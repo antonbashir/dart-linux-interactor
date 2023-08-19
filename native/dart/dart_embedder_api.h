@@ -5,8 +5,8 @@
 #ifndef RUNTIME_INCLUDE_DART_EMBEDDER_API_H_
 #define RUNTIME_INCLUDE_DART_EMBEDDER_API_H_
 
-#include "include/dart_api.h"
-#include "include/dart_tools_api.h"
+#include "dart_api.h"
+#include "dart_tools_api.h"
 
 namespace dart {
 namespace embedder {
