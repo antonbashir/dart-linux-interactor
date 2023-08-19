@@ -6,7 +6,7 @@
       "label": "interactor-binding-build",
       "command": "build",
       "targets": [
-        "binding"
+        "native"
       ],
       "group": "build",
       "problemMatcher": [],
