@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dart-debug-native",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/usr/bin/dart",
+      "args": [
+        "${cwd}/dart/lib/linux_interactor.dart"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/dart",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "interactor-binding-build"
+    },
+    {
+      "name": "dart-test-debug-native",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/usr/bin/dart",
+      "args": [
+        "${cwd}/dart/test/test.dart"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/dart",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "interactor-binding-build"
+    }
+  ]
+}

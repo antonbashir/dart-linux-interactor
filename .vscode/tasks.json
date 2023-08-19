@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cmake",
+      "label": "interactor-binding-build",
+      "command": "build",
+      "targets": [
+        "binding"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+    }    
+  ]
+}
