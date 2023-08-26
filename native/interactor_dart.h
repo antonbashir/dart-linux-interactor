@@ -50,7 +50,7 @@ extern "C"
     uint32_t cqe_wait_count;
     uint32_t cqe_peek_count;
     bool trace;
-    struct quota quota;
+    struct quota arena_quota;
     struct slab_arena arena;
     struct slab_cache cache;
   } interactor_dart_t;

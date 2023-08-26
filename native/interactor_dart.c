@@ -25,8 +25,8 @@ int interactor_dart_initialize(interactor_dart_t *interactor,
     return -ENOMEM;
   }
 
-  quota_init(&interactor->quota, UINT_MAX);
-	slab_arena_create(&interactor->arena, &interactor->quota, 0, 4000000, MAP_PRIVATE);
+  quota_init(&interactor->arena_quota, UINT_MAX);
+	slab_arena_create(&interactor->arena, &interactor->arena_quota, 0, 4000000, MAP_PRIVATE);
 	slab_cache_create(&interactor->cache, &interactor->arena);
 
   interactor_messages_pool_create(&interactor->messages_pool, &interactor->cache);
