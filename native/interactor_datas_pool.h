@@ -8,7 +8,7 @@
 
 struct interactor_datas_pool
 {
-  mempool *mempool;
+  struct mempool *mempool;
 };
 
 static inline int interactor_datas_pool_create(struct interactor_datas_pool *pool, struct slab_cache *slab_cache)

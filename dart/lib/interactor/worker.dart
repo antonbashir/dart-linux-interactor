@@ -9,7 +9,6 @@ import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
 import 'lookup.dart';
-import 'message.dart';
 import 'timeout.dart';
 
 class InteractorWorker {
@@ -23,7 +22,6 @@ class InteractorWorker {
   late final SendPort _destroyer;
   late final InteractorBuffers _buffers;
   late final InteractorTimeoutChecker _timeoutChecker;
-  late final InteractorPayloadPool _payloadPool;
   late final List<Duration> _delays;
 
   var _active = true;
@@ -57,7 +55,6 @@ class InteractorWorker {
       _workerPointer.ref.buffers,
       _workerPointer,
     );
-    _payloadPool = InteractorPayloadPool(_workerPointer.ref.buffers_count, _buffers);
     _ring = _workerPointer.ref.ring;
     _cqes = _workerPointer.ref.cqes;
     _timeoutChecker = InteractorTimeoutChecker(

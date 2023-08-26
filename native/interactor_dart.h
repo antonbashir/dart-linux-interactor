@@ -52,23 +52,23 @@ extern "C"
     bool trace;
   } interactor_dart_t;
 
-  int interactor_dart_initialize(interactor_dart_t *dart,
+  int interactor_dart_initialize(interactor_dart_t *interactor,
                                   interactor_dart_configuration_t *configuration,
                                   uint8_t id);
 
-  void interactor_dart_cancel_by_fd(interactor_dart_t *dart, int fd);
+  void interactor_dart_cancel_by_fd(interactor_dart_t *interactor, int fd);
 
-  void interactor_dart_check_event_timeouts(interactor_dart_t *dart);
-  void interactor_dart_remove_event(interactor_dart_t *dart, uint64_t data);
+  void interactor_dart_check_event_timeouts(interactor_dart_t *interactor);
+  void interactor_dart_remove_event(interactor_dart_t *interactor, uint64_t data);
 
-  int32_t interactor_dart_get_buffer(interactor_dart_t *dart);
-  void interactor_dart_release_buffer(interactor_dart_t *dart, uint16_t buffer_id);
-  int32_t interactor_dart_available_buffers(interactor_dart_t *dart);
-  int32_t interactor_dart_used_buffers(interactor_dart_t *dart);
+  int32_t interactor_dart_get_buffer(interactor_dart_t *interactor);
+  void interactor_dart_release_buffer(interactor_dart_t *interactor, uint16_t buffer_id);
+  int32_t interactor_dart_available_buffers(interactor_dart_t *interactor);
+  int32_t interactor_dart_used_buffers(interactor_dart_t *interactor);
 
-  int interactor_dart_peek(interactor_dart_t *dart);
+  int interactor_dart_peek(interactor_dart_t *interactor);
 
-  void interactor_dart_destroy(interactor_dart_t *dart);
+  void interactor_dart_destroy(interactor_dart_t *interactor);
 
 #if defined(__cplusplus)
 }
