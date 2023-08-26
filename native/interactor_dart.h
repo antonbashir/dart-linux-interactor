@@ -8,6 +8,7 @@
 #include "interactor_buffers_pool.h"
 #include "interactor_messages_pool.h"
 #include "interactor_payloads_pool.h"
+#include "small/include/small/quota.h"
 
 #if defined(__cplusplus)
 extern "C"
@@ -50,7 +51,7 @@ extern "C"
     uint32_t cqe_wait_count;
     uint32_t cqe_peek_count;
     bool trace;
-    struct quota arena_quota;
+    struct quota quota;
     struct slab_arena arena;
     struct slab_cache cache;
   } interactor_dart_t;
