@@ -3,8 +3,8 @@
 #include "interactor_constants.h"
 
 int interactor_dart_initialize(interactor_dart_t *interactor,
-                                 interactor_dart_configuration_t *configuration,
-                                 uint8_t id)
+                               interactor_dart_configuration_t *configuration,
+                               uint8_t id)
 {
   interactor->id = id;
   interactor->ring_size = configuration->ring_size;
@@ -55,7 +55,7 @@ int interactor_dart_initialize(interactor_dart_t *interactor,
   {
     return -ENOMEM;
   }
-  
+
   result = io_uring_queue_init(configuration->ring_size, interactor->ring, configuration->ring_flags);
   if (result)
   {
@@ -92,6 +92,37 @@ void interactor_dart_release_buffer(interactor_dart_t *interactor, uint16_t buff
   memset(buffer->iov_base, 0, interactor->buffer_size);
   buffer->iov_len = interactor->buffer_size;
   interactor_buffers_pool_push(&interactor->buffers_pool, buffer_id);
+}
+
+interactor_message_t *interactor_dart_allocate_message(interactor_dart_t *interactor)
+{
+  return interactor_messages_pool_allocate(&interactor->messages_pool);
+}
+
+void interactor_dart_free_message(interactor_dart_t *interactor, interactor_message_t *message)
+{
+  interactor_messages_pool_free(&interactor->messages_pool, message);
+}
+
+
+struct interactor_payloads_pool* interactor_dart_payload_pool_create(interactor_dart_t *interactor, size_t size)
+{
+  return interactor_payloads_pool_create(malloc(sizeof(struct interactor_payloads_pool)), interactor->cache, size);
+}
+
+intptr_t interactor_dart_payload_allocate(struct interactor_payloads_pool* pool)
+{
+  return interactor_payloads_pool_allocate(pool);
+}
+
+void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer)
+{
+  interactor_payloads_pool_freellocate(pool, pointer);
+}
+
+void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool)
+{
+  interactor_payloads_pool_destroy(pool);
 }
 
 static inline void interactor_dart_add_event(interactor_dart_t *interactor, int fd, uint64_t data, int64_t timeout)

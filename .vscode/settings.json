@@ -6,6 +6,8 @@
     "interactor_constants.h": "c",
     "interactor.h": "c",
     "socket.h": "c",
-    "interactor_dart.h": "c"
+    "interactor_dart.h": "c",
+    "interactor_messages_pool.h": "c",
+    "interactor_payloads_pool.h": "c"
   }
 }

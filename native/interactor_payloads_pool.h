@@ -11,9 +11,9 @@ struct interactor_payloads_pool
   struct mempool *mempool;
 };
 
-static inline int interactor_payloads_pool_create(struct interactor_payloads_pool *pool, struct slab_cache *slab_cache)
+static inline int interactor_payloads_pool_create(struct interactor_payloads_pool *pool, struct slab_cache *slab_cache, size_t size)
 {
-  mempool_create(pool->mempool, slab_cache, sizeof(interactor_message_t));
+  mempool_create(pool->mempool, slab_cache, size);
   return (pool->mempool == NULL ? -1 : 0);
 }
 
@@ -23,14 +23,14 @@ static inline void interactor_payloads_pool_destroy(struct interactor_payloads_p
   pool->mempool = NULL;
 }
 
-static inline interactor_message_t *interactor_payloads_pool_allocate(struct interactor_payloads_pool *pool)
+static inline intptr_t interactor_payloads_pool_allocate(struct interactor_payloads_pool *pool)
 {
-  return (interactor_message_t *)mempool_alloc(pool->mempool);
+  return (intptr_t)mempool_alloc(pool->mempool);
 }
 
-static inline void interactor_payloads_pool_free(struct interactor_payloads_pool *pool, interactor_message_t *message)
+static inline void interactor_payloads_pool_free(struct interactor_payloads_pool *pool, intptr_t pointer)
 {
-  mempool_free(pool->mempool, message);
+  mempool_free(pool->mempool, (void*)pointer);
 }
 
 #endif
