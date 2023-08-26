@@ -2,7 +2,7 @@ name: linux_interactor
 version: 1.0.0
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dev_dependencies:
   ffigen: ^9.0.1
@@ -25,6 +25,9 @@ ffigen:
       - "_(.*)"
       - "ck(.*)"
   functions:
+    leaf:
+      include:
+        - "interactor_worker_.*"
     symbol-address:
       include:
         - ".*"

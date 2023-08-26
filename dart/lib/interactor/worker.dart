@@ -90,7 +90,7 @@ class InteractorWorker {
     final cqeCount = _bindings.interactor_worker_peek(_workerPointer);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
-      final cqe = _cqes.elementAt(cqeIndex).value;
+      Pointer<io_uring_cqe> cqe = _cqes.elementAt(cqeIndex).value;
       final data = cqe.ref.user_data;
       _bindings.interactor_worker_remove_event(_workerPointer, data);
       final result = cqe.ref.res;

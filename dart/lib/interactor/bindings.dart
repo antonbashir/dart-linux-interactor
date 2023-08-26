@@ -11576,8 +11576,10 @@ class InteractorBindings {
               ffi.Uint8)>>('interactor_worker_initialize');
   late final _interactor_worker_initialize =
       _interactor_worker_initializePtr.asFunction<
-          int Function(ffi.Pointer<interactor_worker_t>,
-              ffi.Pointer<interactor_worker_configuration_t>, int)>();
+          int Function(
+              ffi.Pointer<interactor_worker_t>,
+              ffi.Pointer<interactor_worker_configuration_t>,
+              int)>(isLeaf: true);
 
   void interactor_worker_cancel_by_fd(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11595,7 +11597,8 @@ class InteractorBindings {
               ffi.Int)>>('interactor_worker_cancel_by_fd');
   late final _interactor_worker_cancel_by_fd =
       _interactor_worker_cancel_by_fdPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>();
+          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>(
+              isLeaf: true);
 
   void interactor_worker_check_event_timeouts(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11611,7 +11614,8 @@ class InteractorBindings {
       'interactor_worker_check_event_timeouts');
   late final _interactor_worker_check_event_timeouts =
       _interactor_worker_check_event_timeoutsPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>)>();
+          .asFunction<void Function(ffi.Pointer<interactor_worker_t>)>(
+              isLeaf: true);
 
   void interactor_worker_remove_event(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11629,7 +11633,8 @@ class InteractorBindings {
               ffi.Uint64)>>('interactor_worker_remove_event');
   late final _interactor_worker_remove_event =
       _interactor_worker_remove_eventPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>();
+          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>(
+              isLeaf: true);
 
   int interactor_worker_get_buffer(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11644,7 +11649,7 @@ class InteractorBindings {
               ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>(
       'interactor_worker_get_buffer');
   late final _interactor_worker_get_buffer = _interactor_worker_get_bufferPtr
-      .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>();
+      .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(isLeaf: true);
 
   void interactor_worker_release_buffer(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11662,7 +11667,8 @@ class InteractorBindings {
               ffi.Uint16)>>('interactor_worker_release_buffer');
   late final _interactor_worker_release_buffer =
       _interactor_worker_release_bufferPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>();
+          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>(
+              isLeaf: true);
 
   int interactor_worker_available_buffers(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11678,7 +11684,8 @@ class InteractorBindings {
       'interactor_worker_available_buffers');
   late final _interactor_worker_available_buffers =
       _interactor_worker_available_buffersPtr
-          .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>();
+          .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(
+              isLeaf: true);
 
   int interactor_worker_used_buffers(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11694,7 +11701,8 @@ class InteractorBindings {
       'interactor_worker_used_buffers');
   late final _interactor_worker_used_buffers =
       _interactor_worker_used_buffersPtr
-          .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>();
+          .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(
+              isLeaf: true);
 
   int interactor_worker_peek(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11709,7 +11717,7 @@ class InteractorBindings {
           .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_worker_t>)>>(
       'interactor_worker_peek');
   late final _interactor_worker_peek = _interactor_worker_peekPtr
-      .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>();
+      .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(isLeaf: true);
 
   void interactor_worker_destroy(
     ffi.Pointer<interactor_worker_t> worker,
@@ -11724,7 +11732,8 @@ class InteractorBindings {
           .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_worker_t>)>>(
       'interactor_worker_destroy');
   late final _interactor_worker_destroy = _interactor_worker_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_worker_t>)>();
+      .asFunction<void Function(ffi.Pointer<interactor_worker_t>)>(
+          isLeaf: true);
 
   /// Is this an error handle?
   ///
@@ -22241,7 +22250,16 @@ abstract class io_uring_op {
   static const int IORING_OP_LAST = 49;
 }
 
-final class io_uring_cqe extends ffi.Opaque {}
+final class io_uring_cqe extends ffi.Opaque {
+  @ffi.UnsignedLongLong()
+  external int user_data;
+
+  @ffi.Int()
+  external int res;
+
+  @ffi.UnsignedInt()
+  external int flags;
+}
 
 final class io_sqring_offsets extends ffi.Struct {
   @ffi.UnsignedInt()
