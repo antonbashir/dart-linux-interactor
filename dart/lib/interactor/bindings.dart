@@ -2217,6 +2217,5922 @@ class InteractorBindings {
   late final _atomic_flag_clear_explicit = _atomic_flag_clear_explicitPtr
       .asFunction<void Function(ffi.Pointer<atomic_flag>, int)>();
 
+  /// Is this an error handle?
+  ///
+  /// Requires there to be a current isolate.
+  bool Dart_IsError(
+    Object handle,
+  ) {
+    return _Dart_IsError(
+      handle,
+    );
+  }
+
+  late final _Dart_IsErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsError');
+  late final _Dart_IsError =
+      _Dart_IsErrorPtr.asFunction<bool Function(Object)>();
+
+  /// Is this an api error handle?
+  ///
+  /// Api error handles are produced when an api function is misused.
+  /// This happens when a Dart embedding api function is called with
+  /// invalid arguments or in an invalid context.
+  ///
+  /// Requires there to be a current isolate.
+  bool Dart_IsApiError(
+    Object handle,
+  ) {
+    return _Dart_IsApiError(
+      handle,
+    );
+  }
+
+  late final _Dart_IsApiErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsApiError');
+  late final _Dart_IsApiError =
+      _Dart_IsApiErrorPtr.asFunction<bool Function(Object)>();
+
+  /// Is this an unhandled exception error handle?
+  ///
+  /// Unhandled exception error handles are produced when, during the
+  /// execution of Dart code, an exception is thrown but not caught.
+  /// This can occur in any function which triggers the execution of Dart
+  /// code.
+  ///
+  /// See Dart_ErrorGetException and Dart_ErrorGetStackTrace.
+  ///
+  /// Requires there to be a current isolate.
+  bool Dart_IsUnhandledExceptionError(
+    Object handle,
+  ) {
+    return _Dart_IsUnhandledExceptionError(
+      handle,
+    );
+  }
+
+  late final _Dart_IsUnhandledExceptionErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsUnhandledExceptionError');
+  late final _Dart_IsUnhandledExceptionError =
+      _Dart_IsUnhandledExceptionErrorPtr.asFunction<bool Function(Object)>();
+
+  /// Is this a compilation error handle?
+  ///
+  /// Compilation error handles are produced when, during the execution
+  /// of Dart code, a compile-time error occurs.  This can occur in any
+  /// function which triggers the execution of Dart code.
+  ///
+  /// Requires there to be a current isolate.
+  bool Dart_IsCompilationError(
+    Object handle,
+  ) {
+    return _Dart_IsCompilationError(
+      handle,
+    );
+  }
+
+  late final _Dart_IsCompilationErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsCompilationError');
+  late final _Dart_IsCompilationError =
+      _Dart_IsCompilationErrorPtr.asFunction<bool Function(Object)>();
+
+  /// Is this a fatal error handle?
+  ///
+  /// Fatal error handles are produced when the system wants to shut down
+  /// the current isolate.
+  ///
+  /// Requires there to be a current isolate.
+  bool Dart_IsFatalError(
+    Object handle,
+  ) {
+    return _Dart_IsFatalError(
+      handle,
+    );
+  }
+
+  late final _Dart_IsFatalErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsFatalError');
+  late final _Dart_IsFatalError =
+      _Dart_IsFatalErrorPtr.asFunction<bool Function(Object)>();
+
+  /// Gets the error message from an error handle.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \return A C string containing an error message if the handle is
+  /// error. An empty C string ("") if the handle is valid. This C
+  /// String is scope allocated and is only valid until the next call
+  /// to Dart_ExitScope.
+  ffi.Pointer<ffi.Char> Dart_GetError(
+    Object handle,
+  ) {
+    return _Dart_GetError(
+      handle,
+    );
+  }
+
+  late final _Dart_GetErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Handle)>>(
+          'Dart_GetError');
+  late final _Dart_GetError =
+      _Dart_GetErrorPtr.asFunction<ffi.Pointer<ffi.Char> Function(Object)>();
+
+  /// Is this an error handle for an unhandled exception?
+  bool Dart_ErrorHasException(
+    Object handle,
+  ) {
+    return _Dart_ErrorHasException(
+      handle,
+    );
+  }
+
+  late final _Dart_ErrorHasExceptionPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_ErrorHasException');
+  late final _Dart_ErrorHasException =
+      _Dart_ErrorHasExceptionPtr.asFunction<bool Function(Object)>();
+
+  /// Gets the exception Object from an unhandled exception error handle.
+  Object Dart_ErrorGetException(
+    Object handle,
+  ) {
+    return _Dart_ErrorGetException(
+      handle,
+    );
+  }
+
+  late final _Dart_ErrorGetExceptionPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ErrorGetException');
+  late final _Dart_ErrorGetException =
+      _Dart_ErrorGetExceptionPtr.asFunction<Object Function(Object)>();
+
+  /// Gets the stack trace Object from an unhandled exception error handle.
+  Object Dart_ErrorGetStackTrace(
+    Object handle,
+  ) {
+    return _Dart_ErrorGetStackTrace(
+      handle,
+    );
+  }
+
+  late final _Dart_ErrorGetStackTracePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ErrorGetStackTrace');
+  late final _Dart_ErrorGetStackTrace =
+      _Dart_ErrorGetStackTracePtr.asFunction<Object Function(Object)>();
+
+  /// Produces an api error handle with the provided error message.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \param error the error message.
+  Object Dart_NewApiError(
+    ffi.Pointer<ffi.Char> error,
+  ) {
+    return _Dart_NewApiError(
+      error,
+    );
+  }
+
+  late final _Dart_NewApiErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
+          'Dart_NewApiError');
+  late final _Dart_NewApiError =
+      _Dart_NewApiErrorPtr.asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
+
+  Object Dart_NewCompilationError(
+    ffi.Pointer<ffi.Char> error,
+  ) {
+    return _Dart_NewCompilationError(
+      error,
+    );
+  }
+
+  late final _Dart_NewCompilationErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
+          'Dart_NewCompilationError');
+  late final _Dart_NewCompilationError = _Dart_NewCompilationErrorPtr
+      .asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
+
+  /// Produces a new unhandled exception error handle.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \param exception An instance of a Dart object to be thrown or
+  /// an ApiError or CompilationError handle.
+  /// When an ApiError or CompilationError handle is passed in
+  /// a string object of the error message is created and it becomes
+  /// the Dart object to be thrown.
+  Object Dart_NewUnhandledExceptionError(
+    Object exception,
+  ) {
+    return _Dart_NewUnhandledExceptionError(
+      exception,
+    );
+  }
+
+  late final _Dart_NewUnhandledExceptionErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_NewUnhandledExceptionError');
+  late final _Dart_NewUnhandledExceptionError =
+      _Dart_NewUnhandledExceptionErrorPtr.asFunction<Object Function(Object)>();
+
+  /// Propagates an error.
+  ///
+  /// If the provided handle is an unhandled exception error, this
+  /// function will cause the unhandled exception to be rethrown.  This
+  /// will proceed in the standard way, walking up Dart frames until an
+  /// appropriate 'catch' block is found, executing 'finally' blocks,
+  /// etc.
+  ///
+  /// If the error is not an unhandled exception error, we will unwind
+  /// the stack to the next C frame.  Intervening Dart frames will be
+  /// discarded; specifically, 'finally' blocks will not execute.  This
+  /// is the standard way that compilation errors (and the like) are
+  /// handled by the Dart runtime.
+  ///
+  /// In either case, when an error is propagated any current scopes
+  /// created by Dart_EnterScope will be exited.
+  ///
+  /// See the additional discussion under "Propagating Errors" at the
+  /// beginning of this file.
+  ///
+  /// \param handle An error handle (See Dart_IsError)
+  ///
+  /// On success, this function does not return.  On failure, the
+  /// process is terminated.
+  void Dart_PropagateError(
+    Object handle,
+  ) {
+    return _Dart_PropagateError(
+      handle,
+    );
+  }
+
+  late final _Dart_PropagateErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>(
+          'Dart_PropagateError');
+  late final _Dart_PropagateError =
+      _Dart_PropagateErrorPtr.asFunction<void Function(Object)>();
+
+  /// Converts an object to a string.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \return The converted string if no error occurs during
+  /// the conversion. If an error does occur, an error handle is
+  /// returned.
+  Object Dart_ToString(
+    Object object,
+  ) {
+    return _Dart_ToString(
+      object,
+    );
+  }
+
+  late final _Dart_ToStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ToString');
+  late final _Dart_ToString =
+      _Dart_ToStringPtr.asFunction<Object Function(Object)>();
+
+  /// Checks to see if two handles refer to identically equal objects.
+  ///
+  /// If both handles refer to instances, this is equivalent to using the top-level
+  /// function identical() from dart:core. Otherwise, returns whether the two
+  /// argument handles refer to the same object.
+  ///
+  /// \param obj1 An object to be compared.
+  /// \param obj2 An object to be compared.
+  ///
+  /// \return True if the objects are identically equal.  False otherwise.
+  bool Dart_IdentityEquals(
+    Object obj1,
+    Object obj2,
+  ) {
+    return _Dart_IdentityEquals(
+      obj1,
+      obj2,
+    );
+  }
+
+  late final _Dart_IdentityEqualsPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_IdentityEquals');
+  late final _Dart_IdentityEquals =
+      _Dart_IdentityEqualsPtr.asFunction<bool Function(Object, Object)>();
+
+  /// Allocates a handle in the current scope from a persistent handle.
+  Object Dart_HandleFromPersistent(
+    Object object,
+  ) {
+    return _Dart_HandleFromPersistent(
+      object,
+    );
+  }
+
+  late final _Dart_HandleFromPersistentPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_HandleFromPersistent');
+  late final _Dart_HandleFromPersistent =
+      _Dart_HandleFromPersistentPtr.asFunction<Object Function(Object)>();
+
+  /// Allocates a handle in the current scope from a weak persistent handle.
+  ///
+  /// This will be a handle to Dart_Null if the object has been garbage collected.
+  Object Dart_HandleFromWeakPersistent(
+    Dart_WeakPersistentHandle object,
+  ) {
+    return _Dart_HandleFromWeakPersistent(
+      object,
+    );
+  }
+
+  late final _Dart_HandleFromWeakPersistentPtr = _lookup<
+          ffi.NativeFunction<ffi.Handle Function(Dart_WeakPersistentHandle)>>(
+      'Dart_HandleFromWeakPersistent');
+  late final _Dart_HandleFromWeakPersistent = _Dart_HandleFromWeakPersistentPtr
+      .asFunction<Object Function(Dart_WeakPersistentHandle)>();
+
+  /// Allocates a persistent handle for an object.
+  ///
+  /// This handle has the lifetime of the current isolate unless it is
+  /// explicitly deallocated by calling Dart_DeletePersistentHandle.
+  ///
+  /// Requires there to be a current isolate.
+  Object Dart_NewPersistentHandle(
+    Object object,
+  ) {
+    return _Dart_NewPersistentHandle(
+      object,
+    );
+  }
+
+  late final _Dart_NewPersistentHandlePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_NewPersistentHandle');
+  late final _Dart_NewPersistentHandle =
+      _Dart_NewPersistentHandlePtr.asFunction<Object Function(Object)>();
+
+  /// Assign value of local handle to a persistent handle.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \param obj1 A persistent handle whose value needs to be set.
+  /// \param obj2 An object whose value needs to be set to the persistent handle.
+  void Dart_SetPersistentHandle(
+    Object obj1,
+    Object obj2,
+  ) {
+    return _Dart_SetPersistentHandle(
+      obj1,
+      obj2,
+    );
+  }
+
+  late final _Dart_SetPersistentHandlePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_SetPersistentHandle');
+  late final _Dart_SetPersistentHandle =
+      _Dart_SetPersistentHandlePtr.asFunction<void Function(Object, Object)>();
+
+  /// Deallocates a persistent handle.
+  ///
+  /// Requires there to be a current isolate group.
+  void Dart_DeletePersistentHandle(
+    Object object,
+  ) {
+    return _Dart_DeletePersistentHandle(
+      object,
+    );
+  }
+
+  late final _Dart_DeletePersistentHandlePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>(
+          'Dart_DeletePersistentHandle');
+  late final _Dart_DeletePersistentHandle =
+      _Dart_DeletePersistentHandlePtr.asFunction<void Function(Object)>();
+
+  /// Allocates a weak persistent handle for an object.
+  ///
+  /// This handle has the lifetime of the current isolate. The handle can also be
+  /// explicitly deallocated by calling Dart_DeleteWeakPersistentHandle.
+  ///
+  /// If the object becomes unreachable the callback is invoked with the peer as
+  /// argument. The callback can be executed on any thread, will have a current
+  /// isolate group, but will not have a current isolate. The callback can only
+  /// call Dart_DeletePersistentHandle or Dart_DeleteWeakPersistentHandle. This
+  /// gives the embedder the ability to cleanup data associated with the object.
+  /// The handle will point to the Dart_Null object after the finalizer has been
+  /// run. It is illegal to call into the VM with any other Dart_* functions from
+  /// the callback. If the handle is deleted before the object becomes
+  /// unreachable, the callback is never invoked.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \param object An object with identity.
+  /// \param peer A pointer to a native object or NULL.  This value is
+  /// provided to callback when it is invoked.
+  /// \param external_allocation_size The number of externally allocated
+  /// bytes for peer. Used to inform the garbage collector.
+  /// \param callback A function pointer that will be invoked sometime
+  /// after the object is garbage collected, unless the handle has been deleted.
+  /// A valid callback needs to be specified it cannot be NULL.
+  ///
+  /// \return The weak persistent handle or NULL. NULL is returned in case of bad
+  /// parameters.
+  Dart_WeakPersistentHandle Dart_NewWeakPersistentHandle(
+    Object object,
+    ffi.Pointer<ffi.Void> peer,
+    int external_allocation_size,
+    Dart_HandleFinalizer callback,
+  ) {
+    return _Dart_NewWeakPersistentHandle(
+      object,
+      peer,
+      external_allocation_size,
+      callback,
+    );
+  }
+
+  late final _Dart_NewWeakPersistentHandlePtr = _lookup<
+      ffi.NativeFunction<
+          Dart_WeakPersistentHandle Function(
+              ffi.Handle,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>>('Dart_NewWeakPersistentHandle');
+  late final _Dart_NewWeakPersistentHandle =
+      _Dart_NewWeakPersistentHandlePtr.asFunction<
+          Dart_WeakPersistentHandle Function(
+              Object, ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
+
+  /// Deletes the given weak persistent [object] handle.
+  ///
+  /// Requires there to be a current isolate group.
+  void Dart_DeleteWeakPersistentHandle(
+    Dart_WeakPersistentHandle object,
+  ) {
+    return _Dart_DeleteWeakPersistentHandle(
+      object,
+    );
+  }
+
+  late final _Dart_DeleteWeakPersistentHandlePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Dart_WeakPersistentHandle)>>(
+          'Dart_DeleteWeakPersistentHandle');
+  late final _Dart_DeleteWeakPersistentHandle =
+      _Dart_DeleteWeakPersistentHandlePtr.asFunction<
+          void Function(Dart_WeakPersistentHandle)>();
+
+  /// Allocates a finalizable handle for an object.
+  ///
+  /// This handle has the lifetime of the current isolate group unless the object
+  /// pointed to by the handle is garbage collected, in this case the VM
+  /// automatically deletes the handle after invoking the callback associated
+  /// with the handle. The handle can also be explicitly deallocated by
+  /// calling Dart_DeleteFinalizableHandle.
+  ///
+  /// If the object becomes unreachable the callback is invoked with the
+  /// the peer as argument. The callback can be executed on any thread, will have
+  /// an isolate group, but will not have a current isolate. The callback can only
+  /// call Dart_DeletePersistentHandle or Dart_DeleteWeakPersistentHandle.
+  /// This gives the embedder the ability to cleanup data associated with the
+  /// object and clear out any cached references to the handle. All references to
+  /// this handle after the callback will be invalid. It is illegal to call into
+  /// the VM with any other Dart_* functions from the callback. If the handle is
+  /// deleted before the object becomes unreachable, the callback is never
+  /// invoked.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \param object An object with identity.
+  /// \param peer A pointer to a native object or NULL.  This value is
+  /// provided to callback when it is invoked.
+  /// \param external_allocation_size The number of externally allocated
+  /// bytes for peer. Used to inform the garbage collector.
+  /// \param callback A function pointer that will be invoked sometime
+  /// after the object is garbage collected, unless the handle has been deleted.
+  /// A valid callback needs to be specified it cannot be NULL.
+  ///
+  /// \return The finalizable handle or NULL. NULL is returned in case of bad
+  /// parameters.
+  Dart_FinalizableHandle Dart_NewFinalizableHandle(
+    Object object,
+    ffi.Pointer<ffi.Void> peer,
+    int external_allocation_size,
+    Dart_HandleFinalizer callback,
+  ) {
+    return _Dart_NewFinalizableHandle(
+      object,
+      peer,
+      external_allocation_size,
+      callback,
+    );
+  }
+
+  late final _Dart_NewFinalizableHandlePtr = _lookup<
+      ffi.NativeFunction<
+          Dart_FinalizableHandle Function(ffi.Handle, ffi.Pointer<ffi.Void>,
+              ffi.IntPtr, Dart_HandleFinalizer)>>('Dart_NewFinalizableHandle');
+  late final _Dart_NewFinalizableHandle =
+      _Dart_NewFinalizableHandlePtr.asFunction<
+          Dart_FinalizableHandle Function(
+              Object, ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
+
+  /// Deletes the given finalizable [object] handle.
+  ///
+  /// The caller has to provide the actual Dart object the handle was created from
+  /// to prove the object (and therefore the finalizable handle) is still alive.
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_DeleteFinalizableHandle(
+    Dart_FinalizableHandle object,
+    Object strong_ref_to_object,
+  ) {
+    return _Dart_DeleteFinalizableHandle(
+      object,
+      strong_ref_to_object,
+    );
+  }
+
+  late final _Dart_DeleteFinalizableHandlePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(Dart_FinalizableHandle,
+              ffi.Handle)>>('Dart_DeleteFinalizableHandle');
+  late final _Dart_DeleteFinalizableHandle = _Dart_DeleteFinalizableHandlePtr
+      .asFunction<void Function(Dart_FinalizableHandle, Object)>();
+
+  /// Gets the version string for the Dart VM.
+  ///
+  /// The version of the Dart VM can be accessed without initializing the VM.
+  ///
+  /// \return The version string for the embedded Dart VM.
+  ffi.Pointer<ffi.Char> Dart_VersionString() {
+    return _Dart_VersionString();
+  }
+
+  late final _Dart_VersionStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'Dart_VersionString');
+  late final _Dart_VersionString =
+      _Dart_VersionStringPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  /// Initialize Dart_IsolateFlags with correct version and default values.
+  void Dart_IsolateFlagsInitialize(
+    ffi.Pointer<Dart_IsolateFlags> flags,
+  ) {
+    return _Dart_IsolateFlagsInitialize(
+      flags,
+    );
+  }
+
+  late final _Dart_IsolateFlagsInitializePtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<Dart_IsolateFlags>)>>(
+      'Dart_IsolateFlagsInitialize');
+  late final _Dart_IsolateFlagsInitialize = _Dart_IsolateFlagsInitializePtr
+      .asFunction<void Function(ffi.Pointer<Dart_IsolateFlags>)>();
+
+  /// Initializes the VM.
+  ///
+  /// \param params A struct containing initialization information. The version
+  /// field of the struct must be DART_INITIALIZE_PARAMS_CURRENT_VERSION.
+  ///
+  /// \return NULL if initialization is successful. Returns an error message
+  /// otherwise. The caller is responsible for freeing the error message.
+  ffi.Pointer<ffi.Char> Dart_Initialize(
+    ffi.Pointer<Dart_InitializeParams> params,
+  ) {
+    return _Dart_Initialize(
+      params,
+    );
+  }
+
+  late final _Dart_InitializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<Dart_InitializeParams>)>>('Dart_Initialize');
+  late final _Dart_Initialize = _Dart_InitializePtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<Dart_InitializeParams>)>();
+
+  /// Cleanup state in the VM before process termination.
+  ///
+  /// \return NULL if cleanup is successful. Returns an error message otherwise.
+  /// The caller is responsible for freeing the error message.
+  ///
+  /// NOTE: This function must not be called on a thread that was created by the VM
+  /// itself.
+  ffi.Pointer<ffi.Char> Dart_Cleanup() {
+    return _Dart_Cleanup();
+  }
+
+  late final _Dart_CleanupPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'Dart_Cleanup');
+  late final _Dart_Cleanup =
+      _Dart_CleanupPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  /// Sets command line flags. Should be called before Dart_Initialize.
+  ///
+  /// \param argc The length of the arguments array.
+  /// \param argv An array of arguments.
+  ///
+  /// \return NULL if successful. Returns an error message otherwise.
+  /// The caller is responsible for freeing the error message.
+  ///
+  /// NOTE: This call does not store references to the passed in c-strings.
+  ffi.Pointer<ffi.Char> Dart_SetVMFlags(
+    int argc,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
+  ) {
+    return _Dart_SetVMFlags(
+      argc,
+      argv,
+    );
+  }
+
+  late final _Dart_SetVMFlagsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_SetVMFlags');
+  late final _Dart_SetVMFlags = _Dart_SetVMFlagsPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(
+          int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Returns true if the named VM flag is of boolean type, specified, and set to
+  /// true.
+  ///
+  /// \param flag_name The name of the flag without leading punctuation
+  /// (example: "enable_asserts").
+  bool Dart_IsVMFlagSet(
+    ffi.Pointer<ffi.Char> flag_name,
+  ) {
+    return _Dart_IsVMFlagSet(
+      flag_name,
+    );
+  }
+
+  late final _Dart_IsVMFlagSetPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Char>)>>(
+          'Dart_IsVMFlagSet');
+  late final _Dart_IsVMFlagSet =
+      _Dart_IsVMFlagSetPtr.asFunction<bool Function(ffi.Pointer<ffi.Char>)>();
+
+  /// Creates a new isolate. The new isolate becomes the current isolate.
+  ///
+  /// A snapshot can be used to restore the VM quickly to a saved state
+  /// and is useful for fast startup. If snapshot data is provided, the
+  /// isolate will be started using that snapshot data. Requires a core snapshot or
+  /// an app snapshot created by Dart_CreateSnapshot or
+  /// Dart_CreatePrecompiledSnapshot* from a VM with the same version.
+  ///
+  /// Requires there to be no current isolate.
+  ///
+  /// \param script_uri The main source file or snapshot this isolate will load.
+  /// The VM will provide this URI to the Dart_IsolateGroupCreateCallback when a
+  /// child isolate is created by Isolate.spawn. The embedder should use a URI
+  /// that allows it to load the same program into such a child isolate.
+  /// \param name A short name for the isolate to improve debugging messages.
+  /// Typically of the format 'foo.dart:main()'.
+  /// \param isolate_snapshot_data Buffer containing the snapshot data of the
+  /// isolate or NULL if no snapshot is provided. If provided, the buffer must
+  /// remain valid until the isolate shuts down.
+  /// \param isolate_snapshot_instructions Buffer containing the snapshot
+  /// instructions of the isolate or NULL if no snapshot is provided. If
+  /// provided, the buffer must remain valid until the isolate shuts down.
+  /// \param flags Pointer to VM specific flags or NULL for default flags.
+  /// \param isolate_group_data Embedder group data. This data can be obtained
+  /// by calling Dart_IsolateGroupData and will be passed to the
+  /// Dart_IsolateShutdownCallback, Dart_IsolateCleanupCallback, and
+  /// Dart_IsolateGroupCleanupCallback.
+  /// \param isolate_data Embedder data.  This data will be passed to
+  /// the Dart_IsolateGroupCreateCallback when new isolates are spawned from
+  /// this parent isolate.
+  /// \param error Returns NULL if creation is successful, an error message
+  /// otherwise. The caller is responsible for calling free() on the error
+  /// message.
+  ///
+  /// \return The new isolate on success, or NULL if isolate creation failed.
+  Dart_Isolate Dart_CreateIsolateGroup(
+    ffi.Pointer<ffi.Char> script_uri,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Uint8> isolate_snapshot_data,
+    ffi.Pointer<ffi.Uint8> isolate_snapshot_instructions,
+    ffi.Pointer<Dart_IsolateFlags> flags,
+    ffi.Pointer<ffi.Void> isolate_group_data,
+    ffi.Pointer<ffi.Void> isolate_data,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
+  ) {
+    return _Dart_CreateIsolateGroup(
+      script_uri,
+      name,
+      isolate_snapshot_data,
+      isolate_snapshot_instructions,
+      flags,
+      isolate_group_data,
+      isolate_data,
+      error,
+    );
+  }
+
+  late final _Dart_CreateIsolateGroupPtr = _lookup<
+      ffi.NativeFunction<
+          Dart_Isolate Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<Dart_IsolateFlags>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_CreateIsolateGroup');
+  late final _Dart_CreateIsolateGroup = _Dart_CreateIsolateGroupPtr.asFunction<
+      Dart_Isolate Function(
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<Dart_IsolateFlags>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Creates a new isolate inside the isolate group of [group_member].
+  ///
+  /// Requires there to be no current isolate.
+  ///
+  /// \param group_member An isolate from the same group into which the newly created
+  /// isolate should be born into. Other threads may not have entered / enter this
+  /// member isolate.
+  /// \param name A short name for the isolate for debugging purposes.
+  /// \param shutdown_callback A callback to be called when the isolate is being
+  /// shutdown (may be NULL).
+  /// \param cleanup_callback A callback to be called when the isolate is being
+  /// cleaned up (may be NULL).
+  /// \param child_isolate_data The embedder-specific data associated with this isolate.
+  /// \param error Set to NULL if creation is successful, set to an error
+  /// message otherwise. The caller is responsible for calling free() on the
+  /// error message.
+  ///
+  /// \return The newly created isolate on success, or NULL if isolate creation
+  /// failed.
+  ///
+  /// If successful, the newly created isolate will become the current isolate.
+  Dart_Isolate Dart_CreateIsolateInGroup(
+    Dart_Isolate group_member,
+    ffi.Pointer<ffi.Char> name,
+    Dart_IsolateShutdownCallback shutdown_callback,
+    Dart_IsolateCleanupCallback cleanup_callback,
+    ffi.Pointer<ffi.Void> child_isolate_data,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
+  ) {
+    return _Dart_CreateIsolateInGroup(
+      group_member,
+      name,
+      shutdown_callback,
+      cleanup_callback,
+      child_isolate_data,
+      error,
+    );
+  }
+
+  late final _Dart_CreateIsolateInGroupPtr = _lookup<
+          ffi.NativeFunction<
+              Dart_Isolate Function(
+                  Dart_Isolate,
+                  ffi.Pointer<ffi.Char>,
+                  Dart_IsolateShutdownCallback,
+                  Dart_IsolateCleanupCallback,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'Dart_CreateIsolateInGroup');
+  late final _Dart_CreateIsolateInGroup =
+      _Dart_CreateIsolateInGroupPtr.asFunction<
+          Dart_Isolate Function(
+              Dart_Isolate,
+              ffi.Pointer<ffi.Char>,
+              Dart_IsolateShutdownCallback,
+              Dart_IsolateCleanupCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Creates a new isolate from a Dart Kernel file. The new isolate
+  /// becomes the current isolate.
+  ///
+  /// Requires there to be no current isolate.
+  ///
+  /// \param script_uri The main source file or snapshot this isolate will load.
+  /// The VM will provide this URI to the Dart_IsolateGroupCreateCallback when a
+  /// child isolate is created by Isolate.spawn. The embedder should use a URI that
+  /// allows it to load the same program into such a child isolate.
+  /// \param name A short name for the isolate to improve debugging messages.
+  /// Typically of the format 'foo.dart:main()'.
+  /// \param kernel_buffer A buffer which contains a kernel/DIL program. Must
+  /// remain valid until isolate shutdown.
+  /// \param kernel_buffer_size The size of `kernel_buffer`.
+  /// \param flags Pointer to VM specific flags or NULL for default flags.
+  /// \param isolate_group_data Embedder group data. This data can be obtained
+  /// by calling Dart_IsolateGroupData and will be passed to the
+  /// Dart_IsolateShutdownCallback, Dart_IsolateCleanupCallback, and
+  /// Dart_IsolateGroupCleanupCallback.
+  /// \param isolate_data Embedder data.  This data will be passed to
+  /// the Dart_IsolateGroupCreateCallback when new isolates are spawned from
+  /// this parent isolate.
+  /// \param error Returns NULL if creation is successful, an error message
+  /// otherwise. The caller is responsible for calling free() on the error
+  /// message.
+  ///
+  /// \return The new isolate on success, or NULL if isolate creation failed.
+  Dart_Isolate Dart_CreateIsolateGroupFromKernel(
+    ffi.Pointer<ffi.Char> script_uri,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Uint8> kernel_buffer,
+    int kernel_buffer_size,
+    ffi.Pointer<Dart_IsolateFlags> flags,
+    ffi.Pointer<ffi.Void> isolate_group_data,
+    ffi.Pointer<ffi.Void> isolate_data,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
+  ) {
+    return _Dart_CreateIsolateGroupFromKernel(
+      script_uri,
+      name,
+      kernel_buffer,
+      kernel_buffer_size,
+      flags,
+      isolate_group_data,
+      isolate_data,
+      error,
+    );
+  }
+
+  late final _Dart_CreateIsolateGroupFromKernelPtr = _lookup<
+          ffi.NativeFunction<
+              Dart_Isolate Function(
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Uint8>,
+                  ffi.IntPtr,
+                  ffi.Pointer<Dart_IsolateFlags>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'Dart_CreateIsolateGroupFromKernel');
+  late final _Dart_CreateIsolateGroupFromKernel =
+      _Dart_CreateIsolateGroupFromKernelPtr.asFunction<
+          Dart_Isolate Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Uint8>,
+              int,
+              ffi.Pointer<Dart_IsolateFlags>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Shuts down the current isolate. After this call, the current isolate is NULL.
+  /// Any current scopes created by Dart_EnterScope will be exited. Invokes the
+  /// shutdown callback and any callbacks of remaining weak persistent handles.
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_ShutdownIsolate() {
+    return _Dart_ShutdownIsolate();
+  }
+
+  late final _Dart_ShutdownIsolatePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_ShutdownIsolate');
+  late final _Dart_ShutdownIsolate =
+      _Dart_ShutdownIsolatePtr.asFunction<void Function()>();
+
+  /// Returns the current isolate. Will return NULL if there is no
+  /// current isolate.
+  Dart_Isolate Dart_CurrentIsolate() {
+    return _Dart_CurrentIsolate();
+  }
+
+  late final _Dart_CurrentIsolatePtr =
+      _lookup<ffi.NativeFunction<Dart_Isolate Function()>>(
+          'Dart_CurrentIsolate');
+  late final _Dart_CurrentIsolate =
+      _Dart_CurrentIsolatePtr.asFunction<Dart_Isolate Function()>();
+
+  /// Returns the callback data associated with the current isolate. This
+  /// data was set when the isolate got created or initialized.
+  ffi.Pointer<ffi.Void> Dart_CurrentIsolateData() {
+    return _Dart_CurrentIsolateData();
+  }
+
+  late final _Dart_CurrentIsolateDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>(
+          'Dart_CurrentIsolateData');
+  late final _Dart_CurrentIsolateData = _Dart_CurrentIsolateDataPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function()>();
+
+  /// Returns the callback data associated with the given isolate. This
+  /// data was set when the isolate got created or initialized.
+  ffi.Pointer<ffi.Void> Dart_IsolateData(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_IsolateData(
+      isolate,
+    );
+  }
+
+  late final _Dart_IsolateDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>(
+          'Dart_IsolateData');
+  late final _Dart_IsolateData = _Dart_IsolateDataPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(Dart_Isolate)>();
+
+  /// Returns the current isolate group. Will return NULL if there is no
+  /// current isolate group.
+  Dart_IsolateGroup Dart_CurrentIsolateGroup() {
+    return _Dart_CurrentIsolateGroup();
+  }
+
+  late final _Dart_CurrentIsolateGroupPtr =
+      _lookup<ffi.NativeFunction<Dart_IsolateGroup Function()>>(
+          'Dart_CurrentIsolateGroup');
+  late final _Dart_CurrentIsolateGroup =
+      _Dart_CurrentIsolateGroupPtr.asFunction<Dart_IsolateGroup Function()>();
+
+  /// Returns the callback data associated with the current isolate group. This
+  /// data was passed to the isolate group when it was created.
+  ffi.Pointer<ffi.Void> Dart_CurrentIsolateGroupData() {
+    return _Dart_CurrentIsolateGroupData();
+  }
+
+  late final _Dart_CurrentIsolateGroupDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>(
+          'Dart_CurrentIsolateGroupData');
+  late final _Dart_CurrentIsolateGroupData = _Dart_CurrentIsolateGroupDataPtr
+      .asFunction<ffi.Pointer<ffi.Void> Function()>();
+
+  int Dart_CurrentIsolateGroupId() {
+    return _Dart_CurrentIsolateGroupId();
+  }
+
+  late final _Dart_CurrentIsolateGroupIdPtr =
+      _lookup<ffi.NativeFunction<Dart_IsolateGroupId Function()>>(
+          'Dart_CurrentIsolateGroupId');
+  late final _Dart_CurrentIsolateGroupId =
+      _Dart_CurrentIsolateGroupIdPtr.asFunction<int Function()>();
+
+  /// Returns the callback data associated with the specified isolate group. This
+  /// data was passed to the isolate when it was created.
+  /// The embedder is responsible for ensuring the consistency of this data
+  /// with respect to the lifecycle of an isolate group.
+  ffi.Pointer<ffi.Void> Dart_IsolateGroupData(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_IsolateGroupData(
+      isolate,
+    );
+  }
+
+  late final _Dart_IsolateGroupDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>(
+          'Dart_IsolateGroupData');
+  late final _Dart_IsolateGroupData = _Dart_IsolateGroupDataPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(Dart_Isolate)>();
+
+  /// Returns the debugging name for the current isolate.
+  ///
+  /// This name is unique to each isolate and should only be used to make
+  /// debugging messages more comprehensible.
+  Object Dart_DebugName() {
+    return _Dart_DebugName();
+  }
+
+  late final _Dart_DebugNamePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_DebugName');
+  late final _Dart_DebugName =
+      _Dart_DebugNamePtr.asFunction<Object Function()>();
+
+  /// Returns the debugging name for the current isolate.
+  ///
+  /// This name is unique to each isolate and should only be used to make
+  /// debugging messages more comprehensible.
+  ///
+  /// The returned string is scope allocated and is only valid until the next call
+  /// to Dart_ExitScope.
+  ffi.Pointer<ffi.Char> Dart_DebugNameToCString() {
+    return _Dart_DebugNameToCString();
+  }
+
+  late final _Dart_DebugNameToCStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'Dart_DebugNameToCString');
+  late final _Dart_DebugNameToCString = _Dart_DebugNameToCStringPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function()>();
+
+  /// Returns the ID for an isolate which is used to query the service protocol.
+  ///
+  /// It is the responsibility of the caller to free the returned ID.
+  ffi.Pointer<ffi.Char> Dart_IsolateServiceId(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_IsolateServiceId(
+      isolate,
+    );
+  }
+
+  late final _Dart_IsolateServiceIdPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>(
+          'Dart_IsolateServiceId');
+  late final _Dart_IsolateServiceId = _Dart_IsolateServiceIdPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(Dart_Isolate)>();
+
+  /// Enters an isolate. After calling this function,
+  /// the current isolate will be set to the provided isolate.
+  ///
+  /// Requires there to be no current isolate. Multiple threads may not be in
+  /// the same isolate at once.
+  void Dart_EnterIsolate(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_EnterIsolate(
+      isolate,
+    );
+  }
+
+  late final _Dart_EnterIsolatePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>(
+          'Dart_EnterIsolate');
+  late final _Dart_EnterIsolate =
+      _Dart_EnterIsolatePtr.asFunction<void Function(Dart_Isolate)>();
+
+  /// Kills the given isolate.
+  ///
+  /// This function has the same effect as dart:isolate's
+  /// Isolate.kill(priority:immediate).
+  /// It can interrupt ordinary Dart code but not native code. If the isolate is
+  /// in the middle of a long running native function, the isolate will not be
+  /// killed until control returns to Dart.
+  ///
+  /// Does not require a current isolate. It is safe to kill the current isolate if
+  /// there is one.
+  void Dart_KillIsolate(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_KillIsolate(
+      isolate,
+    );
+  }
+
+  late final _Dart_KillIsolatePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>(
+          'Dart_KillIsolate');
+  late final _Dart_KillIsolate =
+      _Dart_KillIsolatePtr.asFunction<void Function(Dart_Isolate)>();
+
+  /// Notifies the VM that the embedder expects to be idle until |deadline|. The VM
+  /// may use this time to perform garbage collection or other tasks to avoid
+  /// delays during execution of Dart code in the future.
+  ///
+  /// |deadline| is measured in microseconds against the system's monotonic time.
+  /// This clock can be accessed via Dart_TimelineGetMicros().
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_NotifyIdle(
+    int deadline,
+  ) {
+    return _Dart_NotifyIdle(
+      deadline,
+    );
+  }
+
+  late final _Dart_NotifyIdlePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'Dart_NotifyIdle');
+  late final _Dart_NotifyIdle =
+      _Dart_NotifyIdlePtr.asFunction<void Function(int)>();
+
+  /// Starts the heap sampling profiler for each thread in the VM.
+  void Dart_EnableHeapSampling() {
+    return _Dart_EnableHeapSampling();
+  }
+
+  late final _Dart_EnableHeapSamplingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'Dart_EnableHeapSampling');
+  late final _Dart_EnableHeapSampling =
+      _Dart_EnableHeapSamplingPtr.asFunction<void Function()>();
+
+  void Dart_DisableHeapSampling() {
+    return _Dart_DisableHeapSampling();
+  }
+
+  late final _Dart_DisableHeapSamplingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'Dart_DisableHeapSampling');
+  late final _Dart_DisableHeapSampling =
+      _Dart_DisableHeapSamplingPtr.asFunction<void Function()>();
+
+  void Dart_RegisterHeapSamplingCallback(
+    Dart_HeapSamplingCreateCallback create_callback,
+    Dart_HeapSamplingDeleteCallback delete_callback,
+  ) {
+    return _Dart_RegisterHeapSamplingCallback(
+      create_callback,
+      delete_callback,
+    );
+  }
+
+  late final _Dart_RegisterHeapSamplingCallbackPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(Dart_HeapSamplingCreateCallback,
+                  Dart_HeapSamplingDeleteCallback)>>(
+      'Dart_RegisterHeapSamplingCallback');
+  late final _Dart_RegisterHeapSamplingCallback =
+      _Dart_RegisterHeapSamplingCallbackPtr.asFunction<
+          void Function(Dart_HeapSamplingCreateCallback,
+              Dart_HeapSamplingDeleteCallback)>();
+
+  void Dart_ReportSurvivingAllocations(
+    Dart_HeapSamplingReportCallback callback,
+    ffi.Pointer<ffi.Void> context,
+    bool force_gc,
+  ) {
+    return _Dart_ReportSurvivingAllocations(
+      callback,
+      context,
+      force_gc,
+    );
+  }
+
+  late final _Dart_ReportSurvivingAllocationsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              Dart_HeapSamplingReportCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Bool)>>('Dart_ReportSurvivingAllocations');
+  late final _Dart_ReportSurvivingAllocations =
+      _Dart_ReportSurvivingAllocationsPtr.asFunction<
+          void Function(
+              Dart_HeapSamplingReportCallback, ffi.Pointer<ffi.Void>, bool)>();
+
+  void Dart_SetHeapSamplingPeriod(
+    int bytes,
+  ) {
+    return _Dart_SetHeapSamplingPeriod(
+      bytes,
+    );
+  }
+
+  late final _Dart_SetHeapSamplingPeriodPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.IntPtr)>>(
+          'Dart_SetHeapSamplingPeriod');
+  late final _Dart_SetHeapSamplingPeriod =
+      _Dart_SetHeapSamplingPeriodPtr.asFunction<void Function(int)>();
+
+  /// Notifies the VM that the embedder expects the application's working set has
+  /// recently shrunk significantly and is not expected to rise in the near future.
+  /// The VM may spend O(heap-size) time performing clean up work.
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_NotifyDestroyed() {
+    return _Dart_NotifyDestroyed();
+  }
+
+  late final _Dart_NotifyDestroyedPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_NotifyDestroyed');
+  late final _Dart_NotifyDestroyed =
+      _Dart_NotifyDestroyedPtr.asFunction<void Function()>();
+
+  /// Notifies the VM that the system is running low on memory.
+  ///
+  /// Does not require a current isolate. Only valid after calling Dart_Initialize.
+  void Dart_NotifyLowMemory() {
+    return _Dart_NotifyLowMemory();
+  }
+
+  late final _Dart_NotifyLowMemoryPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_NotifyLowMemory');
+  late final _Dart_NotifyLowMemory =
+      _Dart_NotifyLowMemoryPtr.asFunction<void Function()>();
+
+  /// Set the desired performance trade-off.
+  ///
+  /// Requires a current isolate.
+  ///
+  /// Returns the previous performance mode.
+  int Dart_SetPerformanceMode(
+    int mode,
+  ) {
+    return _Dart_SetPerformanceMode(
+      mode,
+    );
+  }
+
+  late final _Dart_SetPerformanceModePtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32)>>(
+          'Dart_SetPerformanceMode');
+  late final _Dart_SetPerformanceMode =
+      _Dart_SetPerformanceModePtr.asFunction<int Function(int)>();
+
+  /// Starts the CPU sampling profiler.
+  void Dart_StartProfiling() {
+    return _Dart_StartProfiling();
+  }
+
+  late final _Dart_StartProfilingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_StartProfiling');
+  late final _Dart_StartProfiling =
+      _Dart_StartProfilingPtr.asFunction<void Function()>();
+
+  /// Stops the CPU sampling profiler.
+  ///
+  /// Note that some profile samples might still be taken after this function
+  /// returns due to the asynchronous nature of the implementation on some
+  /// platforms.
+  void Dart_StopProfiling() {
+    return _Dart_StopProfiling();
+  }
+
+  late final _Dart_StopProfilingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_StopProfiling');
+  late final _Dart_StopProfiling =
+      _Dart_StopProfilingPtr.asFunction<void Function()>();
+
+  /// Notifies the VM that the current thread should not be profiled until a
+  /// matching call to Dart_ThreadEnableProfiling is made.
+  ///
+  /// NOTE: By default, if a thread has entered an isolate it will be profiled.
+  /// This function should be used when an embedder knows a thread is about
+  /// to make a blocking call and wants to avoid unnecessary interrupts by
+  /// the profiler.
+  void Dart_ThreadDisableProfiling() {
+    return _Dart_ThreadDisableProfiling();
+  }
+
+  late final _Dart_ThreadDisableProfilingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'Dart_ThreadDisableProfiling');
+  late final _Dart_ThreadDisableProfiling =
+      _Dart_ThreadDisableProfilingPtr.asFunction<void Function()>();
+
+  /// Notifies the VM that the current thread should be profiled.
+  ///
+  /// NOTE: It is only legal to call this function *after* calling
+  /// Dart_ThreadDisableProfiling.
+  ///
+  /// NOTE: By default, if a thread has entered an isolate it will be profiled.
+  void Dart_ThreadEnableProfiling() {
+    return _Dart_ThreadEnableProfiling();
+  }
+
+  late final _Dart_ThreadEnableProfilingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'Dart_ThreadEnableProfiling');
+  late final _Dart_ThreadEnableProfiling =
+      _Dart_ThreadEnableProfilingPtr.asFunction<void Function()>();
+
+  /// Register symbol information for the Dart VM's profiler and crash dumps.
+  ///
+  /// This consumes the output of //topaz/runtime/dart/profiler_symbols, which
+  /// should be treated as opaque.
+  void Dart_AddSymbols(
+    ffi.Pointer<ffi.Char> dso_name,
+    ffi.Pointer<ffi.Void> buffer,
+    int buffer_size,
+  ) {
+    return _Dart_AddSymbols(
+      dso_name,
+      buffer,
+      buffer_size,
+    );
+  }
+
+  late final _Dart_AddSymbolsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>,
+              ffi.IntPtr)>>('Dart_AddSymbols');
+  late final _Dart_AddSymbols = _Dart_AddSymbolsPtr.asFunction<
+      void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>, int)>();
+
+  /// Exits an isolate. After this call, Dart_CurrentIsolate will
+  /// return NULL.
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_ExitIsolate() {
+    return _Dart_ExitIsolate();
+  }
+
+  late final _Dart_ExitIsolatePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_ExitIsolate');
+  late final _Dart_ExitIsolate =
+      _Dart_ExitIsolatePtr.asFunction<void Function()>();
+
+  /// Creates a full snapshot of the current isolate heap.
+  ///
+  /// A full snapshot is a compact representation of the dart vm isolate heap
+  /// and dart isolate heap states. These snapshots are used to initialize
+  /// the vm isolate on startup and fast initialization of an isolate.
+  /// A Snapshot of the heap is created before any dart code has executed.
+  ///
+  /// Requires there to be a current isolate. Not available in the precompiled
+  /// runtime (check Dart_IsPrecompiledRuntime).
+  ///
+  /// \param vm_snapshot_data_buffer Returns a pointer to a buffer containing the
+  /// vm snapshot. This buffer is scope allocated and is only valid
+  /// until the next call to Dart_ExitScope.
+  /// \param vm_snapshot_data_size Returns the size of vm_snapshot_data_buffer.
+  /// \param isolate_snapshot_data_buffer Returns a pointer to a buffer containing
+  /// the isolate snapshot. This buffer is scope allocated and is only valid
+  /// until the next call to Dart_ExitScope.
+  /// \param isolate_snapshot_data_size Returns the size of
+  /// isolate_snapshot_data_buffer.
+  /// \param is_core Create a snapshot containing core libraries.
+  /// Such snapshot should be agnostic to null safety mode.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_CreateSnapshot(
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> vm_snapshot_data_buffer,
+    ffi.Pointer<ffi.IntPtr> vm_snapshot_data_size,
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_data_buffer,
+    ffi.Pointer<ffi.IntPtr> isolate_snapshot_data_size,
+    bool is_core,
+  ) {
+    return _Dart_CreateSnapshot(
+      vm_snapshot_data_buffer,
+      vm_snapshot_data_size,
+      isolate_snapshot_data_buffer,
+      isolate_snapshot_data_size,
+      is_core,
+    );
+  }
+
+  late final _Dart_CreateSnapshotPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Bool)>>('Dart_CreateSnapshot');
+  late final _Dart_CreateSnapshot = _Dart_CreateSnapshotPtr.asFunction<
+      Object Function(
+          ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+          ffi.Pointer<ffi.IntPtr>,
+          ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+          ffi.Pointer<ffi.IntPtr>,
+          bool)>();
+
+  /// Returns whether the buffer contains a kernel file.
+  ///
+  /// \param buffer Pointer to a buffer that might contain a kernel binary.
+  /// \param buffer_size Size of the buffer.
+  ///
+  /// \return Whether the buffer contains a kernel binary (full or partial).
+  bool Dart_IsKernel(
+    ffi.Pointer<ffi.Uint8> buffer,
+    int buffer_size,
+  ) {
+    return _Dart_IsKernel(
+      buffer,
+      buffer_size,
+    );
+  }
+
+  late final _Dart_IsKernelPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(
+              ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>('Dart_IsKernel');
+  late final _Dart_IsKernel = _Dart_IsKernelPtr.asFunction<
+      bool Function(ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// Make isolate runnable.
+  ///
+  /// When isolates are spawned, this function is used to indicate that
+  /// the creation and initialization (including script loading) of the
+  /// isolate is complete and the isolate can start.
+  /// This function expects there to be no current isolate.
+  ///
+  /// \param isolate The isolate to be made runnable.
+  ///
+  /// \return NULL if successful. Returns an error message otherwise. The caller
+  /// is responsible for freeing the error message.
+  ffi.Pointer<ffi.Char> Dart_IsolateMakeRunnable(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_IsolateMakeRunnable(
+      isolate,
+    );
+  }
+
+  late final _Dart_IsolateMakeRunnablePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>(
+          'Dart_IsolateMakeRunnable');
+  late final _Dart_IsolateMakeRunnable = _Dart_IsolateMakeRunnablePtr
+      .asFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>();
+
+  /// Allows embedders to provide a custom wakeup mechanism for the delivery of
+  /// inter-isolate messages. This setting only applies to the current isolate.
+  ///
+  /// This mechanism is optional: if not provided, the isolate will be scheduled on
+  /// a VM-managed thread pool. An embedder should provide this callback if it
+  /// wants to run an isolate on a specific thread or to interleave handling of
+  /// inter-isolate messages with other event sources.
+  ///
+  /// Most embedders will only call this function once, before isolate
+  /// execution begins. If this function is called after isolate
+  /// execution begins, the embedder is responsible for threading issues.
+  void Dart_SetMessageNotifyCallback(
+    Dart_MessageNotifyCallback message_notify_callback,
+  ) {
+    return _Dart_SetMessageNotifyCallback(
+      message_notify_callback,
+    );
+  }
+
+  late final _Dart_SetMessageNotifyCallbackPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(Dart_MessageNotifyCallback)>>(
+      'Dart_SetMessageNotifyCallback');
+  late final _Dart_SetMessageNotifyCallback = _Dart_SetMessageNotifyCallbackPtr
+      .asFunction<void Function(Dart_MessageNotifyCallback)>();
+
+  /// Query the current message notify callback for the isolate.
+  ///
+  /// \return The current message notify callback for the isolate.
+  Dart_MessageNotifyCallback Dart_GetMessageNotifyCallback() {
+    return _Dart_GetMessageNotifyCallback();
+  }
+
+  late final _Dart_GetMessageNotifyCallbackPtr =
+      _lookup<ffi.NativeFunction<Dart_MessageNotifyCallback Function()>>(
+          'Dart_GetMessageNotifyCallback');
+  late final _Dart_GetMessageNotifyCallback = _Dart_GetMessageNotifyCallbackPtr
+      .asFunction<Dart_MessageNotifyCallback Function()>();
+
+  /// If the VM flag `--pause-isolates-on-start` was passed this will be true.
+  ///
+  /// \return A boolean value indicating if pause on start was requested.
+  bool Dart_ShouldPauseOnStart() {
+    return _Dart_ShouldPauseOnStart();
+  }
+
+  late final _Dart_ShouldPauseOnStartPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
+          'Dart_ShouldPauseOnStart');
+  late final _Dart_ShouldPauseOnStart =
+      _Dart_ShouldPauseOnStartPtr.asFunction<bool Function()>();
+
+  /// Override the VM flag `--pause-isolates-on-start` for the current isolate.
+  ///
+  /// \param should_pause Should the isolate be paused on start?
+  ///
+  /// NOTE: This must be called before Dart_IsolateMakeRunnable.
+  void Dart_SetShouldPauseOnStart(
+    bool should_pause,
+  ) {
+    return _Dart_SetShouldPauseOnStart(
+      should_pause,
+    );
+  }
+
+  late final _Dart_SetShouldPauseOnStartPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
+          'Dart_SetShouldPauseOnStart');
+  late final _Dart_SetShouldPauseOnStart =
+      _Dart_SetShouldPauseOnStartPtr.asFunction<void Function(bool)>();
+
+  /// Is the current isolate paused on start?
+  ///
+  /// \return A boolean value indicating if the isolate is paused on start.
+  bool Dart_IsPausedOnStart() {
+    return _Dart_IsPausedOnStart();
+  }
+
+  late final _Dart_IsPausedOnStartPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_IsPausedOnStart');
+  late final _Dart_IsPausedOnStart =
+      _Dart_IsPausedOnStartPtr.asFunction<bool Function()>();
+
+  /// Called when the embedder has paused the current isolate on start and when
+  /// the embedder has resumed the isolate.
+  ///
+  /// \param paused Is the isolate paused on start?
+  void Dart_SetPausedOnStart(
+    bool paused,
+  ) {
+    return _Dart_SetPausedOnStart(
+      paused,
+    );
+  }
+
+  late final _Dart_SetPausedOnStartPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
+          'Dart_SetPausedOnStart');
+  late final _Dart_SetPausedOnStart =
+      _Dart_SetPausedOnStartPtr.asFunction<void Function(bool)>();
+
+  /// If the VM flag `--pause-isolates-on-exit` was passed this will be true.
+  ///
+  /// \return A boolean value indicating if pause on exit was requested.
+  bool Dart_ShouldPauseOnExit() {
+    return _Dart_ShouldPauseOnExit();
+  }
+
+  late final _Dart_ShouldPauseOnExitPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
+          'Dart_ShouldPauseOnExit');
+  late final _Dart_ShouldPauseOnExit =
+      _Dart_ShouldPauseOnExitPtr.asFunction<bool Function()>();
+
+  /// Override the VM flag `--pause-isolates-on-exit` for the current isolate.
+  ///
+  /// \param should_pause Should the isolate be paused on exit?
+  void Dart_SetShouldPauseOnExit(
+    bool should_pause,
+  ) {
+    return _Dart_SetShouldPauseOnExit(
+      should_pause,
+    );
+  }
+
+  late final _Dart_SetShouldPauseOnExitPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
+          'Dart_SetShouldPauseOnExit');
+  late final _Dart_SetShouldPauseOnExit =
+      _Dart_SetShouldPauseOnExitPtr.asFunction<void Function(bool)>();
+
+  /// Is the current isolate paused on exit?
+  ///
+  /// \return A boolean value indicating if the isolate is paused on exit.
+  bool Dart_IsPausedOnExit() {
+    return _Dart_IsPausedOnExit();
+  }
+
+  late final _Dart_IsPausedOnExitPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_IsPausedOnExit');
+  late final _Dart_IsPausedOnExit =
+      _Dart_IsPausedOnExitPtr.asFunction<bool Function()>();
+
+  /// Called when the embedder has paused the current isolate on exit and when
+  /// the embedder has resumed the isolate.
+  ///
+  /// \param paused Is the isolate paused on exit?
+  void Dart_SetPausedOnExit(
+    bool paused,
+  ) {
+    return _Dart_SetPausedOnExit(
+      paused,
+    );
+  }
+
+  late final _Dart_SetPausedOnExitPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
+          'Dart_SetPausedOnExit');
+  late final _Dart_SetPausedOnExit =
+      _Dart_SetPausedOnExitPtr.asFunction<void Function(bool)>();
+
+  /// Called when the embedder has caught a top level unhandled exception error
+  /// in the current isolate.
+  ///
+  /// NOTE: It is illegal to call this twice on the same isolate without first
+  /// clearing the sticky error to null.
+  ///
+  /// \param error The unhandled exception error.
+  void Dart_SetStickyError(
+    Object error,
+  ) {
+    return _Dart_SetStickyError(
+      error,
+    );
+  }
+
+  late final _Dart_SetStickyErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>(
+          'Dart_SetStickyError');
+  late final _Dart_SetStickyError =
+      _Dart_SetStickyErrorPtr.asFunction<void Function(Object)>();
+
+  /// Does the current isolate have a sticky error?
+  bool Dart_HasStickyError() {
+    return _Dart_HasStickyError();
+  }
+
+  late final _Dart_HasStickyErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_HasStickyError');
+  late final _Dart_HasStickyError =
+      _Dart_HasStickyErrorPtr.asFunction<bool Function()>();
+
+  /// Gets the sticky error for the current isolate.
+  ///
+  /// \return A handle to the sticky error object or null.
+  Object Dart_GetStickyError() {
+    return _Dart_GetStickyError();
+  }
+
+  late final _Dart_GetStickyErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_GetStickyError');
+  late final _Dart_GetStickyError =
+      _Dart_GetStickyErrorPtr.asFunction<Object Function()>();
+
+  /// Handles the next pending message for the current isolate.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_HandleMessage() {
+    return _Dart_HandleMessage();
+  }
+
+  late final _Dart_HandleMessagePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_HandleMessage');
+  late final _Dart_HandleMessage =
+      _Dart_HandleMessagePtr.asFunction<Object Function()>();
+
+  /// Drains the microtask queue, then blocks the calling thread until the current
+  /// isolate receives a message, then handles all messages.
+  ///
+  /// \param timeout_millis When non-zero, the call returns after the indicated
+  /// number of milliseconds even if no message was received.
+  /// \return A valid handle if no error occurs, otherwise an error handle.
+  Object Dart_WaitForEvent(
+    int timeout_millis,
+  ) {
+    return _Dart_WaitForEvent(
+      timeout_millis,
+    );
+  }
+
+  late final _Dart_WaitForEventPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>(
+          'Dart_WaitForEvent');
+  late final _Dart_WaitForEvent =
+      _Dart_WaitForEventPtr.asFunction<Object Function(int)>();
+
+  /// Handles any pending messages for the vm service for the current
+  /// isolate.
+  ///
+  /// This function may be used by an embedder at a breakpoint to avoid
+  /// pausing the vm service.
+  ///
+  /// This function can indirectly cause the message notify callback to
+  /// be called.
+  ///
+  /// \return true if the vm service requests the program resume
+  /// execution, false otherwise
+  bool Dart_HandleServiceMessages() {
+    return _Dart_HandleServiceMessages();
+  }
+
+  late final _Dart_HandleServiceMessagesPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
+          'Dart_HandleServiceMessages');
+  late final _Dart_HandleServiceMessages =
+      _Dart_HandleServiceMessagesPtr.asFunction<bool Function()>();
+
+  /// Does the current isolate have pending service messages?
+  ///
+  /// \return true if the isolate has pending service messages, false otherwise.
+  bool Dart_HasServiceMessages() {
+    return _Dart_HasServiceMessages();
+  }
+
+  late final _Dart_HasServiceMessagesPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
+          'Dart_HasServiceMessages');
+  late final _Dart_HasServiceMessages =
+      _Dart_HasServiceMessagesPtr.asFunction<bool Function()>();
+
+  /// Processes any incoming messages for the current isolate.
+  ///
+  /// This function may only be used when the embedder has not provided
+  /// an alternate message delivery mechanism with
+  /// Dart_SetMessageCallbacks. It is provided for convenience.
+  ///
+  /// This function waits for incoming messages for the current
+  /// isolate. As new messages arrive, they are handled using
+  /// Dart_HandleMessage. The routine exits when all ports to the
+  /// current isolate are closed.
+  ///
+  /// \return A valid handle if the run loop exited successfully.  If an
+  /// exception or other error occurs while processing messages, an
+  /// error handle is returned.
+  Object Dart_RunLoop() {
+    return _Dart_RunLoop();
+  }
+
+  late final _Dart_RunLoopPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_RunLoop');
+  late final _Dart_RunLoop = _Dart_RunLoopPtr.asFunction<Object Function()>();
+
+  /// Lets the VM run message processing for the isolate.
+  ///
+  /// This function expects there to a current isolate and the current isolate
+  /// must not have an active api scope. The VM will take care of making the
+  /// isolate runnable (if not already), handles its message loop and will take
+  /// care of shutting the isolate down once it's done.
+  ///
+  /// \param errors_are_fatal Whether uncaught errors should be fatal.
+  /// \param on_error_port A port to notify on uncaught errors (or ILLEGAL_PORT).
+  /// \param on_exit_port A port to notify on exit (or ILLEGAL_PORT).
+  /// \param error A non-NULL pointer which will hold an error message if the call
+  /// fails. The error has to be free()ed by the caller.
+  ///
+  /// \return If successful the VM takes ownership of the isolate and takes care
+  /// of its message loop. If not successful the caller retains ownership of the
+  /// isolate.
+  bool Dart_RunLoopAsync(
+    bool errors_are_fatal,
+    int on_error_port,
+    int on_exit_port,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
+  ) {
+    return _Dart_RunLoopAsync(
+      errors_are_fatal,
+      on_error_port,
+      on_exit_port,
+      error,
+    );
+  }
+
+  late final _Dart_RunLoopAsyncPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(ffi.Bool, Dart_Port, Dart_Port,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_RunLoopAsync');
+  late final _Dart_RunLoopAsync = _Dart_RunLoopAsyncPtr.asFunction<
+      bool Function(bool, int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Gets the main port id for the current isolate.
+  int Dart_GetMainPortId() {
+    return _Dart_GetMainPortId();
+  }
+
+  late final _Dart_GetMainPortIdPtr =
+      _lookup<ffi.NativeFunction<Dart_Port Function()>>('Dart_GetMainPortId');
+  late final _Dart_GetMainPortId =
+      _Dart_GetMainPortIdPtr.asFunction<int Function()>();
+
+  /// Does the current isolate have live ReceivePorts?
+  ///
+  /// A ReceivePort is live when it has not been closed.
+  bool Dart_HasLivePorts() {
+    return _Dart_HasLivePorts();
+  }
+
+  late final _Dart_HasLivePortsPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_HasLivePorts');
+  late final _Dart_HasLivePorts =
+      _Dart_HasLivePortsPtr.asFunction<bool Function()>();
+
+  /// Posts a message for some isolate. The message is a serialized
+  /// object.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// For posting messages outside of an isolate see \ref Dart_PostCObject.
+  ///
+  /// \param port_id The destination port.
+  /// \param object An object from the current isolate.
+  ///
+  /// \return True if the message was posted.
+  bool Dart_Post(
+    int port_id,
+    Object object,
+  ) {
+    return _Dart_Post(
+      port_id,
+      object,
+    );
+  }
+
+  late final _Dart_PostPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(Dart_Port, ffi.Handle)>>(
+          'Dart_Post');
+  late final _Dart_Post =
+      _Dart_PostPtr.asFunction<bool Function(int, Object)>();
+
+  /// Returns a new SendPort with the provided port id.
+  ///
+  /// \param port_id The destination port.
+  ///
+  /// \return A new SendPort if no errors occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewSendPort(
+    int port_id,
+  ) {
+    return _Dart_NewSendPort(
+      port_id,
+    );
+  }
+
+  late final _Dart_NewSendPortPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(Dart_Port)>>(
+          'Dart_NewSendPort');
+  late final _Dart_NewSendPort =
+      _Dart_NewSendPortPtr.asFunction<Object Function(int)>();
+
+  /// Gets the SendPort id for the provided SendPort.
+  /// \param port A SendPort object whose id is desired.
+  /// \param port_id Returns the id of the SendPort.
+  /// \return Success if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_SendPortGetId(
+    Object port,
+    ffi.Pointer<Dart_Port> port_id,
+  ) {
+    return _Dart_SendPortGetId(
+      port,
+      port_id,
+    );
+  }
+
+  late final _Dart_SendPortGetIdPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<Dart_Port>)>>('Dart_SendPortGetId');
+  late final _Dart_SendPortGetId = _Dart_SendPortGetIdPtr.asFunction<
+      Object Function(Object, ffi.Pointer<Dart_Port>)>();
+
+  /// Enters a new scope.
+  ///
+  /// All new local handles will be created in this scope. Additionally,
+  /// some functions may return "scope allocated" memory which is only
+  /// valid within this scope.
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_EnterScope() {
+    return _Dart_EnterScope();
+  }
+
+  late final _Dart_EnterScopePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_EnterScope');
+  late final _Dart_EnterScope =
+      _Dart_EnterScopePtr.asFunction<void Function()>();
+
+  /// Exits a scope.
+  ///
+  /// The previous scope (if any) becomes the current scope.
+  ///
+  /// Requires there to be a current isolate.
+  void Dart_ExitScope() {
+    return _Dart_ExitScope();
+  }
+
+  late final _Dart_ExitScopePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_ExitScope');
+  late final _Dart_ExitScope = _Dart_ExitScopePtr.asFunction<void Function()>();
+
+  /// The Dart VM uses "zone allocation" for temporary structures. Zones
+  /// support very fast allocation of small chunks of memory. The chunks
+  /// cannot be deallocated individually, but instead zones support
+  /// deallocating all chunks in one fast operation.
+  ///
+  /// This function makes it possible for the embedder to allocate
+  /// temporary data in the VMs zone allocator.
+  ///
+  /// Zone allocation is possible:
+  /// 1. when inside a scope where local handles can be allocated
+  /// 2. when processing a message from a native port in a native port
+  /// handler
+  ///
+  /// All the memory allocated this way will be reclaimed either on the
+  /// next call to Dart_ExitScope or when the native port handler exits.
+  ///
+  /// \param size Size of the memory to allocate.
+  ///
+  /// \return A pointer to the allocated memory. NULL if allocation
+  /// failed. Failure might due to is no current VM zone.
+  ffi.Pointer<ffi.Uint8> Dart_ScopeAllocate(
+    int size,
+  ) {
+    return _Dart_ScopeAllocate(
+      size,
+    );
+  }
+
+  late final _Dart_ScopeAllocatePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Uint8> Function(ffi.IntPtr)>>(
+          'Dart_ScopeAllocate');
+  late final _Dart_ScopeAllocate =
+      _Dart_ScopeAllocatePtr.asFunction<ffi.Pointer<ffi.Uint8> Function(int)>();
+
+  /// Returns the null object.
+  ///
+  /// \return A handle to the null object.
+  Object Dart_Null() {
+    return _Dart_Null();
+  }
+
+  late final _Dart_NullPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_Null');
+  late final _Dart_Null = _Dart_NullPtr.asFunction<Object Function()>();
+
+  /// Is this object null?
+  bool Dart_IsNull(
+    Object object,
+  ) {
+    return _Dart_IsNull(
+      object,
+    );
+  }
+
+  late final _Dart_IsNullPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsNull');
+  late final _Dart_IsNull = _Dart_IsNullPtr.asFunction<bool Function(Object)>();
+
+  /// Returns the empty string object.
+  ///
+  /// \return A handle to the empty string object.
+  Object Dart_EmptyString() {
+    return _Dart_EmptyString();
+  }
+
+  late final _Dart_EmptyStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_EmptyString');
+  late final _Dart_EmptyString =
+      _Dart_EmptyStringPtr.asFunction<Object Function()>();
+
+  /// Returns types that are not classes, and which therefore cannot be looked up
+  /// as library members by Dart_GetType.
+  ///
+  /// \return A handle to the dynamic, void or Never type.
+  Object Dart_TypeDynamic() {
+    return _Dart_TypeDynamic();
+  }
+
+  late final _Dart_TypeDynamicPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_TypeDynamic');
+  late final _Dart_TypeDynamic =
+      _Dart_TypeDynamicPtr.asFunction<Object Function()>();
+
+  Object Dart_TypeVoid() {
+    return _Dart_TypeVoid();
+  }
+
+  late final _Dart_TypeVoidPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_TypeVoid');
+  late final _Dart_TypeVoid = _Dart_TypeVoidPtr.asFunction<Object Function()>();
+
+  Object Dart_TypeNever() {
+    return _Dart_TypeNever();
+  }
+
+  late final _Dart_TypeNeverPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_TypeNever');
+  late final _Dart_TypeNever =
+      _Dart_TypeNeverPtr.asFunction<Object Function()>();
+
+  /// Checks if the two objects are equal.
+  ///
+  /// The result of the comparison is returned through the 'equal'
+  /// parameter. The return value itself is used to indicate success or
+  /// failure, not equality.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param obj1 An object to be compared.
+  /// \param obj2 An object to be compared.
+  /// \param equal Returns the result of the equality comparison.
+  ///
+  /// \return A valid handle if no error occurs during the comparison.
+  Object Dart_ObjectEquals(
+    Object obj1,
+    Object obj2,
+    ffi.Pointer<ffi.Bool> equal,
+  ) {
+    return _Dart_ObjectEquals(
+      obj1,
+      obj2,
+      equal,
+    );
+  }
+
+  late final _Dart_ObjectEqualsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle,
+              ffi.Pointer<ffi.Bool>)>>('Dart_ObjectEquals');
+  late final _Dart_ObjectEquals = _Dart_ObjectEqualsPtr.asFunction<
+      Object Function(Object, Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Is this object an instance of some type?
+  ///
+  /// The result of the test is returned through the 'instanceof' parameter.
+  /// The return value itself is used to indicate success or failure.
+  ///
+  /// \param object An object.
+  /// \param type A type.
+  /// \param instanceof Return true if 'object' is an instance of type 'type'.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_ObjectIsType(
+    Object object,
+    Object type,
+    ffi.Pointer<ffi.Bool> instanceof,
+  ) {
+    return _Dart_ObjectIsType(
+      object,
+      type,
+      instanceof,
+    );
+  }
+
+  late final _Dart_ObjectIsTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle,
+              ffi.Pointer<ffi.Bool>)>>('Dart_ObjectIsType');
+  late final _Dart_ObjectIsType = _Dart_ObjectIsTypePtr.asFunction<
+      Object Function(Object, Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Query object type.
+  ///
+  /// \param object Some Object.
+  ///
+  /// \return true if Object is of the specified type.
+  bool Dart_IsInstance(
+    Object object,
+  ) {
+    return _Dart_IsInstance(
+      object,
+    );
+  }
+
+  late final _Dart_IsInstancePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsInstance');
+  late final _Dart_IsInstance =
+      _Dart_IsInstancePtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsNumber(
+    Object object,
+  ) {
+    return _Dart_IsNumber(
+      object,
+    );
+  }
+
+  late final _Dart_IsNumberPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsNumber');
+  late final _Dart_IsNumber =
+      _Dart_IsNumberPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsInteger(
+    Object object,
+  ) {
+    return _Dart_IsInteger(
+      object,
+    );
+  }
+
+  late final _Dart_IsIntegerPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsInteger');
+  late final _Dart_IsInteger =
+      _Dart_IsIntegerPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsDouble(
+    Object object,
+  ) {
+    return _Dart_IsDouble(
+      object,
+    );
+  }
+
+  late final _Dart_IsDoublePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsDouble');
+  late final _Dart_IsDouble =
+      _Dart_IsDoublePtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsBoolean(
+    Object object,
+  ) {
+    return _Dart_IsBoolean(
+      object,
+    );
+  }
+
+  late final _Dart_IsBooleanPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsBoolean');
+  late final _Dart_IsBoolean =
+      _Dart_IsBooleanPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsString(
+    Object object,
+  ) {
+    return _Dart_IsString(
+      object,
+    );
+  }
+
+  late final _Dart_IsStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsString');
+  late final _Dart_IsString =
+      _Dart_IsStringPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsStringLatin1(
+    Object object,
+  ) {
+    return _Dart_IsStringLatin1(
+      object,
+    );
+  }
+
+  late final _Dart_IsStringLatin1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsStringLatin1');
+  late final _Dart_IsStringLatin1 =
+      _Dart_IsStringLatin1Ptr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsExternalString(
+    Object object,
+  ) {
+    return _Dart_IsExternalString(
+      object,
+    );
+  }
+
+  late final _Dart_IsExternalStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsExternalString');
+  late final _Dart_IsExternalString =
+      _Dart_IsExternalStringPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsList(
+    Object object,
+  ) {
+    return _Dart_IsList(
+      object,
+    );
+  }
+
+  late final _Dart_IsListPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsList');
+  late final _Dart_IsList = _Dart_IsListPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsMap(
+    Object object,
+  ) {
+    return _Dart_IsMap(
+      object,
+    );
+  }
+
+  late final _Dart_IsMapPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsMap');
+  late final _Dart_IsMap = _Dart_IsMapPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsLibrary(
+    Object object,
+  ) {
+    return _Dart_IsLibrary(
+      object,
+    );
+  }
+
+  late final _Dart_IsLibraryPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsLibrary');
+  late final _Dart_IsLibrary =
+      _Dart_IsLibraryPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsType(
+    Object handle,
+  ) {
+    return _Dart_IsType(
+      handle,
+    );
+  }
+
+  late final _Dart_IsTypePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsType');
+  late final _Dart_IsType = _Dart_IsTypePtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsFunction(
+    Object handle,
+  ) {
+    return _Dart_IsFunction(
+      handle,
+    );
+  }
+
+  late final _Dart_IsFunctionPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsFunction');
+  late final _Dart_IsFunction =
+      _Dart_IsFunctionPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsVariable(
+    Object handle,
+  ) {
+    return _Dart_IsVariable(
+      handle,
+    );
+  }
+
+  late final _Dart_IsVariablePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsVariable');
+  late final _Dart_IsVariable =
+      _Dart_IsVariablePtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsTypeVariable(
+    Object handle,
+  ) {
+    return _Dart_IsTypeVariable(
+      handle,
+    );
+  }
+
+  late final _Dart_IsTypeVariablePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsTypeVariable');
+  late final _Dart_IsTypeVariable =
+      _Dart_IsTypeVariablePtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsClosure(
+    Object object,
+  ) {
+    return _Dart_IsClosure(
+      object,
+    );
+  }
+
+  late final _Dart_IsClosurePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsClosure');
+  late final _Dart_IsClosure =
+      _Dart_IsClosurePtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsTypedData(
+    Object object,
+  ) {
+    return _Dart_IsTypedData(
+      object,
+    );
+  }
+
+  late final _Dart_IsTypedDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsTypedData');
+  late final _Dart_IsTypedData =
+      _Dart_IsTypedDataPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsByteBuffer(
+    Object object,
+  ) {
+    return _Dart_IsByteBuffer(
+      object,
+    );
+  }
+
+  late final _Dart_IsByteBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsByteBuffer');
+  late final _Dart_IsByteBuffer =
+      _Dart_IsByteBufferPtr.asFunction<bool Function(Object)>();
+
+  bool Dart_IsFuture(
+    Object object,
+  ) {
+    return _Dart_IsFuture(
+      object,
+    );
+  }
+
+  late final _Dart_IsFuturePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsFuture');
+  late final _Dart_IsFuture =
+      _Dart_IsFuturePtr.asFunction<bool Function(Object)>();
+
+  /// Gets the type of a Dart language object.
+  ///
+  /// \param instance Some Dart object.
+  ///
+  /// \return If no error occurs, the type is returned. Otherwise an
+  /// error handle is returned.
+  Object Dart_InstanceGetType(
+    Object instance,
+  ) {
+    return _Dart_InstanceGetType(
+      instance,
+    );
+  }
+
+  late final _Dart_InstanceGetTypePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_InstanceGetType');
+  late final _Dart_InstanceGetType =
+      _Dart_InstanceGetTypePtr.asFunction<Object Function(Object)>();
+
+  /// Returns the name for the provided class type.
+  ///
+  /// \return A valid string handle if no error occurs during the
+  /// operation.
+  Object Dart_ClassName(
+    Object cls_type,
+  ) {
+    return _Dart_ClassName(
+      cls_type,
+    );
+  }
+
+  late final _Dart_ClassNamePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ClassName');
+  late final _Dart_ClassName =
+      _Dart_ClassNamePtr.asFunction<Object Function(Object)>();
+
+  /// Returns the name for the provided function or method.
+  ///
+  /// \return A valid string handle if no error occurs during the
+  /// operation.
+  Object Dart_FunctionName(
+    Object function,
+  ) {
+    return _Dart_FunctionName(
+      function,
+    );
+  }
+
+  late final _Dart_FunctionNamePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_FunctionName');
+  late final _Dart_FunctionName =
+      _Dart_FunctionNamePtr.asFunction<Object Function(Object)>();
+
+  /// Returns a handle to the owner of a function.
+  ///
+  /// The owner of an instance method or a static method is its defining
+  /// class. The owner of a top-level function is its defining
+  /// library. The owner of the function of a non-implicit closure is the
+  /// function of the method or closure that defines the non-implicit
+  /// closure.
+  ///
+  /// \return A valid handle to the owner of the function, or an error
+  /// handle if the argument is not a valid handle to a function.
+  Object Dart_FunctionOwner(
+    Object function,
+  ) {
+    return _Dart_FunctionOwner(
+      function,
+    );
+  }
+
+  late final _Dart_FunctionOwnerPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_FunctionOwner');
+  late final _Dart_FunctionOwner =
+      _Dart_FunctionOwnerPtr.asFunction<Object Function(Object)>();
+
+  /// Determines whether a function handle refers to a static function
+  /// of method.
+  ///
+  /// For the purposes of the embedding API, a top-level function is
+  /// implicitly declared static.
+  ///
+  /// \param function A handle to a function or method declaration.
+  /// \param is_static Returns whether the function or method is declared static.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_FunctionIsStatic(
+    Object function,
+    ffi.Pointer<ffi.Bool> is_static,
+  ) {
+    return _Dart_FunctionIsStatic(
+      function,
+      is_static,
+    );
+  }
+
+  late final _Dart_FunctionIsStaticPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_FunctionIsStatic');
+  late final _Dart_FunctionIsStatic = _Dart_FunctionIsStaticPtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Is this object a closure resulting from a tear-off (closurized method)?
+  ///
+  /// Returns true for closures produced when an ordinary method is accessed
+  /// through a getter call. Returns false otherwise, in particular for closures
+  /// produced from local function declarations.
+  ///
+  /// \param object Some Object.
+  ///
+  /// \return true if Object is a tear-off.
+  bool Dart_IsTearOff(
+    Object object,
+  ) {
+    return _Dart_IsTearOff(
+      object,
+    );
+  }
+
+  late final _Dart_IsTearOffPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
+          'Dart_IsTearOff');
+  late final _Dart_IsTearOff =
+      _Dart_IsTearOffPtr.asFunction<bool Function(Object)>();
+
+  /// Retrieves the function of a closure.
+  ///
+  /// \return A handle to the function of the closure, or an error handle if the
+  /// argument is not a closure.
+  Object Dart_ClosureFunction(
+    Object closure,
+  ) {
+    return _Dart_ClosureFunction(
+      closure,
+    );
+  }
+
+  late final _Dart_ClosureFunctionPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ClosureFunction');
+  late final _Dart_ClosureFunction =
+      _Dart_ClosureFunctionPtr.asFunction<Object Function(Object)>();
+
+  /// Returns a handle to the library which contains class.
+  ///
+  /// \return A valid handle to the library with owns class, null if the class
+  /// has no library or an error handle if the argument is not a valid handle
+  /// to a class type.
+  Object Dart_ClassLibrary(
+    Object cls_type,
+  ) {
+    return _Dart_ClassLibrary(
+      cls_type,
+    );
+  }
+
+  late final _Dart_ClassLibraryPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ClassLibrary');
+  late final _Dart_ClassLibrary =
+      _Dart_ClassLibraryPtr.asFunction<Object Function(Object)>();
+
+  /// Does this Integer fit into a 64-bit signed integer?
+  ///
+  /// \param integer An integer.
+  /// \param fits Returns true if the integer fits into a 64-bit signed integer.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_IntegerFitsIntoInt64(
+    Object integer,
+    ffi.Pointer<ffi.Bool> fits,
+  ) {
+    return _Dart_IntegerFitsIntoInt64(
+      integer,
+      fits,
+    );
+  }
+
+  late final _Dart_IntegerFitsIntoInt64Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IntegerFitsIntoInt64');
+  late final _Dart_IntegerFitsIntoInt64 = _Dart_IntegerFitsIntoInt64Ptr
+      .asFunction<Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Does this Integer fit into a 64-bit unsigned integer?
+  ///
+  /// \param integer An integer.
+  /// \param fits Returns true if the integer fits into a 64-bit unsigned integer.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_IntegerFitsIntoUint64(
+    Object integer,
+    ffi.Pointer<ffi.Bool> fits,
+  ) {
+    return _Dart_IntegerFitsIntoUint64(
+      integer,
+      fits,
+    );
+  }
+
+  late final _Dart_IntegerFitsIntoUint64Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle,
+              ffi.Pointer<ffi.Bool>)>>('Dart_IntegerFitsIntoUint64');
+  late final _Dart_IntegerFitsIntoUint64 = _Dart_IntegerFitsIntoUint64Ptr
+      .asFunction<Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Returns an Integer with the provided value.
+  ///
+  /// \param value The value of the integer.
+  ///
+  /// \return The Integer object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewInteger(
+    int value,
+  ) {
+    return _Dart_NewInteger(
+      value,
+    );
+  }
+
+  late final _Dart_NewIntegerPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>(
+          'Dart_NewInteger');
+  late final _Dart_NewInteger =
+      _Dart_NewIntegerPtr.asFunction<Object Function(int)>();
+
+  /// Returns an Integer with the provided value.
+  ///
+  /// \param value The unsigned value of the integer.
+  ///
+  /// \return The Integer object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewIntegerFromUint64(
+    int value,
+  ) {
+    return _Dart_NewIntegerFromUint64(
+      value,
+    );
+  }
+
+  late final _Dart_NewIntegerFromUint64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Uint64)>>(
+          'Dart_NewIntegerFromUint64');
+  late final _Dart_NewIntegerFromUint64 =
+      _Dart_NewIntegerFromUint64Ptr.asFunction<Object Function(int)>();
+
+  /// Returns an Integer with the provided value.
+  ///
+  /// \param value The value of the integer represented as a C string
+  /// containing a hexadecimal number.
+  ///
+  /// \return The Integer object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewIntegerFromHexCString(
+    ffi.Pointer<ffi.Char> value,
+  ) {
+    return _Dart_NewIntegerFromHexCString(
+      value,
+    );
+  }
+
+  late final _Dart_NewIntegerFromHexCStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
+          'Dart_NewIntegerFromHexCString');
+  late final _Dart_NewIntegerFromHexCString = _Dart_NewIntegerFromHexCStringPtr
+      .asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
+
+  /// Gets the value of an Integer.
+  ///
+  /// The integer must fit into a 64-bit signed integer, otherwise an error occurs.
+  ///
+  /// \param integer An Integer.
+  /// \param value Returns the value of the Integer.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_IntegerToInt64(
+    Object integer,
+    ffi.Pointer<ffi.Int64> value,
+  ) {
+    return _Dart_IntegerToInt64(
+      integer,
+      value,
+    );
+  }
+
+  late final _Dart_IntegerToInt64Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Int64>)>>('Dart_IntegerToInt64');
+  late final _Dart_IntegerToInt64 = _Dart_IntegerToInt64Ptr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Int64>)>();
+
+  /// Gets the value of an Integer.
+  ///
+  /// The integer must fit into a 64-bit unsigned integer, otherwise an
+  /// error occurs.
+  ///
+  /// \param integer An Integer.
+  /// \param value Returns the value of the Integer.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_IntegerToUint64(
+    Object integer,
+    ffi.Pointer<ffi.Uint64> value,
+  ) {
+    return _Dart_IntegerToUint64(
+      integer,
+      value,
+    );
+  }
+
+  late final _Dart_IntegerToUint64Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Uint64>)>>('Dart_IntegerToUint64');
+  late final _Dart_IntegerToUint64 = _Dart_IntegerToUint64Ptr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Uint64>)>();
+
+  /// Gets the value of an integer as a hexadecimal C string.
+  ///
+  /// \param integer An Integer.
+  /// \param value Returns the value of the Integer as a hexadecimal C
+  /// string. This C string is scope allocated and is only valid until
+  /// the next call to Dart_ExitScope.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_IntegerToHexCString(
+    Object integer,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> value,
+  ) {
+    return _Dart_IntegerToHexCString(
+      integer,
+      value,
+    );
+  }
+
+  late final _Dart_IntegerToHexCStringPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_IntegerToHexCString');
+  late final _Dart_IntegerToHexCString =
+      _Dart_IntegerToHexCStringPtr.asFunction<
+          Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Returns a Double with the provided value.
+  ///
+  /// \param value A double.
+  ///
+  /// \return The Double object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewDouble(
+    double value,
+  ) {
+    return _Dart_NewDouble(
+      value,
+    );
+  }
+
+  late final _Dart_NewDoublePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Double)>>(
+          'Dart_NewDouble');
+  late final _Dart_NewDouble =
+      _Dart_NewDoublePtr.asFunction<Object Function(double)>();
+
+  /// Gets the value of a Double
+  ///
+  /// \param double_obj A Double
+  /// \param value Returns the value of the Double.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_DoubleValue(
+    Object double_obj,
+    ffi.Pointer<ffi.Double> value,
+  ) {
+    return _Dart_DoubleValue(
+      double_obj,
+      value,
+    );
+  }
+
+  late final _Dart_DoubleValuePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Double>)>>('Dart_DoubleValue');
+  late final _Dart_DoubleValue = _Dart_DoubleValuePtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Double>)>();
+
+  /// Returns a closure of static function 'function_name' in the class 'class_name'
+  /// in the exported namespace of specified 'library'.
+  ///
+  /// \param library Library object
+  /// \param cls_type Type object representing a Class
+  /// \param function_name Name of the static function in the class
+  ///
+  /// \return A valid Dart instance if no error occurs during the operation.
+  Object Dart_GetStaticMethodClosure(
+    Object library1,
+    Object cls_type,
+    Object function_name,
+  ) {
+    return _Dart_GetStaticMethodClosure(
+      library1,
+      cls_type,
+      function_name,
+    );
+  }
+
+  late final _Dart_GetStaticMethodClosurePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle,
+              ffi.Handle)>>('Dart_GetStaticMethodClosure');
+  late final _Dart_GetStaticMethodClosure = _Dart_GetStaticMethodClosurePtr
+      .asFunction<Object Function(Object, Object, Object)>();
+
+  /// Returns the True object.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \return A handle to the True object.
+  Object Dart_True() {
+    return _Dart_True();
+  }
+
+  late final _Dart_TruePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_True');
+  late final _Dart_True = _Dart_TruePtr.asFunction<Object Function()>();
+
+  /// Returns the False object.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \return A handle to the False object.
+  Object Dart_False() {
+    return _Dart_False();
+  }
+
+  late final _Dart_FalsePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_False');
+  late final _Dart_False = _Dart_FalsePtr.asFunction<Object Function()>();
+
+  /// Returns a Boolean with the provided value.
+  ///
+  /// \param value true or false.
+  ///
+  /// \return The Boolean object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewBoolean(
+    bool value,
+  ) {
+    return _Dart_NewBoolean(
+      value,
+    );
+  }
+
+  late final _Dart_NewBooleanPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>(
+          'Dart_NewBoolean');
+  late final _Dart_NewBoolean =
+      _Dart_NewBooleanPtr.asFunction<Object Function(bool)>();
+
+  /// Gets the value of a Boolean
+  ///
+  /// \param boolean_obj A Boolean
+  /// \param value Returns the value of the Boolean.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_BooleanValue(
+    Object boolean_obj,
+    ffi.Pointer<ffi.Bool> value,
+  ) {
+    return _Dart_BooleanValue(
+      boolean_obj,
+      value,
+    );
+  }
+
+  late final _Dart_BooleanValuePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_BooleanValue');
+  late final _Dart_BooleanValue = _Dart_BooleanValuePtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Gets the length of a String.
+  ///
+  /// \param str A String.
+  /// \param length Returns the length of the String.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_StringLength(
+    Object str,
+    ffi.Pointer<ffi.IntPtr> length,
+  ) {
+    return _Dart_StringLength(
+      str,
+      length,
+    );
+  }
+
+  late final _Dart_StringLengthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>('Dart_StringLength');
+  late final _Dart_StringLength = _Dart_StringLengthPtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Returns a String built from the provided C string
+  /// (There is an implicit assumption that the C string passed in contains
+  /// UTF-8 encoded characters and '\0' is considered as a termination
+  /// character).
+  ///
+  /// \param str A C String
+  ///
+  /// \return The String object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewStringFromCString(
+    ffi.Pointer<ffi.Char> str,
+  ) {
+    return _Dart_NewStringFromCString(
+      str,
+    );
+  }
+
+  late final _Dart_NewStringFromCStringPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
+          'Dart_NewStringFromCString');
+  late final _Dart_NewStringFromCString = _Dart_NewStringFromCStringPtr
+      .asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
+
+  /// Returns a String built from an array of UTF-8 encoded characters.
+  ///
+  /// \param utf8_array An array of UTF-8 encoded characters.
+  /// \param length The length of the codepoints array.
+  ///
+  /// \return The String object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewStringFromUTF8(
+    ffi.Pointer<ffi.Uint8> utf8_array,
+    int length,
+  ) {
+    return _Dart_NewStringFromUTF8(
+      utf8_array,
+      length,
+    );
+  }
+
+  late final _Dart_NewStringFromUTF8Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>('Dart_NewStringFromUTF8');
+  late final _Dart_NewStringFromUTF8 = _Dart_NewStringFromUTF8Ptr.asFunction<
+      Object Function(ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// Returns a String built from an array of UTF-16 encoded characters.
+  ///
+  /// \param utf16_array An array of UTF-16 encoded characters.
+  /// \param length The length of the codepoints array.
+  ///
+  /// \return The String object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewStringFromUTF16(
+    ffi.Pointer<ffi.Uint16> utf16_array,
+    int length,
+  ) {
+    return _Dart_NewStringFromUTF16(
+      utf16_array,
+      length,
+    );
+  }
+
+  late final _Dart_NewStringFromUTF16Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Uint16>, ffi.IntPtr)>>('Dart_NewStringFromUTF16');
+  late final _Dart_NewStringFromUTF16 = _Dart_NewStringFromUTF16Ptr.asFunction<
+      Object Function(ffi.Pointer<ffi.Uint16>, int)>();
+
+  /// Returns a String built from an array of UTF-32 encoded characters.
+  ///
+  /// \param utf32_array An array of UTF-32 encoded characters.
+  /// \param length The length of the codepoints array.
+  ///
+  /// \return The String object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewStringFromUTF32(
+    ffi.Pointer<ffi.Int32> utf32_array,
+    int length,
+  ) {
+    return _Dart_NewStringFromUTF32(
+      utf32_array,
+      length,
+    );
+  }
+
+  late final _Dart_NewStringFromUTF32Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Int32>, ffi.IntPtr)>>('Dart_NewStringFromUTF32');
+  late final _Dart_NewStringFromUTF32 = _Dart_NewStringFromUTF32Ptr.asFunction<
+      Object Function(ffi.Pointer<ffi.Int32>, int)>();
+
+  /// Returns a String which references an external array of
+  /// Latin-1 (ISO-8859-1) encoded characters.
+  ///
+  /// \param latin1_array Array of Latin-1 encoded characters. This must not move.
+  /// \param length The length of the characters array.
+  /// \param peer An external pointer to associate with this string.
+  /// \param external_allocation_size The number of externally allocated
+  /// bytes for peer. Used to inform the garbage collector.
+  /// \param callback A callback to be called when this string is finalized.
+  ///
+  /// \return The String object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewExternalLatin1String(
+    ffi.Pointer<ffi.Uint8> latin1_array,
+    int length,
+    ffi.Pointer<ffi.Void> peer,
+    int external_allocation_size,
+    Dart_HandleFinalizer callback,
+  ) {
+    return _Dart_NewExternalLatin1String(
+      latin1_array,
+      length,
+      peer,
+      external_allocation_size,
+      callback,
+    );
+  }
+
+  late final _Dart_NewExternalLatin1StringPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>>('Dart_NewExternalLatin1String');
+  late final _Dart_NewExternalLatin1String =
+      _Dart_NewExternalLatin1StringPtr.asFunction<
+          Object Function(ffi.Pointer<ffi.Uint8>, int, ffi.Pointer<ffi.Void>,
+              int, Dart_HandleFinalizer)>();
+
+  /// Returns a String which references an external array of UTF-16 encoded
+  /// characters.
+  ///
+  /// \param utf16_array An array of UTF-16 encoded characters. This must not move.
+  /// \param length The length of the characters array.
+  /// \param peer An external pointer to associate with this string.
+  /// \param external_allocation_size The number of externally allocated
+  /// bytes for peer. Used to inform the garbage collector.
+  /// \param callback A callback to be called when this string is finalized.
+  ///
+  /// \return The String object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewExternalUTF16String(
+    ffi.Pointer<ffi.Uint16> utf16_array,
+    int length,
+    ffi.Pointer<ffi.Void> peer,
+    int external_allocation_size,
+    Dart_HandleFinalizer callback,
+  ) {
+    return _Dart_NewExternalUTF16String(
+      utf16_array,
+      length,
+      peer,
+      external_allocation_size,
+      callback,
+    );
+  }
+
+  late final _Dart_NewExternalUTF16StringPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Uint16>,
+              ffi.IntPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>>('Dart_NewExternalUTF16String');
+  late final _Dart_NewExternalUTF16String =
+      _Dart_NewExternalUTF16StringPtr.asFunction<
+          Object Function(ffi.Pointer<ffi.Uint16>, int, ffi.Pointer<ffi.Void>,
+              int, Dart_HandleFinalizer)>();
+
+  /// Gets the C string representation of a String.
+  /// (It is a sequence of UTF-8 encoded values with a '\0' termination.)
+  ///
+  /// \param str A string.
+  /// \param cstr Returns the String represented as a C string.
+  /// This C string is scope allocated and is only valid until
+  /// the next call to Dart_ExitScope.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_StringToCString(
+    Object str,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> cstr,
+  ) {
+    return _Dart_StringToCString(
+      str,
+      cstr,
+    );
+  }
+
+  late final _Dart_StringToCStringPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_StringToCString');
+  late final _Dart_StringToCString = _Dart_StringToCStringPtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Gets a UTF-8 encoded representation of a String.
+  ///
+  /// Any unpaired surrogate code points in the string will be converted as
+  /// replacement characters (U+FFFD, 0xEF 0xBF 0xBD in UTF-8). If you need
+  /// to preserve unpaired surrogates, use the Dart_StringToUTF16 function.
+  ///
+  /// \param str A string.
+  /// \param utf8_array Returns the String represented as UTF-8 code
+  /// units.  This UTF-8 array is scope allocated and is only valid
+  /// until the next call to Dart_ExitScope.
+  /// \param length Used to return the length of the array which was
+  /// actually used.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_StringToUTF8(
+    Object str,
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> utf8_array,
+    ffi.Pointer<ffi.IntPtr> length,
+  ) {
+    return _Dart_StringToUTF8(
+      str,
+      utf8_array,
+      length,
+    );
+  }
+
+  late final _Dart_StringToUTF8Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_StringToUTF8');
+  late final _Dart_StringToUTF8 = _Dart_StringToUTF8Ptr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+          ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Gets the data corresponding to the string object. This function returns
+  /// the data only for Latin-1 (ISO-8859-1) string objects. For all other
+  /// string objects it returns an error.
+  ///
+  /// \param str A string.
+  /// \param latin1_array An array allocated by the caller, used to return
+  /// the string data.
+  /// \param length Used to pass in the length of the provided array.
+  /// Used to return the length of the array which was actually used.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_StringToLatin1(
+    Object str,
+    ffi.Pointer<ffi.Uint8> latin1_array,
+    ffi.Pointer<ffi.IntPtr> length,
+  ) {
+    return _Dart_StringToLatin1(
+      str,
+      latin1_array,
+      length,
+    );
+  }
+
+  late final _Dart_StringToLatin1Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_StringToLatin1');
+  late final _Dart_StringToLatin1 = _Dart_StringToLatin1Ptr.asFunction<
+      Object Function(
+          Object, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Gets the UTF-16 encoded representation of a string.
+  ///
+  /// \param str A string.
+  /// \param utf16_array An array allocated by the caller, used to return
+  /// the array of UTF-16 encoded characters.
+  /// \param length Used to pass in the length of the provided array.
+  /// Used to return the length of the array which was actually used.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_StringToUTF16(
+    Object str,
+    ffi.Pointer<ffi.Uint16> utf16_array,
+    ffi.Pointer<ffi.IntPtr> length,
+  ) {
+    return _Dart_StringToUTF16(
+      str,
+      utf16_array,
+      length,
+    );
+  }
+
+  late final _Dart_StringToUTF16Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint16>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_StringToUTF16');
+  late final _Dart_StringToUTF16 = _Dart_StringToUTF16Ptr.asFunction<
+      Object Function(
+          Object, ffi.Pointer<ffi.Uint16>, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Gets the storage size in bytes of a String.
+  ///
+  /// \param str A String.
+  /// \param size Returns the storage size in bytes of the String.
+  /// This is the size in bytes needed to store the String.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_StringStorageSize(
+    Object str,
+    ffi.Pointer<ffi.IntPtr> size,
+  ) {
+    return _Dart_StringStorageSize(
+      str,
+      size,
+    );
+  }
+
+  late final _Dart_StringStorageSizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>('Dart_StringStorageSize');
+  late final _Dart_StringStorageSize = _Dart_StringStorageSizePtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Retrieves some properties associated with a String.
+  /// Properties retrieved are:
+  /// - character size of the string (one or two byte)
+  /// - length of the string
+  /// - peer pointer of string if it is an external string.
+  /// \param str A String.
+  /// \param char_size Returns the character size of the String.
+  /// \param str_len Returns the length of the String.
+  /// \param peer Returns the peer pointer associated with the String or 0 if
+  /// there is no peer pointer for it.
+  /// \return Success if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_StringGetProperties(
+    Object str,
+    ffi.Pointer<ffi.IntPtr> char_size,
+    ffi.Pointer<ffi.IntPtr> str_len,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> peer,
+  ) {
+    return _Dart_StringGetProperties(
+      str,
+      char_size,
+      str_len,
+      peer,
+    );
+  }
+
+  late final _Dart_StringGetPropertiesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('Dart_StringGetProperties');
+  late final _Dart_StringGetProperties =
+      _Dart_StringGetPropertiesPtr.asFunction<
+          Object Function(Object, ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.IntPtr>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// Returns a List<dynamic> of the desired length.
+  ///
+  /// \param length The length of the list.
+  ///
+  /// \return The List object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewList(
+    int length,
+  ) {
+    return _Dart_NewList(
+      length,
+    );
+  }
+
+  late final _Dart_NewListPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>(
+          'Dart_NewList');
+  late final _Dart_NewList =
+      _Dart_NewListPtr.asFunction<Object Function(int)>();
+
+  /// Returns a List of the desired length with the desired legacy element type.
+  ///
+  /// \param element_type_id The type of elements of the list.
+  /// \param length The length of the list.
+  ///
+  /// \return The List object if no error occurs. Otherwise returns an error
+  /// handle.
+  Object Dart_NewListOf(
+    int element_type_id,
+    int length,
+  ) {
+    return _Dart_NewListOf(
+      element_type_id,
+      length,
+    );
+  }
+
+  late final _Dart_NewListOfPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>(
+          'Dart_NewListOf');
+  late final _Dart_NewListOf =
+      _Dart_NewListOfPtr.asFunction<Object Function(int, int)>();
+
+  /// Returns a List of the desired length with the desired element type.
+  ///
+  /// \param element_type Handle to a nullable type object. E.g., from
+  /// Dart_GetType or Dart_GetNullableType.
+  ///
+  /// \param length The length of the list.
+  ///
+  /// \return The List object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewListOfType(
+    Object element_type,
+    int length,
+  ) {
+    return _Dart_NewListOfType(
+      element_type,
+      length,
+    );
+  }
+
+  late final _Dart_NewListOfTypePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>(
+          'Dart_NewListOfType');
+  late final _Dart_NewListOfType =
+      _Dart_NewListOfTypePtr.asFunction<Object Function(Object, int)>();
+
+  /// Returns a List of the desired length with the desired element type, filled
+  /// with the provided object.
+  ///
+  /// \param element_type Handle to a type object. E.g., from Dart_GetType.
+  ///
+  /// \param fill_object Handle to an object of type 'element_type' that will be
+  /// used to populate the list. This parameter can only be Dart_Null() if the
+  /// length of the list is 0 or 'element_type' is a nullable type.
+  ///
+  /// \param length The length of the list.
+  ///
+  /// \return The List object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewListOfTypeFilled(
+    Object element_type,
+    Object fill_object,
+    int length,
+  ) {
+    return _Dart_NewListOfTypeFilled(
+      element_type,
+      fill_object,
+      length,
+    );
+  }
+
+  late final _Dart_NewListOfTypeFilledPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Handle, ffi.IntPtr)>>('Dart_NewListOfTypeFilled');
+  late final _Dart_NewListOfTypeFilled = _Dart_NewListOfTypeFilledPtr
+      .asFunction<Object Function(Object, Object, int)>();
+
+  /// Gets the length of a List.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param list A List.
+  /// \param length Returns the length of the List.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_ListLength(
+    Object list,
+    ffi.Pointer<ffi.IntPtr> length,
+  ) {
+    return _Dart_ListLength(
+      list,
+      length,
+    );
+  }
+
+  late final _Dart_ListLengthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>('Dart_ListLength');
+  late final _Dart_ListLength = _Dart_ListLengthPtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Gets the Object at some index of a List.
+  ///
+  /// If the index is out of bounds, an error occurs.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param list A List.
+  /// \param index A valid index into the List.
+  ///
+  /// \return The Object in the List at the specified index if no error
+  /// occurs. Otherwise returns an error handle.
+  Object Dart_ListGetAt(
+    Object list,
+    int index,
+  ) {
+    return _Dart_ListGetAt(
+      list,
+      index,
+    );
+  }
+
+  late final _Dart_ListGetAtPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>(
+          'Dart_ListGetAt');
+  late final _Dart_ListGetAt =
+      _Dart_ListGetAtPtr.asFunction<Object Function(Object, int)>();
+
+  /// Gets a range of Objects from a List.
+  ///
+  /// If any of the requested index values are out of bounds, an error occurs.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param list A List.
+  /// \param offset The offset of the first item to get.
+  /// \param length The number of items to get.
+  /// \param result A pointer to fill with the objects.
+  ///
+  /// \return Success if no error occurs during the operation.
+  Object Dart_ListGetRange(
+    Object list,
+    int offset,
+    int length,
+    ffi.Pointer<ffi.Handle> result,
+  ) {
+    return _Dart_ListGetRange(
+      list,
+      offset,
+      length,
+      result,
+    );
+  }
+
+  late final _Dart_ListGetRangePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.IntPtr,
+              ffi.Pointer<ffi.Handle>)>>('Dart_ListGetRange');
+  late final _Dart_ListGetRange = _Dart_ListGetRangePtr.asFunction<
+      Object Function(Object, int, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Sets the Object at some index of a List.
+  ///
+  /// If the index is out of bounds, an error occurs.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param list A List.
+  /// \param index A valid index into the List.
+  /// \param value The Object to put in the List.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_ListSetAt(
+    Object list,
+    int index,
+    Object value,
+  ) {
+    return _Dart_ListSetAt(
+      list,
+      index,
+      value,
+    );
+  }
+
+  late final _Dart_ListSetAtPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.IntPtr, ffi.Handle)>>('Dart_ListSetAt');
+  late final _Dart_ListSetAt =
+      _Dart_ListSetAtPtr.asFunction<Object Function(Object, int, Object)>();
+
+  /// May generate an unhandled exception error.
+  Object Dart_ListGetAsBytes(
+    Object list,
+    int offset,
+    ffi.Pointer<ffi.Uint8> native_array,
+    int length,
+  ) {
+    return _Dart_ListGetAsBytes(
+      list,
+      offset,
+      native_array,
+      length,
+    );
+  }
+
+  late final _Dart_ListGetAsBytesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>>('Dart_ListGetAsBytes');
+  late final _Dart_ListGetAsBytes = _Dart_ListGetAsBytesPtr.asFunction<
+      Object Function(Object, int, ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// May generate an unhandled exception error.
+  Object Dart_ListSetAsBytes(
+    Object list,
+    int offset,
+    ffi.Pointer<ffi.Uint8> native_array,
+    int length,
+  ) {
+    return _Dart_ListSetAsBytes(
+      list,
+      offset,
+      native_array,
+      length,
+    );
+  }
+
+  late final _Dart_ListSetAsBytesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>>('Dart_ListSetAsBytes');
+  late final _Dart_ListSetAsBytes = _Dart_ListSetAsBytesPtr.asFunction<
+      Object Function(Object, int, ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// Gets the Object at some key of a Map.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param map A Map.
+  /// \param key An Object.
+  ///
+  /// \return The value in the map at the specified key, null if the map does not
+  /// contain the key, or an error handle.
+  Object Dart_MapGetAt(
+    Object map,
+    Object key,
+  ) {
+    return _Dart_MapGetAt(
+      map,
+      key,
+    );
+  }
+
+  late final _Dart_MapGetAtPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_MapGetAt');
+  late final _Dart_MapGetAt =
+      _Dart_MapGetAtPtr.asFunction<Object Function(Object, Object)>();
+
+  /// Returns whether the Map contains a given key.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param map A Map.
+  ///
+  /// \return A handle on a boolean indicating whether map contains the key.
+  /// Otherwise returns an error handle.
+  Object Dart_MapContainsKey(
+    Object map,
+    Object key,
+  ) {
+    return _Dart_MapContainsKey(
+      map,
+      key,
+    );
+  }
+
+  late final _Dart_MapContainsKeyPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_MapContainsKey');
+  late final _Dart_MapContainsKey =
+      _Dart_MapContainsKeyPtr.asFunction<Object Function(Object, Object)>();
+
+  /// Gets the list of keys of a Map.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param map A Map.
+  ///
+  /// \return The list of key Objects if no error occurs. Otherwise returns an
+  /// error handle.
+  Object Dart_MapKeys(
+    Object map,
+  ) {
+    return _Dart_MapKeys(
+      map,
+    );
+  }
+
+  late final _Dart_MapKeysPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_MapKeys');
+  late final _Dart_MapKeys =
+      _Dart_MapKeysPtr.asFunction<Object Function(Object)>();
+
+  /// Return type if this object is a TypedData object.
+  ///
+  /// \return kInvalid if the object is not a TypedData object or the appropriate
+  /// Dart_TypedData_Type.
+  int Dart_GetTypeOfTypedData(
+    Object object,
+  ) {
+    return _Dart_GetTypeOfTypedData(
+      object,
+    );
+  }
+
+  late final _Dart_GetTypeOfTypedDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>(
+          'Dart_GetTypeOfTypedData');
+  late final _Dart_GetTypeOfTypedData =
+      _Dart_GetTypeOfTypedDataPtr.asFunction<int Function(Object)>();
+
+  /// Return type if this object is an external TypedData object.
+  ///
+  /// \return kInvalid if the object is not an external TypedData object or
+  /// the appropriate Dart_TypedData_Type.
+  int Dart_GetTypeOfExternalTypedData(
+    Object object,
+  ) {
+    return _Dart_GetTypeOfExternalTypedData(
+      object,
+    );
+  }
+
+  late final _Dart_GetTypeOfExternalTypedDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>(
+          'Dart_GetTypeOfExternalTypedData');
+  late final _Dart_GetTypeOfExternalTypedData =
+      _Dart_GetTypeOfExternalTypedDataPtr.asFunction<int Function(Object)>();
+
+  /// Returns a TypedData object of the desired length and type.
+  ///
+  /// \param type The type of the TypedData object.
+  /// \param length The length of the TypedData object (length in type units).
+  ///
+  /// \return The TypedData object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewTypedData(
+    int type,
+    int length,
+  ) {
+    return _Dart_NewTypedData(
+      type,
+      length,
+    );
+  }
+
+  late final _Dart_NewTypedDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>(
+          'Dart_NewTypedData');
+  late final _Dart_NewTypedData =
+      _Dart_NewTypedDataPtr.asFunction<Object Function(int, int)>();
+
+  /// Returns a TypedData object which references an external data array.
+  ///
+  /// \param type The type of the data array.
+  /// \param data A data array. This array must not move.
+  /// \param length The length of the data array (length in type units).
+  ///
+  /// \return The TypedData object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewExternalTypedData(
+    int type,
+    ffi.Pointer<ffi.Void> data,
+    int length,
+  ) {
+    return _Dart_NewExternalTypedData(
+      type,
+      data,
+      length,
+    );
+  }
+
+  late final _Dart_NewExternalTypedDataPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>,
+              ffi.IntPtr)>>('Dart_NewExternalTypedData');
+  late final _Dart_NewExternalTypedData = _Dart_NewExternalTypedDataPtr
+      .asFunction<Object Function(int, ffi.Pointer<ffi.Void>, int)>();
+
+  /// Returns a TypedData object which references an external data array.
+  ///
+  /// \param type The type of the data array.
+  /// \param data A data array. This array must not move.
+  /// \param length The length of the data array (length in type units).
+  /// \param peer A pointer to a native object or NULL.  This value is
+  /// provided to callback when it is invoked.
+  /// \param external_allocation_size The number of externally allocated
+  /// bytes for peer. Used to inform the garbage collector.
+  /// \param callback A function pointer that will be invoked sometime
+  /// after the object is garbage collected, unless the handle has been deleted.
+  /// A valid callback needs to be specified it cannot be NULL.
+  ///
+  /// \return The TypedData object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewExternalTypedDataWithFinalizer(
+    int type,
+    ffi.Pointer<ffi.Void> data,
+    int length,
+    ffi.Pointer<ffi.Void> peer,
+    int external_allocation_size,
+    Dart_HandleFinalizer callback,
+  ) {
+    return _Dart_NewExternalTypedDataWithFinalizer(
+      type,
+      data,
+      length,
+      peer,
+      external_allocation_size,
+      callback,
+    );
+  }
+
+  late final _Dart_NewExternalTypedDataWithFinalizerPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Int32,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>>('Dart_NewExternalTypedDataWithFinalizer');
+  late final _Dart_NewExternalTypedDataWithFinalizer =
+      _Dart_NewExternalTypedDataWithFinalizerPtr.asFunction<
+          Object Function(int, ffi.Pointer<ffi.Void>, int,
+              ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
+
+  Object Dart_NewUnmodifiableExternalTypedDataWithFinalizer(
+    int type,
+    ffi.Pointer<ffi.Void> data,
+    int length,
+    ffi.Pointer<ffi.Void> peer,
+    int external_allocation_size,
+    Dart_HandleFinalizer callback,
+  ) {
+    return _Dart_NewUnmodifiableExternalTypedDataWithFinalizer(
+      type,
+      data,
+      length,
+      peer,
+      external_allocation_size,
+      callback,
+    );
+  }
+
+  late final _Dart_NewUnmodifiableExternalTypedDataWithFinalizerPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr,
+                  ffi.Pointer<ffi.Void>, ffi.IntPtr, Dart_HandleFinalizer)>>(
+      'Dart_NewUnmodifiableExternalTypedDataWithFinalizer');
+  late final _Dart_NewUnmodifiableExternalTypedDataWithFinalizer =
+      _Dart_NewUnmodifiableExternalTypedDataWithFinalizerPtr.asFunction<
+          Object Function(int, ffi.Pointer<ffi.Void>, int,
+              ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
+
+  /// Returns a ByteBuffer object for the typed data.
+  ///
+  /// \param typed_data The TypedData object.
+  ///
+  /// \return The ByteBuffer object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_NewByteBuffer(
+    Object typed_data,
+  ) {
+    return _Dart_NewByteBuffer(
+      typed_data,
+    );
+  }
+
+  late final _Dart_NewByteBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_NewByteBuffer');
+  late final _Dart_NewByteBuffer =
+      _Dart_NewByteBufferPtr.asFunction<Object Function(Object)>();
+
+  /// Acquires access to the internal data address of a TypedData object.
+  ///
+  /// \param object The typed data object whose internal data address is to
+  /// be accessed.
+  /// \param type The type of the object is returned here.
+  /// \param data The internal data address is returned here.
+  /// \param len Size of the typed array is returned here.
+  ///
+  /// Notes:
+  /// When the internal address of the object is acquired any calls to a
+  /// Dart API function that could potentially allocate an object or run
+  /// any Dart code will return an error.
+  ///
+  /// Any Dart API functions for accessing the data should not be called
+  /// before the corresponding release. In particular, the object should
+  /// not be acquired again before its release. This leads to undefined
+  /// behavior.
+  ///
+  /// \return Success if the internal data address is acquired successfully.
+  /// Otherwise, returns an error handle.
+  Object Dart_TypedDataAcquireData(
+    Object object,
+    ffi.Pointer<ffi.Int32> type,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> data,
+    ffi.Pointer<ffi.IntPtr> len,
+  ) {
+    return _Dart_TypedDataAcquireData(
+      object,
+      type,
+      data,
+      len,
+    );
+  }
+
+  late final _Dart_TypedDataAcquireDataPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle,
+              ffi.Pointer<ffi.Int32>,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_TypedDataAcquireData');
+  late final _Dart_TypedDataAcquireData =
+      _Dart_TypedDataAcquireDataPtr.asFunction<
+          Object Function(Object, ffi.Pointer<ffi.Int32>,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Releases access to the internal data address that was acquired earlier using
+  /// Dart_TypedDataAcquireData.
+  ///
+  /// \param object The typed data object whose internal data address is to be
+  /// released.
+  ///
+  /// \return Success if the internal data address is released successfully.
+  /// Otherwise, returns an error handle.
+  Object Dart_TypedDataReleaseData(
+    Object object,
+  ) {
+    return _Dart_TypedDataReleaseData(
+      object,
+    );
+  }
+
+  late final _Dart_TypedDataReleaseDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_TypedDataReleaseData');
+  late final _Dart_TypedDataReleaseData =
+      _Dart_TypedDataReleaseDataPtr.asFunction<Object Function(Object)>();
+
+  /// Returns the TypedData object associated with the ByteBuffer object.
+  ///
+  /// \param byte_buffer The ByteBuffer object.
+  ///
+  /// \return The TypedData object if no error occurs. Otherwise returns
+  /// an error handle.
+  Object Dart_GetDataFromByteBuffer(
+    Object byte_buffer,
+  ) {
+    return _Dart_GetDataFromByteBuffer(
+      byte_buffer,
+    );
+  }
+
+  late final _Dart_GetDataFromByteBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_GetDataFromByteBuffer');
+  late final _Dart_GetDataFromByteBuffer =
+      _Dart_GetDataFromByteBufferPtr.asFunction<Object Function(Object)>();
+
+  /// Invokes a constructor, creating a new object.
+  ///
+  /// This function allows hidden constructors (constructors with leading
+  /// underscores) to be called.
+  ///
+  /// \param type Type of object to be constructed.
+  /// \param constructor_name The name of the constructor to invoke.  Use
+  /// Dart_Null() or Dart_EmptyString() to invoke the unnamed constructor.
+  /// This name should not include the name of the class.
+  /// \param number_of_arguments Size of the arguments array.
+  /// \param arguments An array of arguments to the constructor.
+  ///
+  /// \return If the constructor is called and completes successfully,
+  /// then the new object. If an error occurs during execution, then an
+  /// error handle is returned.
+  Object Dart_New(
+    Object type,
+    Object constructor_name,
+    int number_of_arguments,
+    ffi.Pointer<ffi.Handle> arguments,
+  ) {
+    return _Dart_New(
+      type,
+      constructor_name,
+      number_of_arguments,
+      arguments,
+    );
+  }
+
+  late final _Dart_NewPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Int,
+              ffi.Pointer<ffi.Handle>)>>('Dart_New');
+  late final _Dart_New = _Dart_NewPtr.asFunction<
+      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Allocate a new object without invoking a constructor.
+  ///
+  /// \param type The type of an object to be allocated.
+  ///
+  /// \return The new object. If an error occurs during execution, then an
+  /// error handle is returned.
+  Object Dart_Allocate(
+    Object type,
+  ) {
+    return _Dart_Allocate(
+      type,
+    );
+  }
+
+  late final _Dart_AllocatePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_Allocate');
+  late final _Dart_Allocate =
+      _Dart_AllocatePtr.asFunction<Object Function(Object)>();
+
+  /// Allocate a new object without invoking a constructor, and sets specified
+  /// native fields.
+  ///
+  /// \param type The type of an object to be allocated.
+  /// \param num_native_fields The number of native fields to set.
+  /// \param native_fields An array containing the value of native fields.
+  ///
+  /// \return The new object. If an error occurs during execution, then an
+  /// error handle is returned.
+  Object Dart_AllocateWithNativeFields(
+    Object type,
+    int num_native_fields,
+    ffi.Pointer<ffi.IntPtr> native_fields,
+  ) {
+    return _Dart_AllocateWithNativeFields(
+      type,
+      num_native_fields,
+      native_fields,
+    );
+  }
+
+  late final _Dart_AllocateWithNativeFieldsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.IntPtr,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_AllocateWithNativeFields');
+  late final _Dart_AllocateWithNativeFields = _Dart_AllocateWithNativeFieldsPtr
+      .asFunction<Object Function(Object, int, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Invokes a method or function.
+  ///
+  /// The 'target' parameter may be an object, type, or library.  If
+  /// 'target' is an object, then this function will invoke an instance
+  /// method.  If 'target' is a type, then this function will invoke a
+  /// static method.  If 'target' is a library, then this function will
+  /// invoke a top-level function from that library.
+  /// NOTE: This API call cannot be used to invoke methods of a type object.
+  ///
+  /// This function ignores visibility (leading underscores in names).
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param target An object, type, or library.
+  /// \param name The name of the function or method to invoke.
+  /// \param number_of_arguments Size of the arguments array.
+  /// \param arguments An array of arguments to the function.
+  ///
+  /// \return If the function or method is called and completes
+  /// successfully, then the return value is returned. If an error
+  /// occurs during execution, then an error handle is returned.
+  Object Dart_Invoke(
+    Object target,
+    Object name,
+    int number_of_arguments,
+    ffi.Pointer<ffi.Handle> arguments,
+  ) {
+    return _Dart_Invoke(
+      target,
+      name,
+      number_of_arguments,
+      arguments,
+    );
+  }
+
+  late final _Dart_InvokePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Int,
+              ffi.Pointer<ffi.Handle>)>>('Dart_Invoke');
+  late final _Dart_Invoke = _Dart_InvokePtr.asFunction<
+      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Invokes a Closure with the given arguments.
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \return If no error occurs during execution, then the result of
+  /// invoking the closure is returned. If an error occurs during
+  /// execution, then an error handle is returned.
+  Object Dart_InvokeClosure(
+    Object closure,
+    int number_of_arguments,
+    ffi.Pointer<ffi.Handle> arguments,
+  ) {
+    return _Dart_InvokeClosure(
+      closure,
+      number_of_arguments,
+      arguments,
+    );
+  }
+
+  late final _Dart_InvokeClosurePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Int,
+              ffi.Pointer<ffi.Handle>)>>('Dart_InvokeClosure');
+  late final _Dart_InvokeClosure = _Dart_InvokeClosurePtr.asFunction<
+      Object Function(Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Invokes a Generative Constructor on an object that was previously
+  /// allocated using Dart_Allocate/Dart_AllocateWithNativeFields.
+  ///
+  /// The 'object' parameter must be an object.
+  ///
+  /// This function ignores visibility (leading underscores in names).
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param object An object.
+  /// \param name The name of the constructor to invoke.
+  /// Use Dart_Null() or Dart_EmptyString() to invoke the unnamed constructor.
+  /// \param number_of_arguments Size of the arguments array.
+  /// \param arguments An array of arguments to the function.
+  ///
+  /// \return If the constructor is called and completes
+  /// successfully, then the object is returned. If an error
+  /// occurs during execution, then an error handle is returned.
+  Object Dart_InvokeConstructor(
+    Object object,
+    Object name,
+    int number_of_arguments,
+    ffi.Pointer<ffi.Handle> arguments,
+  ) {
+    return _Dart_InvokeConstructor(
+      object,
+      name,
+      number_of_arguments,
+      arguments,
+    );
+  }
+
+  late final _Dart_InvokeConstructorPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Int,
+              ffi.Pointer<ffi.Handle>)>>('Dart_InvokeConstructor');
+  late final _Dart_InvokeConstructor = _Dart_InvokeConstructorPtr.asFunction<
+      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Gets the value of a field.
+  ///
+  /// The 'container' parameter may be an object, type, or library.  If
+  /// 'container' is an object, then this function will access an
+  /// instance field.  If 'container' is a type, then this function will
+  /// access a static field.  If 'container' is a library, then this
+  /// function will access a top-level variable.
+  /// NOTE: This API call cannot be used to access fields of a type object.
+  ///
+  /// This function ignores field visibility (leading underscores in names).
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param container An object, type, or library.
+  /// \param name A field name.
+  ///
+  /// \return If no error occurs, then the value of the field is
+  /// returned. Otherwise an error handle is returned.
+  Object Dart_GetField(
+    Object container,
+    Object name,
+  ) {
+    return _Dart_GetField(
+      container,
+      name,
+    );
+  }
+
+  late final _Dart_GetFieldPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_GetField');
+  late final _Dart_GetField =
+      _Dart_GetFieldPtr.asFunction<Object Function(Object, Object)>();
+
+  /// Sets the value of a field.
+  ///
+  /// The 'container' parameter may actually be an object, type, or
+  /// library.  If 'container' is an object, then this function will
+  /// access an instance field.  If 'container' is a type, then this
+  /// function will access a static field.  If 'container' is a library,
+  /// then this function will access a top-level variable.
+  /// NOTE: This API call cannot be used to access fields of a type object.
+  ///
+  /// This function ignores field visibility (leading underscores in names).
+  ///
+  /// May generate an unhandled exception error.
+  ///
+  /// \param container An object, type, or library.
+  /// \param name A field name.
+  /// \param value The new field value.
+  ///
+  /// \return A valid handle if no error occurs.
+  Object Dart_SetField(
+    Object container,
+    Object name,
+    Object value,
+  ) {
+    return _Dart_SetField(
+      container,
+      name,
+      value,
+    );
+  }
+
+  late final _Dart_SetFieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Handle, ffi.Handle)>>('Dart_SetField');
+  late final _Dart_SetField =
+      _Dart_SetFieldPtr.asFunction<Object Function(Object, Object, Object)>();
+
+  /// Throws an exception.
+  ///
+  /// This function causes a Dart language exception to be thrown. This
+  /// will proceed in the standard way, walking up Dart frames until an
+  /// appropriate 'catch' block is found, executing 'finally' blocks,
+  /// etc.
+  ///
+  /// If an error handle is passed into this function, the error is
+  /// propagated immediately.  See Dart_PropagateError for a discussion
+  /// of error propagation.
+  ///
+  /// If successful, this function does not return. Note that this means
+  /// that the destructors of any stack-allocated C++ objects will not be
+  /// called. If there are no Dart frames on the stack, an error occurs.
+  ///
+  /// \return An error handle if the exception was not thrown.
+  /// Otherwise the function does not return.
+  Object Dart_ThrowException(
+    Object exception,
+  ) {
+    return _Dart_ThrowException(
+      exception,
+    );
+  }
+
+  late final _Dart_ThrowExceptionPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_ThrowException');
+  late final _Dart_ThrowException =
+      _Dart_ThrowExceptionPtr.asFunction<Object Function(Object)>();
+
+  /// Rethrows an exception.
+  ///
+  /// Rethrows an exception, unwinding all dart frames on the stack. If
+  /// successful, this function does not return. Note that this means
+  /// that the destructors of any stack-allocated C++ objects will not be
+  /// called. If there are no Dart frames on the stack, an error occurs.
+  ///
+  /// \return An error handle if the exception was not thrown.
+  /// Otherwise the function does not return.
+  Object Dart_ReThrowException(
+    Object exception,
+    Object stacktrace,
+  ) {
+    return _Dart_ReThrowException(
+      exception,
+      stacktrace,
+    );
+  }
+
+  late final _Dart_ReThrowExceptionPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_ReThrowException');
+  late final _Dart_ReThrowException =
+      _Dart_ReThrowExceptionPtr.asFunction<Object Function(Object, Object)>();
+
+  /// Gets the number of native instance fields in an object.
+  Object Dart_GetNativeInstanceFieldCount(
+    Object obj,
+    ffi.Pointer<ffi.Int> count,
+  ) {
+    return _Dart_GetNativeInstanceFieldCount(
+      obj,
+      count,
+    );
+  }
+
+  late final _Dart_GetNativeInstanceFieldCountPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle,
+              ffi.Pointer<ffi.Int>)>>('Dart_GetNativeInstanceFieldCount');
+  late final _Dart_GetNativeInstanceFieldCount =
+      _Dart_GetNativeInstanceFieldCountPtr.asFunction<
+          Object Function(Object, ffi.Pointer<ffi.Int>)>();
+
+  /// Gets the value of a native field.
+  ///
+  /// TODO(turnidge): Document.
+  Object Dart_GetNativeInstanceField(
+    Object obj,
+    int index,
+    ffi.Pointer<ffi.IntPtr> value,
+  ) {
+    return _Dart_GetNativeInstanceField(
+      obj,
+      index,
+      value,
+    );
+  }
+
+  late final _Dart_GetNativeInstanceFieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Int,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetNativeInstanceField');
+  late final _Dart_GetNativeInstanceField = _Dart_GetNativeInstanceFieldPtr
+      .asFunction<Object Function(Object, int, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Sets the value of a native field.
+  ///
+  /// TODO(turnidge): Document.
+  Object Dart_SetNativeInstanceField(
+    Object obj,
+    int index,
+    int value,
+  ) {
+    return _Dart_SetNativeInstanceField(
+      obj,
+      index,
+      value,
+    );
+  }
+
+  late final _Dart_SetNativeInstanceFieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Int, ffi.IntPtr)>>('Dart_SetNativeInstanceField');
+  late final _Dart_SetNativeInstanceField = _Dart_SetNativeInstanceFieldPtr
+      .asFunction<Object Function(Object, int, int)>();
+
+  /// Extracts current isolate group data from the native arguments structure.
+  ffi.Pointer<ffi.Void> Dart_GetNativeIsolateGroupData(
+    Dart_NativeArguments args,
+  ) {
+    return _Dart_GetNativeIsolateGroupData(
+      args,
+    );
+  }
+
+  late final _Dart_GetNativeIsolateGroupDataPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              Dart_NativeArguments)>>('Dart_GetNativeIsolateGroupData');
+  late final _Dart_GetNativeIsolateGroupData =
+      _Dart_GetNativeIsolateGroupDataPtr.asFunction<
+          ffi.Pointer<ffi.Void> Function(Dart_NativeArguments)>();
+
+  /// Gets the native arguments based on the types passed in and populates
+  /// the passed arguments buffer with appropriate native values.
+  ///
+  /// \param args the Native arguments block passed into the native call.
+  /// \param num_arguments length of argument descriptor array and argument
+  /// values array passed in.
+  /// \param arg_descriptors an array that describes the arguments that
+  /// need to be retrieved. For each argument to be retrieved the descriptor
+  /// contains the argument number (0, 1 etc.) and the argument type
+  /// described using Dart_NativeArgument_Type, e.g:
+  /// DART_NATIVE_ARG_DESCRIPTOR(Dart_NativeArgument_kBool, 1) indicates
+  /// that the first argument is to be retrieved and it should be a boolean.
+  /// \param arg_values array into which the native arguments need to be
+  /// extracted into, the array is allocated by the caller (it could be
+  /// stack allocated to avoid the malloc/free performance overhead).
+  ///
+  /// \return Success if all the arguments could be extracted correctly,
+  /// returns an error handle if there were any errors while extracting the
+  /// arguments (mismatched number of arguments, incorrect types, etc.).
+  Object Dart_GetNativeArguments(
+    Dart_NativeArguments args,
+    int num_arguments,
+    ffi.Pointer<Dart_NativeArgument_Descriptor> arg_descriptors,
+    ffi.Pointer<Dart_NativeArgument_Value> arg_values,
+  ) {
+    return _Dart_GetNativeArguments(
+      args,
+      num_arguments,
+      arg_descriptors,
+      arg_values,
+    );
+  }
+
+  late final _Dart_GetNativeArgumentsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_NativeArguments,
+                  ffi.Int,
+                  ffi.Pointer<Dart_NativeArgument_Descriptor>,
+                  ffi.Pointer<Dart_NativeArgument_Value>)>>(
+      'Dart_GetNativeArguments');
+  late final _Dart_GetNativeArguments = _Dart_GetNativeArgumentsPtr.asFunction<
+      Object Function(
+          Dart_NativeArguments,
+          int,
+          ffi.Pointer<Dart_NativeArgument_Descriptor>,
+          ffi.Pointer<Dart_NativeArgument_Value>)>();
+
+  /// Gets the native argument at some index.
+  Object Dart_GetNativeArgument(
+    Dart_NativeArguments args,
+    int index,
+  ) {
+    return _Dart_GetNativeArgument(
+      args,
+      index,
+    );
+  }
+
+  late final _Dart_GetNativeArgumentPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Handle Function(Dart_NativeArguments, ffi.Int)>>(
+      'Dart_GetNativeArgument');
+  late final _Dart_GetNativeArgument = _Dart_GetNativeArgumentPtr.asFunction<
+      Object Function(Dart_NativeArguments, int)>();
+
+  /// Gets the number of native arguments.
+  int Dart_GetNativeArgumentCount(
+    Dart_NativeArguments args,
+  ) {
+    return _Dart_GetNativeArgumentCount(
+      args,
+    );
+  }
+
+  late final _Dart_GetNativeArgumentCountPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(Dart_NativeArguments)>>(
+          'Dart_GetNativeArgumentCount');
+  late final _Dart_GetNativeArgumentCount = _Dart_GetNativeArgumentCountPtr
+      .asFunction<int Function(Dart_NativeArguments)>();
+
+  /// Gets all the native fields of the native argument at some index.
+  /// \param args Native arguments structure.
+  /// \param arg_index Index of the desired argument in the structure above.
+  /// \param num_fields size of the intptr_t array 'field_values' passed in.
+  /// \param field_values intptr_t array in which native field values are returned.
+  /// \return Success if the native fields where copied in successfully. Otherwise
+  /// returns an error handle. On success the native field values are copied
+  /// into the 'field_values' array, if the argument at 'arg_index' is a
+  /// null object then 0 is copied as the native field values into the
+  /// 'field_values' array.
+  Object Dart_GetNativeFieldsOfArgument(
+    Dart_NativeArguments args,
+    int arg_index,
+    int num_fields,
+    ffi.Pointer<ffi.IntPtr> field_values,
+  ) {
+    return _Dart_GetNativeFieldsOfArgument(
+      args,
+      arg_index,
+      num_fields,
+      field_values,
+    );
+  }
+
+  late final _Dart_GetNativeFieldsOfArgumentPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_NativeArguments, ffi.Int, ffi.Int,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetNativeFieldsOfArgument');
+  late final _Dart_GetNativeFieldsOfArgument =
+      _Dart_GetNativeFieldsOfArgumentPtr.asFunction<
+          Object Function(
+              Dart_NativeArguments, int, int, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Gets the native field of the receiver.
+  Object Dart_GetNativeReceiver(
+    Dart_NativeArguments args,
+    ffi.Pointer<ffi.IntPtr> value,
+  ) {
+    return _Dart_GetNativeReceiver(
+      args,
+      value,
+    );
+  }
+
+  late final _Dart_GetNativeReceiverPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_NativeArguments,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetNativeReceiver');
+  late final _Dart_GetNativeReceiver = _Dart_GetNativeReceiverPtr.asFunction<
+      Object Function(Dart_NativeArguments, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Gets a string native argument at some index.
+  /// \param args Native arguments structure.
+  /// \param arg_index Index of the desired argument in the structure above.
+  /// \param peer Returns the peer pointer if the string argument has one.
+  /// \return Success if the string argument has a peer, if it does not
+  /// have a peer then the String object is returned. Otherwise returns
+  /// an error handle (argument is not a String object).
+  Object Dart_GetNativeStringArgument(
+    Dart_NativeArguments args,
+    int arg_index,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> peer,
+  ) {
+    return _Dart_GetNativeStringArgument(
+      args,
+      arg_index,
+      peer,
+    );
+  }
+
+  late final _Dart_GetNativeStringArgumentPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Handle Function(Dart_NativeArguments, ffi.Int,
+                  ffi.Pointer<ffi.Pointer<ffi.Void>>)>>(
+      'Dart_GetNativeStringArgument');
+  late final _Dart_GetNativeStringArgument =
+      _Dart_GetNativeStringArgumentPtr.asFunction<
+          Object Function(
+              Dart_NativeArguments, int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// Gets an integer native argument at some index.
+  /// \param args Native arguments structure.
+  /// \param index Index of the desired argument in the structure above.
+  /// \param value Returns the integer value if the argument is an Integer.
+  /// \return Success if no error occurs. Otherwise returns an error handle.
+  Object Dart_GetNativeIntegerArgument(
+    Dart_NativeArguments args,
+    int index,
+    ffi.Pointer<ffi.Int64> value,
+  ) {
+    return _Dart_GetNativeIntegerArgument(
+      args,
+      index,
+      value,
+    );
+  }
+
+  late final _Dart_GetNativeIntegerArgumentPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_NativeArguments, ffi.Int,
+              ffi.Pointer<ffi.Int64>)>>('Dart_GetNativeIntegerArgument');
+  late final _Dart_GetNativeIntegerArgument =
+      _Dart_GetNativeIntegerArgumentPtr.asFunction<
+          Object Function(Dart_NativeArguments, int, ffi.Pointer<ffi.Int64>)>();
+
+  /// Gets a boolean native argument at some index.
+  /// \param args Native arguments structure.
+  /// \param index Index of the desired argument in the structure above.
+  /// \param value Returns the boolean value if the argument is a Boolean.
+  /// \return Success if no error occurs. Otherwise returns an error handle.
+  Object Dart_GetNativeBooleanArgument(
+    Dart_NativeArguments args,
+    int index,
+    ffi.Pointer<ffi.Bool> value,
+  ) {
+    return _Dart_GetNativeBooleanArgument(
+      args,
+      index,
+      value,
+    );
+  }
+
+  late final _Dart_GetNativeBooleanArgumentPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_NativeArguments, ffi.Int,
+              ffi.Pointer<ffi.Bool>)>>('Dart_GetNativeBooleanArgument');
+  late final _Dart_GetNativeBooleanArgument =
+      _Dart_GetNativeBooleanArgumentPtr.asFunction<
+          Object Function(Dart_NativeArguments, int, ffi.Pointer<ffi.Bool>)>();
+
+  /// Gets a double native argument at some index.
+  /// \param args Native arguments structure.
+  /// \param index Index of the desired argument in the structure above.
+  /// \param value Returns the double value if the argument is a double.
+  /// \return Success if no error occurs. Otherwise returns an error handle.
+  Object Dart_GetNativeDoubleArgument(
+    Dart_NativeArguments args,
+    int index,
+    ffi.Pointer<ffi.Double> value,
+  ) {
+    return _Dart_GetNativeDoubleArgument(
+      args,
+      index,
+      value,
+    );
+  }
+
+  late final _Dart_GetNativeDoubleArgumentPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_NativeArguments, ffi.Int,
+              ffi.Pointer<ffi.Double>)>>('Dart_GetNativeDoubleArgument');
+  late final _Dart_GetNativeDoubleArgument =
+      _Dart_GetNativeDoubleArgumentPtr.asFunction<
+          Object Function(
+              Dart_NativeArguments, int, ffi.Pointer<ffi.Double>)>();
+
+  /// Sets the return value for a native function.
+  ///
+  /// If retval is an Error handle, then error will be propagated once
+  /// the native functions exits. See Dart_PropagateError for a
+  /// discussion of how different types of errors are propagated.
+  void Dart_SetReturnValue(
+    Dart_NativeArguments args,
+    Object retval,
+  ) {
+    return _Dart_SetReturnValue(
+      args,
+      retval,
+    );
+  }
+
+  late final _Dart_SetReturnValuePtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Handle)>>(
+      'Dart_SetReturnValue');
+  late final _Dart_SetReturnValue = _Dart_SetReturnValuePtr.asFunction<
+      void Function(Dart_NativeArguments, Object)>();
+
+  void Dart_SetWeakHandleReturnValue(
+    Dart_NativeArguments args,
+    Dart_WeakPersistentHandle rval,
+  ) {
+    return _Dart_SetWeakHandleReturnValue(
+      args,
+      rval,
+    );
+  }
+
+  late final _Dart_SetWeakHandleReturnValuePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(Dart_NativeArguments,
+              Dart_WeakPersistentHandle)>>('Dart_SetWeakHandleReturnValue');
+  late final _Dart_SetWeakHandleReturnValue =
+      _Dart_SetWeakHandleReturnValuePtr.asFunction<
+          void Function(Dart_NativeArguments, Dart_WeakPersistentHandle)>();
+
+  void Dart_SetBooleanReturnValue(
+    Dart_NativeArguments args,
+    bool retval,
+  ) {
+    return _Dart_SetBooleanReturnValue(
+      args,
+      retval,
+    );
+  }
+
+  late final _Dart_SetBooleanReturnValuePtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Bool)>>(
+      'Dart_SetBooleanReturnValue');
+  late final _Dart_SetBooleanReturnValue = _Dart_SetBooleanReturnValuePtr
+      .asFunction<void Function(Dart_NativeArguments, bool)>();
+
+  void Dart_SetIntegerReturnValue(
+    Dart_NativeArguments args,
+    int retval,
+  ) {
+    return _Dart_SetIntegerReturnValue(
+      args,
+      retval,
+    );
+  }
+
+  late final _Dart_SetIntegerReturnValuePtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Int64)>>(
+      'Dart_SetIntegerReturnValue');
+  late final _Dart_SetIntegerReturnValue = _Dart_SetIntegerReturnValuePtr
+      .asFunction<void Function(Dart_NativeArguments, int)>();
+
+  void Dart_SetDoubleReturnValue(
+    Dart_NativeArguments args,
+    double retval,
+  ) {
+    return _Dart_SetDoubleReturnValue(
+      args,
+      retval,
+    );
+  }
+
+  late final _Dart_SetDoubleReturnValuePtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Double)>>(
+      'Dart_SetDoubleReturnValue');
+  late final _Dart_SetDoubleReturnValue = _Dart_SetDoubleReturnValuePtr
+      .asFunction<void Function(Dart_NativeArguments, double)>();
+
+  /// Sets the environment callback for the current isolate. This
+  /// callback is used to lookup environment values by name in the
+  /// current environment. This enables the embedder to supply values for
+  /// the const constructors bool.fromEnvironment, int.fromEnvironment
+  /// and String.fromEnvironment.
+  Object Dart_SetEnvironmentCallback(
+    Dart_EnvironmentCallback callback,
+  ) {
+    return _Dart_SetEnvironmentCallback(
+      callback,
+    );
+  }
+
+  late final _Dart_SetEnvironmentCallbackPtr = _lookup<
+          ffi.NativeFunction<ffi.Handle Function(Dart_EnvironmentCallback)>>(
+      'Dart_SetEnvironmentCallback');
+  late final _Dart_SetEnvironmentCallback = _Dart_SetEnvironmentCallbackPtr
+      .asFunction<Object Function(Dart_EnvironmentCallback)>();
+
+  /// Sets the callback used to resolve native functions for a library.
+  ///
+  /// \param library A library.
+  /// \param resolver A native entry resolver.
+  ///
+  /// \return A valid handle if the native resolver was set successfully.
+  Object Dart_SetNativeResolver(
+    Object library1,
+    Dart_NativeEntryResolver resolver,
+    Dart_NativeEntrySymbol symbol,
+  ) {
+    return _Dart_SetNativeResolver(
+      library1,
+      resolver,
+      symbol,
+    );
+  }
+
+  late final _Dart_SetNativeResolverPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, Dart_NativeEntryResolver,
+              Dart_NativeEntrySymbol)>>('Dart_SetNativeResolver');
+  late final _Dart_SetNativeResolver = _Dart_SetNativeResolverPtr.asFunction<
+      Object Function(
+          Object, Dart_NativeEntryResolver, Dart_NativeEntrySymbol)>();
+
+  /// Returns the callback used to resolve native functions for a library.
+  ///
+  /// \param library A library.
+  /// \param resolver a pointer to a Dart_NativeEntryResolver
+  ///
+  /// \return A valid handle if the library was found.
+  Object Dart_GetNativeResolver(
+    Object library1,
+    ffi.Pointer<Dart_NativeEntryResolver> resolver,
+  ) {
+    return _Dart_GetNativeResolver(
+      library1,
+      resolver,
+    );
+  }
+
+  late final _Dart_GetNativeResolverPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<Dart_NativeEntryResolver>)>>(
+      'Dart_GetNativeResolver');
+  late final _Dart_GetNativeResolver = _Dart_GetNativeResolverPtr.asFunction<
+      Object Function(Object, ffi.Pointer<Dart_NativeEntryResolver>)>();
+
+  /// Returns the callback used to resolve native function symbols for a library.
+  ///
+  /// \param library A library.
+  /// \param resolver a pointer to a Dart_NativeEntrySymbol.
+  ///
+  /// \return A valid handle if the library was found.
+  Object Dart_GetNativeSymbol(
+    Object library1,
+    ffi.Pointer<Dart_NativeEntrySymbol> resolver,
+  ) {
+    return _Dart_GetNativeSymbol(
+      library1,
+      resolver,
+    );
+  }
+
+  late final _Dart_GetNativeSymbolPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle,
+              ffi.Pointer<Dart_NativeEntrySymbol>)>>('Dart_GetNativeSymbol');
+  late final _Dart_GetNativeSymbol = _Dart_GetNativeSymbolPtr.asFunction<
+      Object Function(Object, ffi.Pointer<Dart_NativeEntrySymbol>)>();
+
+  /// Sets the callback used to resolve FFI native functions for a library.
+  /// The resolved functions are expected to be a C function pointer of the
+  /// correct signature (as specified in the `@FfiNative<NFT>()` function
+  /// annotation in Dart code).
+  ///
+  /// NOTE: This is an experimental feature and might change in the future.
+  ///
+  /// \param library A library.
+  /// \param resolver A native function resolver.
+  ///
+  /// \return A valid handle if the native resolver was set successfully.
+  Object Dart_SetFfiNativeResolver(
+    Object library1,
+    Dart_FfiNativeResolver resolver,
+  ) {
+    return _Dart_SetFfiNativeResolver(
+      library1,
+      resolver,
+    );
+  }
+
+  late final _Dart_SetFfiNativeResolverPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle,
+              Dart_FfiNativeResolver)>>('Dart_SetFfiNativeResolver');
+  late final _Dart_SetFfiNativeResolver = _Dart_SetFfiNativeResolverPtr
+      .asFunction<Object Function(Object, Dart_FfiNativeResolver)>();
+
+  /// Sets library tag handler for the current isolate. This handler is
+  /// used to handle the various tags encountered while loading libraries
+  /// or scripts in the isolate.
+  ///
+  /// \param handler Handler code to be used for handling the various tags
+  /// encountered while loading libraries or scripts in the isolate.
+  ///
+  /// \return If no error occurs, the handler is set for the isolate.
+  /// Otherwise an error handle is returned.
+  ///
+  /// TODO(turnidge): Document.
+  Object Dart_SetLibraryTagHandler(
+    Dart_LibraryTagHandler handler,
+  ) {
+    return _Dart_SetLibraryTagHandler(
+      handler,
+    );
+  }
+
+  late final _Dart_SetLibraryTagHandlerPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(Dart_LibraryTagHandler)>>(
+          'Dart_SetLibraryTagHandler');
+  late final _Dart_SetLibraryTagHandler = _Dart_SetLibraryTagHandlerPtr
+      .asFunction<Object Function(Dart_LibraryTagHandler)>();
+
+  /// Sets the deferred load handler for the current isolate. This handler is
+  /// used to handle loading deferred imports in an AppJIT or AppAOT program.
+  Object Dart_SetDeferredLoadHandler(
+    Dart_DeferredLoadHandler handler,
+  ) {
+    return _Dart_SetDeferredLoadHandler(
+      handler,
+    );
+  }
+
+  late final _Dart_SetDeferredLoadHandlerPtr = _lookup<
+          ffi.NativeFunction<ffi.Handle Function(Dart_DeferredLoadHandler)>>(
+      'Dart_SetDeferredLoadHandler');
+  late final _Dart_SetDeferredLoadHandler = _Dart_SetDeferredLoadHandlerPtr
+      .asFunction<Object Function(Dart_DeferredLoadHandler)>();
+
+  /// Notifies the VM that a deferred load completed successfully. This function
+  /// will eventually cause the corresponding `prefix.loadLibrary()` futures to
+  /// complete.
+  ///
+  /// Requires the current isolate to be the same current isolate during the
+  /// invocation of the Dart_DeferredLoadHandler.
+  Object Dart_DeferredLoadComplete(
+    int loading_unit_id,
+    ffi.Pointer<ffi.Uint8> snapshot_data,
+    ffi.Pointer<ffi.Uint8> snapshot_instructions,
+  ) {
+    return _Dart_DeferredLoadComplete(
+      loading_unit_id,
+      snapshot_data,
+      snapshot_instructions,
+    );
+  }
+
+  late final _Dart_DeferredLoadCompletePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.IntPtr, ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>)>>('Dart_DeferredLoadComplete');
+  late final _Dart_DeferredLoadComplete =
+      _Dart_DeferredLoadCompletePtr.asFunction<
+          Object Function(
+              int, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Uint8>)>();
+
+  /// Notifies the VM that a deferred load failed. This function
+  /// will eventually cause the corresponding `prefix.loadLibrary()` futures to
+  /// complete with an error.
+  ///
+  /// If `transient` is true, future invocations of `prefix.loadLibrary()` will
+  /// trigger new load requests. If false, futures invocation will complete with
+  /// the same error.
+  ///
+  /// Requires the current isolate to be the same current isolate during the
+  /// invocation of the Dart_DeferredLoadHandler.
+  Object Dart_DeferredLoadCompleteError(
+    int loading_unit_id,
+    ffi.Pointer<ffi.Char> error_message,
+    bool transient,
+  ) {
+    return _Dart_DeferredLoadCompleteError(
+      loading_unit_id,
+      error_message,
+      transient,
+    );
+  }
+
+  late final _Dart_DeferredLoadCompleteErrorPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.IntPtr, ffi.Pointer<ffi.Char>,
+              ffi.Bool)>>('Dart_DeferredLoadCompleteError');
+  late final _Dart_DeferredLoadCompleteError =
+      _Dart_DeferredLoadCompleteErrorPtr.asFunction<
+          Object Function(int, ffi.Pointer<ffi.Char>, bool)>();
+
+  /// Canonicalizes a url with respect to some library.
+  ///
+  /// The url is resolved with respect to the library's url and some url
+  /// normalizations are performed.
+  ///
+  /// This canonicalization function should be sufficient for most
+  /// embedders to implement the Dart_kCanonicalizeUrl tag.
+  ///
+  /// \param base_url The base url relative to which the url is
+  /// being resolved.
+  /// \param url The url being resolved and canonicalized.  This
+  /// parameter is a string handle.
+  ///
+  /// \return If no error occurs, a String object is returned.  Otherwise
+  /// an error handle is returned.
+  Object Dart_DefaultCanonicalizeUrl(
+    Object base_url,
+    Object url,
+  ) {
+    return _Dart_DefaultCanonicalizeUrl(
+      base_url,
+      url,
+    );
+  }
+
+  late final _Dart_DefaultCanonicalizeUrlPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_DefaultCanonicalizeUrl');
+  late final _Dart_DefaultCanonicalizeUrl = _Dart_DefaultCanonicalizeUrlPtr
+      .asFunction<Object Function(Object, Object)>();
+
+  /// Loads the root library for the current isolate.
+  ///
+  /// Requires there to be no current root library.
+  ///
+  /// \param kernel_buffer A buffer which contains a kernel binary (see
+  /// pkg/kernel/binary.md). Must remain valid until isolate group shutdown.
+  /// \param kernel_size Length of the passed in buffer.
+  ///
+  /// \return A handle to the root library, or an error.
+  Object Dart_LoadScriptFromKernel(
+    ffi.Pointer<ffi.Uint8> kernel_buffer,
+    int kernel_size,
+  ) {
+    return _Dart_LoadScriptFromKernel(
+      kernel_buffer,
+      kernel_size,
+    );
+  }
+
+  late final _Dart_LoadScriptFromKernelPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>>('Dart_LoadScriptFromKernel');
+  late final _Dart_LoadScriptFromKernel = _Dart_LoadScriptFromKernelPtr
+      .asFunction<Object Function(ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// Gets the library for the root script for the current isolate.
+  ///
+  /// If the root script has not yet been set for the current isolate,
+  /// this function returns Dart_Null().  This function never returns an
+  /// error handle.
+  ///
+  /// \return Returns the root Library for the current isolate or Dart_Null().
+  Object Dart_RootLibrary() {
+    return _Dart_RootLibrary();
+  }
+
+  late final _Dart_RootLibraryPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_RootLibrary');
+  late final _Dart_RootLibrary =
+      _Dart_RootLibraryPtr.asFunction<Object Function()>();
+
+  /// Sets the root library for the current isolate.
+  ///
+  /// \return Returns an error handle if `library` is not a library handle.
+  Object Dart_SetRootLibrary(
+    Object library1,
+  ) {
+    return _Dart_SetRootLibrary(
+      library1,
+    );
+  }
+
+  late final _Dart_SetRootLibraryPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_SetRootLibrary');
+  late final _Dart_SetRootLibrary =
+      _Dart_SetRootLibraryPtr.asFunction<Object Function(Object)>();
+
+  /// Lookup or instantiate a legacy type by name and type arguments from a
+  /// Library.
+  ///
+  /// \param library The library containing the class or interface.
+  /// \param class_name The class name for the type.
+  /// \param number_of_type_arguments Number of type arguments.
+  /// For non parametric types the number of type arguments would be 0.
+  /// \param type_arguments Pointer to an array of type arguments.
+  /// For non parametric types a NULL would be passed in for this argument.
+  ///
+  /// \return If no error occurs, the type is returned.
+  /// Otherwise an error handle is returned.
+  Object Dart_GetType(
+    Object library1,
+    Object class_name,
+    int number_of_type_arguments,
+    ffi.Pointer<ffi.Handle> type_arguments,
+  ) {
+    return _Dart_GetType(
+      library1,
+      class_name,
+      number_of_type_arguments,
+      type_arguments,
+    );
+  }
+
+  late final _Dart_GetTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr,
+              ffi.Pointer<ffi.Handle>)>>('Dart_GetType');
+  late final _Dart_GetType = _Dart_GetTypePtr.asFunction<
+      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Lookup or instantiate a nullable type by name and type arguments from
+  /// Library.
+  ///
+  /// \param library The library containing the class or interface.
+  /// \param class_name The class name for the type.
+  /// \param number_of_type_arguments Number of type arguments.
+  /// For non parametric types the number of type arguments would be 0.
+  /// \param type_arguments Pointer to an array of type arguments.
+  /// For non parametric types a NULL would be passed in for this argument.
+  ///
+  /// \return If no error occurs, the type is returned.
+  /// Otherwise an error handle is returned.
+  Object Dart_GetNullableType(
+    Object library1,
+    Object class_name,
+    int number_of_type_arguments,
+    ffi.Pointer<ffi.Handle> type_arguments,
+  ) {
+    return _Dart_GetNullableType(
+      library1,
+      class_name,
+      number_of_type_arguments,
+      type_arguments,
+    );
+  }
+
+  late final _Dart_GetNullableTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr,
+              ffi.Pointer<ffi.Handle>)>>('Dart_GetNullableType');
+  late final _Dart_GetNullableType = _Dart_GetNullableTypePtr.asFunction<
+      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Lookup or instantiate a non-nullable type by name and type arguments from
+  /// Library.
+  ///
+  /// \param library The library containing the class or interface.
+  /// \param class_name The class name for the type.
+  /// \param number_of_type_arguments Number of type arguments.
+  /// For non parametric types the number of type arguments would be 0.
+  /// \param type_arguments Pointer to an array of type arguments.
+  /// For non parametric types a NULL would be passed in for this argument.
+  ///
+  /// \return If no error occurs, the type is returned.
+  /// Otherwise an error handle is returned.
+  Object Dart_GetNonNullableType(
+    Object library1,
+    Object class_name,
+    int number_of_type_arguments,
+    ffi.Pointer<ffi.Handle> type_arguments,
+  ) {
+    return _Dart_GetNonNullableType(
+      library1,
+      class_name,
+      number_of_type_arguments,
+      type_arguments,
+    );
+  }
+
+  late final _Dart_GetNonNullableTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr,
+              ffi.Pointer<ffi.Handle>)>>('Dart_GetNonNullableType');
+  late final _Dart_GetNonNullableType = _Dart_GetNonNullableTypePtr.asFunction<
+      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
+
+  /// Creates a nullable version of the provided type.
+  ///
+  /// \param type The type to be converted to a nullable type.
+  ///
+  /// \return If no error occurs, a nullable type is returned.
+  /// Otherwise an error handle is returned.
+  Object Dart_TypeToNullableType(
+    Object type,
+  ) {
+    return _Dart_TypeToNullableType(
+      type,
+    );
+  }
+
+  late final _Dart_TypeToNullableTypePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_TypeToNullableType');
+  late final _Dart_TypeToNullableType =
+      _Dart_TypeToNullableTypePtr.asFunction<Object Function(Object)>();
+
+  /// Creates a non-nullable version of the provided type.
+  ///
+  /// \param type The type to be converted to a non-nullable type.
+  ///
+  /// \return If no error occurs, a non-nullable type is returned.
+  /// Otherwise an error handle is returned.
+  Object Dart_TypeToNonNullableType(
+    Object type,
+  ) {
+    return _Dart_TypeToNonNullableType(
+      type,
+    );
+  }
+
+  late final _Dart_TypeToNonNullableTypePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_TypeToNonNullableType');
+  late final _Dart_TypeToNonNullableType =
+      _Dart_TypeToNonNullableTypePtr.asFunction<Object Function(Object)>();
+
+  /// A type's nullability.
+  ///
+  /// \param type A Dart type.
+  /// \param result An out parameter containing the result of the check. True if
+  /// the type is of the specified nullability, false otherwise.
+  ///
+  /// \return Returns an error handle if type is not of type Type.
+  Object Dart_IsNullableType(
+    Object type,
+    ffi.Pointer<ffi.Bool> result,
+  ) {
+    return _Dart_IsNullableType(
+      type,
+      result,
+    );
+  }
+
+  late final _Dart_IsNullableTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IsNullableType');
+  late final _Dart_IsNullableType = _Dart_IsNullableTypePtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  Object Dart_IsNonNullableType(
+    Object type,
+    ffi.Pointer<ffi.Bool> result,
+  ) {
+    return _Dart_IsNonNullableType(
+      type,
+      result,
+    );
+  }
+
+  late final _Dart_IsNonNullableTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IsNonNullableType');
+  late final _Dart_IsNonNullableType = _Dart_IsNonNullableTypePtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  Object Dart_IsLegacyType(
+    Object type,
+    ffi.Pointer<ffi.Bool> result,
+  ) {
+    return _Dart_IsLegacyType(
+      type,
+      result,
+    );
+  }
+
+  late final _Dart_IsLegacyTypePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IsLegacyType');
+  late final _Dart_IsLegacyType = _Dart_IsLegacyTypePtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
+
+  /// Lookup a class or interface by name from a Library.
+  ///
+  /// \param library The library containing the class or interface.
+  /// \param class_name The name of the class or interface.
+  ///
+  /// \return If no error occurs, the class or interface is
+  /// returned. Otherwise an error handle is returned.
+  Object Dart_GetClass(
+    Object library1,
+    Object class_name,
+  ) {
+    return _Dart_GetClass(
+      library1,
+      class_name,
+    );
+  }
+
+  late final _Dart_GetClassPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_GetClass');
+  late final _Dart_GetClass =
+      _Dart_GetClassPtr.asFunction<Object Function(Object, Object)>();
+
+  /// Returns an import path to a Library, such as "file:///test.dart" or
+  /// "dart:core".
+  Object Dart_LibraryUrl(
+    Object library1,
+  ) {
+    return _Dart_LibraryUrl(
+      library1,
+    );
+  }
+
+  late final _Dart_LibraryUrlPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_LibraryUrl');
+  late final _Dart_LibraryUrl =
+      _Dart_LibraryUrlPtr.asFunction<Object Function(Object)>();
+
+  /// Returns a URL from which a Library was loaded.
+  Object Dart_LibraryResolvedUrl(
+    Object library1,
+  ) {
+    return _Dart_LibraryResolvedUrl(
+      library1,
+    );
+  }
+
+  late final _Dart_LibraryResolvedUrlPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_LibraryResolvedUrl');
+  late final _Dart_LibraryResolvedUrl =
+      _Dart_LibraryResolvedUrlPtr.asFunction<Object Function(Object)>();
+
+  /// \return An array of libraries.
+  Object Dart_GetLoadedLibraries() {
+    return _Dart_GetLoadedLibraries();
+  }
+
+  late final _Dart_GetLoadedLibrariesPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>(
+          'Dart_GetLoadedLibraries');
+  late final _Dart_GetLoadedLibraries =
+      _Dart_GetLoadedLibrariesPtr.asFunction<Object Function()>();
+
+  Object Dart_LookupLibrary(
+    Object url,
+  ) {
+    return _Dart_LookupLibrary(
+      url,
+    );
+  }
+
+  late final _Dart_LookupLibraryPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_LookupLibrary');
+  late final _Dart_LookupLibrary =
+      _Dart_LookupLibraryPtr.asFunction<Object Function(Object)>();
+
+  /// Report an loading error for the library.
+  ///
+  /// \param library The library that failed to load.
+  /// \param error The Dart error instance containing the load error.
+  ///
+  /// \return If the VM handles the error, the return value is
+  /// a null handle. If it doesn't handle the error, the error
+  /// object is returned.
+  Object Dart_LibraryHandleError(
+    Object library1,
+    Object error,
+  ) {
+    return _Dart_LibraryHandleError(
+      library1,
+      error,
+    );
+  }
+
+  late final _Dart_LibraryHandleErrorPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
+          'Dart_LibraryHandleError');
+  late final _Dart_LibraryHandleError =
+      _Dart_LibraryHandleErrorPtr.asFunction<Object Function(Object, Object)>();
+
+  /// Called by the embedder to load a partial program. Does not set the root
+  /// library.
+  ///
+  /// \param kernel_buffer A buffer which contains a kernel binary (see
+  /// pkg/kernel/binary.md). Must remain valid until isolate shutdown.
+  /// \param kernel_buffer_size Length of the passed in buffer.
+  ///
+  /// \return A handle to the main library of the compilation unit, or an error.
+  Object Dart_LoadLibraryFromKernel(
+    ffi.Pointer<ffi.Uint8> kernel_buffer,
+    int kernel_buffer_size,
+  ) {
+    return _Dart_LoadLibraryFromKernel(
+      kernel_buffer,
+      kernel_buffer_size,
+    );
+  }
+
+  late final _Dart_LoadLibraryFromKernelPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>>('Dart_LoadLibraryFromKernel');
+  late final _Dart_LoadLibraryFromKernel = _Dart_LoadLibraryFromKernelPtr
+      .asFunction<Object Function(ffi.Pointer<ffi.Uint8>, int)>();
+
+  Object Dart_LoadLibrary(
+    Object kernel_buffer,
+  ) {
+    return _Dart_LoadLibrary(
+      kernel_buffer,
+    );
+  }
+
+  late final _Dart_LoadLibraryPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
+          'Dart_LoadLibrary');
+  late final _Dart_LoadLibrary =
+      _Dart_LoadLibraryPtr.asFunction<Object Function(Object)>();
+
+  /// Indicates that all outstanding load requests have been satisfied.
+  /// This finalizes all the new classes loaded and optionally completes
+  /// deferred library futures.
+  ///
+  /// Requires there to be a current isolate.
+  ///
+  /// \param complete_futures Specify true if all deferred library
+  /// futures should be completed, false otherwise.
+  ///
+  /// \return Success if all classes have been finalized and deferred library
+  /// futures are completed. Otherwise, returns an error.
+  Object Dart_FinalizeLoading(
+    bool complete_futures,
+  ) {
+    return _Dart_FinalizeLoading(
+      complete_futures,
+    );
+  }
+
+  late final _Dart_FinalizeLoadingPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>(
+          'Dart_FinalizeLoading');
+  late final _Dart_FinalizeLoading =
+      _Dart_FinalizeLoadingPtr.asFunction<Object Function(bool)>();
+
+  /// Returns the value of peer field of 'object' in 'peer'.
+  ///
+  /// \param object An object.
+  /// \param peer An out parameter that returns the value of the peer
+  /// field.
+  ///
+  /// \return Returns an error if 'object' is a subtype of Null, num, or
+  /// bool.
+  Object Dart_GetPeer(
+    Object object,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> peer,
+  ) {
+    return _Dart_GetPeer(
+      object,
+      peer,
+    );
+  }
+
+  late final _Dart_GetPeerPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('Dart_GetPeer');
+  late final _Dart_GetPeer = _Dart_GetPeerPtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// Sets the value of the peer field of 'object' to the value of
+  /// 'peer'.
+  ///
+  /// \param object An object.
+  /// \param peer A value to store in the peer field.
+  ///
+  /// \return Returns an error if 'object' is a subtype of Null, num, or
+  /// bool.
+  Object Dart_SetPeer(
+    Object object,
+    ffi.Pointer<ffi.Void> peer,
+  ) {
+    return _Dart_SetPeer(
+      object,
+      peer,
+    );
+  }
+
+  late final _Dart_SetPeerPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle, ffi.Pointer<ffi.Void>)>>('Dart_SetPeer');
+  late final _Dart_SetPeer = _Dart_SetPeerPtr.asFunction<
+      Object Function(Object, ffi.Pointer<ffi.Void>)>();
+
+  bool Dart_IsKernelIsolate(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_IsKernelIsolate(
+      isolate,
+    );
+  }
+
+  late final _Dart_IsKernelIsolatePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>(
+          'Dart_IsKernelIsolate');
+  late final _Dart_IsKernelIsolate =
+      _Dart_IsKernelIsolatePtr.asFunction<bool Function(Dart_Isolate)>();
+
+  bool Dart_KernelIsolateIsRunning() {
+    return _Dart_KernelIsolateIsRunning();
+  }
+
+  late final _Dart_KernelIsolateIsRunningPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
+          'Dart_KernelIsolateIsRunning');
+  late final _Dart_KernelIsolateIsRunning =
+      _Dart_KernelIsolateIsRunningPtr.asFunction<bool Function()>();
+
+  int Dart_KernelPort() {
+    return _Dart_KernelPort();
+  }
+
+  late final _Dart_KernelPortPtr =
+      _lookup<ffi.NativeFunction<Dart_Port Function()>>('Dart_KernelPort');
+  late final _Dart_KernelPort =
+      _Dart_KernelPortPtr.asFunction<int Function()>();
+
+  /// Compiles the given `script_uri` to a kernel file.
+  ///
+  /// \param platform_kernel A buffer containing the kernel of the platform (e.g.
+  /// `vm_platform_strong.dill`). The VM does not take ownership of this memory.
+  ///
+  /// \param platform_kernel_size The length of the platform_kernel buffer.
+  ///
+  /// \param snapshot_compile Set to `true` when the compilation is for a snapshot.
+  /// This is used by the frontend to determine if compilation related information
+  /// should be printed to console (e.g., null safety mode).
+  ///
+  /// \param embed_sources Set to `true` when sources should be embedded in the
+  /// kernel file.
+  ///
+  /// \param verbosity Specifies the logging behavior of the kernel compilation
+  /// service.
+  ///
+  /// \return Returns the result of the compilation.
+  ///
+  /// On a successful compilation the returned [Dart_KernelCompilationResult] has
+  /// a status of [Dart_KernelCompilationStatus_Ok] and the `kernel`/`kernel_size`
+  /// fields are set. The caller takes ownership of the malloc()ed buffer.
+  ///
+  /// On a failed compilation the `error` might be set describing the reason for
+  /// the failed compilation. The caller takes ownership of the malloc()ed
+  /// error.
+  ///
+  /// Requires there to be a current isolate.
+  Dart_KernelCompilationResult Dart_CompileToKernel(
+    ffi.Pointer<ffi.Char> script_uri,
+    ffi.Pointer<ffi.Uint8> platform_kernel,
+    int platform_kernel_size,
+    bool incremental_compile,
+    bool snapshot_compile,
+    bool embed_sources,
+    ffi.Pointer<ffi.Char> package_config,
+    int verbosity,
+  ) {
+    return _Dart_CompileToKernel(
+      script_uri,
+      platform_kernel,
+      platform_kernel_size,
+      incremental_compile,
+      snapshot_compile,
+      embed_sources,
+      package_config,
+      verbosity,
+    );
+  }
+
+  late final _Dart_CompileToKernelPtr = _lookup<
+      ffi.NativeFunction<
+          Dart_KernelCompilationResult Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr,
+              ffi.Bool,
+              ffi.Bool,
+              ffi.Bool,
+              ffi.Pointer<ffi.Char>,
+              ffi.Int32)>>('Dart_CompileToKernel');
+  late final _Dart_CompileToKernel = _Dart_CompileToKernelPtr.asFunction<
+      Dart_KernelCompilationResult Function(
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Uint8>,
+          int,
+          bool,
+          bool,
+          bool,
+          ffi.Pointer<ffi.Char>,
+          int)>();
+
+  Dart_KernelCompilationResult Dart_KernelListDependencies() {
+    return _Dart_KernelListDependencies();
+  }
+
+  late final _Dart_KernelListDependenciesPtr =
+      _lookup<ffi.NativeFunction<Dart_KernelCompilationResult Function()>>(
+          'Dart_KernelListDependencies');
+  late final _Dart_KernelListDependencies = _Dart_KernelListDependenciesPtr
+      .asFunction<Dart_KernelCompilationResult Function()>();
+
+  /// Sets the kernel buffer which will be used to load Dart SDK sources
+  /// dynamically at runtime.
+  ///
+  /// \param platform_kernel A buffer containing kernel which has sources for the
+  /// Dart SDK populated. Note: The VM does not take ownership of this memory.
+  ///
+  /// \param platform_kernel_size The length of the platform_kernel buffer.
+  void Dart_SetDartLibrarySourcesKernel(
+    ffi.Pointer<ffi.Uint8> platform_kernel,
+    int platform_kernel_size,
+  ) {
+    return _Dart_SetDartLibrarySourcesKernel(
+      platform_kernel,
+      platform_kernel_size,
+    );
+  }
+
+  late final _Dart_SetDartLibrarySourcesKernelPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>>('Dart_SetDartLibrarySourcesKernel');
+  late final _Dart_SetDartLibrarySourcesKernel =
+      _Dart_SetDartLibrarySourcesKernelPtr.asFunction<
+          void Function(ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// Detect the null safety opt-in status.
+  ///
+  /// When running from source, it is based on the opt-in status of `script_uri`.
+  /// When running from a kernel buffer, it is based on the mode used when
+  /// generating `kernel_buffer`.
+  /// When running from an appJIT or AOT snapshot, it is based on the mode used
+  /// when generating `snapshot_data`.
+  ///
+  /// \param script_uri Uri of the script that contains the source code
+  ///
+  /// \param package_config Uri of the package configuration file (either in format
+  /// of .packages or .dart_tool/package_config.json) for the null safety
+  /// detection to resolve package imports against. If this parameter is not
+  /// passed the package resolution of the parent isolate should be used.
+  ///
+  /// \param original_working_directory current working directory when the VM
+  /// process was launched, this is used to correctly resolve the path specified
+  /// for package_config.
+  ///
+  /// \param snapshot_data Buffer containing the snapshot data of the
+  /// isolate or NULL if no snapshot is provided. If provided, the buffers must
+  /// remain valid until the isolate shuts down.
+  ///
+  /// \param snapshot_instructions Buffer containing the snapshot instructions of
+  /// the isolate or NULL if no snapshot is provided. If provided, the buffers
+  /// must remain valid until the isolate shuts down.
+  ///
+  /// \param kernel_buffer A buffer which contains a kernel/DIL program. Must
+  /// remain valid until isolate shutdown.
+  ///
+  /// \param kernel_buffer_size The size of `kernel_buffer`.
+  ///
+  /// \return Returns true if the null safety is opted in by the input being
+  /// run `script_uri`, `snapshot_data` or `kernel_buffer`.
+  bool Dart_DetectNullSafety(
+    ffi.Pointer<ffi.Char> script_uri,
+    ffi.Pointer<ffi.Char> package_config,
+    ffi.Pointer<ffi.Char> original_working_directory,
+    ffi.Pointer<ffi.Uint8> snapshot_data,
+    ffi.Pointer<ffi.Uint8> snapshot_instructions,
+    ffi.Pointer<ffi.Uint8> kernel_buffer,
+    int kernel_buffer_size,
+  ) {
+    return _Dart_DetectNullSafety(
+      script_uri,
+      package_config,
+      original_working_directory,
+      snapshot_data,
+      snapshot_instructions,
+      kernel_buffer,
+      kernel_buffer_size,
+    );
+  }
+
+  late final _Dart_DetectNullSafetyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>>('Dart_DetectNullSafety');
+  late final _Dart_DetectNullSafety = _Dart_DetectNullSafetyPtr.asFunction<
+      bool Function(
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Uint8>,
+          int)>();
+
+  /// Returns true if isolate is the service isolate.
+  ///
+  /// \param isolate An isolate
+  ///
+  /// \return Returns true if 'isolate' is the service isolate.
+  bool Dart_IsServiceIsolate(
+    Dart_Isolate isolate,
+  ) {
+    return _Dart_IsServiceIsolate(
+      isolate,
+    );
+  }
+
+  late final _Dart_IsServiceIsolatePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>(
+          'Dart_IsServiceIsolate');
+  late final _Dart_IsServiceIsolate =
+      _Dart_IsServiceIsolatePtr.asFunction<bool Function(Dart_Isolate)>();
+
+  /// Writes the CPU profile to the timeline as a series of 'instant' events.
+  ///
+  /// Note that this is an expensive operation.
+  ///
+  /// \param main_port The main port of the Isolate whose profile samples to write.
+  /// \param error An optional error, must be free()ed by caller.
+  ///
+  /// \return Returns true if the profile is successfully written and false
+  /// otherwise.
+  bool Dart_WriteProfileToTimeline(
+    int main_port,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
+  ) {
+    return _Dart_WriteProfileToTimeline(
+      main_port,
+      error,
+    );
+  }
+
+  late final _Dart_WriteProfileToTimelinePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  Dart_Port, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'Dart_WriteProfileToTimeline');
+  late final _Dart_WriteProfileToTimeline = _Dart_WriteProfileToTimelinePtr
+      .asFunction<bool Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Compiles all functions reachable from entry points and marks
+  /// the isolate to disallow future compilation.
+  ///
+  /// Entry points should be specified using `@pragma("vm:entry-point")`
+  /// annotation.
+  ///
+  /// \return An error handle if a compilation error or runtime error running const
+  /// constructors was encountered.
+  Object Dart_Precompile() {
+    return _Dart_Precompile();
+  }
+
+  late final _Dart_PrecompilePtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_Precompile');
+  late final _Dart_Precompile =
+      _Dart_PrecompilePtr.asFunction<Object Function()>();
+
+  Object Dart_LoadingUnitLibraryUris(
+    int loading_unit_id,
+  ) {
+    return _Dart_LoadingUnitLibraryUris(
+      loading_unit_id,
+    );
+  }
+
+  late final _Dart_LoadingUnitLibraryUrisPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>(
+          'Dart_LoadingUnitLibraryUris');
+  late final _Dart_LoadingUnitLibraryUris =
+      _Dart_LoadingUnitLibraryUrisPtr.asFunction<Object Function(int)>();
+
+  /// Creates a precompiled snapshot.
+  /// - A root library must have been loaded.
+  /// - Dart_Precompile must have been called.
+  ///
+  /// Outputs an assembly file defining the symbols listed in the definitions
+  /// above.
+  ///
+  /// The assembly should be compiled as a static or shared library and linked or
+  /// loaded by the embedder. Running this snapshot requires a VM compiled with
+  /// DART_PRECOMPILED_SNAPSHOT. The kDartVmSnapshotData and
+  /// kDartVmSnapshotInstructions should be passed to Dart_Initialize. The
+  /// kDartIsolateSnapshotData and kDartIsolateSnapshotInstructions should be
+  /// passed to Dart_CreateIsolateGroup.
+  ///
+  /// The callback will be invoked one or more times to provide the assembly code.
+  ///
+  /// If stripped is true, then the assembly code will not include DWARF
+  /// debugging sections.
+  ///
+  /// If debug_callback_data is provided, debug_callback_data will be used with
+  /// the callback to provide separate debugging information.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_CreateAppAOTSnapshotAsAssembly(
+    Dart_StreamingWriteCallback callback,
+    ffi.Pointer<ffi.Void> callback_data,
+    bool stripped,
+    ffi.Pointer<ffi.Void> debug_callback_data,
+  ) {
+    return _Dart_CreateAppAOTSnapshotAsAssembly(
+      callback,
+      callback_data,
+      stripped,
+      debug_callback_data,
+    );
+  }
+
+  late final _Dart_CreateAppAOTSnapshotAsAssemblyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              Dart_StreamingWriteCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Bool,
+              ffi.Pointer<ffi.Void>)>>('Dart_CreateAppAOTSnapshotAsAssembly');
+  late final _Dart_CreateAppAOTSnapshotAsAssembly =
+      _Dart_CreateAppAOTSnapshotAsAssemblyPtr.asFunction<
+          Object Function(Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>,
+              bool, ffi.Pointer<ffi.Void>)>();
+
+  Object Dart_CreateAppAOTSnapshotAsAssemblies(
+    Dart_CreateLoadingUnitCallback next_callback,
+    ffi.Pointer<ffi.Void> next_callback_data,
+    bool stripped,
+    Dart_StreamingWriteCallback write_callback,
+    Dart_StreamingCloseCallback close_callback,
+  ) {
+    return _Dart_CreateAppAOTSnapshotAsAssemblies(
+      next_callback,
+      next_callback_data,
+      stripped,
+      write_callback,
+      close_callback,
+    );
+  }
+
+  late final _Dart_CreateAppAOTSnapshotAsAssembliesPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_CreateLoadingUnitCallback,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Bool,
+                  Dart_StreamingWriteCallback,
+                  Dart_StreamingCloseCallback)>>(
+      'Dart_CreateAppAOTSnapshotAsAssemblies');
+  late final _Dart_CreateAppAOTSnapshotAsAssemblies =
+      _Dart_CreateAppAOTSnapshotAsAssembliesPtr.asFunction<
+          Object Function(
+              Dart_CreateLoadingUnitCallback,
+              ffi.Pointer<ffi.Void>,
+              bool,
+              Dart_StreamingWriteCallback,
+              Dart_StreamingCloseCallback)>();
+
+  /// Creates a precompiled snapshot.
+  /// - A root library must have been loaded.
+  /// - Dart_Precompile must have been called.
+  ///
+  /// Outputs an ELF shared library defining the symbols
+  /// - _kDartVmSnapshotData
+  /// - _kDartVmSnapshotInstructions
+  /// - _kDartIsolateSnapshotData
+  /// - _kDartIsolateSnapshotInstructions
+  ///
+  /// The shared library should be dynamically loaded by the embedder.
+  /// Running this snapshot requires a VM compiled with DART_PRECOMPILED_SNAPSHOT.
+  /// The kDartVmSnapshotData and kDartVmSnapshotInstructions should be passed to
+  /// Dart_Initialize. The kDartIsolateSnapshotData and
+  /// kDartIsolateSnapshotInstructions should be passed to Dart_CreateIsolate.
+  ///
+  /// The callback will be invoked one or more times to provide the binary output.
+  ///
+  /// If stripped is true, then the binary output will not include DWARF
+  /// debugging sections.
+  ///
+  /// If debug_callback_data is provided, debug_callback_data will be used with
+  /// the callback to provide separate debugging information.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_CreateAppAOTSnapshotAsElf(
+    Dart_StreamingWriteCallback callback,
+    ffi.Pointer<ffi.Void> callback_data,
+    bool stripped,
+    ffi.Pointer<ffi.Void> debug_callback_data,
+  ) {
+    return _Dart_CreateAppAOTSnapshotAsElf(
+      callback,
+      callback_data,
+      stripped,
+      debug_callback_data,
+    );
+  }
+
+  late final _Dart_CreateAppAOTSnapshotAsElfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              Dart_StreamingWriteCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Bool,
+              ffi.Pointer<ffi.Void>)>>('Dart_CreateAppAOTSnapshotAsElf');
+  late final _Dart_CreateAppAOTSnapshotAsElf =
+      _Dart_CreateAppAOTSnapshotAsElfPtr.asFunction<
+          Object Function(Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>,
+              bool, ffi.Pointer<ffi.Void>)>();
+
+  Object Dart_CreateAppAOTSnapshotAsElfs(
+    Dart_CreateLoadingUnitCallback next_callback,
+    ffi.Pointer<ffi.Void> next_callback_data,
+    bool stripped,
+    Dart_StreamingWriteCallback write_callback,
+    Dart_StreamingCloseCallback close_callback,
+  ) {
+    return _Dart_CreateAppAOTSnapshotAsElfs(
+      next_callback,
+      next_callback_data,
+      stripped,
+      write_callback,
+      close_callback,
+    );
+  }
+
+  late final _Dart_CreateAppAOTSnapshotAsElfsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              Dart_CreateLoadingUnitCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Bool,
+              Dart_StreamingWriteCallback,
+              Dart_StreamingCloseCallback)>>('Dart_CreateAppAOTSnapshotAsElfs');
+  late final _Dart_CreateAppAOTSnapshotAsElfs =
+      _Dart_CreateAppAOTSnapshotAsElfsPtr.asFunction<
+          Object Function(
+              Dart_CreateLoadingUnitCallback,
+              ffi.Pointer<ffi.Void>,
+              bool,
+              Dart_StreamingWriteCallback,
+              Dart_StreamingCloseCallback)>();
+
+  /// Like Dart_CreateAppAOTSnapshotAsAssembly, but only includes
+  /// kDartVmSnapshotData and kDartVmSnapshotInstructions. It also does
+  /// not strip DWARF information from the generated assembly or allow for
+  /// separate debug information.
+  Object Dart_CreateVMAOTSnapshotAsAssembly(
+    Dart_StreamingWriteCallback callback,
+    ffi.Pointer<ffi.Void> callback_data,
+  ) {
+    return _Dart_CreateVMAOTSnapshotAsAssembly(
+      callback,
+      callback_data,
+    );
+  }
+
+  late final _Dart_CreateVMAOTSnapshotAsAssemblyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_StreamingWriteCallback,
+              ffi.Pointer<ffi.Void>)>>('Dart_CreateVMAOTSnapshotAsAssembly');
+  late final _Dart_CreateVMAOTSnapshotAsAssembly =
+      _Dart_CreateVMAOTSnapshotAsAssemblyPtr.asFunction<
+          Object Function(
+              Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>)>();
+
+  /// Sorts the class-ids in depth first traversal order of the inheritance
+  /// tree. This is a costly operation, but it can make method dispatch
+  /// more efficient and is done before writing snapshots.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_SortClasses() {
+    return _Dart_SortClasses();
+  }
+
+  late final _Dart_SortClassesPtr =
+      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_SortClasses');
+  late final _Dart_SortClasses =
+      _Dart_SortClassesPtr.asFunction<Object Function()>();
+
+  /// Creates a snapshot that caches compiled code and type feedback for faster
+  /// startup and quicker warmup in a subsequent process.
+  ///
+  /// Outputs a snapshot in two pieces. The pieces should be passed to
+  /// Dart_CreateIsolateGroup in a VM using the same VM snapshot pieces used in the
+  /// current VM. The instructions piece must be loaded with read and execute
+  /// permissions; the data piece may be loaded as read-only.
+  ///
+  /// - Requires the VM to have not been started with --precompilation.
+  /// - Not supported when targeting IA32.
+  /// - The VM writing the snapshot and the VM reading the snapshot must be the
+  /// same version, must be built in the same DEBUG/RELEASE/PRODUCT mode, must
+  /// be targeting the same architecture, and must both be in checked mode or
+  /// both in unchecked mode.
+  ///
+  /// The buffers are scope allocated and are only valid until the next call to
+  /// Dart_ExitScope.
+  ///
+  /// \return A valid handle if no error occurs during the operation.
+  Object Dart_CreateAppJITSnapshotAsBlobs(
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_data_buffer,
+    ffi.Pointer<ffi.IntPtr> isolate_snapshot_data_size,
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_instructions_buffer,
+    ffi.Pointer<ffi.IntPtr> isolate_snapshot_instructions_size,
+  ) {
+    return _Dart_CreateAppJITSnapshotAsBlobs(
+      isolate_snapshot_data_buffer,
+      isolate_snapshot_data_size,
+      isolate_snapshot_instructions_buffer,
+      isolate_snapshot_instructions_size,
+    );
+  }
+
+  late final _Dart_CreateAppJITSnapshotAsBlobsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_CreateAppJITSnapshotAsBlobs');
+  late final _Dart_CreateAppJITSnapshotAsBlobs =
+      _Dart_CreateAppJITSnapshotAsBlobsPtr.asFunction<
+          Object Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Like Dart_CreateAppJITSnapshotAsBlobs, but also creates a new VM snapshot.
+  Object Dart_CreateCoreJITSnapshotAsBlobs(
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> vm_snapshot_data_buffer,
+    ffi.Pointer<ffi.IntPtr> vm_snapshot_data_size,
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> vm_snapshot_instructions_buffer,
+    ffi.Pointer<ffi.IntPtr> vm_snapshot_instructions_size,
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_data_buffer,
+    ffi.Pointer<ffi.IntPtr> isolate_snapshot_data_size,
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_instructions_buffer,
+    ffi.Pointer<ffi.IntPtr> isolate_snapshot_instructions_size,
+  ) {
+    return _Dart_CreateCoreJITSnapshotAsBlobs(
+      vm_snapshot_data_buffer,
+      vm_snapshot_data_size,
+      vm_snapshot_instructions_buffer,
+      vm_snapshot_instructions_size,
+      isolate_snapshot_data_buffer,
+      isolate_snapshot_data_size,
+      isolate_snapshot_instructions_buffer,
+      isolate_snapshot_instructions_size,
+    );
+  }
+
+  late final _Dart_CreateCoreJITSnapshotAsBlobsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_CreateCoreJITSnapshotAsBlobs');
+  late final _Dart_CreateCoreJITSnapshotAsBlobs =
+      _Dart_CreateCoreJITSnapshotAsBlobsPtr.asFunction<
+          Object Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Get obfuscation map for precompiled code.
+  ///
+  /// Obfuscation map is encoded as a JSON array of pairs (original name,
+  /// obfuscated name).
+  ///
+  /// \return Returns an error handler if the VM was built in a mode that does not
+  /// support obfuscation.
+  Object Dart_GetObfuscationMap(
+    ffi.Pointer<ffi.Pointer<ffi.Uint8>> buffer,
+    ffi.Pointer<ffi.IntPtr> buffer_length,
+  ) {
+    return _Dart_GetObfuscationMap(
+      buffer,
+      buffer_length,
+    );
+  }
+
+  late final _Dart_GetObfuscationMapPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetObfuscationMap');
+  late final _Dart_GetObfuscationMap = _Dart_GetObfuscationMapPtr.asFunction<
+      Object Function(
+          ffi.Pointer<ffi.Pointer<ffi.Uint8>>, ffi.Pointer<ffi.IntPtr>)>();
+
+  /// Returns whether the VM only supports running from precompiled snapshots and
+  /// not from any other kind of snapshot or from source (that is, the VM was
+  /// compiled with DART_PRECOMPILED_RUNTIME).
+  bool Dart_IsPrecompiledRuntime() {
+    return _Dart_IsPrecompiledRuntime();
+  }
+
+  late final _Dart_IsPrecompiledRuntimePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
+          'Dart_IsPrecompiledRuntime');
+  late final _Dart_IsPrecompiledRuntime =
+      _Dart_IsPrecompiledRuntimePtr.asFunction<bool Function()>();
+
+  /// Print a native stack trace. Used for crash handling.
+  ///
+  /// If context is NULL, prints the current stack trace. Otherwise, context
+  /// should be a CONTEXT* (Windows) or ucontext_t* (POSIX) from a signal handler
+  /// running on the current thread.
+  void Dart_DumpNativeStackTrace(
+    ffi.Pointer<ffi.Void> context,
+  ) {
+    return _Dart_DumpNativeStackTrace(
+      context,
+    );
+  }
+
+  late final _Dart_DumpNativeStackTracePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'Dart_DumpNativeStackTrace');
+  late final _Dart_DumpNativeStackTrace = _Dart_DumpNativeStackTracePtr
+      .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  /// Indicate that the process is about to abort, and the Dart VM should not
+  /// attempt to cleanup resources.
+  void Dart_PrepareToAbort() {
+    return _Dart_PrepareToAbort();
+  }
+
+  late final _Dart_PrepareToAbortPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_PrepareToAbort');
+  late final _Dart_PrepareToAbort =
+      _Dart_PrepareToAbortPtr.asFunction<void Function()>();
+
+  /// Configure DWARF stack trace footnote callback.
+  void Dart_SetDwarfStackTraceFootnoteCallback(
+    Dart_DwarfStackTraceFootnoteCallback callback,
+  ) {
+    return _Dart_SetDwarfStackTraceFootnoteCallback(
+      callback,
+    );
+  }
+
+  late final _Dart_SetDwarfStackTraceFootnoteCallbackPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(Dart_DwarfStackTraceFootnoteCallback)>>(
+      'Dart_SetDwarfStackTraceFootnoteCallback');
+  late final _Dart_SetDwarfStackTraceFootnoteCallback =
+      _Dart_SetDwarfStackTraceFootnoteCallbackPtr.asFunction<
+          void Function(Dart_DwarfStackTraceFootnoteCallback)>();
+
+  void interactor_cqe_advance(
+    ffi.Pointer<io_uring> ring,
+    int count,
+  ) {
+    return _interactor_cqe_advance(
+      ring,
+      count,
+    );
+  }
+
+  late final _interactor_cqe_advancePtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>(
+      'interactor_cqe_advance');
+  late final _interactor_cqe_advance = _interactor_cqe_advancePtr
+      .asFunction<void Function(ffi.Pointer<io_uring>, int)>();
+
+  void interactor_close_descritor(
+    int fd,
+  ) {
+    return _interactor_close_descritor(
+      fd,
+    );
+  }
+
+  late final _interactor_close_descritorPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
+          'interactor_close_descritor');
+  late final _interactor_close_descritor =
+      _interactor_close_descritorPtr.asFunction<void Function(int)>();
+
   late final ffi.Pointer<ffi.Pointer<FILE>> _stdin =
       _lookup<ffi.Pointer<FILE>>('stdin');
 
@@ -11556,6100 +17472,887 @@ class InteractorBindings {
   late final _mh_events_dump =
       _mh_events_dumpPtr.asFunction<void Function(ffi.Pointer<mh_events_t>)>();
 
-  int interactor_worker_initialize(
-    ffi.Pointer<interactor_worker_t> worker,
-    ffi.Pointer<interactor_worker_configuration_t> configuration,
+  ffi.Pointer<ffi.Void> mmap(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+    int __prot,
+    int __flags,
+    int __fd,
+    int __offset,
+  ) {
+    return _mmap(
+      __addr,
+      __len,
+      __prot,
+      __flags,
+      __fd,
+      __offset,
+    );
+  }
+
+  late final _mmapPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size,
+              ffi.Int, ffi.Int, ffi.Int, ffi.Long)>>('mmap');
+  late final _mmap = _mmapPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<ffi.Void>, int, int, int, int, int)>();
+
+  int munmap(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+  ) {
+    return _munmap(
+      __addr,
+      __len,
+    );
+  }
+
+  late final _munmapPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>>(
+      'munmap');
+  late final _munmap =
+      _munmapPtr.asFunction<int Function(ffi.Pointer<ffi.Void>, int)>();
+
+  int mprotect(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+    int __prot,
+  ) {
+    return _mprotect(
+      __addr,
+      __len,
+      __prot,
+    );
+  }
+
+  late final _mprotectPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('mprotect');
+  late final _mprotect =
+      _mprotectPtr.asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  int msync(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+    int __flags,
+  ) {
+    return _msync(
+      __addr,
+      __len,
+      __flags,
+    );
+  }
+
+  late final _msyncPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('msync');
+  late final _msync =
+      _msyncPtr.asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  int madvise(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+    int __advice,
+  ) {
+    return _madvise(
+      __addr,
+      __len,
+      __advice,
+    );
+  }
+
+  late final _madvisePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('madvise');
+  late final _madvise =
+      _madvisePtr.asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  int posix_madvise(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+    int __advice,
+  ) {
+    return _posix_madvise(
+      __addr,
+      __len,
+      __advice,
+    );
+  }
+
+  late final _posix_madvisePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('posix_madvise');
+  late final _posix_madvise = _posix_madvisePtr
+      .asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  int mlock(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+  ) {
+    return _mlock(
+      __addr,
+      __len,
+    );
+  }
+
+  late final _mlockPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>>(
+      'mlock');
+  late final _mlock =
+      _mlockPtr.asFunction<int Function(ffi.Pointer<ffi.Void>, int)>();
+
+  int munlock(
+    ffi.Pointer<ffi.Void> __addr,
+    int __len,
+  ) {
+    return _munlock(
+      __addr,
+      __len,
+    );
+  }
+
+  late final _munlockPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>>(
+      'munlock');
+  late final _munlock =
+      _munlockPtr.asFunction<int Function(ffi.Pointer<ffi.Void>, int)>();
+
+  int mlockall(
+    int __flags,
+  ) {
+    return _mlockall(
+      __flags,
+    );
+  }
+
+  late final _mlockallPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('mlockall');
+  late final _mlockall = _mlockallPtr.asFunction<int Function(int)>();
+
+  int munlockall() {
+    return _munlockall();
+  }
+
+  late final _munlockallPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('munlockall');
+  late final _munlockall = _munlockallPtr.asFunction<int Function()>();
+
+  int mincore(
+    ffi.Pointer<ffi.Void> __start,
+    int __len,
+    ffi.Pointer<ffi.UnsignedChar> __vec,
+  ) {
+    return _mincore(
+      __start,
+      __len,
+      __vec,
+    );
+  }
+
+  late final _mincorePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size,
+              ffi.Pointer<ffi.UnsignedChar>)>>('mincore');
+  late final _mincore = _mincorePtr.asFunction<
+      int Function(
+          ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.UnsignedChar>)>();
+
+  int shm_open(
+    ffi.Pointer<ffi.Char> __name,
+    int __oflag,
+    int __mode,
+  ) {
+    return _shm_open(
+      __name,
+      __oflag,
+      __mode,
+    );
+  }
+
+  late final _shm_openPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>, ffi.Int, mode_t)>>('shm_open');
+  late final _shm_open =
+      _shm_openPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int, int)>();
+
+  int shm_unlink(
+    ffi.Pointer<ffi.Char> __name,
+  ) {
+    return _shm_unlink(
+      __name,
+    );
+  }
+
+  late final _shm_unlinkPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
+          'shm_unlink');
+  late final _shm_unlink =
+      _shm_unlinkPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
+
+  /// Initialize an arena.
+  int slab_arena_create(
+    ffi.Pointer<slab_arena> arena,
+    ffi.Pointer<quota> quota,
+    int prealloc,
+    int slab_size,
+    int flags,
+  ) {
+    return _slab_arena_create(
+      arena,
+      quota,
+      prealloc,
+      slab_size,
+      flags,
+    );
+  }
+
+  late final _slab_arena_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<slab_arena>, ffi.Pointer<quota>,
+              ffi.Size, ffi.Uint32, ffi.Int)>>('slab_arena_create');
+  late final _slab_arena_create = _slab_arena_createPtr.asFunction<
+      int Function(
+          ffi.Pointer<slab_arena>, ffi.Pointer<quota>, int, int, int)>();
+
+  /// Destroy an arena.
+  void slab_arena_destroy(
+    ffi.Pointer<slab_arena> arena,
+  ) {
+    return _slab_arena_destroy(
+      arena,
+    );
+  }
+
+  late final _slab_arena_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_arena>)>>(
+          'slab_arena_destroy');
+  late final _slab_arena_destroy = _slab_arena_destroyPtr
+      .asFunction<void Function(ffi.Pointer<slab_arena>)>();
+
+  /// Get a slab.
+  ffi.Pointer<ffi.Void> slab_map(
+    ffi.Pointer<slab_arena> arena,
+  ) {
+    return _slab_map(
+      arena,
+    );
+  }
+
+  late final _slab_mapPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<slab_arena>)>>('slab_map');
+  late final _slab_map = _slab_mapPtr
+      .asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<slab_arena>)>();
+
+  /// Put a slab into cache.
+  void slab_unmap(
+    ffi.Pointer<slab_arena> arena,
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _slab_unmap(
+      arena,
+      ptr,
+    );
+  }
+
+  late final _slab_unmapPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<slab_arena>, ffi.Pointer<ffi.Void>)>>('slab_unmap');
+  late final _slab_unmap = _slab_unmapPtr.asFunction<
+      void Function(ffi.Pointer<slab_arena>, ffi.Pointer<ffi.Void>)>();
+
+  /// mprotect() the preallocated arena.
+  void slab_arena_mprotect(
+    ffi.Pointer<slab_arena> arena,
+  ) {
+    return _slab_arena_mprotect(
+      arena,
+    );
+  }
+
+  late final _slab_arena_mprotectPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_arena>)>>(
+          'slab_arena_mprotect');
+  late final _slab_arena_mprotect = _slab_arena_mprotectPtr
+      .asFunction<void Function(ffi.Pointer<slab_arena>)>();
+
+  late final ffi.Pointer<ffi.Uint32> _slab_magic =
+      _lookup<ffi.Uint32>('slab_magic');
+
+  int get slab_magic => _slab_magic.value;
+
+  set slab_magic(int value) => _slab_magic.value = value;
+
+  void slab_cache_create(
+    ffi.Pointer<slab_cache> cache,
+    ffi.Pointer<slab_arena> arena,
+  ) {
+    return _slab_cache_create(
+      cache,
+      arena,
+    );
+  }
+
+  late final _slab_cache_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<slab_cache>,
+              ffi.Pointer<slab_arena>)>>('slab_cache_create');
+  late final _slab_cache_create = _slab_cache_createPtr.asFunction<
+      void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab_arena>)>();
+
+  void slab_cache_destroy(
+    ffi.Pointer<slab_cache> cache,
+  ) {
+    return _slab_cache_destroy(
+      cache,
+    );
+  }
+
+  late final _slab_cache_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_cache>)>>(
+          'slab_cache_destroy');
+  late final _slab_cache_destroy = _slab_cache_destroyPtr
+      .asFunction<void Function(ffi.Pointer<slab_cache>)>();
+
+  /// Allocate ordered slab
+  /// @see slab_order()
+  ffi.Pointer<slab> slab_get_with_order(
+    ffi.Pointer<slab_cache> cache,
+    int order,
+  ) {
+    return _slab_get_with_order(
+      cache,
+      order,
+    );
+  }
+
+  late final _slab_get_with_orderPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<slab> Function(
+              ffi.Pointer<slab_cache>, ffi.Uint8)>>('slab_get_with_order');
+  late final _slab_get_with_order = _slab_get_with_orderPtr
+      .asFunction<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, int)>();
+
+  /// Deallocate ordered slab
+  void slab_put_with_order(
+    ffi.Pointer<slab_cache> cache,
+    ffi.Pointer<slab> slab,
+  ) {
+    return _slab_put_with_order(
+      cache,
+      slab,
+    );
+  }
+
+  late final _slab_put_with_orderPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<slab_cache>,
+              ffi.Pointer<slab>)>>('slab_put_with_order');
+  late final _slab_put_with_order = _slab_put_with_orderPtr
+      .asFunction<void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>();
+
+  /// Allocate large slab.
+  /// @pre size > slab_order_size(cache->arena->slab_size)
+  ffi.Pointer<slab> slab_get_large(
+    ffi.Pointer<slab_cache> slab,
+    int size,
+  ) {
+    return _slab_get_large(
+      slab,
+      size,
+    );
+  }
+
+  late final _slab_get_largePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<slab> Function(
+              ffi.Pointer<slab_cache>, ffi.Size)>>('slab_get_large');
+  late final _slab_get_large = _slab_get_largePtr
+      .asFunction<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, int)>();
+
+  /// Deallocate large slab.
+  /// @pre slab was allocated with slab_get_large()
+  void slab_put_large(
+    ffi.Pointer<slab_cache> cache,
+    ffi.Pointer<slab> slab,
+  ) {
+    return _slab_put_large(
+      cache,
+      slab,
+    );
+  }
+
+  late final _slab_put_largePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>>('slab_put_large');
+  late final _slab_put_large = _slab_put_largePtr
+      .asFunction<void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>();
+
+  /// A shortcut for slab_get_with_order()/slab_get_large()
+  /// @see slab_get_with_order()
+  /// @see slab_get_large()
+  ffi.Pointer<slab> slab_get(
+    ffi.Pointer<slab_cache> cache,
+    int size,
+  ) {
+    return _slab_get(
+      cache,
+      size,
+    );
+  }
+
+  late final _slab_getPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<slab> Function(
+              ffi.Pointer<slab_cache>, ffi.Size)>>('slab_get');
+  late final _slab_get = _slab_getPtr
+      .asFunction<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, int)>();
+
+  /// Shortcut for slab_put_with_order()/slab_put_large()
+  /// @see slab_get_with_order()
+  /// @see slab_get_large()
+  void slab_put(
+    ffi.Pointer<slab_cache> cache,
+    ffi.Pointer<slab> slab,
+  ) {
+    return _slab_put(
+      cache,
+      slab,
+    );
+  }
+
+  late final _slab_putPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>>('slab_put');
+  late final _slab_put = _slab_putPtr
+      .asFunction<void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>();
+
+  void slab_cache_check(
+    ffi.Pointer<slab_cache> cache,
+  ) {
+    return _slab_cache_check(
+      cache,
+    );
+  }
+
+  late final _slab_cache_checkPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_cache>)>>(
+          'slab_cache_check');
+  late final _slab_cache_check =
+      _slab_cache_checkPtr.asFunction<void Function(ffi.Pointer<slab_cache>)>();
+
+  /// Given the requested size, calculate the actual size of a slab, that will be
+  /// allocated by slab_get(). Note that the real capacity of such a slab will be
+  /// less than the real size by slab_sizeof().
+  int slab_real_size(
+    ffi.Pointer<slab_cache> cache,
+    int size,
+  ) {
+    return _slab_real_size(
+      cache,
+      size,
+    );
+  }
+
+  late final _slab_real_sizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(
+              ffi.Pointer<slab_cache>, ffi.Size)>>('slab_real_size');
+  late final _slab_real_size = _slab_real_sizePtr
+      .asFunction<int Function(ffi.Pointer<slab_cache>, int)>();
+
+  /// Mempool will try to allocate blocks large enough to ensure
+  /// the overhead from internal fragmentation is less than the
+  /// specified below.
+  late final ffi.Pointer<ffi.Double> _OVERHEAD_RATIO =
+      _lookup<ffi.Double>('OVERHEAD_RATIO');
+
+  double get OVERHEAD_RATIO => _OVERHEAD_RATIO.value;
+
+  set OVERHEAD_RATIO(double value) => _OVERHEAD_RATIO.value = value;
+
+  void mempool_stats1(
+    ffi.Pointer<mempool> mempool,
+    ffi.Pointer<mempool_stats> stats,
+  ) {
+    return _mempool_stats1(
+      mempool,
+      stats,
+    );
+  }
+
+  late final _mempool_stats1Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<mempool>,
+              ffi.Pointer<mempool_stats>)>>('mempool_stats');
+  late final _mempool_stats1 = _mempool_stats1Ptr.asFunction<
+      void Function(ffi.Pointer<mempool>, ffi.Pointer<mempool_stats>)>();
+
+  /// @todo: struct mempool_iterator
+  void mempool_create_with_order(
+    ffi.Pointer<mempool> pool,
+    ffi.Pointer<slab_cache> cache,
+    int objsize,
+    int order,
+  ) {
+    return _mempool_create_with_order(
+      pool,
+      cache,
+      objsize,
+      order,
+    );
+  }
+
+  late final _mempool_create_with_orderPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<slab_cache>,
+              ffi.Uint32, ffi.Uint8)>>('mempool_create_with_order');
+  late final _mempool_create_with_order =
+      _mempool_create_with_orderPtr.asFunction<
+          void Function(
+              ffi.Pointer<mempool>, ffi.Pointer<slab_cache>, int, int)>();
+
+  /// Free the memory pool and release all cached memory blocks.
+  /// @sa mempool_create()
+  void mempool_destroy(
+    ffi.Pointer<mempool> pool,
+  ) {
+    return _mempool_destroy(
+      pool,
+    );
+  }
+
+  late final _mempool_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<mempool>)>>(
+          'mempool_destroy');
+  late final _mempool_destroy =
+      _mempool_destroyPtr.asFunction<void Function(ffi.Pointer<mempool>)>();
+
+  /// Allocate an object.
+  ffi.Pointer<ffi.Void> mempool_alloc(
+    ffi.Pointer<mempool> pool,
+  ) {
+    return _mempool_alloc(
+      pool,
+    );
+  }
+
+  late final _mempool_allocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<mempool>)>>('mempool_alloc');
+  late final _mempool_alloc = _mempool_allocPtr
+      .asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<mempool>)>();
+
+  void mslab_free(
+    ffi.Pointer<mempool> pool,
+    ffi.Pointer<mslab> slab,
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _mslab_free(
+      pool,
+      slab,
+      ptr,
+    );
+  }
+
+  late final _mslab_freePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<mslab>,
+              ffi.Pointer<ffi.Void>)>>('mslab_free');
+  late final _mslab_free = _mslab_freePtr.asFunction<
+      void Function(
+          ffi.Pointer<mempool>, ffi.Pointer<mslab>, ffi.Pointer<ffi.Void>)>();
+
+  late final ffi.Pointer<ffi.Size> _QUOTA_MAX = _lookup<ffi.Size>('QUOTA_MAX');
+
+  int get QUOTA_MAX => _QUOTA_MAX.value;
+
+  set QUOTA_MAX(int value) => _QUOTA_MAX.value = value;
+
+  int interactor_dart_initialize(
+    ffi.Pointer<interactor_dart_t> interactor,
+    ffi.Pointer<interactor_dart_configuration_t> configuration,
     int id,
   ) {
-    return _interactor_worker_initialize(
-      worker,
+    return _interactor_dart_initialize(
+      interactor,
       configuration,
       id,
     );
   }
 
-  late final _interactor_worker_initializePtr = _lookup<
+  late final _interactor_dart_initializePtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<interactor_worker_t>,
-              ffi.Pointer<interactor_worker_configuration_t>,
-              ffi.Uint8)>>('interactor_worker_initialize');
-  late final _interactor_worker_initialize =
-      _interactor_worker_initializePtr.asFunction<
-          int Function(
-              ffi.Pointer<interactor_worker_t>,
-              ffi.Pointer<interactor_worker_configuration_t>,
-              int)>(isLeaf: true);
+              ffi.Pointer<interactor_dart_t>,
+              ffi.Pointer<interactor_dart_configuration_t>,
+              ffi.Uint8)>>('interactor_dart_initialize');
+  late final _interactor_dart_initialize =
+      _interactor_dart_initializePtr.asFunction<
+          int Function(ffi.Pointer<interactor_dart_t>,
+              ffi.Pointer<interactor_dart_configuration_t>, int)>();
 
-  void interactor_worker_cancel_by_fd(
-    ffi.Pointer<interactor_worker_t> worker,
+  void interactor_dart_cancel_by_fd(
+    ffi.Pointer<interactor_dart_t> interactor,
     int fd,
   ) {
-    return _interactor_worker_cancel_by_fd(
-      worker,
+    return _interactor_dart_cancel_by_fd(
+      interactor,
       fd,
     );
   }
 
-  late final _interactor_worker_cancel_by_fdPtr = _lookup<
+  late final _interactor_dart_cancel_by_fdPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_worker_t>,
-              ffi.Int)>>('interactor_worker_cancel_by_fd');
-  late final _interactor_worker_cancel_by_fd =
-      _interactor_worker_cancel_by_fdPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>(
-              isLeaf: true);
+          ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+              ffi.Int)>>('interactor_dart_cancel_by_fd');
+  late final _interactor_dart_cancel_by_fd = _interactor_dart_cancel_by_fdPtr
+      .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>();
 
-  void interactor_worker_check_event_timeouts(
-    ffi.Pointer<interactor_worker_t> worker,
+  void interactor_dart_check_event_timeouts(
+    ffi.Pointer<interactor_dart_t> interactor,
   ) {
-    return _interactor_worker_check_event_timeouts(
-      worker,
+    return _interactor_dart_check_event_timeouts(
+      interactor,
     );
   }
 
-  late final _interactor_worker_check_event_timeoutsPtr = _lookup<
+  late final _interactor_dart_check_event_timeoutsPtr = _lookup<
           ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_worker_t>)>>(
-      'interactor_worker_check_event_timeouts');
-  late final _interactor_worker_check_event_timeouts =
-      _interactor_worker_check_event_timeoutsPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>)>(
-              isLeaf: true);
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_check_event_timeouts');
+  late final _interactor_dart_check_event_timeouts =
+      _interactor_dart_check_event_timeoutsPtr
+          .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>();
 
-  void interactor_worker_remove_event(
-    ffi.Pointer<interactor_worker_t> worker,
+  void interactor_dart_remove_event(
+    ffi.Pointer<interactor_dart_t> interactor,
     int data,
   ) {
-    return _interactor_worker_remove_event(
-      worker,
+    return _interactor_dart_remove_event(
+      interactor,
       data,
     );
   }
 
-  late final _interactor_worker_remove_eventPtr = _lookup<
+  late final _interactor_dart_remove_eventPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_worker_t>,
-              ffi.Uint64)>>('interactor_worker_remove_event');
-  late final _interactor_worker_remove_event =
-      _interactor_worker_remove_eventPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>(
-              isLeaf: true);
+          ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+              ffi.Uint64)>>('interactor_dart_remove_event');
+  late final _interactor_dart_remove_event = _interactor_dart_remove_eventPtr
+      .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>();
 
-  int interactor_worker_get_buffer(
-    ffi.Pointer<interactor_worker_t> worker,
+  int interactor_dart_get_buffer(
+    ffi.Pointer<interactor_dart_t> interactor,
   ) {
-    return _interactor_worker_get_buffer(
-      worker,
+    return _interactor_dart_get_buffer(
+      interactor,
     );
   }
 
-  late final _interactor_worker_get_bufferPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>(
-      'interactor_worker_get_buffer');
-  late final _interactor_worker_get_buffer = _interactor_worker_get_bufferPtr
-      .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(isLeaf: true);
+  late final _interactor_dart_get_bufferPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_get_buffer');
+  late final _interactor_dart_get_buffer = _interactor_dart_get_bufferPtr
+      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
 
-  void interactor_worker_release_buffer(
-    ffi.Pointer<interactor_worker_t> worker,
+  void interactor_dart_release_buffer(
+    ffi.Pointer<interactor_dart_t> interactor,
     int buffer_id,
   ) {
-    return _interactor_worker_release_buffer(
-      worker,
+    return _interactor_dart_release_buffer(
+      interactor,
       buffer_id,
     );
   }
 
-  late final _interactor_worker_release_bufferPtr = _lookup<
+  late final _interactor_dart_release_bufferPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_worker_t>,
-              ffi.Uint16)>>('interactor_worker_release_buffer');
-  late final _interactor_worker_release_buffer =
-      _interactor_worker_release_bufferPtr
-          .asFunction<void Function(ffi.Pointer<interactor_worker_t>, int)>(
-              isLeaf: true);
+          ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+              ffi.Uint16)>>('interactor_dart_release_buffer');
+  late final _interactor_dart_release_buffer =
+      _interactor_dart_release_bufferPtr
+          .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>();
 
-  int interactor_worker_available_buffers(
-    ffi.Pointer<interactor_worker_t> worker,
+  int interactor_dart_available_buffers(
+    ffi.Pointer<interactor_dart_t> interactor,
   ) {
-    return _interactor_worker_available_buffers(
-      worker,
+    return _interactor_dart_available_buffers(
+      interactor,
     );
   }
 
-  late final _interactor_worker_available_buffersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>(
-      'interactor_worker_available_buffers');
-  late final _interactor_worker_available_buffers =
-      _interactor_worker_available_buffersPtr
-          .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(
-              isLeaf: true);
-
-  int interactor_worker_used_buffers(
-    ffi.Pointer<interactor_worker_t> worker,
-  ) {
-    return _interactor_worker_used_buffers(
-      worker,
-    );
-  }
-
-  late final _interactor_worker_used_buffersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>(
-      'interactor_worker_used_buffers');
-  late final _interactor_worker_used_buffers =
-      _interactor_worker_used_buffersPtr
-          .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(
-              isLeaf: true);
-
-  int interactor_worker_peek(
-    ffi.Pointer<interactor_worker_t> worker,
-  ) {
-    return _interactor_worker_peek(
-      worker,
-    );
-  }
-
-  late final _interactor_worker_peekPtr = _lookup<
+  late final _interactor_dart_available_buffersPtr = _lookup<
           ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_worker_t>)>>(
-      'interactor_worker_peek');
-  late final _interactor_worker_peek = _interactor_worker_peekPtr
-      .asFunction<int Function(ffi.Pointer<interactor_worker_t>)>(isLeaf: true);
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_available_buffers');
+  late final _interactor_dart_available_buffers =
+      _interactor_dart_available_buffersPtr
+          .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
 
-  void interactor_worker_destroy(
-    ffi.Pointer<interactor_worker_t> worker,
+  int interactor_dart_used_buffers(
+    ffi.Pointer<interactor_dart_t> interactor,
   ) {
-    return _interactor_worker_destroy(
-      worker,
+    return _interactor_dart_used_buffers(
+      interactor,
     );
   }
 
-  late final _interactor_worker_destroyPtr = _lookup<
+  late final _interactor_dart_used_buffersPtr = _lookup<
           ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_worker_t>)>>(
-      'interactor_worker_destroy');
-  late final _interactor_worker_destroy = _interactor_worker_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_worker_t>)>(
-          isLeaf: true);
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_used_buffers');
+  late final _interactor_dart_used_buffers = _interactor_dart_used_buffersPtr
+      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
 
-  /// Is this an error handle?
-  ///
-  /// Requires there to be a current isolate.
-  bool Dart_IsError(
-    Object handle,
+  ffi.Pointer<interactor_message_t> interactor_dart_allocate_message(
+    ffi.Pointer<interactor_dart_t> interactor,
   ) {
-    return _Dart_IsError(
-      handle,
+    return _interactor_dart_allocate_message(
+      interactor,
     );
   }
 
-  late final _Dart_IsErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsError');
-  late final _Dart_IsError =
-      _Dart_IsErrorPtr.asFunction<bool Function(Object)>();
-
-  /// Is this an api error handle?
-  ///
-  /// Api error handles are produced when an api function is misused.
-  /// This happens when a Dart embedding api function is called with
-  /// invalid arguments or in an invalid context.
-  ///
-  /// Requires there to be a current isolate.
-  bool Dart_IsApiError(
-    Object handle,
-  ) {
-    return _Dart_IsApiError(
-      handle,
-    );
-  }
-
-  late final _Dart_IsApiErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsApiError');
-  late final _Dart_IsApiError =
-      _Dart_IsApiErrorPtr.asFunction<bool Function(Object)>();
-
-  /// Is this an unhandled exception error handle?
-  ///
-  /// Unhandled exception error handles are produced when, during the
-  /// execution of Dart code, an exception is thrown but not caught.
-  /// This can occur in any function which triggers the execution of Dart
-  /// code.
-  ///
-  /// See Dart_ErrorGetException and Dart_ErrorGetStackTrace.
-  ///
-  /// Requires there to be a current isolate.
-  bool Dart_IsUnhandledExceptionError(
-    Object handle,
-  ) {
-    return _Dart_IsUnhandledExceptionError(
-      handle,
-    );
-  }
-
-  late final _Dart_IsUnhandledExceptionErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsUnhandledExceptionError');
-  late final _Dart_IsUnhandledExceptionError =
-      _Dart_IsUnhandledExceptionErrorPtr.asFunction<bool Function(Object)>();
-
-  /// Is this a compilation error handle?
-  ///
-  /// Compilation error handles are produced when, during the execution
-  /// of Dart code, a compile-time error occurs.  This can occur in any
-  /// function which triggers the execution of Dart code.
-  ///
-  /// Requires there to be a current isolate.
-  bool Dart_IsCompilationError(
-    Object handle,
-  ) {
-    return _Dart_IsCompilationError(
-      handle,
-    );
-  }
-
-  late final _Dart_IsCompilationErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsCompilationError');
-  late final _Dart_IsCompilationError =
-      _Dart_IsCompilationErrorPtr.asFunction<bool Function(Object)>();
-
-  /// Is this a fatal error handle?
-  ///
-  /// Fatal error handles are produced when the system wants to shut down
-  /// the current isolate.
-  ///
-  /// Requires there to be a current isolate.
-  bool Dart_IsFatalError(
-    Object handle,
-  ) {
-    return _Dart_IsFatalError(
-      handle,
-    );
-  }
-
-  late final _Dart_IsFatalErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsFatalError');
-  late final _Dart_IsFatalError =
-      _Dart_IsFatalErrorPtr.asFunction<bool Function(Object)>();
-
-  /// Gets the error message from an error handle.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \return A C string containing an error message if the handle is
-  /// error. An empty C string ("") if the handle is valid. This C
-  /// String is scope allocated and is only valid until the next call
-  /// to Dart_ExitScope.
-  ffi.Pointer<ffi.Char> Dart_GetError(
-    Object handle,
-  ) {
-    return _Dart_GetError(
-      handle,
-    );
-  }
-
-  late final _Dart_GetErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Handle)>>(
-          'Dart_GetError');
-  late final _Dart_GetError =
-      _Dart_GetErrorPtr.asFunction<ffi.Pointer<ffi.Char> Function(Object)>();
-
-  /// Is this an error handle for an unhandled exception?
-  bool Dart_ErrorHasException(
-    Object handle,
-  ) {
-    return _Dart_ErrorHasException(
-      handle,
-    );
-  }
-
-  late final _Dart_ErrorHasExceptionPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_ErrorHasException');
-  late final _Dart_ErrorHasException =
-      _Dart_ErrorHasExceptionPtr.asFunction<bool Function(Object)>();
-
-  /// Gets the exception Object from an unhandled exception error handle.
-  Object Dart_ErrorGetException(
-    Object handle,
-  ) {
-    return _Dart_ErrorGetException(
-      handle,
-    );
-  }
-
-  late final _Dart_ErrorGetExceptionPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ErrorGetException');
-  late final _Dart_ErrorGetException =
-      _Dart_ErrorGetExceptionPtr.asFunction<Object Function(Object)>();
-
-  /// Gets the stack trace Object from an unhandled exception error handle.
-  Object Dart_ErrorGetStackTrace(
-    Object handle,
-  ) {
-    return _Dart_ErrorGetStackTrace(
-      handle,
-    );
-  }
-
-  late final _Dart_ErrorGetStackTracePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ErrorGetStackTrace');
-  late final _Dart_ErrorGetStackTrace =
-      _Dart_ErrorGetStackTracePtr.asFunction<Object Function(Object)>();
-
-  /// Produces an api error handle with the provided error message.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \param error the error message.
-  Object Dart_NewApiError(
-    ffi.Pointer<ffi.Char> error,
-  ) {
-    return _Dart_NewApiError(
-      error,
-    );
-  }
-
-  late final _Dart_NewApiErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
-          'Dart_NewApiError');
-  late final _Dart_NewApiError =
-      _Dart_NewApiErrorPtr.asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
-
-  Object Dart_NewCompilationError(
-    ffi.Pointer<ffi.Char> error,
-  ) {
-    return _Dart_NewCompilationError(
-      error,
-    );
-  }
-
-  late final _Dart_NewCompilationErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
-          'Dart_NewCompilationError');
-  late final _Dart_NewCompilationError = _Dart_NewCompilationErrorPtr
-      .asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
-
-  /// Produces a new unhandled exception error handle.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \param exception An instance of a Dart object to be thrown or
-  /// an ApiError or CompilationError handle.
-  /// When an ApiError or CompilationError handle is passed in
-  /// a string object of the error message is created and it becomes
-  /// the Dart object to be thrown.
-  Object Dart_NewUnhandledExceptionError(
-    Object exception,
-  ) {
-    return _Dart_NewUnhandledExceptionError(
-      exception,
-    );
-  }
-
-  late final _Dart_NewUnhandledExceptionErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_NewUnhandledExceptionError');
-  late final _Dart_NewUnhandledExceptionError =
-      _Dart_NewUnhandledExceptionErrorPtr.asFunction<Object Function(Object)>();
-
-  /// Propagates an error.
-  ///
-  /// If the provided handle is an unhandled exception error, this
-  /// function will cause the unhandled exception to be rethrown.  This
-  /// will proceed in the standard way, walking up Dart frames until an
-  /// appropriate 'catch' block is found, executing 'finally' blocks,
-  /// etc.
-  ///
-  /// If the error is not an unhandled exception error, we will unwind
-  /// the stack to the next C frame.  Intervening Dart frames will be
-  /// discarded; specifically, 'finally' blocks will not execute.  This
-  /// is the standard way that compilation errors (and the like) are
-  /// handled by the Dart runtime.
-  ///
-  /// In either case, when an error is propagated any current scopes
-  /// created by Dart_EnterScope will be exited.
-  ///
-  /// See the additional discussion under "Propagating Errors" at the
-  /// beginning of this file.
-  ///
-  /// \param handle An error handle (See Dart_IsError)
-  ///
-  /// On success, this function does not return.  On failure, the
-  /// process is terminated.
-  void Dart_PropagateError(
-    Object handle,
-  ) {
-    return _Dart_PropagateError(
-      handle,
-    );
-  }
-
-  late final _Dart_PropagateErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>(
-          'Dart_PropagateError');
-  late final _Dart_PropagateError =
-      _Dart_PropagateErrorPtr.asFunction<void Function(Object)>();
-
-  /// Converts an object to a string.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \return The converted string if no error occurs during
-  /// the conversion. If an error does occur, an error handle is
-  /// returned.
-  Object Dart_ToString(
-    Object object,
-  ) {
-    return _Dart_ToString(
-      object,
-    );
-  }
-
-  late final _Dart_ToStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ToString');
-  late final _Dart_ToString =
-      _Dart_ToStringPtr.asFunction<Object Function(Object)>();
-
-  /// Checks to see if two handles refer to identically equal objects.
-  ///
-  /// If both handles refer to instances, this is equivalent to using the top-level
-  /// function identical() from dart:core. Otherwise, returns whether the two
-  /// argument handles refer to the same object.
-  ///
-  /// \param obj1 An object to be compared.
-  /// \param obj2 An object to be compared.
-  ///
-  /// \return True if the objects are identically equal.  False otherwise.
-  bool Dart_IdentityEquals(
-    Object obj1,
-    Object obj2,
-  ) {
-    return _Dart_IdentityEquals(
-      obj1,
-      obj2,
-    );
-  }
-
-  late final _Dart_IdentityEqualsPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_IdentityEquals');
-  late final _Dart_IdentityEquals =
-      _Dart_IdentityEqualsPtr.asFunction<bool Function(Object, Object)>();
-
-  /// Allocates a handle in the current scope from a persistent handle.
-  Object Dart_HandleFromPersistent(
-    Object object,
-  ) {
-    return _Dart_HandleFromPersistent(
-      object,
-    );
-  }
-
-  late final _Dart_HandleFromPersistentPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_HandleFromPersistent');
-  late final _Dart_HandleFromPersistent =
-      _Dart_HandleFromPersistentPtr.asFunction<Object Function(Object)>();
-
-  /// Allocates a handle in the current scope from a weak persistent handle.
-  ///
-  /// This will be a handle to Dart_Null if the object has been garbage collected.
-  Object Dart_HandleFromWeakPersistent(
-    Dart_WeakPersistentHandle object,
-  ) {
-    return _Dart_HandleFromWeakPersistent(
-      object,
-    );
-  }
-
-  late final _Dart_HandleFromWeakPersistentPtr = _lookup<
-          ffi.NativeFunction<ffi.Handle Function(Dart_WeakPersistentHandle)>>(
-      'Dart_HandleFromWeakPersistent');
-  late final _Dart_HandleFromWeakPersistent = _Dart_HandleFromWeakPersistentPtr
-      .asFunction<Object Function(Dart_WeakPersistentHandle)>();
-
-  /// Allocates a persistent handle for an object.
-  ///
-  /// This handle has the lifetime of the current isolate unless it is
-  /// explicitly deallocated by calling Dart_DeletePersistentHandle.
-  ///
-  /// Requires there to be a current isolate.
-  Object Dart_NewPersistentHandle(
-    Object object,
-  ) {
-    return _Dart_NewPersistentHandle(
-      object,
-    );
-  }
-
-  late final _Dart_NewPersistentHandlePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_NewPersistentHandle');
-  late final _Dart_NewPersistentHandle =
-      _Dart_NewPersistentHandlePtr.asFunction<Object Function(Object)>();
-
-  /// Assign value of local handle to a persistent handle.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \param obj1 A persistent handle whose value needs to be set.
-  /// \param obj2 An object whose value needs to be set to the persistent handle.
-  void Dart_SetPersistentHandle(
-    Object obj1,
-    Object obj2,
-  ) {
-    return _Dart_SetPersistentHandle(
-      obj1,
-      obj2,
-    );
-  }
-
-  late final _Dart_SetPersistentHandlePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_SetPersistentHandle');
-  late final _Dart_SetPersistentHandle =
-      _Dart_SetPersistentHandlePtr.asFunction<void Function(Object, Object)>();
-
-  /// Deallocates a persistent handle.
-  ///
-  /// Requires there to be a current isolate group.
-  void Dart_DeletePersistentHandle(
-    Object object,
-  ) {
-    return _Dart_DeletePersistentHandle(
-      object,
-    );
-  }
-
-  late final _Dart_DeletePersistentHandlePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>(
-          'Dart_DeletePersistentHandle');
-  late final _Dart_DeletePersistentHandle =
-      _Dart_DeletePersistentHandlePtr.asFunction<void Function(Object)>();
-
-  /// Allocates a weak persistent handle for an object.
-  ///
-  /// This handle has the lifetime of the current isolate. The handle can also be
-  /// explicitly deallocated by calling Dart_DeleteWeakPersistentHandle.
-  ///
-  /// If the object becomes unreachable the callback is invoked with the peer as
-  /// argument. The callback can be executed on any thread, will have a current
-  /// isolate group, but will not have a current isolate. The callback can only
-  /// call Dart_DeletePersistentHandle or Dart_DeleteWeakPersistentHandle. This
-  /// gives the embedder the ability to cleanup data associated with the object.
-  /// The handle will point to the Dart_Null object after the finalizer has been
-  /// run. It is illegal to call into the VM with any other Dart_* functions from
-  /// the callback. If the handle is deleted before the object becomes
-  /// unreachable, the callback is never invoked.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \param object An object with identity.
-  /// \param peer A pointer to a native object or NULL.  This value is
-  /// provided to callback when it is invoked.
-  /// \param external_allocation_size The number of externally allocated
-  /// bytes for peer. Used to inform the garbage collector.
-  /// \param callback A function pointer that will be invoked sometime
-  /// after the object is garbage collected, unless the handle has been deleted.
-  /// A valid callback needs to be specified it cannot be NULL.
-  ///
-  /// \return The weak persistent handle or NULL. NULL is returned in case of bad
-  /// parameters.
-  Dart_WeakPersistentHandle Dart_NewWeakPersistentHandle(
-    Object object,
-    ffi.Pointer<ffi.Void> peer,
-    int external_allocation_size,
-    Dart_HandleFinalizer callback,
-  ) {
-    return _Dart_NewWeakPersistentHandle(
-      object,
-      peer,
-      external_allocation_size,
-      callback,
-    );
-  }
-
-  late final _Dart_NewWeakPersistentHandlePtr = _lookup<
-      ffi.NativeFunction<
-          Dart_WeakPersistentHandle Function(
-              ffi.Handle,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>>('Dart_NewWeakPersistentHandle');
-  late final _Dart_NewWeakPersistentHandle =
-      _Dart_NewWeakPersistentHandlePtr.asFunction<
-          Dart_WeakPersistentHandle Function(
-              Object, ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
-
-  /// Deletes the given weak persistent [object] handle.
-  ///
-  /// Requires there to be a current isolate group.
-  void Dart_DeleteWeakPersistentHandle(
-    Dart_WeakPersistentHandle object,
-  ) {
-    return _Dart_DeleteWeakPersistentHandle(
-      object,
-    );
-  }
-
-  late final _Dart_DeleteWeakPersistentHandlePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(Dart_WeakPersistentHandle)>>(
-          'Dart_DeleteWeakPersistentHandle');
-  late final _Dart_DeleteWeakPersistentHandle =
-      _Dart_DeleteWeakPersistentHandlePtr.asFunction<
-          void Function(Dart_WeakPersistentHandle)>();
-
-  /// Allocates a finalizable handle for an object.
-  ///
-  /// This handle has the lifetime of the current isolate group unless the object
-  /// pointed to by the handle is garbage collected, in this case the VM
-  /// automatically deletes the handle after invoking the callback associated
-  /// with the handle. The handle can also be explicitly deallocated by
-  /// calling Dart_DeleteFinalizableHandle.
-  ///
-  /// If the object becomes unreachable the callback is invoked with the
-  /// the peer as argument. The callback can be executed on any thread, will have
-  /// an isolate group, but will not have a current isolate. The callback can only
-  /// call Dart_DeletePersistentHandle or Dart_DeleteWeakPersistentHandle.
-  /// This gives the embedder the ability to cleanup data associated with the
-  /// object and clear out any cached references to the handle. All references to
-  /// this handle after the callback will be invalid. It is illegal to call into
-  /// the VM with any other Dart_* functions from the callback. If the handle is
-  /// deleted before the object becomes unreachable, the callback is never
-  /// invoked.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \param object An object with identity.
-  /// \param peer A pointer to a native object or NULL.  This value is
-  /// provided to callback when it is invoked.
-  /// \param external_allocation_size The number of externally allocated
-  /// bytes for peer. Used to inform the garbage collector.
-  /// \param callback A function pointer that will be invoked sometime
-  /// after the object is garbage collected, unless the handle has been deleted.
-  /// A valid callback needs to be specified it cannot be NULL.
-  ///
-  /// \return The finalizable handle or NULL. NULL is returned in case of bad
-  /// parameters.
-  Dart_FinalizableHandle Dart_NewFinalizableHandle(
-    Object object,
-    ffi.Pointer<ffi.Void> peer,
-    int external_allocation_size,
-    Dart_HandleFinalizer callback,
-  ) {
-    return _Dart_NewFinalizableHandle(
-      object,
-      peer,
-      external_allocation_size,
-      callback,
-    );
-  }
-
-  late final _Dart_NewFinalizableHandlePtr = _lookup<
-      ffi.NativeFunction<
-          Dart_FinalizableHandle Function(ffi.Handle, ffi.Pointer<ffi.Void>,
-              ffi.IntPtr, Dart_HandleFinalizer)>>('Dart_NewFinalizableHandle');
-  late final _Dart_NewFinalizableHandle =
-      _Dart_NewFinalizableHandlePtr.asFunction<
-          Dart_FinalizableHandle Function(
-              Object, ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
-
-  /// Deletes the given finalizable [object] handle.
-  ///
-  /// The caller has to provide the actual Dart object the handle was created from
-  /// to prove the object (and therefore the finalizable handle) is still alive.
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_DeleteFinalizableHandle(
-    Dart_FinalizableHandle object,
-    Object strong_ref_to_object,
-  ) {
-    return _Dart_DeleteFinalizableHandle(
-      object,
-      strong_ref_to_object,
-    );
-  }
-
-  late final _Dart_DeleteFinalizableHandlePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(Dart_FinalizableHandle,
-              ffi.Handle)>>('Dart_DeleteFinalizableHandle');
-  late final _Dart_DeleteFinalizableHandle = _Dart_DeleteFinalizableHandlePtr
-      .asFunction<void Function(Dart_FinalizableHandle, Object)>();
-
-  /// Gets the version string for the Dart VM.
-  ///
-  /// The version of the Dart VM can be accessed without initializing the VM.
-  ///
-  /// \return The version string for the embedded Dart VM.
-  ffi.Pointer<ffi.Char> Dart_VersionString() {
-    return _Dart_VersionString();
-  }
-
-  late final _Dart_VersionStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'Dart_VersionString');
-  late final _Dart_VersionString =
-      _Dart_VersionStringPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
-
-  /// Initialize Dart_IsolateFlags with correct version and default values.
-  void Dart_IsolateFlagsInitialize(
-    ffi.Pointer<Dart_IsolateFlags> flags,
-  ) {
-    return _Dart_IsolateFlagsInitialize(
-      flags,
-    );
-  }
-
-  late final _Dart_IsolateFlagsInitializePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<Dart_IsolateFlags>)>>(
-      'Dart_IsolateFlagsInitialize');
-  late final _Dart_IsolateFlagsInitialize = _Dart_IsolateFlagsInitializePtr
-      .asFunction<void Function(ffi.Pointer<Dart_IsolateFlags>)>();
-
-  /// Initializes the VM.
-  ///
-  /// \param params A struct containing initialization information. The version
-  /// field of the struct must be DART_INITIALIZE_PARAMS_CURRENT_VERSION.
-  ///
-  /// \return NULL if initialization is successful. Returns an error message
-  /// otherwise. The caller is responsible for freeing the error message.
-  ffi.Pointer<ffi.Char> Dart_Initialize(
-    ffi.Pointer<Dart_InitializeParams> params,
-  ) {
-    return _Dart_Initialize(
-      params,
-    );
-  }
-
-  late final _Dart_InitializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<Dart_InitializeParams>)>>('Dart_Initialize');
-  late final _Dart_Initialize = _Dart_InitializePtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<Dart_InitializeParams>)>();
-
-  /// Cleanup state in the VM before process termination.
-  ///
-  /// \return NULL if cleanup is successful. Returns an error message otherwise.
-  /// The caller is responsible for freeing the error message.
-  ///
-  /// NOTE: This function must not be called on a thread that was created by the VM
-  /// itself.
-  ffi.Pointer<ffi.Char> Dart_Cleanup() {
-    return _Dart_Cleanup();
-  }
-
-  late final _Dart_CleanupPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'Dart_Cleanup');
-  late final _Dart_Cleanup =
-      _Dart_CleanupPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
-
-  /// Sets command line flags. Should be called before Dart_Initialize.
-  ///
-  /// \param argc The length of the arguments array.
-  /// \param argv An array of arguments.
-  ///
-  /// \return NULL if successful. Returns an error message otherwise.
-  /// The caller is responsible for freeing the error message.
-  ///
-  /// NOTE: This call does not store references to the passed in c-strings.
-  ffi.Pointer<ffi.Char> Dart_SetVMFlags(
-    int argc,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
-  ) {
-    return _Dart_SetVMFlags(
-      argc,
-      argv,
-    );
-  }
-
-  late final _Dart_SetVMFlagsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_SetVMFlags');
-  late final _Dart_SetVMFlags = _Dart_SetVMFlagsPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(
-          int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Returns true if the named VM flag is of boolean type, specified, and set to
-  /// true.
-  ///
-  /// \param flag_name The name of the flag without leading punctuation
-  /// (example: "enable_asserts").
-  bool Dart_IsVMFlagSet(
-    ffi.Pointer<ffi.Char> flag_name,
-  ) {
-    return _Dart_IsVMFlagSet(
-      flag_name,
-    );
-  }
-
-  late final _Dart_IsVMFlagSetPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Char>)>>(
-          'Dart_IsVMFlagSet');
-  late final _Dart_IsVMFlagSet =
-      _Dart_IsVMFlagSetPtr.asFunction<bool Function(ffi.Pointer<ffi.Char>)>();
-
-  /// Creates a new isolate. The new isolate becomes the current isolate.
-  ///
-  /// A snapshot can be used to restore the VM quickly to a saved state
-  /// and is useful for fast startup. If snapshot data is provided, the
-  /// isolate will be started using that snapshot data. Requires a core snapshot or
-  /// an app snapshot created by Dart_CreateSnapshot or
-  /// Dart_CreatePrecompiledSnapshot* from a VM with the same version.
-  ///
-  /// Requires there to be no current isolate.
-  ///
-  /// \param script_uri The main source file or snapshot this isolate will load.
-  /// The VM will provide this URI to the Dart_IsolateGroupCreateCallback when a
-  /// child isolate is created by Isolate.spawn. The embedder should use a URI
-  /// that allows it to load the same program into such a child isolate.
-  /// \param name A short name for the isolate to improve debugging messages.
-  /// Typically of the format 'foo.dart:main()'.
-  /// \param isolate_snapshot_data Buffer containing the snapshot data of the
-  /// isolate or NULL if no snapshot is provided. If provided, the buffer must
-  /// remain valid until the isolate shuts down.
-  /// \param isolate_snapshot_instructions Buffer containing the snapshot
-  /// instructions of the isolate or NULL if no snapshot is provided. If
-  /// provided, the buffer must remain valid until the isolate shuts down.
-  /// \param flags Pointer to VM specific flags or NULL for default flags.
-  /// \param isolate_group_data Embedder group data. This data can be obtained
-  /// by calling Dart_IsolateGroupData and will be passed to the
-  /// Dart_IsolateShutdownCallback, Dart_IsolateCleanupCallback, and
-  /// Dart_IsolateGroupCleanupCallback.
-  /// \param isolate_data Embedder data.  This data will be passed to
-  /// the Dart_IsolateGroupCreateCallback when new isolates are spawned from
-  /// this parent isolate.
-  /// \param error Returns NULL if creation is successful, an error message
-  /// otherwise. The caller is responsible for calling free() on the error
-  /// message.
-  ///
-  /// \return The new isolate on success, or NULL if isolate creation failed.
-  Dart_Isolate Dart_CreateIsolateGroup(
-    ffi.Pointer<ffi.Char> script_uri,
-    ffi.Pointer<ffi.Char> name,
-    ffi.Pointer<ffi.Uint8> isolate_snapshot_data,
-    ffi.Pointer<ffi.Uint8> isolate_snapshot_instructions,
-    ffi.Pointer<Dart_IsolateFlags> flags,
-    ffi.Pointer<ffi.Void> isolate_group_data,
-    ffi.Pointer<ffi.Void> isolate_data,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
-  ) {
-    return _Dart_CreateIsolateGroup(
-      script_uri,
-      name,
-      isolate_snapshot_data,
-      isolate_snapshot_instructions,
-      flags,
-      isolate_group_data,
-      isolate_data,
-      error,
-    );
-  }
-
-  late final _Dart_CreateIsolateGroupPtr = _lookup<
-      ffi.NativeFunction<
-          Dart_Isolate Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<Dart_IsolateFlags>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_CreateIsolateGroup');
-  late final _Dart_CreateIsolateGroup = _Dart_CreateIsolateGroupPtr.asFunction<
-      Dart_Isolate Function(
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<Dart_IsolateFlags>,
-          ffi.Pointer<ffi.Void>,
-          ffi.Pointer<ffi.Void>,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Creates a new isolate inside the isolate group of [group_member].
-  ///
-  /// Requires there to be no current isolate.
-  ///
-  /// \param group_member An isolate from the same group into which the newly created
-  /// isolate should be born into. Other threads may not have entered / enter this
-  /// member isolate.
-  /// \param name A short name for the isolate for debugging purposes.
-  /// \param shutdown_callback A callback to be called when the isolate is being
-  /// shutdown (may be NULL).
-  /// \param cleanup_callback A callback to be called when the isolate is being
-  /// cleaned up (may be NULL).
-  /// \param child_isolate_data The embedder-specific data associated with this isolate.
-  /// \param error Set to NULL if creation is successful, set to an error
-  /// message otherwise. The caller is responsible for calling free() on the
-  /// error message.
-  ///
-  /// \return The newly created isolate on success, or NULL if isolate creation
-  /// failed.
-  ///
-  /// If successful, the newly created isolate will become the current isolate.
-  Dart_Isolate Dart_CreateIsolateInGroup(
-    Dart_Isolate group_member,
-    ffi.Pointer<ffi.Char> name,
-    Dart_IsolateShutdownCallback shutdown_callback,
-    Dart_IsolateCleanupCallback cleanup_callback,
-    ffi.Pointer<ffi.Void> child_isolate_data,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
-  ) {
-    return _Dart_CreateIsolateInGroup(
-      group_member,
-      name,
-      shutdown_callback,
-      cleanup_callback,
-      child_isolate_data,
-      error,
-    );
-  }
-
-  late final _Dart_CreateIsolateInGroupPtr = _lookup<
+  late final _interactor_dart_allocate_messagePtr = _lookup<
           ffi.NativeFunction<
-              Dart_Isolate Function(
-                  Dart_Isolate,
-                  ffi.Pointer<ffi.Char>,
-                  Dart_IsolateShutdownCallback,
-                  Dart_IsolateCleanupCallback,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'Dart_CreateIsolateInGroup');
-  late final _Dart_CreateIsolateInGroup =
-      _Dart_CreateIsolateInGroupPtr.asFunction<
-          Dart_Isolate Function(
-              Dart_Isolate,
-              ffi.Pointer<ffi.Char>,
-              Dart_IsolateShutdownCallback,
-              Dart_IsolateCleanupCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+              ffi.Pointer<interactor_message_t> Function(
+                  ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_allocate_message');
+  late final _interactor_dart_allocate_message =
+      _interactor_dart_allocate_messagePtr.asFunction<
+          ffi.Pointer<interactor_message_t> Function(
+              ffi.Pointer<interactor_dart_t>)>();
 
-  /// Creates a new isolate from a Dart Kernel file. The new isolate
-  /// becomes the current isolate.
-  ///
-  /// Requires there to be no current isolate.
-  ///
-  /// \param script_uri The main source file or snapshot this isolate will load.
-  /// The VM will provide this URI to the Dart_IsolateGroupCreateCallback when a
-  /// child isolate is created by Isolate.spawn. The embedder should use a URI that
-  /// allows it to load the same program into such a child isolate.
-  /// \param name A short name for the isolate to improve debugging messages.
-  /// Typically of the format 'foo.dart:main()'.
-  /// \param kernel_buffer A buffer which contains a kernel/DIL program. Must
-  /// remain valid until isolate shutdown.
-  /// \param kernel_buffer_size The size of `kernel_buffer`.
-  /// \param flags Pointer to VM specific flags or NULL for default flags.
-  /// \param isolate_group_data Embedder group data. This data can be obtained
-  /// by calling Dart_IsolateGroupData and will be passed to the
-  /// Dart_IsolateShutdownCallback, Dart_IsolateCleanupCallback, and
-  /// Dart_IsolateGroupCleanupCallback.
-  /// \param isolate_data Embedder data.  This data will be passed to
-  /// the Dart_IsolateGroupCreateCallback when new isolates are spawned from
-  /// this parent isolate.
-  /// \param error Returns NULL if creation is successful, an error message
-  /// otherwise. The caller is responsible for calling free() on the error
-  /// message.
-  ///
-  /// \return The new isolate on success, or NULL if isolate creation failed.
-  Dart_Isolate Dart_CreateIsolateGroupFromKernel(
-    ffi.Pointer<ffi.Char> script_uri,
-    ffi.Pointer<ffi.Char> name,
-    ffi.Pointer<ffi.Uint8> kernel_buffer,
-    int kernel_buffer_size,
-    ffi.Pointer<Dart_IsolateFlags> flags,
-    ffi.Pointer<ffi.Void> isolate_group_data,
-    ffi.Pointer<ffi.Void> isolate_data,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
+  void interactor_dart_free_message(
+    ffi.Pointer<interactor_dart_t> interactor,
+    ffi.Pointer<interactor_message_t> message,
   ) {
-    return _Dart_CreateIsolateGroupFromKernel(
-      script_uri,
-      name,
-      kernel_buffer,
-      kernel_buffer_size,
-      flags,
-      isolate_group_data,
-      isolate_data,
-      error,
+    return _interactor_dart_free_message(
+      interactor,
+      message,
     );
   }
 
-  late final _Dart_CreateIsolateGroupFromKernelPtr = _lookup<
+  late final _interactor_dart_free_messagePtr = _lookup<
           ffi.NativeFunction<
-              Dart_Isolate Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Uint8>,
-                  ffi.IntPtr,
-                  ffi.Pointer<Dart_IsolateFlags>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'Dart_CreateIsolateGroupFromKernel');
-  late final _Dart_CreateIsolateGroupFromKernel =
-      _Dart_CreateIsolateGroupFromKernelPtr.asFunction<
-          Dart_Isolate Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Uint8>,
-              int,
-              ffi.Pointer<Dart_IsolateFlags>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Shuts down the current isolate. After this call, the current isolate is NULL.
-  /// Any current scopes created by Dart_EnterScope will be exited. Invokes the
-  /// shutdown callback and any callbacks of remaining weak persistent handles.
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_ShutdownIsolate() {
-    return _Dart_ShutdownIsolate();
-  }
-
-  late final _Dart_ShutdownIsolatePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_ShutdownIsolate');
-  late final _Dart_ShutdownIsolate =
-      _Dart_ShutdownIsolatePtr.asFunction<void Function()>();
-
-  /// Returns the current isolate. Will return NULL if there is no
-  /// current isolate.
-  Dart_Isolate Dart_CurrentIsolate() {
-    return _Dart_CurrentIsolate();
-  }
-
-  late final _Dart_CurrentIsolatePtr =
-      _lookup<ffi.NativeFunction<Dart_Isolate Function()>>(
-          'Dart_CurrentIsolate');
-  late final _Dart_CurrentIsolate =
-      _Dart_CurrentIsolatePtr.asFunction<Dart_Isolate Function()>();
-
-  /// Returns the callback data associated with the current isolate. This
-  /// data was set when the isolate got created or initialized.
-  ffi.Pointer<ffi.Void> Dart_CurrentIsolateData() {
-    return _Dart_CurrentIsolateData();
-  }
-
-  late final _Dart_CurrentIsolateDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>(
-          'Dart_CurrentIsolateData');
-  late final _Dart_CurrentIsolateData = _Dart_CurrentIsolateDataPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function()>();
-
-  /// Returns the callback data associated with the given isolate. This
-  /// data was set when the isolate got created or initialized.
-  ffi.Pointer<ffi.Void> Dart_IsolateData(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_IsolateData(
-      isolate,
-    );
-  }
-
-  late final _Dart_IsolateDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>(
-          'Dart_IsolateData');
-  late final _Dart_IsolateData = _Dart_IsolateDataPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(Dart_Isolate)>();
-
-  /// Returns the current isolate group. Will return NULL if there is no
-  /// current isolate group.
-  Dart_IsolateGroup Dart_CurrentIsolateGroup() {
-    return _Dart_CurrentIsolateGroup();
-  }
-
-  late final _Dart_CurrentIsolateGroupPtr =
-      _lookup<ffi.NativeFunction<Dart_IsolateGroup Function()>>(
-          'Dart_CurrentIsolateGroup');
-  late final _Dart_CurrentIsolateGroup =
-      _Dart_CurrentIsolateGroupPtr.asFunction<Dart_IsolateGroup Function()>();
-
-  /// Returns the callback data associated with the current isolate group. This
-  /// data was passed to the isolate group when it was created.
-  ffi.Pointer<ffi.Void> Dart_CurrentIsolateGroupData() {
-    return _Dart_CurrentIsolateGroupData();
-  }
-
-  late final _Dart_CurrentIsolateGroupDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>(
-          'Dart_CurrentIsolateGroupData');
-  late final _Dart_CurrentIsolateGroupData = _Dart_CurrentIsolateGroupDataPtr
-      .asFunction<ffi.Pointer<ffi.Void> Function()>();
-
-  int Dart_CurrentIsolateGroupId() {
-    return _Dart_CurrentIsolateGroupId();
-  }
-
-  late final _Dart_CurrentIsolateGroupIdPtr =
-      _lookup<ffi.NativeFunction<Dart_IsolateGroupId Function()>>(
-          'Dart_CurrentIsolateGroupId');
-  late final _Dart_CurrentIsolateGroupId =
-      _Dart_CurrentIsolateGroupIdPtr.asFunction<int Function()>();
-
-  /// Returns the callback data associated with the specified isolate group. This
-  /// data was passed to the isolate when it was created.
-  /// The embedder is responsible for ensuring the consistency of this data
-  /// with respect to the lifecycle of an isolate group.
-  ffi.Pointer<ffi.Void> Dart_IsolateGroupData(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_IsolateGroupData(
-      isolate,
-    );
-  }
-
-  late final _Dart_IsolateGroupDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>(
-          'Dart_IsolateGroupData');
-  late final _Dart_IsolateGroupData = _Dart_IsolateGroupDataPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(Dart_Isolate)>();
-
-  /// Returns the debugging name for the current isolate.
-  ///
-  /// This name is unique to each isolate and should only be used to make
-  /// debugging messages more comprehensible.
-  Object Dart_DebugName() {
-    return _Dart_DebugName();
-  }
-
-  late final _Dart_DebugNamePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_DebugName');
-  late final _Dart_DebugName =
-      _Dart_DebugNamePtr.asFunction<Object Function()>();
-
-  /// Returns the debugging name for the current isolate.
-  ///
-  /// This name is unique to each isolate and should only be used to make
-  /// debugging messages more comprehensible.
-  ///
-  /// The returned string is scope allocated and is only valid until the next call
-  /// to Dart_ExitScope.
-  ffi.Pointer<ffi.Char> Dart_DebugNameToCString() {
-    return _Dart_DebugNameToCString();
-  }
-
-  late final _Dart_DebugNameToCStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'Dart_DebugNameToCString');
-  late final _Dart_DebugNameToCString = _Dart_DebugNameToCStringPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function()>();
-
-  /// Returns the ID for an isolate which is used to query the service protocol.
-  ///
-  /// It is the responsibility of the caller to free the returned ID.
-  ffi.Pointer<ffi.Char> Dart_IsolateServiceId(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_IsolateServiceId(
-      isolate,
-    );
-  }
-
-  late final _Dart_IsolateServiceIdPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>(
-          'Dart_IsolateServiceId');
-  late final _Dart_IsolateServiceId = _Dart_IsolateServiceIdPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(Dart_Isolate)>();
-
-  /// Enters an isolate. After calling this function,
-  /// the current isolate will be set to the provided isolate.
-  ///
-  /// Requires there to be no current isolate. Multiple threads may not be in
-  /// the same isolate at once.
-  void Dart_EnterIsolate(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_EnterIsolate(
-      isolate,
-    );
-  }
-
-  late final _Dart_EnterIsolatePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>(
-          'Dart_EnterIsolate');
-  late final _Dart_EnterIsolate =
-      _Dart_EnterIsolatePtr.asFunction<void Function(Dart_Isolate)>();
-
-  /// Kills the given isolate.
-  ///
-  /// This function has the same effect as dart:isolate's
-  /// Isolate.kill(priority:immediate).
-  /// It can interrupt ordinary Dart code but not native code. If the isolate is
-  /// in the middle of a long running native function, the isolate will not be
-  /// killed until control returns to Dart.
-  ///
-  /// Does not require a current isolate. It is safe to kill the current isolate if
-  /// there is one.
-  void Dart_KillIsolate(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_KillIsolate(
-      isolate,
-    );
-  }
-
-  late final _Dart_KillIsolatePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>(
-          'Dart_KillIsolate');
-  late final _Dart_KillIsolate =
-      _Dart_KillIsolatePtr.asFunction<void Function(Dart_Isolate)>();
-
-  /// Notifies the VM that the embedder expects to be idle until |deadline|. The VM
-  /// may use this time to perform garbage collection or other tasks to avoid
-  /// delays during execution of Dart code in the future.
-  ///
-  /// |deadline| is measured in microseconds against the system's monotonic time.
-  /// This clock can be accessed via Dart_TimelineGetMicros().
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_NotifyIdle(
-    int deadline,
-  ) {
-    return _Dart_NotifyIdle(
-      deadline,
-    );
-  }
-
-  late final _Dart_NotifyIdlePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
-          'Dart_NotifyIdle');
-  late final _Dart_NotifyIdle =
-      _Dart_NotifyIdlePtr.asFunction<void Function(int)>();
-
-  /// Starts the heap sampling profiler for each thread in the VM.
-  void Dart_EnableHeapSampling() {
-    return _Dart_EnableHeapSampling();
-  }
-
-  late final _Dart_EnableHeapSamplingPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
-          'Dart_EnableHeapSampling');
-  late final _Dart_EnableHeapSampling =
-      _Dart_EnableHeapSamplingPtr.asFunction<void Function()>();
-
-  void Dart_DisableHeapSampling() {
-    return _Dart_DisableHeapSampling();
-  }
-
-  late final _Dart_DisableHeapSamplingPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
-          'Dart_DisableHeapSampling');
-  late final _Dart_DisableHeapSampling =
-      _Dart_DisableHeapSamplingPtr.asFunction<void Function()>();
-
-  void Dart_RegisterHeapSamplingCallback(
-    Dart_HeapSamplingCreateCallback create_callback,
-    Dart_HeapSamplingDeleteCallback delete_callback,
-  ) {
-    return _Dart_RegisterHeapSamplingCallback(
-      create_callback,
-      delete_callback,
-    );
-  }
-
-  late final _Dart_RegisterHeapSamplingCallbackPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(Dart_HeapSamplingCreateCallback,
-                  Dart_HeapSamplingDeleteCallback)>>(
-      'Dart_RegisterHeapSamplingCallback');
-  late final _Dart_RegisterHeapSamplingCallback =
-      _Dart_RegisterHeapSamplingCallbackPtr.asFunction<
-          void Function(Dart_HeapSamplingCreateCallback,
-              Dart_HeapSamplingDeleteCallback)>();
-
-  void Dart_ReportSurvivingAllocations(
-    Dart_HeapSamplingReportCallback callback,
-    ffi.Pointer<ffi.Void> context,
-    bool force_gc,
-  ) {
-    return _Dart_ReportSurvivingAllocations(
-      callback,
-      context,
-      force_gc,
-    );
-  }
-
-  late final _Dart_ReportSurvivingAllocationsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              Dart_HeapSamplingReportCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Bool)>>('Dart_ReportSurvivingAllocations');
-  late final _Dart_ReportSurvivingAllocations =
-      _Dart_ReportSurvivingAllocationsPtr.asFunction<
-          void Function(
-              Dart_HeapSamplingReportCallback, ffi.Pointer<ffi.Void>, bool)>();
-
-  void Dart_SetHeapSamplingPeriod(
-    int bytes,
-  ) {
-    return _Dart_SetHeapSamplingPeriod(
-      bytes,
-    );
-  }
-
-  late final _Dart_SetHeapSamplingPeriodPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.IntPtr)>>(
-          'Dart_SetHeapSamplingPeriod');
-  late final _Dart_SetHeapSamplingPeriod =
-      _Dart_SetHeapSamplingPeriodPtr.asFunction<void Function(int)>();
-
-  /// Notifies the VM that the embedder expects the application's working set has
-  /// recently shrunk significantly and is not expected to rise in the near future.
-  /// The VM may spend O(heap-size) time performing clean up work.
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_NotifyDestroyed() {
-    return _Dart_NotifyDestroyed();
-  }
-
-  late final _Dart_NotifyDestroyedPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_NotifyDestroyed');
-  late final _Dart_NotifyDestroyed =
-      _Dart_NotifyDestroyedPtr.asFunction<void Function()>();
-
-  /// Notifies the VM that the system is running low on memory.
-  ///
-  /// Does not require a current isolate. Only valid after calling Dart_Initialize.
-  void Dart_NotifyLowMemory() {
-    return _Dart_NotifyLowMemory();
-  }
-
-  late final _Dart_NotifyLowMemoryPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_NotifyLowMemory');
-  late final _Dart_NotifyLowMemory =
-      _Dart_NotifyLowMemoryPtr.asFunction<void Function()>();
-
-  /// Set the desired performance trade-off.
-  ///
-  /// Requires a current isolate.
-  ///
-  /// Returns the previous performance mode.
-  int Dart_SetPerformanceMode(
-    int mode,
-  ) {
-    return _Dart_SetPerformanceMode(
-      mode,
-    );
-  }
-
-  late final _Dart_SetPerformanceModePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32)>>(
-          'Dart_SetPerformanceMode');
-  late final _Dart_SetPerformanceMode =
-      _Dart_SetPerformanceModePtr.asFunction<int Function(int)>();
-
-  /// Starts the CPU sampling profiler.
-  void Dart_StartProfiling() {
-    return _Dart_StartProfiling();
-  }
-
-  late final _Dart_StartProfilingPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_StartProfiling');
-  late final _Dart_StartProfiling =
-      _Dart_StartProfilingPtr.asFunction<void Function()>();
-
-  /// Stops the CPU sampling profiler.
-  ///
-  /// Note that some profile samples might still be taken after this function
-  /// returns due to the asynchronous nature of the implementation on some
-  /// platforms.
-  void Dart_StopProfiling() {
-    return _Dart_StopProfiling();
-  }
-
-  late final _Dart_StopProfilingPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_StopProfiling');
-  late final _Dart_StopProfiling =
-      _Dart_StopProfilingPtr.asFunction<void Function()>();
-
-  /// Notifies the VM that the current thread should not be profiled until a
-  /// matching call to Dart_ThreadEnableProfiling is made.
-  ///
-  /// NOTE: By default, if a thread has entered an isolate it will be profiled.
-  /// This function should be used when an embedder knows a thread is about
-  /// to make a blocking call and wants to avoid unnecessary interrupts by
-  /// the profiler.
-  void Dart_ThreadDisableProfiling() {
-    return _Dart_ThreadDisableProfiling();
-  }
-
-  late final _Dart_ThreadDisableProfilingPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
-          'Dart_ThreadDisableProfiling');
-  late final _Dart_ThreadDisableProfiling =
-      _Dart_ThreadDisableProfilingPtr.asFunction<void Function()>();
-
-  /// Notifies the VM that the current thread should be profiled.
-  ///
-  /// NOTE: It is only legal to call this function *after* calling
-  /// Dart_ThreadDisableProfiling.
-  ///
-  /// NOTE: By default, if a thread has entered an isolate it will be profiled.
-  void Dart_ThreadEnableProfiling() {
-    return _Dart_ThreadEnableProfiling();
-  }
-
-  late final _Dart_ThreadEnableProfilingPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
-          'Dart_ThreadEnableProfiling');
-  late final _Dart_ThreadEnableProfiling =
-      _Dart_ThreadEnableProfilingPtr.asFunction<void Function()>();
-
-  /// Register symbol information for the Dart VM's profiler and crash dumps.
-  ///
-  /// This consumes the output of //topaz/runtime/dart/profiler_symbols, which
-  /// should be treated as opaque.
-  void Dart_AddSymbols(
-    ffi.Pointer<ffi.Char> dso_name,
-    ffi.Pointer<ffi.Void> buffer,
-    int buffer_size,
-  ) {
-    return _Dart_AddSymbols(
-      dso_name,
-      buffer,
-      buffer_size,
-    );
-  }
-
-  late final _Dart_AddSymbolsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>,
-              ffi.IntPtr)>>('Dart_AddSymbols');
-  late final _Dart_AddSymbols = _Dart_AddSymbolsPtr.asFunction<
-      void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>, int)>();
-
-  /// Exits an isolate. After this call, Dart_CurrentIsolate will
-  /// return NULL.
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_ExitIsolate() {
-    return _Dart_ExitIsolate();
-  }
-
-  late final _Dart_ExitIsolatePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_ExitIsolate');
-  late final _Dart_ExitIsolate =
-      _Dart_ExitIsolatePtr.asFunction<void Function()>();
-
-  /// Creates a full snapshot of the current isolate heap.
-  ///
-  /// A full snapshot is a compact representation of the dart vm isolate heap
-  /// and dart isolate heap states. These snapshots are used to initialize
-  /// the vm isolate on startup and fast initialization of an isolate.
-  /// A Snapshot of the heap is created before any dart code has executed.
-  ///
-  /// Requires there to be a current isolate. Not available in the precompiled
-  /// runtime (check Dart_IsPrecompiledRuntime).
-  ///
-  /// \param vm_snapshot_data_buffer Returns a pointer to a buffer containing the
-  /// vm snapshot. This buffer is scope allocated and is only valid
-  /// until the next call to Dart_ExitScope.
-  /// \param vm_snapshot_data_size Returns the size of vm_snapshot_data_buffer.
-  /// \param isolate_snapshot_data_buffer Returns a pointer to a buffer containing
-  /// the isolate snapshot. This buffer is scope allocated and is only valid
-  /// until the next call to Dart_ExitScope.
-  /// \param isolate_snapshot_data_size Returns the size of
-  /// isolate_snapshot_data_buffer.
-  /// \param is_core Create a snapshot containing core libraries.
-  /// Such snapshot should be agnostic to null safety mode.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_CreateSnapshot(
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> vm_snapshot_data_buffer,
-    ffi.Pointer<ffi.IntPtr> vm_snapshot_data_size,
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_data_buffer,
-    ffi.Pointer<ffi.IntPtr> isolate_snapshot_data_size,
-    bool is_core,
-  ) {
-    return _Dart_CreateSnapshot(
-      vm_snapshot_data_buffer,
-      vm_snapshot_data_size,
-      isolate_snapshot_data_buffer,
-      isolate_snapshot_data_size,
-      is_core,
-    );
-  }
-
-  late final _Dart_CreateSnapshotPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Bool)>>('Dart_CreateSnapshot');
-  late final _Dart_CreateSnapshot = _Dart_CreateSnapshotPtr.asFunction<
-      Object Function(
-          ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-          ffi.Pointer<ffi.IntPtr>,
-          ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-          ffi.Pointer<ffi.IntPtr>,
-          bool)>();
-
-  /// Returns whether the buffer contains a kernel file.
-  ///
-  /// \param buffer Pointer to a buffer that might contain a kernel binary.
-  /// \param buffer_size Size of the buffer.
-  ///
-  /// \return Whether the buffer contains a kernel binary (full or partial).
-  bool Dart_IsKernel(
-    ffi.Pointer<ffi.Uint8> buffer,
-    int buffer_size,
-  ) {
-    return _Dart_IsKernel(
-      buffer,
-      buffer_size,
-    );
-  }
-
-  late final _Dart_IsKernelPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Bool Function(
-              ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>('Dart_IsKernel');
-  late final _Dart_IsKernel = _Dart_IsKernelPtr.asFunction<
-      bool Function(ffi.Pointer<ffi.Uint8>, int)>();
-
-  /// Make isolate runnable.
-  ///
-  /// When isolates are spawned, this function is used to indicate that
-  /// the creation and initialization (including script loading) of the
-  /// isolate is complete and the isolate can start.
-  /// This function expects there to be no current isolate.
-  ///
-  /// \param isolate The isolate to be made runnable.
-  ///
-  /// \return NULL if successful. Returns an error message otherwise. The caller
-  /// is responsible for freeing the error message.
-  ffi.Pointer<ffi.Char> Dart_IsolateMakeRunnable(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_IsolateMakeRunnable(
-      isolate,
-    );
-  }
-
-  late final _Dart_IsolateMakeRunnablePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>(
-          'Dart_IsolateMakeRunnable');
-  late final _Dart_IsolateMakeRunnable = _Dart_IsolateMakeRunnablePtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>();
-
-  /// Allows embedders to provide a custom wakeup mechanism for the delivery of
-  /// inter-isolate messages. This setting only applies to the current isolate.
-  ///
-  /// This mechanism is optional: if not provided, the isolate will be scheduled on
-  /// a VM-managed thread pool. An embedder should provide this callback if it
-  /// wants to run an isolate on a specific thread or to interleave handling of
-  /// inter-isolate messages with other event sources.
-  ///
-  /// Most embedders will only call this function once, before isolate
-  /// execution begins. If this function is called after isolate
-  /// execution begins, the embedder is responsible for threading issues.
-  void Dart_SetMessageNotifyCallback(
-    Dart_MessageNotifyCallback message_notify_callback,
-  ) {
-    return _Dart_SetMessageNotifyCallback(
-      message_notify_callback,
-    );
-  }
-
-  late final _Dart_SetMessageNotifyCallbackPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(Dart_MessageNotifyCallback)>>(
-      'Dart_SetMessageNotifyCallback');
-  late final _Dart_SetMessageNotifyCallback = _Dart_SetMessageNotifyCallbackPtr
-      .asFunction<void Function(Dart_MessageNotifyCallback)>();
-
-  /// Query the current message notify callback for the isolate.
-  ///
-  /// \return The current message notify callback for the isolate.
-  Dart_MessageNotifyCallback Dart_GetMessageNotifyCallback() {
-    return _Dart_GetMessageNotifyCallback();
-  }
-
-  late final _Dart_GetMessageNotifyCallbackPtr =
-      _lookup<ffi.NativeFunction<Dart_MessageNotifyCallback Function()>>(
-          'Dart_GetMessageNotifyCallback');
-  late final _Dart_GetMessageNotifyCallback = _Dart_GetMessageNotifyCallbackPtr
-      .asFunction<Dart_MessageNotifyCallback Function()>();
-
-  /// If the VM flag `--pause-isolates-on-start` was passed this will be true.
-  ///
-  /// \return A boolean value indicating if pause on start was requested.
-  bool Dart_ShouldPauseOnStart() {
-    return _Dart_ShouldPauseOnStart();
-  }
-
-  late final _Dart_ShouldPauseOnStartPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
-          'Dart_ShouldPauseOnStart');
-  late final _Dart_ShouldPauseOnStart =
-      _Dart_ShouldPauseOnStartPtr.asFunction<bool Function()>();
-
-  /// Override the VM flag `--pause-isolates-on-start` for the current isolate.
-  ///
-  /// \param should_pause Should the isolate be paused on start?
-  ///
-  /// NOTE: This must be called before Dart_IsolateMakeRunnable.
-  void Dart_SetShouldPauseOnStart(
-    bool should_pause,
-  ) {
-    return _Dart_SetShouldPauseOnStart(
-      should_pause,
-    );
-  }
-
-  late final _Dart_SetShouldPauseOnStartPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
-          'Dart_SetShouldPauseOnStart');
-  late final _Dart_SetShouldPauseOnStart =
-      _Dart_SetShouldPauseOnStartPtr.asFunction<void Function(bool)>();
-
-  /// Is the current isolate paused on start?
-  ///
-  /// \return A boolean value indicating if the isolate is paused on start.
-  bool Dart_IsPausedOnStart() {
-    return _Dart_IsPausedOnStart();
-  }
-
-  late final _Dart_IsPausedOnStartPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_IsPausedOnStart');
-  late final _Dart_IsPausedOnStart =
-      _Dart_IsPausedOnStartPtr.asFunction<bool Function()>();
-
-  /// Called when the embedder has paused the current isolate on start and when
-  /// the embedder has resumed the isolate.
-  ///
-  /// \param paused Is the isolate paused on start?
-  void Dart_SetPausedOnStart(
-    bool paused,
-  ) {
-    return _Dart_SetPausedOnStart(
-      paused,
-    );
-  }
-
-  late final _Dart_SetPausedOnStartPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
-          'Dart_SetPausedOnStart');
-  late final _Dart_SetPausedOnStart =
-      _Dart_SetPausedOnStartPtr.asFunction<void Function(bool)>();
-
-  /// If the VM flag `--pause-isolates-on-exit` was passed this will be true.
-  ///
-  /// \return A boolean value indicating if pause on exit was requested.
-  bool Dart_ShouldPauseOnExit() {
-    return _Dart_ShouldPauseOnExit();
-  }
-
-  late final _Dart_ShouldPauseOnExitPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
-          'Dart_ShouldPauseOnExit');
-  late final _Dart_ShouldPauseOnExit =
-      _Dart_ShouldPauseOnExitPtr.asFunction<bool Function()>();
-
-  /// Override the VM flag `--pause-isolates-on-exit` for the current isolate.
-  ///
-  /// \param should_pause Should the isolate be paused on exit?
-  void Dart_SetShouldPauseOnExit(
-    bool should_pause,
-  ) {
-    return _Dart_SetShouldPauseOnExit(
-      should_pause,
-    );
-  }
-
-  late final _Dart_SetShouldPauseOnExitPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
-          'Dart_SetShouldPauseOnExit');
-  late final _Dart_SetShouldPauseOnExit =
-      _Dart_SetShouldPauseOnExitPtr.asFunction<void Function(bool)>();
-
-  /// Is the current isolate paused on exit?
-  ///
-  /// \return A boolean value indicating if the isolate is paused on exit.
-  bool Dart_IsPausedOnExit() {
-    return _Dart_IsPausedOnExit();
-  }
-
-  late final _Dart_IsPausedOnExitPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_IsPausedOnExit');
-  late final _Dart_IsPausedOnExit =
-      _Dart_IsPausedOnExitPtr.asFunction<bool Function()>();
-
-  /// Called when the embedder has paused the current isolate on exit and when
-  /// the embedder has resumed the isolate.
-  ///
-  /// \param paused Is the isolate paused on exit?
-  void Dart_SetPausedOnExit(
-    bool paused,
-  ) {
-    return _Dart_SetPausedOnExit(
-      paused,
-    );
-  }
-
-  late final _Dart_SetPausedOnExitPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>(
-          'Dart_SetPausedOnExit');
-  late final _Dart_SetPausedOnExit =
-      _Dart_SetPausedOnExitPtr.asFunction<void Function(bool)>();
-
-  /// Called when the embedder has caught a top level unhandled exception error
-  /// in the current isolate.
-  ///
-  /// NOTE: It is illegal to call this twice on the same isolate without first
-  /// clearing the sticky error to null.
-  ///
-  /// \param error The unhandled exception error.
-  void Dart_SetStickyError(
-    Object error,
-  ) {
-    return _Dart_SetStickyError(
-      error,
-    );
-  }
-
-  late final _Dart_SetStickyErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>(
-          'Dart_SetStickyError');
-  late final _Dart_SetStickyError =
-      _Dart_SetStickyErrorPtr.asFunction<void Function(Object)>();
-
-  /// Does the current isolate have a sticky error?
-  bool Dart_HasStickyError() {
-    return _Dart_HasStickyError();
-  }
-
-  late final _Dart_HasStickyErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_HasStickyError');
-  late final _Dart_HasStickyError =
-      _Dart_HasStickyErrorPtr.asFunction<bool Function()>();
-
-  /// Gets the sticky error for the current isolate.
-  ///
-  /// \return A handle to the sticky error object or null.
-  Object Dart_GetStickyError() {
-    return _Dart_GetStickyError();
-  }
-
-  late final _Dart_GetStickyErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_GetStickyError');
-  late final _Dart_GetStickyError =
-      _Dart_GetStickyErrorPtr.asFunction<Object Function()>();
-
-  /// Handles the next pending message for the current isolate.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_HandleMessage() {
-    return _Dart_HandleMessage();
-  }
-
-  late final _Dart_HandleMessagePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_HandleMessage');
-  late final _Dart_HandleMessage =
-      _Dart_HandleMessagePtr.asFunction<Object Function()>();
-
-  /// Drains the microtask queue, then blocks the calling thread until the current
-  /// isolate receives a message, then handles all messages.
-  ///
-  /// \param timeout_millis When non-zero, the call returns after the indicated
-  /// number of milliseconds even if no message was received.
-  /// \return A valid handle if no error occurs, otherwise an error handle.
-  Object Dart_WaitForEvent(
-    int timeout_millis,
-  ) {
-    return _Dart_WaitForEvent(
-      timeout_millis,
-    );
-  }
-
-  late final _Dart_WaitForEventPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>(
-          'Dart_WaitForEvent');
-  late final _Dart_WaitForEvent =
-      _Dart_WaitForEventPtr.asFunction<Object Function(int)>();
-
-  /// Handles any pending messages for the vm service for the current
-  /// isolate.
-  ///
-  /// This function may be used by an embedder at a breakpoint to avoid
-  /// pausing the vm service.
-  ///
-  /// This function can indirectly cause the message notify callback to
-  /// be called.
-  ///
-  /// \return true if the vm service requests the program resume
-  /// execution, false otherwise
-  bool Dart_HandleServiceMessages() {
-    return _Dart_HandleServiceMessages();
-  }
-
-  late final _Dart_HandleServiceMessagesPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
-          'Dart_HandleServiceMessages');
-  late final _Dart_HandleServiceMessages =
-      _Dart_HandleServiceMessagesPtr.asFunction<bool Function()>();
-
-  /// Does the current isolate have pending service messages?
-  ///
-  /// \return true if the isolate has pending service messages, false otherwise.
-  bool Dart_HasServiceMessages() {
-    return _Dart_HasServiceMessages();
-  }
-
-  late final _Dart_HasServiceMessagesPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
-          'Dart_HasServiceMessages');
-  late final _Dart_HasServiceMessages =
-      _Dart_HasServiceMessagesPtr.asFunction<bool Function()>();
-
-  /// Processes any incoming messages for the current isolate.
-  ///
-  /// This function may only be used when the embedder has not provided
-  /// an alternate message delivery mechanism with
-  /// Dart_SetMessageCallbacks. It is provided for convenience.
-  ///
-  /// This function waits for incoming messages for the current
-  /// isolate. As new messages arrive, they are handled using
-  /// Dart_HandleMessage. The routine exits when all ports to the
-  /// current isolate are closed.
-  ///
-  /// \return A valid handle if the run loop exited successfully.  If an
-  /// exception or other error occurs while processing messages, an
-  /// error handle is returned.
-  Object Dart_RunLoop() {
-    return _Dart_RunLoop();
-  }
-
-  late final _Dart_RunLoopPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_RunLoop');
-  late final _Dart_RunLoop = _Dart_RunLoopPtr.asFunction<Object Function()>();
-
-  /// Lets the VM run message processing for the isolate.
-  ///
-  /// This function expects there to a current isolate and the current isolate
-  /// must not have an active api scope. The VM will take care of making the
-  /// isolate runnable (if not already), handles its message loop and will take
-  /// care of shutting the isolate down once it's done.
-  ///
-  /// \param errors_are_fatal Whether uncaught errors should be fatal.
-  /// \param on_error_port A port to notify on uncaught errors (or ILLEGAL_PORT).
-  /// \param on_exit_port A port to notify on exit (or ILLEGAL_PORT).
-  /// \param error A non-NULL pointer which will hold an error message if the call
-  /// fails. The error has to be free()ed by the caller.
-  ///
-  /// \return If successful the VM takes ownership of the isolate and takes care
-  /// of its message loop. If not successful the caller retains ownership of the
-  /// isolate.
-  bool Dart_RunLoopAsync(
-    bool errors_are_fatal,
-    int on_error_port,
-    int on_exit_port,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
-  ) {
-    return _Dart_RunLoopAsync(
-      errors_are_fatal,
-      on_error_port,
-      on_exit_port,
-      error,
-    );
-  }
-
-  late final _Dart_RunLoopAsyncPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Bool Function(ffi.Bool, Dart_Port, Dart_Port,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_RunLoopAsync');
-  late final _Dart_RunLoopAsync = _Dart_RunLoopAsyncPtr.asFunction<
-      bool Function(bool, int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Gets the main port id for the current isolate.
-  int Dart_GetMainPortId() {
-    return _Dart_GetMainPortId();
-  }
-
-  late final _Dart_GetMainPortIdPtr =
-      _lookup<ffi.NativeFunction<Dart_Port Function()>>('Dart_GetMainPortId');
-  late final _Dart_GetMainPortId =
-      _Dart_GetMainPortIdPtr.asFunction<int Function()>();
-
-  /// Does the current isolate have live ReceivePorts?
-  ///
-  /// A ReceivePort is live when it has not been closed.
-  bool Dart_HasLivePorts() {
-    return _Dart_HasLivePorts();
-  }
-
-  late final _Dart_HasLivePortsPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>('Dart_HasLivePorts');
-  late final _Dart_HasLivePorts =
-      _Dart_HasLivePortsPtr.asFunction<bool Function()>();
-
-  /// Posts a message for some isolate. The message is a serialized
-  /// object.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// For posting messages outside of an isolate see \ref Dart_PostCObject.
-  ///
-  /// \param port_id The destination port.
-  /// \param object An object from the current isolate.
-  ///
-  /// \return True if the message was posted.
-  bool Dart_Post(
-    int port_id,
-    Object object,
-  ) {
-    return _Dart_Post(
-      port_id,
-      object,
-    );
-  }
-
-  late final _Dart_PostPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(Dart_Port, ffi.Handle)>>(
-          'Dart_Post');
-  late final _Dart_Post =
-      _Dart_PostPtr.asFunction<bool Function(int, Object)>();
-
-  /// Returns a new SendPort with the provided port id.
-  ///
-  /// \param port_id The destination port.
-  ///
-  /// \return A new SendPort if no errors occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewSendPort(
-    int port_id,
-  ) {
-    return _Dart_NewSendPort(
-      port_id,
-    );
-  }
-
-  late final _Dart_NewSendPortPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(Dart_Port)>>(
-          'Dart_NewSendPort');
-  late final _Dart_NewSendPort =
-      _Dart_NewSendPortPtr.asFunction<Object Function(int)>();
-
-  /// Gets the SendPort id for the provided SendPort.
-  /// \param port A SendPort object whose id is desired.
-  /// \param port_id Returns the id of the SendPort.
-  /// \return Success if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_SendPortGetId(
-    Object port,
-    ffi.Pointer<Dart_Port> port_id,
-  ) {
-    return _Dart_SendPortGetId(
-      port,
-      port_id,
-    );
-  }
-
-  late final _Dart_SendPortGetIdPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<Dart_Port>)>>('Dart_SendPortGetId');
-  late final _Dart_SendPortGetId = _Dart_SendPortGetIdPtr.asFunction<
-      Object Function(Object, ffi.Pointer<Dart_Port>)>();
-
-  /// Enters a new scope.
-  ///
-  /// All new local handles will be created in this scope. Additionally,
-  /// some functions may return "scope allocated" memory which is only
-  /// valid within this scope.
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_EnterScope() {
-    return _Dart_EnterScope();
-  }
-
-  late final _Dart_EnterScopePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_EnterScope');
-  late final _Dart_EnterScope =
-      _Dart_EnterScopePtr.asFunction<void Function()>();
-
-  /// Exits a scope.
-  ///
-  /// The previous scope (if any) becomes the current scope.
-  ///
-  /// Requires there to be a current isolate.
-  void Dart_ExitScope() {
-    return _Dart_ExitScope();
-  }
-
-  late final _Dart_ExitScopePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_ExitScope');
-  late final _Dart_ExitScope = _Dart_ExitScopePtr.asFunction<void Function()>();
-
-  /// The Dart VM uses "zone allocation" for temporary structures. Zones
-  /// support very fast allocation of small chunks of memory. The chunks
-  /// cannot be deallocated individually, but instead zones support
-  /// deallocating all chunks in one fast operation.
-  ///
-  /// This function makes it possible for the embedder to allocate
-  /// temporary data in the VMs zone allocator.
-  ///
-  /// Zone allocation is possible:
-  /// 1. when inside a scope where local handles can be allocated
-  /// 2. when processing a message from a native port in a native port
-  /// handler
-  ///
-  /// All the memory allocated this way will be reclaimed either on the
-  /// next call to Dart_ExitScope or when the native port handler exits.
-  ///
-  /// \param size Size of the memory to allocate.
-  ///
-  /// \return A pointer to the allocated memory. NULL if allocation
-  /// failed. Failure might due to is no current VM zone.
-  ffi.Pointer<ffi.Uint8> Dart_ScopeAllocate(
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+                  ffi.Pointer<interactor_message_t>)>>(
+      'interactor_dart_free_message');
+  late final _interactor_dart_free_message =
+      _interactor_dart_free_messagePtr.asFunction<
+          void Function(ffi.Pointer<interactor_dart_t>,
+              ffi.Pointer<interactor_message_t>)>();
+
+  ffi.Pointer<interactor_payloads_pool> interactor_dart_payload_pool_create(
+    ffi.Pointer<interactor_dart_t> interactor,
     int size,
   ) {
-    return _Dart_ScopeAllocate(
+    return _interactor_dart_payload_pool_create(
+      interactor,
       size,
     );
   }
 
-  late final _Dart_ScopeAllocatePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Uint8> Function(ffi.IntPtr)>>(
-          'Dart_ScopeAllocate');
-  late final _Dart_ScopeAllocate =
-      _Dart_ScopeAllocatePtr.asFunction<ffi.Pointer<ffi.Uint8> Function(int)>();
-
-  /// Returns the null object.
-  ///
-  /// \return A handle to the null object.
-  Object Dart_Null() {
-    return _Dart_Null();
-  }
-
-  late final _Dart_NullPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_Null');
-  late final _Dart_Null = _Dart_NullPtr.asFunction<Object Function()>();
-
-  /// Is this object null?
-  bool Dart_IsNull(
-    Object object,
-  ) {
-    return _Dart_IsNull(
-      object,
-    );
-  }
-
-  late final _Dart_IsNullPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsNull');
-  late final _Dart_IsNull = _Dart_IsNullPtr.asFunction<bool Function(Object)>();
-
-  /// Returns the empty string object.
-  ///
-  /// \return A handle to the empty string object.
-  Object Dart_EmptyString() {
-    return _Dart_EmptyString();
-  }
-
-  late final _Dart_EmptyStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_EmptyString');
-  late final _Dart_EmptyString =
-      _Dart_EmptyStringPtr.asFunction<Object Function()>();
-
-  /// Returns types that are not classes, and which therefore cannot be looked up
-  /// as library members by Dart_GetType.
-  ///
-  /// \return A handle to the dynamic, void or Never type.
-  Object Dart_TypeDynamic() {
-    return _Dart_TypeDynamic();
-  }
-
-  late final _Dart_TypeDynamicPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_TypeDynamic');
-  late final _Dart_TypeDynamic =
-      _Dart_TypeDynamicPtr.asFunction<Object Function()>();
-
-  Object Dart_TypeVoid() {
-    return _Dart_TypeVoid();
-  }
-
-  late final _Dart_TypeVoidPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_TypeVoid');
-  late final _Dart_TypeVoid = _Dart_TypeVoidPtr.asFunction<Object Function()>();
-
-  Object Dart_TypeNever() {
-    return _Dart_TypeNever();
-  }
-
-  late final _Dart_TypeNeverPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_TypeNever');
-  late final _Dart_TypeNever =
-      _Dart_TypeNeverPtr.asFunction<Object Function()>();
-
-  /// Checks if the two objects are equal.
-  ///
-  /// The result of the comparison is returned through the 'equal'
-  /// parameter. The return value itself is used to indicate success or
-  /// failure, not equality.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param obj1 An object to be compared.
-  /// \param obj2 An object to be compared.
-  /// \param equal Returns the result of the equality comparison.
-  ///
-  /// \return A valid handle if no error occurs during the comparison.
-  Object Dart_ObjectEquals(
-    Object obj1,
-    Object obj2,
-    ffi.Pointer<ffi.Bool> equal,
-  ) {
-    return _Dart_ObjectEquals(
-      obj1,
-      obj2,
-      equal,
-    );
-  }
-
-  late final _Dart_ObjectEqualsPtr = _lookup<
+  late final _interactor_dart_payload_pool_createPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle,
-              ffi.Pointer<ffi.Bool>)>>('Dart_ObjectEquals');
-  late final _Dart_ObjectEquals = _Dart_ObjectEqualsPtr.asFunction<
-      Object Function(Object, Object, ffi.Pointer<ffi.Bool>)>();
+          ffi.Pointer<interactor_payloads_pool> Function(
+              ffi.Pointer<interactor_dart_t>,
+              ffi.Size)>>('interactor_dart_payload_pool_create');
+  late final _interactor_dart_payload_pool_create =
+      _interactor_dart_payload_pool_createPtr.asFunction<
+          ffi.Pointer<interactor_payloads_pool> Function(
+              ffi.Pointer<interactor_dart_t>, int)>();
 
-  /// Is this object an instance of some type?
-  ///
-  /// The result of the test is returned through the 'instanceof' parameter.
-  /// The return value itself is used to indicate success or failure.
-  ///
-  /// \param object An object.
-  /// \param type A type.
-  /// \param instanceof Return true if 'object' is an instance of type 'type'.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_ObjectIsType(
-    Object object,
-    Object type,
-    ffi.Pointer<ffi.Bool> instanceof,
+  int interactor_dart_payload_allocate(
+    ffi.Pointer<interactor_payloads_pool> pool,
   ) {
-    return _Dart_ObjectIsType(
-      object,
-      type,
-      instanceof,
+    return _interactor_dart_payload_allocate(
+      pool,
     );
   }
 
-  late final _Dart_ObjectIsTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle,
-              ffi.Pointer<ffi.Bool>)>>('Dart_ObjectIsType');
-  late final _Dart_ObjectIsType = _Dart_ObjectIsTypePtr.asFunction<
-      Object Function(Object, Object, ffi.Pointer<ffi.Bool>)>();
-
-  /// Query object type.
-  ///
-  /// \param object Some Object.
-  ///
-  /// \return true if Object is of the specified type.
-  bool Dart_IsInstance(
-    Object object,
-  ) {
-    return _Dart_IsInstance(
-      object,
-    );
-  }
-
-  late final _Dart_IsInstancePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsInstance');
-  late final _Dart_IsInstance =
-      _Dart_IsInstancePtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsNumber(
-    Object object,
-  ) {
-    return _Dart_IsNumber(
-      object,
-    );
-  }
-
-  late final _Dart_IsNumberPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsNumber');
-  late final _Dart_IsNumber =
-      _Dart_IsNumberPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsInteger(
-    Object object,
-  ) {
-    return _Dart_IsInteger(
-      object,
-    );
-  }
-
-  late final _Dart_IsIntegerPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsInteger');
-  late final _Dart_IsInteger =
-      _Dart_IsIntegerPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsDouble(
-    Object object,
-  ) {
-    return _Dart_IsDouble(
-      object,
-    );
-  }
-
-  late final _Dart_IsDoublePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsDouble');
-  late final _Dart_IsDouble =
-      _Dart_IsDoublePtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsBoolean(
-    Object object,
-  ) {
-    return _Dart_IsBoolean(
-      object,
-    );
-  }
-
-  late final _Dart_IsBooleanPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsBoolean');
-  late final _Dart_IsBoolean =
-      _Dart_IsBooleanPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsString(
-    Object object,
-  ) {
-    return _Dart_IsString(
-      object,
-    );
-  }
-
-  late final _Dart_IsStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsString');
-  late final _Dart_IsString =
-      _Dart_IsStringPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsStringLatin1(
-    Object object,
-  ) {
-    return _Dart_IsStringLatin1(
-      object,
-    );
-  }
-
-  late final _Dart_IsStringLatin1Ptr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsStringLatin1');
-  late final _Dart_IsStringLatin1 =
-      _Dart_IsStringLatin1Ptr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsExternalString(
-    Object object,
-  ) {
-    return _Dart_IsExternalString(
-      object,
-    );
-  }
-
-  late final _Dart_IsExternalStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsExternalString');
-  late final _Dart_IsExternalString =
-      _Dart_IsExternalStringPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsList(
-    Object object,
-  ) {
-    return _Dart_IsList(
-      object,
-    );
-  }
-
-  late final _Dart_IsListPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsList');
-  late final _Dart_IsList = _Dart_IsListPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsMap(
-    Object object,
-  ) {
-    return _Dart_IsMap(
-      object,
-    );
-  }
-
-  late final _Dart_IsMapPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsMap');
-  late final _Dart_IsMap = _Dart_IsMapPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsLibrary(
-    Object object,
-  ) {
-    return _Dart_IsLibrary(
-      object,
-    );
-  }
-
-  late final _Dart_IsLibraryPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsLibrary');
-  late final _Dart_IsLibrary =
-      _Dart_IsLibraryPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsType(
-    Object handle,
-  ) {
-    return _Dart_IsType(
-      handle,
-    );
-  }
-
-  late final _Dart_IsTypePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>('Dart_IsType');
-  late final _Dart_IsType = _Dart_IsTypePtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsFunction(
-    Object handle,
-  ) {
-    return _Dart_IsFunction(
-      handle,
-    );
-  }
-
-  late final _Dart_IsFunctionPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsFunction');
-  late final _Dart_IsFunction =
-      _Dart_IsFunctionPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsVariable(
-    Object handle,
-  ) {
-    return _Dart_IsVariable(
-      handle,
-    );
-  }
-
-  late final _Dart_IsVariablePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsVariable');
-  late final _Dart_IsVariable =
-      _Dart_IsVariablePtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsTypeVariable(
-    Object handle,
-  ) {
-    return _Dart_IsTypeVariable(
-      handle,
-    );
-  }
-
-  late final _Dart_IsTypeVariablePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsTypeVariable');
-  late final _Dart_IsTypeVariable =
-      _Dart_IsTypeVariablePtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsClosure(
-    Object object,
-  ) {
-    return _Dart_IsClosure(
-      object,
-    );
-  }
-
-  late final _Dart_IsClosurePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsClosure');
-  late final _Dart_IsClosure =
-      _Dart_IsClosurePtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsTypedData(
-    Object object,
-  ) {
-    return _Dart_IsTypedData(
-      object,
-    );
-  }
-
-  late final _Dart_IsTypedDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsTypedData');
-  late final _Dart_IsTypedData =
-      _Dart_IsTypedDataPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsByteBuffer(
-    Object object,
-  ) {
-    return _Dart_IsByteBuffer(
-      object,
-    );
-  }
-
-  late final _Dart_IsByteBufferPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsByteBuffer');
-  late final _Dart_IsByteBuffer =
-      _Dart_IsByteBufferPtr.asFunction<bool Function(Object)>();
-
-  bool Dart_IsFuture(
-    Object object,
-  ) {
-    return _Dart_IsFuture(
-      object,
-    );
-  }
-
-  late final _Dart_IsFuturePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsFuture');
-  late final _Dart_IsFuture =
-      _Dart_IsFuturePtr.asFunction<bool Function(Object)>();
-
-  /// Gets the type of a Dart language object.
-  ///
-  /// \param instance Some Dart object.
-  ///
-  /// \return If no error occurs, the type is returned. Otherwise an
-  /// error handle is returned.
-  Object Dart_InstanceGetType(
-    Object instance,
-  ) {
-    return _Dart_InstanceGetType(
-      instance,
-    );
-  }
-
-  late final _Dart_InstanceGetTypePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_InstanceGetType');
-  late final _Dart_InstanceGetType =
-      _Dart_InstanceGetTypePtr.asFunction<Object Function(Object)>();
-
-  /// Returns the name for the provided class type.
-  ///
-  /// \return A valid string handle if no error occurs during the
-  /// operation.
-  Object Dart_ClassName(
-    Object cls_type,
-  ) {
-    return _Dart_ClassName(
-      cls_type,
-    );
-  }
-
-  late final _Dart_ClassNamePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ClassName');
-  late final _Dart_ClassName =
-      _Dart_ClassNamePtr.asFunction<Object Function(Object)>();
-
-  /// Returns the name for the provided function or method.
-  ///
-  /// \return A valid string handle if no error occurs during the
-  /// operation.
-  Object Dart_FunctionName(
-    Object function,
-  ) {
-    return _Dart_FunctionName(
-      function,
-    );
-  }
-
-  late final _Dart_FunctionNamePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_FunctionName');
-  late final _Dart_FunctionName =
-      _Dart_FunctionNamePtr.asFunction<Object Function(Object)>();
-
-  /// Returns a handle to the owner of a function.
-  ///
-  /// The owner of an instance method or a static method is its defining
-  /// class. The owner of a top-level function is its defining
-  /// library. The owner of the function of a non-implicit closure is the
-  /// function of the method or closure that defines the non-implicit
-  /// closure.
-  ///
-  /// \return A valid handle to the owner of the function, or an error
-  /// handle if the argument is not a valid handle to a function.
-  Object Dart_FunctionOwner(
-    Object function,
-  ) {
-    return _Dart_FunctionOwner(
-      function,
-    );
-  }
-
-  late final _Dart_FunctionOwnerPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_FunctionOwner');
-  late final _Dart_FunctionOwner =
-      _Dart_FunctionOwnerPtr.asFunction<Object Function(Object)>();
-
-  /// Determines whether a function handle refers to a static function
-  /// of method.
-  ///
-  /// For the purposes of the embedding API, a top-level function is
-  /// implicitly declared static.
-  ///
-  /// \param function A handle to a function or method declaration.
-  /// \param is_static Returns whether the function or method is declared static.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_FunctionIsStatic(
-    Object function,
-    ffi.Pointer<ffi.Bool> is_static,
-  ) {
-    return _Dart_FunctionIsStatic(
-      function,
-      is_static,
-    );
-  }
-
-  late final _Dart_FunctionIsStaticPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_FunctionIsStatic');
-  late final _Dart_FunctionIsStatic = _Dart_FunctionIsStaticPtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  /// Is this object a closure resulting from a tear-off (closurized method)?
-  ///
-  /// Returns true for closures produced when an ordinary method is accessed
-  /// through a getter call. Returns false otherwise, in particular for closures
-  /// produced from local function declarations.
-  ///
-  /// \param object Some Object.
-  ///
-  /// \return true if Object is a tear-off.
-  bool Dart_IsTearOff(
-    Object object,
-  ) {
-    return _Dart_IsTearOff(
-      object,
-    );
-  }
-
-  late final _Dart_IsTearOffPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>(
-          'Dart_IsTearOff');
-  late final _Dart_IsTearOff =
-      _Dart_IsTearOffPtr.asFunction<bool Function(Object)>();
-
-  /// Retrieves the function of a closure.
-  ///
-  /// \return A handle to the function of the closure, or an error handle if the
-  /// argument is not a closure.
-  Object Dart_ClosureFunction(
-    Object closure,
-  ) {
-    return _Dart_ClosureFunction(
-      closure,
-    );
-  }
-
-  late final _Dart_ClosureFunctionPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ClosureFunction');
-  late final _Dart_ClosureFunction =
-      _Dart_ClosureFunctionPtr.asFunction<Object Function(Object)>();
-
-  /// Returns a handle to the library which contains class.
-  ///
-  /// \return A valid handle to the library with owns class, null if the class
-  /// has no library or an error handle if the argument is not a valid handle
-  /// to a class type.
-  Object Dart_ClassLibrary(
-    Object cls_type,
-  ) {
-    return _Dart_ClassLibrary(
-      cls_type,
-    );
-  }
-
-  late final _Dart_ClassLibraryPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ClassLibrary');
-  late final _Dart_ClassLibrary =
-      _Dart_ClassLibraryPtr.asFunction<Object Function(Object)>();
-
-  /// Does this Integer fit into a 64-bit signed integer?
-  ///
-  /// \param integer An integer.
-  /// \param fits Returns true if the integer fits into a 64-bit signed integer.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_IntegerFitsIntoInt64(
-    Object integer,
-    ffi.Pointer<ffi.Bool> fits,
-  ) {
-    return _Dart_IntegerFitsIntoInt64(
-      integer,
-      fits,
-    );
-  }
-
-  late final _Dart_IntegerFitsIntoInt64Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IntegerFitsIntoInt64');
-  late final _Dart_IntegerFitsIntoInt64 = _Dart_IntegerFitsIntoInt64Ptr
-      .asFunction<Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  /// Does this Integer fit into a 64-bit unsigned integer?
-  ///
-  /// \param integer An integer.
-  /// \param fits Returns true if the integer fits into a 64-bit unsigned integer.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_IntegerFitsIntoUint64(
-    Object integer,
-    ffi.Pointer<ffi.Bool> fits,
-  ) {
-    return _Dart_IntegerFitsIntoUint64(
-      integer,
-      fits,
-    );
-  }
-
-  late final _Dart_IntegerFitsIntoUint64Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle,
-              ffi.Pointer<ffi.Bool>)>>('Dart_IntegerFitsIntoUint64');
-  late final _Dart_IntegerFitsIntoUint64 = _Dart_IntegerFitsIntoUint64Ptr
-      .asFunction<Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  /// Returns an Integer with the provided value.
-  ///
-  /// \param value The value of the integer.
-  ///
-  /// \return The Integer object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewInteger(
-    int value,
-  ) {
-    return _Dart_NewInteger(
-      value,
-    );
-  }
-
-  late final _Dart_NewIntegerPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>(
-          'Dart_NewInteger');
-  late final _Dart_NewInteger =
-      _Dart_NewIntegerPtr.asFunction<Object Function(int)>();
-
-  /// Returns an Integer with the provided value.
-  ///
-  /// \param value The unsigned value of the integer.
-  ///
-  /// \return The Integer object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewIntegerFromUint64(
-    int value,
-  ) {
-    return _Dart_NewIntegerFromUint64(
-      value,
-    );
-  }
-
-  late final _Dart_NewIntegerFromUint64Ptr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Uint64)>>(
-          'Dart_NewIntegerFromUint64');
-  late final _Dart_NewIntegerFromUint64 =
-      _Dart_NewIntegerFromUint64Ptr.asFunction<Object Function(int)>();
-
-  /// Returns an Integer with the provided value.
-  ///
-  /// \param value The value of the integer represented as a C string
-  /// containing a hexadecimal number.
-  ///
-  /// \return The Integer object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewIntegerFromHexCString(
-    ffi.Pointer<ffi.Char> value,
-  ) {
-    return _Dart_NewIntegerFromHexCString(
-      value,
-    );
-  }
-
-  late final _Dart_NewIntegerFromHexCStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
-          'Dart_NewIntegerFromHexCString');
-  late final _Dart_NewIntegerFromHexCString = _Dart_NewIntegerFromHexCStringPtr
-      .asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
-
-  /// Gets the value of an Integer.
-  ///
-  /// The integer must fit into a 64-bit signed integer, otherwise an error occurs.
-  ///
-  /// \param integer An Integer.
-  /// \param value Returns the value of the Integer.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_IntegerToInt64(
-    Object integer,
-    ffi.Pointer<ffi.Int64> value,
-  ) {
-    return _Dart_IntegerToInt64(
-      integer,
-      value,
-    );
-  }
-
-  late final _Dart_IntegerToInt64Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Int64>)>>('Dart_IntegerToInt64');
-  late final _Dart_IntegerToInt64 = _Dart_IntegerToInt64Ptr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Int64>)>();
-
-  /// Gets the value of an Integer.
-  ///
-  /// The integer must fit into a 64-bit unsigned integer, otherwise an
-  /// error occurs.
-  ///
-  /// \param integer An Integer.
-  /// \param value Returns the value of the Integer.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_IntegerToUint64(
-    Object integer,
-    ffi.Pointer<ffi.Uint64> value,
-  ) {
-    return _Dart_IntegerToUint64(
-      integer,
-      value,
-    );
-  }
-
-  late final _Dart_IntegerToUint64Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Uint64>)>>('Dart_IntegerToUint64');
-  late final _Dart_IntegerToUint64 = _Dart_IntegerToUint64Ptr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Uint64>)>();
-
-  /// Gets the value of an integer as a hexadecimal C string.
-  ///
-  /// \param integer An Integer.
-  /// \param value Returns the value of the Integer as a hexadecimal C
-  /// string. This C string is scope allocated and is only valid until
-  /// the next call to Dart_ExitScope.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_IntegerToHexCString(
-    Object integer,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> value,
-  ) {
-    return _Dart_IntegerToHexCString(
-      integer,
-      value,
-    );
-  }
-
-  late final _Dart_IntegerToHexCStringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_IntegerToHexCString');
-  late final _Dart_IntegerToHexCString =
-      _Dart_IntegerToHexCStringPtr.asFunction<
-          Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Returns a Double with the provided value.
-  ///
-  /// \param value A double.
-  ///
-  /// \return The Double object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewDouble(
-    double value,
-  ) {
-    return _Dart_NewDouble(
-      value,
-    );
-  }
-
-  late final _Dart_NewDoublePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Double)>>(
-          'Dart_NewDouble');
-  late final _Dart_NewDouble =
-      _Dart_NewDoublePtr.asFunction<Object Function(double)>();
-
-  /// Gets the value of a Double
-  ///
-  /// \param double_obj A Double
-  /// \param value Returns the value of the Double.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_DoubleValue(
-    Object double_obj,
-    ffi.Pointer<ffi.Double> value,
-  ) {
-    return _Dart_DoubleValue(
-      double_obj,
-      value,
-    );
-  }
-
-  late final _Dart_DoubleValuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Double>)>>('Dart_DoubleValue');
-  late final _Dart_DoubleValue = _Dart_DoubleValuePtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Double>)>();
-
-  /// Returns a closure of static function 'function_name' in the class 'class_name'
-  /// in the exported namespace of specified 'library'.
-  ///
-  /// \param library Library object
-  /// \param cls_type Type object representing a Class
-  /// \param function_name Name of the static function in the class
-  ///
-  /// \return A valid Dart instance if no error occurs during the operation.
-  Object Dart_GetStaticMethodClosure(
-    Object library1,
-    Object cls_type,
-    Object function_name,
-  ) {
-    return _Dart_GetStaticMethodClosure(
-      library1,
-      cls_type,
-      function_name,
-    );
-  }
-
-  late final _Dart_GetStaticMethodClosurePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle,
-              ffi.Handle)>>('Dart_GetStaticMethodClosure');
-  late final _Dart_GetStaticMethodClosure = _Dart_GetStaticMethodClosurePtr
-      .asFunction<Object Function(Object, Object, Object)>();
-
-  /// Returns the True object.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \return A handle to the True object.
-  Object Dart_True() {
-    return _Dart_True();
-  }
-
-  late final _Dart_TruePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_True');
-  late final _Dart_True = _Dart_TruePtr.asFunction<Object Function()>();
-
-  /// Returns the False object.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \return A handle to the False object.
-  Object Dart_False() {
-    return _Dart_False();
-  }
-
-  late final _Dart_FalsePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_False');
-  late final _Dart_False = _Dart_FalsePtr.asFunction<Object Function()>();
-
-  /// Returns a Boolean with the provided value.
-  ///
-  /// \param value true or false.
-  ///
-  /// \return The Boolean object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewBoolean(
-    bool value,
-  ) {
-    return _Dart_NewBoolean(
-      value,
-    );
-  }
-
-  late final _Dart_NewBooleanPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>(
-          'Dart_NewBoolean');
-  late final _Dart_NewBoolean =
-      _Dart_NewBooleanPtr.asFunction<Object Function(bool)>();
-
-  /// Gets the value of a Boolean
-  ///
-  /// \param boolean_obj A Boolean
-  /// \param value Returns the value of the Boolean.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_BooleanValue(
-    Object boolean_obj,
-    ffi.Pointer<ffi.Bool> value,
-  ) {
-    return _Dart_BooleanValue(
-      boolean_obj,
-      value,
-    );
-  }
-
-  late final _Dart_BooleanValuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_BooleanValue');
-  late final _Dart_BooleanValue = _Dart_BooleanValuePtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  /// Gets the length of a String.
-  ///
-  /// \param str A String.
-  /// \param length Returns the length of the String.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_StringLength(
-    Object str,
-    ffi.Pointer<ffi.IntPtr> length,
-  ) {
-    return _Dart_StringLength(
-      str,
-      length,
-    );
-  }
-
-  late final _Dart_StringLengthPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>('Dart_StringLength');
-  late final _Dart_StringLength = _Dart_StringLengthPtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Returns a String built from the provided C string
-  /// (There is an implicit assumption that the C string passed in contains
-  /// UTF-8 encoded characters and '\0' is considered as a termination
-  /// character).
-  ///
-  /// \param str A C String
-  ///
-  /// \return The String object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewStringFromCString(
-    ffi.Pointer<ffi.Char> str,
-  ) {
-    return _Dart_NewStringFromCString(
-      str,
-    );
-  }
-
-  late final _Dart_NewStringFromCStringPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>(
-          'Dart_NewStringFromCString');
-  late final _Dart_NewStringFromCString = _Dart_NewStringFromCStringPtr
-      .asFunction<Object Function(ffi.Pointer<ffi.Char>)>();
-
-  /// Returns a String built from an array of UTF-8 encoded characters.
-  ///
-  /// \param utf8_array An array of UTF-8 encoded characters.
-  /// \param length The length of the codepoints array.
-  ///
-  /// \return The String object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewStringFromUTF8(
-    ffi.Pointer<ffi.Uint8> utf8_array,
-    int length,
-  ) {
-    return _Dart_NewStringFromUTF8(
-      utf8_array,
-      length,
-    );
-  }
-
-  late final _Dart_NewStringFromUTF8Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>('Dart_NewStringFromUTF8');
-  late final _Dart_NewStringFromUTF8 = _Dart_NewStringFromUTF8Ptr.asFunction<
-      Object Function(ffi.Pointer<ffi.Uint8>, int)>();
-
-  /// Returns a String built from an array of UTF-16 encoded characters.
-  ///
-  /// \param utf16_array An array of UTF-16 encoded characters.
-  /// \param length The length of the codepoints array.
-  ///
-  /// \return The String object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewStringFromUTF16(
-    ffi.Pointer<ffi.Uint16> utf16_array,
-    int length,
-  ) {
-    return _Dart_NewStringFromUTF16(
-      utf16_array,
-      length,
-    );
-  }
-
-  late final _Dart_NewStringFromUTF16Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Uint16>, ffi.IntPtr)>>('Dart_NewStringFromUTF16');
-  late final _Dart_NewStringFromUTF16 = _Dart_NewStringFromUTF16Ptr.asFunction<
-      Object Function(ffi.Pointer<ffi.Uint16>, int)>();
-
-  /// Returns a String built from an array of UTF-32 encoded characters.
-  ///
-  /// \param utf32_array An array of UTF-32 encoded characters.
-  /// \param length The length of the codepoints array.
-  ///
-  /// \return The String object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewStringFromUTF32(
-    ffi.Pointer<ffi.Int32> utf32_array,
-    int length,
-  ) {
-    return _Dart_NewStringFromUTF32(
-      utf32_array,
-      length,
-    );
-  }
-
-  late final _Dart_NewStringFromUTF32Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Int32>, ffi.IntPtr)>>('Dart_NewStringFromUTF32');
-  late final _Dart_NewStringFromUTF32 = _Dart_NewStringFromUTF32Ptr.asFunction<
-      Object Function(ffi.Pointer<ffi.Int32>, int)>();
-
-  /// Returns a String which references an external array of
-  /// Latin-1 (ISO-8859-1) encoded characters.
-  ///
-  /// \param latin1_array Array of Latin-1 encoded characters. This must not move.
-  /// \param length The length of the characters array.
-  /// \param peer An external pointer to associate with this string.
-  /// \param external_allocation_size The number of externally allocated
-  /// bytes for peer. Used to inform the garbage collector.
-  /// \param callback A callback to be called when this string is finalized.
-  ///
-  /// \return The String object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewExternalLatin1String(
-    ffi.Pointer<ffi.Uint8> latin1_array,
-    int length,
-    ffi.Pointer<ffi.Void> peer,
-    int external_allocation_size,
-    Dart_HandleFinalizer callback,
-  ) {
-    return _Dart_NewExternalLatin1String(
-      latin1_array,
-      length,
-      peer,
-      external_allocation_size,
-      callback,
-    );
-  }
-
-  late final _Dart_NewExternalLatin1StringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>>('Dart_NewExternalLatin1String');
-  late final _Dart_NewExternalLatin1String =
-      _Dart_NewExternalLatin1StringPtr.asFunction<
-          Object Function(ffi.Pointer<ffi.Uint8>, int, ffi.Pointer<ffi.Void>,
-              int, Dart_HandleFinalizer)>();
-
-  /// Returns a String which references an external array of UTF-16 encoded
-  /// characters.
-  ///
-  /// \param utf16_array An array of UTF-16 encoded characters. This must not move.
-  /// \param length The length of the characters array.
-  /// \param peer An external pointer to associate with this string.
-  /// \param external_allocation_size The number of externally allocated
-  /// bytes for peer. Used to inform the garbage collector.
-  /// \param callback A callback to be called when this string is finalized.
-  ///
-  /// \return The String object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewExternalUTF16String(
-    ffi.Pointer<ffi.Uint16> utf16_array,
-    int length,
-    ffi.Pointer<ffi.Void> peer,
-    int external_allocation_size,
-    Dart_HandleFinalizer callback,
-  ) {
-    return _Dart_NewExternalUTF16String(
-      utf16_array,
-      length,
-      peer,
-      external_allocation_size,
-      callback,
-    );
-  }
-
-  late final _Dart_NewExternalUTF16StringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Uint16>,
-              ffi.IntPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>>('Dart_NewExternalUTF16String');
-  late final _Dart_NewExternalUTF16String =
-      _Dart_NewExternalUTF16StringPtr.asFunction<
-          Object Function(ffi.Pointer<ffi.Uint16>, int, ffi.Pointer<ffi.Void>,
-              int, Dart_HandleFinalizer)>();
-
-  /// Gets the C string representation of a String.
-  /// (It is a sequence of UTF-8 encoded values with a '\0' termination.)
-  ///
-  /// \param str A string.
-  /// \param cstr Returns the String represented as a C string.
-  /// This C string is scope allocated and is only valid until
-  /// the next call to Dart_ExitScope.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_StringToCString(
-    Object str,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> cstr,
-  ) {
-    return _Dart_StringToCString(
-      str,
-      cstr,
-    );
-  }
-
-  late final _Dart_StringToCStringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('Dart_StringToCString');
-  late final _Dart_StringToCString = _Dart_StringToCStringPtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Gets a UTF-8 encoded representation of a String.
-  ///
-  /// Any unpaired surrogate code points in the string will be converted as
-  /// replacement characters (U+FFFD, 0xEF 0xBF 0xBD in UTF-8). If you need
-  /// to preserve unpaired surrogates, use the Dart_StringToUTF16 function.
-  ///
-  /// \param str A string.
-  /// \param utf8_array Returns the String represented as UTF-8 code
-  /// units.  This UTF-8 array is scope allocated and is only valid
-  /// until the next call to Dart_ExitScope.
-  /// \param length Used to return the length of the array which was
-  /// actually used.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_StringToUTF8(
-    Object str,
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> utf8_array,
-    ffi.Pointer<ffi.IntPtr> length,
-  ) {
-    return _Dart_StringToUTF8(
-      str,
-      utf8_array,
-      length,
-    );
-  }
-
-  late final _Dart_StringToUTF8Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_StringToUTF8');
-  late final _Dart_StringToUTF8 = _Dart_StringToUTF8Ptr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-          ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Gets the data corresponding to the string object. This function returns
-  /// the data only for Latin-1 (ISO-8859-1) string objects. For all other
-  /// string objects it returns an error.
-  ///
-  /// \param str A string.
-  /// \param latin1_array An array allocated by the caller, used to return
-  /// the string data.
-  /// \param length Used to pass in the length of the provided array.
-  /// Used to return the length of the array which was actually used.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_StringToLatin1(
-    Object str,
-    ffi.Pointer<ffi.Uint8> latin1_array,
-    ffi.Pointer<ffi.IntPtr> length,
-  ) {
-    return _Dart_StringToLatin1(
-      str,
-      latin1_array,
-      length,
-    );
-  }
-
-  late final _Dart_StringToLatin1Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_StringToLatin1');
-  late final _Dart_StringToLatin1 = _Dart_StringToLatin1Ptr.asFunction<
-      Object Function(
-          Object, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Gets the UTF-16 encoded representation of a string.
-  ///
-  /// \param str A string.
-  /// \param utf16_array An array allocated by the caller, used to return
-  /// the array of UTF-16 encoded characters.
-  /// \param length Used to pass in the length of the provided array.
-  /// Used to return the length of the array which was actually used.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_StringToUTF16(
-    Object str,
-    ffi.Pointer<ffi.Uint16> utf16_array,
-    ffi.Pointer<ffi.IntPtr> length,
-  ) {
-    return _Dart_StringToUTF16(
-      str,
-      utf16_array,
-      length,
-    );
-  }
-
-  late final _Dart_StringToUTF16Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint16>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_StringToUTF16');
-  late final _Dart_StringToUTF16 = _Dart_StringToUTF16Ptr.asFunction<
-      Object Function(
-          Object, ffi.Pointer<ffi.Uint16>, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Gets the storage size in bytes of a String.
-  ///
-  /// \param str A String.
-  /// \param size Returns the storage size in bytes of the String.
-  /// This is the size in bytes needed to store the String.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_StringStorageSize(
-    Object str,
-    ffi.Pointer<ffi.IntPtr> size,
-  ) {
-    return _Dart_StringStorageSize(
-      str,
-      size,
-    );
-  }
-
-  late final _Dart_StringStorageSizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>('Dart_StringStorageSize');
-  late final _Dart_StringStorageSize = _Dart_StringStorageSizePtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Retrieves some properties associated with a String.
-  /// Properties retrieved are:
-  /// - character size of the string (one or two byte)
-  /// - length of the string
-  /// - peer pointer of string if it is an external string.
-  /// \param str A String.
-  /// \param char_size Returns the character size of the String.
-  /// \param str_len Returns the length of the String.
-  /// \param peer Returns the peer pointer associated with the String or 0 if
-  /// there is no peer pointer for it.
-  /// \return Success if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_StringGetProperties(
-    Object str,
-    ffi.Pointer<ffi.IntPtr> char_size,
-    ffi.Pointer<ffi.IntPtr> str_len,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> peer,
-  ) {
-    return _Dart_StringGetProperties(
-      str,
-      char_size,
-      str_len,
-      peer,
-    );
-  }
-
-  late final _Dart_StringGetPropertiesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('Dart_StringGetProperties');
-  late final _Dart_StringGetProperties =
-      _Dart_StringGetPropertiesPtr.asFunction<
-          Object Function(Object, ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.IntPtr>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// Returns a List<dynamic> of the desired length.
-  ///
-  /// \param length The length of the list.
-  ///
-  /// \return The List object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewList(
-    int length,
-  ) {
-    return _Dart_NewList(
-      length,
-    );
-  }
-
-  late final _Dart_NewListPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>(
-          'Dart_NewList');
-  late final _Dart_NewList =
-      _Dart_NewListPtr.asFunction<Object Function(int)>();
-
-  /// Returns a List of the desired length with the desired legacy element type.
-  ///
-  /// \param element_type_id The type of elements of the list.
-  /// \param length The length of the list.
-  ///
-  /// \return The List object if no error occurs. Otherwise returns an error
-  /// handle.
-  Object Dart_NewListOf(
-    int element_type_id,
-    int length,
-  ) {
-    return _Dart_NewListOf(
-      element_type_id,
-      length,
-    );
-  }
-
-  late final _Dart_NewListOfPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>(
-          'Dart_NewListOf');
-  late final _Dart_NewListOf =
-      _Dart_NewListOfPtr.asFunction<Object Function(int, int)>();
-
-  /// Returns a List of the desired length with the desired element type.
-  ///
-  /// \param element_type Handle to a nullable type object. E.g., from
-  /// Dart_GetType or Dart_GetNullableType.
-  ///
-  /// \param length The length of the list.
-  ///
-  /// \return The List object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewListOfType(
-    Object element_type,
-    int length,
-  ) {
-    return _Dart_NewListOfType(
-      element_type,
-      length,
-    );
-  }
-
-  late final _Dart_NewListOfTypePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>(
-          'Dart_NewListOfType');
-  late final _Dart_NewListOfType =
-      _Dart_NewListOfTypePtr.asFunction<Object Function(Object, int)>();
-
-  /// Returns a List of the desired length with the desired element type, filled
-  /// with the provided object.
-  ///
-  /// \param element_type Handle to a type object. E.g., from Dart_GetType.
-  ///
-  /// \param fill_object Handle to an object of type 'element_type' that will be
-  /// used to populate the list. This parameter can only be Dart_Null() if the
-  /// length of the list is 0 or 'element_type' is a nullable type.
-  ///
-  /// \param length The length of the list.
-  ///
-  /// \return The List object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewListOfTypeFilled(
-    Object element_type,
-    Object fill_object,
-    int length,
-  ) {
-    return _Dart_NewListOfTypeFilled(
-      element_type,
-      fill_object,
-      length,
-    );
-  }
-
-  late final _Dart_NewListOfTypeFilledPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Handle, ffi.IntPtr)>>('Dart_NewListOfTypeFilled');
-  late final _Dart_NewListOfTypeFilled = _Dart_NewListOfTypeFilledPtr
-      .asFunction<Object Function(Object, Object, int)>();
-
-  /// Gets the length of a List.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param list A List.
-  /// \param length Returns the length of the List.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_ListLength(
-    Object list,
-    ffi.Pointer<ffi.IntPtr> length,
-  ) {
-    return _Dart_ListLength(
-      list,
-      length,
-    );
-  }
-
-  late final _Dart_ListLengthPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>('Dart_ListLength');
-  late final _Dart_ListLength = _Dart_ListLengthPtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Gets the Object at some index of a List.
-  ///
-  /// If the index is out of bounds, an error occurs.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param list A List.
-  /// \param index A valid index into the List.
-  ///
-  /// \return The Object in the List at the specified index if no error
-  /// occurs. Otherwise returns an error handle.
-  Object Dart_ListGetAt(
-    Object list,
-    int index,
-  ) {
-    return _Dart_ListGetAt(
-      list,
-      index,
-    );
-  }
-
-  late final _Dart_ListGetAtPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>(
-          'Dart_ListGetAt');
-  late final _Dart_ListGetAt =
-      _Dart_ListGetAtPtr.asFunction<Object Function(Object, int)>();
-
-  /// Gets a range of Objects from a List.
-  ///
-  /// If any of the requested index values are out of bounds, an error occurs.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param list A List.
-  /// \param offset The offset of the first item to get.
-  /// \param length The number of items to get.
-  /// \param result A pointer to fill with the objects.
-  ///
-  /// \return Success if no error occurs during the operation.
-  Object Dart_ListGetRange(
-    Object list,
-    int offset,
-    int length,
-    ffi.Pointer<ffi.Handle> result,
-  ) {
-    return _Dart_ListGetRange(
-      list,
-      offset,
-      length,
-      result,
-    );
-  }
-
-  late final _Dart_ListGetRangePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.IntPtr,
-              ffi.Pointer<ffi.Handle>)>>('Dart_ListGetRange');
-  late final _Dart_ListGetRange = _Dart_ListGetRangePtr.asFunction<
-      Object Function(Object, int, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Sets the Object at some index of a List.
-  ///
-  /// If the index is out of bounds, an error occurs.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param list A List.
-  /// \param index A valid index into the List.
-  /// \param value The Object to put in the List.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_ListSetAt(
-    Object list,
-    int index,
-    Object value,
-  ) {
-    return _Dart_ListSetAt(
-      list,
-      index,
-      value,
-    );
-  }
-
-  late final _Dart_ListSetAtPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.IntPtr, ffi.Handle)>>('Dart_ListSetAt');
-  late final _Dart_ListSetAt =
-      _Dart_ListSetAtPtr.asFunction<Object Function(Object, int, Object)>();
-
-  /// May generate an unhandled exception error.
-  Object Dart_ListGetAsBytes(
-    Object list,
-    int offset,
-    ffi.Pointer<ffi.Uint8> native_array,
-    int length,
-  ) {
-    return _Dart_ListGetAsBytes(
-      list,
-      offset,
-      native_array,
-      length,
-    );
-  }
-
-  late final _Dart_ListGetAsBytesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>>('Dart_ListGetAsBytes');
-  late final _Dart_ListGetAsBytes = _Dart_ListGetAsBytesPtr.asFunction<
-      Object Function(Object, int, ffi.Pointer<ffi.Uint8>, int)>();
-
-  /// May generate an unhandled exception error.
-  Object Dart_ListSetAsBytes(
-    Object list,
-    int offset,
-    ffi.Pointer<ffi.Uint8> native_array,
-    int length,
-  ) {
-    return _Dart_ListSetAsBytes(
-      list,
-      offset,
-      native_array,
-      length,
-    );
-  }
-
-  late final _Dart_ListSetAsBytesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>>('Dart_ListSetAsBytes');
-  late final _Dart_ListSetAsBytes = _Dart_ListSetAsBytesPtr.asFunction<
-      Object Function(Object, int, ffi.Pointer<ffi.Uint8>, int)>();
-
-  /// Gets the Object at some key of a Map.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param map A Map.
-  /// \param key An Object.
-  ///
-  /// \return The value in the map at the specified key, null if the map does not
-  /// contain the key, or an error handle.
-  Object Dart_MapGetAt(
-    Object map,
-    Object key,
-  ) {
-    return _Dart_MapGetAt(
-      map,
-      key,
-    );
-  }
-
-  late final _Dart_MapGetAtPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_MapGetAt');
-  late final _Dart_MapGetAt =
-      _Dart_MapGetAtPtr.asFunction<Object Function(Object, Object)>();
-
-  /// Returns whether the Map contains a given key.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param map A Map.
-  ///
-  /// \return A handle on a boolean indicating whether map contains the key.
-  /// Otherwise returns an error handle.
-  Object Dart_MapContainsKey(
-    Object map,
-    Object key,
-  ) {
-    return _Dart_MapContainsKey(
-      map,
-      key,
-    );
-  }
-
-  late final _Dart_MapContainsKeyPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_MapContainsKey');
-  late final _Dart_MapContainsKey =
-      _Dart_MapContainsKeyPtr.asFunction<Object Function(Object, Object)>();
-
-  /// Gets the list of keys of a Map.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param map A Map.
-  ///
-  /// \return The list of key Objects if no error occurs. Otherwise returns an
-  /// error handle.
-  Object Dart_MapKeys(
-    Object map,
-  ) {
-    return _Dart_MapKeys(
-      map,
-    );
-  }
-
-  late final _Dart_MapKeysPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_MapKeys');
-  late final _Dart_MapKeys =
-      _Dart_MapKeysPtr.asFunction<Object Function(Object)>();
-
-  /// Return type if this object is a TypedData object.
-  ///
-  /// \return kInvalid if the object is not a TypedData object or the appropriate
-  /// Dart_TypedData_Type.
-  int Dart_GetTypeOfTypedData(
-    Object object,
-  ) {
-    return _Dart_GetTypeOfTypedData(
-      object,
-    );
-  }
-
-  late final _Dart_GetTypeOfTypedDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>(
-          'Dart_GetTypeOfTypedData');
-  late final _Dart_GetTypeOfTypedData =
-      _Dart_GetTypeOfTypedDataPtr.asFunction<int Function(Object)>();
-
-  /// Return type if this object is an external TypedData object.
-  ///
-  /// \return kInvalid if the object is not an external TypedData object or
-  /// the appropriate Dart_TypedData_Type.
-  int Dart_GetTypeOfExternalTypedData(
-    Object object,
-  ) {
-    return _Dart_GetTypeOfExternalTypedData(
-      object,
-    );
-  }
-
-  late final _Dart_GetTypeOfExternalTypedDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>(
-          'Dart_GetTypeOfExternalTypedData');
-  late final _Dart_GetTypeOfExternalTypedData =
-      _Dart_GetTypeOfExternalTypedDataPtr.asFunction<int Function(Object)>();
-
-  /// Returns a TypedData object of the desired length and type.
-  ///
-  /// \param type The type of the TypedData object.
-  /// \param length The length of the TypedData object (length in type units).
-  ///
-  /// \return The TypedData object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewTypedData(
-    int type,
-    int length,
-  ) {
-    return _Dart_NewTypedData(
-      type,
-      length,
-    );
-  }
-
-  late final _Dart_NewTypedDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>(
-          'Dart_NewTypedData');
-  late final _Dart_NewTypedData =
-      _Dart_NewTypedDataPtr.asFunction<Object Function(int, int)>();
-
-  /// Returns a TypedData object which references an external data array.
-  ///
-  /// \param type The type of the data array.
-  /// \param data A data array. This array must not move.
-  /// \param length The length of the data array (length in type units).
-  ///
-  /// \return The TypedData object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewExternalTypedData(
-    int type,
-    ffi.Pointer<ffi.Void> data,
-    int length,
-  ) {
-    return _Dart_NewExternalTypedData(
-      type,
-      data,
-      length,
-    );
-  }
-
-  late final _Dart_NewExternalTypedDataPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>,
-              ffi.IntPtr)>>('Dart_NewExternalTypedData');
-  late final _Dart_NewExternalTypedData = _Dart_NewExternalTypedDataPtr
-      .asFunction<Object Function(int, ffi.Pointer<ffi.Void>, int)>();
-
-  /// Returns a TypedData object which references an external data array.
-  ///
-  /// \param type The type of the data array.
-  /// \param data A data array. This array must not move.
-  /// \param length The length of the data array (length in type units).
-  /// \param peer A pointer to a native object or NULL.  This value is
-  /// provided to callback when it is invoked.
-  /// \param external_allocation_size The number of externally allocated
-  /// bytes for peer. Used to inform the garbage collector.
-  /// \param callback A function pointer that will be invoked sometime
-  /// after the object is garbage collected, unless the handle has been deleted.
-  /// A valid callback needs to be specified it cannot be NULL.
-  ///
-  /// \return The TypedData object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewExternalTypedDataWithFinalizer(
-    int type,
-    ffi.Pointer<ffi.Void> data,
-    int length,
-    ffi.Pointer<ffi.Void> peer,
-    int external_allocation_size,
-    Dart_HandleFinalizer callback,
-  ) {
-    return _Dart_NewExternalTypedDataWithFinalizer(
-      type,
-      data,
-      length,
-      peer,
-      external_allocation_size,
-      callback,
-    );
-  }
-
-  late final _Dart_NewExternalTypedDataWithFinalizerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Int32,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>>('Dart_NewExternalTypedDataWithFinalizer');
-  late final _Dart_NewExternalTypedDataWithFinalizer =
-      _Dart_NewExternalTypedDataWithFinalizerPtr.asFunction<
-          Object Function(int, ffi.Pointer<ffi.Void>, int,
-              ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
-
-  Object Dart_NewUnmodifiableExternalTypedDataWithFinalizer(
-    int type,
-    ffi.Pointer<ffi.Void> data,
-    int length,
-    ffi.Pointer<ffi.Void> peer,
-    int external_allocation_size,
-    Dart_HandleFinalizer callback,
-  ) {
-    return _Dart_NewUnmodifiableExternalTypedDataWithFinalizer(
-      type,
-      data,
-      length,
-      peer,
-      external_allocation_size,
-      callback,
-    );
-  }
-
-  late final _Dart_NewUnmodifiableExternalTypedDataWithFinalizerPtr = _lookup<
+  late final _interactor_dart_payload_allocatePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr,
-                  ffi.Pointer<ffi.Void>, ffi.IntPtr, Dart_HandleFinalizer)>>(
-      'Dart_NewUnmodifiableExternalTypedDataWithFinalizer');
-  late final _Dart_NewUnmodifiableExternalTypedDataWithFinalizer =
-      _Dart_NewUnmodifiableExternalTypedDataWithFinalizerPtr.asFunction<
-          Object Function(int, ffi.Pointer<ffi.Void>, int,
-              ffi.Pointer<ffi.Void>, int, Dart_HandleFinalizer)>();
+              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>(
+      'interactor_dart_payload_allocate');
+  late final _interactor_dart_payload_allocate =
+      _interactor_dart_payload_allocatePtr
+          .asFunction<int Function(ffi.Pointer<interactor_payloads_pool>)>();
 
-  /// Returns a ByteBuffer object for the typed data.
-  ///
-  /// \param typed_data The TypedData object.
-  ///
-  /// \return The ByteBuffer object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_NewByteBuffer(
-    Object typed_data,
+  void interactor_dart_payload_free(
+    ffi.Pointer<interactor_payloads_pool> pool,
+    int pointer,
   ) {
-    return _Dart_NewByteBuffer(
-      typed_data,
+    return _interactor_dart_payload_free(
+      pool,
+      pointer,
     );
   }
 
-  late final _Dart_NewByteBufferPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_NewByteBuffer');
-  late final _Dart_NewByteBuffer =
-      _Dart_NewByteBufferPtr.asFunction<Object Function(Object)>();
-
-  /// Acquires access to the internal data address of a TypedData object.
-  ///
-  /// \param object The typed data object whose internal data address is to
-  /// be accessed.
-  /// \param type The type of the object is returned here.
-  /// \param data The internal data address is returned here.
-  /// \param len Size of the typed array is returned here.
-  ///
-  /// Notes:
-  /// When the internal address of the object is acquired any calls to a
-  /// Dart API function that could potentially allocate an object or run
-  /// any Dart code will return an error.
-  ///
-  /// Any Dart API functions for accessing the data should not be called
-  /// before the corresponding release. In particular, the object should
-  /// not be acquired again before its release. This leads to undefined
-  /// behavior.
-  ///
-  /// \return Success if the internal data address is acquired successfully.
-  /// Otherwise, returns an error handle.
-  Object Dart_TypedDataAcquireData(
-    Object object,
-    ffi.Pointer<ffi.Int32> type,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> data,
-    ffi.Pointer<ffi.IntPtr> len,
-  ) {
-    return _Dart_TypedDataAcquireData(
-      object,
-      type,
-      data,
-      len,
-    );
-  }
-
-  late final _Dart_TypedDataAcquireDataPtr = _lookup<
+  late final _interactor_dart_payload_freePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle,
-              ffi.Pointer<ffi.Int32>,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_TypedDataAcquireData');
-  late final _Dart_TypedDataAcquireData =
-      _Dart_TypedDataAcquireDataPtr.asFunction<
-          Object Function(Object, ffi.Pointer<ffi.Int32>,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.IntPtr>)>();
+          ffi.Void Function(ffi.Pointer<interactor_payloads_pool>,
+              ffi.IntPtr)>>('interactor_dart_payload_free');
+  late final _interactor_dart_payload_free = _interactor_dart_payload_freePtr
+      .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>, int)>();
 
-  /// Releases access to the internal data address that was acquired earlier using
-  /// Dart_TypedDataAcquireData.
-  ///
-  /// \param object The typed data object whose internal data address is to be
-  /// released.
-  ///
-  /// \return Success if the internal data address is released successfully.
-  /// Otherwise, returns an error handle.
-  Object Dart_TypedDataReleaseData(
-    Object object,
+  void interactor_dart_payload_pool_destroy(
+    ffi.Pointer<interactor_payloads_pool> pool,
   ) {
-    return _Dart_TypedDataReleaseData(
-      object,
+    return _interactor_dart_payload_pool_destroy(
+      pool,
     );
   }
 
-  late final _Dart_TypedDataReleaseDataPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_TypedDataReleaseData');
-  late final _Dart_TypedDataReleaseData =
-      _Dart_TypedDataReleaseDataPtr.asFunction<Object Function(Object)>();
-
-  /// Returns the TypedData object associated with the ByteBuffer object.
-  ///
-  /// \param byte_buffer The ByteBuffer object.
-  ///
-  /// \return The TypedData object if no error occurs. Otherwise returns
-  /// an error handle.
-  Object Dart_GetDataFromByteBuffer(
-    Object byte_buffer,
-  ) {
-    return _Dart_GetDataFromByteBuffer(
-      byte_buffer,
-    );
-  }
-
-  late final _Dart_GetDataFromByteBufferPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_GetDataFromByteBuffer');
-  late final _Dart_GetDataFromByteBuffer =
-      _Dart_GetDataFromByteBufferPtr.asFunction<Object Function(Object)>();
-
-  /// Invokes a constructor, creating a new object.
-  ///
-  /// This function allows hidden constructors (constructors with leading
-  /// underscores) to be called.
-  ///
-  /// \param type Type of object to be constructed.
-  /// \param constructor_name The name of the constructor to invoke.  Use
-  /// Dart_Null() or Dart_EmptyString() to invoke the unnamed constructor.
-  /// This name should not include the name of the class.
-  /// \param number_of_arguments Size of the arguments array.
-  /// \param arguments An array of arguments to the constructor.
-  ///
-  /// \return If the constructor is called and completes successfully,
-  /// then the new object. If an error occurs during execution, then an
-  /// error handle is returned.
-  Object Dart_New(
-    Object type,
-    Object constructor_name,
-    int number_of_arguments,
-    ffi.Pointer<ffi.Handle> arguments,
-  ) {
-    return _Dart_New(
-      type,
-      constructor_name,
-      number_of_arguments,
-      arguments,
-    );
-  }
-
-  late final _Dart_NewPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Int,
-              ffi.Pointer<ffi.Handle>)>>('Dart_New');
-  late final _Dart_New = _Dart_NewPtr.asFunction<
-      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Allocate a new object without invoking a constructor.
-  ///
-  /// \param type The type of an object to be allocated.
-  ///
-  /// \return The new object. If an error occurs during execution, then an
-  /// error handle is returned.
-  Object Dart_Allocate(
-    Object type,
-  ) {
-    return _Dart_Allocate(
-      type,
-    );
-  }
-
-  late final _Dart_AllocatePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_Allocate');
-  late final _Dart_Allocate =
-      _Dart_AllocatePtr.asFunction<Object Function(Object)>();
-
-  /// Allocate a new object without invoking a constructor, and sets specified
-  /// native fields.
-  ///
-  /// \param type The type of an object to be allocated.
-  /// \param num_native_fields The number of native fields to set.
-  /// \param native_fields An array containing the value of native fields.
-  ///
-  /// \return The new object. If an error occurs during execution, then an
-  /// error handle is returned.
-  Object Dart_AllocateWithNativeFields(
-    Object type,
-    int num_native_fields,
-    ffi.Pointer<ffi.IntPtr> native_fields,
-  ) {
-    return _Dart_AllocateWithNativeFields(
-      type,
-      num_native_fields,
-      native_fields,
-    );
-  }
-
-  late final _Dart_AllocateWithNativeFieldsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.IntPtr,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_AllocateWithNativeFields');
-  late final _Dart_AllocateWithNativeFields = _Dart_AllocateWithNativeFieldsPtr
-      .asFunction<Object Function(Object, int, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Invokes a method or function.
-  ///
-  /// The 'target' parameter may be an object, type, or library.  If
-  /// 'target' is an object, then this function will invoke an instance
-  /// method.  If 'target' is a type, then this function will invoke a
-  /// static method.  If 'target' is a library, then this function will
-  /// invoke a top-level function from that library.
-  /// NOTE: This API call cannot be used to invoke methods of a type object.
-  ///
-  /// This function ignores visibility (leading underscores in names).
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param target An object, type, or library.
-  /// \param name The name of the function or method to invoke.
-  /// \param number_of_arguments Size of the arguments array.
-  /// \param arguments An array of arguments to the function.
-  ///
-  /// \return If the function or method is called and completes
-  /// successfully, then the return value is returned. If an error
-  /// occurs during execution, then an error handle is returned.
-  Object Dart_Invoke(
-    Object target,
-    Object name,
-    int number_of_arguments,
-    ffi.Pointer<ffi.Handle> arguments,
-  ) {
-    return _Dart_Invoke(
-      target,
-      name,
-      number_of_arguments,
-      arguments,
-    );
-  }
-
-  late final _Dart_InvokePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Int,
-              ffi.Pointer<ffi.Handle>)>>('Dart_Invoke');
-  late final _Dart_Invoke = _Dart_InvokePtr.asFunction<
-      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Invokes a Closure with the given arguments.
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \return If no error occurs during execution, then the result of
-  /// invoking the closure is returned. If an error occurs during
-  /// execution, then an error handle is returned.
-  Object Dart_InvokeClosure(
-    Object closure,
-    int number_of_arguments,
-    ffi.Pointer<ffi.Handle> arguments,
-  ) {
-    return _Dart_InvokeClosure(
-      closure,
-      number_of_arguments,
-      arguments,
-    );
-  }
-
-  late final _Dart_InvokeClosurePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Int,
-              ffi.Pointer<ffi.Handle>)>>('Dart_InvokeClosure');
-  late final _Dart_InvokeClosure = _Dart_InvokeClosurePtr.asFunction<
-      Object Function(Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Invokes a Generative Constructor on an object that was previously
-  /// allocated using Dart_Allocate/Dart_AllocateWithNativeFields.
-  ///
-  /// The 'object' parameter must be an object.
-  ///
-  /// This function ignores visibility (leading underscores in names).
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param object An object.
-  /// \param name The name of the constructor to invoke.
-  /// Use Dart_Null() or Dart_EmptyString() to invoke the unnamed constructor.
-  /// \param number_of_arguments Size of the arguments array.
-  /// \param arguments An array of arguments to the function.
-  ///
-  /// \return If the constructor is called and completes
-  /// successfully, then the object is returned. If an error
-  /// occurs during execution, then an error handle is returned.
-  Object Dart_InvokeConstructor(
-    Object object,
-    Object name,
-    int number_of_arguments,
-    ffi.Pointer<ffi.Handle> arguments,
-  ) {
-    return _Dart_InvokeConstructor(
-      object,
-      name,
-      number_of_arguments,
-      arguments,
-    );
-  }
-
-  late final _Dart_InvokeConstructorPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Int,
-              ffi.Pointer<ffi.Handle>)>>('Dart_InvokeConstructor');
-  late final _Dart_InvokeConstructor = _Dart_InvokeConstructorPtr.asFunction<
-      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Gets the value of a field.
-  ///
-  /// The 'container' parameter may be an object, type, or library.  If
-  /// 'container' is an object, then this function will access an
-  /// instance field.  If 'container' is a type, then this function will
-  /// access a static field.  If 'container' is a library, then this
-  /// function will access a top-level variable.
-  /// NOTE: This API call cannot be used to access fields of a type object.
-  ///
-  /// This function ignores field visibility (leading underscores in names).
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param container An object, type, or library.
-  /// \param name A field name.
-  ///
-  /// \return If no error occurs, then the value of the field is
-  /// returned. Otherwise an error handle is returned.
-  Object Dart_GetField(
-    Object container,
-    Object name,
-  ) {
-    return _Dart_GetField(
-      container,
-      name,
-    );
-  }
-
-  late final _Dart_GetFieldPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_GetField');
-  late final _Dart_GetField =
-      _Dart_GetFieldPtr.asFunction<Object Function(Object, Object)>();
-
-  /// Sets the value of a field.
-  ///
-  /// The 'container' parameter may actually be an object, type, or
-  /// library.  If 'container' is an object, then this function will
-  /// access an instance field.  If 'container' is a type, then this
-  /// function will access a static field.  If 'container' is a library,
-  /// then this function will access a top-level variable.
-  /// NOTE: This API call cannot be used to access fields of a type object.
-  ///
-  /// This function ignores field visibility (leading underscores in names).
-  ///
-  /// May generate an unhandled exception error.
-  ///
-  /// \param container An object, type, or library.
-  /// \param name A field name.
-  /// \param value The new field value.
-  ///
-  /// \return A valid handle if no error occurs.
-  Object Dart_SetField(
-    Object container,
-    Object name,
-    Object value,
-  ) {
-    return _Dart_SetField(
-      container,
-      name,
-      value,
-    );
-  }
-
-  late final _Dart_SetFieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Handle, ffi.Handle)>>('Dart_SetField');
-  late final _Dart_SetField =
-      _Dart_SetFieldPtr.asFunction<Object Function(Object, Object, Object)>();
-
-  /// Throws an exception.
-  ///
-  /// This function causes a Dart language exception to be thrown. This
-  /// will proceed in the standard way, walking up Dart frames until an
-  /// appropriate 'catch' block is found, executing 'finally' blocks,
-  /// etc.
-  ///
-  /// If an error handle is passed into this function, the error is
-  /// propagated immediately.  See Dart_PropagateError for a discussion
-  /// of error propagation.
-  ///
-  /// If successful, this function does not return. Note that this means
-  /// that the destructors of any stack-allocated C++ objects will not be
-  /// called. If there are no Dart frames on the stack, an error occurs.
-  ///
-  /// \return An error handle if the exception was not thrown.
-  /// Otherwise the function does not return.
-  Object Dart_ThrowException(
-    Object exception,
-  ) {
-    return _Dart_ThrowException(
-      exception,
-    );
-  }
-
-  late final _Dart_ThrowExceptionPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_ThrowException');
-  late final _Dart_ThrowException =
-      _Dart_ThrowExceptionPtr.asFunction<Object Function(Object)>();
-
-  /// Rethrows an exception.
-  ///
-  /// Rethrows an exception, unwinding all dart frames on the stack. If
-  /// successful, this function does not return. Note that this means
-  /// that the destructors of any stack-allocated C++ objects will not be
-  /// called. If there are no Dart frames on the stack, an error occurs.
-  ///
-  /// \return An error handle if the exception was not thrown.
-  /// Otherwise the function does not return.
-  Object Dart_ReThrowException(
-    Object exception,
-    Object stacktrace,
-  ) {
-    return _Dart_ReThrowException(
-      exception,
-      stacktrace,
-    );
-  }
-
-  late final _Dart_ReThrowExceptionPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_ReThrowException');
-  late final _Dart_ReThrowException =
-      _Dart_ReThrowExceptionPtr.asFunction<Object Function(Object, Object)>();
-
-  /// Gets the number of native instance fields in an object.
-  Object Dart_GetNativeInstanceFieldCount(
-    Object obj,
-    ffi.Pointer<ffi.Int> count,
-  ) {
-    return _Dart_GetNativeInstanceFieldCount(
-      obj,
-      count,
-    );
-  }
-
-  late final _Dart_GetNativeInstanceFieldCountPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle,
-              ffi.Pointer<ffi.Int>)>>('Dart_GetNativeInstanceFieldCount');
-  late final _Dart_GetNativeInstanceFieldCount =
-      _Dart_GetNativeInstanceFieldCountPtr.asFunction<
-          Object Function(Object, ffi.Pointer<ffi.Int>)>();
-
-  /// Gets the value of a native field.
-  ///
-  /// TODO(turnidge): Document.
-  Object Dart_GetNativeInstanceField(
-    Object obj,
-    int index,
-    ffi.Pointer<ffi.IntPtr> value,
-  ) {
-    return _Dart_GetNativeInstanceField(
-      obj,
-      index,
-      value,
-    );
-  }
-
-  late final _Dart_GetNativeInstanceFieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Int,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetNativeInstanceField');
-  late final _Dart_GetNativeInstanceField = _Dart_GetNativeInstanceFieldPtr
-      .asFunction<Object Function(Object, int, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Sets the value of a native field.
-  ///
-  /// TODO(turnidge): Document.
-  Object Dart_SetNativeInstanceField(
-    Object obj,
-    int index,
-    int value,
-  ) {
-    return _Dart_SetNativeInstanceField(
-      obj,
-      index,
-      value,
-    );
-  }
-
-  late final _Dart_SetNativeInstanceFieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Int, ffi.IntPtr)>>('Dart_SetNativeInstanceField');
-  late final _Dart_SetNativeInstanceField = _Dart_SetNativeInstanceFieldPtr
-      .asFunction<Object Function(Object, int, int)>();
-
-  /// Extracts current isolate group data from the native arguments structure.
-  ffi.Pointer<ffi.Void> Dart_GetNativeIsolateGroupData(
-    Dart_NativeArguments args,
-  ) {
-    return _Dart_GetNativeIsolateGroupData(
-      args,
-    );
-  }
-
-  late final _Dart_GetNativeIsolateGroupDataPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              Dart_NativeArguments)>>('Dart_GetNativeIsolateGroupData');
-  late final _Dart_GetNativeIsolateGroupData =
-      _Dart_GetNativeIsolateGroupDataPtr.asFunction<
-          ffi.Pointer<ffi.Void> Function(Dart_NativeArguments)>();
-
-  /// Gets the native arguments based on the types passed in and populates
-  /// the passed arguments buffer with appropriate native values.
-  ///
-  /// \param args the Native arguments block passed into the native call.
-  /// \param num_arguments length of argument descriptor array and argument
-  /// values array passed in.
-  /// \param arg_descriptors an array that describes the arguments that
-  /// need to be retrieved. For each argument to be retrieved the descriptor
-  /// contains the argument number (0, 1 etc.) and the argument type
-  /// described using Dart_NativeArgument_Type, e.g:
-  /// DART_NATIVE_ARG_DESCRIPTOR(Dart_NativeArgument_kBool, 1) indicates
-  /// that the first argument is to be retrieved and it should be a boolean.
-  /// \param arg_values array into which the native arguments need to be
-  /// extracted into, the array is allocated by the caller (it could be
-  /// stack allocated to avoid the malloc/free performance overhead).
-  ///
-  /// \return Success if all the arguments could be extracted correctly,
-  /// returns an error handle if there were any errors while extracting the
-  /// arguments (mismatched number of arguments, incorrect types, etc.).
-  Object Dart_GetNativeArguments(
-    Dart_NativeArguments args,
-    int num_arguments,
-    ffi.Pointer<Dart_NativeArgument_Descriptor> arg_descriptors,
-    ffi.Pointer<Dart_NativeArgument_Value> arg_values,
-  ) {
-    return _Dart_GetNativeArguments(
-      args,
-      num_arguments,
-      arg_descriptors,
-      arg_values,
-    );
-  }
-
-  late final _Dart_GetNativeArgumentsPtr = _lookup<
+  late final _interactor_dart_payload_pool_destroyPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_NativeArguments,
-                  ffi.Int,
-                  ffi.Pointer<Dart_NativeArgument_Descriptor>,
-                  ffi.Pointer<Dart_NativeArgument_Value>)>>(
-      'Dart_GetNativeArguments');
-  late final _Dart_GetNativeArguments = _Dart_GetNativeArgumentsPtr.asFunction<
-      Object Function(
-          Dart_NativeArguments,
-          int,
-          ffi.Pointer<Dart_NativeArgument_Descriptor>,
-          ffi.Pointer<Dart_NativeArgument_Value>)>();
+              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>(
+      'interactor_dart_payload_pool_destroy');
+  late final _interactor_dart_payload_pool_destroy =
+      _interactor_dart_payload_pool_destroyPtr
+          .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>();
 
-  /// Gets the native argument at some index.
-  Object Dart_GetNativeArgument(
-    Dart_NativeArguments args,
-    int index,
+  int interactor_dart_peek(
+    ffi.Pointer<interactor_dart_t> interactor,
   ) {
-    return _Dart_GetNativeArgument(
-      args,
-      index,
+    return _interactor_dart_peek(
+      interactor,
     );
   }
 
-  late final _Dart_GetNativeArgumentPtr = _lookup<
+  late final _interactor_dart_peekPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_peek');
+  late final _interactor_dart_peek = _interactor_dart_peekPtr
+      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
+
+  void interactor_dart_destroy(
+    ffi.Pointer<interactor_dart_t> interactor,
+  ) {
+    return _interactor_dart_destroy(
+      interactor,
+    );
+  }
+
+  late final _interactor_dart_destroyPtr = _lookup<
           ffi
-          .NativeFunction<ffi.Handle Function(Dart_NativeArguments, ffi.Int)>>(
-      'Dart_GetNativeArgument');
-  late final _Dart_GetNativeArgument = _Dart_GetNativeArgumentPtr.asFunction<
-      Object Function(Dart_NativeArguments, int)>();
-
-  /// Gets the number of native arguments.
-  int Dart_GetNativeArgumentCount(
-    Dart_NativeArguments args,
-  ) {
-    return _Dart_GetNativeArgumentCount(
-      args,
-    );
-  }
-
-  late final _Dart_GetNativeArgumentCountPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(Dart_NativeArguments)>>(
-          'Dart_GetNativeArgumentCount');
-  late final _Dart_GetNativeArgumentCount = _Dart_GetNativeArgumentCountPtr
-      .asFunction<int Function(Dart_NativeArguments)>();
-
-  /// Gets all the native fields of the native argument at some index.
-  /// \param args Native arguments structure.
-  /// \param arg_index Index of the desired argument in the structure above.
-  /// \param num_fields size of the intptr_t array 'field_values' passed in.
-  /// \param field_values intptr_t array in which native field values are returned.
-  /// \return Success if the native fields where copied in successfully. Otherwise
-  /// returns an error handle. On success the native field values are copied
-  /// into the 'field_values' array, if the argument at 'arg_index' is a
-  /// null object then 0 is copied as the native field values into the
-  /// 'field_values' array.
-  Object Dart_GetNativeFieldsOfArgument(
-    Dart_NativeArguments args,
-    int arg_index,
-    int num_fields,
-    ffi.Pointer<ffi.IntPtr> field_values,
-  ) {
-    return _Dart_GetNativeFieldsOfArgument(
-      args,
-      arg_index,
-      num_fields,
-      field_values,
-    );
-  }
-
-  late final _Dart_GetNativeFieldsOfArgumentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_NativeArguments, ffi.Int, ffi.Int,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetNativeFieldsOfArgument');
-  late final _Dart_GetNativeFieldsOfArgument =
-      _Dart_GetNativeFieldsOfArgumentPtr.asFunction<
-          Object Function(
-              Dart_NativeArguments, int, int, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Gets the native field of the receiver.
-  Object Dart_GetNativeReceiver(
-    Dart_NativeArguments args,
-    ffi.Pointer<ffi.IntPtr> value,
-  ) {
-    return _Dart_GetNativeReceiver(
-      args,
-      value,
-    );
-  }
-
-  late final _Dart_GetNativeReceiverPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_NativeArguments,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetNativeReceiver');
-  late final _Dart_GetNativeReceiver = _Dart_GetNativeReceiverPtr.asFunction<
-      Object Function(Dart_NativeArguments, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Gets a string native argument at some index.
-  /// \param args Native arguments structure.
-  /// \param arg_index Index of the desired argument in the structure above.
-  /// \param peer Returns the peer pointer if the string argument has one.
-  /// \return Success if the string argument has a peer, if it does not
-  /// have a peer then the String object is returned. Otherwise returns
-  /// an error handle (argument is not a String object).
-  Object Dart_GetNativeStringArgument(
-    Dart_NativeArguments args,
-    int arg_index,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> peer,
-  ) {
-    return _Dart_GetNativeStringArgument(
-      args,
-      arg_index,
-      peer,
-    );
-  }
-
-  late final _Dart_GetNativeStringArgumentPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Handle Function(Dart_NativeArguments, ffi.Int,
-                  ffi.Pointer<ffi.Pointer<ffi.Void>>)>>(
-      'Dart_GetNativeStringArgument');
-  late final _Dart_GetNativeStringArgument =
-      _Dart_GetNativeStringArgumentPtr.asFunction<
-          Object Function(
-              Dart_NativeArguments, int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// Gets an integer native argument at some index.
-  /// \param args Native arguments structure.
-  /// \param index Index of the desired argument in the structure above.
-  /// \param value Returns the integer value if the argument is an Integer.
-  /// \return Success if no error occurs. Otherwise returns an error handle.
-  Object Dart_GetNativeIntegerArgument(
-    Dart_NativeArguments args,
-    int index,
-    ffi.Pointer<ffi.Int64> value,
-  ) {
-    return _Dart_GetNativeIntegerArgument(
-      args,
-      index,
-      value,
-    );
-  }
-
-  late final _Dart_GetNativeIntegerArgumentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_NativeArguments, ffi.Int,
-              ffi.Pointer<ffi.Int64>)>>('Dart_GetNativeIntegerArgument');
-  late final _Dart_GetNativeIntegerArgument =
-      _Dart_GetNativeIntegerArgumentPtr.asFunction<
-          Object Function(Dart_NativeArguments, int, ffi.Pointer<ffi.Int64>)>();
-
-  /// Gets a boolean native argument at some index.
-  /// \param args Native arguments structure.
-  /// \param index Index of the desired argument in the structure above.
-  /// \param value Returns the boolean value if the argument is a Boolean.
-  /// \return Success if no error occurs. Otherwise returns an error handle.
-  Object Dart_GetNativeBooleanArgument(
-    Dart_NativeArguments args,
-    int index,
-    ffi.Pointer<ffi.Bool> value,
-  ) {
-    return _Dart_GetNativeBooleanArgument(
-      args,
-      index,
-      value,
-    );
-  }
-
-  late final _Dart_GetNativeBooleanArgumentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_NativeArguments, ffi.Int,
-              ffi.Pointer<ffi.Bool>)>>('Dart_GetNativeBooleanArgument');
-  late final _Dart_GetNativeBooleanArgument =
-      _Dart_GetNativeBooleanArgumentPtr.asFunction<
-          Object Function(Dart_NativeArguments, int, ffi.Pointer<ffi.Bool>)>();
-
-  /// Gets a double native argument at some index.
-  /// \param args Native arguments structure.
-  /// \param index Index of the desired argument in the structure above.
-  /// \param value Returns the double value if the argument is a double.
-  /// \return Success if no error occurs. Otherwise returns an error handle.
-  Object Dart_GetNativeDoubleArgument(
-    Dart_NativeArguments args,
-    int index,
-    ffi.Pointer<ffi.Double> value,
-  ) {
-    return _Dart_GetNativeDoubleArgument(
-      args,
-      index,
-      value,
-    );
-  }
-
-  late final _Dart_GetNativeDoubleArgumentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_NativeArguments, ffi.Int,
-              ffi.Pointer<ffi.Double>)>>('Dart_GetNativeDoubleArgument');
-  late final _Dart_GetNativeDoubleArgument =
-      _Dart_GetNativeDoubleArgumentPtr.asFunction<
-          Object Function(
-              Dart_NativeArguments, int, ffi.Pointer<ffi.Double>)>();
-
-  /// Sets the return value for a native function.
-  ///
-  /// If retval is an Error handle, then error will be propagated once
-  /// the native functions exits. See Dart_PropagateError for a
-  /// discussion of how different types of errors are propagated.
-  void Dart_SetReturnValue(
-    Dart_NativeArguments args,
-    Object retval,
-  ) {
-    return _Dart_SetReturnValue(
-      args,
-      retval,
-    );
-  }
-
-  late final _Dart_SetReturnValuePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Handle)>>(
-      'Dart_SetReturnValue');
-  late final _Dart_SetReturnValue = _Dart_SetReturnValuePtr.asFunction<
-      void Function(Dart_NativeArguments, Object)>();
-
-  void Dart_SetWeakHandleReturnValue(
-    Dart_NativeArguments args,
-    Dart_WeakPersistentHandle rval,
-  ) {
-    return _Dart_SetWeakHandleReturnValue(
-      args,
-      rval,
-    );
-  }
-
-  late final _Dart_SetWeakHandleReturnValuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(Dart_NativeArguments,
-              Dart_WeakPersistentHandle)>>('Dart_SetWeakHandleReturnValue');
-  late final _Dart_SetWeakHandleReturnValue =
-      _Dart_SetWeakHandleReturnValuePtr.asFunction<
-          void Function(Dart_NativeArguments, Dart_WeakPersistentHandle)>();
-
-  void Dart_SetBooleanReturnValue(
-    Dart_NativeArguments args,
-    bool retval,
-  ) {
-    return _Dart_SetBooleanReturnValue(
-      args,
-      retval,
-    );
-  }
-
-  late final _Dart_SetBooleanReturnValuePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Bool)>>(
-      'Dart_SetBooleanReturnValue');
-  late final _Dart_SetBooleanReturnValue = _Dart_SetBooleanReturnValuePtr
-      .asFunction<void Function(Dart_NativeArguments, bool)>();
-
-  void Dart_SetIntegerReturnValue(
-    Dart_NativeArguments args,
-    int retval,
-  ) {
-    return _Dart_SetIntegerReturnValue(
-      args,
-      retval,
-    );
-  }
-
-  late final _Dart_SetIntegerReturnValuePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Int64)>>(
-      'Dart_SetIntegerReturnValue');
-  late final _Dart_SetIntegerReturnValue = _Dart_SetIntegerReturnValuePtr
-      .asFunction<void Function(Dart_NativeArguments, int)>();
-
-  void Dart_SetDoubleReturnValue(
-    Dart_NativeArguments args,
-    double retval,
-  ) {
-    return _Dart_SetDoubleReturnValue(
-      args,
-      retval,
-    );
-  }
-
-  late final _Dart_SetDoubleReturnValuePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Double)>>(
-      'Dart_SetDoubleReturnValue');
-  late final _Dart_SetDoubleReturnValue = _Dart_SetDoubleReturnValuePtr
-      .asFunction<void Function(Dart_NativeArguments, double)>();
-
-  /// Sets the environment callback for the current isolate. This
-  /// callback is used to lookup environment values by name in the
-  /// current environment. This enables the embedder to supply values for
-  /// the const constructors bool.fromEnvironment, int.fromEnvironment
-  /// and String.fromEnvironment.
-  Object Dart_SetEnvironmentCallback(
-    Dart_EnvironmentCallback callback,
-  ) {
-    return _Dart_SetEnvironmentCallback(
-      callback,
-    );
-  }
-
-  late final _Dart_SetEnvironmentCallbackPtr = _lookup<
-          ffi.NativeFunction<ffi.Handle Function(Dart_EnvironmentCallback)>>(
-      'Dart_SetEnvironmentCallback');
-  late final _Dart_SetEnvironmentCallback = _Dart_SetEnvironmentCallbackPtr
-      .asFunction<Object Function(Dart_EnvironmentCallback)>();
-
-  /// Sets the callback used to resolve native functions for a library.
-  ///
-  /// \param library A library.
-  /// \param resolver A native entry resolver.
-  ///
-  /// \return A valid handle if the native resolver was set successfully.
-  Object Dart_SetNativeResolver(
-    Object library1,
-    Dart_NativeEntryResolver resolver,
-    Dart_NativeEntrySymbol symbol,
-  ) {
-    return _Dart_SetNativeResolver(
-      library1,
-      resolver,
-      symbol,
-    );
-  }
-
-  late final _Dart_SetNativeResolverPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, Dart_NativeEntryResolver,
-              Dart_NativeEntrySymbol)>>('Dart_SetNativeResolver');
-  late final _Dart_SetNativeResolver = _Dart_SetNativeResolverPtr.asFunction<
-      Object Function(
-          Object, Dart_NativeEntryResolver, Dart_NativeEntrySymbol)>();
-
-  /// Returns the callback used to resolve native functions for a library.
-  ///
-  /// \param library A library.
-  /// \param resolver a pointer to a Dart_NativeEntryResolver
-  ///
-  /// \return A valid handle if the library was found.
-  Object Dart_GetNativeResolver(
-    Object library1,
-    ffi.Pointer<Dart_NativeEntryResolver> resolver,
-  ) {
-    return _Dart_GetNativeResolver(
-      library1,
-      resolver,
-    );
-  }
-
-  late final _Dart_GetNativeResolverPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<Dart_NativeEntryResolver>)>>(
-      'Dart_GetNativeResolver');
-  late final _Dart_GetNativeResolver = _Dart_GetNativeResolverPtr.asFunction<
-      Object Function(Object, ffi.Pointer<Dart_NativeEntryResolver>)>();
-
-  /// Returns the callback used to resolve native function symbols for a library.
-  ///
-  /// \param library A library.
-  /// \param resolver a pointer to a Dart_NativeEntrySymbol.
-  ///
-  /// \return A valid handle if the library was found.
-  Object Dart_GetNativeSymbol(
-    Object library1,
-    ffi.Pointer<Dart_NativeEntrySymbol> resolver,
-  ) {
-    return _Dart_GetNativeSymbol(
-      library1,
-      resolver,
-    );
-  }
-
-  late final _Dart_GetNativeSymbolPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle,
-              ffi.Pointer<Dart_NativeEntrySymbol>)>>('Dart_GetNativeSymbol');
-  late final _Dart_GetNativeSymbol = _Dart_GetNativeSymbolPtr.asFunction<
-      Object Function(Object, ffi.Pointer<Dart_NativeEntrySymbol>)>();
-
-  /// Sets the callback used to resolve FFI native functions for a library.
-  /// The resolved functions are expected to be a C function pointer of the
-  /// correct signature (as specified in the `@FfiNative<NFT>()` function
-  /// annotation in Dart code).
-  ///
-  /// NOTE: This is an experimental feature and might change in the future.
-  ///
-  /// \param library A library.
-  /// \param resolver A native function resolver.
-  ///
-  /// \return A valid handle if the native resolver was set successfully.
-  Object Dart_SetFfiNativeResolver(
-    Object library1,
-    Dart_FfiNativeResolver resolver,
-  ) {
-    return _Dart_SetFfiNativeResolver(
-      library1,
-      resolver,
-    );
-  }
-
-  late final _Dart_SetFfiNativeResolverPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle,
-              Dart_FfiNativeResolver)>>('Dart_SetFfiNativeResolver');
-  late final _Dart_SetFfiNativeResolver = _Dart_SetFfiNativeResolverPtr
-      .asFunction<Object Function(Object, Dart_FfiNativeResolver)>();
-
-  /// Sets library tag handler for the current isolate. This handler is
-  /// used to handle the various tags encountered while loading libraries
-  /// or scripts in the isolate.
-  ///
-  /// \param handler Handler code to be used for handling the various tags
-  /// encountered while loading libraries or scripts in the isolate.
-  ///
-  /// \return If no error occurs, the handler is set for the isolate.
-  /// Otherwise an error handle is returned.
-  ///
-  /// TODO(turnidge): Document.
-  Object Dart_SetLibraryTagHandler(
-    Dart_LibraryTagHandler handler,
-  ) {
-    return _Dart_SetLibraryTagHandler(
-      handler,
-    );
-  }
-
-  late final _Dart_SetLibraryTagHandlerPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(Dart_LibraryTagHandler)>>(
-          'Dart_SetLibraryTagHandler');
-  late final _Dart_SetLibraryTagHandler = _Dart_SetLibraryTagHandlerPtr
-      .asFunction<Object Function(Dart_LibraryTagHandler)>();
-
-  /// Sets the deferred load handler for the current isolate. This handler is
-  /// used to handle loading deferred imports in an AppJIT or AppAOT program.
-  Object Dart_SetDeferredLoadHandler(
-    Dart_DeferredLoadHandler handler,
-  ) {
-    return _Dart_SetDeferredLoadHandler(
-      handler,
-    );
-  }
-
-  late final _Dart_SetDeferredLoadHandlerPtr = _lookup<
-          ffi.NativeFunction<ffi.Handle Function(Dart_DeferredLoadHandler)>>(
-      'Dart_SetDeferredLoadHandler');
-  late final _Dart_SetDeferredLoadHandler = _Dart_SetDeferredLoadHandlerPtr
-      .asFunction<Object Function(Dart_DeferredLoadHandler)>();
-
-  /// Notifies the VM that a deferred load completed successfully. This function
-  /// will eventually cause the corresponding `prefix.loadLibrary()` futures to
-  /// complete.
-  ///
-  /// Requires the current isolate to be the same current isolate during the
-  /// invocation of the Dart_DeferredLoadHandler.
-  Object Dart_DeferredLoadComplete(
-    int loading_unit_id,
-    ffi.Pointer<ffi.Uint8> snapshot_data,
-    ffi.Pointer<ffi.Uint8> snapshot_instructions,
-  ) {
-    return _Dart_DeferredLoadComplete(
-      loading_unit_id,
-      snapshot_data,
-      snapshot_instructions,
-    );
-  }
-
-  late final _Dart_DeferredLoadCompletePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.IntPtr, ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>)>>('Dart_DeferredLoadComplete');
-  late final _Dart_DeferredLoadComplete =
-      _Dart_DeferredLoadCompletePtr.asFunction<
-          Object Function(
-              int, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Uint8>)>();
-
-  /// Notifies the VM that a deferred load failed. This function
-  /// will eventually cause the corresponding `prefix.loadLibrary()` futures to
-  /// complete with an error.
-  ///
-  /// If `transient` is true, future invocations of `prefix.loadLibrary()` will
-  /// trigger new load requests. If false, futures invocation will complete with
-  /// the same error.
-  ///
-  /// Requires the current isolate to be the same current isolate during the
-  /// invocation of the Dart_DeferredLoadHandler.
-  Object Dart_DeferredLoadCompleteError(
-    int loading_unit_id,
-    ffi.Pointer<ffi.Char> error_message,
-    bool transient,
-  ) {
-    return _Dart_DeferredLoadCompleteError(
-      loading_unit_id,
-      error_message,
-      transient,
-    );
-  }
-
-  late final _Dart_DeferredLoadCompleteErrorPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.IntPtr, ffi.Pointer<ffi.Char>,
-              ffi.Bool)>>('Dart_DeferredLoadCompleteError');
-  late final _Dart_DeferredLoadCompleteError =
-      _Dart_DeferredLoadCompleteErrorPtr.asFunction<
-          Object Function(int, ffi.Pointer<ffi.Char>, bool)>();
-
-  /// Canonicalizes a url with respect to some library.
-  ///
-  /// The url is resolved with respect to the library's url and some url
-  /// normalizations are performed.
-  ///
-  /// This canonicalization function should be sufficient for most
-  /// embedders to implement the Dart_kCanonicalizeUrl tag.
-  ///
-  /// \param base_url The base url relative to which the url is
-  /// being resolved.
-  /// \param url The url being resolved and canonicalized.  This
-  /// parameter is a string handle.
-  ///
-  /// \return If no error occurs, a String object is returned.  Otherwise
-  /// an error handle is returned.
-  Object Dart_DefaultCanonicalizeUrl(
-    Object base_url,
-    Object url,
-  ) {
-    return _Dart_DefaultCanonicalizeUrl(
-      base_url,
-      url,
-    );
-  }
-
-  late final _Dart_DefaultCanonicalizeUrlPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_DefaultCanonicalizeUrl');
-  late final _Dart_DefaultCanonicalizeUrl = _Dart_DefaultCanonicalizeUrlPtr
-      .asFunction<Object Function(Object, Object)>();
-
-  /// Loads the root library for the current isolate.
-  ///
-  /// Requires there to be no current root library.
-  ///
-  /// \param kernel_buffer A buffer which contains a kernel binary (see
-  /// pkg/kernel/binary.md). Must remain valid until isolate group shutdown.
-  /// \param kernel_size Length of the passed in buffer.
-  ///
-  /// \return A handle to the root library, or an error.
-  Object Dart_LoadScriptFromKernel(
-    ffi.Pointer<ffi.Uint8> kernel_buffer,
-    int kernel_size,
-  ) {
-    return _Dart_LoadScriptFromKernel(
-      kernel_buffer,
-      kernel_size,
-    );
-  }
-
-  late final _Dart_LoadScriptFromKernelPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>>('Dart_LoadScriptFromKernel');
-  late final _Dart_LoadScriptFromKernel = _Dart_LoadScriptFromKernelPtr
-      .asFunction<Object Function(ffi.Pointer<ffi.Uint8>, int)>();
-
-  /// Gets the library for the root script for the current isolate.
-  ///
-  /// If the root script has not yet been set for the current isolate,
-  /// this function returns Dart_Null().  This function never returns an
-  /// error handle.
-  ///
-  /// \return Returns the root Library for the current isolate or Dart_Null().
-  Object Dart_RootLibrary() {
-    return _Dart_RootLibrary();
-  }
-
-  late final _Dart_RootLibraryPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_RootLibrary');
-  late final _Dart_RootLibrary =
-      _Dart_RootLibraryPtr.asFunction<Object Function()>();
-
-  /// Sets the root library for the current isolate.
-  ///
-  /// \return Returns an error handle if `library` is not a library handle.
-  Object Dart_SetRootLibrary(
-    Object library1,
-  ) {
-    return _Dart_SetRootLibrary(
-      library1,
-    );
-  }
-
-  late final _Dart_SetRootLibraryPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_SetRootLibrary');
-  late final _Dart_SetRootLibrary =
-      _Dart_SetRootLibraryPtr.asFunction<Object Function(Object)>();
-
-  /// Lookup or instantiate a legacy type by name and type arguments from a
-  /// Library.
-  ///
-  /// \param library The library containing the class or interface.
-  /// \param class_name The class name for the type.
-  /// \param number_of_type_arguments Number of type arguments.
-  /// For non parametric types the number of type arguments would be 0.
-  /// \param type_arguments Pointer to an array of type arguments.
-  /// For non parametric types a NULL would be passed in for this argument.
-  ///
-  /// \return If no error occurs, the type is returned.
-  /// Otherwise an error handle is returned.
-  Object Dart_GetType(
-    Object library1,
-    Object class_name,
-    int number_of_type_arguments,
-    ffi.Pointer<ffi.Handle> type_arguments,
-  ) {
-    return _Dart_GetType(
-      library1,
-      class_name,
-      number_of_type_arguments,
-      type_arguments,
-    );
-  }
-
-  late final _Dart_GetTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr,
-              ffi.Pointer<ffi.Handle>)>>('Dart_GetType');
-  late final _Dart_GetType = _Dart_GetTypePtr.asFunction<
-      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Lookup or instantiate a nullable type by name and type arguments from
-  /// Library.
-  ///
-  /// \param library The library containing the class or interface.
-  /// \param class_name The class name for the type.
-  /// \param number_of_type_arguments Number of type arguments.
-  /// For non parametric types the number of type arguments would be 0.
-  /// \param type_arguments Pointer to an array of type arguments.
-  /// For non parametric types a NULL would be passed in for this argument.
-  ///
-  /// \return If no error occurs, the type is returned.
-  /// Otherwise an error handle is returned.
-  Object Dart_GetNullableType(
-    Object library1,
-    Object class_name,
-    int number_of_type_arguments,
-    ffi.Pointer<ffi.Handle> type_arguments,
-  ) {
-    return _Dart_GetNullableType(
-      library1,
-      class_name,
-      number_of_type_arguments,
-      type_arguments,
-    );
-  }
-
-  late final _Dart_GetNullableTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr,
-              ffi.Pointer<ffi.Handle>)>>('Dart_GetNullableType');
-  late final _Dart_GetNullableType = _Dart_GetNullableTypePtr.asFunction<
-      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Lookup or instantiate a non-nullable type by name and type arguments from
-  /// Library.
-  ///
-  /// \param library The library containing the class or interface.
-  /// \param class_name The class name for the type.
-  /// \param number_of_type_arguments Number of type arguments.
-  /// For non parametric types the number of type arguments would be 0.
-  /// \param type_arguments Pointer to an array of type arguments.
-  /// For non parametric types a NULL would be passed in for this argument.
-  ///
-  /// \return If no error occurs, the type is returned.
-  /// Otherwise an error handle is returned.
-  Object Dart_GetNonNullableType(
-    Object library1,
-    Object class_name,
-    int number_of_type_arguments,
-    ffi.Pointer<ffi.Handle> type_arguments,
-  ) {
-    return _Dart_GetNonNullableType(
-      library1,
-      class_name,
-      number_of_type_arguments,
-      type_arguments,
-    );
-  }
-
-  late final _Dart_GetNonNullableTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr,
-              ffi.Pointer<ffi.Handle>)>>('Dart_GetNonNullableType');
-  late final _Dart_GetNonNullableType = _Dart_GetNonNullableTypePtr.asFunction<
-      Object Function(Object, Object, int, ffi.Pointer<ffi.Handle>)>();
-
-  /// Creates a nullable version of the provided type.
-  ///
-  /// \param type The type to be converted to a nullable type.
-  ///
-  /// \return If no error occurs, a nullable type is returned.
-  /// Otherwise an error handle is returned.
-  Object Dart_TypeToNullableType(
-    Object type,
-  ) {
-    return _Dart_TypeToNullableType(
-      type,
-    );
-  }
-
-  late final _Dart_TypeToNullableTypePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_TypeToNullableType');
-  late final _Dart_TypeToNullableType =
-      _Dart_TypeToNullableTypePtr.asFunction<Object Function(Object)>();
-
-  /// Creates a non-nullable version of the provided type.
-  ///
-  /// \param type The type to be converted to a non-nullable type.
-  ///
-  /// \return If no error occurs, a non-nullable type is returned.
-  /// Otherwise an error handle is returned.
-  Object Dart_TypeToNonNullableType(
-    Object type,
-  ) {
-    return _Dart_TypeToNonNullableType(
-      type,
-    );
-  }
-
-  late final _Dart_TypeToNonNullableTypePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_TypeToNonNullableType');
-  late final _Dart_TypeToNonNullableType =
-      _Dart_TypeToNonNullableTypePtr.asFunction<Object Function(Object)>();
-
-  /// A type's nullability.
-  ///
-  /// \param type A Dart type.
-  /// \param result An out parameter containing the result of the check. True if
-  /// the type is of the specified nullability, false otherwise.
-  ///
-  /// \return Returns an error handle if type is not of type Type.
-  Object Dart_IsNullableType(
-    Object type,
-    ffi.Pointer<ffi.Bool> result,
-  ) {
-    return _Dart_IsNullableType(
-      type,
-      result,
-    );
-  }
-
-  late final _Dart_IsNullableTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IsNullableType');
-  late final _Dart_IsNullableType = _Dart_IsNullableTypePtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  Object Dart_IsNonNullableType(
-    Object type,
-    ffi.Pointer<ffi.Bool> result,
-  ) {
-    return _Dart_IsNonNullableType(
-      type,
-      result,
-    );
-  }
-
-  late final _Dart_IsNonNullableTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IsNonNullableType');
-  late final _Dart_IsNonNullableType = _Dart_IsNonNullableTypePtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  Object Dart_IsLegacyType(
-    Object type,
-    ffi.Pointer<ffi.Bool> result,
-  ) {
-    return _Dart_IsLegacyType(
-      type,
-      result,
-    );
-  }
-
-  late final _Dart_IsLegacyTypePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Bool>)>>('Dart_IsLegacyType');
-  late final _Dart_IsLegacyType = _Dart_IsLegacyTypePtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Bool>)>();
-
-  /// Lookup a class or interface by name from a Library.
-  ///
-  /// \param library The library containing the class or interface.
-  /// \param class_name The name of the class or interface.
-  ///
-  /// \return If no error occurs, the class or interface is
-  /// returned. Otherwise an error handle is returned.
-  Object Dart_GetClass(
-    Object library1,
-    Object class_name,
-  ) {
-    return _Dart_GetClass(
-      library1,
-      class_name,
-    );
-  }
-
-  late final _Dart_GetClassPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_GetClass');
-  late final _Dart_GetClass =
-      _Dart_GetClassPtr.asFunction<Object Function(Object, Object)>();
-
-  /// Returns an import path to a Library, such as "file:///test.dart" or
-  /// "dart:core".
-  Object Dart_LibraryUrl(
-    Object library1,
-  ) {
-    return _Dart_LibraryUrl(
-      library1,
-    );
-  }
-
-  late final _Dart_LibraryUrlPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_LibraryUrl');
-  late final _Dart_LibraryUrl =
-      _Dart_LibraryUrlPtr.asFunction<Object Function(Object)>();
-
-  /// Returns a URL from which a Library was loaded.
-  Object Dart_LibraryResolvedUrl(
-    Object library1,
-  ) {
-    return _Dart_LibraryResolvedUrl(
-      library1,
-    );
-  }
-
-  late final _Dart_LibraryResolvedUrlPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_LibraryResolvedUrl');
-  late final _Dart_LibraryResolvedUrl =
-      _Dart_LibraryResolvedUrlPtr.asFunction<Object Function(Object)>();
-
-  /// \return An array of libraries.
-  Object Dart_GetLoadedLibraries() {
-    return _Dart_GetLoadedLibraries();
-  }
-
-  late final _Dart_GetLoadedLibrariesPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>(
-          'Dart_GetLoadedLibraries');
-  late final _Dart_GetLoadedLibraries =
-      _Dart_GetLoadedLibrariesPtr.asFunction<Object Function()>();
-
-  Object Dart_LookupLibrary(
-    Object url,
-  ) {
-    return _Dart_LookupLibrary(
-      url,
-    );
-  }
-
-  late final _Dart_LookupLibraryPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_LookupLibrary');
-  late final _Dart_LookupLibrary =
-      _Dart_LookupLibraryPtr.asFunction<Object Function(Object)>();
-
-  /// Report an loading error for the library.
-  ///
-  /// \param library The library that failed to load.
-  /// \param error The Dart error instance containing the load error.
-  ///
-  /// \return If the VM handles the error, the return value is
-  /// a null handle. If it doesn't handle the error, the error
-  /// object is returned.
-  Object Dart_LibraryHandleError(
-    Object library1,
-    Object error,
-  ) {
-    return _Dart_LibraryHandleError(
-      library1,
-      error,
-    );
-  }
-
-  late final _Dart_LibraryHandleErrorPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>(
-          'Dart_LibraryHandleError');
-  late final _Dart_LibraryHandleError =
-      _Dart_LibraryHandleErrorPtr.asFunction<Object Function(Object, Object)>();
-
-  /// Called by the embedder to load a partial program. Does not set the root
-  /// library.
-  ///
-  /// \param kernel_buffer A buffer which contains a kernel binary (see
-  /// pkg/kernel/binary.md). Must remain valid until isolate shutdown.
-  /// \param kernel_buffer_size Length of the passed in buffer.
-  ///
-  /// \return A handle to the main library of the compilation unit, or an error.
-  Object Dart_LoadLibraryFromKernel(
-    ffi.Pointer<ffi.Uint8> kernel_buffer,
-    int kernel_buffer_size,
-  ) {
-    return _Dart_LoadLibraryFromKernel(
-      kernel_buffer,
-      kernel_buffer_size,
-    );
-  }
-
-  late final _Dart_LoadLibraryFromKernelPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>>('Dart_LoadLibraryFromKernel');
-  late final _Dart_LoadLibraryFromKernel = _Dart_LoadLibraryFromKernelPtr
-      .asFunction<Object Function(ffi.Pointer<ffi.Uint8>, int)>();
-
-  Object Dart_LoadLibrary(
-    Object kernel_buffer,
-  ) {
-    return _Dart_LoadLibrary(
-      kernel_buffer,
-    );
-  }
-
-  late final _Dart_LoadLibraryPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>(
-          'Dart_LoadLibrary');
-  late final _Dart_LoadLibrary =
-      _Dart_LoadLibraryPtr.asFunction<Object Function(Object)>();
-
-  /// Indicates that all outstanding load requests have been satisfied.
-  /// This finalizes all the new classes loaded and optionally completes
-  /// deferred library futures.
-  ///
-  /// Requires there to be a current isolate.
-  ///
-  /// \param complete_futures Specify true if all deferred library
-  /// futures should be completed, false otherwise.
-  ///
-  /// \return Success if all classes have been finalized and deferred library
-  /// futures are completed. Otherwise, returns an error.
-  Object Dart_FinalizeLoading(
-    bool complete_futures,
-  ) {
-    return _Dart_FinalizeLoading(
-      complete_futures,
-    );
-  }
-
-  late final _Dart_FinalizeLoadingPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>(
-          'Dart_FinalizeLoading');
-  late final _Dart_FinalizeLoading =
-      _Dart_FinalizeLoadingPtr.asFunction<Object Function(bool)>();
-
-  /// Returns the value of peer field of 'object' in 'peer'.
-  ///
-  /// \param object An object.
-  /// \param peer An out parameter that returns the value of the peer
-  /// field.
-  ///
-  /// \return Returns an error if 'object' is a subtype of Null, num, or
-  /// bool.
-  Object Dart_GetPeer(
-    Object object,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> peer,
-  ) {
-    return _Dart_GetPeer(
-      object,
-      peer,
-    );
-  }
-
-  late final _Dart_GetPeerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('Dart_GetPeer');
-  late final _Dart_GetPeer = _Dart_GetPeerPtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// Sets the value of the peer field of 'object' to the value of
-  /// 'peer'.
-  ///
-  /// \param object An object.
-  /// \param peer A value to store in the peer field.
-  ///
-  /// \return Returns an error if 'object' is a subtype of Null, num, or
-  /// bool.
-  Object Dart_SetPeer(
-    Object object,
-    ffi.Pointer<ffi.Void> peer,
-  ) {
-    return _Dart_SetPeer(
-      object,
-      peer,
-    );
-  }
-
-  late final _Dart_SetPeerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle, ffi.Pointer<ffi.Void>)>>('Dart_SetPeer');
-  late final _Dart_SetPeer = _Dart_SetPeerPtr.asFunction<
-      Object Function(Object, ffi.Pointer<ffi.Void>)>();
-
-  bool Dart_IsKernelIsolate(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_IsKernelIsolate(
-      isolate,
-    );
-  }
-
-  late final _Dart_IsKernelIsolatePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>(
-          'Dart_IsKernelIsolate');
-  late final _Dart_IsKernelIsolate =
-      _Dart_IsKernelIsolatePtr.asFunction<bool Function(Dart_Isolate)>();
-
-  bool Dart_KernelIsolateIsRunning() {
-    return _Dart_KernelIsolateIsRunning();
-  }
-
-  late final _Dart_KernelIsolateIsRunningPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
-          'Dart_KernelIsolateIsRunning');
-  late final _Dart_KernelIsolateIsRunning =
-      _Dart_KernelIsolateIsRunningPtr.asFunction<bool Function()>();
-
-  int Dart_KernelPort() {
-    return _Dart_KernelPort();
-  }
-
-  late final _Dart_KernelPortPtr =
-      _lookup<ffi.NativeFunction<Dart_Port Function()>>('Dart_KernelPort');
-  late final _Dart_KernelPort =
-      _Dart_KernelPortPtr.asFunction<int Function()>();
-
-  /// Compiles the given `script_uri` to a kernel file.
-  ///
-  /// \param platform_kernel A buffer containing the kernel of the platform (e.g.
-  /// `vm_platform_strong.dill`). The VM does not take ownership of this memory.
-  ///
-  /// \param platform_kernel_size The length of the platform_kernel buffer.
-  ///
-  /// \param snapshot_compile Set to `true` when the compilation is for a snapshot.
-  /// This is used by the frontend to determine if compilation related information
-  /// should be printed to console (e.g., null safety mode).
-  ///
-  /// \param embed_sources Set to `true` when sources should be embedded in the
-  /// kernel file.
-  ///
-  /// \param verbosity Specifies the logging behavior of the kernel compilation
-  /// service.
-  ///
-  /// \return Returns the result of the compilation.
-  ///
-  /// On a successful compilation the returned [Dart_KernelCompilationResult] has
-  /// a status of [Dart_KernelCompilationStatus_Ok] and the `kernel`/`kernel_size`
-  /// fields are set. The caller takes ownership of the malloc()ed buffer.
-  ///
-  /// On a failed compilation the `error` might be set describing the reason for
-  /// the failed compilation. The caller takes ownership of the malloc()ed
-  /// error.
-  ///
-  /// Requires there to be a current isolate.
-  Dart_KernelCompilationResult Dart_CompileToKernel(
-    ffi.Pointer<ffi.Char> script_uri,
-    ffi.Pointer<ffi.Uint8> platform_kernel,
-    int platform_kernel_size,
-    bool incremental_compile,
-    bool snapshot_compile,
-    bool embed_sources,
-    ffi.Pointer<ffi.Char> package_config,
-    int verbosity,
-  ) {
-    return _Dart_CompileToKernel(
-      script_uri,
-      platform_kernel,
-      platform_kernel_size,
-      incremental_compile,
-      snapshot_compile,
-      embed_sources,
-      package_config,
-      verbosity,
-    );
-  }
-
-  late final _Dart_CompileToKernelPtr = _lookup<
-      ffi.NativeFunction<
-          Dart_KernelCompilationResult Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr,
-              ffi.Bool,
-              ffi.Bool,
-              ffi.Bool,
-              ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('Dart_CompileToKernel');
-  late final _Dart_CompileToKernel = _Dart_CompileToKernelPtr.asFunction<
-      Dart_KernelCompilationResult Function(
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Uint8>,
-          int,
-          bool,
-          bool,
-          bool,
-          ffi.Pointer<ffi.Char>,
-          int)>();
-
-  Dart_KernelCompilationResult Dart_KernelListDependencies() {
-    return _Dart_KernelListDependencies();
-  }
-
-  late final _Dart_KernelListDependenciesPtr =
-      _lookup<ffi.NativeFunction<Dart_KernelCompilationResult Function()>>(
-          'Dart_KernelListDependencies');
-  late final _Dart_KernelListDependencies = _Dart_KernelListDependenciesPtr
-      .asFunction<Dart_KernelCompilationResult Function()>();
-
-  /// Sets the kernel buffer which will be used to load Dart SDK sources
-  /// dynamically at runtime.
-  ///
-  /// \param platform_kernel A buffer containing kernel which has sources for the
-  /// Dart SDK populated. Note: The VM does not take ownership of this memory.
-  ///
-  /// \param platform_kernel_size The length of the platform_kernel buffer.
-  void Dart_SetDartLibrarySourcesKernel(
-    ffi.Pointer<ffi.Uint8> platform_kernel,
-    int platform_kernel_size,
-  ) {
-    return _Dart_SetDartLibrarySourcesKernel(
-      platform_kernel,
-      platform_kernel_size,
-    );
-  }
-
-  late final _Dart_SetDartLibrarySourcesKernelPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>>('Dart_SetDartLibrarySourcesKernel');
-  late final _Dart_SetDartLibrarySourcesKernel =
-      _Dart_SetDartLibrarySourcesKernelPtr.asFunction<
-          void Function(ffi.Pointer<ffi.Uint8>, int)>();
-
-  /// Detect the null safety opt-in status.
-  ///
-  /// When running from source, it is based on the opt-in status of `script_uri`.
-  /// When running from a kernel buffer, it is based on the mode used when
-  /// generating `kernel_buffer`.
-  /// When running from an appJIT or AOT snapshot, it is based on the mode used
-  /// when generating `snapshot_data`.
-  ///
-  /// \param script_uri Uri of the script that contains the source code
-  ///
-  /// \param package_config Uri of the package configuration file (either in format
-  /// of .packages or .dart_tool/package_config.json) for the null safety
-  /// detection to resolve package imports against. If this parameter is not
-  /// passed the package resolution of the parent isolate should be used.
-  ///
-  /// \param original_working_directory current working directory when the VM
-  /// process was launched, this is used to correctly resolve the path specified
-  /// for package_config.
-  ///
-  /// \param snapshot_data Buffer containing the snapshot data of the
-  /// isolate or NULL if no snapshot is provided. If provided, the buffers must
-  /// remain valid until the isolate shuts down.
-  ///
-  /// \param snapshot_instructions Buffer containing the snapshot instructions of
-  /// the isolate or NULL if no snapshot is provided. If provided, the buffers
-  /// must remain valid until the isolate shuts down.
-  ///
-  /// \param kernel_buffer A buffer which contains a kernel/DIL program. Must
-  /// remain valid until isolate shutdown.
-  ///
-  /// \param kernel_buffer_size The size of `kernel_buffer`.
-  ///
-  /// \return Returns true if the null safety is opted in by the input being
-  /// run `script_uri`, `snapshot_data` or `kernel_buffer`.
-  bool Dart_DetectNullSafety(
-    ffi.Pointer<ffi.Char> script_uri,
-    ffi.Pointer<ffi.Char> package_config,
-    ffi.Pointer<ffi.Char> original_working_directory,
-    ffi.Pointer<ffi.Uint8> snapshot_data,
-    ffi.Pointer<ffi.Uint8> snapshot_instructions,
-    ffi.Pointer<ffi.Uint8> kernel_buffer,
-    int kernel_buffer_size,
-  ) {
-    return _Dart_DetectNullSafety(
-      script_uri,
-      package_config,
-      original_working_directory,
-      snapshot_data,
-      snapshot_instructions,
-      kernel_buffer,
-      kernel_buffer_size,
-    );
-  }
-
-  late final _Dart_DetectNullSafetyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Bool Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>>('Dart_DetectNullSafety');
-  late final _Dart_DetectNullSafety = _Dart_DetectNullSafetyPtr.asFunction<
-      bool Function(
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<ffi.Uint8>,
-          ffi.Pointer<ffi.Uint8>,
-          int)>();
-
-  /// Returns true if isolate is the service isolate.
-  ///
-  /// \param isolate An isolate
-  ///
-  /// \return Returns true if 'isolate' is the service isolate.
-  bool Dart_IsServiceIsolate(
-    Dart_Isolate isolate,
-  ) {
-    return _Dart_IsServiceIsolate(
-      isolate,
-    );
-  }
-
-  late final _Dart_IsServiceIsolatePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>(
-          'Dart_IsServiceIsolate');
-  late final _Dart_IsServiceIsolate =
-      _Dart_IsServiceIsolatePtr.asFunction<bool Function(Dart_Isolate)>();
-
-  /// Writes the CPU profile to the timeline as a series of 'instant' events.
-  ///
-  /// Note that this is an expensive operation.
-  ///
-  /// \param main_port The main port of the Isolate whose profile samples to write.
-  /// \param error An optional error, must be free()ed by caller.
-  ///
-  /// \return Returns true if the profile is successfully written and false
-  /// otherwise.
-  bool Dart_WriteProfileToTimeline(
-    int main_port,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> error,
-  ) {
-    return _Dart_WriteProfileToTimeline(
-      main_port,
-      error,
-    );
-  }
-
-  late final _Dart_WriteProfileToTimelinePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Bool Function(
-                  Dart_Port, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'Dart_WriteProfileToTimeline');
-  late final _Dart_WriteProfileToTimeline = _Dart_WriteProfileToTimelinePtr
-      .asFunction<bool Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// Compiles all functions reachable from entry points and marks
-  /// the isolate to disallow future compilation.
-  ///
-  /// Entry points should be specified using `@pragma("vm:entry-point")`
-  /// annotation.
-  ///
-  /// \return An error handle if a compilation error or runtime error running const
-  /// constructors was encountered.
-  Object Dart_Precompile() {
-    return _Dart_Precompile();
-  }
-
-  late final _Dart_PrecompilePtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_Precompile');
-  late final _Dart_Precompile =
-      _Dart_PrecompilePtr.asFunction<Object Function()>();
-
-  Object Dart_LoadingUnitLibraryUris(
-    int loading_unit_id,
-  ) {
-    return _Dart_LoadingUnitLibraryUris(
-      loading_unit_id,
-    );
-  }
-
-  late final _Dart_LoadingUnitLibraryUrisPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>(
-          'Dart_LoadingUnitLibraryUris');
-  late final _Dart_LoadingUnitLibraryUris =
-      _Dart_LoadingUnitLibraryUrisPtr.asFunction<Object Function(int)>();
-
-  /// Creates a precompiled snapshot.
-  /// - A root library must have been loaded.
-  /// - Dart_Precompile must have been called.
-  ///
-  /// Outputs an assembly file defining the symbols listed in the definitions
-  /// above.
-  ///
-  /// The assembly should be compiled as a static or shared library and linked or
-  /// loaded by the embedder. Running this snapshot requires a VM compiled with
-  /// DART_PRECOMPILED_SNAPSHOT. The kDartVmSnapshotData and
-  /// kDartVmSnapshotInstructions should be passed to Dart_Initialize. The
-  /// kDartIsolateSnapshotData and kDartIsolateSnapshotInstructions should be
-  /// passed to Dart_CreateIsolateGroup.
-  ///
-  /// The callback will be invoked one or more times to provide the assembly code.
-  ///
-  /// If stripped is true, then the assembly code will not include DWARF
-  /// debugging sections.
-  ///
-  /// If debug_callback_data is provided, debug_callback_data will be used with
-  /// the callback to provide separate debugging information.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_CreateAppAOTSnapshotAsAssembly(
-    Dart_StreamingWriteCallback callback,
-    ffi.Pointer<ffi.Void> callback_data,
-    bool stripped,
-    ffi.Pointer<ffi.Void> debug_callback_data,
-  ) {
-    return _Dart_CreateAppAOTSnapshotAsAssembly(
-      callback,
-      callback_data,
-      stripped,
-      debug_callback_data,
-    );
-  }
-
-  late final _Dart_CreateAppAOTSnapshotAsAssemblyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              Dart_StreamingWriteCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Bool,
-              ffi.Pointer<ffi.Void>)>>('Dart_CreateAppAOTSnapshotAsAssembly');
-  late final _Dart_CreateAppAOTSnapshotAsAssembly =
-      _Dart_CreateAppAOTSnapshotAsAssemblyPtr.asFunction<
-          Object Function(Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>,
-              bool, ffi.Pointer<ffi.Void>)>();
-
-  Object Dart_CreateAppAOTSnapshotAsAssemblies(
-    Dart_CreateLoadingUnitCallback next_callback,
-    ffi.Pointer<ffi.Void> next_callback_data,
-    bool stripped,
-    Dart_StreamingWriteCallback write_callback,
-    Dart_StreamingCloseCallback close_callback,
-  ) {
-    return _Dart_CreateAppAOTSnapshotAsAssemblies(
-      next_callback,
-      next_callback_data,
-      stripped,
-      write_callback,
-      close_callback,
-    );
-  }
-
-  late final _Dart_CreateAppAOTSnapshotAsAssembliesPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_CreateLoadingUnitCallback,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Bool,
-                  Dart_StreamingWriteCallback,
-                  Dart_StreamingCloseCallback)>>(
-      'Dart_CreateAppAOTSnapshotAsAssemblies');
-  late final _Dart_CreateAppAOTSnapshotAsAssemblies =
-      _Dart_CreateAppAOTSnapshotAsAssembliesPtr.asFunction<
-          Object Function(
-              Dart_CreateLoadingUnitCallback,
-              ffi.Pointer<ffi.Void>,
-              bool,
-              Dart_StreamingWriteCallback,
-              Dart_StreamingCloseCallback)>();
-
-  /// Creates a precompiled snapshot.
-  /// - A root library must have been loaded.
-  /// - Dart_Precompile must have been called.
-  ///
-  /// Outputs an ELF shared library defining the symbols
-  /// - _kDartVmSnapshotData
-  /// - _kDartVmSnapshotInstructions
-  /// - _kDartIsolateSnapshotData
-  /// - _kDartIsolateSnapshotInstructions
-  ///
-  /// The shared library should be dynamically loaded by the embedder.
-  /// Running this snapshot requires a VM compiled with DART_PRECOMPILED_SNAPSHOT.
-  /// The kDartVmSnapshotData and kDartVmSnapshotInstructions should be passed to
-  /// Dart_Initialize. The kDartIsolateSnapshotData and
-  /// kDartIsolateSnapshotInstructions should be passed to Dart_CreateIsolate.
-  ///
-  /// The callback will be invoked one or more times to provide the binary output.
-  ///
-  /// If stripped is true, then the binary output will not include DWARF
-  /// debugging sections.
-  ///
-  /// If debug_callback_data is provided, debug_callback_data will be used with
-  /// the callback to provide separate debugging information.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_CreateAppAOTSnapshotAsElf(
-    Dart_StreamingWriteCallback callback,
-    ffi.Pointer<ffi.Void> callback_data,
-    bool stripped,
-    ffi.Pointer<ffi.Void> debug_callback_data,
-  ) {
-    return _Dart_CreateAppAOTSnapshotAsElf(
-      callback,
-      callback_data,
-      stripped,
-      debug_callback_data,
-    );
-  }
-
-  late final _Dart_CreateAppAOTSnapshotAsElfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              Dart_StreamingWriteCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Bool,
-              ffi.Pointer<ffi.Void>)>>('Dart_CreateAppAOTSnapshotAsElf');
-  late final _Dart_CreateAppAOTSnapshotAsElf =
-      _Dart_CreateAppAOTSnapshotAsElfPtr.asFunction<
-          Object Function(Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>,
-              bool, ffi.Pointer<ffi.Void>)>();
-
-  Object Dart_CreateAppAOTSnapshotAsElfs(
-    Dart_CreateLoadingUnitCallback next_callback,
-    ffi.Pointer<ffi.Void> next_callback_data,
-    bool stripped,
-    Dart_StreamingWriteCallback write_callback,
-    Dart_StreamingCloseCallback close_callback,
-  ) {
-    return _Dart_CreateAppAOTSnapshotAsElfs(
-      next_callback,
-      next_callback_data,
-      stripped,
-      write_callback,
-      close_callback,
-    );
-  }
-
-  late final _Dart_CreateAppAOTSnapshotAsElfsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              Dart_CreateLoadingUnitCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Bool,
-              Dart_StreamingWriteCallback,
-              Dart_StreamingCloseCallback)>>('Dart_CreateAppAOTSnapshotAsElfs');
-  late final _Dart_CreateAppAOTSnapshotAsElfs =
-      _Dart_CreateAppAOTSnapshotAsElfsPtr.asFunction<
-          Object Function(
-              Dart_CreateLoadingUnitCallback,
-              ffi.Pointer<ffi.Void>,
-              bool,
-              Dart_StreamingWriteCallback,
-              Dart_StreamingCloseCallback)>();
-
-  /// Like Dart_CreateAppAOTSnapshotAsAssembly, but only includes
-  /// kDartVmSnapshotData and kDartVmSnapshotInstructions. It also does
-  /// not strip DWARF information from the generated assembly or allow for
-  /// separate debug information.
-  Object Dart_CreateVMAOTSnapshotAsAssembly(
-    Dart_StreamingWriteCallback callback,
-    ffi.Pointer<ffi.Void> callback_data,
-  ) {
-    return _Dart_CreateVMAOTSnapshotAsAssembly(
-      callback,
-      callback_data,
-    );
-  }
-
-  late final _Dart_CreateVMAOTSnapshotAsAssemblyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_StreamingWriteCallback,
-              ffi.Pointer<ffi.Void>)>>('Dart_CreateVMAOTSnapshotAsAssembly');
-  late final _Dart_CreateVMAOTSnapshotAsAssembly =
-      _Dart_CreateVMAOTSnapshotAsAssemblyPtr.asFunction<
-          Object Function(
-              Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>)>();
-
-  /// Sorts the class-ids in depth first traversal order of the inheritance
-  /// tree. This is a costly operation, but it can make method dispatch
-  /// more efficient and is done before writing snapshots.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_SortClasses() {
-    return _Dart_SortClasses();
-  }
-
-  late final _Dart_SortClassesPtr =
-      _lookup<ffi.NativeFunction<ffi.Handle Function()>>('Dart_SortClasses');
-  late final _Dart_SortClasses =
-      _Dart_SortClassesPtr.asFunction<Object Function()>();
-
-  /// Creates a snapshot that caches compiled code and type feedback for faster
-  /// startup and quicker warmup in a subsequent process.
-  ///
-  /// Outputs a snapshot in two pieces. The pieces should be passed to
-  /// Dart_CreateIsolateGroup in a VM using the same VM snapshot pieces used in the
-  /// current VM. The instructions piece must be loaded with read and execute
-  /// permissions; the data piece may be loaded as read-only.
-  ///
-  /// - Requires the VM to have not been started with --precompilation.
-  /// - Not supported when targeting IA32.
-  /// - The VM writing the snapshot and the VM reading the snapshot must be the
-  /// same version, must be built in the same DEBUG/RELEASE/PRODUCT mode, must
-  /// be targeting the same architecture, and must both be in checked mode or
-  /// both in unchecked mode.
-  ///
-  /// The buffers are scope allocated and are only valid until the next call to
-  /// Dart_ExitScope.
-  ///
-  /// \return A valid handle if no error occurs during the operation.
-  Object Dart_CreateAppJITSnapshotAsBlobs(
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_data_buffer,
-    ffi.Pointer<ffi.IntPtr> isolate_snapshot_data_size,
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_instructions_buffer,
-    ffi.Pointer<ffi.IntPtr> isolate_snapshot_instructions_size,
-  ) {
-    return _Dart_CreateAppJITSnapshotAsBlobs(
-      isolate_snapshot_data_buffer,
-      isolate_snapshot_data_size,
-      isolate_snapshot_instructions_buffer,
-      isolate_snapshot_instructions_size,
-    );
-  }
-
-  late final _Dart_CreateAppJITSnapshotAsBlobsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_CreateAppJITSnapshotAsBlobs');
-  late final _Dart_CreateAppJITSnapshotAsBlobs =
-      _Dart_CreateAppJITSnapshotAsBlobsPtr.asFunction<
-          Object Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Like Dart_CreateAppJITSnapshotAsBlobs, but also creates a new VM snapshot.
-  Object Dart_CreateCoreJITSnapshotAsBlobs(
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> vm_snapshot_data_buffer,
-    ffi.Pointer<ffi.IntPtr> vm_snapshot_data_size,
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> vm_snapshot_instructions_buffer,
-    ffi.Pointer<ffi.IntPtr> vm_snapshot_instructions_size,
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_data_buffer,
-    ffi.Pointer<ffi.IntPtr> isolate_snapshot_data_size,
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> isolate_snapshot_instructions_buffer,
-    ffi.Pointer<ffi.IntPtr> isolate_snapshot_instructions_size,
-  ) {
-    return _Dart_CreateCoreJITSnapshotAsBlobs(
-      vm_snapshot_data_buffer,
-      vm_snapshot_data_size,
-      vm_snapshot_instructions_buffer,
-      vm_snapshot_instructions_size,
-      isolate_snapshot_data_buffer,
-      isolate_snapshot_data_size,
-      isolate_snapshot_instructions_buffer,
-      isolate_snapshot_instructions_size,
-    );
-  }
-
-  late final _Dart_CreateCoreJITSnapshotAsBlobsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_CreateCoreJITSnapshotAsBlobs');
-  late final _Dart_CreateCoreJITSnapshotAsBlobs =
-      _Dart_CreateCoreJITSnapshotAsBlobsPtr.asFunction<
-          Object Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Get obfuscation map for precompiled code.
-  ///
-  /// Obfuscation map is encoded as a JSON array of pairs (original name,
-  /// obfuscated name).
-  ///
-  /// \return Returns an error handler if the VM was built in a mode that does not
-  /// support obfuscation.
-  Object Dart_GetObfuscationMap(
-    ffi.Pointer<ffi.Pointer<ffi.Uint8>> buffer,
-    ffi.Pointer<ffi.IntPtr> buffer_length,
-  ) {
-    return _Dart_GetObfuscationMap(
-      buffer,
-      buffer_length,
-    );
-  }
-
-  late final _Dart_GetObfuscationMapPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>>('Dart_GetObfuscationMap');
-  late final _Dart_GetObfuscationMap = _Dart_GetObfuscationMapPtr.asFunction<
-      Object Function(
-          ffi.Pointer<ffi.Pointer<ffi.Uint8>>, ffi.Pointer<ffi.IntPtr>)>();
-
-  /// Returns whether the VM only supports running from precompiled snapshots and
-  /// not from any other kind of snapshot or from source (that is, the VM was
-  /// compiled with DART_PRECOMPILED_RUNTIME).
-  bool Dart_IsPrecompiledRuntime() {
-    return _Dart_IsPrecompiledRuntime();
-  }
-
-  late final _Dart_IsPrecompiledRuntimePtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function()>>(
-          'Dart_IsPrecompiledRuntime');
-  late final _Dart_IsPrecompiledRuntime =
-      _Dart_IsPrecompiledRuntimePtr.asFunction<bool Function()>();
-
-  /// Print a native stack trace. Used for crash handling.
-  ///
-  /// If context is NULL, prints the current stack trace. Otherwise, context
-  /// should be a CONTEXT* (Windows) or ucontext_t* (POSIX) from a signal handler
-  /// running on the current thread.
-  void Dart_DumpNativeStackTrace(
-    ffi.Pointer<ffi.Void> context,
-  ) {
-    return _Dart_DumpNativeStackTrace(
-      context,
-    );
-  }
-
-  late final _Dart_DumpNativeStackTracePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'Dart_DumpNativeStackTrace');
-  late final _Dart_DumpNativeStackTrace = _Dart_DumpNativeStackTracePtr
-      .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  /// Indicate that the process is about to abort, and the Dart VM should not
-  /// attempt to cleanup resources.
-  void Dart_PrepareToAbort() {
-    return _Dart_PrepareToAbort();
-  }
-
-  late final _Dart_PrepareToAbortPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Dart_PrepareToAbort');
-  late final _Dart_PrepareToAbort =
-      _Dart_PrepareToAbortPtr.asFunction<void Function()>();
-
-  /// Configure DWARF stack trace footnote callback.
-  void Dart_SetDwarfStackTraceFootnoteCallback(
-    Dart_DwarfStackTraceFootnoteCallback callback,
-  ) {
-    return _Dart_SetDwarfStackTraceFootnoteCallback(
-      callback,
-    );
-  }
-
-  late final _Dart_SetDwarfStackTraceFootnoteCallbackPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(Dart_DwarfStackTraceFootnoteCallback)>>(
-      'Dart_SetDwarfStackTraceFootnoteCallback');
-  late final _Dart_SetDwarfStackTraceFootnoteCallback =
-      _Dart_SetDwarfStackTraceFootnoteCallbackPtr.asFunction<
-          void Function(Dart_DwarfStackTraceFootnoteCallback)>();
-
-  void interactor_cqe_advance(
-    ffi.Pointer<io_uring> ring,
-    int count,
-  ) {
-    return _interactor_cqe_advance(
-      ring,
-      count,
-    );
-  }
-
-  late final _interactor_cqe_advancePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>(
-      'interactor_cqe_advance');
-  late final _interactor_cqe_advance = _interactor_cqe_advancePtr
-      .asFunction<void Function(ffi.Pointer<io_uring>, int)>();
-
-  void interactor_close_descritor(
-    int fd,
-  ) {
-    return _interactor_close_descritor(
-      fd,
-    );
-  }
-
-  late final _interactor_close_descritorPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
-          'interactor_close_descritor');
-  late final _interactor_close_descritor =
-      _interactor_close_descritorPtr.asFunction<void Function(int)>();
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>(
+      'interactor_dart_destroy');
+  late final _interactor_dart_destroy = _interactor_dart_destroyPtr
+      .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>();
 
   late final addresses = _SymbolAddresses(this);
 }
@@ -18137,6 +18840,918 @@ class _SymbolAddresses {
           ffi.NativeFunction<
               ffi.Void Function(ffi.Pointer<atomic_flag>, ffi.Int32)>>
       get atomic_flag_clear_explicit => _library._atomic_flag_clear_explicitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsError => _library._Dart_IsErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsApiError => _library._Dart_IsApiErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsUnhandledExceptionError =>
+          _library._Dart_IsUnhandledExceptionErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsCompilationError => _library._Dart_IsCompilationErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsFatalError => _library._Dart_IsFatalErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Handle)>>
+      get Dart_GetError => _library._Dart_GetErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_ErrorHasException => _library._Dart_ErrorHasExceptionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ErrorGetException => _library._Dart_ErrorGetExceptionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ErrorGetStackTrace => _library._Dart_ErrorGetStackTracePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
+      get Dart_NewApiError => _library._Dart_NewApiErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
+      get Dart_NewCompilationError => _library._Dart_NewCompilationErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_NewUnhandledExceptionError =>
+          _library._Dart_NewUnhandledExceptionErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>
+      get Dart_PropagateError => _library._Dart_PropagateErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ToString => _library._Dart_ToStringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle, ffi.Handle)>>
+      get Dart_IdentityEquals => _library._Dart_IdentityEqualsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_HandleFromPersistent => _library._Dart_HandleFromPersistentPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Handle Function(Dart_WeakPersistentHandle)>>
+      get Dart_HandleFromWeakPersistent =>
+          _library._Dart_HandleFromWeakPersistentPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_NewPersistentHandle => _library._Dart_NewPersistentHandlePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle, ffi.Handle)>>
+      get Dart_SetPersistentHandle => _library._Dart_SetPersistentHandlePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>
+      get Dart_DeletePersistentHandle =>
+          _library._Dart_DeletePersistentHandlePtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          Dart_WeakPersistentHandle Function(
+              ffi.Handle,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>> get Dart_NewWeakPersistentHandle =>
+      _library._Dart_NewWeakPersistentHandlePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_WeakPersistentHandle)>>
+      get Dart_DeleteWeakPersistentHandle =>
+          _library._Dart_DeleteWeakPersistentHandlePtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          Dart_FinalizableHandle Function(
+              ffi.Handle,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>> get Dart_NewFinalizableHandle =>
+      _library._Dart_NewFinalizableHandlePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(Dart_FinalizableHandle, ffi.Handle)>>
+      get Dart_DeleteFinalizableHandle =>
+          _library._Dart_DeleteFinalizableHandlePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>
+      get Dart_VersionString => _library._Dart_VersionStringPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<Dart_IsolateFlags>)>>
+      get Dart_IsolateFlagsInitialize =>
+          _library._Dart_IsolateFlagsInitializePtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<Dart_InitializeParams>)>> get Dart_Initialize =>
+      _library._Dart_InitializePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>
+      get Dart_Cleanup => _library._Dart_CleanupPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Char> Function(
+                  ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_SetVMFlags => _library._Dart_SetVMFlagsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Char>)>>
+      get Dart_IsVMFlagSet => _library._Dart_IsVMFlagSetPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              Dart_Isolate Function(
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Uint8>,
+                  ffi.Pointer<ffi.Uint8>,
+                  ffi.Pointer<Dart_IsolateFlags>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_CreateIsolateGroup => _library._Dart_CreateIsolateGroupPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              Dart_Isolate Function(
+                  Dart_Isolate,
+                  ffi.Pointer<ffi.Char>,
+                  Dart_IsolateShutdownCallback,
+                  Dart_IsolateCleanupCallback,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_CreateIsolateInGroup => _library._Dart_CreateIsolateInGroupPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              Dart_Isolate Function(
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Uint8>,
+                  ffi.IntPtr,
+                  ffi.Pointer<Dart_IsolateFlags>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_CreateIsolateGroupFromKernel =>
+          _library._Dart_CreateIsolateGroupFromKernelPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_ShutdownIsolate => _library._Dart_ShutdownIsolatePtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_Isolate Function()>>
+      get Dart_CurrentIsolate => _library._Dart_CurrentIsolatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>
+      get Dart_CurrentIsolateData => _library._Dart_CurrentIsolateDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>
+      get Dart_IsolateData => _library._Dart_IsolateDataPtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_IsolateGroup Function()>>
+      get Dart_CurrentIsolateGroup => _library._Dart_CurrentIsolateGroupPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>
+      get Dart_CurrentIsolateGroupData =>
+          _library._Dart_CurrentIsolateGroupDataPtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_IsolateGroupId Function()>>
+      get Dart_CurrentIsolateGroupId => _library._Dart_CurrentIsolateGroupIdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>
+      get Dart_IsolateGroupData => _library._Dart_IsolateGroupDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_DebugName =>
+      _library._Dart_DebugNamePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>
+      get Dart_DebugNameToCString => _library._Dart_DebugNameToCStringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>
+      get Dart_IsolateServiceId => _library._Dart_IsolateServiceIdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>
+      get Dart_EnterIsolate => _library._Dart_EnterIsolatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>
+      get Dart_KillIsolate => _library._Dart_KillIsolatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>
+      get Dart_NotifyIdle => _library._Dart_NotifyIdlePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_EnableHeapSampling => _library._Dart_EnableHeapSamplingPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_DisableHeapSampling => _library._Dart_DisableHeapSamplingPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(Dart_HeapSamplingCreateCallback,
+                  Dart_HeapSamplingDeleteCallback)>>
+      get Dart_RegisterHeapSamplingCallback =>
+          _library._Dart_RegisterHeapSamplingCallbackPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              Dart_HeapSamplingReportCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Bool)>> get Dart_ReportSurvivingAllocations =>
+      _library._Dart_ReportSurvivingAllocationsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.IntPtr)>>
+      get Dart_SetHeapSamplingPeriod => _library._Dart_SetHeapSamplingPeriodPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_NotifyDestroyed => _library._Dart_NotifyDestroyedPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_NotifyLowMemory => _library._Dart_NotifyLowMemoryPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32)>>
+      get Dart_SetPerformanceMode => _library._Dart_SetPerformanceModePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_StartProfiling => _library._Dart_StartProfilingPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_StopProfiling =>
+      _library._Dart_StopProfilingPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_ThreadDisableProfiling =>
+          _library._Dart_ThreadDisableProfilingPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_ThreadEnableProfiling => _library._Dart_ThreadEnableProfilingPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>, ffi.IntPtr)>>
+      get Dart_AddSymbols => _library._Dart_AddSymbolsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_ExitIsolate =>
+      _library._Dart_ExitIsolatePtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Bool)>> get Dart_CreateSnapshot =>
+      _library._Dart_CreateSnapshotPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_IsKernel => _library._Dart_IsKernelPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>
+      get Dart_IsolateMakeRunnable => _library._Dart_IsolateMakeRunnablePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_MessageNotifyCallback)>>
+      get Dart_SetMessageNotifyCallback =>
+          _library._Dart_SetMessageNotifyCallbackPtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_MessageNotifyCallback Function()>>
+      get Dart_GetMessageNotifyCallback =>
+          _library._Dart_GetMessageNotifyCallbackPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_ShouldPauseOnStart => _library._Dart_ShouldPauseOnStartPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
+      get Dart_SetShouldPauseOnStart => _library._Dart_SetShouldPauseOnStartPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_IsPausedOnStart => _library._Dart_IsPausedOnStartPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
+      get Dart_SetPausedOnStart => _library._Dart_SetPausedOnStartPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_ShouldPauseOnExit => _library._Dart_ShouldPauseOnExitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
+      get Dart_SetShouldPauseOnExit => _library._Dart_SetShouldPauseOnExitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_IsPausedOnExit => _library._Dart_IsPausedOnExitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
+      get Dart_SetPausedOnExit => _library._Dart_SetPausedOnExitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>
+      get Dart_SetStickyError => _library._Dart_SetStickyErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_HasStickyError => _library._Dart_HasStickyErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>>
+      get Dart_GetStickyError => _library._Dart_GetStickyErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>>
+      get Dart_HandleMessage => _library._Dart_HandleMessagePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>
+      get Dart_WaitForEvent => _library._Dart_WaitForEventPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_HandleServiceMessages => _library._Dart_HandleServiceMessagesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_HasServiceMessages => _library._Dart_HasServiceMessagesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_RunLoop =>
+      _library._Dart_RunLoopPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Bool Function(ffi.Bool, Dart_Port, Dart_Port,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>> get Dart_RunLoopAsync =>
+      _library._Dart_RunLoopAsyncPtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_Port Function()>>
+      get Dart_GetMainPortId => _library._Dart_GetMainPortIdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>> get Dart_HasLivePorts =>
+      _library._Dart_HasLivePortsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(Dart_Port, ffi.Handle)>>
+      get Dart_Post => _library._Dart_PostPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_Port)>>
+      get Dart_NewSendPort => _library._Dart_NewSendPortPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<Dart_Port>)>>
+      get Dart_SendPortGetId => _library._Dart_SendPortGetIdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_EnterScope =>
+      _library._Dart_EnterScopePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_ExitScope =>
+      _library._Dart_ExitScopePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Uint8> Function(ffi.IntPtr)>>
+      get Dart_ScopeAllocate => _library._Dart_ScopeAllocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_Null =>
+      _library._Dart_NullPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsNull => _library._Dart_IsNullPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_EmptyString =>
+      _library._Dart_EmptyStringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_TypeDynamic =>
+      _library._Dart_TypeDynamicPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_TypeVoid =>
+      _library._Dart_TypeVoidPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_TypeNever =>
+      _library._Dart_TypeNeverPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_ObjectEquals => _library._Dart_ObjectEqualsPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_ObjectIsType => _library._Dart_ObjectIsTypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsInstance => _library._Dart_IsInstancePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsNumber => _library._Dart_IsNumberPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsInteger => _library._Dart_IsIntegerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsDouble => _library._Dart_IsDoublePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsBoolean => _library._Dart_IsBooleanPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsString => _library._Dart_IsStringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsStringLatin1 => _library._Dart_IsStringLatin1Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsExternalString => _library._Dart_IsExternalStringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsList => _library._Dart_IsListPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsMap => _library._Dart_IsMapPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsLibrary => _library._Dart_IsLibraryPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsType => _library._Dart_IsTypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsFunction => _library._Dart_IsFunctionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsVariable => _library._Dart_IsVariablePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsTypeVariable => _library._Dart_IsTypeVariablePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsClosure => _library._Dart_IsClosurePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsTypedData => _library._Dart_IsTypedDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsByteBuffer => _library._Dart_IsByteBufferPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsFuture => _library._Dart_IsFuturePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_InstanceGetType => _library._Dart_InstanceGetTypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ClassName => _library._Dart_ClassNamePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_FunctionName => _library._Dart_FunctionNamePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_FunctionOwner => _library._Dart_FunctionOwnerPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_FunctionIsStatic => _library._Dart_FunctionIsStaticPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
+      get Dart_IsTearOff => _library._Dart_IsTearOffPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ClosureFunction => _library._Dart_ClosureFunctionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ClassLibrary => _library._Dart_ClassLibraryPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_IntegerFitsIntoInt64 => _library._Dart_IntegerFitsIntoInt64Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_IntegerFitsIntoUint64 => _library._Dart_IntegerFitsIntoUint64Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>
+      get Dart_NewInteger => _library._Dart_NewIntegerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Uint64)>>
+      get Dart_NewIntegerFromUint64 => _library._Dart_NewIntegerFromUint64Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
+      get Dart_NewIntegerFromHexCString =>
+          _library._Dart_NewIntegerFromHexCStringPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Int64>)>>
+      get Dart_IntegerToInt64 => _library._Dart_IntegerToInt64Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint64>)>>
+      get Dart_IntegerToUint64 => _library._Dart_IntegerToUint64Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_IntegerToHexCString => _library._Dart_IntegerToHexCStringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Double)>>
+      get Dart_NewDouble => _library._Dart_NewDoublePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Double>)>>
+      get Dart_DoubleValue => _library._Dart_DoubleValuePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Handle)>>
+      get Dart_GetStaticMethodClosure =>
+          _library._Dart_GetStaticMethodClosurePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_True =>
+      _library._Dart_TruePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_False =>
+      _library._Dart_FalsePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>
+      get Dart_NewBoolean => _library._Dart_NewBooleanPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_BooleanValue => _library._Dart_BooleanValuePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_StringLength => _library._Dart_StringLengthPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
+      get Dart_NewStringFromCString => _library._Dart_NewStringFromCStringPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_NewStringFromUTF8 => _library._Dart_NewStringFromUTF8Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Pointer<ffi.Uint16>, ffi.IntPtr)>>
+      get Dart_NewStringFromUTF16 => _library._Dart_NewStringFromUTF16Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Pointer<ffi.Int32>, ffi.IntPtr)>>
+      get Dart_NewStringFromUTF32 => _library._Dart_NewStringFromUTF32Ptr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>> get Dart_NewExternalLatin1String =>
+      _library._Dart_NewExternalLatin1StringPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Uint16>,
+              ffi.IntPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.IntPtr,
+              Dart_HandleFinalizer)>> get Dart_NewExternalUTF16String =>
+      _library._Dart_NewExternalUTF16StringPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_StringToCString => _library._Dart_StringToCStringPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>> get Dart_StringToUTF8 =>
+      _library._Dart_StringToUTF8Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_StringToLatin1 => _library._Dart_StringToLatin1Ptr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint16>,
+              ffi.Pointer<ffi.IntPtr>)>> get Dart_StringToUTF16 =>
+      _library._Dart_StringToUTF16Ptr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_StringStorageSize => _library._Dart_StringStorageSizePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>,
+                  ffi.Pointer<ffi.IntPtr>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>
+      get Dart_StringGetProperties => _library._Dart_StringGetPropertiesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>
+      get Dart_NewList => _library._Dart_NewListPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>
+      get Dart_NewListOf => _library._Dart_NewListOfPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>
+      get Dart_NewListOfType => _library._Dart_NewListOfTypePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr)>>
+      get Dart_NewListOfTypeFilled => _library._Dart_NewListOfTypeFilledPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_ListLength => _library._Dart_ListLengthPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>
+      get Dart_ListGetAt => _library._Dart_ListGetAtPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.IntPtr, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
+      get Dart_ListGetRange => _library._Dart_ListGetRangePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.Handle)>>
+      get Dart_ListSetAt => _library._Dart_ListSetAtPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_ListGetAsBytes => _library._Dart_ListGetAsBytesPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_ListSetAsBytes => _library._Dart_ListSetAsBytesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_MapGetAt => _library._Dart_MapGetAtPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_MapContainsKey => _library._Dart_MapContainsKeyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_MapKeys => _library._Dart_MapKeysPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>
+      get Dart_GetTypeOfTypedData => _library._Dart_GetTypeOfTypedDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>
+      get Dart_GetTypeOfExternalTypedData =>
+          _library._Dart_GetTypeOfExternalTypedDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>
+      get Dart_NewTypedData => _library._Dart_NewTypedDataPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr)>>
+      get Dart_NewExternalTypedData => _library._Dart_NewExternalTypedDataPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr,
+                  ffi.Pointer<ffi.Void>, ffi.IntPtr, Dart_HandleFinalizer)>>
+      get Dart_NewExternalTypedDataWithFinalizer =>
+          _library._Dart_NewExternalTypedDataWithFinalizerPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr,
+                  ffi.Pointer<ffi.Void>, ffi.IntPtr, Dart_HandleFinalizer)>>
+      get Dart_NewUnmodifiableExternalTypedDataWithFinalizer =>
+          _library._Dart_NewUnmodifiableExternalTypedDataWithFinalizerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_NewByteBuffer => _library._Dart_NewByteBufferPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Handle,
+              ffi.Pointer<ffi.Int32>,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.IntPtr>)>> get Dart_TypedDataAcquireData =>
+      _library._Dart_TypedDataAcquireDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_TypedDataReleaseData => _library._Dart_TypedDataReleaseDataPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_GetDataFromByteBuffer => _library._Dart_GetDataFromByteBufferPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
+      get Dart_New => _library._Dart_NewPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_Allocate => _library._Dart_AllocatePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_AllocateWithNativeFields =>
+          _library._Dart_AllocateWithNativeFieldsPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
+      get Dart_Invoke => _library._Dart_InvokePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
+      get Dart_InvokeClosure => _library._Dart_InvokeClosurePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
+      get Dart_InvokeConstructor => _library._Dart_InvokeConstructorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_GetField => _library._Dart_GetFieldPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Handle)>>
+      get Dart_SetField => _library._Dart_SetFieldPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_ThrowException => _library._Dart_ThrowExceptionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_ReThrowException => _library._Dart_ReThrowExceptionPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Int>)>>
+      get Dart_GetNativeInstanceFieldCount =>
+          _library._Dart_GetNativeInstanceFieldCountPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Int, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_GetNativeInstanceField =>
+          _library._Dart_GetNativeInstanceFieldPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Int, ffi.IntPtr)>>
+      get Dart_SetNativeInstanceField =>
+          _library._Dart_SetNativeInstanceFieldPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_NativeArguments)>>
+      get Dart_GetNativeIsolateGroupData =>
+          _library._Dart_GetNativeIsolateGroupDataPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_NativeArguments,
+                  ffi.Int,
+                  ffi.Pointer<Dart_NativeArgument_Descriptor>,
+                  ffi.Pointer<Dart_NativeArgument_Value>)>>
+      get Dart_GetNativeArguments => _library._Dart_GetNativeArgumentsPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Handle Function(Dart_NativeArguments, ffi.Int)>>
+      get Dart_GetNativeArgument => _library._Dart_GetNativeArgumentPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(Dart_NativeArguments)>>
+      get Dart_GetNativeArgumentCount =>
+          _library._Dart_GetNativeArgumentCountPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(Dart_NativeArguments, ffi.Int, ffi.Int,
+              ffi.Pointer<ffi.IntPtr>)>> get Dart_GetNativeFieldsOfArgument =>
+      _library._Dart_GetNativeFieldsOfArgumentPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_NativeArguments, ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_GetNativeReceiver => _library._Dart_GetNativeReceiverPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(Dart_NativeArguments, ffi.Int,
+                  ffi.Pointer<ffi.Pointer<ffi.Void>>)>>
+      get Dart_GetNativeStringArgument =>
+          _library._Dart_GetNativeStringArgumentPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_NativeArguments, ffi.Int, ffi.Pointer<ffi.Int64>)>>
+      get Dart_GetNativeIntegerArgument =>
+          _library._Dart_GetNativeIntegerArgumentPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_NativeArguments, ffi.Int, ffi.Pointer<ffi.Bool>)>>
+      get Dart_GetNativeBooleanArgument =>
+          _library._Dart_GetNativeBooleanArgumentPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_NativeArguments, ffi.Int, ffi.Pointer<ffi.Double>)>>
+      get Dart_GetNativeDoubleArgument =>
+          _library._Dart_GetNativeDoubleArgumentPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Handle)>>
+      get Dart_SetReturnValue => _library._Dart_SetReturnValuePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  Dart_NativeArguments, Dart_WeakPersistentHandle)>>
+      get Dart_SetWeakHandleReturnValue =>
+          _library._Dart_SetWeakHandleReturnValuePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Bool)>>
+      get Dart_SetBooleanReturnValue => _library._Dart_SetBooleanReturnValuePtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Int64)>>
+      get Dart_SetIntegerReturnValue => _library._Dart_SetIntegerReturnValuePtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Double)>>
+      get Dart_SetDoubleReturnValue => _library._Dart_SetDoubleReturnValuePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_EnvironmentCallback)>>
+      get Dart_SetEnvironmentCallback =>
+          _library._Dart_SetEnvironmentCallbackPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Handle, Dart_NativeEntryResolver,
+              Dart_NativeEntrySymbol)>> get Dart_SetNativeResolver =>
+      _library._Dart_SetNativeResolverPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<Dart_NativeEntryResolver>)>>
+      get Dart_GetNativeResolver => _library._Dart_GetNativeResolverPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<Dart_NativeEntrySymbol>)>>
+      get Dart_GetNativeSymbol => _library._Dart_GetNativeSymbolPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, Dart_FfiNativeResolver)>>
+      get Dart_SetFfiNativeResolver => _library._Dart_SetFfiNativeResolverPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_LibraryTagHandler)>>
+      get Dart_SetLibraryTagHandler => _library._Dart_SetLibraryTagHandlerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_DeferredLoadHandler)>>
+      get Dart_SetDeferredLoadHandler =>
+          _library._Dart_SetDeferredLoadHandlerPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.IntPtr, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Uint8>)>>
+      get Dart_DeferredLoadComplete => _library._Dart_DeferredLoadCompletePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.IntPtr, ffi.Pointer<ffi.Char>, ffi.Bool)>>
+      get Dart_DeferredLoadCompleteError =>
+          _library._Dart_DeferredLoadCompleteErrorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_DefaultCanonicalizeUrl =>
+          _library._Dart_DefaultCanonicalizeUrlPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_LoadScriptFromKernel => _library._Dart_LoadScriptFromKernelPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_RootLibrary =>
+      _library._Dart_RootLibraryPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_SetRootLibrary => _library._Dart_SetRootLibraryPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
+      get Dart_GetType => _library._Dart_GetTypePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
+      get Dart_GetNullableType => _library._Dart_GetNullableTypePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
+      get Dart_GetNonNullableType => _library._Dart_GetNonNullableTypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_TypeToNullableType => _library._Dart_TypeToNullableTypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_TypeToNonNullableType => _library._Dart_TypeToNonNullableTypePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_IsNullableType => _library._Dart_IsNullableTypePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_IsNonNullableType => _library._Dart_IsNonNullableTypePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
+      get Dart_IsLegacyType => _library._Dart_IsLegacyTypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_GetClass => _library._Dart_GetClassPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_LibraryUrl => _library._Dart_LibraryUrlPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_LibraryResolvedUrl => _library._Dart_LibraryResolvedUrlPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>>
+      get Dart_GetLoadedLibraries => _library._Dart_GetLoadedLibrariesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_LookupLibrary => _library._Dart_LookupLibraryPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
+      get Dart_LibraryHandleError => _library._Dart_LibraryHandleErrorPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_LoadLibraryFromKernel => _library._Dart_LoadLibraryFromKernelPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
+      get Dart_LoadLibrary => _library._Dart_LoadLibraryPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>
+      get Dart_FinalizeLoading => _library._Dart_FinalizeLoadingPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>
+      get Dart_GetPeer => _library._Dart_GetPeerPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Void>)>>
+      get Dart_SetPeer => _library._Dart_SetPeerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>
+      get Dart_IsKernelIsolate => _library._Dart_IsKernelIsolatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_KernelIsolateIsRunning =>
+          _library._Dart_KernelIsolateIsRunningPtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_Port Function()>> get Dart_KernelPort =>
+      _library._Dart_KernelPortPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          Dart_KernelCompilationResult Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr,
+              ffi.Bool,
+              ffi.Bool,
+              ffi.Bool,
+              ffi.Pointer<ffi.Char>,
+              ffi.Int32)>> get Dart_CompileToKernel =>
+      _library._Dart_CompileToKernelPtr;
+  ffi.Pointer<ffi.NativeFunction<Dart_KernelCompilationResult Function()>>
+      get Dart_KernelListDependencies =>
+          _library._Dart_KernelListDependenciesPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
+      get Dart_SetDartLibrarySourcesKernel =>
+          _library._Dart_SetDartLibrarySourcesKernelPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Bool Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.IntPtr)>> get Dart_DetectNullSafety =>
+      _library._Dart_DetectNullSafetyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>
+      get Dart_IsServiceIsolate => _library._Dart_IsServiceIsolatePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Bool Function(Dart_Port, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
+      get Dart_WriteProfileToTimeline =>
+          _library._Dart_WriteProfileToTimelinePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_Precompile =>
+      _library._Dart_PrecompilePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>
+      get Dart_LoadingUnitLibraryUris =>
+          _library._Dart_LoadingUnitLibraryUrisPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(Dart_StreamingWriteCallback,
+                  ffi.Pointer<ffi.Void>, ffi.Bool, ffi.Pointer<ffi.Void>)>>
+      get Dart_CreateAppAOTSnapshotAsAssembly =>
+          _library._Dart_CreateAppAOTSnapshotAsAssemblyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_CreateLoadingUnitCallback,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Bool,
+                  Dart_StreamingWriteCallback,
+                  Dart_StreamingCloseCallback)>>
+      get Dart_CreateAppAOTSnapshotAsAssemblies =>
+          _library._Dart_CreateAppAOTSnapshotAsAssembliesPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              Dart_StreamingWriteCallback,
+              ffi.Pointer<ffi.Void>,
+              ffi.Bool,
+              ffi.Pointer<ffi.Void>)>> get Dart_CreateAppAOTSnapshotAsElf =>
+      _library._Dart_CreateAppAOTSnapshotAsElfPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_CreateLoadingUnitCallback,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Bool,
+                  Dart_StreamingWriteCallback,
+                  Dart_StreamingCloseCallback)>>
+      get Dart_CreateAppAOTSnapshotAsElfs =>
+          _library._Dart_CreateAppAOTSnapshotAsElfsPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>)>>
+      get Dart_CreateVMAOTSnapshotAsAssembly =>
+          _library._Dart_CreateVMAOTSnapshotAsAssemblyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_SortClasses =>
+      _library._Dart_SortClassesPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>,
+              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>> get Dart_CreateAppJITSnapshotAsBlobs =>
+      _library._Dart_CreateAppJITSnapshotAsBlobsPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Handle Function(
+                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+                  ffi.Pointer<ffi.IntPtr>,
+                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+                  ffi.Pointer<ffi.IntPtr>,
+                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+                  ffi.Pointer<ffi.IntPtr>,
+                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+                  ffi.Pointer<ffi.IntPtr>)>>
+      get Dart_CreateCoreJITSnapshotAsBlobs =>
+          _library._Dart_CreateCoreJITSnapshotAsBlobsPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Handle Function(ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
+              ffi.Pointer<ffi.IntPtr>)>> get Dart_GetObfuscationMap =>
+      _library._Dart_GetObfuscationMapPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
+      get Dart_IsPrecompiledRuntime => _library._Dart_IsPrecompiledRuntimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
+      get Dart_DumpNativeStackTrace => _library._Dart_DumpNativeStackTracePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get Dart_PrepareToAbort => _library._Dart_PrepareToAbortPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(Dart_DwarfStackTraceFootnoteCallback)>>
+      get Dart_SetDwarfStackTraceFootnoteCallback =>
+          _library._Dart_SetDwarfStackTraceFootnoteCallbackPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>
+      get interactor_cqe_advance => _library._interactor_cqe_advancePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
+      get interactor_close_descritor => _library._interactor_close_descritorPtr;
   ffi.Pointer<ffi.Pointer<FILE>> get stdin => _library._stdin;
   ffi.Pointer<ffi.Pointer<FILE>> get stdout => _library._stdout;
   ffi.Pointer<ffi.Pointer<FILE>> get stderr => _library._stderr;
@@ -20163,966 +21778,219 @@ class _SymbolAddresses {
       get mh_events_dump => _library._mh_events_dumpPtr;
   ffi.Pointer<
       ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Size,
+              ffi.Int,
+              ffi.Int,
+              ffi.Int,
+              ffi.Long)>> get mmap => _library._mmapPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>>
+      get munmap => _library._munmapPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>
+      get mprotect => _library._mprotectPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>
+      get msync => _library._msyncPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>
+      get madvise => _library._madvisePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>
+      get posix_madvise => _library._posix_madvisePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>>
+      get mlock => _library._mlockPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>>
+      get munlock => _library._munlockPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get mlockall =>
+      _library._mlockallPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get munlockall =>
+      _library._munlockallPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size,
+              ffi.Pointer<ffi.UnsignedChar>)>> get mincore =>
+      _library._mincorePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int, mode_t)>>
+      get shm_open => _library._shm_openPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>
+      get shm_unlink => _library._shm_unlinkPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<interactor_worker_t>,
-              ffi.Pointer<interactor_worker_configuration_t>,
-              ffi.Uint8)>> get interactor_worker_initialize =>
-      _library._interactor_worker_initializePtr;
+              ffi.Pointer<slab_arena>,
+              ffi.Pointer<quota>,
+              ffi.Size,
+              ffi.Uint32,
+              ffi.Int)>> get slab_arena_create =>
+      _library._slab_arena_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_arena>)>>
+      get slab_arena_destroy => _library._slab_arena_destroyPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_worker_t>, ffi.Int)>>
-      get interactor_worker_cancel_by_fd =>
-          _library._interactor_worker_cancel_by_fdPtr;
+              ffi.Pointer<ffi.Void> Function(ffi.Pointer<slab_arena>)>>
+      get slab_map => _library._slab_mapPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<slab_arena>, ffi.Pointer<ffi.Void>)>>
+      get slab_unmap => _library._slab_unmapPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_arena>)>>
+      get slab_arena_mprotect => _library._slab_arena_mprotectPtr;
+  ffi.Pointer<ffi.Uint32> get slab_magic => _library._slab_magic;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<slab_cache>, ffi.Pointer<slab_arena>)>>
+      get slab_cache_create => _library._slab_cache_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_cache>)>>
+      get slab_cache_destroy => _library._slab_cache_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Uint8)>>
+      get slab_get_with_order => _library._slab_get_with_orderPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>>
+      get slab_put_with_order => _library._slab_put_with_orderPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Size)>>
+      get slab_get_large => _library._slab_get_largePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>>
+      get slab_put_large => _library._slab_put_largePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Size)>>
+      get slab_get => _library._slab_getPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>>
+      get slab_put => _library._slab_putPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<slab_cache>)>>
+      get slab_cache_check => _library._slab_cache_checkPtr;
   ffi.Pointer<
           ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_worker_t>)>>
-      get interactor_worker_check_event_timeouts =>
-          _library._interactor_worker_check_event_timeoutsPtr;
+          .NativeFunction<ffi.Size Function(ffi.Pointer<slab_cache>, ffi.Size)>>
+      get slab_real_size => _library._slab_real_sizePtr;
+  ffi.Pointer<ffi.Double> get OVERHEAD_RATIO => _library._OVERHEAD_RATIO;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_worker_t>, ffi.Uint64)>>
-      get interactor_worker_remove_event =>
-          _library._interactor_worker_remove_eventPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>
-      get interactor_worker_get_buffer =>
-          _library._interactor_worker_get_bufferPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_worker_t>, ffi.Uint16)>>
-      get interactor_worker_release_buffer =>
-          _library._interactor_worker_release_bufferPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>
-      get interactor_worker_available_buffers =>
-          _library._interactor_worker_available_buffersPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_worker_t>)>>
-      get interactor_worker_used_buffers =>
-          _library._interactor_worker_used_buffersPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_worker_t>)>>
-      get interactor_worker_peek => _library._interactor_worker_peekPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_worker_t>)>>
-      get interactor_worker_destroy => _library._interactor_worker_destroyPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsError => _library._Dart_IsErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsApiError => _library._Dart_IsApiErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsUnhandledExceptionError =>
-          _library._Dart_IsUnhandledExceptionErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsCompilationError => _library._Dart_IsCompilationErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsFatalError => _library._Dart_IsFatalErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Handle)>>
-      get Dart_GetError => _library._Dart_GetErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_ErrorHasException => _library._Dart_ErrorHasExceptionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ErrorGetException => _library._Dart_ErrorGetExceptionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ErrorGetStackTrace => _library._Dart_ErrorGetStackTracePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
-      get Dart_NewApiError => _library._Dart_NewApiErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
-      get Dart_NewCompilationError => _library._Dart_NewCompilationErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_NewUnhandledExceptionError =>
-          _library._Dart_NewUnhandledExceptionErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>
-      get Dart_PropagateError => _library._Dart_PropagateErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ToString => _library._Dart_ToStringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle, ffi.Handle)>>
-      get Dart_IdentityEquals => _library._Dart_IdentityEqualsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_HandleFromPersistent => _library._Dart_HandleFromPersistentPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Handle Function(Dart_WeakPersistentHandle)>>
-      get Dart_HandleFromWeakPersistent =>
-          _library._Dart_HandleFromWeakPersistentPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_NewPersistentHandle => _library._Dart_NewPersistentHandlePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle, ffi.Handle)>>
-      get Dart_SetPersistentHandle => _library._Dart_SetPersistentHandlePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>
-      get Dart_DeletePersistentHandle =>
-          _library._Dart_DeletePersistentHandlePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          Dart_WeakPersistentHandle Function(
-              ffi.Handle,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>> get Dart_NewWeakPersistentHandle =>
-      _library._Dart_NewWeakPersistentHandlePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_WeakPersistentHandle)>>
-      get Dart_DeleteWeakPersistentHandle =>
-          _library._Dart_DeleteWeakPersistentHandlePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          Dart_FinalizableHandle Function(
-              ffi.Handle,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>> get Dart_NewFinalizableHandle =>
-      _library._Dart_NewFinalizableHandlePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(Dart_FinalizableHandle, ffi.Handle)>>
-      get Dart_DeleteFinalizableHandle =>
-          _library._Dart_DeleteFinalizableHandlePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>
-      get Dart_VersionString => _library._Dart_VersionStringPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<Dart_IsolateFlags>)>>
-      get Dart_IsolateFlagsInitialize =>
-          _library._Dart_IsolateFlagsInitializePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<Dart_InitializeParams>)>> get Dart_Initialize =>
-      _library._Dart_InitializePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>
-      get Dart_Cleanup => _library._Dart_CleanupPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_SetVMFlags => _library._Dart_SetVMFlagsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Char>)>>
-      get Dart_IsVMFlagSet => _library._Dart_IsVMFlagSetPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              Dart_Isolate Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Uint8>,
-                  ffi.Pointer<ffi.Uint8>,
-                  ffi.Pointer<Dart_IsolateFlags>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_CreateIsolateGroup => _library._Dart_CreateIsolateGroupPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              Dart_Isolate Function(
-                  Dart_Isolate,
-                  ffi.Pointer<ffi.Char>,
-                  Dart_IsolateShutdownCallback,
-                  Dart_IsolateCleanupCallback,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_CreateIsolateInGroup => _library._Dart_CreateIsolateInGroupPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              Dart_Isolate Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Uint8>,
-                  ffi.IntPtr,
-                  ffi.Pointer<Dart_IsolateFlags>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_CreateIsolateGroupFromKernel =>
-          _library._Dart_CreateIsolateGroupFromKernelPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_ShutdownIsolate => _library._Dart_ShutdownIsolatePtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_Isolate Function()>>
-      get Dart_CurrentIsolate => _library._Dart_CurrentIsolatePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>
-      get Dart_CurrentIsolateData => _library._Dart_CurrentIsolateDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>
-      get Dart_IsolateData => _library._Dart_IsolateDataPtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_IsolateGroup Function()>>
-      get Dart_CurrentIsolateGroup => _library._Dart_CurrentIsolateGroupPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function()>>
-      get Dart_CurrentIsolateGroupData =>
-          _library._Dart_CurrentIsolateGroupDataPtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_IsolateGroupId Function()>>
-      get Dart_CurrentIsolateGroupId => _library._Dart_CurrentIsolateGroupIdPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_Isolate)>>
-      get Dart_IsolateGroupData => _library._Dart_IsolateGroupDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_DebugName =>
-      _library._Dart_DebugNamePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>
-      get Dart_DebugNameToCString => _library._Dart_DebugNameToCStringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>
-      get Dart_IsolateServiceId => _library._Dart_IsolateServiceIdPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>
-      get Dart_EnterIsolate => _library._Dart_EnterIsolatePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_Isolate)>>
-      get Dart_KillIsolate => _library._Dart_KillIsolatePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>
-      get Dart_NotifyIdle => _library._Dart_NotifyIdlePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_EnableHeapSampling => _library._Dart_EnableHeapSamplingPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_DisableHeapSampling => _library._Dart_DisableHeapSamplingPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(Dart_HeapSamplingCreateCallback,
-                  Dart_HeapSamplingDeleteCallback)>>
-      get Dart_RegisterHeapSamplingCallback =>
-          _library._Dart_RegisterHeapSamplingCallbackPtr;
+              ffi.Void Function(
+                  ffi.Pointer<mempool>, ffi.Pointer<mempool_stats>)>>
+      get mempool_stats1 => _library._mempool_stats1Ptr;
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              Dart_HeapSamplingReportCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Bool)>> get Dart_ReportSurvivingAllocations =>
-      _library._Dart_ReportSurvivingAllocationsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.IntPtr)>>
-      get Dart_SetHeapSamplingPeriod => _library._Dart_SetHeapSamplingPeriodPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_NotifyDestroyed => _library._Dart_NotifyDestroyedPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_NotifyLowMemory => _library._Dart_NotifyLowMemoryPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32)>>
-      get Dart_SetPerformanceMode => _library._Dart_SetPerformanceModePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_StartProfiling => _library._Dart_StartProfilingPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_StopProfiling =>
-      _library._Dart_StopProfilingPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_ThreadDisableProfiling =>
-          _library._Dart_ThreadDisableProfilingPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_ThreadEnableProfiling => _library._Dart_ThreadEnableProfilingPtr;
+              ffi.Pointer<mempool>,
+              ffi.Pointer<slab_cache>,
+              ffi.Uint32,
+              ffi.Uint8)>> get mempool_create_with_order =>
+      _library._mempool_create_with_orderPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<mempool>)>>
+      get mempool_destroy => _library._mempool_destroyPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<mempool>)>>
+      get mempool_alloc => _library._mempool_allocPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<mslab>,
+              ffi.Pointer<ffi.Void>)>> get mslab_free =>
+      _library._mslab_freePtr;
+  ffi.Pointer<ffi.Size> get QUOTA_MAX => _library._QUOTA_MAX;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<interactor_dart_t>,
+              ffi.Pointer<interactor_dart_configuration_t>,
+              ffi.Uint8)>> get interactor_dart_initialize =>
+      _library._interactor_dart_initializePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Int)>>
+      get interactor_dart_cancel_by_fd =>
+          _library._interactor_dart_cancel_by_fdPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_check_event_timeouts =>
+          _library._interactor_dart_check_event_timeoutsPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Uint64)>>
+      get interactor_dart_remove_event =>
+          _library._interactor_dart_remove_eventPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_get_buffer => _library._interactor_dart_get_bufferPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Uint16)>>
+      get interactor_dart_release_buffer =>
+          _library._interactor_dart_release_bufferPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_available_buffers =>
+          _library._interactor_dart_available_buffersPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_used_buffers =>
+          _library._interactor_dart_used_buffersPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<interactor_message_t> Function(
+                  ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_allocate_message =>
+          _library._interactor_dart_allocate_messagePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+                  ffi.Pointer<interactor_message_t>)>>
+      get interactor_dart_free_message =>
+          _library._interactor_dart_free_messagePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<interactor_payloads_pool> Function(
+                  ffi.Pointer<interactor_dart_t>, ffi.Size)>>
+      get interactor_dart_payload_pool_create =>
+          _library._interactor_dart_payload_pool_createPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>
+      get interactor_dart_payload_allocate =>
+          _library._interactor_dart_payload_allocatePtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>, ffi.IntPtr)>>
-      get Dart_AddSymbols => _library._Dart_AddSymbolsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_ExitIsolate =>
-      _library._Dart_ExitIsolatePtr;
+                  ffi.Pointer<interactor_payloads_pool>, ffi.IntPtr)>>
+      get interactor_dart_payload_free =>
+          _library._interactor_dart_payload_freePtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Bool)>> get Dart_CreateSnapshot =>
-      _library._Dart_CreateSnapshotPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Bool Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_IsKernel => _library._Dart_IsKernelPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(Dart_Isolate)>>
-      get Dart_IsolateMakeRunnable => _library._Dart_IsolateMakeRunnablePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(Dart_MessageNotifyCallback)>>
-      get Dart_SetMessageNotifyCallback =>
-          _library._Dart_SetMessageNotifyCallbackPtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_MessageNotifyCallback Function()>>
-      get Dart_GetMessageNotifyCallback =>
-          _library._Dart_GetMessageNotifyCallbackPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_ShouldPauseOnStart => _library._Dart_ShouldPauseOnStartPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
-      get Dart_SetShouldPauseOnStart => _library._Dart_SetShouldPauseOnStartPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_IsPausedOnStart => _library._Dart_IsPausedOnStartPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
-      get Dart_SetPausedOnStart => _library._Dart_SetPausedOnStartPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_ShouldPauseOnExit => _library._Dart_ShouldPauseOnExitPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
-      get Dart_SetShouldPauseOnExit => _library._Dart_SetShouldPauseOnExitPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_IsPausedOnExit => _library._Dart_IsPausedOnExitPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool)>>
-      get Dart_SetPausedOnExit => _library._Dart_SetPausedOnExitPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Handle)>>
-      get Dart_SetStickyError => _library._Dart_SetStickyErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_HasStickyError => _library._Dart_HasStickyErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>>
-      get Dart_GetStickyError => _library._Dart_GetStickyErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>>
-      get Dart_HandleMessage => _library._Dart_HandleMessagePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>
-      get Dart_WaitForEvent => _library._Dart_WaitForEventPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_HandleServiceMessages => _library._Dart_HandleServiceMessagesPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_HasServiceMessages => _library._Dart_HasServiceMessagesPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_RunLoop =>
-      _library._Dart_RunLoopPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Bool Function(ffi.Bool, Dart_Port, Dart_Port,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>> get Dart_RunLoopAsync =>
-      _library._Dart_RunLoopAsyncPtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_Port Function()>>
-      get Dart_GetMainPortId => _library._Dart_GetMainPortIdPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>> get Dart_HasLivePorts =>
-      _library._Dart_HasLivePortsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(Dart_Port, ffi.Handle)>>
-      get Dart_Post => _library._Dart_PostPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_Port)>>
-      get Dart_NewSendPort => _library._Dart_NewSendPortPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<Dart_Port>)>>
-      get Dart_SendPortGetId => _library._Dart_SendPortGetIdPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_EnterScope =>
-      _library._Dart_EnterScopePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get Dart_ExitScope =>
-      _library._Dart_ExitScopePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Uint8> Function(ffi.IntPtr)>>
-      get Dart_ScopeAllocate => _library._Dart_ScopeAllocatePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_Null =>
-      _library._Dart_NullPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsNull => _library._Dart_IsNullPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_EmptyString =>
-      _library._Dart_EmptyStringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_TypeDynamic =>
-      _library._Dart_TypeDynamicPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_TypeVoid =>
-      _library._Dart_TypeVoidPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_TypeNever =>
-      _library._Dart_TypeNeverPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_ObjectEquals => _library._Dart_ObjectEqualsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_ObjectIsType => _library._Dart_ObjectIsTypePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsInstance => _library._Dart_IsInstancePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsNumber => _library._Dart_IsNumberPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsInteger => _library._Dart_IsIntegerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsDouble => _library._Dart_IsDoublePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsBoolean => _library._Dart_IsBooleanPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsString => _library._Dart_IsStringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsStringLatin1 => _library._Dart_IsStringLatin1Ptr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsExternalString => _library._Dart_IsExternalStringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsList => _library._Dart_IsListPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsMap => _library._Dart_IsMapPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsLibrary => _library._Dart_IsLibraryPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsType => _library._Dart_IsTypePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsFunction => _library._Dart_IsFunctionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsVariable => _library._Dart_IsVariablePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsTypeVariable => _library._Dart_IsTypeVariablePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsClosure => _library._Dart_IsClosurePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsTypedData => _library._Dart_IsTypedDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsByteBuffer => _library._Dart_IsByteBufferPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsFuture => _library._Dart_IsFuturePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_InstanceGetType => _library._Dart_InstanceGetTypePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ClassName => _library._Dart_ClassNamePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_FunctionName => _library._Dart_FunctionNamePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_FunctionOwner => _library._Dart_FunctionOwnerPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_FunctionIsStatic => _library._Dart_FunctionIsStaticPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
-      get Dart_IsTearOff => _library._Dart_IsTearOffPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ClosureFunction => _library._Dart_ClosureFunctionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ClassLibrary => _library._Dart_ClassLibraryPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_IntegerFitsIntoInt64 => _library._Dart_IntegerFitsIntoInt64Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_IntegerFitsIntoUint64 => _library._Dart_IntegerFitsIntoUint64Ptr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int64)>>
-      get Dart_NewInteger => _library._Dart_NewIntegerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Uint64)>>
-      get Dart_NewIntegerFromUint64 => _library._Dart_NewIntegerFromUint64Ptr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
-      get Dart_NewIntegerFromHexCString =>
-          _library._Dart_NewIntegerFromHexCStringPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Int64>)>>
-      get Dart_IntegerToInt64 => _library._Dart_IntegerToInt64Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint64>)>>
-      get Dart_IntegerToUint64 => _library._Dart_IntegerToUint64Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_IntegerToHexCString => _library._Dart_IntegerToHexCStringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Double)>>
-      get Dart_NewDouble => _library._Dart_NewDoublePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Double>)>>
-      get Dart_DoubleValue => _library._Dart_DoubleValuePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Handle)>>
-      get Dart_GetStaticMethodClosure =>
-          _library._Dart_GetStaticMethodClosurePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_True =>
-      _library._Dart_TruePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_False =>
-      _library._Dart_FalsePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>
-      get Dart_NewBoolean => _library._Dart_NewBooleanPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_BooleanValue => _library._Dart_BooleanValuePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_StringLength => _library._Dart_StringLengthPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Pointer<ffi.Char>)>>
-      get Dart_NewStringFromCString => _library._Dart_NewStringFromCStringPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_NewStringFromUTF8 => _library._Dart_NewStringFromUTF8Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Pointer<ffi.Uint16>, ffi.IntPtr)>>
-      get Dart_NewStringFromUTF16 => _library._Dart_NewStringFromUTF16Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Pointer<ffi.Int32>, ffi.IntPtr)>>
-      get Dart_NewStringFromUTF32 => _library._Dart_NewStringFromUTF32Ptr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>> get Dart_NewExternalLatin1String =>
-      _library._Dart_NewExternalLatin1StringPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Uint16>,
-              ffi.IntPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.IntPtr,
-              Dart_HandleFinalizer)>> get Dart_NewExternalUTF16String =>
-      _library._Dart_NewExternalUTF16StringPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_StringToCString => _library._Dart_StringToCStringPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>> get Dart_StringToUTF8 =>
-      _library._Dart_StringToUTF8Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_StringToLatin1 => _library._Dart_StringToLatin1Ptr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Uint16>,
-              ffi.Pointer<ffi.IntPtr>)>> get Dart_StringToUTF16 =>
-      _library._Dart_StringToUTF16Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_StringStorageSize => _library._Dart_StringStorageSizePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>,
-                  ffi.Pointer<ffi.IntPtr>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>
-      get Dart_StringGetProperties => _library._Dart_StringGetPropertiesPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>
-      get Dart_NewList => _library._Dart_NewListPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>
-      get Dart_NewListOf => _library._Dart_NewListOfPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>
-      get Dart_NewListOfType => _library._Dart_NewListOfTypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.IntPtr)>>
-      get Dart_NewListOfTypeFilled => _library._Dart_NewListOfTypeFilledPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_ListLength => _library._Dart_ListLengthPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.IntPtr)>>
-      get Dart_ListGetAt => _library._Dart_ListGetAtPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.IntPtr, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
-      get Dart_ListGetRange => _library._Dart_ListGetRangePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.IntPtr, ffi.Handle)>>
-      get Dart_ListSetAt => _library._Dart_ListSetAtPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_ListGetAsBytes => _library._Dart_ListGetAsBytesPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_ListSetAsBytes => _library._Dart_ListSetAsBytesPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_MapGetAt => _library._Dart_MapGetAtPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_MapContainsKey => _library._Dart_MapContainsKeyPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_MapKeys => _library._Dart_MapKeysPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>
-      get Dart_GetTypeOfTypedData => _library._Dart_GetTypeOfTypedDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Handle)>>
-      get Dart_GetTypeOfExternalTypedData =>
-          _library._Dart_GetTypeOfExternalTypedDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Int32, ffi.IntPtr)>>
-      get Dart_NewTypedData => _library._Dart_NewTypedDataPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr)>>
-      get Dart_NewExternalTypedData => _library._Dart_NewExternalTypedDataPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr,
-                  ffi.Pointer<ffi.Void>, ffi.IntPtr, Dart_HandleFinalizer)>>
-      get Dart_NewExternalTypedDataWithFinalizer =>
-          _library._Dart_NewExternalTypedDataWithFinalizerPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.IntPtr,
-                  ffi.Pointer<ffi.Void>, ffi.IntPtr, Dart_HandleFinalizer)>>
-      get Dart_NewUnmodifiableExternalTypedDataWithFinalizer =>
-          _library._Dart_NewUnmodifiableExternalTypedDataWithFinalizerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_NewByteBuffer => _library._Dart_NewByteBufferPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Handle,
-              ffi.Pointer<ffi.Int32>,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.IntPtr>)>> get Dart_TypedDataAcquireData =>
-      _library._Dart_TypedDataAcquireDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_TypedDataReleaseData => _library._Dart_TypedDataReleaseDataPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_GetDataFromByteBuffer => _library._Dart_GetDataFromByteBufferPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
-      get Dart_New => _library._Dart_NewPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_Allocate => _library._Dart_AllocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_AllocateWithNativeFields =>
-          _library._Dart_AllocateWithNativeFieldsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
-      get Dart_Invoke => _library._Dart_InvokePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
-      get Dart_InvokeClosure => _library._Dart_InvokeClosurePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.Int, ffi.Pointer<ffi.Handle>)>>
-      get Dart_InvokeConstructor => _library._Dart_InvokeConstructorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_GetField => _library._Dart_GetFieldPtr;
-  ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Handle, ffi.Handle)>>
-      get Dart_SetField => _library._Dart_SetFieldPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_ThrowException => _library._Dart_ThrowExceptionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_ReThrowException => _library._Dart_ReThrowExceptionPtr;
+              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>
+      get interactor_dart_payload_pool_destroy =>
+          _library._interactor_dart_payload_pool_destroyPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Int>)>>
-      get Dart_GetNativeInstanceFieldCount =>
-          _library._Dart_GetNativeInstanceFieldCountPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Int, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_GetNativeInstanceField =>
-          _library._Dart_GetNativeInstanceFieldPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Int, ffi.IntPtr)>>
-      get Dart_SetNativeInstanceField =>
-          _library._Dart_SetNativeInstanceFieldPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Pointer<ffi.Void> Function(Dart_NativeArguments)>>
-      get Dart_GetNativeIsolateGroupData =>
-          _library._Dart_GetNativeIsolateGroupDataPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_NativeArguments,
-                  ffi.Int,
-                  ffi.Pointer<Dart_NativeArgument_Descriptor>,
-                  ffi.Pointer<Dart_NativeArgument_Value>)>>
-      get Dart_GetNativeArguments => _library._Dart_GetNativeArgumentsPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Handle Function(Dart_NativeArguments, ffi.Int)>>
-      get Dart_GetNativeArgument => _library._Dart_GetNativeArgumentPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(Dart_NativeArguments)>>
-      get Dart_GetNativeArgumentCount =>
-          _library._Dart_GetNativeArgumentCountPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(Dart_NativeArguments, ffi.Int, ffi.Int,
-              ffi.Pointer<ffi.IntPtr>)>> get Dart_GetNativeFieldsOfArgument =>
-      _library._Dart_GetNativeFieldsOfArgumentPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_NativeArguments, ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_GetNativeReceiver => _library._Dart_GetNativeReceiverPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(Dart_NativeArguments, ffi.Int,
-                  ffi.Pointer<ffi.Pointer<ffi.Void>>)>>
-      get Dart_GetNativeStringArgument =>
-          _library._Dart_GetNativeStringArgumentPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_NativeArguments, ffi.Int, ffi.Pointer<ffi.Int64>)>>
-      get Dart_GetNativeIntegerArgument =>
-          _library._Dart_GetNativeIntegerArgumentPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_NativeArguments, ffi.Int, ffi.Pointer<ffi.Bool>)>>
-      get Dart_GetNativeBooleanArgument =>
-          _library._Dart_GetNativeBooleanArgumentPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_NativeArguments, ffi.Int, ffi.Pointer<ffi.Double>)>>
-      get Dart_GetNativeDoubleArgument =>
-          _library._Dart_GetNativeDoubleArgumentPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Handle)>>
-      get Dart_SetReturnValue => _library._Dart_SetReturnValuePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  Dart_NativeArguments, Dart_WeakPersistentHandle)>>
-      get Dart_SetWeakHandleReturnValue =>
-          _library._Dart_SetWeakHandleReturnValuePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Bool)>>
-      get Dart_SetBooleanReturnValue => _library._Dart_SetBooleanReturnValuePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Int64)>>
-      get Dart_SetIntegerReturnValue => _library._Dart_SetIntegerReturnValuePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(Dart_NativeArguments, ffi.Double)>>
-      get Dart_SetDoubleReturnValue => _library._Dart_SetDoubleReturnValuePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_EnvironmentCallback)>>
-      get Dart_SetEnvironmentCallback =>
-          _library._Dart_SetEnvironmentCallbackPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Handle, Dart_NativeEntryResolver,
-              Dart_NativeEntrySymbol)>> get Dart_SetNativeResolver =>
-      _library._Dart_SetNativeResolverPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<Dart_NativeEntryResolver>)>>
-      get Dart_GetNativeResolver => _library._Dart_GetNativeResolverPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<Dart_NativeEntrySymbol>)>>
-      get Dart_GetNativeSymbol => _library._Dart_GetNativeSymbolPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, Dart_FfiNativeResolver)>>
-      get Dart_SetFfiNativeResolver => _library._Dart_SetFfiNativeResolverPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_LibraryTagHandler)>>
-      get Dart_SetLibraryTagHandler => _library._Dart_SetLibraryTagHandlerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(Dart_DeferredLoadHandler)>>
-      get Dart_SetDeferredLoadHandler =>
-          _library._Dart_SetDeferredLoadHandlerPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.IntPtr, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Uint8>)>>
-      get Dart_DeferredLoadComplete => _library._Dart_DeferredLoadCompletePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.IntPtr, ffi.Pointer<ffi.Char>, ffi.Bool)>>
-      get Dart_DeferredLoadCompleteError =>
-          _library._Dart_DeferredLoadCompleteErrorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_DefaultCanonicalizeUrl =>
-          _library._Dart_DefaultCanonicalizeUrlPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_LoadScriptFromKernel => _library._Dart_LoadScriptFromKernelPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_RootLibrary =>
-      _library._Dart_RootLibraryPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_SetRootLibrary => _library._Dart_SetRootLibraryPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
-      get Dart_GetType => _library._Dart_GetTypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
-      get Dart_GetNullableType => _library._Dart_GetNullableTypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Handle, ffi.IntPtr, ffi.Pointer<ffi.Handle>)>>
-      get Dart_GetNonNullableType => _library._Dart_GetNonNullableTypePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_TypeToNullableType => _library._Dart_TypeToNullableTypePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_TypeToNonNullableType => _library._Dart_TypeToNonNullableTypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_IsNullableType => _library._Dart_IsNullableTypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_IsNonNullableType => _library._Dart_IsNonNullableTypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Bool>)>>
-      get Dart_IsLegacyType => _library._Dart_IsLegacyTypePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_GetClass => _library._Dart_GetClassPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_LibraryUrl => _library._Dart_LibraryUrlPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_LibraryResolvedUrl => _library._Dart_LibraryResolvedUrlPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>>
-      get Dart_GetLoadedLibraries => _library._Dart_GetLoadedLibrariesPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_LookupLibrary => _library._Dart_LookupLibraryPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle, ffi.Handle)>>
-      get Dart_LibraryHandleError => _library._Dart_LibraryHandleErrorPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_LoadLibraryFromKernel => _library._Dart_LoadLibraryFromKernelPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Handle)>>
-      get Dart_LoadLibrary => _library._Dart_LoadLibraryPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.Bool)>>
-      get Dart_FinalizeLoading => _library._Dart_FinalizeLoadingPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Handle, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>
-      get Dart_GetPeer => _library._Dart_GetPeerPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(ffi.Handle, ffi.Pointer<ffi.Void>)>>
-      get Dart_SetPeer => _library._Dart_SetPeerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>
-      get Dart_IsKernelIsolate => _library._Dart_IsKernelIsolatePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_KernelIsolateIsRunning =>
-          _library._Dart_KernelIsolateIsRunningPtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_Port Function()>> get Dart_KernelPort =>
-      _library._Dart_KernelPortPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          Dart_KernelCompilationResult Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr,
-              ffi.Bool,
-              ffi.Bool,
-              ffi.Bool,
-              ffi.Pointer<ffi.Char>,
-              ffi.Int32)>> get Dart_CompileToKernel =>
-      _library._Dart_CompileToKernelPtr;
-  ffi.Pointer<ffi.NativeFunction<Dart_KernelCompilationResult Function()>>
-      get Dart_KernelListDependencies =>
-          _library._Dart_KernelListDependenciesPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<ffi.Uint8>, ffi.IntPtr)>>
-      get Dart_SetDartLibrarySourcesKernel =>
-          _library._Dart_SetDartLibrarySourcesKernelPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Bool Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.IntPtr)>> get Dart_DetectNullSafety =>
-      _library._Dart_DetectNullSafetyPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(Dart_Isolate)>>
-      get Dart_IsServiceIsolate => _library._Dart_IsServiceIsolatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Bool Function(Dart_Port, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>
-      get Dart_WriteProfileToTimeline =>
-          _library._Dart_WriteProfileToTimelinePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_Precompile =>
-      _library._Dart_PrecompilePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function(ffi.IntPtr)>>
-      get Dart_LoadingUnitLibraryUris =>
-          _library._Dart_LoadingUnitLibraryUrisPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(Dart_StreamingWriteCallback,
-                  ffi.Pointer<ffi.Void>, ffi.Bool, ffi.Pointer<ffi.Void>)>>
-      get Dart_CreateAppAOTSnapshotAsAssembly =>
-          _library._Dart_CreateAppAOTSnapshotAsAssemblyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_CreateLoadingUnitCallback,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Bool,
-                  Dart_StreamingWriteCallback,
-                  Dart_StreamingCloseCallback)>>
-      get Dart_CreateAppAOTSnapshotAsAssemblies =>
-          _library._Dart_CreateAppAOTSnapshotAsAssembliesPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              Dart_StreamingWriteCallback,
-              ffi.Pointer<ffi.Void>,
-              ffi.Bool,
-              ffi.Pointer<ffi.Void>)>> get Dart_CreateAppAOTSnapshotAsElf =>
-      _library._Dart_CreateAppAOTSnapshotAsElfPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_CreateLoadingUnitCallback,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Bool,
-                  Dart_StreamingWriteCallback,
-                  Dart_StreamingCloseCallback)>>
-      get Dart_CreateAppAOTSnapshotAsElfs =>
-          _library._Dart_CreateAppAOTSnapshotAsElfsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  Dart_StreamingWriteCallback, ffi.Pointer<ffi.Void>)>>
-      get Dart_CreateVMAOTSnapshotAsAssembly =>
-          _library._Dart_CreateVMAOTSnapshotAsAssemblyPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Handle Function()>> get Dart_SortClasses =>
-      _library._Dart_SortClassesPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>,
-              ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>> get Dart_CreateAppJITSnapshotAsBlobs =>
-      _library._Dart_CreateAppJITSnapshotAsBlobsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Handle Function(
-                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-                  ffi.Pointer<ffi.IntPtr>,
-                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-                  ffi.Pointer<ffi.IntPtr>,
-                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-                  ffi.Pointer<ffi.IntPtr>,
-                  ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-                  ffi.Pointer<ffi.IntPtr>)>>
-      get Dart_CreateCoreJITSnapshotAsBlobs =>
-          _library._Dart_CreateCoreJITSnapshotAsBlobsPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Handle Function(ffi.Pointer<ffi.Pointer<ffi.Uint8>>,
-              ffi.Pointer<ffi.IntPtr>)>> get Dart_GetObfuscationMap =>
-      _library._Dart_GetObfuscationMapPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function()>>
-      get Dart_IsPrecompiledRuntime => _library._Dart_IsPrecompiledRuntimePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
-      get Dart_DumpNativeStackTrace => _library._Dart_DumpNativeStackTracePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
-      get Dart_PrepareToAbort => _library._Dart_PrepareToAbortPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(Dart_DwarfStackTraceFootnoteCallback)>>
-      get Dart_SetDwarfStackTraceFootnoteCallback =>
-          _library._Dart_SetDwarfStackTraceFootnoteCallbackPtr;
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_peek => _library._interactor_dart_peekPtr;
   ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>
-      get interactor_cqe_advance => _library._interactor_cqe_advancePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
-      get interactor_close_descritor => _library._interactor_close_descritorPtr;
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>
+      get interactor_dart_destroy => _library._interactor_dart_destroyPtr;
 }
 
 final class iovec extends ffi.Struct {
@@ -22250,16 +23118,7 @@ abstract class io_uring_op {
   static const int IORING_OP_LAST = 49;
 }
 
-final class io_uring_cqe extends ffi.Struct {
-  @ffi.UnsignedLongLong()
-  external int user_data;
-
-  @ffi.Int()
-  external int res;
-
-  @ffi.UnsignedInt()
-  external int flags;
-}
+final class io_uring_cqe extends ffi.Opaque {}
 
 final class io_sqring_offsets extends ffi.Struct {
   @ffi.UnsignedInt()
@@ -22677,353 +23536,6 @@ final class statx extends ffi.Opaque {}
 
 final class epoll_event extends ffi.Opaque {}
 
-typedef FILE = _IO_FILE;
-
-final class _IO_FILE extends ffi.Struct {
-  @ffi.Int()
-  external int _flags;
-
-  external ffi.Pointer<ffi.Char> _IO_read_ptr;
-
-  external ffi.Pointer<ffi.Char> _IO_read_end;
-
-  external ffi.Pointer<ffi.Char> _IO_read_base;
-
-  external ffi.Pointer<ffi.Char> _IO_write_base;
-
-  external ffi.Pointer<ffi.Char> _IO_write_ptr;
-
-  external ffi.Pointer<ffi.Char> _IO_write_end;
-
-  external ffi.Pointer<ffi.Char> _IO_buf_base;
-
-  external ffi.Pointer<ffi.Char> _IO_buf_end;
-
-  external ffi.Pointer<ffi.Char> _IO_save_base;
-
-  external ffi.Pointer<ffi.Char> _IO_backup_base;
-
-  external ffi.Pointer<ffi.Char> _IO_save_end;
-
-  external ffi.Pointer<_IO_marker> _markers;
-
-  external ffi.Pointer<_IO_FILE> _chain;
-
-  @ffi.Int()
-  external int _fileno;
-
-  @ffi.Int()
-  external int _flags2;
-
-  @ffi.Long()
-  external int _old_offset;
-
-  @ffi.UnsignedShort()
-  external int _cur_column;
-
-  @ffi.SignedChar()
-  external int _vtable_offset;
-
-  @ffi.Array.multi([1])
-  external ffi.Array<ffi.Char> _shortbuf;
-
-  external ffi.Pointer<ffi.Void> _lock;
-
-  @ffi.Long()
-  external int _offset;
-
-  external ffi.Pointer<_IO_codecvt> _codecvt;
-
-  external ffi.Pointer<_IO_wide_data> _wide_data;
-
-  external ffi.Pointer<_IO_FILE> _freeres_list;
-
-  external ffi.Pointer<ffi.Void> _freeres_buf;
-
-  @ffi.Size()
-  external int __pad5;
-
-  @ffi.Int()
-  external int _mode;
-
-  @ffi.Array.multi([20])
-  external ffi.Array<ffi.Char> _unused2;
-}
-
-final class _IO_marker extends ffi.Opaque {}
-
-final class _IO_codecvt extends ffi.Opaque {}
-
-final class _IO_wide_data extends ffi.Opaque {}
-
-final class __va_list_tag extends ffi.Struct {
-  @ffi.UnsignedInt()
-  external int gp_offset;
-
-  @ffi.UnsignedInt()
-  external int fp_offset;
-
-  external ffi.Pointer<ffi.Void> overflow_arg_area;
-
-  external ffi.Pointer<ffi.Void> reg_save_area;
-}
-
-typedef fpos_t = _G_fpos_t;
-
-final class _G_fpos_t extends ffi.Struct {
-  @ffi.Long()
-  external int __pos;
-
-  external __mbstate_t __state;
-}
-
-final class __mbstate_t extends ffi.Struct {
-  @ffi.Int()
-  external int __count;
-
-  external UnnamedUnion16 __value;
-}
-
-final class UnnamedUnion16 extends ffi.Union {
-  @ffi.UnsignedInt()
-  external int __wch;
-
-  @ffi.Array.multi([4])
-  external ffi.Array<ffi.Char> __wchb;
-}
-
-final class div_t extends ffi.Struct {
-  @ffi.Int()
-  external int quot;
-
-  @ffi.Int()
-  external int rem;
-}
-
-final class ldiv_t extends ffi.Struct {
-  @ffi.Long()
-  external int quot;
-
-  @ffi.Long()
-  external int rem;
-}
-
-final class lldiv_t extends ffi.Struct {
-  @ffi.LongLong()
-  external int quot;
-
-  @ffi.LongLong()
-  external int rem;
-}
-
-final class random_data extends ffi.Struct {
-  external ffi.Pointer<ffi.Int32> fptr;
-
-  external ffi.Pointer<ffi.Int32> rptr;
-
-  external ffi.Pointer<ffi.Int32> state;
-
-  @ffi.Int()
-  external int rand_type;
-
-  @ffi.Int()
-  external int rand_deg;
-
-  @ffi.Int()
-  external int rand_sep;
-
-  external ffi.Pointer<ffi.Int32> end_ptr;
-}
-
-final class drand48_data extends ffi.Struct {
-  @ffi.Array.multi([3])
-  external ffi.Array<ffi.UnsignedShort> __x;
-
-  @ffi.Array.multi([3])
-  external ffi.Array<ffi.UnsignedShort> __old_x;
-
-  @ffi.UnsignedShort()
-  external int __c;
-
-  @ffi.UnsignedShort()
-  external int __init;
-
-  @ffi.UnsignedLongLong()
-  external int __a;
-}
-
-final class timezone1 extends ffi.Struct {
-  @ffi.Int()
-  external int tz_minuteswest;
-
-  @ffi.Int()
-  external int tz_dsttime;
-}
-
-abstract class __itimer_which {
-  static const int ITIMER_REAL = 0;
-  static const int ITIMER_VIRTUAL = 1;
-  static const int ITIMER_PROF = 2;
-}
-
-final class itimerval extends ffi.Struct {
-  external timeval it_interval;
-
-  external timeval it_value;
-}
-
-typedef pthread_once_t = ffi.Int;
-typedef pthread_key_t = ffi.UnsignedInt;
-
-final class mh_events_node_t extends ffi.Struct {
-  @ffi.Uint64()
-  external int data;
-
-  @ffi.Int64()
-  external int timeout;
-
-  @ffi.Uint64()
-  external int timestamp;
-
-  @ffi.Int()
-  external int fd;
-}
-
-final class mh_events_t extends ffi.Struct {
-  external ffi.Pointer<mh_events_node_t> p;
-
-  external ffi.Pointer<ffi.Uint32> b;
-
-  @mh_int_t()
-  external int n_buckets;
-
-  @mh_int_t()
-  external int n_dirty;
-
-  @mh_int_t()
-  external int size;
-
-  @mh_int_t()
-  external int upper_bound;
-
-  @mh_int_t()
-  external int prime;
-
-  @mh_int_t()
-  external int resize_cnt;
-
-  @mh_int_t()
-  external int resize_position;
-
-  @mh_int_t()
-  external int batch;
-
-  external ffi.Pointer<mh_events_t> shadow;
-}
-
-typedef mh_int_t = ffi.Uint32;
-
-final class interactor_buffers_pool extends ffi.Struct {
-  external ffi.Pointer<ffi.Int32> ids;
-
-  @ffi.Size()
-  external int count;
-
-  @ffi.Size()
-  external int size;
-}
-
-final class interactor_worker_configuration extends ffi.Struct {
-  @ffi.Uint16()
-  external int buffers_count;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
-  @ffi.Size()
-  external int ring_size;
-
-  @ffi.Int()
-  external int ring_flags;
-
-  @ffi.Uint64()
-  external int timeout_checker_period_millis;
-
-  @ffi.Uint32()
-  external int base_delay_micros;
-
-  @ffi.Double()
-  external double delay_randomization_factor;
-
-  @ffi.Uint64()
-  external int max_delay_micros;
-
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
-
-  @ffi.Uint32()
-  external int cqe_wait_count;
-
-  @ffi.Uint32()
-  external int cqe_peek_count;
-
-  @ffi.Bool()
-  external bool trace;
-}
-
-final class interactor_worker extends ffi.Struct {
-  @ffi.Uint8()
-  external int id;
-
-  external interactor_buffers_pool free_buffers;
-
-  external ffi.Pointer<io_uring> ring;
-
-  external ffi.Pointer<iovec> buffers;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
-  @ffi.Uint16()
-  external int buffers_count;
-
-  @ffi.Uint64()
-  external int timeout_checker_period_millis;
-
-  @ffi.Uint32()
-  external int base_delay_micros;
-
-  @ffi.Double()
-  external double delay_randomization_factor;
-
-  @ffi.Uint64()
-  external int max_delay_micros;
-
-  external ffi.Pointer<mh_events_t> events;
-
-  @ffi.Size()
-  external int ring_size;
-
-  @ffi.Int()
-  external int ring_flags;
-
-  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
-
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
-
-  @ffi.Uint32()
-  external int cqe_wait_count;
-
-  @ffi.Uint32()
-  external int cqe_peek_count;
-
-  @ffi.Bool()
-  external bool trace;
-}
-
-typedef interactor_worker_t = interactor_worker;
-typedef interactor_worker_configuration_t = interactor_worker_configuration;
 typedef Dart_WeakPersistentHandle = ffi.Pointer<_Dart_WeakPersistentHandle>;
 
 final class _Dart_WeakPersistentHandle extends ffi.Opaque {}
@@ -23740,6 +24252,673 @@ typedef Dart_DwarfStackTraceFootnoteCallback = ffi.Pointer<
     ffi.NativeFunction<
         ffi.Pointer<ffi.Char> Function(
             ffi.Pointer<ffi.Pointer<ffi.Void>> addresses, ffi.IntPtr count)>>;
+typedef FILE = _IO_FILE;
+
+final class _IO_FILE extends ffi.Struct {
+  @ffi.Int()
+  external int _flags;
+
+  external ffi.Pointer<ffi.Char> _IO_read_ptr;
+
+  external ffi.Pointer<ffi.Char> _IO_read_end;
+
+  external ffi.Pointer<ffi.Char> _IO_read_base;
+
+  external ffi.Pointer<ffi.Char> _IO_write_base;
+
+  external ffi.Pointer<ffi.Char> _IO_write_ptr;
+
+  external ffi.Pointer<ffi.Char> _IO_write_end;
+
+  external ffi.Pointer<ffi.Char> _IO_buf_base;
+
+  external ffi.Pointer<ffi.Char> _IO_buf_end;
+
+  external ffi.Pointer<ffi.Char> _IO_save_base;
+
+  external ffi.Pointer<ffi.Char> _IO_backup_base;
+
+  external ffi.Pointer<ffi.Char> _IO_save_end;
+
+  external ffi.Pointer<_IO_marker> _markers;
+
+  external ffi.Pointer<_IO_FILE> _chain;
+
+  @ffi.Int()
+  external int _fileno;
+
+  @ffi.Int()
+  external int _flags2;
+
+  @ffi.Long()
+  external int _old_offset;
+
+  @ffi.UnsignedShort()
+  external int _cur_column;
+
+  @ffi.SignedChar()
+  external int _vtable_offset;
+
+  @ffi.Array.multi([1])
+  external ffi.Array<ffi.Char> _shortbuf;
+
+  external ffi.Pointer<ffi.Void> _lock;
+
+  @ffi.Long()
+  external int _offset;
+
+  external ffi.Pointer<_IO_codecvt> _codecvt;
+
+  external ffi.Pointer<_IO_wide_data> _wide_data;
+
+  external ffi.Pointer<_IO_FILE> _freeres_list;
+
+  external ffi.Pointer<ffi.Void> _freeres_buf;
+
+  @ffi.Size()
+  external int __pad5;
+
+  @ffi.Int()
+  external int _mode;
+
+  @ffi.Array.multi([20])
+  external ffi.Array<ffi.Char> _unused2;
+}
+
+final class _IO_marker extends ffi.Opaque {}
+
+final class _IO_codecvt extends ffi.Opaque {}
+
+final class _IO_wide_data extends ffi.Opaque {}
+
+final class __va_list_tag extends ffi.Struct {
+  @ffi.UnsignedInt()
+  external int gp_offset;
+
+  @ffi.UnsignedInt()
+  external int fp_offset;
+
+  external ffi.Pointer<ffi.Void> overflow_arg_area;
+
+  external ffi.Pointer<ffi.Void> reg_save_area;
+}
+
+typedef fpos_t = _G_fpos_t;
+
+final class _G_fpos_t extends ffi.Struct {
+  @ffi.Long()
+  external int __pos;
+
+  external __mbstate_t __state;
+}
+
+final class __mbstate_t extends ffi.Struct {
+  @ffi.Int()
+  external int __count;
+
+  external UnnamedUnion16 __value;
+}
+
+final class UnnamedUnion16 extends ffi.Union {
+  @ffi.UnsignedInt()
+  external int __wch;
+
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Char> __wchb;
+}
+
+final class div_t extends ffi.Struct {
+  @ffi.Int()
+  external int quot;
+
+  @ffi.Int()
+  external int rem;
+}
+
+final class ldiv_t extends ffi.Struct {
+  @ffi.Long()
+  external int quot;
+
+  @ffi.Long()
+  external int rem;
+}
+
+final class lldiv_t extends ffi.Struct {
+  @ffi.LongLong()
+  external int quot;
+
+  @ffi.LongLong()
+  external int rem;
+}
+
+final class random_data extends ffi.Struct {
+  external ffi.Pointer<ffi.Int32> fptr;
+
+  external ffi.Pointer<ffi.Int32> rptr;
+
+  external ffi.Pointer<ffi.Int32> state;
+
+  @ffi.Int()
+  external int rand_type;
+
+  @ffi.Int()
+  external int rand_deg;
+
+  @ffi.Int()
+  external int rand_sep;
+
+  external ffi.Pointer<ffi.Int32> end_ptr;
+}
+
+final class drand48_data extends ffi.Struct {
+  @ffi.Array.multi([3])
+  external ffi.Array<ffi.UnsignedShort> __x;
+
+  @ffi.Array.multi([3])
+  external ffi.Array<ffi.UnsignedShort> __old_x;
+
+  @ffi.UnsignedShort()
+  external int __c;
+
+  @ffi.UnsignedShort()
+  external int __init;
+
+  @ffi.UnsignedLongLong()
+  external int __a;
+}
+
+final class timezone1 extends ffi.Struct {
+  @ffi.Int()
+  external int tz_minuteswest;
+
+  @ffi.Int()
+  external int tz_dsttime;
+}
+
+abstract class __itimer_which {
+  static const int ITIMER_REAL = 0;
+  static const int ITIMER_VIRTUAL = 1;
+  static const int ITIMER_PROF = 2;
+}
+
+final class itimerval extends ffi.Struct {
+  external timeval it_interval;
+
+  external timeval it_value;
+}
+
+typedef pthread_once_t = ffi.Int;
+typedef pthread_key_t = ffi.UnsignedInt;
+
+final class mh_events_node_t extends ffi.Struct {
+  @ffi.Uint64()
+  external int data;
+
+  @ffi.Int64()
+  external int timeout;
+
+  @ffi.Uint64()
+  external int timestamp;
+
+  @ffi.Int()
+  external int fd;
+}
+
+final class mh_events_t extends ffi.Struct {
+  external ffi.Pointer<mh_events_node_t> p;
+
+  external ffi.Pointer<ffi.Uint32> b;
+
+  @mh_int_t()
+  external int n_buckets;
+
+  @mh_int_t()
+  external int n_dirty;
+
+  @mh_int_t()
+  external int size;
+
+  @mh_int_t()
+  external int upper_bound;
+
+  @mh_int_t()
+  external int prime;
+
+  @mh_int_t()
+  external int resize_cnt;
+
+  @mh_int_t()
+  external int resize_position;
+
+  @mh_int_t()
+  external int batch;
+
+  external ffi.Pointer<mh_events_t> shadow;
+}
+
+typedef mh_int_t = ffi.Uint32;
+
+final class interactor_buffers_pool extends ffi.Struct {
+  external ffi.Pointer<ffi.Int32> ids;
+
+  @ffi.Size()
+  external int count;
+
+  @ffi.Size()
+  external int size;
+}
+
+final class interactor_message extends ffi.Struct {
+  @ffi.Uint64()
+  external int channel_id;
+
+  @ffi.Uint64()
+  external int operation_id;
+
+  external ffi.Pointer<ffi.UintPtr> input_pointer;
+
+  external ffi.Pointer<ffi.UintPtr> output_pointer;
+
+  @ffi.Uint16()
+  external int flags;
+}
+
+/// list entry and head structure
+final class rlist extends ffi.Struct {
+  external ffi.Pointer<rlist> prev;
+
+  external ffi.Pointer<rlist> next;
+}
+
+abstract class pm_memory_order {
+  static const int pm_memory_order_relaxed = 0;
+  static const int pm_memory_order_consume = 1;
+  static const int pm_memory_order_acquire = 2;
+  static const int pm_memory_order_release = 3;
+  static const int pm_memory_order_acq_rel = 4;
+  static const int pm_memory_order_seq_cst = 5;
+}
+
+/// A very primitive implementation of lock-free
+/// LIFO (last in first out, AKA stack, AKA single-linked
+/// list with head-only add and remove).
+///
+/// It is only usable to store free pages of a memory allocator
+/// or similar, since it assumes that all addresses are aligned,
+/// and lower 16 bits of address can be used as a counter-based
+/// solution for ABA problem.
+final class lf_lifo extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> next;
+}
+
+/// slab_arena -- a source of large aligned blocks of memory.
+/// MT-safe.
+/// Uses a lock-free LIFO to maintain a cache of used slabs.
+/// Uses a lock-free quota to limit allocating memory.
+/// Never returns memory to the operating system.
+final class slab_arena extends ffi.Struct {
+  /// A lock free list of cached slabs.
+  /// Initially there are no cached slabs, only arena.
+  /// As slabs are used and returned to arena, the cache is
+  /// used to recycle them.
+  external lf_lifo cache;
+
+  /// A preallocated arena of size = prealloc.
+  external ffi.Pointer<ffi.Void> arena;
+
+  /// How much memory is preallocated during initialization
+  /// of slab_arena.
+  @ffi.Size()
+  external int prealloc;
+
+  /// How much memory in the arena has
+  /// already been initialized for slabs.
+  @ffi.Size()
+  external int used;
+
+  /// An external quota to which we must adhere.
+  /// A quota exists to set a common limit on two arenas.
+  external ffi.Pointer<quota> quota;
+
+  @ffi.Uint32()
+  external int slab_size;
+
+  /// SLAB_ARENA_ flags for mmap() and madvise() calls.
+  @ffi.Int()
+  external int flags;
+}
+
+/// A basic limit on memory usage
+final class quota extends ffi.Struct {
+  /// High order dword is the total available memory
+  /// and the low order dword is the  currently used amount.
+  /// Both values are represented in units of size
+  /// QUOTA_UNIT_SIZE.
+  @ffi.Uint64()
+  external int value;
+}
+
+final class slab extends ffi.Struct {
+  external rlist next_in_cache;
+
+  /// Next slab in slab_list->slabs list.
+  external rlist next_in_list;
+
+  /// Allocated size.
+  /// Is different from (SLAB_MIN_SIZE << slab->order)
+  /// when requested size is bigger than SLAB_MAX_SIZE
+  /// (i.e. slab->order is SLAB_CLASS_LAST).
+  @ffi.Size()
+  external int size;
+
+  /// Slab magic (for sanity checks).
+  @ffi.Uint32()
+  external int magic;
+
+  /// Base of lb(size) for ordered slabs.
+  @ffi.Uint8()
+  external int order;
+
+  /// Only used for buddy slabs. If the buddy of the current
+  /// free slab is also free, both slabs are merged and
+  /// a free slab of the higher order emerges.
+  /// Value of 0 means the slab is free. Otherwise
+  /// slab->in_use is set to slab->order + 1.
+  @ffi.Uint8()
+  external int in_use;
+}
+
+/// Allocation statistics.
+final class small_stats extends ffi.Struct {
+  @ffi.Size()
+  external int used;
+
+  @ffi.Size()
+  external int total;
+}
+
+/// A general purpose list of slabs. Is used
+/// to store unused slabs of a certain order in the
+/// slab cache, as well as to contain allocated
+/// slabs of a specialized allocator.
+final class slab_list extends ffi.Struct {
+  external rlist slabs;
+
+  /// Total/used bytes in this list.
+  external small_stats stats;
+}
+
+final class slab_cache extends ffi.Struct {
+  external ffi.Pointer<slab_arena> arena;
+
+  @ffi.Uint32()
+  external int order0_size;
+
+  @ffi.Uint8()
+  external int order0_size_lb;
+
+  @ffi.Uint8()
+  external int order_max;
+
+  /// All allocated slabs used in the cache.
+  /// The stats reflect the total used/allocated
+  /// memory in the cache.
+  external slab_list allocated;
+
+  /// Lists of unused slabs, for each slab order.
+  ///
+  /// A used slab is removed from the list and its
+  /// next_in_list link may be reused for some other purpose.
+  @ffi.Array.multi([17])
+  external ffi.Array<slab_list> orders;
+
+  @pthread_t()
+  external int thread_id;
+}
+
+final class lifo extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> next;
+}
+
+/// A memory pool.
+final class mempool extends ffi.Struct {
+  /// The source of empty slabs.
+  external ffi.Pointer<slab_cache> cache;
+
+  /// All slabs.
+  external slab_list slabs;
+
+  /// Slabs with some amount of free space available are put
+  /// into this red-black tree, which is sorted by slab
+  /// address. A (partially) free slab with the smallest
+  /// address is chosen for allocation. This reduces internal
+  /// memory fragmentation across many slabs.
+  external mslab_tree_t hot_slabs;
+
+  /// Cached leftmost node of hot_slabs tree.
+  external ffi.Pointer<mslab> first_hot_slab;
+
+  /// Slabs with a little of free items count, staged to
+  /// be added to hot_slabs tree. Are  used in case the
+  /// tree is empty or the allocator runs out of memory.
+  external rlist cold_slabs;
+
+  /// A completely empty slab which is not freed only to
+  /// avoid the overhead of slab_cache oscillation around
+  /// a single element allocation.
+  external ffi.Pointer<mslab> spare;
+
+  /// The size of an individual object. All objects
+  /// allocated on the pool have the same size.
+  @ffi.Uint32()
+  external int objsize;
+
+  /// Mempool slabs are ordered (@sa slab_cache.h for
+  /// definition of "ordered"). The order is calculated
+  /// when the pool is initialized or is set explicitly.
+  /// The latter is necessary for 'small' allocator,
+  /// which needs to quickly find mempool containing
+  /// an allocated object when the object is freed.
+  @ffi.Uint8()
+  external int slab_order;
+
+  /// How many objects can fit in a slab.
+  @ffi.Uint32()
+  external int objcount;
+
+  /// Offset from beginning of slab to the first object
+  @ffi.Uint32()
+  external int offset;
+
+  /// Address mask to translate ptr to slab
+  @ffi.IntPtr()
+  external int slab_ptr_mask;
+
+  /// Small allocator pool, the owner of this mempool in case
+  /// this mempool used as a part of small_alloc, otherwise
+  /// NULL
+  external ffi.Pointer<small_mempool> small_mempool;
+}
+
+final class mslab_tree_t extends ffi.Struct {
+  external ffi.Pointer<mslab> rbt_root;
+}
+
+/// mslab - a standard slab formatted to store objects of equal size.
+final class mslab extends ffi.Struct {
+  external slab slab1;
+
+  external ffi.Pointer<ffi.Void> free_list;
+
+  /// Offset of an object that has never been allocated in mslab
+  @ffi.Uint32()
+  external int free_offset;
+
+  /// Number of available slots in the slab.
+  @ffi.Uint32()
+  external int nfree;
+
+  /// Used if this slab is a member of hot_slabs tree.
+  external UnnamedStruct17 next_in_hot;
+
+  /// Next slab in stagged slabs list in mempool object
+  external rlist next_in_cold;
+
+  /// Set if this slab is a member of hot_slabs tree
+  @ffi.Bool()
+  external bool in_hot_slabs;
+
+  /// Pointer to mempool, the owner of this mslab
+  external ffi.Pointer<mempool> mempool;
+}
+
+final class UnnamedStruct17 extends ffi.Struct {
+  external ffi.Pointer<mslab> rbn_left;
+
+  external ffi.Pointer<mslab> rbn_right_red;
+}
+
+final class small_mempool extends ffi.Opaque {}
+
+/// Allocation statistics.
+final class mempool_stats extends ffi.Struct {
+  /// Object size.
+  @ffi.Uint32()
+  external int objsize;
+
+  /// Total objects allocated.
+  @ffi.Uint32()
+  external int objcount;
+
+  /// Size of the slab.
+  @ffi.Uint32()
+  external int slabsize;
+
+  /// Number of slabs. All slabs are of the same size.
+  @ffi.Uint32()
+  external int slabcount;
+
+  /// Memory used and booked but passive (to see fragmentation).
+  external small_stats totals;
+}
+
+final class interactor_messages_pool extends ffi.Struct {
+  external ffi.Pointer<mempool> memory_pool;
+}
+
+final class interactor_payloads_pool extends ffi.Struct {
+  external ffi.Pointer<mempool> memory_pool;
+}
+
+final class interactor_dart_configuration extends ffi.Struct {
+  @ffi.Uint16()
+  external int buffers_count;
+
+  @ffi.Uint32()
+  external int buffer_size;
+
+  @ffi.Size()
+  external int ring_size;
+
+  @ffi.Int()
+  external int ring_flags;
+
+  @ffi.Uint64()
+  external int timeout_checker_period_millis;
+
+  @ffi.Uint32()
+  external int base_delay_micros;
+
+  @ffi.Double()
+  external double delay_randomization_factor;
+
+  @ffi.Uint64()
+  external int max_delay_micros;
+
+  @ffi.Uint64()
+  external int cqe_wait_timeout_millis;
+
+  @ffi.Uint32()
+  external int cqe_wait_count;
+
+  @ffi.Uint32()
+  external int cqe_peek_count;
+
+  @ffi.Bool()
+  external bool trace;
+
+  @ffi.Size()
+  external int quota_size;
+
+  @ffi.Size()
+  external int preallocation_size;
+
+  @ffi.Size()
+  external int slab_size;
+}
+
+final class interactor_dart extends ffi.Struct {
+  @ffi.Uint8()
+  external int id;
+
+  external interactor_messages_pool messages_pool;
+
+  external interactor_buffers_pool buffers_pool;
+
+  external ffi.Pointer<io_uring> ring;
+
+  external ffi.Pointer<iovec> buffers;
+
+  @ffi.Uint32()
+  external int buffer_size;
+
+  @ffi.Uint16()
+  external int buffers_count;
+
+  @ffi.Uint64()
+  external int timeout_checker_period_millis;
+
+  @ffi.Uint32()
+  external int base_delay_micros;
+
+  @ffi.Double()
+  external double delay_randomization_factor;
+
+  @ffi.Uint64()
+  external int max_delay_micros;
+
+  external ffi.Pointer<mh_events_t> events;
+
+  @ffi.Size()
+  external int ring_size;
+
+  @ffi.Int()
+  external int ring_flags;
+
+  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
+
+  @ffi.Uint64()
+  external int cqe_wait_timeout_millis;
+
+  @ffi.Uint32()
+  external int cqe_wait_count;
+
+  @ffi.Uint32()
+  external int cqe_peek_count;
+
+  @ffi.Bool()
+  external bool trace;
+
+  external quota quota1;
+
+  external slab_arena arena;
+
+  external slab_cache cache;
+}
+
+typedef interactor_dart_t = interactor_dart;
+typedef interactor_dart_configuration_t = interactor_dart_configuration;
+typedef interactor_message_t = interactor_message;
 
 const int MSG_OOB = 1;
 
@@ -24000,6 +25179,14 @@ const int IORING_RESTRICTION_SQE_FLAGS_ALLOWED = 2;
 const int IORING_RESTRICTION_SQE_FLAGS_REQUIRED = 3;
 
 const int IORING_RESTRICTION_LAST = 4;
+
+const int kNativeArgNumberPos = 0;
+
+const int kNativeArgNumberSize = 8;
+
+const int kNativeArgTypePos = 8;
+
+const int kNativeArgTypeSize = 8;
 
 const int _PC_LINK_MAX = 0;
 
@@ -24681,13 +25868,21 @@ const int FP_SUBNORMAL = 3;
 
 const int FP_NORMAL = 4;
 
-const int kNativeArgNumberPos = 0;
+const int SLAB_MIN_SIZE = 65536;
 
-const int kNativeArgNumberSize = 8;
+const int SMALL_UNLIMITED = -9223372036854775808;
 
-const int kNativeArgTypePos = 8;
+const int SLAB_ARENA_PRIVATE = -2147483647;
 
-const int kNativeArgTypeSize = 8;
+const int SLAB_ARENA_SHARED = -2147483646;
+
+const int SLAB_ARENA_DONTDUMP = -2147483644;
+
+const int ORDER_MAX = 16;
+
+const int RB_WALK_LEFT = 1;
+
+const int RB_WALK_RIGHT = 2;
 
 const int INT8_MIN = -128;
 
@@ -27075,6 +28270,46 @@ const int ATOMIC_POINTER_LOCK_FREE = 2;
 
 const int LIBURING_UDATA_TIMEOUT = -1;
 
+const int DART_FLAGS_CURRENT_VERSION = 12;
+
+const int DART_INITIALIZE_PARAMS_CURRENT_VERSION = 8;
+
+const int ILLEGAL_PORT = 0;
+
+const String DART_KERNEL_ISOLATE_NAME = 'kernel-service';
+
+const String DART_VM_SERVICE_ISOLATE_NAME = 'vm-service';
+
+const String kSnapshotBuildIdCSymbol = '_kDartSnapshotBuildId';
+
+const String kVmSnapshotDataCSymbol = '_kDartVmSnapshotData';
+
+const String kVmSnapshotInstructionsCSymbol = '_kDartVmSnapshotInstructions';
+
+const String kVmSnapshotBssCSymbol = '_kDartVmSnapshotBss';
+
+const String kIsolateSnapshotDataCSymbol = '_kDartIsolateSnapshotData';
+
+const String kIsolateSnapshotInstructionsCSymbol =
+    '_kDartIsolateSnapshotInstructions';
+
+const String kIsolateSnapshotBssCSymbol = '_kDartIsolateSnapshotBss';
+
+const String kSnapshotBuildIdAsmSymbol = '_kDartSnapshotBuildId';
+
+const String kVmSnapshotDataAsmSymbol = '_kDartVmSnapshotData';
+
+const String kVmSnapshotInstructionsAsmSymbol = '_kDartVmSnapshotInstructions';
+
+const String kVmSnapshotBssAsmSymbol = '_kDartVmSnapshotBss';
+
+const String kIsolateSnapshotDataAsmSymbol = '_kDartIsolateSnapshotData';
+
+const String kIsolateSnapshotInstructionsAsmSymbol =
+    '_kDartIsolateSnapshotInstructions';
+
+const String kIsolateSnapshotBssAsmSymbol = '_kDartIsolateSnapshotBss';
+
 const int BUFSIZ = 8192;
 
 const int EOF = -1;
@@ -27101,7 +28336,7 @@ const int WAL_SYNC_FLAG = 1052672;
 
 const int HAVE_CLOCK_GETTIME_DECL = 1;
 
-const String SYSCONF_DIR = 'etc';
+const String SYSCONF_DIR = '';
 
 const String INSTALL_PREFIX = '/usr/local';
 
@@ -27259,42 +28494,210 @@ const int INTERACTOR_BUFFER_USED = -1;
 
 const int INTERACTOR_TIMEOUT_INFINITY = -1;
 
-const int DART_FLAGS_CURRENT_VERSION = 12;
+const int MB_LEN_MAX = 16;
 
-const int DART_INITIALIZE_PARAMS_CURRENT_VERSION = 8;
+const int LLONG_MIN = -9223372036854775808;
 
-const int ILLEGAL_PORT = 0;
+const int LLONG_MAX = 9223372036854775807;
 
-const String DART_KERNEL_ISOLATE_NAME = 'kernel-service';
+const int ULLONG_MAX = -1;
 
-const String DART_VM_SERVICE_ISOLATE_NAME = 'vm-service';
+const int PTHREAD_KEYS_MAX = 1024;
 
-const String kSnapshotBuildIdCSymbol = '_kDartSnapshotBuildId';
+const int PTHREAD_DESTRUCTOR_ITERATIONS = 4;
 
-const String kVmSnapshotDataCSymbol = '_kDartVmSnapshotData';
+const int AIO_PRIO_DELTA_MAX = 20;
 
-const String kVmSnapshotInstructionsCSymbol = '_kDartVmSnapshotInstructions';
+const int DELAYTIMER_MAX = 2147483647;
 
-const String kVmSnapshotBssCSymbol = '_kDartVmSnapshotBss';
+const int TTY_NAME_MAX = 32;
 
-const String kIsolateSnapshotDataCSymbol = '_kDartIsolateSnapshotData';
+const int LOGIN_NAME_MAX = 256;
 
-const String kIsolateSnapshotInstructionsCSymbol =
-    '_kDartIsolateSnapshotInstructions';
+const int HOST_NAME_MAX = 64;
 
-const String kIsolateSnapshotBssCSymbol = '_kDartIsolateSnapshotBss';
+const int MQ_PRIO_MAX = 32768;
 
-const String kSnapshotBuildIdAsmSymbol = '_kDartSnapshotBuildId';
+const int SEM_VALUE_MAX = 2147483647;
 
-const String kVmSnapshotDataAsmSymbol = '_kDartVmSnapshotData';
+const int SSIZE_MAX = 9223372036854775807;
 
-const String kVmSnapshotInstructionsAsmSymbol = '_kDartVmSnapshotInstructions';
+const int BC_BASE_MAX = 99;
 
-const String kVmSnapshotBssAsmSymbol = '_kDartVmSnapshotBss';
+const int BC_DIM_MAX = 2048;
 
-const String kIsolateSnapshotDataAsmSymbol = '_kDartIsolateSnapshotData';
+const int BC_SCALE_MAX = 99;
 
-const String kIsolateSnapshotInstructionsAsmSymbol =
-    '_kDartIsolateSnapshotInstructions';
+const int BC_STRING_MAX = 1000;
 
-const String kIsolateSnapshotBssAsmSymbol = '_kDartIsolateSnapshotBss';
+const int COLL_WEIGHTS_MAX = 255;
+
+const int EXPR_NEST_MAX = 32;
+
+const int LINE_MAX = 2048;
+
+const int CHARCLASS_NAME_MAX = 2048;
+
+const int RE_DUP_MAX = 32767;
+
+const int SCHAR_MAX = 127;
+
+const int SHRT_MAX = 32767;
+
+const int INT_MAX = 2147483647;
+
+const int LONG_MAX = 9223372036854775807;
+
+const int SCHAR_MIN = -128;
+
+const int SHRT_MIN = -32768;
+
+const int INT_MIN = -2147483648;
+
+const int LONG_MIN = -9223372036854775808;
+
+const int UCHAR_MAX = 255;
+
+const int USHRT_MAX = 65535;
+
+const int UINT_MAX = 4294967295;
+
+const int ULONG_MAX = -1;
+
+const int CHAR_BIT = 8;
+
+const int CHAR_MIN = -128;
+
+const int CHAR_MAX = 127;
+
+const int MAP_32BIT = 64;
+
+const int MAP_GROWSDOWN = 256;
+
+const int MAP_DENYWRITE = 2048;
+
+const int MAP_EXECUTABLE = 4096;
+
+const int MAP_LOCKED = 8192;
+
+const int MAP_NORESERVE = 16384;
+
+const int MAP_POPULATE = 32768;
+
+const int MAP_NONBLOCK = 65536;
+
+const int MAP_STACK = 131072;
+
+const int MAP_HUGETLB = 262144;
+
+const int MAP_SYNC = 524288;
+
+const int MAP_FIXED_NOREPLACE = 1048576;
+
+const int PROT_READ = 1;
+
+const int PROT_WRITE = 2;
+
+const int PROT_EXEC = 4;
+
+const int PROT_NONE = 0;
+
+const int PROT_GROWSDOWN = 16777216;
+
+const int PROT_GROWSUP = 33554432;
+
+const int MAP_SHARED = 1;
+
+const int MAP_PRIVATE = 2;
+
+const int MAP_SHARED_VALIDATE = 3;
+
+const int MAP_TYPE = 15;
+
+const int MAP_FIXED = 16;
+
+const int MAP_FILE = 0;
+
+const int MAP_ANONYMOUS = 32;
+
+const int MAP_ANON = 32;
+
+const int MAP_HUGE_SHIFT = 26;
+
+const int MAP_HUGE_MASK = 63;
+
+const int MS_ASYNC = 1;
+
+const int MS_SYNC = 4;
+
+const int MS_INVALIDATE = 2;
+
+const int MADV_NORMAL = 0;
+
+const int MADV_RANDOM = 1;
+
+const int MADV_SEQUENTIAL = 2;
+
+const int MADV_WILLNEED = 3;
+
+const int MADV_DONTNEED = 4;
+
+const int MADV_FREE = 8;
+
+const int MADV_REMOVE = 9;
+
+const int MADV_DONTFORK = 10;
+
+const int MADV_DOFORK = 11;
+
+const int MADV_MERGEABLE = 12;
+
+const int MADV_UNMERGEABLE = 13;
+
+const int MADV_HUGEPAGE = 14;
+
+const int MADV_NOHUGEPAGE = 15;
+
+const int MADV_DONTDUMP = 16;
+
+const int MADV_DODUMP = 17;
+
+const int MADV_WIPEONFORK = 18;
+
+const int MADV_KEEPONFORK = 19;
+
+const int MADV_COLD = 20;
+
+const int MADV_PAGEOUT = 21;
+
+const int MADV_POPULATE_READ = 22;
+
+const int MADV_POPULATE_WRITE = 23;
+
+const int MADV_DONTNEED_LOCKED = 24;
+
+const int MADV_HWPOISON = 100;
+
+const int POSIX_MADV_NORMAL = 0;
+
+const int POSIX_MADV_RANDOM = 1;
+
+const int POSIX_MADV_SEQUENTIAL = 2;
+
+const int POSIX_MADV_WILLNEED = 3;
+
+const int POSIX_MADV_DONTNEED = 4;
+
+const int MCL_CURRENT = 1;
+
+const int MCL_FUTURE = 2;
+
+const int MCL_ONFAULT = 4;
+
+const int SLAB_ARENA_FLAG_MARK = 2147483648;
+
+const int RB_COMPACT = 1;
+
+const int RB_MAX_TREE_HEIGHT = 48;
+
+const int QUOTA_UNIT_SIZE = 1024;

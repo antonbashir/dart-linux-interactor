@@ -15,10 +15,12 @@ ffigen:
   name: "InteractorBindings"
   description: "Bindings for Interactor"
   output: "lib/interactor/bindings.dart"
+  compiler-opts:
+    - "-I../native/small/third_party"
   headers:
     entry-points:
       - "../native/interactor.h"
-      - "../native/interactor_worker.h"
+      - "../native/interactor_dart.h"
       - "../native/interactor_constants.h"
   globals:
     exclude:

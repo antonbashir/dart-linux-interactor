@@ -344,7 +344,7 @@ struct io_uring_cqe {
 	 * If the ring is initialized with IORING_SETUP_CQE32, then this field
 	 * contains 16-bytes of padding, doubling the size of the CQE.
 	 */
-	__u64 big_cqe[];
+//	__u64 big_cqe[];
 };
 
 /*

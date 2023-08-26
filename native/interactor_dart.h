@@ -1,5 +1,5 @@
-#ifndef INTERACTOR_dart_H
-#define INTERACTOR_dart_H
+#ifndef INTERACTOR_DART_H
+#define INTERACTOR_DART_H
 
 #include <stdint.h>
 #include <stdio.h>
