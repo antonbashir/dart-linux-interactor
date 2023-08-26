@@ -129,6 +129,7 @@ void interactor_dart_payload_free(struct interactor_payloads_pool *pool, intptr_
 void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool *pool)
 {
   interactor_payloads_pool_destroy(pool);
+  free(pool);
 }
 
 static inline void interactor_dart_add_event(interactor_dart_t *interactor, int fd, uint64_t data, int64_t timeout)
