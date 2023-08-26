@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <liburing.h>
-#include "interactor_worker.h"
 #include "dart/dart_api.h"
 
 #if defined(__cplusplus)
