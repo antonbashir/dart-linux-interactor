@@ -1,3 +1,7 @@
+import 'package:ffi/ffi.dart';
+
+import 'bindings.dart';
+
 const preferInlinePragma = "vm:prefer-inline";
 
 const empty = "";
@@ -25,20 +29,30 @@ const unableToFindProjectRoot = "Unable to find project root";
 const pubspecYamlFile = 'pubspec.yaml';
 const pubspecYmlFile = 'pubspec.yml';
 
-class interactorDirectories {
-  const interactorDirectories._();
+class InteractorDirectories {
+  const InteractorDirectories._();
 
   static const native = "/native";
   static const package = "/package";
   static const dotDartTool = ".dart_tool";
 }
 
-class interactorPackageConfigFields {
-  interactorPackageConfigFields._();
+class InteractorPackageConfigFields {
+  InteractorPackageConfigFields._();
 
   static const rootUri = 'rootUri';
   static const name = 'name';
   static const packages = 'packages';
+}
+
+class InteractorMessages {
+  InteractorMessages._();
+
+  static final workerMemoryError = "[worker] out of memory";
+  static workerError(int result, InteractorBindings bindings) => "[worker] code = $result, message = ${_kernelErrorToString(result, bindings)}";
+  static workerTrace(int id, int result, int data, int fd) => "worker = $id, result = $result,  bid = ${((data >> 16) & 0xffff)}, fd = $fd";
+
+  static _kernelErrorToString(int error, InteractorBindings bindings) => bindings.strerror(-error).cast<Utf8>().toDartString();
 }
 
 const interactorBufferUsed = -1;

@@ -24,7 +24,7 @@ InteractorLibrary _load() {
   } on ArgumentError {
     final dotDartTool = findDotDartTool();
     if (dotDartTool != null) {
-      final packageNativeRoot = Directory(findPackageRoot(dotDartTool).toFilePath() + interactorDirectories.native);
+      final packageNativeRoot = Directory(findPackageRoot(dotDartTool).toFilePath() + InteractorDirectories.native);
       final libraryFile = File(packageNativeRoot.path + slash + interactorLibraryName);
       if (libraryFile.existsSync()) {
         return InteractorLibrary(DynamicLibrary.open(libraryFile.path), libraryFile.path);
@@ -39,16 +39,16 @@ Uri? findDotDartTool() {
   Uri root = Platform.script.resolve(currentDirectorySymbol);
 
   do {
-    if (File.fromUri(root.resolve(interactorDirectories.dotDartTool + slash + packageConfigJsonFile)).existsSync()) {
-      return root.resolve(interactorDirectories.dotDartTool + slash);
+    if (File.fromUri(root.resolve(InteractorDirectories.dotDartTool + slash + packageConfigJsonFile)).existsSync()) {
+      return root.resolve(InteractorDirectories.dotDartTool + slash);
     }
   } while (root != (root = root.resolve(parentDirectorySymbol)));
 
   root = Directory.current.uri;
 
   do {
-    if (File.fromUri(root.resolve(interactorDirectories.dotDartTool + slash + packageConfigJsonFile)).existsSync()) {
-      return root.resolve(interactorDirectories.dotDartTool + slash);
+    if (File.fromUri(root.resolve(InteractorDirectories.dotDartTool + slash + packageConfigJsonFile)).existsSync()) {
+      return root.resolve(InteractorDirectories.dotDartTool + slash);
     }
   } while (root != (root = root.resolve(parentDirectorySymbol)));
 
@@ -63,11 +63,11 @@ Uri findPackageRoot(Uri dotDartTool) {
   } catch (ignore) {
     throw UnsupportedError(unableToFindProjectRoot);
   }
-  final package = (packageConfig[interactorPackageConfigFields.packages] ?? []).firstWhere(
-    (element) => element[interactorPackageConfigFields.name] == interactorPackageName,
+  final package = (packageConfig[InteractorPackageConfigFields.packages] ?? []).firstWhere(
+    (element) => element[InteractorPackageConfigFields.name] == interactorPackageName,
     orElse: () => throw UnsupportedError(unableToFindProjectRoot),
   );
-  return packageConfigFile.uri.resolve(package[interactorPackageConfigFields.rootUri] ?? empty);
+  return packageConfigFile.uri.resolve(package[InteractorPackageConfigFields.rootUri] ?? empty);
 }
 
 String? findProjectRoot() {
