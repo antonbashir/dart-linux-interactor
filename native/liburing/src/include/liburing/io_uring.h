@@ -333,7 +333,7 @@ enum {
 
 /*
  * IO completion data structure (Completion Queue Entry)
- */clear
+ */
  
 struct io_uring_cqe {
 	__u64	user_data;	/* sqe->data submission passed back */
