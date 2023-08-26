@@ -5,6 +5,7 @@
     "interactor_datas_pool.h": "c",
     "interactor_constants.h": "c",
     "interactor.h": "c",
-    "socket.h": "c"
+    "socket.h": "c",
+    "interactor_dart.h": "c"
   }
 }

@@ -6,7 +6,6 @@
 #include "interactor_common.h"
 #include "interactor_collections.h"
 #include "interactor_buffers_pool.h"
-#include "interactor_datas_pool.h"
 #include "interactor_messages_pool.h"
 
 #if defined(__cplusplus)

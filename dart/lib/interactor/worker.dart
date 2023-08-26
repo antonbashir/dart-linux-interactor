@@ -3,10 +3,7 @@ import 'dart:ffi';
 import 'dart:isolate';
 import 'dart:math';
 
-import 'package:meta/meta.dart';
-
 import 'bindings.dart';
-import 'buffers.dart';
 import 'constants.dart';
 import 'lookup.dart';
 import 'timeout.dart';
@@ -20,7 +17,6 @@ class InteractorWorker {
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
   late final RawReceivePort _closer;
   late final SendPort _destroyer;
-  late final InteractorBuffers _buffers;
   late final InteractorTimeoutChecker _timeoutChecker;
   late final List<Duration> _delays;
 
@@ -50,11 +46,6 @@ class InteractorWorker {
     _destroyer = configuration[2] as SendPort;
     _fromInteractor.close();
     _bindings = InteractorBindings(InteractorLibrary.load(libraryPath: libraryPath).library);
-    _buffers = InteractorBuffers(
-      _bindings,
-      _workerPointer.ref.buffers,
-      _workerPointer,
-    );
     _ring = _workerPointer.ref.ring;
     _cqes = _workerPointer.ref.cqes;
     _timeoutChecker = InteractorTimeoutChecker(
@@ -95,7 +86,6 @@ class InteractorWorker {
       final fd = (data >> 32) & 0xffffffff;
       final bufferId = (data >> 16) & 0xffff;
       if (_workerPointer.ref.trace) print(InteractorMessages.workerTrace(id, result, data, fd));
-      
     }
     _bindings.interactor_cqe_advance(_ring, cqeCount);
     return true;
@@ -115,7 +105,4 @@ class InteractorWorker {
     }
     return delays;
   }
-
-  @visibleForTesting
-  InteractorBuffers get buffers => _buffers;
 }
