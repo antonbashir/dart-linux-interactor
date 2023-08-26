@@ -98,7 +98,6 @@ class InteractorWorker {
       final fd = (data >> 32) & 0xffffffff;
       final bufferId = (data >> 16) & 0xffff;
       if (_workerPointer.ref.trace) print(InteractorMessages.workerTrace(id, result, data, fd));
-
       
     }
     _bindings.interactor_cqe_advance(_ring, cqeCount);

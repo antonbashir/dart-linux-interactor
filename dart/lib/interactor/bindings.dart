@@ -22250,7 +22250,7 @@ abstract class io_uring_op {
   static const int IORING_OP_LAST = 49;
 }
 
-final class io_uring_cqe extends ffi.Opaque {
+final class io_uring_cqe extends ffi.Struct {
   @ffi.UnsignedLongLong()
   external int user_data;
 
