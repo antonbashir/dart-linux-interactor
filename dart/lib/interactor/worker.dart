@@ -9,7 +9,7 @@ import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
 import 'lookup.dart';
-import 'payload.dart';
+import 'message.dart';
 import 'timeout.dart';
 
 class InteractorWorker {

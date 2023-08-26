@@ -1,17 +1,19 @@
-#ifndef INTERACTOR_WORKER_H
-#define INTERACTOR_WORKER_H
+#ifndef INTERACTOR_dart_H
+#define INTERACTOR_dart_H
 
 #include <stdint.h>
 #include <stdio.h>
 #include "interactor_common.h"
 #include "interactor_collections.h"
 #include "interactor_buffers_pool.h"
+#include "interactor_datas_pool.h"
+#include "interactor_messages_pool.h"
 
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
-  typedef struct interactor_worker_configuration
+  typedef struct interactor_dart_configuration
   {
     uint16_t buffers_count;
     uint32_t buffer_size;
@@ -25,12 +27,13 @@ extern "C"
     uint32_t cqe_wait_count;
     uint32_t cqe_peek_count;
     bool trace;
-  } interactor_worker_configuration_t;
+  } interactor_dart_configuration_t;
 
-  typedef struct interactor_worker
+  typedef struct interactor_dart
   {
     uint8_t id;
-    struct interactor_buffers_pool free_buffers;
+    struct interactor_messages_pool messages_pool;
+    struct interactor_buffers_pool buffers_pool;
     struct io_uring *ring;
     struct iovec *buffers;
     uint32_t buffer_size;
@@ -47,25 +50,25 @@ extern "C"
     uint32_t cqe_wait_count;
     uint32_t cqe_peek_count;
     bool trace;
-  } interactor_worker_t;
+  } interactor_dart_t;
 
-  int interactor_worker_initialize(interactor_worker_t *worker,
-                                  interactor_worker_configuration_t *configuration,
+  int interactor_dart_initialize(interactor_dart_t *dart,
+                                  interactor_dart_configuration_t *configuration,
                                   uint8_t id);
 
-  void interactor_worker_cancel_by_fd(interactor_worker_t *worker, int fd);
+  void interactor_dart_cancel_by_fd(interactor_dart_t *dart, int fd);
 
-  void interactor_worker_check_event_timeouts(interactor_worker_t *worker);
-  void interactor_worker_remove_event(interactor_worker_t *worker, uint64_t data);
+  void interactor_dart_check_event_timeouts(interactor_dart_t *dart);
+  void interactor_dart_remove_event(interactor_dart_t *dart, uint64_t data);
 
-  int32_t interactor_worker_get_buffer(interactor_worker_t *worker);
-  void interactor_worker_release_buffer(interactor_worker_t *worker, uint16_t buffer_id);
-  int32_t interactor_worker_available_buffers(interactor_worker_t *worker);
-  int32_t interactor_worker_used_buffers(interactor_worker_t *worker);
+  int32_t interactor_dart_get_buffer(interactor_dart_t *dart);
+  void interactor_dart_release_buffer(interactor_dart_t *dart, uint16_t buffer_id);
+  int32_t interactor_dart_available_buffers(interactor_dart_t *dart);
+  int32_t interactor_dart_used_buffers(interactor_dart_t *dart);
 
-  int interactor_worker_peek(interactor_worker_t *worker);
+  int interactor_dart_peek(interactor_dart_t *dart);
 
-  void interactor_worker_destroy(interactor_worker_t *worker);
+  void interactor_dart_destroy(interactor_dart_t *dart);
 
 #if defined(__cplusplus)
 }

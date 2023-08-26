@@ -1,5 +1,10 @@
 {
   "files.associations": {
-    "util.h": "c"
+    "util.h": "c",
+    "interactor_buffers_pool.h": "c",
+    "interactor_datas_pool.h": "c",
+    "interactor_constants.h": "c",
+    "interactor.h": "c",
+    "socket.h": "c"
   }
 }
