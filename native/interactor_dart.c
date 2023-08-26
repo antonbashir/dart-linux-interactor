@@ -113,7 +113,8 @@ void interactor_dart_free_message(interactor_dart_t *interactor, interactor_mess
 struct interactor_payloads_pool *interactor_dart_payload_pool_create(interactor_dart_t *interactor, size_t size)
 {
   struct interactor_payloads_pool* pool = malloc(sizeof(struct interactor_payloads_pool));
-  return interactor_payloads_pool_create(pool, &interactor->cache, size);
+  interactor_payloads_pool_create(pool, &interactor->cache, size);
+  return pool;
 }
 
 intptr_t interactor_dart_payload_allocate(struct interactor_payloads_pool *pool)
