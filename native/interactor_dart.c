@@ -25,10 +25,9 @@ int interactor_dart_initialize(interactor_dart_t *interactor,
     return -ENOMEM;
   }
 
-  quota_init(&interactor->quota, UINT_MAX);
-	slab_arena_create(&interactor->arena, &interactor->quota, 0, 4000000, MAP_PRIVATE);
-	slab_cache_create(&interactor->cache, &interactor->arena);
-
+  quota_init(&interactor->quota, configuration->quota_size);
+  slab_arena_create(&interactor->arena, &interactor->quota, configuration->preallocation_size, configuration->slab_size, MAP_PRIVATE);
+  slab_cache_create(&interactor->cache, &interactor->arena);
   interactor_messages_pool_create(&interactor->messages_pool, &interactor->cache);
 
   interactor->events = mh_events_new();
@@ -112,7 +111,7 @@ void interactor_dart_free_message(interactor_dart_t *interactor, interactor_mess
 
 struct interactor_payloads_pool *interactor_dart_payload_pool_create(interactor_dart_t *interactor, size_t size)
 {
-  struct interactor_payloads_pool* pool = malloc(sizeof(struct interactor_payloads_pool));
+  struct interactor_payloads_pool *pool = malloc(sizeof(struct interactor_payloads_pool));
   interactor_payloads_pool_create(pool, &interactor->cache, size);
   return pool;
 }

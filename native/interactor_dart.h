@@ -28,6 +28,9 @@ extern "C"
     uint32_t cqe_wait_count;
     uint32_t cqe_peek_count;
     bool trace;
+    size_t quota_size;
+    size_t preallocation_size;
+    size_t slab_size;
   } interactor_dart_configuration_t;
 
   typedef struct interactor_dart
