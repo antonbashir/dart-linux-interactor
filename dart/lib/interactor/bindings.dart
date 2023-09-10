@@ -18075,11 +18075,235 @@ class InteractorBindings {
       void Function(
           ffi.Pointer<mempool>, ffi.Pointer<mslab>, ffi.Pointer<ffi.Void>)>();
 
-  late final ffi.Pointer<ffi.Size> _QUOTA_MAX = _lookup<ffi.Size>('QUOTA_MAX');
+  /// Create an instance of small_class evaluator. All args must meet the
+  /// requirements, undefined behaviour otherwise (at least assert).
+  /// @param sc - instance to create.
+  /// @param granularity - any class size will be a multiple of this value.
+  /// Must be a power of 2 (and thus greater than zero).
+  /// @param desired_factor - desired factor of growth of class size.
+  /// Must be in (1, 2] range. Actual factor can be different.
+  /// @param min_alloc - the lowest class size, must be greater than zero.
+  /// The good choice is the same value as granularity.
+  /// @param actual_factor calculated on the basis of desired factor
+  void small_class_create(
+    ffi.Pointer<small_class> sc,
+    int granularity,
+    double desired_factor,
+    int min_alloc,
+    ffi.Pointer<ffi.Float> actual_factor,
+  ) {
+    return _small_class_create(
+      sc,
+      granularity,
+      desired_factor,
+      min_alloc,
+      actual_factor,
+    );
+  }
 
-  int get QUOTA_MAX => _QUOTA_MAX.value;
+  late final _small_class_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<small_class>,
+              ffi.UnsignedInt,
+              ffi.Float,
+              ffi.UnsignedInt,
+              ffi.Pointer<ffi.Float>)>>('small_class_create');
+  late final _small_class_create = _small_class_createPtr.asFunction<
+      void Function(ffi.Pointer<small_class>, int, double, int,
+          ffi.Pointer<ffi.Float>)>();
 
-  set QUOTA_MAX(int value) => _QUOTA_MAX.value = value;
+  /// Initialize a small memory allocator.
+  /// @param alloc - instance to create.
+  /// @param cache - pointer to used slab cache.
+  /// @param objsize_min - minimal object size.
+  /// @param granularity - alignment of objects in pools
+  /// @param alloc_factor - desired factor of growth object size.
+  /// Must be in (1, 2] range.
+  /// @param actual_alloc_factor real allocation factor calculated the basis of
+  /// desired alloc_factor
+  void small_alloc_create(
+    ffi.Pointer<small_alloc> alloc,
+    ffi.Pointer<slab_cache> cache,
+    int objsize_min,
+    int granularity,
+    double alloc_factor,
+    ffi.Pointer<ffi.Float> actual_alloc_factor,
+  ) {
+    return _small_alloc_create(
+      alloc,
+      cache,
+      objsize_min,
+      granularity,
+      alloc_factor,
+      actual_alloc_factor,
+    );
+  }
+
+  late final _small_alloc_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<small_alloc>,
+              ffi.Pointer<slab_cache>,
+              ffi.Uint32,
+              ffi.UnsignedInt,
+              ffi.Float,
+              ffi.Pointer<ffi.Float>)>>('small_alloc_create');
+  late final _small_alloc_create = _small_alloc_createPtr.asFunction<
+      void Function(ffi.Pointer<small_alloc>, ffi.Pointer<slab_cache>, int, int,
+          double, ffi.Pointer<ffi.Float>)>();
+
+  /// Destroy the allocator and all allocated memory.
+  void small_alloc_destroy(
+    ffi.Pointer<small_alloc> alloc,
+  ) {
+    return _small_alloc_destroy(
+      alloc,
+    );
+  }
+
+  late final _small_alloc_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<small_alloc>)>>(
+          'small_alloc_destroy');
+  late final _small_alloc_destroy = _small_alloc_destroyPtr
+      .asFunction<void Function(ffi.Pointer<small_alloc>)>();
+
+  /// Allocate a piece of memory in the small allocator.
+  ///
+  /// @retval NULL   the requested size is beyond objsize_max
+  /// or out of memory
+  ffi.Pointer<ffi.Void> smalloc(
+    ffi.Pointer<small_alloc> alloc,
+    int size,
+  ) {
+    return _smalloc(
+      alloc,
+      size,
+    );
+  }
+
+  late final _smallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<small_alloc>, ffi.Size)>>('smalloc');
+  late final _smalloc = _smallocPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<small_alloc>, int)>();
+
+  /// Free memory chunk allocated by the small allocator. */
+  /// /**
+  /// Free a small objects.
+  ///
+  /// This boils down to finding the object's mempool and delegating
+  /// to mempool_free().
+  void smfree(
+    ffi.Pointer<small_alloc> alloc,
+    ffi.Pointer<ffi.Void> ptr,
+    int size,
+  ) {
+    return _smfree(
+      alloc,
+      ptr,
+      size,
+    );
+  }
+
+  late final _smfreePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>,
+              ffi.Size)>>('smfree');
+  late final _smfree = _smfreePtr.asFunction<
+      void Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>, int)>();
+
+  /// @brief Return an unique index associated with a chunk allocated
+  /// by the allocator.
+  ///
+  /// This index space is more dense than the pointers space,
+  /// especially in the least significant bits.  This number is
+  /// needed because some types of box's indexes (e.g. BITSET) have
+  /// better performance then they operate on sequential offsets
+  /// (i.e. dense space) instead of memory pointers (sparse space).
+  ///
+  /// The calculation is based on SLAB number and the position of an
+  /// item within it. Current implementation only guarantees that
+  /// adjacent chunks from one SLAB will have consecutive indexes.
+  /// That is, if two chunks were sequentially allocated from one
+  /// chunk they will have sequential ids. If a second chunk was
+  /// allocated from another SLAB thеn the difference between indexes
+  /// may be more than one.
+  ///
+  /// @param ptr pointer to memory allocated in small_alloc
+  /// @return unique index
+  int small_ptr_compress(
+    ffi.Pointer<small_alloc> alloc,
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _small_ptr_compress(
+      alloc,
+      ptr,
+    );
+  }
+
+  late final _small_ptr_compressPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<small_alloc>,
+              ffi.Pointer<ffi.Void>)>>('small_ptr_compress');
+  late final _small_ptr_compress = _small_ptr_compressPtr.asFunction<
+      int Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>)>();
+
+  /// Perform the opposite action of small_ptr_compress().
+  ffi.Pointer<ffi.Void> small_ptr_decompress(
+    ffi.Pointer<small_alloc> alloc,
+    int val,
+  ) {
+    return _small_ptr_decompress(
+      alloc,
+      val,
+    );
+  }
+
+  late final _small_ptr_decompressPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<small_alloc>, ffi.Size)>>('small_ptr_decompress');
+  late final _small_ptr_decompress = _small_ptr_decompressPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<small_alloc>, int)>();
+
+  void small_stats1(
+    ffi.Pointer<small_alloc> alloc,
+    ffi.Pointer<small_stats> totals,
+    ffi.Pointer<
+            ffi.NativeFunction<
+                ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>
+        cb,
+    ffi.Pointer<ffi.Void> cb_ctx,
+  ) {
+    return _small_stats1(
+      alloc,
+      totals,
+      cb,
+      cb_ctx,
+    );
+  }
+
+  late final _small_stats1Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<small_alloc>,
+              ffi.Pointer<small_stats>,
+              ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Int Function(
+                          ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
+              ffi.Pointer<ffi.Void>)>>('small_stats');
+  late final _small_stats1 = _small_stats1Ptr.asFunction<
+      void Function(
+          ffi.Pointer<small_alloc>,
+          ffi.Pointer<small_stats>,
+          ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Int Function(
+                      ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
+          ffi.Pointer<ffi.Void>)>();
 
   int interactor_dart_initialize(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -21910,7 +22134,58 @@ class _SymbolAddresses {
           ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<mslab>,
               ffi.Pointer<ffi.Void>)>> get mslab_free =>
       _library._mslab_freePtr;
-  ffi.Pointer<ffi.Size> get QUOTA_MAX => _library._QUOTA_MAX;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<small_class>,
+              ffi.UnsignedInt,
+              ffi.Float,
+              ffi.UnsignedInt,
+              ffi.Pointer<ffi.Float>)>> get small_class_create =>
+      _library._small_class_createPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<small_alloc>,
+              ffi.Pointer<slab_cache>,
+              ffi.Uint32,
+              ffi.UnsignedInt,
+              ffi.Float,
+              ffi.Pointer<ffi.Float>)>> get small_alloc_create =>
+      _library._small_alloc_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<small_alloc>)>>
+      get small_alloc_destroy => _library._small_alloc_destroyPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<small_alloc>, ffi.Size)>> get smalloc =>
+      _library._smallocPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>, ffi.Size)>>
+      get smfree => _library._smfreePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Size Function(
+                  ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>)>>
+      get small_ptr_compress => _library._small_ptr_compressPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<small_alloc>, ffi.Size)>> get small_ptr_decompress =>
+      _library._small_ptr_decompressPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<small_alloc>,
+              ffi.Pointer<small_stats>,
+              ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Int Function(
+                          ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
+              ffi.Pointer<ffi.Void>)>> get small_stats1 =>
+      _library._small_stats1Ptr;
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Int Function(
@@ -24578,7 +24853,7 @@ final class slab_arena extends ffi.Struct {
 
   /// An external quota to which we must adhere.
   /// A quota exists to set a common limit on two arenas.
-  external ffi.Pointer<quota> quota;
+  // external ffi.Pointer<quota> quota;
 
   @ffi.Uint32()
   external int slab_size;
@@ -24588,15 +24863,7 @@ final class slab_arena extends ffi.Struct {
   external int flags;
 }
 
-/// A basic limit on memory usage
-final class quota extends ffi.Struct {
-  /// High order dword is the total available memory
-  /// and the low order dword is the  currently used amount.
-  /// Both values are represented in units of size
-  /// QUOTA_UNIT_SIZE.
-  @ffi.Uint64()
-  external int value;
-}
+final class quota extends ffi.Opaque {}
 
 final class slab extends ffi.Struct {
   external rlist next_in_cache;
@@ -24680,6 +24947,47 @@ final class lifo extends ffi.Struct {
   external ffi.Pointer<ffi.Void> next;
 }
 
+/// A mempool to store objects sized from objsize_min to pool->objsize.
+/// Is a member of small_mempool_cache array which contains all such pools.
+/// All this pools are created when creating an allocator. Their sizes and
+/// count are calculated depending on alloc_factor and granularity, using
+/// small_class.
+final class small_mempool extends ffi.Struct {
+  /// the pool itself.
+  external mempool pool;
+
+  /// Objects starting from this size and up to
+  /// pool->objsize are stored in this factored
+  /// pool.
+  @ffi.Size()
+  external int objsize_min;
+
+  /// Small mempool group that this pool belongs to.
+  external ffi.Pointer<small_mempool_group> group;
+
+  /// Currently used pool for memory allocation. In case waste is
+  /// less than @waste_max of corresponding mempool_group, @used_pool
+  /// points to this structure itself.
+  external ffi.Pointer<small_mempool> used_pool;
+
+  /// Mask of appropriate pools. It is calculated once pool is created.
+  /// Values of mask for:
+  /// Pool 0: 0x0001 (0000 0000 0000 0001)
+  /// Pool 1: 0x0003 (0000 0000 0000 0011)
+  /// Pool 2: 0x0007 (0000 0000 0000 0111)
+  /// And so forth.
+  @ffi.Uint32()
+  external int appropriate_pool_mask;
+
+  /// Currently memory waste for a given mempool. Waste is calculated as
+  /// amount of excess memory spent for storing small object in pools
+  /// with large object size. For instance, if we store object with size
+  /// of 15 bytes in a 64-byte pool having inactive 32-byte pool, the loss
+  /// will be: 64 bytes - 32 bytes = 32 bytes.
+  @ffi.Size()
+  external int waste;
+}
+
 /// A memory pool.
 final class mempool extends ffi.Struct {
   /// The source of empty slabs.
@@ -24737,7 +25045,7 @@ final class mempool extends ffi.Struct {
   /// Small allocator pool, the owner of this mempool in case
   /// this mempool used as a part of small_alloc, otherwise
   /// NULL
-  external ffi.Pointer<small_mempool> small_mempool;
+  // external ffi.Pointer<small_mempool> small_mempool;
 }
 
 final class mslab_tree_t extends ffi.Struct {
@@ -24769,7 +25077,7 @@ final class mslab extends ffi.Struct {
   external bool in_hot_slabs;
 
   /// Pointer to mempool, the owner of this mslab
-  external ffi.Pointer<mempool> mempool;
+  // external ffi.Pointer<mempool> mempool;
 }
 
 final class UnnamedStruct17 extends ffi.Struct {
@@ -24778,7 +25086,26 @@ final class UnnamedStruct17 extends ffi.Struct {
   external ffi.Pointer<mslab> rbn_right_red;
 }
 
-final class small_mempool extends ffi.Opaque {}
+
+final class small_mempool_group extends ffi.Struct {
+  /// The first pool in the group.
+  external ffi.Pointer<small_mempool> first;
+
+  /// The last pool in the group.
+  external ffi.Pointer<small_mempool> last;
+
+  /// Raised bit on position n means that the pool with index n can be
+  /// used for allocations. At the start only one pool (the last one)
+  /// is available. Also note that once pool become active, it can't
+  /// become
+  @ffi.Uint32()
+  external int active_pool_mask;
+
+  /// Pre-calculated waste threshold reaching which small_mempool becomes
+  /// activated. It is equal to slab_order_size / 4.
+  @ffi.Size()
+  external int waste_max;
+}
 
 /// Allocation statistics.
 final class mempool_stats extends ffi.Struct {
@@ -24800,6 +25127,76 @@ final class mempool_stats extends ffi.Struct {
 
   /// Memory used and booked but passive (to see fragmentation).
   external small_stats totals;
+}
+
+final class small_class extends ffi.Struct {
+  /// Every class size must be a multiple of this.
+  @ffi.UnsignedInt()
+  external int granularity;
+
+  /// log2(granularity), ignore those number of the lowest bit of size.
+  @ffi.UnsignedInt()
+  external int ignore_bits_count;
+
+  /// A number of bits (after the most significant bit) that are used in
+  /// size class evaluation ('n' in the Explanation above).
+  @ffi.UnsignedInt()
+  external int effective_bits;
+
+  /// 1u << effective_bits.
+  @ffi.UnsignedInt()
+  external int effective_size;
+
+  /// effective_size - 1u.
+  @ffi.UnsignedInt()
+  external int effective_mask;
+
+  /// By default the lowest possible allocation size (aka class size of
+  /// class 0) is granularity. If a user wants different min_alloc, we
+  /// simply shift sizes; min_alloc = granularity + size_shift.
+  @ffi.UnsignedInt()
+  external int size_shift;
+
+  /// Actually we need 'size_shift + 1', so store it.
+  @ffi.UnsignedInt()
+  external int size_shift_plus_1;
+
+  /// Exponential factor, approximation of which we managed to provide.
+  /// It is calculated from requested_factor, it's guaranteed that
+  /// it must be in range [requested_factor/k, requested_factor*k],
+  /// where k = pow(requested_factor, 0.5).
+  @ffi.Float()
+  external double actual_factor;
+}
+
+/// A slab allocator for a wide range of object sizes.
+final class small_alloc extends ffi.Struct {
+  external ffi.Pointer<slab_cache> cache;
+
+  /// Array of all small mempools of a given allocator
+  @ffi.Array.multi([1024])
+  external ffi.Array<small_mempool> small_mempool_cache;
+
+  @ffi.Uint32()
+  external int small_mempool_cache_size;
+
+  /// Array of all small mempool groups of a given allocator
+  @ffi.Array.multi([1024])
+  external ffi.Array<small_mempool_group> small_mempool_groups;
+
+  @ffi.Uint32()
+  external int small_mempool_groups_size;
+
+  /// The factor used for factored pools. Must be > 1.
+  /// Is provided during initialization.
+  @ffi.Float()
+  external double factor;
+
+  /// Small class for this allocator
+  external small_class small_class1;
+
+  @ffi.Uint32()
+  external int objsize_max;
 }
 
 final class interactor_messages_pool extends ffi.Struct {
@@ -24857,64 +25254,7 @@ final class interactor_dart_configuration extends ffi.Struct {
   external int slab_size;
 }
 
-final class interactor_dart extends ffi.Struct {
-  @ffi.Uint8()
-  external int id;
-
-  external interactor_messages_pool messages_pool;
-
-  external interactor_buffers_pool buffers_pool;
-
-  external ffi.Pointer<io_uring> ring;
-
-  external ffi.Pointer<iovec> buffers;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
-  @ffi.Uint16()
-  external int buffers_count;
-
-  @ffi.Uint64()
-  external int timeout_checker_period_millis;
-
-  @ffi.Uint32()
-  external int base_delay_micros;
-
-  @ffi.Double()
-  external double delay_randomization_factor;
-
-  @ffi.Uint64()
-  external int max_delay_micros;
-
-  external ffi.Pointer<mh_events_t> events;
-
-  @ffi.Size()
-  external int ring_size;
-
-  @ffi.Int()
-  external int ring_flags;
-
-  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
-
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
-
-  @ffi.Uint32()
-  external int cqe_wait_count;
-
-  @ffi.Uint32()
-  external int cqe_peek_count;
-
-  @ffi.Bool()
-  external bool trace;
-
-  external quota quota1;
-
-  external slab_arena arena;
-
-  external slab_cache cache;
-}
+final class interactor_dart extends ffi.Opaque {}
 
 typedef interactor_dart_t = interactor_dart;
 typedef interactor_dart_configuration_t = interactor_dart_configuration;
@@ -25883,6 +26223,8 @@ const int ORDER_MAX = 16;
 const int RB_WALK_LEFT = 1;
 
 const int RB_WALK_RIGHT = 2;
+
+const int SMALL_MEMPOOL_MAX = 1024;
 
 const int INT8_MIN = -128;
 
@@ -28336,7 +28678,7 @@ const int WAL_SYNC_FLAG = 1052672;
 
 const int HAVE_CLOCK_GETTIME_DECL = 1;
 
-const String SYSCONF_DIR = '';
+const String SYSCONF_DIR = 'etc';
 
 const String INSTALL_PREFIX = '/usr/local';
 
@@ -28699,5 +29041,3 @@ const int SLAB_ARENA_FLAG_MARK = 2147483648;
 const int RB_COMPACT = 1;
 
 const int RB_MAX_TREE_HEIGHT = 48;
-
-const int QUOTA_UNIT_SIZE = 1024;

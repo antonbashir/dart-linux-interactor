@@ -17,6 +17,7 @@
     "quota.h": "c",
     "stdint.h": "c",
     "mempool.h": "c",
-    "interactor_collections.h": "c"
+    "interactor_collections.h": "c",
+    "small.h": "c"
   }
 }

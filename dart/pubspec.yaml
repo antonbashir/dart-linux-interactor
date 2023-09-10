@@ -29,7 +29,7 @@ ffigen:
   functions:
     leaf:
       include:
-        - "interactor_worker_.*"
+        - "interactor_dart_.*"
     symbol-address:
       include:
         - ".*"

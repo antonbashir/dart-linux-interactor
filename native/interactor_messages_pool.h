@@ -4,7 +4,7 @@
 #include "trivia/util.h"
 #include "interactor_constants.h"
 #include "interactor_message.h"
-#include "small/include/small/mempool.h"
+#include "small/include/small/small.h"
 
 struct interactor_messages_pool
 {

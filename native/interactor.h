@@ -12,7 +12,7 @@ extern "C"
 #endif
   void interactor_cqe_advance(struct io_uring *ring, int count);
 
-  void interactor_close_descritor(int fd);
+  void interactor_close_descriptor(int fd);
 #if defined(__cplusplus)
 }
 #endif

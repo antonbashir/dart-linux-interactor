@@ -36,10 +36,10 @@ class Interactor {
     final port = RawReceivePort((ports) async {
       SendPort toWorker = ports[0];
       _workerClosers.add(ports[1]);
-      final workerPointer = calloc<interactor_worker_t>();
+      final workerPointer = calloc<interactor_dart_t>();
       if (workerPointer == nullptr) throw InteractorInitializationException(InteractorMessages.workerMemoryError);
       final result = using((arena) {
-        final nativeConfiguration = arena<interactor_worker_configuration_t>();
+        final nativeConfiguration = arena<interactor_dart_configuration_t>();
         nativeConfiguration.ref.ring_flags = configuration.ringFlags;
         nativeConfiguration.ref.ring_size = configuration.ringSize;
         nativeConfiguration.ref.buffer_size = configuration.bufferSize;
@@ -51,10 +51,10 @@ class Interactor {
         nativeConfiguration.ref.cqe_peek_count = configuration.cqePeekCount;
         nativeConfiguration.ref.cqe_wait_count = configuration.cqeWaitCount;
         nativeConfiguration.ref.cqe_wait_timeout_millis = configuration.cqeWaitTimeout.inMilliseconds;
-        return _bindings.interactor_worker_initialize(workerPointer, nativeConfiguration, _workerClosers.length);
+        return _bindings.interactor_dart_initialize(workerPointer, nativeConfiguration, _workerClosers.length);
       });
       if (result < 0) {
-        _bindings.interactor_worker_destroy(workerPointer);
+        _bindings.interactor_dart_destroy(workerPointer);
         throw InteractorInitializationException(InteractorMessages.workerError(result, _bindings));
       }
       final workerInput = [_libraryPath, workerPointer.address, _workerDestroyer.sendPort];

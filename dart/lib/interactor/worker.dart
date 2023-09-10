@@ -12,7 +12,7 @@ class InteractorWorker {
   final _fromInteractor = ReceivePort();
 
   late final InteractorBindings _bindings;
-  late final Pointer<interactor_worker_t> _workerPointer;
+  late final Pointer<interactor_dart_t> _workerPointer;
   late final Pointer<io_uring> _ring;
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
   late final RawReceivePort _closer;
@@ -32,7 +32,7 @@ class InteractorWorker {
       _timeoutChecker.stop();
       _active = false;
       await _done.future;
-      _bindings.interactor_worker_destroy(_workerPointer);
+      _bindings.interactor_dart_destroy(_workerPointer);
       _closer.close();
       _destroyer.send(null);
     });
@@ -42,7 +42,7 @@ class InteractorWorker {
   Future<void> initialize() async {
     final configuration = await _fromInteractor.first as List;
     final libraryPath = configuration[0] as String?;
-    _workerPointer = Pointer.fromAddress(configuration[1] as int).cast<interactor_worker_t>();
+    _workerPointer = Pointer.fromAddress(configuration[1] as int).cast<interactor_dart_t>();
     _destroyer = configuration[2] as SendPort;
     _fromInteractor.close();
     _bindings = InteractorBindings(InteractorLibrary.load(libraryPath: libraryPath).library);
@@ -75,12 +75,12 @@ class InteractorWorker {
   }
 
   bool _handleCqes() {
-    final cqeCount = _bindings.interactor_worker_peek(_workerPointer);
+    final cqeCount = _bindings.interactor_dart_peek(_workerPointer);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
       Pointer<io_uring_cqe> cqe = _cqes.elementAt(cqeIndex).value;
       final data = cqe.ref.user_data;
-      _bindings.interactor_worker_remove_event(_workerPointer, data);
+      _bindings.interactor_dart_remove_event(_workerPointer, data);
       final result = cqe.ref.res;
       var event = data & 0xffff;
       final fd = (data >> 32) & 0xffffffff;

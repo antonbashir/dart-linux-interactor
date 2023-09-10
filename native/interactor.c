@@ -7,7 +7,7 @@ void interactor_cqe_advance(struct io_uring *ring, int count)
   io_uring_cq_advance(ring, count);
 }
 
-void interactor_close_descritor(int fd)
+void interactor_close_descriptor(int fd)
 {
   shutdown(fd, SHUT_RDWR);
   close(fd);

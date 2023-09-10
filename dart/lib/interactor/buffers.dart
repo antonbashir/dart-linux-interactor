@@ -10,7 +10,7 @@ class InteractorBuffers {
   final InteractorBindings _bindings;
   final Pointer<iovec> buffers;
   final Queue<Completer<void>> _finalizers = Queue();
-  final Pointer<interactor_worker_t> _worker;
+  final Pointer<interactor_dart_t> _worker;
 
   late final int bufferSize;
   late final int buffersCount;
@@ -22,7 +22,7 @@ class InteractorBuffers {
 
   @pragma(preferInlinePragma)
   void release(int bufferId) {
-    _bindings.interactor_worker_release_buffer(_worker, bufferId);
+    _bindings.interactor_dart_release_buffer(_worker, bufferId);
     if (_finalizers.isNotEmpty) _finalizers.removeLast().complete();
   }
 
@@ -45,23 +45,23 @@ class InteractorBuffers {
 
   @pragma(preferInlinePragma)
   int? get() {
-    final buffer = _bindings.interactor_worker_get_buffer(_worker);
+    final buffer = _bindings.interactor_dart_get_buffer(_worker);
     if (buffer == interactorBufferUsed) return null;
     return buffer;
   }
 
   Future<int> allocate() async {
-    var bufferId = _bindings.interactor_worker_get_buffer(_worker);
+    var bufferId = _bindings.interactor_dart_get_buffer(_worker);
     while (bufferId == interactorBufferUsed) {
       if (_finalizers.isNotEmpty) {
         await _finalizers.last.future;
-        bufferId = _bindings.interactor_worker_get_buffer(_worker);
+        bufferId = _bindings.interactor_dart_get_buffer(_worker);
         continue;
       }
       final completer = Completer();
       _finalizers.add(completer);
       await completer.future;
-      bufferId = _bindings.interactor_worker_get_buffer(_worker);
+      bufferId = _bindings.interactor_dart_get_buffer(_worker);
     }
     return bufferId;
   }
@@ -73,10 +73,10 @@ class InteractorBuffers {
   }
 
   @pragma(preferInlinePragma)
-  int available() => _bindings.interactor_worker_available_buffers(_worker);
+  int available() => _bindings.interactor_dart_available_buffers(_worker);
 
   @pragma(preferInlinePragma)
-  int used() => _bindings.interactor_worker_used_buffers(_worker);
+  int used() => _bindings.interactor_dart_used_buffers(_worker);
 
   @pragma(preferInlinePragma)
   void releaseArray(List<int> buffers) {

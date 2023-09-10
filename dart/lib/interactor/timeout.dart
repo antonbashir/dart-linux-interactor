@@ -5,7 +5,7 @@ import 'bindings.dart';
 
 class InteractorTimeoutChecker {
   final InteractorBindings _bindings;
-  final Pointer<interactor_worker_t> _workerPointer;
+  final Pointer<interactor_dart_t> _workerPointer;
   final Duration _period;
 
   late final Timer _timer;
@@ -17,6 +17,6 @@ class InteractorTimeoutChecker {
   void stop() => _timer.cancel();
 
   void _check(Timer timer) {
-    if (timer.isActive) _bindings.interactor_worker_check_event_timeouts(_workerPointer);
+    if (timer.isActive) _bindings.interactor_dart_check_event_timeouts(_workerPointer);
   }
 }
