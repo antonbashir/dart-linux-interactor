@@ -1,7 +1,5 @@
 Running in Directory: '/home/anton/development/dart-linux-interactor/dart'
 Input Headers: [./../native/interactor.h, ./../native/interactor_dart.h, ./../native/interactor_constants.h]
-[SEVERE] : Header ./../native/interactor_dart.h: Total errors/warnings: 1.
-[SEVERE] :     ./../native/interactor_dart.h:57:18: error: field has incomplete type 'struct quota' [Semantic Issue]
 [WARNING]: Removed All Struct Members from cmsghdr(cmsghdr), Flexible array members not supported.
 [WARNING]: No definition found for declaration - (Cursor) spelling: __locale_data, kind: 2, kindSpelling: StructDecl, type: 105, typeSpelling: struct __locale_data, usr: c:@S@__locale_data
 [WARNING]: No definition found for declaration - (Cursor) spelling: __locale_data, kind: 2, kindSpelling: StructDecl, type: 105, typeSpelling: struct __locale_data, usr: c:@S@__locale_data
@@ -796,9 +794,6 @@ Input Headers: [./../native/interactor.h, ./../native/interactor_dart.h, ./../na
 [WARNING]: Skipped Function 'lf_lifo_push', inline functions are not supported.
 [WARNING]: Skipped Function 'lf_lifo_pop', inline functions are not supported.
 [WARNING]: Skipped Function 'lf_lifo_is_empty', inline functions are not supported.
-[WARNING]: No definition found for declaration - (Cursor) spelling: quota, kind: 2, kindSpelling: StructDecl, type: 105, typeSpelling: struct quota, usr: c:@S@quota
-[WARNING]: No definition found for declaration - (Cursor) spelling: quota, kind: 2, kindSpelling: StructDecl, type: 105, typeSpelling: struct quota, usr: c:@S@quota
-[WARNING]: No definition found for declaration - (Cursor) spelling: quota, kind: 2, kindSpelling: StructDecl, type: 105, typeSpelling: struct quota, usr: c:@S@quota
 [WARNING]: Skipped Function 'small_align', inline functions are not supported.
 [WARNING]: Skipped Function 'small_round', inline functions are not supported.
 [WARNING]: Skipped Function 'small_lb', inline functions are not supported.
@@ -839,8 +834,13 @@ Input Headers: [./../native/interactor.h, ./../native/interactor_dart.h, ./../na
 [WARNING]: Skipped Function 'interactor_payloads_pool_destroy', inline functions are not supported.
 [WARNING]: Skipped Function 'interactor_payloads_pool_allocate', inline functions are not supported.
 [WARNING]: Skipped Function 'interactor_payloads_pool_free', inline functions are not supported.
-[WARNING]: No definition found for declaration - (Cursor) spelling: quota, kind: 2, kindSpelling: StructDecl, type: 105, typeSpelling: struct quota, usr: c:@S@quota
-[WARNING]: Removed All Struct Members from interactor_dart(interactor_dart), Incomplete Nested Struct member not supported.
+[WARNING]: Skipped Function 'quota_init', inline functions are not supported.
+[WARNING]: Skipped Function 'quota_total', inline functions are not supported.
+[WARNING]: Skipped Function 'quota_used', inline functions are not supported.
+[WARNING]: Skipped Function 'quota_get_total_and_used', inline functions are not supported.
+[WARNING]: Skipped Function 'quota_set', inline functions are not supported.
+[WARNING]: Skipped Function 'quota_use', inline functions are not supported.
+[WARNING]: Skipped Function 'quota_release', inline functions are not supported.
 [WARNING]: Generated declaration '__sigset_t' start's with '_' and therefore will be private.
 [WARNING]: Generated declaration '__atomic_wide_counter' start's with '_' and therefore will be private.
 [WARNING]: Generated declaration '__pthread_mutex_s' start's with '_' and therefore will be private.

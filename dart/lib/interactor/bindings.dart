@@ -8119,19 +8119,19 @@ class InteractorBindings {
   late final _interactor_cqe_advance = _interactor_cqe_advancePtr
       .asFunction<void Function(ffi.Pointer<io_uring>, int)>();
 
-  void interactor_close_descritor(
+  void interactor_close_descriptor(
     int fd,
   ) {
-    return _interactor_close_descritor(
+    return _interactor_close_descriptor(
       fd,
     );
   }
 
-  late final _interactor_close_descritorPtr =
+  late final _interactor_close_descriptorPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
-          'interactor_close_descritor');
-  late final _interactor_close_descritor =
-      _interactor_close_descritorPtr.asFunction<void Function(int)>();
+          'interactor_close_descriptor');
+  late final _interactor_close_descriptor =
+      _interactor_close_descriptorPtr.asFunction<void Function(int)>();
 
   late final ffi.Pointer<ffi.Pointer<FILE>> _stdin =
       _lookup<ffi.Pointer<FILE>>('stdin');
@@ -18305,6 +18305,12 @@ class InteractorBindings {
                       ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
           ffi.Pointer<ffi.Void>)>();
 
+  late final ffi.Pointer<ffi.Size> _QUOTA_MAX = _lookup<ffi.Size>('QUOTA_MAX');
+
+  int get QUOTA_MAX => _QUOTA_MAX.value;
+
+  set QUOTA_MAX(int value) => _QUOTA_MAX.value = value;
+
   int interactor_dart_initialize(
     ffi.Pointer<interactor_dart_t> interactor,
     ffi.Pointer<interactor_dart_configuration_t> configuration,
@@ -18326,7 +18332,7 @@ class InteractorBindings {
   late final _interactor_dart_initialize =
       _interactor_dart_initializePtr.asFunction<
           int Function(ffi.Pointer<interactor_dart_t>,
-              ffi.Pointer<interactor_dart_configuration_t>, int)>();
+              ffi.Pointer<interactor_dart_configuration_t>, int)>(isLeaf: true);
 
   void interactor_dart_cancel_by_fd(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18343,7 +18349,8 @@ class InteractorBindings {
           ffi.Void Function(ffi.Pointer<interactor_dart_t>,
               ffi.Int)>>('interactor_dart_cancel_by_fd');
   late final _interactor_dart_cancel_by_fd = _interactor_dart_cancel_by_fdPtr
-      .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>();
+      .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>(
+          isLeaf: true);
 
   void interactor_dart_check_event_timeouts(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18359,7 +18366,8 @@ class InteractorBindings {
       'interactor_dart_check_event_timeouts');
   late final _interactor_dart_check_event_timeouts =
       _interactor_dart_check_event_timeoutsPtr
-          .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>();
+          .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>(
+              isLeaf: true);
 
   void interactor_dart_remove_event(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18376,7 +18384,8 @@ class InteractorBindings {
           ffi.Void Function(ffi.Pointer<interactor_dart_t>,
               ffi.Uint64)>>('interactor_dart_remove_event');
   late final _interactor_dart_remove_event = _interactor_dart_remove_eventPtr
-      .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>();
+      .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>(
+          isLeaf: true);
 
   int interactor_dart_get_buffer(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18391,7 +18400,7 @@ class InteractorBindings {
           .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>(
       'interactor_dart_get_buffer');
   late final _interactor_dart_get_buffer = _interactor_dart_get_bufferPtr
-      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
+      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   void interactor_dart_release_buffer(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18409,7 +18418,8 @@ class InteractorBindings {
               ffi.Uint16)>>('interactor_dart_release_buffer');
   late final _interactor_dart_release_buffer =
       _interactor_dart_release_bufferPtr
-          .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>();
+          .asFunction<void Function(ffi.Pointer<interactor_dart_t>, int)>(
+              isLeaf: true);
 
   int interactor_dart_available_buffers(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18425,7 +18435,8 @@ class InteractorBindings {
       'interactor_dart_available_buffers');
   late final _interactor_dart_available_buffers =
       _interactor_dart_available_buffersPtr
-          .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
+          .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>(
+              isLeaf: true);
 
   int interactor_dart_used_buffers(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18440,7 +18451,7 @@ class InteractorBindings {
           .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>>(
       'interactor_dart_used_buffers');
   late final _interactor_dart_used_buffers = _interactor_dart_used_buffersPtr
-      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
+      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   ffi.Pointer<interactor_message_t> interactor_dart_allocate_message(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18458,7 +18469,7 @@ class InteractorBindings {
   late final _interactor_dart_allocate_message =
       _interactor_dart_allocate_messagePtr.asFunction<
           ffi.Pointer<interactor_message_t> Function(
-              ffi.Pointer<interactor_dart_t>)>();
+              ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   void interactor_dart_free_message(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18478,7 +18489,7 @@ class InteractorBindings {
   late final _interactor_dart_free_message =
       _interactor_dart_free_messagePtr.asFunction<
           void Function(ffi.Pointer<interactor_dart_t>,
-              ffi.Pointer<interactor_message_t>)>();
+              ffi.Pointer<interactor_message_t>)>(isLeaf: true);
 
   ffi.Pointer<interactor_payloads_pool> interactor_dart_payload_pool_create(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18498,7 +18509,7 @@ class InteractorBindings {
   late final _interactor_dart_payload_pool_create =
       _interactor_dart_payload_pool_createPtr.asFunction<
           ffi.Pointer<interactor_payloads_pool> Function(
-              ffi.Pointer<interactor_dart_t>, int)>();
+              ffi.Pointer<interactor_dart_t>, int)>(isLeaf: true);
 
   int interactor_dart_payload_allocate(
     ffi.Pointer<interactor_payloads_pool> pool,
@@ -18514,7 +18525,8 @@ class InteractorBindings {
       'interactor_dart_payload_allocate');
   late final _interactor_dart_payload_allocate =
       _interactor_dart_payload_allocatePtr
-          .asFunction<int Function(ffi.Pointer<interactor_payloads_pool>)>();
+          .asFunction<int Function(ffi.Pointer<interactor_payloads_pool>)>(
+              isLeaf: true);
 
   void interactor_dart_payload_free(
     ffi.Pointer<interactor_payloads_pool> pool,
@@ -18531,7 +18543,8 @@ class InteractorBindings {
           ffi.Void Function(ffi.Pointer<interactor_payloads_pool>,
               ffi.IntPtr)>>('interactor_dart_payload_free');
   late final _interactor_dart_payload_free = _interactor_dart_payload_freePtr
-      .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>, int)>();
+      .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>, int)>(
+          isLeaf: true);
 
   void interactor_dart_payload_pool_destroy(
     ffi.Pointer<interactor_payloads_pool> pool,
@@ -18547,7 +18560,8 @@ class InteractorBindings {
       'interactor_dart_payload_pool_destroy');
   late final _interactor_dart_payload_pool_destroy =
       _interactor_dart_payload_pool_destroyPtr
-          .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>();
+          .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>(
+              isLeaf: true);
 
   int interactor_dart_peek(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18561,7 +18575,7 @@ class InteractorBindings {
           ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_dart_t>)>>(
       'interactor_dart_peek');
   late final _interactor_dart_peek = _interactor_dart_peekPtr
-      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>();
+      .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   void interactor_dart_destroy(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -18576,7 +18590,7 @@ class InteractorBindings {
           .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>(
       'interactor_dart_destroy');
   late final _interactor_dart_destroy = _interactor_dart_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>();
+      .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   late final addresses = _SymbolAddresses(this);
 }
@@ -19975,7 +19989,8 @@ class _SymbolAddresses {
           ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>
       get interactor_cqe_advance => _library._interactor_cqe_advancePtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
-      get interactor_close_descritor => _library._interactor_close_descritorPtr;
+      get interactor_close_descriptor =>
+          _library._interactor_close_descriptorPtr;
   ffi.Pointer<ffi.Pointer<FILE>> get stdin => _library._stdin;
   ffi.Pointer<ffi.Pointer<FILE>> get stdout => _library._stdout;
   ffi.Pointer<ffi.Pointer<FILE>> get stderr => _library._stderr;
@@ -22186,6 +22201,7 @@ class _SymbolAddresses {
                           ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
               ffi.Pointer<ffi.Void>)>> get small_stats1 =>
       _library._small_stats1Ptr;
+  ffi.Pointer<ffi.Size> get QUOTA_MAX => _library._QUOTA_MAX;
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Int Function(
@@ -23393,7 +23409,16 @@ abstract class io_uring_op {
   static const int IORING_OP_LAST = 49;
 }
 
-final class io_uring_cqe extends ffi.Opaque {}
+final class io_uring_cqe extends ffi.Struct {
+  @ffi.UnsignedLongLong()
+  external int user_data;
+
+  @ffi.Int()
+  external int res;
+  
+  @ffi.UnsignedInt()
+  external int flags;
+}
 
 final class io_sqring_offsets extends ffi.Struct {
   @ffi.UnsignedInt()
@@ -24863,7 +24888,15 @@ final class slab_arena extends ffi.Struct {
   external int flags;
 }
 
-final class quota extends ffi.Opaque {}
+/// A basic limit on memory usage
+final class quota extends ffi.Struct {
+  /// High order dword is the total available memory
+  /// and the low order dword is the  currently used amount.
+  /// Both values are represented in units of size
+  /// QUOTA_UNIT_SIZE.
+  @ffi.Uint64()
+  external int value;
+}
 
 final class slab extends ffi.Struct {
   external rlist next_in_cache;
@@ -24945,47 +24978,6 @@ final class slab_cache extends ffi.Struct {
 
 final class lifo extends ffi.Struct {
   external ffi.Pointer<ffi.Void> next;
-}
-
-/// A mempool to store objects sized from objsize_min to pool->objsize.
-/// Is a member of small_mempool_cache array which contains all such pools.
-/// All this pools are created when creating an allocator. Their sizes and
-/// count are calculated depending on alloc_factor and granularity, using
-/// small_class.
-final class small_mempool extends ffi.Struct {
-  /// the pool itself.
-  external mempool pool;
-
-  /// Objects starting from this size and up to
-  /// pool->objsize are stored in this factored
-  /// pool.
-  @ffi.Size()
-  external int objsize_min;
-
-  /// Small mempool group that this pool belongs to.
-  external ffi.Pointer<small_mempool_group> group;
-
-  /// Currently used pool for memory allocation. In case waste is
-  /// less than @waste_max of corresponding mempool_group, @used_pool
-  /// points to this structure itself.
-  external ffi.Pointer<small_mempool> used_pool;
-
-  /// Mask of appropriate pools. It is calculated once pool is created.
-  /// Values of mask for:
-  /// Pool 0: 0x0001 (0000 0000 0000 0001)
-  /// Pool 1: 0x0003 (0000 0000 0000 0011)
-  /// Pool 2: 0x0007 (0000 0000 0000 0111)
-  /// And so forth.
-  @ffi.Uint32()
-  external int appropriate_pool_mask;
-
-  /// Currently memory waste for a given mempool. Waste is calculated as
-  /// amount of excess memory spent for storing small object in pools
-  /// with large object size. For instance, if we store object with size
-  /// of 15 bytes in a 64-byte pool having inactive 32-byte pool, the loss
-  /// will be: 64 bytes - 32 bytes = 32 bytes.
-  @ffi.Size()
-  external int waste;
 }
 
 /// A memory pool.
@@ -25086,6 +25078,46 @@ final class UnnamedStruct17 extends ffi.Struct {
   external ffi.Pointer<mslab> rbn_right_red;
 }
 
+/// A mempool to store objects sized from objsize_min to pool->objsize.
+/// Is a member of small_mempool_cache array which contains all such pools.
+/// All this pools are created when creating an allocator. Their sizes and
+/// count are calculated depending on alloc_factor and granularity, using
+/// small_class.
+final class small_mempool extends ffi.Struct {
+  /// the pool itself.
+  external mempool pool;
+
+  /// Objects starting from this size and up to
+  /// pool->objsize are stored in this factored
+  /// pool.
+  @ffi.Size()
+  external int objsize_min;
+
+  /// Small mempool group that this pool belongs to.
+  external ffi.Pointer<small_mempool_group> group;
+
+  /// Currently used pool for memory allocation. In case waste is
+  /// less than @waste_max of corresponding mempool_group, @used_pool
+  /// points to this structure itself.
+  external ffi.Pointer<small_mempool> used_pool;
+
+  /// Mask of appropriate pools. It is calculated once pool is created.
+  /// Values of mask for:
+  /// Pool 0: 0x0001 (0000 0000 0000 0001)
+  /// Pool 1: 0x0003 (0000 0000 0000 0011)
+  /// Pool 2: 0x0007 (0000 0000 0000 0111)
+  /// And so forth.
+  @ffi.Uint32()
+  external int appropriate_pool_mask;
+
+  /// Currently memory waste for a given mempool. Waste is calculated as
+  /// amount of excess memory spent for storing small object in pools
+  /// with large object size. For instance, if we store object with size
+  /// of 15 bytes in a 64-byte pool having inactive 32-byte pool, the loss
+  /// will be: 64 bytes - 32 bytes = 32 bytes.
+  @ffi.Size()
+  external int waste;
+}
 
 final class small_mempool_group extends ffi.Struct {
   /// The first pool in the group.
@@ -25254,7 +25286,64 @@ final class interactor_dart_configuration extends ffi.Struct {
   external int slab_size;
 }
 
-final class interactor_dart extends ffi.Opaque {}
+final class interactor_dart extends ffi.Struct {
+  @ffi.Uint8()
+  external int id;
+
+  external interactor_messages_pool messages_pool;
+
+  external interactor_buffers_pool buffers_pool;
+
+  external ffi.Pointer<io_uring> ring;
+
+  external ffi.Pointer<iovec> buffers;
+
+  @ffi.Uint32()
+  external int buffer_size;
+
+  @ffi.Uint16()
+  external int buffers_count;
+
+  @ffi.Uint64()
+  external int timeout_checker_period_millis;
+
+  @ffi.Uint32()
+  external int base_delay_micros;
+
+  @ffi.Double()
+  external double delay_randomization_factor;
+
+  @ffi.Uint64()
+  external int max_delay_micros;
+
+  external ffi.Pointer<mh_events_t> events;
+
+  @ffi.Size()
+  external int ring_size;
+
+  @ffi.Int()
+  external int ring_flags;
+
+  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
+
+  @ffi.Uint64()
+  external int cqe_wait_timeout_millis;
+
+  @ffi.Uint32()
+  external int cqe_wait_count;
+
+  @ffi.Uint32()
+  external int cqe_peek_count;
+
+  @ffi.Bool()
+  external bool trace;
+
+  external quota quota1;
+
+  external slab_arena arena;
+
+  external slab_cache cache;
+}
 
 typedef interactor_dart_t = interactor_dart;
 typedef interactor_dart_configuration_t = interactor_dart_configuration;
@@ -29041,3 +29130,5 @@ const int SLAB_ARENA_FLAG_MARK = 2147483648;
 const int RB_COMPACT = 1;
 
 const int RB_MAX_TREE_HEIGHT = 48;
+
+const int QUOTA_UNIT_SIZE = 1024;
