@@ -3,13 +3,19 @@ import 'dart:ffi';
 import 'dart:isolate';
 import 'dart:math';
 
+import 'package:linux_interactor/interactor/channel.dart';
+
 import 'bindings.dart';
 import 'constants.dart';
 import 'lookup.dart';
+import 'registrat.dart';
+import 'registry.dart';
 import 'timeout.dart';
 
 class InteractorWorker {
   final _fromInteractor = ReceivePort();
+
+  final _registry = InteractorChannelRegistry();
 
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _workerPointer;
@@ -58,6 +64,10 @@ class InteractorWorker {
     unawaited(_listen());
   }
 
+  void register(InteractorChannelRegistrat registrat) {
+    _registry.register(registrat);
+  }
+
   Future<void> _listen() async {
     final baseDelay = _workerPointer.ref.base_delay_micros;
     final regularDelayDuration = Duration(microseconds: baseDelay);
@@ -82,6 +92,9 @@ class InteractorWorker {
       final data = cqe.ref.user_data;
       _bindings.interactor_dart_remove_event(_workerPointer, data);
       final result = cqe.ref.res;
+      Pointer<interactor_message_t> message = Pointer.fromAddress(data);
+      _registry.execute(message);
+
       var event = data & 0xffff;
       final fd = (data >> 32) & 0xffffffff;
       final bufferId = (data >> 16) & 0xffff;
