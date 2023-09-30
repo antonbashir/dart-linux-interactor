@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:linux_interactor/interactor/bindings.dart';
+import 'bindings.dart';
 
 abstract interface class NativeConsumerDeclaration {
   List<NativeCallbackDeclaration> callbacks();
@@ -17,7 +17,7 @@ abstract interface class NativeServiceDeclaration {
 }
 
 class NativeMethodDeclaration {
-  final void Function(Pointer<interactor_message_t> message) method;
+  final Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> method;
 
   NativeMethodDeclaration(this.method);
 }

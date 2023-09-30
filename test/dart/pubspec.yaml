@@ -18,6 +18,20 @@ ffigen:
   name: "TestBindings"
   description: "Bindings for Test"
   output: "bindings.dart"
+  compiler-opts:
+    - "-I/home/anton/development/evolution/dart-linux-interactor/native/include"
+  type-map:
+    typedefs:
+      "interactor_message_t":
+        lib: "linux_interactor"
+        c-type: "interactor_message_t"
+        dart-type: "interactor_message_t"
+  library-imports:
+    linux_interactor: package:linux_interactor/interactor/bindings.dart
+  functions:
+    symbol-address:
+      include:
+        - ".*"
   headers:
     entry-points:
       - "../native/test.h"

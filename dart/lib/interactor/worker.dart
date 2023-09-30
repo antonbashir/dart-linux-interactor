@@ -97,11 +97,6 @@ class InteractorWorker {
       final result = cqe.ref.res;
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
       _consumers.execute(message);
-
-      var event = data & 0xffff;
-      final fd = (data >> 32) & 0xffffffff;
-      final bufferId = (data >> 16) & 0xffff;
-      if (_workerPointer.ref.trace) print(InteractorMessages.workerTrace(id, result, data, fd));
     }
     _bindings.interactor_cqe_advance(_ring, cqeCount);
     return true;

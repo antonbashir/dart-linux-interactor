@@ -1,8 +1,9 @@
 #include "test.h"
+#include <interactor_dart.h>
+#include <inttypes.h>
 #include <liburing.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "interactor_dart.h"
 
 void test_void(int fd)
 {
@@ -12,4 +13,9 @@ void test_void(int fd)
     msg->owner_id = 0;
     msg->method_id = 0;
     interactor_dart_send(&ring, fd, msg);
+}
+
+void test_method(interactor_message_t* message)
+{
+  printf("Hello, Dart");
 }

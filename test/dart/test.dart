@@ -1,13 +1,11 @@
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:linux_interactor/interactor/bindings.dart';
+import 'bindings.dart';
 import 'package:linux_interactor/interactor/declaration.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor/interactor/worker.dart';
-
-import 'bindings.dart';
 
 class TestNativeConsumer implements NativeConsumerDeclaration {
   void test(Pointer<interactor_message_t> message) {
@@ -16,6 +14,15 @@ class TestNativeConsumer implements NativeConsumerDeclaration {
 
   @override
   List<NativeCallbackDeclaration> callbacks() => [NativeCallbackDeclaration(test)];
+}
+
+class TestNativeService implements NativeServiceDeclaration {
+  final TestBindings _bindings;
+
+  TestNativeService(this._bindings);
+
+  @override
+  List<NativeMethodDeclaration> methods() => [NativeMethodDeclaration(_bindings.addresses.test_method)];
 }
 
 Future<void> main() async {
