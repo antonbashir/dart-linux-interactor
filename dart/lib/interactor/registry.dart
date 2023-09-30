@@ -5,6 +5,7 @@ import 'consumer.dart';
 import 'declaration.dart';
 
 import 'bindings.dart';
+import 'producer.dart';
 
 class InteractorConsumerRegistry {
   final Pointer<interactor_dart_t> _workerPointer;

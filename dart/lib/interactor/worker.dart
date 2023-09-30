@@ -5,9 +5,10 @@ import 'dart:math';
 
 import 'bindings.dart';
 import 'buffers.dart';
-import 'constants.dart';
 import 'declaration.dart';
+import 'factory.dart';
 import 'lookup.dart';
+import 'producer.dart';
 import 'registry.dart';
 import 'timeout.dart';
 
@@ -15,6 +16,7 @@ class InteractorWorker {
   final _fromInteractor = ReceivePort();
 
   late final InteractorConsumerRegistry _consumers;
+  late final InteractorProducerFactory _producers;
 
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _workerPointer;
@@ -59,6 +61,7 @@ class InteractorWorker {
       Duration(milliseconds: _workerPointer.ref.timeout_checker_period_millis),
     );
     _consumers = InteractorConsumerRegistry(_workerPointer, _bindings, InteractorBuffers(_bindings, _workerPointer.ref.buffers, _workerPointer));
+    _producers = InteractorProducerFactory(_workerPointer, _bindings, InteractorBuffers(_bindings, _workerPointer.ref.buffers, _workerPointer));
   }
 
   void activate() {
@@ -70,6 +73,8 @@ class InteractorWorker {
   void consumer(NativeConsumerDeclaration declaration) {
     _consumers.register(declaration);
   }
+
+  T producer<T extends NativeProducerProvider>(T provider) => _producers.register(provider);
 
   Future<void> _listen() async {
     final baseDelay = _workerPointer.ref.base_delay_micros;
@@ -95,6 +100,7 @@ class InteractorWorker {
       final data = cqe.ref.user_data;
       _bindings.interactor_dart_remove_event(_workerPointer, data);
       final result = cqe.ref.res;
+      print(result);
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
       _consumers.execute(message);
     }

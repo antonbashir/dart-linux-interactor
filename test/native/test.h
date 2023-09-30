@@ -8,7 +8,8 @@ extern "C"
 {
 #endif
 
-    void test_void(int fd);
+    int test_void(int fd);
+    void test_check();
     void test_method(interactor_message_t* message);
 
 #if defined(__cplusplus)

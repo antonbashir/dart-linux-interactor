@@ -19652,22 +19652,24 @@ class InteractorBindings {
       .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   void interactor_dart_send(
-    int ring_fd,
+    ffi.Pointer<ffi.Void> source_ring,
+    int target_ring_fd,
     ffi.Pointer<interactor_message_t> message,
   ) {
     return _interactor_dart_send(
-      ring_fd,
+      source_ring,
+      target_ring_fd,
       message,
     );
   }
 
   late final _interactor_dart_sendPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Int,
+          ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Int,
               ffi.Pointer<interactor_message_t>)>>('interactor_dart_send');
-  late final _interactor_dart_send = _interactor_dart_sendPtr
-      .asFunction<void Function(int, ffi.Pointer<interactor_message_t>)>(
-          isLeaf: true);
+  late final _interactor_dart_send = _interactor_dart_sendPtr.asFunction<
+      void Function(ffi.Pointer<ffi.Void>, int,
+          ffi.Pointer<interactor_message_t>)>(isLeaf: true);
 
   late final addresses = _SymbolAddresses(this);
 }
@@ -23636,9 +23638,10 @@ class _SymbolAddresses {
           ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>
       get interactor_dart_destroy => _library._interactor_dart_destroyPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int, ffi.Pointer<interactor_message_t>)>>
-      get interactor_dart_send => _library._interactor_dart_sendPtr;
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Int,
+              ffi.Pointer<interactor_message_t>)>> get interactor_dart_send =>
+      _library._interactor_dart_sendPtr;
 }
 
 final class iovec extends ffi.Struct {
@@ -30738,3 +30741,5 @@ const int PTHREAD_BARRIER_SERIAL_THREAD = -1;
 const int INTERACTOR_BUFFER_USED = -1;
 
 const int INTERACTOR_TIMEOUT_INFINITY = -1;
+
+const int INTERACTOR_DART_CALLBACK = 2;

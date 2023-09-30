@@ -21,7 +21,7 @@ class TestBindings {
           lookup)
       : _lookup = lookup;
 
-  void test_void(
+  int test_void(
     int fd,
   ) {
     return _test_void(
@@ -30,8 +30,16 @@ class TestBindings {
   }
 
   late final _test_voidPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>('test_void');
-  late final _test_void = _test_voidPtr.asFunction<void Function(int)>();
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('test_void');
+  late final _test_void = _test_voidPtr.asFunction<int Function(int)>();
+
+  void test_check() {
+    return _test_check();
+  }
+
+  late final _test_checkPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_check');
+  late final _test_check = _test_checkPtr.asFunction<void Function()>();
 
   void test_method(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -55,8 +63,10 @@ class TestBindings {
 class _SymbolAddresses {
   final TestBindings _library;
   _SymbolAddresses(this._library);
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>> get test_void =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get test_void =>
       _library._test_voidPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_check =>
+      _library._test_checkPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(

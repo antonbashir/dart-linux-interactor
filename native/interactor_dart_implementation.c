@@ -1,4 +1,5 @@
 #include "interactor_dart_implementation.h"
+#include <liburing/io_uring.h>
 #include <stdint.h>
 #include "interactor_common.h"
 #include "interactor_constants.h"
@@ -236,6 +237,6 @@ void interactor_dart_destroy(interactor_dart_t* interactor)
 void interactor_dart_send(void* source_ring, int target_ring_fd, interactor_message_t* message)
 {
     struct io_uring_sqe* sqe = interactor_provide_sqe((struct io_uring*)source_ring);
-    io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALLBACK, (intptr_t)message, 0);
+    io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALLBACK, (intptr_t)message, IOSQE_CQE_SKIP_SUCCESS);
     io_uring_submit((struct io_uring*)source_ring);
 }
