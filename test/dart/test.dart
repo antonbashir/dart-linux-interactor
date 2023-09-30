@@ -1,4 +1,6 @@
 import 'dart:ffi';
+import 'dart:io';
+import 'package:path/path.dart';
 
 import 'package:ffi/ffi.dart';
 import 'bindings.dart' as test;
@@ -30,7 +32,7 @@ class TestNativeProducer extends NativeProducer {
 Future<void> main() async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-  final bindings = test.TestBindings(DynamicLibrary.open("/home/anton/development/evolution/dart-linux-interactor/test/dart/native/libinteractortest.so"));
+  final bindings = test.TestBindings(DynamicLibrary.open("${dirname(Platform.script.toFilePath())}/native/libinteractortest.so"));
   await worker.initialize();
   worker.consumer(TestNativeConsumer());
   final producer = worker.producer(TestNativeProducer(bindings));
