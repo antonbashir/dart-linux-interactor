@@ -3,7 +3,7 @@
 
 #include <interactor_message.h>
 #include "interactor_constants.h"
-#include "interactor_memory.h"
+#include <interactor_memory.h>
 #include "trivia/util.h"
 
 struct interactor_messages_pool

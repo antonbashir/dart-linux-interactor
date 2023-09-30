@@ -1,15 +1,14 @@
 #ifndef INTERACTOR_DART_IMPLEMENTATION_H
 #define INTERACTOR_DART_IMPLEMENTATION_H
 
+#include <interactor_buffers_pool.h>
+#include <interactor_memory.h>
+#include <interactor_messages_pool.h>
+#include <interactor_payloads_pool.h>
 #include <stdint.h>
 #include <stdio.h>
-#include "interactor_buffers_pool.h"
 #include "interactor_collections.h"
 #include "interactor_common.h"
-#include "interactor_memory.h"
-#include "interactor_messages_pool.h"
-#include "interactor_payloads_pool.h"
-#include <interactor_dart.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -81,6 +80,10 @@ extern "C"
     int interactor_dart_peek(interactor_dart_t* interactor);
 
     void interactor_dart_destroy(interactor_dart_t* interactor);
+
+    void interactor_dart_cqe_advance(struct io_uring* ring, int count);
+
+    void interactor_dart_close_descriptor(int fd);
 
 #if defined(__cplusplus)
 }

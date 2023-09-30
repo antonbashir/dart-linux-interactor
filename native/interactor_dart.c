@@ -1,10 +1,11 @@
-#include "interactor_dart_implementation.h"
+#include "interactor_dart.h"
 #include <liburing/io_uring.h>
 #include <stdint.h>
+#include <sys/socket.h>
 #include "interactor_common.h"
 #include "interactor_constants.h"
-#include "interactor_memory.h"
-#include "interactor_messages_pool.h"
+#include <interactor_memory.h>
+#include <interactor_messages_pool.h>
 #include "liburing.h"
 
 int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id)
@@ -234,10 +235,13 @@ void interactor_dart_destroy(interactor_dart_t* interactor)
     free(interactor);
 }
 
-void interactor_dart_send(void* source_ring, int target_ring_fd, interactor_message_t* message)
+void interactor_dart_cqe_advance(struct io_uring* ring, int count)
 {
-    struct io_uring_sqe* sqe = interactor_provide_sqe((struct io_uring*)source_ring);
-    io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALLBACK, (intptr_t)message, 0);
-    sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-    io_uring_submit((struct io_uring*)source_ring);
+    io_uring_cq_advance(ring, count);
+}
+
+void interactor_dart_close_descriptor(int fd)
+{
+    shutdown(fd, SHUT_RDWR);
+    close(fd);
 }
