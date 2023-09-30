@@ -30,14 +30,13 @@ class TestNativeProducer extends NativeProducer {
 Future<void> main() async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-  await worker.initialize();
   final bindings = TestBindings(DynamicLibrary.open("/home/anton/development/evolution/dart-linux-interactor/test/dart/native/libinteractortest.so"));
+  await worker.initialize();
   worker.consumer(TestNativeConsumer());
   final producer = worker.producer(TestNativeProducer(bindings));
   worker.activate();
 
-  final native = bindings.test_initialize();
-  bindings.test_to_dart(worker.descriptor);
-  producer.testMethod.execute(native);
-  bindings.test_check();
+  final native = bindings.test_initialize(worker.descriptor);
+  producer.testMethod.execute(native.ref.ring.ref.ring_fd);
+  bindings.test_check(native);
 }

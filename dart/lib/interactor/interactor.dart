@@ -51,13 +51,16 @@ class Interactor {
         nativeConfiguration.ref.cqe_peek_count = configuration.cqePeekCount;
         nativeConfiguration.ref.cqe_wait_count = configuration.cqeWaitCount;
         nativeConfiguration.ref.cqe_wait_timeout_millis = configuration.cqeWaitTimeout.inMilliseconds;
+        nativeConfiguration.ref.slab_size = 65536;
+        nativeConfiguration.ref.preallocation_size = 65536;
+        nativeConfiguration.ref.quota_size = 128000;
         return _bindings.interactor_dart_initialize(interactorPointer, nativeConfiguration, _workerClosers.length);
       });
       if (result < 0) {
         _bindings.interactor_dart_destroy(interactorPointer);
         throw InteractorInitializationException(InteractorMessages.workerError(result, _bindings));
       }
-      final workerInput = [_libraryPath, interactorPointer.address, _workerDestroyer.sendPort];
+      final workerInput = [_libraryPath, interactorPointer.address, _workerDestroyer.sendPort, result];
       toWorker.send(workerInput);
     });
     _workerPorts.add(port);

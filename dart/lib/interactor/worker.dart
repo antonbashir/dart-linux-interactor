@@ -8,7 +8,6 @@ import 'buffers.dart';
 import 'declaration.dart';
 import 'factory.dart';
 import 'lookup.dart';
-import 'producer.dart';
 import 'registry.dart';
 import 'timeout.dart';
 
@@ -21,6 +20,7 @@ class InteractorWorker {
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _interactorPointer;
   late final Pointer<io_uring> _ring;
+  late final int _descriptor;
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
   late final RawReceivePort _closer;
   late final SendPort _destroyer;
@@ -32,7 +32,7 @@ class InteractorWorker {
 
   bool get active => _active;
   int get id => _interactorPointer.ref.id;
-  int get descriptor => _ring.ref.ring_fd;
+  int get descriptor => _descriptor;
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((gracefulDuration) async {
@@ -51,6 +51,7 @@ class InteractorWorker {
     final libraryPath = configuration[0] as String?;
     _interactorPointer = Pointer.fromAddress(configuration[1] as int).cast<interactor_dart_t>();
     _destroyer = configuration[2] as SendPort;
+    _descriptor = configuration[3] as int;
     _fromInteractor.close();
     _bindings = InteractorBindings(InteractorLibrary.load(libraryPath: libraryPath).library);
     _ring = _interactorPointer.ref.ring;

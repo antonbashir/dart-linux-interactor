@@ -2,16 +2,16 @@
 #define TEST_H_INCLUDED
 
 #include <interactor_message.h>
+#include <interactor_native.h>
 
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
 
-    int test_initialize();
-    void test_to_dart(int fd);
+    interactor_native_t* test_initialize(int fd);
     void test_method(interactor_message_t* message);
-    void test_check();
+    void test_check(interactor_native_t* interactor);
 
 #if defined(__cplusplus)
 }
