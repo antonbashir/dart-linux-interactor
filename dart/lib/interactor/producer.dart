@@ -23,7 +23,7 @@ class NativeMethodExecutor {
 
   NativeMethodExecutor(this._id, this._interactorPointer, this._bindings, this._buffers);
 
-  void execute(int target) {
+  void call(int target) {
     final message = _bindings.interactor_dart_allocate_message(_interactorPointer);
     message.ref.method_id = _id;
     _bindings.interactor_dart_send(_interactorPointer, target, message);

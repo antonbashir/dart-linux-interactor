@@ -18,7 +18,7 @@ abstract class NativeProducer {
 
   void initialize(NativeProducerExecutor executor) => this._executor = executor;
 
-  NativeMethodExecutor of(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) => _executor.of(pointer);
+  NativeMethodExecutor synchronous(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) => _executor.of(pointer);
 
   List<NativeMethod> methods();
 }

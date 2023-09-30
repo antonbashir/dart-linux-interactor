@@ -11,7 +11,7 @@ void test_send_to_dart(interactor_native_t* interactor, int dart_ring_fd)
     interactor_native_send(interactor, dart_ring_fd, msg);
 }
 
-void test_native_method(interactor_message_t* message)
+void test_send_to_native(interactor_message_t* message)
 {
     printf("Hello, Dart\n");
 }

@@ -23,10 +23,10 @@ class TestNativeProducer extends NativeProducer {
   final test.TestBindings _bindings;
   TestNativeProducer(this._bindings);
 
-  late final testMethod = of(_bindings.addresses.test_native_method);
+  late final testSendToNative = synchronous(_bindings.addresses.test_send_to_native);
 
   @override
-  List<NativeMethod> methods() => [NativeMethod(_bindings.addresses.test_native_method)];
+  List<NativeMethod> methods() => [NativeMethod(_bindings.addresses.test_send_to_native)];
 }
 
 Future<void> main() async {
@@ -55,7 +55,7 @@ Future<void> main() async {
     return interactorNative;
   });
   bindings.test_send_to_dart(native, worker.descriptor);
-  producer.testMethod.execute(native.ref.ring.ref.ring_fd);
+  producer.testSendToNative(native.ref.ring.ref.ring_fd);
   bindings.test_check(native);
   await interactor.shutdown();
 }

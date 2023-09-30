@@ -3969,7 +3969,7 @@ class TestBindings {
   late final _interactor_native_peek = _interactor_native_peekPtr.asFunction<
       int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
-  int interactor_native_process(
+  void interactor_native_process(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
   ) {
     return _interactor_native_process(
@@ -3979,12 +3979,12 @@ class TestBindings {
 
   late final _interactor_native_processPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int Function(
+              ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_native_t>)>>(
       'interactor_native_process');
   late final _interactor_native_process =
       _interactor_native_processPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void interactor_native_destroy(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4074,20 +4074,20 @@ class TestBindings {
   late final _test_send_to_dart = _test_send_to_dartPtr.asFunction<
       void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
-  void test_native_method(
+  void test_send_to_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
-    return _test_native_method(
+    return _test_send_to_native(
       message,
     );
   }
 
-  late final _test_native_methodPtr = _lookup<
+  late final _test_send_to_nativePtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'test_native_method');
-  late final _test_native_method = _test_native_methodPtr.asFunction<
+      'test_send_to_native');
+  late final _test_send_to_native = _test_send_to_nativePtr.asFunction<
       void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void test_check(
@@ -5054,7 +5054,7 @@ class _SymbolAddresses {
       get interactor_native_peek => _library._interactor_native_peekPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Int Function(
+              ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_native_t>)>>
       get interactor_native_process => _library._interactor_native_processPtr;
   ffi.Pointer<
@@ -5085,7 +5085,7 @@ class _SymbolAddresses {
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get test_native_method => _library._test_native_methodPtr;
+      get test_send_to_native => _library._test_send_to_nativePtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
