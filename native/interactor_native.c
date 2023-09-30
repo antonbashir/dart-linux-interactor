@@ -242,7 +242,7 @@ void interactor_native_close_descriptor(int fd)
     close(fd);
 }
 
-int interactor_native_process(interactor_native_t* interactor)
+void interactor_native_process(interactor_native_t* interactor)
 {
     if (interactor_native_peek(interactor) > 0)
     {

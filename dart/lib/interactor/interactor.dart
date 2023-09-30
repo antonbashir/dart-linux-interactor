@@ -16,8 +16,8 @@ class Interactor {
   final _workerDestroyer = ReceivePort();
 
   late final String? _libraryPath;
-  late final InteractorBindings bindings;
   late final InteractorLibrary _library;
+  late final InteractorBindings bindings;
 
   Interactor({String? libraryPath}) {
     this._libraryPath = libraryPath;

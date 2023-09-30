@@ -16,10 +16,11 @@ ffigen:
   description: "Bindings for Interactor"
   output: "lib/interactor/bindings.dart"
   compiler-opts:
-    - "-I/home/anton/development/evolution/dart-linux-interactor/native/include"
+    - "-I../native/include"
 
   headers:
     entry-points:
+      - "../native/include/interactor_native.h"
       - "../native/interactor_dart.h"
       - "../native/interactor_constants.h"
       - "../native/test.h"
@@ -31,6 +32,7 @@ ffigen:
     leaf:
       include:
         - "interactor_dart_.*"
+        - "interactor_native_.*"
     symbol-address:
       include:
         - ".*"
