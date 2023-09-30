@@ -1,6 +1,5 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/declaration.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
@@ -29,10 +28,10 @@ class TestNativeProducer extends NativeProducer {
 }
 
 Future<void> main() async {
-  final bindings = TestBindings(DynamicLibrary.open("/home/anton/development/evolution/dart-linux-interactor/test/dart/native/libinteractortest.so"));
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
   await worker.initialize();
+  final bindings = TestBindings(DynamicLibrary.open("/home/anton/development/evolution/dart-linux-interactor/test/dart/native/libinteractortest.so"));
   worker.consumer(TestNativeConsumer());
   final producer = worker.producer(TestNativeProducer(bindings));
   worker.activate();

@@ -1,4 +1,5 @@
 #include "test.h"
+#include <interactor_native.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,6 +15,8 @@ int test_initialize()
     configuration.cqe_peek_count = 1024;
     configuration.cqe_wait_count = 1;
     configuration.cqe_wait_timeout_millis = 1000;
+    configuration.quota_size = 12800;
+    configuration.slab_size = 65536;
     interactor_native_initialize(&interactor, &configuration, 0);
     return interactor.ring->ring_fd;
 }

@@ -1,7 +1,7 @@
-#include <interactor_messages_pool.h>
-#include <interactor_message.h>
-#include "interactor_constants.h"
 #include <interactor_memory.h>
+#include <interactor_message.h>
+#include <interactor_messages_pool.h>
+#include "interactor_constants.h"
 #include "small/include/small/small.h"
 #include "trivia/util.h"
 
@@ -18,10 +18,11 @@ void interactor_messages_pool_destroy(struct interactor_messages_pool* pool)
 
 interactor_message_t* interactor_messages_pool_allocate(struct interactor_messages_pool* pool)
 {
-    return (interactor_message_t*)interactor_messages_pool_allocate(pool);
+    
+    return (interactor_message_t*)interactor_mempool_allocate(&pool->pool);
 }
 
 void interactor_messages_pool_free(struct interactor_messages_pool* pool, interactor_message_t* message)
 {
-    interactor_messages_pool_free(pool, message);
+    interactor_mempool_free(&pool->pool, message);
 }

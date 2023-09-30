@@ -35,7 +35,6 @@ message(STATUS "")
 file(GLOB sources
   *.c
   *.h
-  include/*.h
   dart/*.h
   dart/*.c
   salad/*.h
