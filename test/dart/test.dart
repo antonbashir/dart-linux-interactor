@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/declaration.dart';
@@ -23,5 +24,5 @@ Future<void> main() async {
   await worker.initialize();
   worker.consumer(TestNativeConsumer());
   worker.activate();
-  TestBindings(DynamicLibrary.open("native/libinteractortest.so")).test_void(worker.descriptor);
+  TestBindings(DynamicLibrary.open("/home/anton/development/evolution/dart-linux-interactor/test/dart/native/libinteractortest.so")).test_void(worker.descriptor);
 }
