@@ -2,18 +2,18 @@ import 'dart:ffi';
 
 import 'operation.dart';
 import 'bindings.dart';
-import 'channel.dart';
+import 'service.dart';
 import 'registrat.dart';
 
 class InteractorChannelRegistry {
-  final _channels = <InteractorChannel>[];
+  final _channels = <NativeService>[];
 
   void register(InteractorChannelRegistrat registrat) {
-    final operations = <InteractorOperation>[];
+    final operations = <NativeFunction>[];
     for (var operation in registrat.operations) {
-      operations.add(InteractorOperation(operations.length, operation));
+      operations.add(NativeFunction(operations.length, operation));
     }
-    _channels.add(InteractorChannel(
+    _channels.add(NativeService(
       _channels.length,
       _workerPointer,
       _bindings,

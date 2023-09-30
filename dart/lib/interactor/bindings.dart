@@ -2154,69 +2154,6 @@ class InteractorBindings {
   late final _atomic_signal_fence =
       _atomic_signal_fencePtr.asFunction<void Function(int)>();
 
-  bool atomic_flag_test_and_set(
-    ffi.Pointer<atomic_flag> arg0,
-  ) {
-    return _atomic_flag_test_and_set(
-      arg0,
-    );
-  }
-
-  late final _atomic_flag_test_and_setPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<atomic_flag>)>>(
-          'atomic_flag_test_and_set');
-  late final _atomic_flag_test_and_set = _atomic_flag_test_and_setPtr
-      .asFunction<bool Function(ffi.Pointer<atomic_flag>)>();
-
-  bool atomic_flag_test_and_set_explicit(
-    ffi.Pointer<atomic_flag> arg0,
-    int arg1,
-  ) {
-    return _atomic_flag_test_and_set_explicit(
-      arg0,
-      arg1,
-    );
-  }
-
-  late final _atomic_flag_test_and_set_explicitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Bool Function(ffi.Pointer<atomic_flag>,
-              ffi.Int32)>>('atomic_flag_test_and_set_explicit');
-  late final _atomic_flag_test_and_set_explicit =
-      _atomic_flag_test_and_set_explicitPtr
-          .asFunction<bool Function(ffi.Pointer<atomic_flag>, int)>();
-
-  void atomic_flag_clear(
-    ffi.Pointer<atomic_flag> arg0,
-  ) {
-    return _atomic_flag_clear(
-      arg0,
-    );
-  }
-
-  late final _atomic_flag_clearPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<atomic_flag>)>>(
-          'atomic_flag_clear');
-  late final _atomic_flag_clear = _atomic_flag_clearPtr
-      .asFunction<void Function(ffi.Pointer<atomic_flag>)>();
-
-  void atomic_flag_clear_explicit(
-    ffi.Pointer<atomic_flag> arg0,
-    int arg1,
-  ) {
-    return _atomic_flag_clear_explicit(
-      arg0,
-      arg1,
-    );
-  }
-
-  late final _atomic_flag_clear_explicitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<atomic_flag>,
-              ffi.Int32)>>('atomic_flag_clear_explicit');
-  late final _atomic_flag_clear_explicit = _atomic_flag_clear_explicitPtr
-      .asFunction<void Function(ffi.Pointer<atomic_flag>, int)>();
-
   /// Is this an error handle?
   ///
   /// Requires there to be a current isolate.
@@ -8355,6 +8292,26 @@ class InteractorBindings {
   late final _fdopen = _fdopenPtr
       .asFunction<ffi.Pointer<FILE> Function(int, ffi.Pointer<ffi.Char>)>();
 
+  ffi.Pointer<FILE> fopencookie(
+    ffi.Pointer<ffi.Void> __magic_cookie,
+    ffi.Pointer<ffi.Char> __modes,
+    cookie_io_functions_t __io_funcs,
+  ) {
+    return _fopencookie(
+      __magic_cookie,
+      __modes,
+      __io_funcs,
+    );
+  }
+
+  late final _fopencookiePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Char>, cookie_io_functions_t)>>('fopencookie');
+  late final _fopencookie = _fopencookiePtr.asFunction<
+      ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>,
+          cookie_io_functions_t)>();
+
   ffi.Pointer<FILE> fmemopen(
     ffi.Pointer<ffi.Void> __s,
     int __len,
@@ -8609,6 +8566,44 @@ class InteractorBindings {
   late final _vsnprintf = _vsnprintfPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<__va_list_tag>)>();
+
+  int vasprintf(
+    ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
+    ffi.Pointer<ffi.Char> __f,
+    ffi.Pointer<__va_list_tag> __arg,
+  ) {
+    return _vasprintf(
+      __ptr,
+      __f,
+      __arg,
+    );
+  }
+
+  late final _vasprintfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>>('vasprintf');
+  late final _vasprintf = _vasprintfPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<__va_list_tag>)>();
+
+  int asprintf(
+    ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
+    ffi.Pointer<ffi.Char> __fmt,
+  ) {
+    return _asprintf(
+      __ptr,
+      __fmt,
+    );
+  }
+
+  late final _asprintfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>)>>('asprintf');
+  late final _asprintf = _asprintfPtr.asFunction<
+      int Function(
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>();
 
   int vdprintf(
     int __fd,
@@ -11355,6 +11350,23 @@ class InteractorBindings {
   late final _strrchr = _strrchrPtr
       .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, int)>();
 
+  ffi.Pointer<ffi.Char> strchrnul(
+    ffi.Pointer<ffi.Char> __s,
+    int __c,
+  ) {
+    return _strchrnul(
+      __s,
+      __c,
+    );
+  }
+
+  late final _strchrnulPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>, ffi.Int)>>('strchrnul');
+  late final _strchrnul = _strchrnulPtr
+      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, int)>();
+
   int strcspn(
     ffi.Pointer<ffi.Char> __s,
     ffi.Pointer<ffi.Char> __reject,
@@ -11464,6 +11476,66 @@ class InteractorBindings {
   late final _strtok_r = _strtok_rPtr.asFunction<
       ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  ffi.Pointer<ffi.Char> strcasestr(
+    ffi.Pointer<ffi.Char> __haystack,
+    ffi.Pointer<ffi.Char> __needle,
+  ) {
+    return _strcasestr(
+      __haystack,
+      __needle,
+    );
+  }
+
+  late final _strcasestrPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('strcasestr');
+  late final _strcasestr = _strcasestrPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+
+  ffi.Pointer<ffi.Void> memmem(
+    ffi.Pointer<ffi.Void> __haystack,
+    int __haystacklen,
+    ffi.Pointer<ffi.Void> __needle,
+    int __needlelen,
+  ) {
+    return _memmem(
+      __haystack,
+      __haystacklen,
+      __needle,
+      __needlelen,
+    );
+  }
+
+  late final _memmemPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size,
+              ffi.Pointer<ffi.Void>, ffi.Size)>>('memmem');
+  late final _memmem = _memmemPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>, int)>();
+
+  ffi.Pointer<ffi.Void> mempcpy(
+    ffi.Pointer<ffi.Void> __dest,
+    ffi.Pointer<ffi.Void> __src,
+    int __n,
+  ) {
+    return _mempcpy(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final _mempcpyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>, ffi.Size)>>('mempcpy');
+  late final _mempcpy = _mempcpyPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
 
   int strlen(
     ffi.Pointer<ffi.Char> __s,
@@ -11834,6 +11906,60 @@ class InteractorBindings {
   late final _stpncpy = _stpncpyPtr.asFunction<
       ffi.Pointer<ffi.Char> Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+
+  /// Copy string. Unlike @a strncpy the result string
+  /// is always null-terminated.
+  ///
+  /// @param dst destination buffer.
+  /// @param src source string.
+  /// @param size destination buffer size.
+  ///
+  /// @return size of @a src string.
+  int strlcpy(
+    ffi.Pointer<ffi.Char> __dest,
+    ffi.Pointer<ffi.Char> __src,
+    int __n,
+  ) {
+    return _strlcpy(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final _strlcpyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>, ffi.Size)>>('strlcpy');
+  late final _strlcpy = _strlcpyPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+
+  /// Append the null-terminated string @a src to the end of @a dst string.
+  /// Unlike @a strncat the resulting string is always null-terminated.
+  ///
+  /// @param dst destination buffer and the first input string
+  /// @param src the second input string
+  /// @param size destination buffer size
+  ///
+  /// @return the total length of the string, that it is trying to create
+  int strlcat(
+    ffi.Pointer<ffi.Char> __dest,
+    ffi.Pointer<ffi.Char> __src,
+    int __n,
+  ) {
+    return _strlcat(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final _strlcatPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>, ffi.Size)>>('strlcat');
+  late final _strlcat = _strlcatPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
 
   int access(
     ffi.Pointer<ffi.Char> __name,
@@ -13485,60 +13611,6 @@ class InteractorBindings {
   set precision_fmts(ffi.Pointer<ffi.Pointer<ffi.Char>> value) =>
       _precision_fmts.value = value;
 
-  /// Copy string. Unlike @a strncpy the result string
-  /// is always null-terminated.
-  ///
-  /// @param dst destination buffer.
-  /// @param src source string.
-  /// @param size destination buffer size.
-  ///
-  /// @return size of @a src string.
-  int strlcpy(
-    ffi.Pointer<ffi.Char> dst,
-    ffi.Pointer<ffi.Char> src,
-    int size,
-  ) {
-    return _strlcpy(
-      dst,
-      src,
-      size,
-    );
-  }
-
-  late final _strlcpyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('strlcpy');
-  late final _strlcpy = _strlcpyPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
-
-  /// Append the null-terminated string @a src to the end of @a dst string.
-  /// Unlike @a strncat the resulting string is always null-terminated.
-  ///
-  /// @param dst destination buffer and the first input string
-  /// @param src the second input string
-  /// @param size destination buffer size
-  ///
-  /// @return the total length of the string, that it is trying to create
-  int strlcat(
-    ffi.Pointer<ffi.Char> dst,
-    ffi.Pointer<ffi.Char> src,
-    int size,
-  ) {
-    return _strlcat(
-      dst,
-      src,
-      size,
-    );
-  }
-
-  late final _strlcatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('strlcat');
-  late final _strlcat = _strlcatPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
-
   /// Check that @a str is valid utf-8 sequence and can be printed
   /// unescaped.
   /// @param str string
@@ -13559,28 +13631,6 @@ class InteractorBindings {
       'utf8_check_printable');
   late final _utf8_check_printable = _utf8_check_printablePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
-
-  ffi.Pointer<ffi.Void> memmem(
-    ffi.Pointer<ffi.Void> block,
-    int blen,
-    ffi.Pointer<ffi.Void> pat,
-    int plen,
-  ) {
-    return _memmem(
-      block,
-      blen,
-      pat,
-      plen,
-    );
-  }
-
-  late final _memmemPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size,
-              ffi.Pointer<ffi.Void>, ffi.Size)>>('memmem');
-  late final _memmem = _memmemPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(
-          ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>, int)>();
 
   ffi.Pointer<ffi.Void> memrchr(
     ffi.Pointer<ffi.Void> s,
@@ -17472,6 +17522,72 @@ class InteractorBindings {
   late final _mh_events_dump =
       _mh_events_dumpPtr.asFunction<void Function(ffi.Pointer<mh_events_t>)>();
 
+  int interactor_buffers_pool_create(
+    ffi.Pointer<interactor_buffers_pool> pool,
+    int size,
+  ) {
+    return _interactor_buffers_pool_create(
+      pool,
+      size,
+    );
+  }
+
+  late final _interactor_buffers_pool_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<interactor_buffers_pool>,
+              ffi.Size)>>('interactor_buffers_pool_create');
+  late final _interactor_buffers_pool_create =
+      _interactor_buffers_pool_createPtr.asFunction<
+          int Function(ffi.Pointer<interactor_buffers_pool>, int)>();
+
+  void interactor_buffers_pool_destroy(
+    ffi.Pointer<interactor_buffers_pool> pool,
+  ) {
+    return _interactor_buffers_pool_destroy(
+      pool,
+    );
+  }
+
+  late final _interactor_buffers_pool_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_buffers_pool>)>>(
+      'interactor_buffers_pool_destroy');
+  late final _interactor_buffers_pool_destroy =
+      _interactor_buffers_pool_destroyPtr
+          .asFunction<void Function(ffi.Pointer<interactor_buffers_pool>)>();
+
+  void interactor_buffers_pool_push(
+    ffi.Pointer<interactor_buffers_pool> pool,
+    int id,
+  ) {
+    return _interactor_buffers_pool_push(
+      pool,
+      id,
+    );
+  }
+
+  late final _interactor_buffers_pool_pushPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<interactor_buffers_pool>,
+              ffi.Int32)>>('interactor_buffers_pool_push');
+  late final _interactor_buffers_pool_push = _interactor_buffers_pool_pushPtr
+      .asFunction<void Function(ffi.Pointer<interactor_buffers_pool>, int)>();
+
+  int interactor_buffers_pool_pop(
+    ffi.Pointer<interactor_buffers_pool> pool,
+  ) {
+    return _interactor_buffers_pool_pop(
+      pool,
+    );
+  }
+
+  late final _interactor_buffers_pool_popPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int32 Function(ffi.Pointer<interactor_buffers_pool>)>>(
+      'interactor_buffers_pool_pop');
+  late final _interactor_buffers_pool_pop = _interactor_buffers_pool_popPtr
+      .asFunction<int Function(ffi.Pointer<interactor_buffers_pool>)>();
+
   ffi.Pointer<ffi.Void> mmap(
     ffi.Pointer<ffi.Void> __addr,
     int __len,
@@ -18305,6 +18421,151 @@ class InteractorBindings {
                       ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
           ffi.Pointer<ffi.Void>)>();
 
+  int interactor_messages_pool_create(
+    ffi.Pointer<interactor_messages_pool> pool,
+    ffi.Pointer<slab_cache> slab_cache,
+  ) {
+    return _interactor_messages_pool_create(
+      pool,
+      slab_cache,
+    );
+  }
+
+  late final _interactor_messages_pool_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<interactor_messages_pool>,
+              ffi.Pointer<slab_cache>)>>('interactor_messages_pool_create');
+  late final _interactor_messages_pool_create =
+      _interactor_messages_pool_createPtr.asFunction<
+          int Function(ffi.Pointer<interactor_messages_pool>,
+              ffi.Pointer<slab_cache>)>();
+
+  void interactor_messages_pool_destroy(
+    ffi.Pointer<interactor_messages_pool> pool,
+  ) {
+    return _interactor_messages_pool_destroy(
+      pool,
+    );
+  }
+
+  late final _interactor_messages_pool_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_messages_pool>)>>(
+      'interactor_messages_pool_destroy');
+  late final _interactor_messages_pool_destroy =
+      _interactor_messages_pool_destroyPtr
+          .asFunction<void Function(ffi.Pointer<interactor_messages_pool>)>();
+
+  ffi.Pointer<interactor_message_t> interactor_messages_pool_allocate(
+    ffi.Pointer<interactor_messages_pool> pool,
+  ) {
+    return _interactor_messages_pool_allocate(
+      pool,
+    );
+  }
+
+  late final _interactor_messages_pool_allocatePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<interactor_message_t> Function(
+                  ffi.Pointer<interactor_messages_pool>)>>(
+      'interactor_messages_pool_allocate');
+  late final _interactor_messages_pool_allocate =
+      _interactor_messages_pool_allocatePtr.asFunction<
+          ffi.Pointer<interactor_message_t> Function(
+              ffi.Pointer<interactor_messages_pool>)>();
+
+  void interactor_messages_pool_free(
+    ffi.Pointer<interactor_messages_pool> pool,
+    ffi.Pointer<interactor_message_t> message,
+  ) {
+    return _interactor_messages_pool_free(
+      pool,
+      message,
+    );
+  }
+
+  late final _interactor_messages_pool_freePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
+                  ffi.Pointer<interactor_message_t>)>>(
+      'interactor_messages_pool_free');
+  late final _interactor_messages_pool_free =
+      _interactor_messages_pool_freePtr.asFunction<
+          void Function(ffi.Pointer<interactor_messages_pool>,
+              ffi.Pointer<interactor_message_t>)>();
+
+  int interactor_payloads_pool_create(
+    ffi.Pointer<interactor_payloads_pool> pool,
+    ffi.Pointer<slab_cache> slab_cache,
+    int size,
+  ) {
+    return _interactor_payloads_pool_create(
+      pool,
+      slab_cache,
+      size,
+    );
+  }
+
+  late final _interactor_payloads_pool_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<interactor_payloads_pool>,
+              ffi.Pointer<slab_cache>,
+              ffi.Size)>>('interactor_payloads_pool_create');
+  late final _interactor_payloads_pool_create =
+      _interactor_payloads_pool_createPtr.asFunction<
+          int Function(ffi.Pointer<interactor_payloads_pool>,
+              ffi.Pointer<slab_cache>, int)>();
+
+  void interactor_payloads_pool_destroy(
+    ffi.Pointer<interactor_payloads_pool> pool,
+  ) {
+    return _interactor_payloads_pool_destroy(
+      pool,
+    );
+  }
+
+  late final _interactor_payloads_pool_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>(
+      'interactor_payloads_pool_destroy');
+  late final _interactor_payloads_pool_destroy =
+      _interactor_payloads_pool_destroyPtr
+          .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>();
+
+  int interactor_payloads_pool_allocate(
+    ffi.Pointer<interactor_payloads_pool> pool,
+  ) {
+    return _interactor_payloads_pool_allocate(
+      pool,
+    );
+  }
+
+  late final _interactor_payloads_pool_allocatePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>(
+      'interactor_payloads_pool_allocate');
+  late final _interactor_payloads_pool_allocate =
+      _interactor_payloads_pool_allocatePtr
+          .asFunction<int Function(ffi.Pointer<interactor_payloads_pool>)>();
+
+  void interactor_payloads_pool_free(
+    ffi.Pointer<interactor_payloads_pool> pool,
+    int pointer,
+  ) {
+    return _interactor_payloads_pool_free(
+      pool,
+      pointer,
+    );
+  }
+
+  late final _interactor_payloads_pool_freePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<interactor_payloads_pool>,
+              ffi.IntPtr)>>('interactor_payloads_pool_free');
+  late final _interactor_payloads_pool_free = _interactor_payloads_pool_freePtr
+      .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>, int)>();
+
   late final ffi.Pointer<ffi.Size> _QUOTA_MAX = _lookup<ffi.Size>('QUOTA_MAX');
 
   int get QUOTA_MAX => _QUOTA_MAX.value;
@@ -19065,19 +19326,6 @@ class _SymbolAddresses {
       get atomic_thread_fence => _library._atomic_thread_fencePtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>
       get atomic_signal_fence => _library._atomic_signal_fencePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<atomic_flag>)>>
-      get atomic_flag_test_and_set => _library._atomic_flag_test_and_setPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Bool Function(ffi.Pointer<atomic_flag>, ffi.Int32)>>
-      get atomic_flag_test_and_set_explicit =>
-          _library._atomic_flag_test_and_set_explicitPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<atomic_flag>)>>
-      get atomic_flag_clear => _library._atomic_flag_clearPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<atomic_flag>, ffi.Int32)>>
-      get atomic_flag_clear_explicit => _library._atomic_flag_clear_explicitPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
       get Dart_IsError => _library._Dart_IsErrorPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Handle)>>
@@ -20041,6 +20289,13 @@ class _SymbolAddresses {
               ffi.Pointer<FILE> Function(ffi.Int, ffi.Pointer<ffi.Char>)>>
       get fdopen => _library._fdopenPtr;
   ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<FILE> Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Char>,
+              cookie_io_functions_t)>> get fopencookie =>
+      _library._fopencookiePtr;
+  ffi.Pointer<
           ffi.NativeFunction<
               ffi.Pointer<FILE> Function(
                   ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<ffi.Char>)>>
@@ -20104,6 +20359,18 @@ class _SymbolAddresses {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<__va_list_tag>)>> get vsnprintf =>
       _library._vsnprintfPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<__va_list_tag>)>> get vasprintf =>
+      _library._vasprintfPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>>
+      get asprintf => _library._asprintfPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Int Function(
@@ -20735,6 +21002,10 @@ class _SymbolAddresses {
               ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>>
       get strrchr => _library._strrchrPtr;
   ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>>
+      get strchrnul => _library._strchrnulPtr;
+  ffi.Pointer<
       ffi.NativeFunction<
           ffi.UnsignedLong Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>> get strcspn =>
@@ -20766,6 +21037,23 @@ class _SymbolAddresses {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>> get strtok_r =>
       _library._strtok_rPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>> get strcasestr =>
+      _library._strcasestrPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Size,
+              ffi.Pointer<ffi.Void>,
+              ffi.Size)>> get memmem => _library._memmemPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Void> Function(
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>>
+      get mempcpy => _library._mempcpyPtr;
   ffi.Pointer<
           ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>)>>
       get strlen => _library._strlenPtr;
@@ -20852,6 +21140,16 @@ class _SymbolAddresses {
               ffi.Pointer<ffi.Char> Function(
                   ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>>
       get stpncpy => _library._stpncpyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.UnsignedLong Function(
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>>
+      get strlcpy => _library._strlcpyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.UnsignedLong Function(
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>>
+      get strlcat => _library._strlcatPtr;
   ffi.Pointer<
           ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>>
       get access => _library._accessPtr;
@@ -21199,25 +21497,8 @@ class _SymbolAddresses {
   ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> get precision_fmts =>
       _library._precision_fmts;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Size Function(
-                  ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>>
-      get strlcpy => _library._strlcpyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Size Function(
-                  ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>>
-      get strlcat => _library._strlcatPtr;
-  ffi.Pointer<
           ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>>
       get utf8_check_printable => _library._utf8_check_printablePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size)>> get memmem => _library._memmemPtr;
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Pointer<ffi.Void> Function(
@@ -22016,6 +22297,27 @@ class _SymbolAddresses {
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<mh_events_t>)>>
       get mh_events_dump => _library._mh_events_dumpPtr;
   ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<interactor_buffers_pool>, ffi.Size)>>
+      get interactor_buffers_pool_create =>
+          _library._interactor_buffers_pool_createPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_buffers_pool>)>>
+      get interactor_buffers_pool_destroy =>
+          _library._interactor_buffers_pool_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_buffers_pool>, ffi.Int32)>>
+      get interactor_buffers_pool_push =>
+          _library._interactor_buffers_pool_pushPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int32 Function(ffi.Pointer<interactor_buffers_pool>)>>
+      get interactor_buffers_pool_pop =>
+          _library._interactor_buffers_pool_popPtr;
+  ffi.Pointer<
       ffi.NativeFunction<
           ffi.Pointer<ffi.Void> Function(
               ffi.Pointer<ffi.Void>,
@@ -22201,6 +22503,51 @@ class _SymbolAddresses {
                           ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
               ffi.Pointer<ffi.Void>)>> get small_stats1 =>
       _library._small_stats1Ptr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<interactor_messages_pool>,
+              ffi.Pointer<slab_cache>)>> get interactor_messages_pool_create =>
+      _library._interactor_messages_pool_createPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_messages_pool>)>>
+      get interactor_messages_pool_destroy =>
+          _library._interactor_messages_pool_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<interactor_message_t> Function(
+                  ffi.Pointer<interactor_messages_pool>)>>
+      get interactor_messages_pool_allocate =>
+          _library._interactor_messages_pool_allocatePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
+                  ffi.Pointer<interactor_message_t>)>>
+      get interactor_messages_pool_free =>
+          _library._interactor_messages_pool_freePtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<interactor_payloads_pool>,
+              ffi.Pointer<slab_cache>,
+              ffi.Size)>> get interactor_payloads_pool_create =>
+      _library._interactor_payloads_pool_createPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>
+      get interactor_payloads_pool_destroy =>
+          _library._interactor_payloads_pool_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>
+      get interactor_payloads_pool_allocate =>
+          _library._interactor_payloads_pool_allocatePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_payloads_pool>, ffi.IntPtr)>>
+      get interactor_payloads_pool_free =>
+          _library._interactor_payloads_pool_freePtr;
   ffi.Pointer<ffi.Size> get QUOTA_MAX => _library._QUOTA_MAX;
   ffi.Pointer<
       ffi.NativeFunction<
@@ -23409,7 +23756,7 @@ abstract class io_uring_op {
   static const int IORING_OP_LAST = 49;
 }
 
-final class io_uring_cqe extends ffi.Struct {@ffi.UnsignedLongLong()external int user_data; @ffi.Int() external int res; @ffi.UnsignedInt()external int flags;}
+final class io_uring_cqe extends ffi.Opaque {}
 
 final class io_sqring_offsets extends ffi.Struct {
   @ffi.UnsignedInt()
@@ -23558,31 +23905,6 @@ final class io_uring_rsrc_update2 extends ffi.Struct {
   external int resv2;
 }
 
-final class io_uring_notification_slot extends ffi.Struct {
-  @ffi.UnsignedLongLong()
-  external int tag;
-
-  @ffi.Array.multi([3])
-  external ffi.Array<ffi.UnsignedLongLong> resv;
-}
-
-final class io_uring_notification_register extends ffi.Struct {
-  @ffi.UnsignedInt()
-  external int nr_slots;
-
-  @ffi.UnsignedInt()
-  external int resv;
-
-  @ffi.UnsignedLongLong()
-  external int resv2;
-
-  @ffi.UnsignedLongLong()
-  external int data;
-
-  @ffi.UnsignedLongLong()
-  external int resv3;
-}
-
 final class io_uring_probe_op extends ffi.Struct {
   @ffi.UnsignedChar()
   external int op;
@@ -23648,7 +23970,7 @@ final class io_uring_buf_reg extends ffi.Struct {
   external int bgid;
 
   @ffi.UnsignedShort()
-  external int pad;
+  external int flags;
 
   @ffi.Array.multi([3])
   external ffi.Array<ffi.UnsignedLongLong> resv;
@@ -23725,8 +24047,6 @@ abstract class memory_order {
   static const int memory_order_acq_rel = 4;
   static const int memory_order_seq_cst = 5;
 }
-
-final class atomic_flag extends ffi.Opaque {}
 
 final class io_uring_sq extends ffi.Struct {
   external ffi.Pointer<ffi.UnsignedInt> khead;
@@ -24622,6 +24942,30 @@ final class _IO_codecvt extends ffi.Opaque {}
 
 final class _IO_wide_data extends ffi.Opaque {}
 
+typedef cookie_io_functions_t = _IO_cookie_io_functions_t;
+
+final class _IO_cookie_io_functions_t extends ffi.Struct {
+  external ffi.Pointer<cookie_read_function_t> read;
+
+  external ffi.Pointer<cookie_write_function_t> write;
+
+  external ffi.Pointer<cookie_seek_function_t> seek;
+
+  external ffi.Pointer<cookie_close_function_t> close;
+}
+
+typedef cookie_read_function_t = ffi.NativeFunction<
+    ffi.Long Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
+typedef cookie_write_function_t = ffi.NativeFunction<
+    ffi.Long Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
+typedef cookie_seek_function_t = ffi.NativeFunction<
+    ffi.Int Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Long> __pos, ffi.Int __w)>;
+typedef cookie_close_function_t
+    = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> __cookie)>;
+
 final class __va_list_tag extends ffi.Struct {
   @ffi.UnsignedInt()
   external int gp_offset;
@@ -24801,10 +25145,10 @@ final class interactor_buffers_pool extends ffi.Struct {
 
 final class interactor_message extends ffi.Struct {
   @ffi.Uint64()
-  external int channel_id;
+  external int service_id;
 
   @ffi.Uint64()
-  external int operation_id;
+  external int method_id;
 
   external ffi.Pointer<ffi.UintPtr> input_pointer;
 
@@ -24869,7 +25213,7 @@ final class slab_arena extends ffi.Struct {
 
   /// An external quota to which we must adhere.
   /// A quota exists to set a common limit on two arenas.
-  // external ffi.Pointer<quota> quota;
+  external ffi.Pointer<quota> quota;
 
   @ffi.Uint32()
   external int slab_size;
@@ -25028,7 +25372,7 @@ final class mempool extends ffi.Struct {
   /// Small allocator pool, the owner of this mempool in case
   /// this mempool used as a part of small_alloc, otherwise
   /// NULL
-  // external ffi.Pointer<small_mempool> small_mempool;
+  external ffi.Pointer<small_mempool> small_mempool;
 }
 
 final class mslab_tree_t extends ffi.Struct {
@@ -25060,7 +25404,7 @@ final class mslab extends ffi.Struct {
   external bool in_hot_slabs;
 
   /// Pointer to mempool, the owner of this mslab
-  // external ffi.Pointer<mempool> mempool;
+  external ffi.Pointer<mempool> mempool;
 }
 
 final class UnnamedStruct17 extends ffi.Struct {
@@ -25226,6 +25570,8 @@ final class interactor_messages_pool extends ffi.Struct {
   external ffi.Pointer<mempool> memory_pool;
 }
 
+typedef interactor_message_t = interactor_message;
+
 final class interactor_payloads_pool extends ffi.Struct {
   external ffi.Pointer<mempool> memory_pool;
 }
@@ -25338,7 +25684,6 @@ final class interactor_dart extends ffi.Struct {
 
 typedef interactor_dart_t = interactor_dart;
 typedef interactor_dart_configuration_t = interactor_dart_configuration;
-typedef interactor_message_t = interactor_message;
 
 const int MSG_OOB = 1;
 
@@ -25586,9 +25931,13 @@ const int IORING_REGISTER_FILE_ALLOC_RANGE = 25;
 
 const int IORING_REGISTER_LAST = 26;
 
+const int IORING_REGISTER_USE_REGISTERED_RING = -2147483648;
+
 const int IO_WQ_BOUND = 0;
 
 const int IO_WQ_UNBOUND = 1;
+
+const int IOU_PBUF_RING_MMAP = 1;
 
 const int IORING_RESTRICTION_REGISTER_OP = 0;
 
@@ -27942,16 +28291,6 @@ const int POSIX_FADV_DONTNEED = 4;
 
 const int POSIX_FADV_NOREUSE = 5;
 
-const int AT_FDCWD = -100;
-
-const int AT_SYMLINK_NOFOLLOW = 256;
-
-const int AT_REMOVEDIR = 512;
-
-const int AT_SYMLINK_FOLLOW = 1024;
-
-const int AT_EACCESS = 512;
-
 const int R_OK = 4;
 
 const int W_OK = 2;
@@ -27966,6 +28305,16 @@ const int SEEK_CUR = 1;
 
 const int SEEK_END = 2;
 
+const int AT_FDCWD = -100;
+
+const int AT_SYMLINK_NOFOLLOW = 256;
+
+const int AT_REMOVEDIR = 512;
+
+const int AT_SYMLINK_FOLLOW = 1024;
+
+const int AT_EACCESS = 512;
+
 const int F_ULOCK = 0;
 
 const int F_LOCK = 1;
@@ -27979,6 +28328,8 @@ const int SCHED_OTHER = 0;
 const int SCHED_FIFO = 1;
 
 const int SCHED_RR = 2;
+
+const int UAPI_LINUX_IO_URING_H_SKIP_LINUX_TIME_TYPES_H = 1;
 
 const int RESOLVE_NO_XDEV = 1;
 
@@ -28049,6 +28400,10 @@ const int FSCRYPT_MODE_AES_256_CTS = 4;
 const int FSCRYPT_MODE_AES_128_CBC = 5;
 
 const int FSCRYPT_MODE_AES_128_CTS = 6;
+
+const int FSCRYPT_MODE_SM4_XTS = 7;
+
+const int FSCRYPT_MODE_SM4_CTS = 8;
 
 const int FSCRYPT_MODE_ADIANTUM = 9;
 
@@ -28131,10 +28486,6 @@ const int FS_ENCRYPTION_MODE_AES_256_CTS = 4;
 const int FS_ENCRYPTION_MODE_AES_128_CBC = 5;
 
 const int FS_ENCRYPTION_MODE_AES_128_CTS = 6;
-
-const int FS_ENCRYPTION_MODE_SPECK128_256_XTS = 7;
-
-const int FS_ENCRYPTION_MODE_SPECK128_256_CTS = 8;
 
 const int FS_ENCRYPTION_MODE_ADIANTUM = 9;
 
@@ -28574,6 +28925,8 @@ const int IORING_LINK_TIMEOUT_UPDATE = 16;
 
 const int IORING_TIMEOUT_ETIME_SUCCESS = 32;
 
+const int IORING_TIMEOUT_MULTISHOT = 64;
+
 const int IORING_TIMEOUT_CLOCK_MASK = 12;
 
 const int IORING_TIMEOUT_UPDATE_MASK = 18;
@@ -28602,9 +28955,15 @@ const int IORING_RECV_MULTISHOT = 2;
 
 const int IORING_RECVSEND_FIXED_BUF = 4;
 
+const int IORING_SEND_ZC_REPORT_USAGE = 8;
+
+const int IORING_NOTIF_USAGE_ZC_COPIED = 2147483648;
+
 const int IORING_ACCEPT_MULTISHOT = 1;
 
 const int IORING_MSG_RING_CQE_SKIP = 1;
+
+const int IORING_MSG_RING_FLAGS_PASS = 2;
 
 const int IORING_CQE_F_BUFFER = 1;
 
@@ -28619,6 +28978,12 @@ const int IORING_OFF_SQ_RING = 0;
 const int IORING_OFF_CQ_RING = 134217728;
 
 const int IORING_OFF_SQES = 268435456;
+
+const int IORING_OFF_PBUF_RING = 2147483648;
+
+const int IORING_OFF_PBUF_SHIFT = 16;
+
+const int IORING_OFF_MMAP_MASK = 4160749568;
 
 const int IORING_SQ_NEED_WAKEUP = 1;
 
@@ -28664,11 +29029,17 @@ const int IORING_FEAT_CQE_SKIP = 2048;
 
 const int IORING_FEAT_LINKED_FILE = 4096;
 
+const int IORING_FEAT_REG_REG_RING = 8192;
+
 const int IORING_RSRC_REGISTER_SPARSE = 1;
 
 const int IORING_REGISTER_FILES_SKIP = -2;
 
 const int IO_URING_OP_SUPPORTED = 1;
+
+const int IO_URING_VERSION_MAJOR = 2;
+
+const int IO_URING_VERSION_MINOR = 4;
 
 const int ATOMIC_BOOL_LOCK_FREE = 2;
 
@@ -28768,7 +29139,7 @@ const String BUILD_INFO = '';
 
 const String BUILD_OPTIONS = 'cmake . ';
 
-const String COMPILER_INFO = 'GNU-12.2.0';
+const String COMPILER_INFO = 'GNU-13.2.1';
 
 const String INTERACTOR_C_FLAGS = '';
 
@@ -28962,35 +29333,35 @@ const int CHARCLASS_NAME_MAX = 2048;
 
 const int RE_DUP_MAX = 32767;
 
-const int SCHAR_MAX = 127;
-
-const int SHRT_MAX = 32767;
-
-const int INT_MAX = 2147483647;
-
-const int LONG_MAX = 9223372036854775807;
+const int CHAR_BIT = 8;
 
 const int SCHAR_MIN = -128;
 
-const int SHRT_MIN = -32768;
-
-const int INT_MIN = -2147483648;
-
-const int LONG_MIN = -9223372036854775808;
+const int SCHAR_MAX = 127;
 
 const int UCHAR_MAX = 255;
-
-const int USHRT_MAX = 65535;
-
-const int UINT_MAX = 4294967295;
-
-const int ULONG_MAX = -1;
-
-const int CHAR_BIT = 8;
 
 const int CHAR_MIN = -128;
 
 const int CHAR_MAX = 127;
+
+const int SHRT_MIN = -32768;
+
+const int SHRT_MAX = 32767;
+
+const int USHRT_MAX = 65535;
+
+const int INT_MIN = -2147483648;
+
+const int INT_MAX = 2147483647;
+
+const int UINT_MAX = 4294967295;
+
+const int LONG_MIN = -9223372036854775808;
+
+const int LONG_MAX = 9223372036854775807;
+
+const int ULONG_MAX = -1;
 
 const int MAP_32BIT = 64;
 
@@ -29097,6 +29468,8 @@ const int MADV_POPULATE_READ = 22;
 const int MADV_POPULATE_WRITE = 23;
 
 const int MADV_DONTNEED_LOCKED = 24;
+
+const int MADV_COLLAPSE = 25;
 
 const int MADV_HWPOISON = 100;
 

@@ -2,14 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "dart-debug",
+      "name": "dart-test-debug",
       "type": "dart",
       "request": "launch",
       "program": "${workspaceFolder}/dart/test/test.dart",
       "preLaunchTask": "interactor-binding-build"
     },
     {
-      "name": "dart-debug (no-rebuild)",
+      "name": "dart-test-debug (no-rebuild)",
       "type": "dart",
       "request": "launch",
       "program": "${workspaceFolder}/dart/test/test.dart"

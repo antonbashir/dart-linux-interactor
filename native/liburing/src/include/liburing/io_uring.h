@@ -334,7 +334,6 @@ enum {
 /*
  * IO completion data structure (Completion Queue Entry)
  */
- 
 struct io_uring_cqe {
 	__u64	user_data;	/* sqe->data submission passed back */
 	__s32	res;		/* result code for this event */
@@ -344,7 +343,7 @@ struct io_uring_cqe {
 	 * If the ring is initialized with IORING_SETUP_CQE32, then this field
 	 * contains 16-bytes of padding, doubling the size of the CQE.
 	 */
-  __u64 big_cqe[];
+	__u64 big_cqe[];
 };
 
 /*

@@ -4,11 +4,11 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "interactor_common.h"
+#include "interactor_memory.h"
 #include "interactor_collections.h"
 #include "interactor_buffers_pool.h"
 #include "interactor_messages_pool.h"
 #include "interactor_payloads_pool.h"
-#include "small/include/small/quota.h"
 
 #if defined(__cplusplus)
 extern "C"
@@ -38,6 +38,7 @@ extern "C"
     uint8_t id;
     struct interactor_messages_pool messages_pool;
     struct interactor_buffers_pool buffers_pool;
+    struct interactor_memory memory;
     struct io_uring *ring;
     struct iovec *buffers;
     uint32_t buffer_size;
@@ -54,9 +55,6 @@ extern "C"
     uint32_t cqe_wait_count;
     uint32_t cqe_peek_count;
     bool trace;
-    struct quota quota;
-    struct slab_arena arena;
-    struct slab_cache cache;
   } interactor_dart_t;
 
   int interactor_dart_initialize(interactor_dart_t *interactor,

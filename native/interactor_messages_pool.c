@@ -1,0 +1,28 @@
+#include "interactor_messages_pool.h"
+
+#include "interactor_constants.h"
+#include "interactor_memory.h"
+#include "interactor_message.h"
+#include "small/include/small/small.h"
+#include "trivia/util.h"
+
+int interactor_messages_pool_create(struct interactor_messages_pool* pool, struct interactor_memory* memory)
+{
+    pool->pool.memory = memory;
+    return interactor_mempool_create(&pool->pool, sizeof(interactor_message_t));
+}
+
+void interactor_messages_pool_destroy(struct interactor_messages_pool* pool)
+{
+    interactor_mempool_destroy(&pool->pool);
+}
+
+interactor_message_t* interactor_messages_pool_allocate(struct interactor_messages_pool* pool)
+{
+    return (interactor_message_t*)interactor_messages_pool_allocate(pool);
+}
+
+void interactor_messages_pool_free(struct interactor_messages_pool* pool, interactor_message_t* message)
+{
+    interactor_messages_pool_free(pool, message);
+}

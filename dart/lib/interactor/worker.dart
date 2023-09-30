@@ -3,8 +3,6 @@ import 'dart:ffi';
 import 'dart:isolate';
 import 'dart:math';
 
-import 'package:linux_interactor/interactor/channel.dart';
-
 import 'bindings.dart';
 import 'constants.dart';
 import 'lookup.dart';
@@ -94,7 +92,7 @@ class InteractorWorker {
       final result = cqe.ref.res;
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
       _registry.execute(message);
-
+      
       var event = data & 0xffff;
       final fd = (data >> 32) & 0xffffffff;
       final bufferId = (data >> 16) & 0xffff;
