@@ -6,6 +6,8 @@ import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor/interactor/worker.dart';
 
+import 'bindings.dart';
+
 class TestNativeConsumer implements NativeConsumer {
   void test(Pointer<interactor_message_t> message) {
     print("Hello, C");
@@ -16,7 +18,7 @@ class TestNativeConsumer implements NativeConsumer {
 }
 
 class TestNativeProducer extends NativeProducer {
-  final InteractorBindings _bindings;
+  final TestBindings _bindings;
   TestNativeProducer(this._bindings);
 
   late final testMethod = of(_bindings.addresses.test_method);
@@ -28,13 +30,13 @@ class TestNativeProducer extends NativeProducer {
 Future<void> main() async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+  final bindings = TestBindings(DynamicLibrary.open("/home/anton/development/evolution/dart-linux-interactor/test/dart/native/libinteractortest.so"));
   await worker.initialize();
   worker.consumer(TestNativeConsumer());
-
-  final producer = worker.producer(TestNativeProducer(interactor.bindings));
+  final producer = worker.producer(TestNativeProducer(bindings));
   worker.activate();
 
-  final native = interactor.bindings.test_initialize(worker.descriptor);
+  final native = bindings.test_initialize(worker.descriptor);
   producer.testMethod.execute(native.ref.ring.ref.ring_fd);
-  interactor.bindings.test_check(native);
+  bindings.test_check(native);
 }
