@@ -3,28 +3,28 @@ import 'dart:ffi';
 import 'bindings.dart';
 import 'producer.dart';
 
-abstract interface class NativeConsumerDeclaration {
-  List<NativeCallbackDeclaration> callbacks();
+abstract interface class NativeConsumer {
+  List<NativeCallback> callbacks();
 }
 
-class NativeCallbackDeclaration {
+class NativeCallback {
   final void Function(Pointer<interactor_message_t> message) callback;
 
-  NativeCallbackDeclaration(this.callback);
+  NativeCallback(this.callback);
 }
 
-abstract class NativeProducerProvider {
-  late final NativeProducer _producer;
+abstract class NativeProducer {
+  late final NativeProducerExecutor _executor;
 
-  void initialize(NativeProducer producer) => this._producer = producer;
+  void initialize(NativeProducerExecutor executor) => this._executor = executor;
 
-  NativeMethod of(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) => _producer.of(pointer);
+  NativeMethodExecutor of(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) => _executor.of(pointer);
 
-  List<NativeMethodDeclaration> methods();
+  List<NativeMethod> methods();
 }
 
-class NativeMethodDeclaration {
+class NativeMethod {
   final Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> method;
 
-  NativeMethodDeclaration(this.method);
+  NativeMethod(this.method);
 }

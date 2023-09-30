@@ -9,24 +9,23 @@ import 'package:linux_interactor/interactor/worker.dart';
 
 import 'bindings.dart';
 
-class TestNativeConsumer implements NativeConsumerDeclaration {
+class TestNativeConsumer implements NativeConsumer {
   void test(Pointer<interactor_message_t> message) {
     print("Hello, C");
   }
 
   @override
-  List<NativeCallbackDeclaration> callbacks() => [NativeCallbackDeclaration(test)];
+  List<NativeCallback> callbacks() => [NativeCallback(test)];
 }
 
-class TestNativeProducer extends NativeProducerProvider {
+class TestNativeProducer extends NativeProducer {
   final TestBindings _bindings;
-
   TestNativeProducer(this._bindings);
 
   late final testMethod = of(_bindings.addresses.test_method);
 
   @override
-  List<NativeMethodDeclaration> methods() => [NativeMethodDeclaration(_bindings.addresses.test_method)];
+  List<NativeMethod> methods() => [NativeMethod(_bindings.addresses.test_method)];
 }
 
 Future<void> main() async {
@@ -34,9 +33,12 @@ Future<void> main() async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
   await worker.initialize();
+
   worker.consumer(TestNativeConsumer());
-  final provider = worker.producer(TestNativeProducer(bindings));
+  final producer = worker.producer(TestNativeProducer(bindings));
+
   worker.activate();
-  provider.testMethod.execute(bindings.test_void(worker.descriptor), calloc<interactor_message_t>());
+  
+  producer.testMethod.execute(bindings.test_void(worker.descriptor), calloc<interactor_message_t>());
   bindings.test_check();
 }

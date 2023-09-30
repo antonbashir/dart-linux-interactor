@@ -1,11 +1,9 @@
 import 'dart:ffi';
 
+import 'bindings.dart';
 import 'buffers.dart';
 import 'consumer.dart';
 import 'declaration.dart';
-
-import 'bindings.dart';
-import 'producer.dart';
 
 class InteractorConsumerRegistry {
   final Pointer<interactor_dart_t> _workerPointer;
@@ -18,14 +16,14 @@ class InteractorConsumerRegistry {
     this._buffers,
   );
 
-  final _consumers = <NativeConsumer>[];
+  final _consumers = <NativeConsumerExecutor>[];
 
-  void register(NativeConsumerDeclaration declaration) {
-    final callbacks = <NativeCallback>[];
+  void register(NativeConsumer declaration) {
+    final callbacks = <NativeCallbackExecutor>[];
     for (var callback in declaration.callbacks()) {
-      callbacks.add(NativeCallback(callbacks.length, callback.callback));
+      callbacks.add(NativeCallbackExecutor(callbacks.length, callback.callback));
     }
-    _consumers.add(NativeConsumer(
+    _consumers.add(NativeConsumerExecutor(
       _consumers.length,
       _workerPointer,
       _bindings,

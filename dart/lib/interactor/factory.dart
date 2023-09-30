@@ -16,14 +16,14 @@ class InteractorProducerFactory {
     this._buffers,
   );
 
-  final _producer = <NativeProducer>[];
+  final _producer = <NativeProducerExecutor>[];
 
-  T register<T extends NativeProducerProvider>(T provider) {
-    final methods = <Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethod>{};
+  T register<T extends NativeProducer>(T provider) {
+    final methods = <Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethodExecutor>{};
     for (var method in provider.methods()) {
-      methods[method.method] = NativeMethod(methods.length, _workerPointer, _bindings, _buffers);
+      methods[method.method] = NativeMethodExecutor(methods.length, _workerPointer, _bindings, _buffers);
     }
-    final producer = NativeProducer(
+    final producer = NativeProducerExecutor(
       _producer.length,
       _workerPointer,
       _bindings,
