@@ -4,16 +4,17 @@ import 'dart:isolate';
 import 'dart:math';
 
 import 'bindings.dart';
+import 'buffers.dart';
 import 'constants.dart';
+import 'declaration.dart';
 import 'lookup.dart';
-import 'registrat.dart';
 import 'registry.dart';
 import 'timeout.dart';
 
 class InteractorWorker {
   final _fromInteractor = ReceivePort();
 
-  final _registry = InteractorChannelRegistry();
+  late final InteractorConsumerRegistry _consumers;
 
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _workerPointer;
@@ -57,13 +58,17 @@ class InteractorWorker {
       _workerPointer,
       Duration(milliseconds: _workerPointer.ref.timeout_checker_period_millis),
     );
+    _consumers = InteractorConsumerRegistry(_workerPointer, _bindings, InteractorBuffers(_bindings, _workerPointer.ref.buffers, _workerPointer));
+  }
+
+  void activate() {
     _delays = _calculateDelays();
     _timeoutChecker.start();
     unawaited(_listen());
   }
 
-  void register(InteractorChannelRegistrat registrat) {
-    _registry.register(registrat);
+  void consumer(NativeConsumerDeclaration declaration) {
+    _consumers.register(declaration);
   }
 
   Future<void> _listen() async {
@@ -91,8 +96,8 @@ class InteractorWorker {
       _bindings.interactor_dart_remove_event(_workerPointer, data);
       final result = cqe.ref.res;
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
-      _registry.execute(message);
-      
+      _consumers.execute(message);
+
       var event = data & 0xffff;
       final fd = (data >> 32) & 0xffffffff;
       final bufferId = (data >> 16) & 0xffff;

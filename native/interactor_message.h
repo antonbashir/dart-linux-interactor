@@ -10,7 +10,7 @@ extern "C"
 
   typedef struct interactor_message
   {
-    uint64_t service_id;
+    uint64_t owner_id;
     uint64_t method_id;
     uintptr_t *input_pointer;
     uintptr_t *output_pointer;

@@ -1,26 +1,37 @@
 import 'dart:ffi';
 
-import 'operation.dart';
+import 'buffers.dart';
+import 'consumer.dart';
+import 'declaration.dart';
+
 import 'bindings.dart';
-import 'service.dart';
-import 'registrat.dart';
 
-class InteractorChannelRegistry {
-  final _channels = <NativeService>[];
+class InteractorConsumerRegistry {
+  final Pointer<interactor_dart_t> _workerPointer;
+  final InteractorBindings _bindings;
+  final InteractorBuffers _buffers;
 
-  void register(InteractorChannelRegistrat registrat) {
-    final operations = <NativeFunction>[];
-    for (var operation in registrat.operations) {
-      operations.add(NativeFunction(operations.length, operation));
+  InteractorConsumerRegistry(
+    this._workerPointer,
+    this._bindings,
+    this._buffers,
+  );
+
+  final _consumers = <NativeConsumer>[];
+
+  void register(NativeConsumerDeclaration declaration) {
+    final callbacks = <NativeCallback>[];
+    for (var callback in declaration.callbacks()) {
+      callbacks.add(NativeCallback(callbacks.length, callback.callback));
     }
-    _channels.add(NativeService(
-      _channels.length,
+    _consumers.add(NativeConsumer(
+      _consumers.length,
       _workerPointer,
       _bindings,
       _buffers,
-      operations,
+      callbacks,
     ));
   }
 
-  void execute(Pointer<interactor_message_t> message) => _channels[message.ref.channel_id].execute(message);
+  void execute(Pointer<interactor_message_t> message) => _consumers[message.ref.owner_id].execute(message);
 }
