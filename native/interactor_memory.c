@@ -1,7 +1,5 @@
 #include "interactor_memory.h"
-
 #include <stddef.h>
-
 #include "small/include/small/quota.h"
 #include "small/include/small/small.h"
 #include "small/mempool.h"
@@ -42,7 +40,8 @@ void interactor_memory_destroy(struct interactor_memory* memory)
 
 int interactor_mempool_create(struct interactor_mempool* pool, size_t size)
 {
-    struct interactor_mempool_context* pool_context = (struct interactor_mempool_context*)pool->context;
+    struct interactor_mempool_context* pool_context = malloc(sizeof(struct interactor_mempool_context));
+    pool->context = pool_context;
     struct interactor_memory_context* memory_context = (struct interactor_memory_context*)pool->memory->context;
     mempool_create(&pool_context->pool, &memory_context->cache, size);
     return mempool_is_initialized(&pool_context->pool);

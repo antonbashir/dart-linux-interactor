@@ -9,6 +9,7 @@ file(GLOB sources
   *.h
 )
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../native/include)
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
 

@@ -20,8 +20,10 @@ ffigen:
   headers:
     entry-points:
       - "../native/interactor.h"
-      - "../native/interactor_dart.h"
+      - "../native/interactor_dart_implementation.h"
       - "../native/interactor_constants.h"
+      - "../native/include/interactor_dart.h"
+      - "../native/include/interactor_message.h"
   globals:
     exclude:
       - "_(.*)"

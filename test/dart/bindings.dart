@@ -20,11 +20,15 @@ class TestBindings {
           lookup)
       : _lookup = lookup;
 
-  void test_void() {
-    return _test_void();
+  void test_void(
+    int fd,
+  ) {
+    return _test_void(
+      fd,
+    );
   }
 
   late final _test_voidPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_void');
-  late final _test_void = _test_voidPtr.asFunction<void Function()>();
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>('test_void');
+  late final _test_void = _test_voidPtr.asFunction<void Function(int)>();
 }

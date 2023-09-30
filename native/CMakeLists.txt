@@ -35,6 +35,7 @@ message(STATUS "")
 file(GLOB sources
   *.c
   *.h
+  include/*.h
   dart/*.h
   dart/*.c
   salad/*.h
@@ -43,6 +44,7 @@ file(GLOB sources
 
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
+include_directories(include)
 include_directories(small/include)
 include_directories(small/third_party)
 

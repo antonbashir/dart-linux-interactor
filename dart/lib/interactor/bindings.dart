@@ -19263,7 +19263,7 @@ class InteractorBindings {
       _interactor_messages_pool_destroyPtr
           .asFunction<void Function(ffi.Pointer<interactor_messages_pool>)>();
 
-  ffi.Pointer<interactor_message_t> interactor_messages_pool_allocate(
+  ffi.Pointer<ffi.Int> interactor_messages_pool_allocate(
     ffi.Pointer<interactor_messages_pool> pool,
   ) {
     return _interactor_messages_pool_allocate(
@@ -19273,17 +19273,17 @@ class InteractorBindings {
 
   late final _interactor_messages_pool_allocatePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Pointer<interactor_message_t> Function(
+              ffi.Pointer<ffi.Int> Function(
                   ffi.Pointer<interactor_messages_pool>)>>(
       'interactor_messages_pool_allocate');
   late final _interactor_messages_pool_allocate =
       _interactor_messages_pool_allocatePtr.asFunction<
-          ffi.Pointer<interactor_message_t> Function(
+          ffi.Pointer<ffi.Int> Function(
               ffi.Pointer<interactor_messages_pool>)>();
 
   void interactor_messages_pool_free(
     ffi.Pointer<interactor_messages_pool> pool,
-    ffi.Pointer<interactor_message_t> message,
+    ffi.Pointer<ffi.Int> message,
   ) {
     return _interactor_messages_pool_free(
       pool,
@@ -19292,14 +19292,13 @@ class InteractorBindings {
   }
 
   late final _interactor_messages_pool_freePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
-                  ffi.Pointer<interactor_message_t>)>>(
-      'interactor_messages_pool_free');
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
+              ffi.Pointer<ffi.Int>)>>('interactor_messages_pool_free');
   late final _interactor_messages_pool_free =
       _interactor_messages_pool_freePtr.asFunction<
-          void Function(ffi.Pointer<interactor_messages_pool>,
-              ffi.Pointer<interactor_message_t>)>();
+          void Function(
+              ffi.Pointer<interactor_messages_pool>, ffi.Pointer<ffi.Int>)>();
 
   int interactor_payloads_pool_create(
     ffi.Pointer<interactor_payloads_pool> pool,
@@ -19515,7 +19514,7 @@ class InteractorBindings {
   late final _interactor_dart_used_buffers = _interactor_dart_used_buffersPtr
       .asFunction<int Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
-  ffi.Pointer<interactor_message_t> interactor_dart_allocate_message(
+  ffi.Pointer<ffi.Int> interactor_dart_allocate_message(
     ffi.Pointer<interactor_dart_t> interactor,
   ) {
     return _interactor_dart_allocate_message(
@@ -19525,17 +19524,16 @@ class InteractorBindings {
 
   late final _interactor_dart_allocate_messagePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Pointer<interactor_message_t> Function(
-                  ffi.Pointer<interactor_dart_t>)>>(
+              ffi.Pointer<ffi.Int> Function(ffi.Pointer<interactor_dart_t>)>>(
       'interactor_dart_allocate_message');
   late final _interactor_dart_allocate_message =
       _interactor_dart_allocate_messagePtr.asFunction<
-          ffi.Pointer<interactor_message_t> Function(
+          ffi.Pointer<ffi.Int> Function(
               ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   void interactor_dart_free_message(
     ffi.Pointer<interactor_dart_t> interactor,
-    ffi.Pointer<interactor_message_t> message,
+    ffi.Pointer<ffi.Int> message,
   ) {
     return _interactor_dart_free_message(
       interactor,
@@ -19544,14 +19542,13 @@ class InteractorBindings {
   }
 
   late final _interactor_dart_free_messagePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_dart_t>,
-                  ffi.Pointer<interactor_message_t>)>>(
-      'interactor_dart_free_message');
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+              ffi.Pointer<ffi.Int>)>>('interactor_dart_free_message');
   late final _interactor_dart_free_message =
       _interactor_dart_free_messagePtr.asFunction<
           void Function(ffi.Pointer<interactor_dart_t>,
-              ffi.Pointer<interactor_message_t>)>(isLeaf: true);
+              ffi.Pointer<ffi.Int>)>(isLeaf: true);
 
   ffi.Pointer<interactor_payloads_pool> interactor_dart_payload_pool_create(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -19653,6 +19650,24 @@ class InteractorBindings {
       'interactor_dart_destroy');
   late final _interactor_dart_destroy = _interactor_dart_destroyPtr
       .asFunction<void Function(ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
+
+  void interactor_dart_send(
+    int ring_fd,
+    ffi.Pointer<interactor_message_t> message,
+  ) {
+    return _interactor_dart_send(
+      ring_fd,
+      message,
+    );
+  }
+
+  late final _interactor_dart_sendPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Int,
+              ffi.Pointer<interactor_message_t>)>>('interactor_dart_send');
+  late final _interactor_dart_send = _interactor_dart_sendPtr
+      .asFunction<void Function(int, ffi.Pointer<interactor_message_t>)>(
+          isLeaf: true);
 
   late final addresses = _SymbolAddresses(this);
 }
@@ -23508,14 +23523,14 @@ class _SymbolAddresses {
           _library._interactor_messages_pool_destroyPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Pointer<interactor_message_t> Function(
+              ffi.Pointer<ffi.Int> Function(
                   ffi.Pointer<interactor_messages_pool>)>>
       get interactor_messages_pool_allocate =>
           _library._interactor_messages_pool_allocatePtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
-                  ffi.Pointer<interactor_message_t>)>>
+              ffi.Void Function(
+                  ffi.Pointer<interactor_messages_pool>, ffi.Pointer<ffi.Int>)>>
       get interactor_messages_pool_free =>
           _library._interactor_messages_pool_freePtr;
   ffi.Pointer<
@@ -23583,14 +23598,13 @@ class _SymbolAddresses {
           _library._interactor_dart_used_buffersPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Pointer<interactor_message_t> Function(
-                  ffi.Pointer<interactor_dart_t>)>>
+              ffi.Pointer<ffi.Int> Function(ffi.Pointer<interactor_dart_t>)>>
       get interactor_dart_allocate_message =>
           _library._interactor_dart_allocate_messagePtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_dart_t>,
-                  ffi.Pointer<interactor_message_t>)>>
+              ffi.Void Function(
+                  ffi.Pointer<interactor_dart_t>, ffi.Pointer<ffi.Int>)>>
       get interactor_dart_free_message =>
           _library._interactor_dart_free_messagePtr;
   ffi.Pointer<
@@ -23621,6 +23635,10 @@ class _SymbolAddresses {
   ffi.Pointer<
           ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_dart_t>)>>
       get interactor_dart_destroy => _library._interactor_dart_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int, ffi.Pointer<interactor_message_t>)>>
+      get interactor_dart_send => _library._interactor_dart_sendPtr;
 }
 
 final class iovec extends ffi.Struct {
@@ -26405,26 +26423,9 @@ final class interactor_mempool extends ffi.Struct {
   external ffi.Pointer<ffi.Void> context;
 }
 
-final class interactor_message extends ffi.Struct {
-  @ffi.Uint64()
-  external int owner_id;
-
-  @ffi.Uint64()
-  external int method_id;
-
-  external ffi.Pointer<ffi.UintPtr> input_pointer;
-
-  external ffi.Pointer<ffi.UintPtr> output_pointer;
-
-  @ffi.Uint16()
-  external int flags;
-}
-
 final class interactor_messages_pool extends ffi.Struct {
   external interactor_mempool pool;
 }
-
-typedef interactor_message_t = interactor_message;
 
 final class interactor_payloads_pool extends ffi.Struct {
   external interactor_mempool pool;
@@ -26534,6 +26535,23 @@ final class interactor_dart extends ffi.Struct {
 
 typedef interactor_dart_t = interactor_dart;
 typedef interactor_dart_configuration_t = interactor_dart_configuration;
+
+final class interactor_message extends ffi.Struct {
+  @ffi.Uint64()
+  external int owner_id;
+
+  @ffi.Uint64()
+  external int method_id;
+
+  external ffi.Pointer<ffi.UintPtr> input_pointer;
+
+  external ffi.Pointer<ffi.UintPtr> output_pointer;
+
+  @ffi.Uint16()
+  external int flags;
+}
+
+typedef interactor_message_t = interactor_message;
 
 const int MSG_OOB = 1;
 

@@ -6,6 +6,8 @@ import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor/interactor/worker.dart';
 
+import 'bindings.dart';
+
 class TestNativeConsumer implements NativeConsumerDeclaration {
   void test(Pointer<interactor_message_t> message) {
     print("Hello, C");
@@ -21,4 +23,5 @@ Future<void> main() async {
   await worker.initialize();
   worker.consumer(TestNativeConsumer());
   worker.activate();
+  TestBindings(DynamicLibrary.open("native/libinteractortest.so")).test_void(worker.descriptor);
 }
