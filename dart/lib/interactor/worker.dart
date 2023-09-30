@@ -100,7 +100,6 @@ class InteractorWorker {
       final data = cqe.ref.user_data;
       _bindings.interactor_dart_remove_event(_workerPointer, data);
       final result = cqe.ref.res;
-      print(result);
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
       _consumers.execute(message);
     }
