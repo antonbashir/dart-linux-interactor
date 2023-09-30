@@ -1,5 +1,4 @@
 #include "interactor_dart.h"
-
 #include "interactor_common.h"
 #include "interactor_constants.h"
 #include "interactor_memory.h"

@@ -13,3 +13,4 @@ AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortFunctionsOnASingleLine: None
 BinPackParameters: true
 BinPackArguments: true
+IncludeBlocks: Merge
