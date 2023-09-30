@@ -55,4 +55,5 @@ Future<void> main() async {
   bindings.test_send_to_dart(native, worker.descriptor);
   producer.testMethod.execute(native.ref.ring.ref.ring_fd);
   bindings.test_check(native);
+  await interactor.shutdown();
 }
