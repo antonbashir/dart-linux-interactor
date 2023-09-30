@@ -22,6 +22,7 @@ ffigen:
     entry-points:
       - "../native/interactor_dart.h"
       - "../native/interactor_constants.h"
+      - "../native/test.h"
   globals:
     exclude:
       - "_(.*)"

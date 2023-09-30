@@ -71,9 +71,7 @@ class InteractorWorker {
     unawaited(_listen());
   }
 
-  void consumer(NativeConsumer declaration) {
-    _consumers.register(declaration);
-  }
+  void consumer(NativeConsumer declaration) => _consumers.register(declaration);
 
   T producer<T extends NativeProducer>(T provider) => _producers.register(provider);
 

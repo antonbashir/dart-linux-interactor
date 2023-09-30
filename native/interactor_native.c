@@ -249,7 +249,6 @@ int interactor_native_process(interactor_native_t* interactor)
         struct io_uring_cqe* cqe;
         unsigned head;
         unsigned count = 0;
-
         io_uring_for_each_cqe(interactor->ring, head, cqe)
         {
             count++;
@@ -264,7 +263,7 @@ int interactor_native_process(interactor_native_t* interactor)
 void interactor_native_send(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)
 {
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
-    io_uring_prep_msg_ring(sqe, target_ring_fd, 0, (intptr_t)message, 0);
+    io_uring_prep_msg_ring(sqe, target_ring_fd, 0, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
     io_uring_submit(interactor->ring);
 }

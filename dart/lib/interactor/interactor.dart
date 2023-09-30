@@ -16,13 +16,13 @@ class Interactor {
   final _workerDestroyer = ReceivePort();
 
   late final String? _libraryPath;
-  late final InteractorBindings _bindings;
+  late final InteractorBindings bindings;
   late final InteractorLibrary _library;
 
   Interactor({String? libraryPath}) {
     this._libraryPath = libraryPath;
     _library = InteractorLibrary.load(libraryPath: libraryPath);
-    _bindings = InteractorBindings(_library.library);
+    bindings = InteractorBindings(_library.library);
   }
 
   Future<void> shutdown({Duration? gracefulDuration}) async {
@@ -54,11 +54,11 @@ class Interactor {
         nativeConfiguration.ref.slab_size = 65536;
         nativeConfiguration.ref.preallocation_size = 65536;
         nativeConfiguration.ref.quota_size = 128000;
-        return _bindings.interactor_dart_initialize(interactorPointer, nativeConfiguration, _workerClosers.length);
+        return bindings.interactor_dart_initialize(interactorPointer, nativeConfiguration, _workerClosers.length);
       });
       if (result < 0) {
-        _bindings.interactor_dart_destroy(interactorPointer);
-        throw InteractorInitializationException(InteractorMessages.workerError(result, _bindings));
+        bindings.interactor_dart_destroy(interactorPointer);
+        throw InteractorInitializationException(InteractorMessages.workerError(result, bindings));
       }
       final workerInput = [_libraryPath, interactorPointer.address, _workerDestroyer.sendPort, result];
       toWorker.send(workerInput);

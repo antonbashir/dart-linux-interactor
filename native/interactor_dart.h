@@ -36,9 +36,6 @@ extern "C"
     typedef struct interactor_dart
     {
         uint8_t id;
-        struct interactor_messages_pool messages_pool;
-        struct interactor_buffers_pool buffers_pool;
-        struct interactor_memory memory;
         struct io_uring* ring;
         struct iovec* buffers;
         uint32_t buffer_size;
@@ -55,6 +52,9 @@ extern "C"
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
         bool trace;
+        struct interactor_messages_pool messages_pool;
+        struct interactor_buffers_pool buffers_pool;
+        struct interactor_memory memory;
     } interactor_dart_t;
 
     int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id);
@@ -82,7 +82,7 @@ extern "C"
     void interactor_dart_destroy(interactor_dart_t* interactor);
 
     void interactor_dart_cqe_advance(struct io_uring* ring, int count);
-    
+
     void interactor_dart_send(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message);
 
     void interactor_dart_close_descriptor(int fd);

@@ -1,11 +1,12 @@
 #include "interactor_dart.h"
+#include <interactor_memory.h>
+#include <interactor_messages_pool.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
 #include <sys/socket.h>
 #include "interactor_common.h"
 #include "interactor_constants.h"
-#include <interactor_memory.h>
-#include <interactor_messages_pool.h>
+#include "interactor_message.h"
 #include "liburing.h"
 
 int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id)
@@ -245,7 +246,6 @@ void interactor_dart_close_descriptor(int fd)
     shutdown(fd, SHUT_RDWR);
     close(fd);
 }
-
 
 void interactor_dart_send(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message)
 {
