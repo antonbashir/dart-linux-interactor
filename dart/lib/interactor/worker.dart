@@ -19,7 +19,7 @@ class InteractorWorker {
   late final InteractorProducerFactory _producers;
 
   late final InteractorBindings _bindings;
-  late final Pointer<interactor_dart_t> _workerPointer;
+  late final Pointer<interactor_dart_t> _interactorPointer;
   late final Pointer<io_uring> _ring;
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
   late final RawReceivePort _closer;
@@ -31,7 +31,7 @@ class InteractorWorker {
   final _done = Completer();
 
   bool get active => _active;
-  int get id => _workerPointer.ref.id;
+  int get id => _interactorPointer.ref.id;
   int get descriptor => _ring.ref.ring_fd;
 
   InteractorWorker(SendPort toInteractor) {
@@ -39,7 +39,7 @@ class InteractorWorker {
       _timeoutChecker.stop();
       _active = false;
       await _done.future;
-      _bindings.interactor_dart_destroy(_workerPointer);
+      _bindings.interactor_dart_destroy(_interactorPointer);
       _closer.close();
       _destroyer.send(null);
     });
@@ -49,19 +49,19 @@ class InteractorWorker {
   Future<void> initialize() async {
     final configuration = await _fromInteractor.first as List;
     final libraryPath = configuration[0] as String?;
-    _workerPointer = Pointer.fromAddress(configuration[1] as int).cast<interactor_dart_t>();
+    _interactorPointer = Pointer.fromAddress(configuration[1] as int).cast<interactor_dart_t>();
     _destroyer = configuration[2] as SendPort;
     _fromInteractor.close();
     _bindings = InteractorBindings(InteractorLibrary.load(libraryPath: libraryPath).library);
-    _ring = _workerPointer.ref.ring;
-    _cqes = _workerPointer.ref.cqes;
+    _ring = _interactorPointer.ref.ring;
+    _cqes = _interactorPointer.ref.cqes;
     _timeoutChecker = InteractorTimeoutChecker(
       _bindings,
-      _workerPointer,
-      Duration(milliseconds: _workerPointer.ref.timeout_checker_period_millis),
+      _interactorPointer,
+      Duration(milliseconds: _interactorPointer.ref.timeout_checker_period_millis),
     );
-    _consumers = InteractorConsumerRegistry(_workerPointer, _bindings, InteractorBuffers(_bindings, _workerPointer.ref.buffers, _workerPointer));
-    _producers = InteractorProducerFactory(_workerPointer, _bindings, InteractorBuffers(_bindings, _workerPointer.ref.buffers, _workerPointer));
+    _consumers = InteractorConsumerRegistry(_interactorPointer, _bindings, InteractorBuffers(_bindings, _interactorPointer.ref.buffers, _interactorPointer));
+    _producers = InteractorProducerFactory(_interactorPointer, _bindings, InteractorBuffers(_bindings, _interactorPointer.ref.buffers, _interactorPointer));
   }
 
   void activate() {
@@ -77,7 +77,7 @@ class InteractorWorker {
   T producer<T extends NativeProducer>(T provider) => _producers.register(provider);
 
   Future<void> _listen() async {
-    final baseDelay = _workerPointer.ref.base_delay_micros;
+    final baseDelay = _interactorPointer.ref.base_delay_micros;
     final regularDelayDuration = Duration(microseconds: baseDelay);
     var attempt = 0;
     while (_active) {
@@ -93,12 +93,12 @@ class InteractorWorker {
   }
 
   bool _handleCqes() {
-    final cqeCount = _bindings.interactor_dart_peek(_workerPointer);
+    final cqeCount = _bindings.interactor_dart_peek(_interactorPointer);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
       Pointer<io_uring_cqe> cqe = _cqes.elementAt(cqeIndex).value;
       final data = cqe.ref.user_data;
-      _bindings.interactor_dart_remove_event(_workerPointer, data);
+      _bindings.interactor_dart_remove_event(_interactorPointer, data);
       final result = cqe.ref.res;
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
       _consumers.execute(message);
@@ -108,9 +108,9 @@ class InteractorWorker {
   }
 
   List<Duration> _calculateDelays() {
-    final baseDelay = _workerPointer.ref.base_delay_micros;
-    final delayRandomizationFactor = _workerPointer.ref.delay_randomization_factor;
-    final maxDelay = _workerPointer.ref.max_delay_micros;
+    final baseDelay = _interactorPointer.ref.base_delay_micros;
+    final delayRandomizationFactor = _interactorPointer.ref.delay_randomization_factor;
+    final maxDelay = _interactorPointer.ref.max_delay_micros;
     final random = Random();
     final delays = <Duration>[];
     for (var i = 0; i < 32; i++) {

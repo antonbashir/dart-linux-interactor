@@ -4,7 +4,7 @@
 
 interactor_native_t interactor;
 
-void test_initialize()
+int test_initialize()
 {
     interactor_native_configuration_t configuration;
     configuration.buffers_count = 4096;
@@ -15,6 +15,7 @@ void test_initialize()
     configuration.cqe_wait_count = 1;
     configuration.cqe_wait_timeout_millis = 1000;
     interactor_native_initialize(&interactor, &configuration, 0);
+    return interactor.ring->ring_fd;
 }
 
 void test_to_dart(int fd)
@@ -32,5 +33,5 @@ void test_method(interactor_message_t* message)
 
 void test_check()
 {
-  interactor_native_peek(&interactor);
+    interactor_native_peek(&interactor);
 }

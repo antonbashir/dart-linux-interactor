@@ -36,9 +36,9 @@ Future<void> main() async {
   worker.consumer(TestNativeConsumer());
   final producer = worker.producer(TestNativeProducer(bindings));
   worker.activate();
-  
-  bindings.test_initialize();
-  
-  producer.testMethod.execute();
-  bindings.test_method()
+
+  final native = bindings.test_initialize();
+  bindings.test_to_dart(worker.descriptor);
+  producer.testMethod.execute(native);
+  bindings.test_check();
 }

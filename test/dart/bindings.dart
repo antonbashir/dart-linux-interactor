@@ -4041,14 +4041,14 @@ class TestBindings {
       void Function(ffi.Pointer<interactor_native_t>, int,
           ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
-  void test_initialize() {
+  int test_initialize() {
     return _test_initialize();
   }
 
   late final _test_initializePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_initialize');
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('test_initialize');
   late final _test_initialize =
-      _test_initializePtr.asFunction<void Function()>();
+      _test_initializePtr.asFunction<int Function()>();
 
   void test_to_dart(
     int fd,
@@ -4077,6 +4077,14 @@ class TestBindings {
       'test_method');
   late final _test_method = _test_methodPtr.asFunction<
       void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
+
+  void test_check() {
+    return _test_check();
+  }
+
+  late final _test_checkPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_check');
+  late final _test_check = _test_checkPtr.asFunction<void Function()>();
 
   late final addresses = _SymbolAddresses(this);
 }
@@ -5037,7 +5045,7 @@ class _SymbolAddresses {
               ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get interactor_native_send => _library._interactor_native_sendPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_initialize =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get test_initialize =>
       _library._test_initializePtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
       get test_to_dart => _library._test_to_dartPtr;
@@ -5046,6 +5054,8 @@ class _SymbolAddresses {
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get test_method => _library._test_methodPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_check =>
+      _library._test_checkPtr;
 }
 
 final class max_align_t extends ffi.Opaque {}

@@ -5,12 +5,12 @@ import 'buffers.dart';
 
 class NativeConsumerExecutor {
   final int _id;
-  final Pointer<interactor_dart_t> _workerPointer;
+  final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
   final InteractorBuffers _buffers;
   final List<NativeCallbackExecutor> _functions;
 
-  NativeConsumerExecutor(this._id, this._workerPointer, this._bindings, this._buffers, this._functions);
+  NativeConsumerExecutor(this._id, this._interactorPointer, this._bindings, this._buffers, this._functions);
 
   void execute(Pointer<interactor_message_t> message) => _functions[message.ref.method_id].execute(message);
 }

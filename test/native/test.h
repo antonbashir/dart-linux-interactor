@@ -8,9 +8,10 @@ extern "C"
 {
 #endif
 
-    void test_initialize();
+    int test_initialize();
     void test_to_dart(int fd);
     void test_method(interactor_message_t* message);
+    void test_check();
 
 #if defined(__cplusplus)
 }

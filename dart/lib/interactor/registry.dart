@@ -6,12 +6,12 @@ import 'consumer.dart';
 import 'declaration.dart';
 
 class InteractorConsumerRegistry {
-  final Pointer<interactor_dart_t> _workerPointer;
+  final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
   final InteractorBuffers _buffers;
 
   InteractorConsumerRegistry(
-    this._workerPointer,
+    this._interactorPointer,
     this._bindings,
     this._buffers,
   );
@@ -25,7 +25,7 @@ class InteractorConsumerRegistry {
     }
     _consumers.add(NativeConsumerExecutor(
       _consumers.length,
-      _workerPointer,
+      _interactorPointer,
       _bindings,
       _buffers,
       callbacks,
