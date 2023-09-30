@@ -1,7 +1,8 @@
 #ifndef INTERACTOR_BUFFERS_POOL_INCLUDED
 #define INTERACTOR_BUFFERS_POOL_INCLUDED
 
-#include "trivia/util.h"
+#include <stddef.h>
+#include <stdint.h>
 
 struct interactor_buffers_pool
 {

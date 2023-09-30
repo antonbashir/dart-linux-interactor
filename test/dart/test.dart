@@ -33,12 +33,12 @@ Future<void> main() async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
   await worker.initialize();
-
   worker.consumer(TestNativeConsumer());
   final producer = worker.producer(TestNativeProducer(bindings));
-
   worker.activate();
   
-  producer.testMethod.execute(bindings.test_void(worker.descriptor), calloc<interactor_message_t>());
-  bindings.test_check();
+  bindings.test_initialize();
+  
+  producer.testMethod.execute();
+  bindings.test_method()
 }

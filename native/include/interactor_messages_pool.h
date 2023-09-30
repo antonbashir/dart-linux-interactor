@@ -2,9 +2,7 @@
 #define INTERACTOR_MESSAGES_POOL_INCLUDED
 
 #include <interactor_message.h>
-#include "interactor_constants.h"
 #include <interactor_memory.h>
-#include "trivia/util.h"
 
 struct interactor_messages_pool
 {

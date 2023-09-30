@@ -103,7 +103,7 @@ class InteractorWorker {
       Pointer<interactor_message_t> message = Pointer.fromAddress(data);
       _consumers.execute(message);
     }
-    _bindings.interactor_cqe_advance(_ring, cqeCount);
+    _bindings.interactor_dart_cqe_advance(_ring, cqeCount);
     return true;
   }
 

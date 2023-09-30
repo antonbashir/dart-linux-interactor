@@ -1,9 +1,8 @@
 #ifndef INTERACTOR_PAYLOADS_POOL_INCLUDED
 #define INTERACTOR_PAYLOADS_POOL_INCLUDED
 
-#include "interactor_constants.h"
 #include <interactor_memory.h>
-#include "trivia/util.h"
+#include <stdint.h>
 
 struct interactor_payloads_pool
 {

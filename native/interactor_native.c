@@ -1,10 +1,12 @@
 #include <interactor_native.h>
+#include <liburing.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
 #include <sys/socket.h>
 #include "interactor_collections.h"
 #include "interactor_common.h"
 #include "interactor_constants.h"
+#include "interactor_message.h"
 #include "liburing.h"
 
 int interactor_native_initialize(interactor_native_t* interactor, interactor_native_configuration_t* configuration, uint8_t id)
@@ -238,4 +240,31 @@ void interactor_native_close_descriptor(int fd)
 {
     shutdown(fd, SHUT_RDWR);
     close(fd);
+}
+
+int interactor_native_process(interactor_native_t* interactor)
+{
+    if (interactor_native_peek(interactor) > 0)
+    {
+        struct io_uring_cqe* cqe;
+        unsigned head;
+        unsigned count = 0;
+
+        io_uring_for_each_cqe(interactor->ring, head, cqe)
+        {
+            count++;
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            void (*pointer)(interactor_message_t*) = (void (*)(interactor_message_t*))message->method_id;
+            pointer(message);
+        }
+        io_uring_cq_advance(interactor->ring, count);
+    }
+}
+
+void interactor_native_send(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)
+{
+    struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
+    io_uring_prep_msg_ring(sqe, target_ring_fd, 0, (intptr_t)message, 0);
+    sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
+    io_uring_submit(interactor->ring);
 }

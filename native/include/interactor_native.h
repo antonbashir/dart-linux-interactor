@@ -65,6 +65,8 @@ extern "C"
     void interactor_native_payload_pool_destroy(struct interactor_payloads_pool* pool);
 
     int interactor_native_peek(interactor_native_t* interactor);
+    
+    int interactor_native_process(interactor_native_t* interactor);
 
     void interactor_native_destroy(interactor_native_t* interactor);
 

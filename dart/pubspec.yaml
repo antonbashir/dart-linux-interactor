@@ -16,14 +16,12 @@ ffigen:
   description: "Bindings for Interactor"
   output: "lib/interactor/bindings.dart"
   compiler-opts:
-    - "-I../native/small/third_party"
+    - "-I/home/anton/development/evolution/dart-linux-interactor/native/include"
+
   headers:
     entry-points:
-      - "../native/interactor.h"
-      - "../native/interactor_dart_implementation.h"
+      - "../native/interactor_dart.h"
       - "../native/interactor_constants.h"
-      - "../native/include/interactor_dart.h"
-      - "../native/include/interactor_message.h"
   globals:
     exclude:
       - "_(.*)"

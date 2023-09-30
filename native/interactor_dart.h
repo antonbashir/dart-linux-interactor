@@ -82,6 +82,8 @@ extern "C"
     void interactor_dart_destroy(interactor_dart_t* interactor);
 
     void interactor_dart_cqe_advance(struct io_uring* ring, int count);
+    
+    void interactor_dart_send(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message);
 
     void interactor_dart_close_descriptor(int fd);
 

@@ -245,3 +245,12 @@ void interactor_dart_close_descriptor(int fd)
     shutdown(fd, SHUT_RDWR);
     close(fd);
 }
+
+
+void interactor_dart_send(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message)
+{
+    struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
+    io_uring_prep_msg_ring(sqe, target_ring_fd, 0, (intptr_t)message, 0);
+    sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
+    io_uring_submit(interactor->ring);
+}
