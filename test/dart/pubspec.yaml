@@ -19,7 +19,7 @@ ffigen:
   description: "Bindings for Test"
   output: "bindings.dart"
   compiler-opts:
-    - "-I/home/anton/development/evolution/dart-linux-interactor/native/include"
+    - "-I../../native/include"
   type-map:
     typedefs:
       "interactor_message_t":
