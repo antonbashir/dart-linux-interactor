@@ -17,7 +17,6 @@ extern "C"
         uint32_t buffer_size;
         size_t ring_size;
         int ring_flags;
-        uint64_t cqe_wait_timeout_millis;
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
         size_t quota_size;
@@ -45,6 +44,8 @@ extern "C"
     } interactor_native_t;
 
     int interactor_native_initialize(interactor_native_t* interactor, interactor_native_configuration_t* configuration, uint8_t id);
+
+    int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id);
 
     void interactor_native_cancel_by_fd(interactor_native_t* interactor, int fd);
 

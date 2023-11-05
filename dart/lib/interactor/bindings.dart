@@ -2493,6 +2493,25 @@ class InteractorBindings {
               ffi.Pointer<interactor_native_configuration_t>,
               int)>(isLeaf: true);
 
+  int interactor_native_initialize_default(
+    ffi.Pointer<interactor_native_t> interactor,
+    int id,
+  ) {
+    return _interactor_native_initialize_default(
+      interactor,
+      id,
+    );
+  }
+
+  late final _interactor_native_initialize_defaultPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<interactor_native_t>,
+              ffi.Uint8)>>('interactor_native_initialize_default');
+  late final _interactor_native_initialize_default =
+      _interactor_native_initialize_defaultPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>, int)>(
+              isLeaf: true);
+
   void interactor_native_cancel_by_fd(
     ffi.Pointer<interactor_native_t> interactor,
     int fd,
@@ -13234,6 +13253,11 @@ class _SymbolAddresses {
       _library._interactor_native_initializePtr;
   ffi.Pointer<
           ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<interactor_native_t>, ffi.Uint8)>>
+      get interactor_native_initialize_default =>
+          _library._interactor_native_initialize_defaultPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
               ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int)>>
       get interactor_native_cancel_by_fd =>
           _library._interactor_native_cancel_by_fdPtr;
@@ -17063,9 +17087,6 @@ final class interactor_native_configuration extends ffi.Struct {
 
   @ffi.Int()
   external int ring_flags;
-
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
 
   @ffi.Uint32()
   external int cqe_wait_count;

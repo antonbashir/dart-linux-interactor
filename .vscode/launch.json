@@ -5,14 +5,14 @@
       "name": "dart-test-debug",
       "type": "dart",
       "request": "launch",
-      "program": "${workspaceFolder}/test/dart/test.dart",
+      "program": "${workspaceFolder}/test/dart/lib/test.dart",
       "preLaunchTask": "interactor-binding-build"
     },
     {
       "name": "dart-test-debug (no-rebuild)",
       "type": "dart",
       "request": "launch",
-      "program": "${workspaceFolder}/test/dart/test.dart"
+      "program": "${workspaceFolder}/test/dart/lib/test.dart"
     },
     {
       "name": "dart-test-debug-native",
@@ -20,7 +20,7 @@
       "request": "launch",
       "program": "/usr/bin/dart",
       "args": [
-        "${workspaceFolder}/test/dart/test.dart"
+        "${workspaceFolder}/test/dart/lib/test.dart"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}/dart",
@@ -40,7 +40,7 @@
       "request": "launch",
       "program": "/usr/bin/dart",
       "args": [
-        "${workspaceFolder}/test/dart/test.dart"
+        "${workspaceFolder}/test/dart/lib/test.dart"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}/dart",

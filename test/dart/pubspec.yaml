@@ -17,7 +17,7 @@ dependencies:
 ffigen:
   name: "TestBindings"
   description: "Bindings for Test"
-  output: "bindings.dart"
+  output: "lib/bindings.dart"
   compiler-opts:
     - "-I../../native/include"
   type-map:
@@ -38,4 +38,4 @@ ffigen:
         - ".*"
   headers:
     entry-points:
-      - "../native/test.h"
+      - "../native/test_call.h"

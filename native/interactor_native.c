@@ -17,7 +17,6 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     interactor->buffers_count = configuration->buffers_count;
     interactor->cqes = malloc(sizeof(struct io_uring_cqe) * interactor->ring_size);
     interactor->buffers = malloc(sizeof(struct iovec) * configuration->buffers_count);
-    interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;
     interactor->cqe_wait_count = configuration->cqe_wait_count;
     interactor->cqe_peek_count = configuration->cqe_peek_count;
     if (!interactor->buffers)
@@ -72,6 +71,22 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     }
 
     return 0;
+}
+
+int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id)
+{
+    interactor_native_configuration_t configuration = {
+        .buffer_size = 4096,
+        .buffers_count = 4096,
+        .ring_size = 16384,
+        .cqe_peek_count = 1024,
+        .cqe_wait_count = 1,
+        .preallocation_size = 64 * 1024,
+        .slab_size = 64 * 1024,
+        .quota_size = 16 * 1024 * 1024,
+        .ring_flags = 0,
+    };
+    return interactor_native_initialize(interactor, &configuration, id);
 }
 
 int32_t interactor_native_get_buffer(interactor_native_t* interactor)
