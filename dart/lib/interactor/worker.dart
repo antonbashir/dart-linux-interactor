@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'bindings.dart';
 import 'buffers.dart';
+import 'constants.dart';
 import 'declaration.dart';
 import 'factory.dart';
 import 'lookup.dart';
@@ -99,8 +100,16 @@ class InteractorWorker {
       final data = cqe.ref.user_data;
       _bindings.interactor_dart_remove_event(_interactorPointer, data);
       final result = cqe.ref.res;
-      Pointer<interactor_message_t> message = Pointer.fromAddress(data);
-      _consumers.execute(message);
+      if (result & interactorDartCall > 0) {
+        Pointer<interactor_message_t> message = Pointer.fromAddress(data);
+        _consumers.execute(message);
+        continue;
+      }
+      if (result & interactorDartCallback > 0) {
+        Pointer<interactor_message_t> message = Pointer.fromAddress(data);
+        _consumers.execute(message);
+        continue;
+      }
     }
     _bindings.interactor_dart_cqe_advance(_ring, cqeCount);
     return true;

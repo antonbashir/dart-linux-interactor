@@ -11,6 +11,9 @@ class InteractorWorkerConfiguration {
   final Duration baseDelay;
   final Duration maxDelay;
   final bool trace;
+  final int memorySlabSize;
+  final int memoryPreallocationSize;
+  final int memoryQuotaSize;
 
   InteractorWorkerConfiguration({
     required this.buffersCount,
@@ -25,6 +28,9 @@ class InteractorWorkerConfiguration {
     required this.cqeWaitCount,
     required this.cqeWaitTimeout,
     required this.trace,
+    required this.memorySlabSize,
+    required this.memoryPreallocationSize,
+    required this.memoryQuotaSize,
   });
 
   InteractorWorkerConfiguration copyWith({
@@ -40,6 +46,9 @@ class InteractorWorkerConfiguration {
     int? cqeWaitCount,
     Duration? cqeWaitTimeout,
     bool? trace,
+    int? memorySlabSize,
+    int? memoryPreallocationSize,
+    int? memoryQuotaSize,
   }) =>
       InteractorWorkerConfiguration(
         buffersCount: buffersCount ?? this.buffersCount,
@@ -54,5 +63,8 @@ class InteractorWorkerConfiguration {
         cqeWaitCount: cqeWaitCount ?? this.cqeWaitCount,
         cqeWaitTimeout: cqeWaitTimeout ?? this.cqeWaitTimeout,
         trace: trace ?? this.trace,
+        memorySlabSize: memorySlabSize ?? this.memorySlabSize,
+        memoryPreallocationSize: memoryPreallocationSize ?? this.memoryPreallocationSize,
+        memoryQuotaSize: memoryQuotaSize ?? this.memoryQuotaSize,
       );
 }

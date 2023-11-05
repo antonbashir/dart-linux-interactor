@@ -16,5 +16,8 @@ class InteractorDefaults {
         cqePeekCount: 1024,
         cqeWaitCount: 1,
         cqeWaitTimeout: Duration(milliseconds: 1),
+        memorySlabSize: 64 * 1024,
+        memoryPreallocationSize: 64 * 1024,
+        memoryQuotaSize: 16 * 1024 * 1024,
       );
 }

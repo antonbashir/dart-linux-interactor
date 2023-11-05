@@ -23,14 +23,14 @@ class InteractorProducerFactory {
     for (var method in provider.methods()) {
       methods[method.method] = NativeMethodExecutor(method.method.address, _interactorPointer, _bindings, _buffers);
     }
-    final producer = NativeProducerExecutor(
+    final executor = NativeProducerExecutor(
       _producer.length,
       _interactorPointer,
       _bindings,
       _buffers,
       methods,
     );
-    provider.initialize(producer);
+    provider.initialize(executor);
     return provider;
   }
 }

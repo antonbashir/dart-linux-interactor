@@ -57,25 +57,10 @@ class InteractorMessages {
 
 const interactorBufferUsed = -1;
 
-const interactorEventRead = 1 << 0;
-const interactorEventWrite = 1 << 1;
-const interactorEventReceiveMessage = 1 << 2;
-const interactorEventSendMessage = 1 << 3;
-const interactorEventAccept = 1 << 4;
-const interactorEventConnect = 1 << 5;
-const interactorEventClient = 1 << 6;
-const interactorEventFile = 1 << 7;
-const interactorEventServer = 1 << 8;
-
-const interactorEventAll = interactorEventRead |
-    interactorEventWrite |
-    interactorEventAccept |
-    interactorEventConnect |
-    interactorEventReceiveMessage |
-    interactorEventSendMessage |
-    interactorEventClient |
-    interactorEventFile |
-    interactorEventServer;
+const interactorDartCallback = 1 << 0;
+const interactorNativeCallback = 1 << 1;
+const interactorDartCall = 1 << 2;
+const interactorNativeCall = 1 << 3;
 
 const ringSetupIopoll = 1 << 0;
 const ringSetupSqpoll = 1 << 1;
