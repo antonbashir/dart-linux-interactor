@@ -4,15 +4,15 @@
 #include <stdlib.h>
 #include "test.h"
 
-static bool call_native_check = false;
+static bool run_native_check = false;
 
-bool test_call_dart_check(interactor_native_t* interactor)
+bool test_run_native_check(interactor_native_t* interactor)
 {
     interactor_native_process(interactor);
-    return call_native_check;
+    return run_native_check;
 }
 
-void test_call_native(interactor_message_t* message)
+void test_run_native(interactor_message_t* message)
 {
-    call_native_check = true;
+    run_native_check = true;
 }

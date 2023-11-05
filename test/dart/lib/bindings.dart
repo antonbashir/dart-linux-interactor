@@ -4114,36 +4114,36 @@ class TestBindings {
       _test_interactor_initializePtr.asFunction<
           ffi.Pointer<linux_interactor.interactor_native_t> Function()>();
 
-  bool test_call_dart_check(
+  bool test_run_native_check(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
   ) {
-    return _test_call_dart_check(
+    return _test_run_native_check(
       interactor,
     );
   }
 
-  late final _test_call_dart_checkPtr = _lookup<
+  late final _test_run_native_checkPtr = _lookup<
           ffi.NativeFunction<
               ffi.Bool Function(
                   ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'test_call_dart_check');
-  late final _test_call_dart_check = _test_call_dart_checkPtr.asFunction<
+      'test_run_native_check');
+  late final _test_run_native_check = _test_run_native_checkPtr.asFunction<
       bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
-  void test_call_native(
+  void test_run_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
-    return _test_call_native(
+    return _test_run_native(
       message,
     );
   }
 
-  late final _test_call_nativePtr = _lookup<
+  late final _test_run_nativePtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'test_call_native');
-  late final _test_call_native = _test_call_nativePtr.asFunction<
+      'test_run_native');
+  late final _test_run_native = _test_run_nativePtr.asFunction<
       void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   late final addresses = _SymbolAddresses(this);
@@ -5138,12 +5138,12 @@ class _SymbolAddresses {
           ffi.NativeFunction<
               ffi.Bool Function(
                   ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get test_call_dart_check => _library._test_call_dart_checkPtr;
+      get test_run_native_check => _library._test_run_native_checkPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get test_call_native => _library._test_call_nativePtr;
+      get test_run_native => _library._test_run_nativePtr;
 }
 
 final class max_align_t extends ffi.Opaque {}
