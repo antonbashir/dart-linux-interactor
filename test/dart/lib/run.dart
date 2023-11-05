@@ -8,8 +8,8 @@ import 'package:linux_interactor_test/producer.dart';
 import 'package:linux_interactor_test/test.dart';
 import 'package:test/test.dart';
 
-void testCallNative() {
-  test("dart -> native(input)", () async {
+void testRunNative() {
+  test("dart -> native()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -23,7 +23,7 @@ void testCallNative() {
     await interactor.shutdown();
   });
 
-  test("async dart -> native(input)", () async {
+  test("async dart -> native()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -37,7 +37,7 @@ void testCallNative() {
     await interactor.shutdown();
   });
 
-  test("dart(output) <-> native(input)", () async {
+  test("dart <-> native()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -51,7 +51,7 @@ void testCallNative() {
     await interactor.shutdown();
   });
 
-  test("async dart(output) <-> native(input)", () async {
+  test("async dart <-> native()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -66,8 +66,8 @@ void testCallNative() {
   });
 }
 
-void testCallDart() {
-  test("native -> dart(input)", () async {
+void testRunDart() {
+  test("native -> dart()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -81,7 +81,7 @@ void testCallDart() {
     await interactor.shutdown();
   });
 
-  test("async native -> dart(input)", () async {
+  test("async native -> dart()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -95,7 +95,7 @@ void testCallDart() {
     await interactor.shutdown();
   });
 
-  test("native(output) <-> dart(input)", () async {
+  test("native <-> dart()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -109,7 +109,7 @@ void testCallDart() {
     await interactor.shutdown();
   });
 
-  test("async native(output) <-> dart(input)", () async {
+  test("async native <-> dart()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();

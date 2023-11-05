@@ -1,13 +1,17 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:linux_interactor_test/bindings.dart';
 import 'package:linux_interactor_test/call.dart';
-import 'package:test/test.dart';
-import 'dart:io';
+import 'package:linux_interactor_test/run.dart';
 import 'package:path/path.dart';
+import 'package:test/test.dart';
 
 TestBindings loadBindings() => TestBindings(DynamicLibrary.open("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so"));
 
 void main() {
-  group("[call]", testCall);
+  group("[run native]", testRunNative);
+  group("[run dart]", testRunDart);
+  group("[call native]", testCallNative);
+  group("[call dart]", testCallDart);
 }
