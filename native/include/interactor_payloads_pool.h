@@ -4,13 +4,23 @@
 #include <interactor_memory.h>
 #include <stdint.h>
 
-struct interactor_payloads_pool
+#if defined(__cplusplus)
+extern "C"
 {
-    struct interactor_mempool pool;
-};
+#endif
 
-int interactor_payloads_pool_create(struct interactor_payloads_pool* pool, struct interactor_memory* memory, size_t payload_size);
-void interactor_payloads_pool_destroy(struct interactor_payloads_pool* pool);
-intptr_t interactor_payloads_pool_allocate(struct interactor_payloads_pool* pool);
-void interactor_payloads_pool_free(struct interactor_payloads_pool* pool, intptr_t payload);
+    struct interactor_payloads_pool
+    {
+        struct interactor_mempool pool;
+    };
+
+    int interactor_payloads_pool_create(struct interactor_payloads_pool* pool, struct interactor_memory* memory, size_t payload_size);
+    void interactor_payloads_pool_destroy(struct interactor_payloads_pool* pool);
+    intptr_t interactor_payloads_pool_allocate(struct interactor_payloads_pool* pool);
+    void interactor_payloads_pool_free(struct interactor_payloads_pool* pool, intptr_t payload);
+
+#if defined(__cplusplus)
+}
+#endif
+
 #endif

@@ -1,5 +1,5 @@
-#ifndef INTERACTOR_NATIVE_H_INCLUDED
-#define INTERACTOR_NATIVE_H_INCLUDED
+#ifndef INTERACTOR_NATIVE_H
+#define INTERACTOR_NATIVE_H
 
 #include <interactor_buffers_pool.h>
 #include <interactor_message.h>

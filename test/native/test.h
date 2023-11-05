@@ -1,5 +1,5 @@
-#ifndef TEST_H_INCLUDED
-#define TEST_H_INCLUDED
+#ifndef TEST_H
+#define TEST_H
 
 #include <interactor_message.h>
 #include <interactor_native.h>
