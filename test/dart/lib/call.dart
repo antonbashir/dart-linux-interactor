@@ -79,7 +79,7 @@ void testCall() {
     await interactor.shutdown();
   });
 
-  test("async dart -> native()", () async {
+  test("async native -> dart()", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
