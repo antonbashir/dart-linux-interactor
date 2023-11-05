@@ -76,7 +76,8 @@ extern "C"
 
     void interactor_native_send(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message);
 
-#endif
 #if defined(__cplusplus)
 }
+#endif
+
 #endif

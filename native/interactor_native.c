@@ -253,7 +253,7 @@ void interactor_native_process(interactor_native_t* interactor)
         {
             count++;
             interactor_message_t* message = (interactor_message_t*)cqe->user_data;
-            void (*pointer)(interactor_message_t*) = (void (*)(interactor_message_t*))message->method_id;
+            void (*pointer)(interactor_message_t*) = (void (*)(interactor_message_t*))message->method;
             pointer(message);
         }
         io_uring_cq_advance(interactor->ring, count);
