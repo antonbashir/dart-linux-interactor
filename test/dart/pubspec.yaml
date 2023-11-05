@@ -38,4 +38,5 @@ ffigen:
         - ".*"
   headers:
     entry-points:
+      - "../native/test.h"
       - "../native/test_call.h"
