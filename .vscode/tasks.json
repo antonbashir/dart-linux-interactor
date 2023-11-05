@@ -4,7 +4,7 @@
     {
       "type": "cmake",
       "label": "interactor-native-build",
-      "command": "cleanRebuild",
+      "command": "build",
       "targets": [
         "native",
         "interactor_test"
