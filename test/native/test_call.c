@@ -15,5 +15,4 @@ bool test_call_dart_check(interactor_native_t* interactor)
 void test_call_native(interactor_message_t* message)
 {
     call_native_check = true;
-    printf("Hello, Dart\n");
 }

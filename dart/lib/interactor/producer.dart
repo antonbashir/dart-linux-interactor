@@ -13,7 +13,7 @@ class NativeProducerExecutor {
   NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._buffers);
 
   NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
-    _methods[pointer] = NativeMethodExecutor(_id, _interactorPointer, _bindings, _buffers);
+    _methods[pointer] = NativeMethodExecutor(pointer.address, _interactorPointer, _bindings, _buffers);
     return _methods[pointer]!;
   }
 }
