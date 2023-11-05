@@ -1,12 +1,15 @@
 import 'package:linux_interactor/interactor/declaration.dart';
+import 'package:linux_interactor/interactor/producer.dart';
 import 'package:linux_interactor_test/bindings.dart';
 
-class TestNativeProducer extends NativeProducer {
+class TestNativeProducer implements NativeProducer {
   final TestBindings _bindings;
   TestNativeProducer(this._bindings);
 
-  late final testCallNative = synchronous(_bindings.addresses.test_call_native);
+  late final NativeMethodExecutor testCallNative;
 
   @override
-  List<NativeMethod> methods() => [NativeMethod(_bindings.addresses.test_call_native)];
+  void initialize(NativeProducerExecutor executor) {
+    testCallNative = executor.register(_bindings.addresses.test_call_native);
+  }
 }

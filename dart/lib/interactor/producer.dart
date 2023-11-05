@@ -8,11 +8,14 @@ class NativeProducerExecutor {
   final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
   final InteractorBuffers _buffers;
-  final Map<Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethodExecutor> _methods;
+  final Map<Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethodExecutor> _methods = {};
 
-  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._buffers, this._methods);
+  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._buffers);
 
-  NativeMethodExecutor of(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) => _methods[pointer]!;
+  NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
+    _methods[pointer] = NativeMethodExecutor(_id, _interactorPointer, _bindings, _buffers);
+    return _methods[pointer]!;
+  }
 }
 
 class NativeMethodExecutor {

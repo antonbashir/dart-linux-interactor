@@ -4101,32 +4101,34 @@ class TestBindings {
           void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int,
               ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
-  int test_interactor_initialize() {
+  ffi.Pointer<linux_interactor.interactor_native_t>
+      test_interactor_initialize() {
     return _test_interactor_initialize();
   }
 
-  late final _test_interactor_initializePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>(
-          'test_interactor_initialize');
+  late final _test_interactor_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<linux_interactor.interactor_native_t>
+              Function()>>('test_interactor_initialize');
   late final _test_interactor_initialize =
-      _test_interactor_initializePtr.asFunction<int Function()>();
+      _test_interactor_initializePtr.asFunction<
+          ffi.Pointer<linux_interactor.interactor_native_t> Function()>();
 
-  void test_call_dart(
+  bool test_call_dart_check(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
-    int dart_ring_fd,
   ) {
-    return _test_call_dart(
+    return _test_call_dart_check(
       interactor,
-      dart_ring_fd,
     );
   }
 
-  late final _test_call_dartPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int)>>('test_call_dart');
-  late final _test_call_dart = _test_call_dartPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+  late final _test_call_dart_checkPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+      'test_call_dart_check');
+  late final _test_call_dart_check = _test_call_dart_checkPtr.asFunction<
+      bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void test_call_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -5128,13 +5130,15 @@ class _SymbolAddresses {
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get interactor_native_callback_to_dart =>
           _library._interactor_native_callback_to_dartPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<linux_interactor.interactor_native_t> Function()>>
       get test_interactor_initialize => _library._test_interactor_initializePtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int)>>
-      get test_call_dart => _library._test_call_dartPtr;
+              ffi.Bool Function(
+                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+      get test_call_dart_check => _library._test_call_dart_checkPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(

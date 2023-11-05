@@ -2,16 +2,18 @@
 #include <interactor_native.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "test.h"
 
-void test_call_dart(interactor_native_t* interactor, int dart_ring_fd)
+static bool call_native_check = false;
+
+bool test_call_dart_check(interactor_native_t* interactor)
 {
-    interactor_message_t* msg = interactor_native_allocate_message(interactor);
-    msg->owner = 0;
-    msg->method = 0;
-    interactor_native_call_dart(interactor, dart_ring_fd, msg);
+    interactor_native_process(interactor);
+    return call_native_check;
 }
 
 void test_call_native(interactor_message_t* message)
 {
+    call_native_check = true;
     printf("Hello, Dart\n");
 }

@@ -13,14 +13,8 @@ class NativeCallback {
   NativeCallback(this.callback);
 }
 
-abstract class NativeProducer {
-  late final NativeProducerExecutor _executor;
-
-  void initialize(NativeProducerExecutor executor) => this._executor = executor;
-
-  NativeMethodExecutor synchronous(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) => _executor.of(pointer);
-
-  List<NativeMethod> methods();
+abstract interface class NativeProducer {
+  void initialize(NativeProducerExecutor executor);
 }
 
 class NativeMethod {

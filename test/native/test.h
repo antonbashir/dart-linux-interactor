@@ -8,7 +8,7 @@ extern "C"
 {
 #endif
 
-    int test_interactor_initialize();
+    interactor_native_t* test_interactor_initialize();
 
 #if defined(__cplusplus)
 }

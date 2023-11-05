@@ -19,18 +19,12 @@ class InteractorProducerFactory {
   final _producer = <NativeProducerExecutor>[];
 
   T register<T extends NativeProducer>(T provider) {
-    final methods = <Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethodExecutor>{};
-    for (var method in provider.methods()) {
-      methods[method.method] = NativeMethodExecutor(method.method.address, _interactorPointer, _bindings, _buffers);
-    }
     final executor = NativeProducerExecutor(
       _producer.length,
       _interactorPointer,
       _bindings,
       _buffers,
-      methods,
     );
-    provider.initialize(executor);
-    return provider;
+    return provider..initialize(executor);
   }
 }

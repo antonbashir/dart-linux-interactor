@@ -182,11 +182,7 @@ void interactor_native_cancel_by_fd(interactor_native_t* interactor, int fd)
 
 int interactor_native_peek(interactor_native_t* interactor)
 {
-    struct __kernel_timespec timeout = {
-        .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
-        .tv_sec = 0,
-    };
-    io_uring_submit_and_wait_timeout(interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
+    io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
 }
 
