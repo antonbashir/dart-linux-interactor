@@ -4034,28 +4034,53 @@ class TestBindings {
   late final _interactor_native_close_descriptor =
       _interactor_native_close_descriptorPtr.asFunction<void Function(int)>();
 
-  void interactor_native_send(
+  void interactor_native_call_dart(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
     int target_ring_fd,
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
-    return _interactor_native_send(
+    return _interactor_native_call_dart(
       interactor,
       target_ring_fd,
       message,
     );
   }
 
-  late final _interactor_native_sendPtr = _lookup<
+  late final _interactor_native_call_dartPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_native_t>,
                   ffi.Int,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'interactor_native_send');
-  late final _interactor_native_send = _interactor_native_sendPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int,
-          ffi.Pointer<linux_interactor.interactor_message_t>)>();
+      'interactor_native_call_dart');
+  late final _interactor_native_call_dart =
+      _interactor_native_call_dartPtr.asFunction<
+          void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int,
+              ffi.Pointer<linux_interactor.interactor_message_t>)>();
+
+  void interactor_native_callback_to_dart(
+    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    int target_ring_fd,
+    ffi.Pointer<linux_interactor.interactor_message_t> message,
+  ) {
+    return _interactor_native_callback_to_dart(
+      interactor,
+      target_ring_fd,
+      message,
+    );
+  }
+
+  late final _interactor_native_callback_to_dartPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<linux_interactor.interactor_native_t>,
+                  ffi.Int,
+                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
+      'interactor_native_callback_to_dart');
+  late final _interactor_native_callback_to_dart =
+      _interactor_native_callback_to_dartPtr.asFunction<
+          void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int,
+              ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void test_send_to_dart(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -5075,7 +5100,16 @@ class _SymbolAddresses {
                   ffi.Pointer<linux_interactor.interactor_native_t>,
                   ffi.Int,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get interactor_native_send => _library._interactor_native_sendPtr;
+      get interactor_native_call_dart =>
+          _library._interactor_native_call_dartPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<linux_interactor.interactor_native_t>,
+                  ffi.Int,
+                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
+      get interactor_native_callback_to_dart =>
+          _library._interactor_native_callback_to_dartPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
@@ -5100,14 +5134,14 @@ final class __fsid_t extends ffi.Struct {
 
 final class interactor_message extends ffi.Struct {
   @ffi.Uint64()
-  external int owner_id;
+  external int owner;
 
   @ffi.Uint64()
-  external int method_id;
+  external int method;
 
-  external ffi.Pointer<ffi.UintPtr> input_pointer;
+  external ffi.Pointer<ffi.UintPtr> input;
 
-  external ffi.Pointer<ffi.UintPtr> output_pointer;
+  external ffi.Pointer<ffi.UintPtr> output;
 
   @ffi.Uint16()
   external int flags;

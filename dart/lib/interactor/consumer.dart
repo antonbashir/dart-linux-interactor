@@ -12,7 +12,7 @@ class NativeConsumerExecutor {
 
   NativeConsumerExecutor(this._id, this._interactorPointer, this._bindings, this._buffers, this._callbacks);
 
-  void execute(Pointer<interactor_message_t> message) => _callbacks[message.ref.method_id].execute(message);
+  void execute(Pointer<interactor_message_t> message) => _callbacks[message.ref.method].execute(message);
 }
 
 class NativeCallbackExecutor {

@@ -32,5 +32,5 @@ class InteractorConsumerRegistry {
     ));
   }
 
-  void execute(Pointer<interactor_message_t> message) => _consumers[message.ref.owner_id].execute(message);
+  void execute(Pointer<interactor_message_t> message) => _consumers[message.ref.owner].execute(message);
 }
