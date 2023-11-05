@@ -3,13 +3,14 @@
   "tasks": [
     {
       "type": "cmake",
-      "label": "interactor-binding-build",
+      "label": "interactor-native-build",
       "command": "build",
       "targets": [
-        "native"
+        "native",
+        "interactor_test"
       ],
       "group": "build",
       "problemMatcher": [],
-    }    
+    }
   ]
 }

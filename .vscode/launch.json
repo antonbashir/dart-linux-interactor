@@ -6,7 +6,7 @@
       "type": "dart",
       "request": "launch",
       "program": "${workspaceFolder}/test/dart/lib/test.dart",
-      "preLaunchTask": "interactor-binding-build"
+      "preLaunchTask": "interactor-native-build"
     },
     {
       "name": "dart-test-debug (no-rebuild)",
@@ -32,7 +32,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "interactor-binding-build"
+      "preLaunchTask": "interactor-native-build"
     },
     {
       "name": "dart-test-debug-native (no-rebuild)",
