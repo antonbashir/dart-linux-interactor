@@ -47,10 +47,10 @@ Future<void> main() async {
     nativeConfiguration.ref.buffers_count = configuration.buffersCount;
     nativeConfiguration.ref.cqe_peek_count = configuration.cqePeekCount;
     nativeConfiguration.ref.cqe_wait_count = configuration.cqeWaitCount;
-    nativeConfiguration.ref.cqe_wait_timeout_millis = 1000;
-    nativeConfiguration.ref.slab_size = 65536;
-    nativeConfiguration.ref.preallocation_size = 65536;
-    nativeConfiguration.ref.quota_size = 128000;
+    nativeConfiguration.ref.cqe_wait_timeout_millis = configuration.cqeWaitTimeout.inMilliseconds;
+    nativeConfiguration.ref.slab_size = configuration.memorySlabSize;
+    nativeConfiguration.ref.preallocation_size = configuration.memoryPreallocationSize;
+    nativeConfiguration.ref.quota_size = configuration.memoryQuotaSize;
     interactor.bindings.interactor_native_initialize(interactorNative, nativeConfiguration, 0);
     return interactorNative;
   });
