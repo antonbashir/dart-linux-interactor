@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:linux_interactor_test/bindings.dart';
 import 'package:linux_interactor_test/call.dart';
 import 'package:linux_interactor_test/run.dart';
+import 'package:linux_interactor_test/timeout.dart';
 import 'package:path/path.dart';
 import 'package:test/test.dart';
 
@@ -14,4 +15,6 @@ void main() {
   group("[run dart]", testRunDart);
   group("[call native]", testCallNative);
   group("[call dart]", testCallDart);
+  group("[timeout native]", testTimeoutNative);
+  group("[timeout dart]", testTimeoutDart);
 }
