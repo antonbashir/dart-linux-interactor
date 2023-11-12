@@ -21,7 +21,7 @@ class InteractorConsumerRegistry {
   void register(NativeConsumer declaration) {
     final callbacks = <NativeCallbackExecutor>[];
     for (var callback in declaration.callbacks()) {
-      callbacks.add(NativeCallbackExecutor(callbacks.length, callback.callback));
+      callbacks.add(NativeCallbackExecutor(callbacks.length, _bindings, _interactorPointer, callback.callback));
     }
     _consumers.add(NativeConsumerExecutor(
       _consumers.length,

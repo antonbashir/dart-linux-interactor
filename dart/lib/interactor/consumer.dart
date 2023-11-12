@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'bindings.dart';
 import 'buffers.dart';
+import 'messages.dart';
 
 class NativeConsumerExecutor {
   final int _id;
@@ -17,9 +18,11 @@ class NativeConsumerExecutor {
 
 class NativeCallbackExecutor {
   final int _id;
-  final void Function(Pointer<interactor_message_t> message) _executor;
+  final InteractorBindings _bindings;
+  final Pointer<interactor_dart_t> _interactorPointer;
+  final void Function(InteractorNotification notification) _executor;
 
-  NativeCallbackExecutor(this._id, this._executor);
+  NativeCallbackExecutor(this._id, this._bindings, this._interactorPointer, this._executor);
 
-  void call(Pointer<interactor_message_t> message) => _executor(message);
+  void call(Pointer<interactor_message_t> message) => _executor(InteractorNotification(_interactorPointer, message, _bindings));
 }

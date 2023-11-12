@@ -180,7 +180,7 @@ void interactor_native_cancel_by_fd(interactor_native_t* interactor, int fd)
     io_uring_submit(interactor->ring);
 }
 
-int interactor_native_peek(interactor_native_t* interactor)
+int interactor_native_peek_infinity(interactor_native_t* interactor)
 {
     io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
@@ -259,7 +259,7 @@ void interactor_native_cqe_advance(struct io_uring* ring, int count)
 
 void interactor_native_process(interactor_native_t* interactor)
 {
-    if (interactor_native_peek(interactor) > 0)
+    if (interactor_native_peek_infinity(interactor) > 0)
     {
         struct io_uring_cqe* cqe;
         unsigned head;

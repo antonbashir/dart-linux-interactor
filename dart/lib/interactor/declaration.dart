@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'bindings.dart';
+import 'messages.dart';
 import 'producer.dart';
 
 abstract interface class NativeConsumer {
@@ -8,7 +8,7 @@ abstract interface class NativeConsumer {
 }
 
 class NativeCallback {
-  final void Function(Pointer<interactor_message_t> message) callback;
+  final void Function(InteractorNotification notification) callback;
 
   NativeCallback(this.callback);
 }
@@ -18,7 +18,7 @@ abstract interface class NativeProducer {
 }
 
 class NativeMethod {
-  final Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> method;
+  final Pointer<NativeFunction<Void Function(InteractorNotification)>> method;
 
   NativeMethod(this.method);
 }

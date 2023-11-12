@@ -29,23 +29,23 @@ class NativeMethodExecutor {
   final InteractorBindings _bindings;
   final InteractorBuffers _buffers;
 
-  Map<int, InteractorMessage> _messages = {};
+  Map<int, InteractorCall> _calls = {};
 
   NativeMethodExecutor(this._methodId, this._executorId, this._interactorPointer, this._bindings, this._buffers);
 
-  Future<InteractorMessage> call(int target, {InteractorMessage Function(InteractorMessage message)? configurator}) {
+  Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator}) {
     final messagePointer = _bindings.interactor_dart_allocate_message(_interactorPointer);
-    final completer = Completer<InteractorMessage>();
-    var message = InteractorMessage(_interactorPointer, messagePointer, _bindings, completer);
+    final completer = Completer<InteractorCall>();
+    var message = InteractorCall(_interactorPointer, messagePointer, _bindings, completer);
     if (configurator != null) message = configurator(message);
     messagePointer.ref.id = completer.hashCode;
     messagePointer.ref.source = _interactorPointer.ref.ring.ref.ring_fd;
     messagePointer.ref.owner = _executorId;
     messagePointer.ref.method = _methodId;
-    _messages[completer.hashCode] = message;
+    _calls[completer.hashCode] = message;
     _bindings.interactor_dart_call_native(_interactorPointer, target, messagePointer);
-    return completer.future.whenComplete(() => _messages.remove(completer.hashCode));
+    return completer.future.whenComplete(() => _calls.remove(completer.hashCode));
   }
 
-  void callback(Pointer<interactor_message_t> message) => _messages[message.ref.id]?.callback(message);
+  void callback(Pointer<interactor_message_t> message) => _calls[message.ref.id]?.callback(message);
 }

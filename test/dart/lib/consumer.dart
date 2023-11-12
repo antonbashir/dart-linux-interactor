@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
-import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/declaration.dart';
+import 'package:linux_interactor/interactor/messages.dart';
 
 class TestNativeConsumer implements NativeConsumer {
-  void test(Pointer<interactor_message_t> message) {
+  void test(InteractorNotification message) {
     print("Hello, C");
   }
 
