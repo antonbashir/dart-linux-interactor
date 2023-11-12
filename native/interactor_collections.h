@@ -14,13 +14,13 @@ extern "C"
 
 #define mh_name _events
 #define mh_key_t uint64_t
-  struct mh_events_node_t
-  {
-    mh_key_t data;
-    int64_t timeout;
-    uint64_t timestamp;
-    int fd;
-  };
+    struct mh_events_node_t
+    {
+        mh_key_t data;
+        int64_t timeout;
+        uint64_t timestamp;
+        int id;
+    };
 
 #define mh_node_t struct mh_events_node_t
 #define mh_arg_t uint64_t

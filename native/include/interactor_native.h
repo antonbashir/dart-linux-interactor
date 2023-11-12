@@ -50,7 +50,7 @@ extern "C"
 
     int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id);
 
-    void interactor_native_cancel_by_fd(interactor_native_t* interactor, int fd);
+    void interactor_native_cancel_by_id(interactor_native_t* interactor, int id);
 
     void interactor_native_check_event_timeouts(interactor_native_t* interactor);
     void interactor_native_remove_event(interactor_native_t* interactor, uint64_t data);
@@ -83,6 +83,7 @@ extern "C"
     void interactor_native_close_descriptor(int fd);
 
     void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message);
+
     void interactor_native_callback_to_dart(interactor_native_t* interactor, interactor_message_t* message);
 
 #if defined(__cplusplus)

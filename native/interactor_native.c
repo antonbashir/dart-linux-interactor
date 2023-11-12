@@ -158,18 +158,18 @@ void interactor_native_data_free(interactor_native_t* interactor, intptr_t point
     interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
 
-static inline void interactor_native_add_event(interactor_native_t* interactor, int fd, uint64_t data, int64_t timeout)
+static inline void interactor_native_add_event(interactor_native_t* interactor, int id, uint64_t data, int64_t timeout)
 {
     struct mh_events_node_t node = {
         .data = data,
         .timeout = timeout,
         .timestamp = time(NULL),
-        .fd = fd,
+        .id = id,
     };
     mh_events_put((struct mh_events_t*)interactor->events, &node, NULL, 0);
 }
 
-void interactor_native_cancel_by_fd(interactor_native_t* interactor, int fd)
+void interactor_native_cancel_by_id(interactor_native_t* interactor, int fd)
 {
     mh_int_t index;
     mh_int_t to_delete[((struct mh_events_t*)interactor->events)->size];
@@ -177,7 +177,7 @@ void interactor_native_cancel_by_fd(interactor_native_t* interactor, int fd)
     mh_foreach(((struct mh_events_t*)interactor->events), index)
     {
         struct mh_events_node_t* node = mh_events_node(interactor->events, index);
-        if (node->fd == fd)
+        if (node->id == fd)
         {
             struct io_uring* ring = interactor->ring;
             struct io_uring_sqe* sqe = interactor_provide_sqe(ring);

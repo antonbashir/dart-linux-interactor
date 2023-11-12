@@ -61,7 +61,7 @@ extern "C"
 
     int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id);
 
-    void interactor_dart_cancel_by_fd(interactor_dart_t* interactor, int fd);
+    void interactor_dart_cancel_by_id(interactor_dart_t* interactor, int id);
 
     void interactor_dart_check_event_timeouts(interactor_dart_t* interactor);
     void interactor_dart_remove_event(interactor_dart_t* interactor, uint64_t data);

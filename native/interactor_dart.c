@@ -154,12 +154,12 @@ static inline void interactor_dart_add_event(interactor_dart_t* interactor, int 
         .data = data,
         .timeout = timeout,
         .timestamp = time(NULL),
-        .fd = fd,
+        .id = fd,
     };
     mh_events_put(interactor->events, &node, NULL, 0);
 }
 
-void interactor_dart_cancel_by_fd(interactor_dart_t* interactor, int fd)
+void interactor_dart_cancel_by_id(interactor_dart_t* interactor, int id)
 {
     mh_int_t index;
     mh_int_t to_delete[interactor->events->size];
@@ -167,7 +167,7 @@ void interactor_dart_cancel_by_fd(interactor_dart_t* interactor, int fd)
     mh_foreach(interactor->events, index)
     {
         struct mh_events_node_t* node = mh_events_node(interactor->events, index);
-        if (node->fd == fd)
+        if (node->id == id)
         {
             struct io_uring* ring = interactor->ring;
             struct io_uring_sqe* sqe = interactor_provide_sqe(ring);
