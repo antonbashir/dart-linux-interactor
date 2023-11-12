@@ -2,6 +2,7 @@
 #define INTERACTOR_NATIVE_H
 
 #include <interactor_buffers_pool.h>
+#include <interactor_data_pool.h>
 #include <interactor_message.h>
 #include <interactor_messages_pool.h>
 #include <interactor_payloads_pool.h>
@@ -30,6 +31,7 @@ extern "C"
         uint8_t id;
         struct interactor_messages_pool messages_pool;
         struct interactor_buffers_pool buffers_pool;
+        struct interactor_data_pool data_pool;
         struct interactor_memory memory;
         struct io_uring* ring;
         struct iovec* buffers;
@@ -65,6 +67,9 @@ extern "C"
     intptr_t interactor_native_payload_allocate(struct interactor_payloads_pool* pool);
     void interactor_native_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer);
     void interactor_native_payload_pool_destroy(struct interactor_payloads_pool* pool);
+
+    intptr_t interactor_native_data_allocate(interactor_native_t* interactor, size_t size);
+    void interactor_native_data_free(interactor_native_t* interactor, intptr_t pointer, size_t size);
 
     int interactor_native_peek_infinity(interactor_native_t* interactor);
     int interactor_native_peek_timeout(interactor_native_t* interactor);

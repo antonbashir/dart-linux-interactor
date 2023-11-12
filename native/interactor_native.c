@@ -27,6 +27,7 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
 
     interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size);
     interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory);
+    interactor_data_pool_create(&interactor->data_pool, &interactor->memory);
 
     interactor->events = mh_events_new();
     if (!interactor->events)
@@ -145,6 +146,16 @@ void interactor_native_payload_pool_destroy(struct interactor_payloads_pool* poo
 {
     interactor_payloads_pool_destroy(pool);
     free(pool);
+}
+
+intptr_t interactor_native_data_allocate(interactor_native_t* interactor, size_t size)
+{
+    return interactor_data_pool_allocate(&interactor->data_pool, size);
+}
+
+void interactor_native_data_free(interactor_native_t* interactor, intptr_t pointer, size_t size)
+{
+    interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
 
 static inline void interactor_native_add_event(interactor_native_t* interactor, int fd, uint64_t data, int64_t timeout)

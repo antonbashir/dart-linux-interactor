@@ -254,6 +254,76 @@ class InteractorBindings {
   late final _interactor_small_destroy = _interactor_small_destroyPtr
       .asFunction<void Function(ffi.Pointer<interactor_small>)>();
 
+  int interactor_data_pool_create(
+    ffi.Pointer<interactor_data_pool> pool,
+    ffi.Pointer<interactor_memory> memory,
+  ) {
+    return _interactor_data_pool_create(
+      pool,
+      memory,
+    );
+  }
+
+  late final _interactor_data_pool_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<interactor_data_pool>,
+              ffi.Pointer<interactor_memory>)>>('interactor_data_pool_create');
+  late final _interactor_data_pool_create =
+      _interactor_data_pool_createPtr.asFunction<
+          int Function(ffi.Pointer<interactor_data_pool>,
+              ffi.Pointer<interactor_memory>)>();
+
+  void interactor_data_pool_destroy(
+    ffi.Pointer<interactor_data_pool> pool,
+  ) {
+    return _interactor_data_pool_destroy(
+      pool,
+    );
+  }
+
+  late final _interactor_data_pool_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>(
+      'interactor_data_pool_destroy');
+  late final _interactor_data_pool_destroy = _interactor_data_pool_destroyPtr
+      .asFunction<void Function(ffi.Pointer<interactor_data_pool>)>();
+
+  int interactor_data_pool_allocate(
+    ffi.Pointer<interactor_data_pool> pool,
+    int size,
+  ) {
+    return _interactor_data_pool_allocate(
+      pool,
+      size,
+    );
+  }
+
+  late final _interactor_data_pool_allocatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>,
+              ffi.Size)>>('interactor_data_pool_allocate');
+  late final _interactor_data_pool_allocate = _interactor_data_pool_allocatePtr
+      .asFunction<int Function(ffi.Pointer<interactor_data_pool>, int)>();
+
+  void interactor_data_pool_free(
+    ffi.Pointer<interactor_data_pool> pool,
+    int payload,
+    int size,
+  ) {
+    return _interactor_data_pool_free(
+      pool,
+      payload,
+      size,
+    );
+  }
+
+  late final _interactor_data_pool_freePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<interactor_data_pool>, ffi.IntPtr,
+              ffi.Size)>>('interactor_data_pool_free');
+  late final _interactor_data_pool_free = _interactor_data_pool_freePtr
+      .asFunction<void Function(ffi.Pointer<interactor_data_pool>, int, int)>();
+
   int interactor_messages_pool_create(
     ffi.Pointer<interactor_messages_pool> pool,
     ffi.Pointer<interactor_memory> memory,
@@ -2812,6 +2882,45 @@ class InteractorBindings {
           .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>(
               isLeaf: true);
 
+  int interactor_native_data_allocate(
+    ffi.Pointer<interactor_native_t> interactor,
+    int size,
+  ) {
+    return _interactor_native_data_allocate(
+      interactor,
+      size,
+    );
+  }
+
+  late final _interactor_native_data_allocatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.IntPtr Function(ffi.Pointer<interactor_native_t>,
+              ffi.Size)>>('interactor_native_data_allocate');
+  late final _interactor_native_data_allocate =
+      _interactor_native_data_allocatePtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>, int)>(
+              isLeaf: true);
+
+  void interactor_native_data_free(
+    ffi.Pointer<interactor_native_t> interactor,
+    int pointer,
+    int size,
+  ) {
+    return _interactor_native_data_free(
+      interactor,
+      pointer,
+      size,
+    );
+  }
+
+  late final _interactor_native_data_freePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.IntPtr,
+              ffi.Size)>>('interactor_native_data_free');
+  late final _interactor_native_data_free = _interactor_native_data_freePtr
+      .asFunction<void Function(ffi.Pointer<interactor_native_t>, int, int)>(
+          isLeaf: true);
+
   int interactor_native_peek_infinity(
     ffi.Pointer<interactor_native_t> interactor,
   ) {
@@ -2950,76 +3059,6 @@ class InteractorBindings {
       _interactor_native_callback_to_dartPtr.asFunction<
           void Function(ffi.Pointer<interactor_native_t>,
               ffi.Pointer<interactor_message_t>)>(isLeaf: true);
-
-  int interactor_data_pool_create(
-    ffi.Pointer<interactor_data_pool> pool,
-    ffi.Pointer<interactor_memory> memory,
-  ) {
-    return _interactor_data_pool_create(
-      pool,
-      memory,
-    );
-  }
-
-  late final _interactor_data_pool_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<interactor_data_pool>,
-              ffi.Pointer<interactor_memory>)>>('interactor_data_pool_create');
-  late final _interactor_data_pool_create =
-      _interactor_data_pool_createPtr.asFunction<
-          int Function(ffi.Pointer<interactor_data_pool>,
-              ffi.Pointer<interactor_memory>)>();
-
-  void interactor_data_pool_destroy(
-    ffi.Pointer<interactor_data_pool> pool,
-  ) {
-    return _interactor_data_pool_destroy(
-      pool,
-    );
-  }
-
-  late final _interactor_data_pool_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>(
-      'interactor_data_pool_destroy');
-  late final _interactor_data_pool_destroy = _interactor_data_pool_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_data_pool>)>();
-
-  int interactor_data_pool_allocate(
-    ffi.Pointer<interactor_data_pool> pool,
-    int size,
-  ) {
-    return _interactor_data_pool_allocate(
-      pool,
-      size,
-    );
-  }
-
-  late final _interactor_data_pool_allocatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>,
-              ffi.Size)>>('interactor_data_pool_allocate');
-  late final _interactor_data_pool_allocate = _interactor_data_pool_allocatePtr
-      .asFunction<int Function(ffi.Pointer<interactor_data_pool>, int)>();
-
-  void interactor_data_pool_free(
-    ffi.Pointer<interactor_data_pool> pool,
-    int payload,
-    int size,
-  ) {
-    return _interactor_data_pool_free(
-      pool,
-      payload,
-      size,
-    );
-  }
-
-  late final _interactor_data_pool_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_data_pool>, ffi.IntPtr,
-              ffi.Size)>>('interactor_data_pool_free');
-  late final _interactor_data_pool_free = _interactor_data_pool_freePtr
-      .asFunction<void Function(ffi.Pointer<interactor_data_pool>, int, int)>();
 
   late final ffi.Pointer<ffi.Pointer<FILE>> _stdin =
       _lookup<ffi.Pointer<FILE>>('stdin');
@@ -12939,6 +12978,27 @@ class _SymbolAddresses {
       get interactor_small_destroy => _library._interactor_small_destroyPtr;
   ffi.Pointer<
           ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<interactor_data_pool>,
+                  ffi.Pointer<interactor_memory>)>>
+      get interactor_data_pool_create =>
+          _library._interactor_data_pool_createPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>
+      get interactor_data_pool_destroy =>
+          _library._interactor_data_pool_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>, ffi.Size)>>
+      get interactor_data_pool_allocate =>
+          _library._interactor_data_pool_allocatePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_data_pool>, ffi.IntPtr, ffi.Size)>>
+      get interactor_data_pool_free => _library._interactor_data_pool_freePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
               ffi.Int Function(ffi.Pointer<interactor_messages_pool>,
                   ffi.Pointer<interactor_memory>)>>
       get interactor_messages_pool_create =>
@@ -13532,6 +13592,17 @@ class _SymbolAddresses {
       get interactor_native_payload_pool_destroy =>
           _library._interactor_native_payload_pool_destroyPtr;
   ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.IntPtr Function(ffi.Pointer<interactor_native_t>, ffi.Size)>>
+      get interactor_native_data_allocate =>
+          _library._interactor_native_data_allocatePtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_native_t>, ffi.IntPtr, ffi.Size)>>
+      get interactor_native_data_free =>
+          _library._interactor_native_data_freePtr;
+  ffi.Pointer<
           ffi
           .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_peek_infinity =>
@@ -13568,27 +13639,6 @@ class _SymbolAddresses {
                   ffi.Pointer<interactor_message_t>)>>
       get interactor_native_callback_to_dart =>
           _library._interactor_native_callback_to_dartPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<interactor_data_pool>,
-                  ffi.Pointer<interactor_memory>)>>
-      get interactor_data_pool_create =>
-          _library._interactor_data_pool_createPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>
-      get interactor_data_pool_destroy =>
-          _library._interactor_data_pool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>, ffi.Size)>>
-      get interactor_data_pool_allocate =>
-          _library._interactor_data_pool_allocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<interactor_data_pool>, ffi.IntPtr, ffi.Size)>>
-      get interactor_data_pool_free => _library._interactor_data_pool_freePtr;
   ffi.Pointer<ffi.Pointer<FILE>> get stdin => _library._stdin;
   ffi.Pointer<ffi.Pointer<FILE>> get stdout => _library._stdout;
   ffi.Pointer<ffi.Pointer<FILE>> get stderr => _library._stderr;
@@ -15767,6 +15817,26 @@ final class interactor_buffers_pool extends ffi.Struct {
   external int size;
 }
 
+final class interactor_memory extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> context;
+}
+
+final class interactor_mempool extends ffi.Struct {
+  external ffi.Pointer<interactor_memory> memory;
+
+  external ffi.Pointer<ffi.Void> context;
+}
+
+final class interactor_small extends ffi.Struct {
+  external ffi.Pointer<interactor_memory> memory;
+
+  external ffi.Pointer<ffi.Void> context;
+}
+
+final class interactor_data_pool extends ffi.Struct {
+  external interactor_small pool;
+}
+
 final class interactor_message extends ffi.Struct {
   @ffi.Uint64()
   external int id;
@@ -15792,22 +15862,6 @@ final class interactor_message extends ffi.Struct {
 
   @ffi.Uint16()
   external int flags;
-}
-
-final class interactor_memory extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> context;
-}
-
-final class interactor_mempool extends ffi.Struct {
-  external ffi.Pointer<interactor_memory> memory;
-
-  external ffi.Pointer<ffi.Void> context;
-}
-
-final class interactor_small extends ffi.Struct {
-  external ffi.Pointer<interactor_memory> memory;
-
-  external ffi.Pointer<ffi.Void> context;
 }
 
 final class interactor_messages_pool extends ffi.Struct {
@@ -17379,6 +17433,8 @@ final class interactor_native extends ffi.Struct {
 
   external interactor_buffers_pool buffers_pool;
 
+  external interactor_data_pool data_pool;
+
   external interactor_memory memory;
 
   external ffi.Pointer<io_uring> ring;
@@ -17413,11 +17469,6 @@ final class interactor_native extends ffi.Struct {
 
 typedef interactor_native_t = interactor_native;
 typedef interactor_native_configuration_t = interactor_native_configuration;
-
-final class interactor_data_pool extends ffi.Struct {
-  external interactor_small pool;
-}
-
 typedef FILE = _IO_FILE;
 
 final class _IO_FILE extends ffi.Struct {

@@ -11,7 +11,7 @@ bool test_call_native_check(interactor_native_t* interactor)
     test_interactor_process(interactor);
     if (called_message)
     {
-        interactor_native_callback_to_dart(interactor, called_message->source, called_message);
+        interactor_native_callback_to_dart(interactor, called_message);
         interactor_native_submit(interactor);
         return true;
     }
