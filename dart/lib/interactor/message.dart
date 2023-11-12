@@ -7,6 +7,7 @@ import 'package:ffi/ffi.dart';
 
 import 'bindings.dart';
 import 'buffers.dart';
+import 'exception.dart';
 import 'payloads.dart';
 
 class InteractorCall {
@@ -48,7 +49,7 @@ class InteractorCall {
 
   void setInputObject<T extends Struct>(void Function(Pointer<T> object)? configurator) {
     var object = _payloads.allocate<T>();
-    if (object == nullptr) throw Exception("TODO: Message");
+    if (object == nullptr) throw InteractorOutOfMemory();
     configurator?.call(object);
     _message.ref.input = Pointer.fromAddress(object.address);
     _message.ref.input_size = _payloads.size<T>();
@@ -68,45 +69,25 @@ class InteractorCall {
     _message.ref.input_size = bytes.length;
   }
 
-  void releaseInputDouble() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
-  }
+  void releaseInputDouble() => _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
 
-  void releaseInputString() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
-  }
+  void releaseInputString() => _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
 
-  void releaseInputObject<T extends Struct>() {
-    _payloads.free(Pointer.fromAddress(_message.ref.input.address).cast<T>());
-  }
+  void releaseInputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.input.address).cast<T>());
 
-  void releaseInputBuffer() {
-    _buffers.release(_message.ref.input.address);
-  }
+  void releaseInputBuffer() => _buffers.release(_message.ref.input.address);
 
-  void releaseInputBytes() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
-  }
+  void releaseInputBytes() => _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
 
-  void releaseOutputDouble() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
-  }
+  void releaseOutputDouble() => _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
 
-  void releaseOutputString() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
-  }
+  void releaseOutputString() => _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
 
-  void releaseOutputObject<T extends Struct>() {
-    _payloads.free(Pointer.fromAddress(_message.ref.output.address).cast<T>());
-  }
+  void releaseOutputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.output.address).cast<T>());
 
-  void releaseOutputBuffer() {
-    _buffers.release(_message.ref.output.address);
-  }
+  void releaseOutputBuffer() => _buffers.release(_message.ref.output.address);
 
-  void releaseOutputBytes() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
-  }
+  void releaseOutputBytes() => _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
 
   int getOutputInt() => _message.ref.output.address;
 
@@ -177,13 +158,9 @@ class InteractorNotification {
     return pointer.asTypedList(_message.ref.input_size);
   }
 
-  void setOutputInt(int data) {
-    _message.ref.output = Pointer.fromAddress(data);
-  }
+  void setOutputInt(int data) => _message.ref.output = Pointer.fromAddress(data);
 
-  void setOutputBool(bool data) {
-    _message.ref.output = Pointer.fromAddress(data ? 1 : 0);
-  }
+  void setOutputBool(bool data) => _message.ref.output = Pointer.fromAddress(data ? 1 : 0);
 
   void setOutputDouble(double data) {
     Pointer<Double> pointer = _message.ref.output.cast();
@@ -199,9 +176,7 @@ class InteractorNotification {
     nativeString[units.length] = 0;
   }
 
-  void setOutputObject<T extends Struct>(void Function(Pointer<T> object) configurator) {
-    configurator.call(_message.ref.output.cast());
-  }
+  void setOutputObject<T extends Struct>(void Function(Pointer<T> object) configurator) => configurator.call(_message.ref.output.cast());
 
   Future<void> setOutputBytes(List<int> bytes) async {
     final Pointer<Uint8> pointer = _message.ref.output.cast();
