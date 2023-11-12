@@ -19,7 +19,7 @@ void testThreadingNative() {
     worker.consumer(TestNativeConsumer());
     worker.activate();
     producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
+    bindings.test_call_native_check(native);
     await interactor.shutdown();
   });
 }
@@ -35,7 +35,7 @@ void testThreadingDart() {
     worker.consumer(TestNativeConsumer());
     worker.activate();
     producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
+    bindings.test_call_native_check(native);
     await interactor.shutdown();
   });
 }

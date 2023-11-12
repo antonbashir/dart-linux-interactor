@@ -10,6 +10,6 @@ class TestNativeProducer implements NativeProducer {
 
   @override
   void initialize(NativeProducerExecutor executor) {
-    testCallNative = executor.register(_bindings.addresses.test_run_native);
+    testCallNative = executor.register(_bindings.addresses.test_call_native);
   }
 }

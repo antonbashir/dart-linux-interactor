@@ -68,7 +68,7 @@ extern "C"
     int interactor_native_peek_infinity(interactor_native_t* interactor);
     int interactor_native_peek_timeout(interactor_native_t* interactor);
 
-    void interactor_native_process(interactor_native_t* interactor);
+    int interactor_native_submit(interactor_native_t* interactor);
 
     void interactor_native_destroy(interactor_native_t* interactor);
 

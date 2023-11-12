@@ -2,20 +2,18 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'bindings.dart';
-import 'buffers.dart';
 import 'messages.dart';
 
 class NativeProducerExecutor {
   final int _id;
   final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
-  final InteractorBuffers _buffers;
   final Map<Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethodExecutor> _methods = {};
 
-  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._buffers);
+  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings);
 
   NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
-    _methods[pointer] = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings, _buffers);
+    _methods[pointer] = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings);
     return _methods[pointer]!;
   }
 
@@ -23,15 +21,14 @@ class NativeProducerExecutor {
 }
 
 class NativeMethodExecutor {
+  Map<int, InteractorCall> _calls = {};
+
   final int _methodId;
   final int _executorId;
   final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
-  final InteractorBuffers _buffers;
 
-  Map<int, InteractorCall> _calls = {};
-
-  NativeMethodExecutor(this._methodId, this._executorId, this._interactorPointer, this._bindings, this._buffers);
+  NativeMethodExecutor(this._methodId, this._executorId, this._interactorPointer, this._bindings);
 
   Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator}) {
     final messagePointer = _bindings.interactor_dart_allocate_message(_interactorPointer);

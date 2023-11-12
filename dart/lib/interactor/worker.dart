@@ -4,7 +4,6 @@ import 'dart:isolate';
 import 'dart:math';
 
 import 'bindings.dart';
-import 'buffers.dart';
 import 'constants.dart';
 import 'declaration.dart';
 import 'factory.dart';
@@ -62,8 +61,14 @@ class InteractorWorker {
       _interactorPointer,
       Duration(milliseconds: _interactorPointer.ref.timeout_checker_period_millis),
     );
-    _consumers = InteractorConsumerRegistry(_interactorPointer, _bindings, InteractorBuffers(_bindings, _interactorPointer.ref.buffers, _interactorPointer));
-    _producers = InteractorProducerFactory(_interactorPointer, _bindings, InteractorBuffers(_bindings, _interactorPointer.ref.buffers, _interactorPointer));
+    _consumers = InteractorConsumerRegistry(
+      _interactorPointer,
+      _bindings,
+    );
+    _producers = InteractorProducerFactory(
+      _interactorPointer,
+      _bindings,
+    );
   }
 
   void activate() {

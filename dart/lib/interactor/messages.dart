@@ -11,6 +11,12 @@ class InteractorCall {
 
   InteractorCall(this._interactor, this._message, this._bindings, this._completer);
 
+  void setBool(bool data) {
+    _message.ref.input = Pointer.fromAddress(data ? 1 : 0);
+  }
+
+  bool getBool() => _message.ref.output.value == 1;
+
   void callback(Pointer<interactor_message> message) {
     _message = message;
     _completer.complete(this);

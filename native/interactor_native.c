@@ -257,22 +257,9 @@ void interactor_native_cqe_advance(struct io_uring* ring, int count)
     io_uring_cq_advance(ring, count);
 }
 
-void interactor_native_process(interactor_native_t* interactor)
+int interactor_native_submit(interactor_native_t* interactor)
 {
-    if (interactor_native_peek_infinity(interactor) > 0)
-    {
-        struct io_uring_cqe* cqe;
-        unsigned head;
-        unsigned count = 0;
-        io_uring_for_each_cqe(interactor->ring, head, cqe)
-        {
-            count++;
-            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
-            void (*pointer)(interactor_message_t*) = (void (*)(interactor_message_t*))message->method;
-            pointer(message);
-        }
-        io_uring_cq_advance(interactor->ring, count);
-    }
+  return io_uring_submit(interactor->ring);
 }
 
 void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)
@@ -280,7 +267,6 @@ void interactor_native_call_dart(interactor_native_t* interactor, int target_rin
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALL, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-    io_uring_submit(interactor->ring);
 }
 
 void interactor_native_callback_to_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)
@@ -288,7 +274,6 @@ void interactor_native_callback_to_dart(interactor_native_t* interactor, int tar
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALLBACK, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-    io_uring_submit(interactor->ring);
 }
 
 void interactor_native_close_descriptor(int fd)

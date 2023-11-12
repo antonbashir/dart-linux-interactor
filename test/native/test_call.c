@@ -6,13 +6,14 @@
 
 static bool run_native_check = false;
 
-bool test_run_native_check(interactor_native_t* interactor)
+bool test_call_native_check(interactor_native_t* interactor)
 {
-    interactor_native_process(interactor);
+    test_interactor_process(interactor);
     return run_native_check;
 }
 
-void test_run_native(interactor_message_t* message)
+void test_call_native(interactor_message_t* message)
 {
-    run_native_check = true;
+    message->output = (uintptr_t*)true;
+    run_native_check = (bool)message->input;
 }

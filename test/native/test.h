@@ -9,6 +9,7 @@ extern "C"
 #endif
 
     interactor_native_t* test_interactor_initialize();
+    void test_interactor_process(interactor_native_t* interactor);
 
 #if defined(__cplusplus)
 }
