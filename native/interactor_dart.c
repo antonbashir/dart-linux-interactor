@@ -148,13 +148,13 @@ void interactor_dart_data_free(interactor_dart_t* interactor, intptr_t pointer, 
     interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
 
-static inline void interactor_dart_add_event(interactor_dart_t* interactor, int fd, uint64_t data, int64_t timeout)
+static inline void interactor_dart_add_event(interactor_dart_t* interactor, int id, uint64_t data, int64_t timeout)
 {
     struct mh_events_node_t node = {
         .data = data,
         .timeout = timeout,
         .timestamp = time(NULL),
-        .id = fd,
+        .id = id,
     };
     mh_events_put(interactor->events, &node, NULL, 0);
 }
