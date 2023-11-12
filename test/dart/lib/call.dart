@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:collection/collection.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor/interactor/worker.dart';
@@ -123,26 +124,33 @@ void testCallNative() {
     final bindings = loadBindings();
     bindings.test_call_native_reset();
     await worker.initialize();
-    worker.payloads.register<test_object>(sizeOf<test_object>());
-    worker.payloads.register<test_object_child>(sizeOf<test_object_child>());
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.consumer(TestNativeConsumer());
     worker.activate();
-    final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd,
-        configurator: (message) => message
-          ..setInputObject<test_object>(
-            (object) {
-              object.ref.field = 123;
-              object.ref.child_field = worker.payloads.allocate<test_object_child>().ref;
-              object.ref.child_field.field = 456;
-            },
-          ));
+    final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3]));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    final output = result.getOutputObject<test_object>().ref;
-    expect(output.field, 123);
-    expect(output.child_field.field, 456);
+    expect(true, ListEquality().equals(result.getOutputBuffer(), [1, 2, 3]));
+    result.free();
+    await interactor.shutdown();
+    bindings.test_interactor_destroy(native);
+  });
+
+  test("dart(bytes) <-> native(bytes)", () async {
+    final interactor = Interactor();
+    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+    final bindings = loadBindings();
+    bindings.test_call_native_reset();
+    await worker.initialize();
+    final native = bindings.test_interactor_initialize();
+    final producer = worker.producer(TestNativeProducer(bindings));
+    worker.consumer(TestNativeConsumer());
+    worker.activate();
+    final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBytes([1, 2, 3]));
+    while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
+    final result = await call;
+    expect(true, ListEquality().equals(result.getOutputBytes(), [1, 2, 3]));
     result.free();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);

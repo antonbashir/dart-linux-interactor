@@ -13,6 +13,7 @@ dependencies:
   test: ^1.22.0
   linux_interactor:
     path: ../../dart/
+  collection: ^1.18.0
 
 ffigen:
   name: "TestBindings"

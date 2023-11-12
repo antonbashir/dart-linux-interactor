@@ -62,7 +62,9 @@ class InteractorCall {
   }
 
   Future<void> setInputBytes(List<int> bytes) async {
-    _message.ref.input = Pointer.fromAddress(_bindings.interactor_dart_data_allocate(_interactor, bytes.length));
+    final Pointer<Uint8> pointer = Pointer.fromAddress(_bindings.interactor_dart_data_allocate(_interactor, bytes.length));
+    pointer.asTypedList(bytes.length).setAll(0, bytes);
+    _message.ref.input = pointer.cast();
     _message.ref.input_size = bytes.length;
   }
 
@@ -204,6 +206,6 @@ class InteractorNotification {
   Future<void> setOutputBytes(List<int> bytes) async {
     final Pointer<Uint8> pointer = _message.ref.output.cast();
     pointer.asTypedList(bytes.length).setAll(0, bytes);
-    _message.ref.input_size = bytes.length;
+    _message.ref.output_size = bytes.length;
   }
 }
