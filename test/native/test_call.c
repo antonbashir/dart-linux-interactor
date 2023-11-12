@@ -116,7 +116,7 @@ void test_call_dart_buffer(interactor_native_t* interactor, int32_t target, uint
     interactor_message_t* message = interactor_native_allocate_message(interactor);
     message->id = 0;
     message->input = (void*)(intptr_t)interactor_native_get_buffer(interactor);
-    interactor->buffers[(intptr_t)message->input].iov_base = (void*)value;
+    memcpy(interactor->buffers[(intptr_t)message->input].iov_base, (void*)value, count);
     interactor->buffers[(intptr_t)message->input].iov_len = count;
     message->input_size = count;
     message->source = interactor->ring->ring_fd;
