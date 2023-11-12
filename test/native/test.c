@@ -31,5 +31,4 @@ void test_interactor_process(interactor_native_t* interactor)
 void test_interactor_destroy(interactor_native_t* interactor)
 {
   interactor_native_destroy(interactor);
-  free(interactor);
 }

@@ -12,7 +12,7 @@ class InteractorPayloads {
 
   int size<T extends Struct>() => _pools[T.hashCode]?.ref.size ?? 0;
 
-  void create<T extends Struct>(int size) {
+  void register<T extends Struct>(int size) {
     _pools[T.hashCode] = _bindings.interactor_dart_payload_pool_create(_interactor, size);
   }
 

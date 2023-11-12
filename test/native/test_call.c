@@ -6,6 +6,11 @@
 
 static interactor_message_t* called_message = NULL;
 
+void test_call_native_reset()
+{
+    called_message = NULL;
+}
+
 bool test_call_native_check(interactor_native_t* interactor)
 {
     test_interactor_process(interactor);

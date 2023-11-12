@@ -46,10 +46,10 @@ class InteractorCall {
     _message.ref.input_size = units.length + 1;
   }
 
-  void setInputObject<T extends Struct>(Pointer<T> Function(Pointer<T> object)? configurator) {
+  void setInputObject<T extends Struct>(void Function(Pointer<T> object)? configurator) {
     var object = _payloads.allocate<T>();
     if (object == nullptr) throw Exception("TODO: Message");
-    object = configurator?.call(object) ?? object;
+    configurator?.call(object);
     _message.ref.input = Pointer.fromAddress(object.address);
     _message.ref.input_size = _payloads.size<T>();
   }
@@ -197,7 +197,7 @@ class InteractorNotification {
     nativeString[units.length] = 0;
   }
 
-  void setOutputObject<T extends Struct>(Pointer<T> Function(Pointer<T> object) configurator) {
+  void setOutputObject<T extends Struct>(void Function(Pointer<T> object) configurator) {
     configurator.call(_message.ref.output.cast());
   }
 

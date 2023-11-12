@@ -4353,6 +4353,16 @@ class TestBindings {
   late final _test_call_native_check = _test_call_native_checkPtr.asFunction<
       bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
+  void test_call_native_reset() {
+    return _test_call_native_reset();
+  }
+
+  late final _test_call_native_resetPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'test_call_native_reset');
+  late final _test_call_native_reset =
+      _test_call_native_resetPtr.asFunction<void Function()>();
+
   void test_call_native_echo(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
@@ -5430,6 +5440,8 @@ class _SymbolAddresses {
               ffi.Bool Function(
                   ffi.Pointer<linux_interactor.interactor_native_t>)>>
       get test_call_native_check => _library._test_call_native_checkPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get test_call_native_reset => _library._test_call_native_resetPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
@@ -7302,6 +7314,18 @@ final class interactor_native extends ffi.Struct {
 }
 
 typedef interactor_native_configuration_t = interactor_native_configuration;
+
+final class test_object_child extends ffi.Struct {
+  @ffi.Int()
+  external int field;
+}
+
+final class test_object extends ffi.Struct {
+  @ffi.Int()
+  external int field;
+
+  external test_object_child child_field;
+}
 
 const int MSG_OOB = 1;
 

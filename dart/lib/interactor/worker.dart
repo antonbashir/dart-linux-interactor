@@ -18,6 +18,7 @@ class InteractorWorker {
 
   late final InteractorConsumerRegistry _consumers;
   late final InteractorProducerFactory _producers;
+  late final InteractorPayloads _payloads;
 
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _interactor;
@@ -35,6 +36,7 @@ class InteractorWorker {
   bool get active => _active;
   int get id => _interactor.ref.id;
   int get descriptor => _descriptor;
+  InteractorPayloads get payloads => _payloads;
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((gracefulDuration) async {
@@ -63,6 +65,7 @@ class InteractorWorker {
       _interactor,
       Duration(milliseconds: _interactor.ref.timeout_checker_period_millis),
     );
+    _payloads = InteractorPayloads(_bindings, _interactor);
     _consumers = InteractorConsumerRegistry(
       _interactor,
       _bindings,
@@ -70,7 +73,7 @@ class InteractorWorker {
     _producers = InteractorProducerFactory(
       _interactor,
       _bindings,
-      InteractorPayloads(_bindings, _interactor),
+      _payloads,
       InteractorBuffers(_bindings, _interactor.ref.buffers, _interactor),
     );
   }
