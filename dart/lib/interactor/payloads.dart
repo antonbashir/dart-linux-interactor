@@ -27,4 +27,9 @@ class InteractorPayloads {
     if (pool == null) return;
     _bindings.interactor_dart_payload_free(pool, payload.address);
   }
+
+  void destroy() {
+    _pools.values.toList().forEach((pool) => _bindings.interactor_dart_payload_pool_destroy(pool));
+    _pools.clear();
+  }
 }

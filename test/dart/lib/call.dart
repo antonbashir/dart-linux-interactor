@@ -116,6 +116,37 @@ void testCallNative() {
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
+
+  test("dart(buffer) <-> native(buffer)", () async {
+    final interactor = Interactor();
+    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+    final bindings = loadBindings();
+    bindings.test_call_native_reset();
+    await worker.initialize();
+    worker.payloads.register<test_object>(sizeOf<test_object>());
+    worker.payloads.register<test_object_child>(sizeOf<test_object_child>());
+    final native = bindings.test_interactor_initialize();
+    final producer = worker.producer(TestNativeProducer(bindings));
+    worker.consumer(TestNativeConsumer());
+    worker.activate();
+    final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd,
+        configurator: (message) => message
+          ..setInputObject<test_object>(
+            (object) {
+              object.ref.field = 123;
+              object.ref.child_field = worker.payloads.allocate<test_object_child>().ref;
+              object.ref.child_field.field = 456;
+            },
+          ));
+    while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
+    final result = await call;
+    final output = result.getOutputObject<test_object>().ref;
+    expect(output.field, 123);
+    expect(output.child_field.field, 456);
+    result.free();
+    await interactor.shutdown();
+    bindings.test_interactor_destroy(native);
+  });
 }
 
 void testCallDart() {
