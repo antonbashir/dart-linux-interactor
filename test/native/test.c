@@ -1,5 +1,6 @@
 #include "test.h"
 #include <stdlib.h>
+#include "interactor_native.h"
 
 interactor_native_t* test_interactor_initialize()
 {
@@ -25,4 +26,10 @@ void test_interactor_process(interactor_native_t* interactor)
         }
         io_uring_cq_advance(interactor->ring, count);
     }
+}
+
+void test_interactor_destroy(interactor_native_t* interactor)
+{
+  interactor_native_destroy(interactor);
+  free(interactor);
 }

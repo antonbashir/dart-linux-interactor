@@ -6,10 +6,10 @@ class TestNativeProducer implements NativeProducer {
   final TestBindings _bindings;
   TestNativeProducer(this._bindings);
 
-  late final NativeMethodExecutor testCallNative;
+  late final NativeMethodExecutor testCallNativeEcho;
 
   @override
   void initialize(NativeProducerExecutor executor) {
-    testCallNative = executor.register(_bindings.addresses.test_call_native);
+    testCallNativeEcho = executor.register(_bindings.addresses.test_call_native_echo);
   }
 }

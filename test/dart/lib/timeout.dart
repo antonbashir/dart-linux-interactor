@@ -18,7 +18,7 @@ void testTimeoutNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.consumer(TestNativeConsumer());
     worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
+    producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
     bindings.test_call_native_check(native);
     await interactor.shutdown();
   });
@@ -32,7 +32,7 @@ void testTimeoutNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.consumer(TestNativeConsumer());
     worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
+    producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
     bindings.test_call_native_check(native);
     await interactor.shutdown();
   });
@@ -48,7 +48,7 @@ void testTimeoutDart() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.consumer(TestNativeConsumer());
     worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
+    producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
     bindings.test_call_native_check(native);
     await interactor.shutdown();
   });
@@ -62,7 +62,7 @@ void testTimeoutDart() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.consumer(TestNativeConsumer());
     worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
+    producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
     bindings.test_call_native_check(native);
     await interactor.shutdown();
   });
