@@ -164,8 +164,8 @@ class InteractorNotification {
 
   void setOutputDouble(double data) {
     Pointer<Double> pointer = _message.ref.output.cast();
-    _message.ref.input = pointer.cast();
-    _message.ref.input_size = sizeOf<Double>();
+    _message.ref.output = pointer.cast();
+    _message.ref.output_size = sizeOf<Double>();
   }
 
   void setOutputString(String data) {
