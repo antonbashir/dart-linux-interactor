@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:collection/collection.dart';
@@ -15,11 +16,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -33,11 +33,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBool(true));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -52,11 +51,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputInt(123));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -71,11 +69,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputDouble(123.45));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -90,11 +87,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test"));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -109,13 +105,12 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     worker.payloads.register<test_object>(sizeOf<test_object>());
     worker.payloads.register<test_object_child>(sizeOf<test_object_child>());
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd,
         configurator: (message) => message
@@ -140,11 +135,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3]));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -159,11 +153,10 @@ void testCallNative() {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
-    bindings.test_call_native_reset();
+    bindings.test_call_reset();
     await worker.initialize();
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBytes([1, 2, 3]));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
@@ -176,17 +169,60 @@ void testCallNative() {
 }
 
 void testCallDart() {
-  test("native(output) <-> dart(input)", () async {
-    // final interactor = Interactor();
-    // final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    // final bindings = loadBindings();
-    // await worker.initialize();
-    // final native = bindings.test_interactor_initialize();
-    // final producer = worker.producer(TestNativeProducer(bindings));
-    // worker.consumer(TestNativeConsumer());
-    // worker.activate();
-    // producer.testCallNative(native.ref.ring.ref.ring_fd);
-    // bindings.test_call_native_check(native);
-    // await interactor.shutdown();
+  test("native(null) <-> dart(null)", () async {
+    final interactor = Interactor();
+    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+    final bindings = loadBindings();
+    bindings.test_call_reset();
+    await worker.initialize();
+    final native = bindings.test_interactor_initialize();
+    final completer = Completer();
+    worker.consumer(TestNativeConsumer(
+      (message) {
+        completer.complete();
+      },
+    ));
+    worker.activate();
+    bindings.test_call_dart_bool(native, worker.descriptor, 0, true);
+    while (true) {
+      final result = bindings.test_call_dart_check(native);
+      if (result == nullptr) {
+        await Future.delayed(Duration(milliseconds: 100));
+        continue;
+      }
+      break;
+    }
+    await completer.future;
+    await interactor.shutdown();
+    bindings.test_interactor_destroy(native);
+  });
+
+  test("native(bool) <-> dart(bool)", () async {
+    final interactor = Interactor();
+    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+    final bindings = loadBindings();
+    bindings.test_call_reset();
+    await worker.initialize();
+    final native = bindings.test_interactor_initialize();
+    final completer = Completer();
+    worker.consumer(TestNativeConsumer(
+      (message) {
+        expect(message.getInputBool(), true);
+        completer.complete();
+      },
+    ));
+    worker.activate();
+    bindings.test_call_dart_bool(native, worker.descriptor, 0, true);
+    while (true) {
+      final result = bindings.test_call_dart_check(native);
+      if (result == nullptr) {
+        await Future.delayed(Duration(milliseconds: 100));
+        continue;
+      }
+      break;
+    }
+    await completer.future;
+    await interactor.shutdown();
+    bindings.test_interactor_destroy(native);
   });
 }

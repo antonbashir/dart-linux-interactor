@@ -12,7 +12,7 @@ TestBindings loadBindings() => TestBindings(DynamicLibrary.open("${dirname(Platf
 
 void main() {
   group("[call native]", testCallNative);
-  // group("[call dart]", testCallDart);
+  group("[call dart]", testCallDart);
   // group("[timeout native]", testTimeoutNative);
   // group("[timeout dart]", testTimeoutDart);
   // group("[threading native]", testThreadingNative);
