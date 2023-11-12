@@ -11,6 +11,24 @@ import 'package:linux_interactor_test/test.dart';
 import 'package:test/test.dart';
 
 void testCallNative() {
+  test("dart(null) <-> native(null)", () async {
+    final interactor = Interactor();
+    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+    final bindings = loadBindings();
+    bindings.test_call_native_reset();
+    await worker.initialize();
+    final native = bindings.test_interactor_initialize();
+    final producer = worker.producer(TestNativeProducer(bindings));
+    worker.consumer(TestNativeConsumer());
+    worker.activate();
+    final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
+    while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
+    final result = await call;
+    result.free();
+    await interactor.shutdown();
+    bindings.test_interactor_destroy(native);
+  });
+
   test("dart(bool) <-> native(bool)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
