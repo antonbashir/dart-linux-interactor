@@ -11,7 +11,7 @@ interactor_native_t* test_interactor_initialize()
 
 void test_interactor_process(interactor_native_t* interactor)
 {
-    if (interactor_native_peek_infinity(interactor) > 0)
+    if (interactor_native_peek_timeout(interactor) > 0)
     {
         struct io_uring_cqe* cqe;
         unsigned head;

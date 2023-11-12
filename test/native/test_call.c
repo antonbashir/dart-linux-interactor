@@ -4,16 +4,22 @@
 #include <stdlib.h>
 #include "test.h"
 
-static bool run_native_check = false;
+static interactor_message_t* called_message = NULL;
 
 bool test_call_native_check(interactor_native_t* interactor)
 {
     test_interactor_process(interactor);
-    return run_native_check;
+    if (called_message)
+    {
+        interactor_native_callback_to_dart(interactor, called_message->source, called_message);
+        interactor_native_submit(interactor);
+        return true;
+    }
+    return false;
 }
 
 void test_call_native(interactor_message_t* message)
 {
     message->output = (uintptr_t*)true;
-    run_native_check = (bool)message->input;
+    called_message = message;
 }

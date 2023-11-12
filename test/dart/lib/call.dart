@@ -19,7 +19,7 @@ void testCallNative() {
     worker.consumer(TestNativeConsumer());
     worker.activate();
     final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setBool(true));
-    bindings.test_call_native_check(native);
+    while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(result.getBool(), true);
     result.free();

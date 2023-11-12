@@ -19,6 +19,7 @@ extern "C"
         int ring_flags;
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
+        uint64_t cqe_wait_timeout_millis;
         size_t quota_size;
         size_t preallocation_size;
         size_t slab_size;

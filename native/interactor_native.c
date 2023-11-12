@@ -19,6 +19,7 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     interactor->buffers = malloc(sizeof(struct iovec) * configuration->buffers_count);
     interactor->cqe_wait_count = configuration->cqe_wait_count;
     interactor->cqe_peek_count = configuration->cqe_peek_count;
+    interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;
     if (!interactor->buffers)
     {
         return -ENOMEM;
@@ -81,6 +82,7 @@ int interactor_native_initialize_default(interactor_native_t* interactor, uint8_
         .ring_size = 16384,
         .cqe_peek_count = 1024,
         .cqe_wait_count = 1,
+        .cqe_wait_timeout_millis = 1,
         .preallocation_size = 64 * 1024,
         .slab_size = 64 * 1024,
         .quota_size = 16 * 1024 * 1024,
@@ -259,7 +261,7 @@ void interactor_native_cqe_advance(struct io_uring* ring, int count)
 
 int interactor_native_submit(interactor_native_t* interactor)
 {
-  return io_uring_submit(interactor->ring);
+    return io_uring_submit(interactor->ring);
 }
 
 void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)

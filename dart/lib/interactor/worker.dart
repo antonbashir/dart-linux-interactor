@@ -8,6 +8,7 @@ import 'constants.dart';
 import 'declaration.dart';
 import 'factory.dart';
 import 'lookup.dart';
+import 'messages.dart';
 import 'registry.dart';
 import 'timeout.dart';
 

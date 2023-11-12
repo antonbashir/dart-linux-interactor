@@ -8,13 +8,14 @@ class NativeProducerExecutor {
   final int _id;
   final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
-  final Map<Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>>, NativeMethodExecutor> _methods = {};
+  final Map<int, NativeMethodExecutor> _methods = {};
 
   NativeProducerExecutor(this._id, this._interactorPointer, this._bindings);
 
   NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
-    _methods[pointer] = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings);
-    return _methods[pointer]!;
+    final executor = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings);
+    _methods[pointer.address] = executor;
+    return executor;
   }
 
   void callback(Pointer<interactor_message_t> message) => _methods[message.ref.method]?.callback(message);
