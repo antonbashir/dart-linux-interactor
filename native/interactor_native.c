@@ -186,6 +186,16 @@ int interactor_native_peek(interactor_native_t* interactor)
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
 }
 
+int interactor_native_peek_timeout(interactor_native_t* interactor)
+{
+    struct __kernel_timespec timeout = {
+        .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
+        .tv_sec = 0,
+    };
+    io_uring_submit_and_wait_timeout(interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
+    return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
+}
+
 void interactor_native_check_event_timeouts(interactor_native_t* interactor)
 {
     mh_int_t index;
@@ -247,12 +257,6 @@ void interactor_native_cqe_advance(struct io_uring* ring, int count)
     io_uring_cq_advance(ring, count);
 }
 
-void interactor_native_close_descriptor(int fd)
-{
-    shutdown(fd, SHUT_RDWR);
-    close(fd);
-}
-
 void interactor_native_process(interactor_native_t* interactor)
 {
     if (interactor_native_peek(interactor) > 0)
@@ -285,4 +289,10 @@ void interactor_native_callback_to_dart(interactor_native_t* interactor, int tar
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALLBACK, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
     io_uring_submit(interactor->ring);
+}
+
+void interactor_native_close_descriptor(int fd)
+{
+    shutdown(fd, SHUT_RDWR);
+    close(fd);
 }

@@ -102,12 +102,12 @@ class InteractorWorker {
       final result = cqe.ref.res;
       if (result & interactorDartCall > 0) {
         Pointer<interactor_message_t> message = Pointer.fromAddress(data);
-        _consumers.execute(message);
+        _consumers.call(message);
         continue;
       }
       if (result & interactorDartCallback > 0) {
         Pointer<interactor_message_t> message = Pointer.fromAddress(data);
-        _consumers.execute(message);
+        _producers.callback(message);
         continue;
       }
     }

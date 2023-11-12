@@ -16,15 +16,19 @@ class InteractorProducerFactory {
     this._buffers,
   );
 
-  final _producer = <NativeProducerExecutor>[];
+  final _producers = <int, NativeProducerExecutor>{};
 
   T register<T extends NativeProducer>(T provider) {
+    final id = _producers.length;
     final executor = NativeProducerExecutor(
-      _producer.length,
+      id,
       _interactorPointer,
       _bindings,
       _buffers,
     );
+    _producers[id] = executor;
     return provider..initialize(executor);
   }
+
+  void callback(Pointer<interactor_message_t> message) => _producers[message.ref.owner]?.callback(message);
 }

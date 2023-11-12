@@ -10,6 +10,8 @@ extern "C"
 
     typedef struct interactor_message
     {
+        uint64_t id;
+        uint64_t source;
         uint64_t owner;
         uint64_t method;
         uintptr_t* input;

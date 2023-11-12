@@ -9,49 +9,7 @@ import 'package:linux_interactor_test/test.dart';
 import 'package:test/test.dart';
 
 void testCallNative() {
-  test("dart -> native(input)", () async {
-    final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    final bindings = loadBindings();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
-    worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
-    await interactor.shutdown();
-  });
-
-  test("async dart -> native(input)", () async {
-    final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    final bindings = loadBindings();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
-    worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
-    await interactor.shutdown();
-  });
-
   test("dart(output) <-> native(input)", () async {
-    final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    final bindings = loadBindings();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
-    worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
-    await interactor.shutdown();
-  });
-
-  test("async dart(output) <-> native(input)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();
@@ -67,49 +25,7 @@ void testCallNative() {
 }
 
 void testCallDart() {
-  test("native -> dart(input)", () async {
-    final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    final bindings = loadBindings();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
-    worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
-    await interactor.shutdown();
-  });
-
-  test("async native -> dart(input)", () async {
-    final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    final bindings = loadBindings();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
-    worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
-    await interactor.shutdown();
-  });
-
   test("native(output) <-> dart(input)", () async {
-    final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-    final bindings = loadBindings();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.consumer(TestNativeConsumer());
-    worker.activate();
-    producer.testCallNative(native.ref.ring.ref.ring_fd);
-    bindings.test_run_native_check(native);
-    await interactor.shutdown();
-  });
-
-  test("async native(output) <-> dart(input)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
     final bindings = loadBindings();

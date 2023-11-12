@@ -2761,6 +2761,23 @@ class InteractorBindings {
   late final _interactor_native_peek = _interactor_native_peekPtr
       .asFunction<int Function(ffi.Pointer<interactor_native_t>)>(isLeaf: true);
 
+  int interactor_native_peek_timeout(
+    ffi.Pointer<interactor_native_t> interactor,
+  ) {
+    return _interactor_native_peek_timeout(
+      interactor,
+    );
+  }
+
+  late final _interactor_native_peek_timeoutPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>(
+      'interactor_native_peek_timeout');
+  late final _interactor_native_peek_timeout =
+      _interactor_native_peek_timeoutPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>)>(
+              isLeaf: true);
+
   void interactor_native_process(
     ffi.Pointer<interactor_native_t> interactor,
   ) {
@@ -13331,6 +13348,11 @@ class _SymbolAddresses {
       get interactor_native_peek => _library._interactor_native_peekPtr;
   ffi.Pointer<
           ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>
+      get interactor_native_peek_timeout =>
+          _library._interactor_native_peek_timeoutPtr;
+  ffi.Pointer<
+          ffi
           .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_process => _library._interactor_native_processPtr;
   ffi.Pointer<
@@ -15525,6 +15547,12 @@ final class interactor_buffers_pool extends ffi.Struct {
 }
 
 final class interactor_message extends ffi.Struct {
+  @ffi.Uint64()
+  external int id;
+
+  @ffi.Uint64()
+  external int source;
+
   @ffi.Uint64()
   external int owner;
 
@@ -20974,7 +21002,7 @@ const int WAL_SYNC_FLAG = 1052672;
 
 const int HAVE_CLOCK_GETTIME_DECL = 1;
 
-const String SYSCONF_DIR = '';
+const String SYSCONF_DIR = 'etc';
 
 const String INSTALL_PREFIX = '/usr/local';
 
