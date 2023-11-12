@@ -78,7 +78,7 @@ extern "C"
     void interactor_native_close_descriptor(int fd);
 
     void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message);
-    void interactor_native_callback_to_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message);
+    void interactor_native_callback_to_dart(interactor_native_t* interactor, interactor_message_t* message);
 
 #if defined(__cplusplus)
 }

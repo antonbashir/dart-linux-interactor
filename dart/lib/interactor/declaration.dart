@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'messages.dart';
+import 'message.dart';
 import 'producer.dart';
 
 abstract interface class NativeConsumer {

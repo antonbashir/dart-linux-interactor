@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include "interactor_common.h"
 #include "interactor_constants.h"
+#include "interactor_data_pool.h"
 #include "interactor_message.h"
 #include "liburing.h"
 
@@ -32,6 +33,7 @@ int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_co
 
     interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size);
     interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory);
+    interactor_data_pool_create(&interactor->data_pool, &interactor->memory);
 
     interactor->events = mh_events_new();
     if (!interactor->events)
@@ -115,6 +117,7 @@ void interactor_dart_free_message(interactor_dart_t* interactor, interactor_mess
 struct interactor_payloads_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size)
 {
     struct interactor_payloads_pool* pool = malloc(sizeof(struct interactor_payloads_pool));
+    pool->size = size;
     interactor_payloads_pool_create(pool, &interactor->memory, size);
     return pool;
 }
@@ -133,6 +136,16 @@ void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool)
 {
     interactor_payloads_pool_destroy(pool);
     free(pool);
+}
+
+intptr_t interactor_dart_data_allocate(interactor_dart_t* interactor, size_t size)
+{
+    return interactor_data_pool_allocate(&interactor->data_pool, size);
+}
+
+void interactor_dart_data_free(interactor_dart_t* interactor, intptr_t pointer, size_t size)
+{
+    interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
 
 static inline void interactor_dart_add_event(interactor_dart_t* interactor, int fd, uint64_t data, int64_t timeout)
@@ -229,6 +242,7 @@ void interactor_dart_destroy(interactor_dart_t* interactor)
         free(interactor->buffers[index].iov_base);
     }
     interactor_buffers_pool_destroy(&interactor->buffers_pool);
+    interactor_data_pool_destroy(&interactor->data_pool);
     mh_events_delete(interactor->events);
     free(interactor->cqes);
     free(interactor->buffers);
@@ -243,15 +257,18 @@ void interactor_dart_cqe_advance(struct io_uring* ring, int count)
 
 void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message)
 {
+    message->source = interactor->ring->ring_fd;
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_NATIVE_CALL, (intptr_t)message, 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
 }
 
-void interactor_dart_callback_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message)
+void interactor_dart_callback_to_native(interactor_dart_t* interactor, interactor_message_t* message)
 {
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
-    io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_NATIVE_CALLBACK, (intptr_t)message, 0);
+    uint64_t target = message->source;
+    message->source = interactor->ring->ring_fd;
+    io_uring_prep_msg_ring(sqe, target, INTERACTOR_NATIVE_CALLBACK, (intptr_t)message, 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
 }
 

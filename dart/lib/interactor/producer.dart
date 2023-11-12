@@ -2,18 +2,23 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'bindings.dart';
-import 'messages.dart';
+import 'buffers.dart';
+import 'message.dart';
+import 'payloads.dart';
 
 class NativeProducerExecutor {
+  final Map<int, NativeMethodExecutor> _methods = {};
+
   final int _id;
   final Pointer<interactor_dart_t> _interactorPointer;
   final InteractorBindings _bindings;
-  final Map<int, NativeMethodExecutor> _methods = {};
+  final InteractorPayloads _payloads;
+  final InteractorBuffers _buffers;
 
-  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings);
+  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._payloads, this._buffers);
 
   NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
-    final executor = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings);
+    final executor = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings, _payloads, _buffers);
     _methods[pointer.address] = executor;
     return executor;
   }
@@ -26,22 +31,23 @@ class NativeMethodExecutor {
 
   final int _methodId;
   final int _executorId;
-  final Pointer<interactor_dart_t> _interactorPointer;
+  final Pointer<interactor_dart_t> _interactor;
   final InteractorBindings _bindings;
+  final InteractorPayloads _payloads;
+  final InteractorBuffers _buffers;
 
-  NativeMethodExecutor(this._methodId, this._executorId, this._interactorPointer, this._bindings);
+  NativeMethodExecutor(this._methodId, this._executorId, this._interactor, this._bindings, this._payloads, this._buffers);
 
   Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator}) {
-    final messagePointer = _bindings.interactor_dart_allocate_message(_interactorPointer);
+    final messagePointer = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
-    var message = InteractorCall(_interactorPointer, messagePointer, _bindings, completer);
-    if (configurator != null) message = configurator(message);
+    var message = InteractorCall(_interactor, messagePointer, _bindings, _payloads, _buffers, completer);
+    message = configurator?.call(message) ?? message;
     messagePointer.ref.id = completer.hashCode;
-    messagePointer.ref.source = _interactorPointer.ref.ring.ref.ring_fd;
     messagePointer.ref.owner = _executorId;
     messagePointer.ref.method = _methodId;
     _calls[completer.hashCode] = message;
-    _bindings.interactor_dart_call_native(_interactorPointer, target, messagePointer);
+    _bindings.interactor_dart_call_native(_interactor, target, messagePointer);
     return completer.future.whenComplete(() => _calls.remove(completer.hashCode));
   }
 

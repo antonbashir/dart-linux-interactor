@@ -2,6 +2,7 @@
 #define INTERACTOR_DART_IMPLEMENTATION_H
 
 #include <interactor_buffers_pool.h>
+#include <interactor_data_pool.h>
 #include <interactor_memory.h>
 #include <interactor_messages_pool.h>
 #include <interactor_payloads_pool.h>
@@ -54,6 +55,7 @@ extern "C"
         bool trace;
         struct interactor_messages_pool messages_pool;
         struct interactor_buffers_pool buffers_pool;
+        struct interactor_data_pool data_pool;
         struct interactor_memory memory;
     } interactor_dart_t;
 
@@ -77,6 +79,14 @@ extern "C"
     void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer);
     void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool);
 
+    struct interactor_payloads_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size);
+    intptr_t interactor_dart_payload_allocate(struct interactor_payloads_pool* pool);
+    void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer);
+    void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool);
+
+    intptr_t interactor_dart_data_allocate(interactor_dart_t* interactor, size_t size);
+    void interactor_dart_data_free(interactor_dart_t* interactor, intptr_t pointer, size_t size);
+
     int interactor_dart_peek(interactor_dart_t* interactor);
 
     void interactor_dart_destroy(interactor_dart_t* interactor);
@@ -84,8 +94,8 @@ extern "C"
     void interactor_dart_cqe_advance(struct io_uring* ring, int count);
 
     void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message);
-    
-    void interactor_dart_callback_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message);
+
+    void interactor_dart_callback_to_native(interactor_dart_t* interactor, interactor_message_t* message);
 
     void interactor_dart_close_descriptor(int fd);
 

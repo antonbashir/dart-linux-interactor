@@ -12,6 +12,7 @@ extern "C"
     struct interactor_payloads_pool
     {
         struct interactor_mempool pool;
+        size_t size;
     };
 
     int interactor_payloads_pool_create(struct interactor_payloads_pool* pool, struct interactor_memory* memory, size_t payload_size);
