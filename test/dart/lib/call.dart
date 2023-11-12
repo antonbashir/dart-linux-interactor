@@ -24,7 +24,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -43,7 +43,7 @@ void testCallNative() {
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(result.getOutputBool(), true);
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -62,7 +62,7 @@ void testCallNative() {
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(result.getOutputInt(), 123);
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -81,7 +81,7 @@ void testCallNative() {
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(result.getOutputDouble(), 123.45);
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -100,7 +100,7 @@ void testCallNative() {
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(result.getOutputString(), "test");
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -131,7 +131,7 @@ void testCallNative() {
     final output = result.getOutputObject<test_object>().ref;
     expect(output.field, 123);
     expect(output.child_field.field, 456);
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -150,7 +150,7 @@ void testCallNative() {
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(true, ListEquality().equals(result.getOutputBuffer(), [1, 2, 3]));
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -169,7 +169,7 @@ void testCallNative() {
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
     expect(true, ListEquality().equals(result.getOutputBytes(), [1, 2, 3]));
-    result.free();
+    result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });

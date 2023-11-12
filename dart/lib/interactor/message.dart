@@ -81,11 +81,11 @@ class InteractorCall {
   }
 
   void releaseInputBuffer() {
-    _buffers.release(_message.ref.output.address);
+    _buffers.release(_message.ref.input.address);
   }
 
   void releaseInputBytes() {
-    _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
+    _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
   }
 
   void releaseOutputDouble() {
@@ -142,7 +142,7 @@ class InteractorCall {
     _completer.complete(this);
   }
 
-  void free() => _bindings.interactor_dart_free_message(_interactor, _message);
+  void release() => _bindings.interactor_dart_free_message(_interactor, _message);
 }
 
 class InteractorNotification {
