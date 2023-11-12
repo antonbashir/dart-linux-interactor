@@ -31,7 +31,6 @@ extern "C"
     void test_call_dart_double(interactor_native_t* interactor, int32_t target, uintptr_t method, double value);
     void test_call_dart_string(interactor_native_t* interactor, int32_t target, uintptr_t method, const char* value);
     void test_call_dart_object(interactor_native_t* interactor, int32_t target, uintptr_t method, int field);
-    void test_call_dart_buffer(interactor_native_t* interactor, int32_t target, uintptr_t method, const uint8_t* value, size_t count);
     void test_call_dart_bytes(interactor_native_t* interactor, int32_t target, uintptr_t method, const uint8_t* value, size_t count);
     interactor_message_t* test_call_dart_check(interactor_native_t* interactor);
 
