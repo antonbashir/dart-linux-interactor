@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'bindings.dart';
+import 'constants.dart';
 import 'message.dart';
 
 class NativeConsumerExecutor {
@@ -9,6 +10,7 @@ class NativeConsumerExecutor {
 
   NativeConsumerExecutor(this._callbacks);
 
+  @pragma(preferInlinePragma)
   void call(Pointer<interactor_message_t> message) => _callbacks[message.ref.method].call(message);
 }
 
@@ -19,5 +21,6 @@ class NativeCallbackExecutor {
 
   NativeCallbackExecutor(this._bindings, this._interactor, this._executor);
 
+  @pragma(preferInlinePragma)
   void call(Pointer<interactor_message_t> message) => Future.value(_executor(InteractorNotification(message))).whenComplete(() => _bindings.interactor_dart_callback_to_native(_interactor, message));
 }

@@ -7,7 +7,6 @@ import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
 import 'declaration.dart';
-import 'factory.dart';
 import 'lookup.dart';
 import 'payloads.dart';
 import 'registry.dart';
@@ -17,7 +16,7 @@ class InteractorWorker {
   final _fromInteractor = ReceivePort();
 
   late final InteractorConsumerRegistry _consumers;
-  late final InteractorProducerFactory _producers;
+  late final InteractorProducerRegistry _producers;
   late final InteractorPayloads _payloads;
   late final InteractorBuffers _buffers;
 
@@ -74,7 +73,7 @@ class InteractorWorker {
       _interactor,
       _bindings,
     );
-    _producers = InteractorProducerFactory(
+    _producers = InteractorProducerRegistry(
       _interactor,
       _bindings,
       _payloads,

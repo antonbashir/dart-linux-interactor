@@ -7,11 +7,11 @@ class InteractorInitializationException implements Exception {
   String toString() => message;
 }
 
-class InteractorOutOfMemory implements Exception {
+class InteractorRuntimeException implements Exception {
   final String message;
 
-  InteractorOutOfMemory() : this.message = StackTrace.current.toString();
+  InteractorRuntimeException(this.message);
 
   @override
-  String toString() => "Out of memory:\n${message}";
+  String toString() => message;
 }

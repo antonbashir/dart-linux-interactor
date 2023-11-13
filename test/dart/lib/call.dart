@@ -42,7 +42,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBool(true));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(result.getOutputBool(), true);
+    expect(result.outputBool, true);
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -60,7 +60,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputInt(123));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(result.getOutputInt(), 123);
+    expect(result.outputInt, 123);
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -78,7 +78,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputDouble(123.45));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(result.getOutputDouble(), 123.45);
+    expect(result.outputDouble, 123.45);
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -96,7 +96,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test"));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(result.getOutputString(), "test");
+    expect(result.outputString, "test");
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -144,7 +144,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3]));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(true, ListEquality().equals(result.getOutputBuffer(), [1, 2, 3]));
+    expect(true, ListEquality().equals(result.outputBuffer, [1, 2, 3]));
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -162,7 +162,7 @@ void testCallNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBytes([1, 2, 3]));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(true, ListEquality().equals(result.getOutputBytes(), [1, 2, 3]));
+    expect(true, ListEquality().equals(result.outputBytes, [1, 2, 3]));
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -208,7 +208,7 @@ void testCallDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(message.getInputBool(), true);
+        expect(message.inputBool, true);
         completer.complete();
       },
     ));
@@ -237,7 +237,7 @@ void testCallDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(message.getInputInt(), 123);
+        expect(message.inputInt, 123);
         completer.complete();
       },
     ));
@@ -266,7 +266,7 @@ void testCallDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(message.getInputDouble(), 123.45);
+        expect(message.inputDouble, 123.45);
         completer.complete();
       },
     ));
@@ -295,7 +295,7 @@ void testCallDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(message.getInputString(), "test");
+        expect(message.inputString, "test");
         completer.complete();
       },
     ));
@@ -353,7 +353,7 @@ void testCallDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(true, ListEquality().equals(message.getInputBytes(), [1, 2, 3]));
+        expect(true, ListEquality().equals(message.inputBytes, [1, 2, 3]));
         completer.complete();
       },
     ));

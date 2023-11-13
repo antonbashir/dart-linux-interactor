@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'bindings.dart';
 import 'buffers.dart';
+import 'constants.dart';
 import 'message.dart';
 import 'payloads.dart';
 
@@ -17,12 +18,14 @@ class NativeProducerExecutor {
 
   NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._payloads, this._buffers);
 
+  @pragma(preferInlinePragma)
   NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
     final executor = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings, _payloads, _buffers);
     _methods[pointer.address] = executor;
     return executor;
   }
 
+  @pragma(preferInlinePragma)
   void callback(Pointer<interactor_message_t> message) => _methods[message.ref.method]?.callback(message);
 }
 
@@ -38,6 +41,7 @@ class NativeMethodExecutor {
 
   NativeMethodExecutor(this._methodId, this._executorId, this._interactor, this._bindings, this._payloads, this._buffers);
 
+  @pragma(preferInlinePragma)
   Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator}) {
     final messagePointer = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
@@ -51,5 +55,6 @@ class NativeMethodExecutor {
     return completer.future.whenComplete(() => _calls.remove(completer.hashCode));
   }
 
+  @pragma(preferInlinePragma)
   void callback(Pointer<interactor_message_t> message) => _calls[message.ref.id]?.callback(message);
 }

@@ -23,7 +23,7 @@ void testThreadingNative() {
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test"));
     while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
     final result = await call;
-    expect(result.getOutputString(), "test");
+    expect(result.outputString, "test");
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -41,7 +41,7 @@ void testThreadingDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(message.getInputString(), "test");
+        expect(message.inputString, "test");
         completer.complete();
       },
     ));
