@@ -79,11 +79,6 @@ extern "C"
     void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer);
     void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool);
 
-    struct interactor_payloads_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size);
-    intptr_t interactor_dart_payload_allocate(struct interactor_payloads_pool* pool);
-    void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer);
-    void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool);
-
     intptr_t interactor_dart_data_allocate(interactor_dart_t* interactor, size_t size);
     void interactor_dart_data_free(interactor_dart_t* interactor, intptr_t pointer, size_t size);
 
@@ -93,7 +88,7 @@ extern "C"
 
     void interactor_dart_cqe_advance(struct io_uring* ring, int count);
 
-    void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message);
+    void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout);
 
     void interactor_dart_callback_to_native(interactor_dart_t* interactor, interactor_message_t* message);
 

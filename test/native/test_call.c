@@ -39,7 +39,7 @@ void test_call_dart_null(interactor_native_t* interactor, int32_t target, uintpt
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 
@@ -52,7 +52,7 @@ void test_call_dart_bool(interactor_native_t* interactor, int32_t target, uintpt
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 
@@ -65,7 +65,7 @@ void test_call_dart_int(interactor_native_t* interactor, int32_t target, uintptr
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 
@@ -79,7 +79,7 @@ void test_call_dart_double(interactor_native_t* interactor, int32_t target, uint
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 
@@ -93,7 +93,7 @@ void test_call_dart_string(interactor_native_t* interactor, int32_t target, uint
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 
@@ -107,7 +107,7 @@ void test_call_dart_object(interactor_native_t* interactor, int32_t target, uint
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 
@@ -121,7 +121,7 @@ void test_call_dart_bytes(interactor_native_t* interactor, int32_t target, uintp
     message->source = interactor->ring->ring_fd;
     message->owner = 0;
     message->method = method;
-    interactor_native_call_dart(interactor, target, message);
+    interactor_native_call_dart(interactor, target, message, -1);
     interactor_native_submit(interactor);
 }
 

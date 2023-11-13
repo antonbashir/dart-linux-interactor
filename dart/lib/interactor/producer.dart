@@ -42,7 +42,7 @@ class NativeMethodExecutor {
   NativeMethodExecutor(this._methodId, this._executorId, this._interactor, this._bindings, this._payloads, this._buffers);
 
   @pragma(preferInlinePragma)
-  Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator}) {
+  Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator, Duration? timeout}) {
     final messagePointer = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
     var message = InteractorCall(_interactor, messagePointer, _bindings, _payloads, _buffers, completer);
@@ -51,7 +51,7 @@ class NativeMethodExecutor {
     messagePointer.ref.owner = _executorId;
     messagePointer.ref.method = _methodId;
     _calls[completer.hashCode] = message;
-    _bindings.interactor_dart_call_native(_interactor, target, messagePointer);
+    _bindings.interactor_dart_call_native(_interactor, target, messagePointer, timeout?.inMilliseconds ?? interactorTimeoutInfinity);
     return completer.future.whenComplete(() => _calls.remove(completer.hashCode));
   }
 

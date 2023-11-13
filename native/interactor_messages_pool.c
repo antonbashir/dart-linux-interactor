@@ -18,7 +18,6 @@ void interactor_messages_pool_destroy(struct interactor_messages_pool* pool)
 
 interactor_message_t* interactor_messages_pool_allocate(struct interactor_messages_pool* pool)
 {
-    
     return (interactor_message_t*)interactor_mempool_allocate(&pool->pool);
 }
 

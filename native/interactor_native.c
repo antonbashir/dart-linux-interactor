@@ -169,7 +169,7 @@ static inline void interactor_native_add_event(interactor_native_t* interactor, 
     mh_events_put((struct mh_events_t*)interactor->events, &node, NULL, 0);
 }
 
-void interactor_native_cancel_by_id(interactor_native_t* interactor, int fd)
+void interactor_native_cancel_by_id(interactor_native_t* interactor, int id)
 {
     mh_int_t index;
     mh_int_t to_delete[((struct mh_events_t*)interactor->events)->size];
@@ -177,7 +177,7 @@ void interactor_native_cancel_by_id(interactor_native_t* interactor, int fd)
     mh_foreach(((struct mh_events_t*)interactor->events), index)
     {
         struct mh_events_node_t* node = mh_events_node(interactor->events, index);
-        if (node->id == fd)
+        if (node->id == id)
         {
             struct io_uring* ring = interactor->ring;
             struct io_uring_sqe* sqe = interactor_provide_sqe(ring);
@@ -275,12 +275,13 @@ int interactor_native_submit(interactor_native_t* interactor)
     return io_uring_submit(interactor->ring);
 }
 
-void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)
+void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout)
 {
     message->source = interactor->ring->ring_fd;
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALL, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
+    interactor_native_add_event(interactor, message->id, (uint64_t)((intptr_t)message), timeout);
 }
 
 void interactor_native_callback_to_dart(interactor_native_t* interactor, interactor_message_t* message)
@@ -290,6 +291,7 @@ void interactor_native_callback_to_dart(interactor_native_t* interactor, interac
     message->source = interactor->ring->ring_fd;
     io_uring_prep_msg_ring(sqe, target, INTERACTOR_DART_CALLBACK, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
+    interactor_native_remove_event(interactor, (uint64_t)((intptr_t)message));
 }
 
 void interactor_native_close_descriptor(int fd)
