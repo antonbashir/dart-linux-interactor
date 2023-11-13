@@ -48,7 +48,8 @@ class InteractorPackageConfigFields {
 class InteractorMessages {
   InteractorMessages._();
 
-  static final workerMemoryError = "[worker] out of memory";
+  static const workerMemoryError = "[worker] out of memory";
+  static const interactorMemoryError = "[interactor] out of memory";
   static workerError(int result, InteractorBindings bindings) => "[worker] code = $result, message = ${_kernelErrorToString(result, bindings)}";
   static workerTrace(int id, int result, int data, int fd) => "worker = $id, result = $result,  bid = ${((data >> 16) & 0xffff)}, fd = $fd";
 
@@ -77,5 +78,3 @@ const ringSetupSqe128 = 1 << 10;
 const ringSetupCqe32 = 1 << 11;
 const ringSetupSingleIssuer = 1 << 12;
 const ringSetupDeferTaskrun = 1 << 13;
-
-const interactorMemoryException = "[interactor]: out of memory";

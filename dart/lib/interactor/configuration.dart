@@ -10,7 +10,6 @@ class InteractorWorkerConfiguration {
   final Duration cqeWaitTimeout;
   final Duration baseDelay;
   final Duration maxDelay;
-  final bool trace;
   final int memorySlabSize;
   final int memoryPreallocationSize;
   final int memoryQuotaSize;
@@ -27,7 +26,6 @@ class InteractorWorkerConfiguration {
     required this.cqePeekCount,
     required this.cqeWaitCount,
     required this.cqeWaitTimeout,
-    required this.trace,
     required this.memorySlabSize,
     required this.memoryPreallocationSize,
     required this.memoryQuotaSize,
@@ -45,7 +43,6 @@ class InteractorWorkerConfiguration {
     int? cqePeekCount,
     int? cqeWaitCount,
     Duration? cqeWaitTimeout,
-    bool? trace,
     int? memorySlabSize,
     int? memoryPreallocationSize,
     int? memoryQuotaSize,
@@ -62,7 +59,6 @@ class InteractorWorkerConfiguration {
         cqePeekCount: cqePeekCount ?? this.cqePeekCount,
         cqeWaitCount: cqeWaitCount ?? this.cqeWaitCount,
         cqeWaitTimeout: cqeWaitTimeout ?? this.cqeWaitTimeout,
-        trace: trace ?? this.trace,
         memorySlabSize: memorySlabSize ?? this.memorySlabSize,
         memoryPreallocationSize: memoryPreallocationSize ?? this.memoryPreallocationSize,
         memoryQuotaSize: memoryQuotaSize ?? this.memoryQuotaSize,

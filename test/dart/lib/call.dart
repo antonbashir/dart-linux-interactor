@@ -24,7 +24,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd);
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     result.release();
     await interactor.shutdown();
@@ -41,7 +41,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBool(true));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputBool, true);
     result.release();
@@ -59,7 +59,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputInt(123));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputInt, 123);
     result.release();
@@ -77,7 +77,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputDouble(123.45));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputDouble, 123.45);
     result.release();
@@ -95,7 +95,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test"));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputString, "test");
     result.release();
@@ -123,7 +123,7 @@ void testCallNative() {
               object.ref.child_field.field = 456;
             },
           ));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     final output = result.getOutputObject<test_object>().ref;
     expect(output.field, 123);
@@ -143,7 +143,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3]));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBuffer, [1, 2, 3]));
     result.release();
@@ -161,7 +161,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBytes([1, 2, 3]));
-    await awaitNativeCall(bindings, native);
+    await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBytes, [1, 2, 3]));
     result.release();
@@ -182,7 +182,7 @@ void testCallDart() {
     worker.consumer(TestNativeConsumer((message) => completer.complete()));
     worker.activate();
     bindings.test_call_dart_bool(native, worker.descriptor, 0, true);
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -204,7 +204,7 @@ void testCallDart() {
     ));
     worker.activate();
     bindings.test_call_dart_bool(native, worker.descriptor, 0, true);
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -226,7 +226,7 @@ void testCallDart() {
     ));
     worker.activate();
     bindings.test_call_dart_int(native, worker.descriptor, 0, 123);
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -248,7 +248,7 @@ void testCallDart() {
     ));
     worker.activate();
     bindings.test_call_dart_double(native, worker.descriptor, 0, 123.45);
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -270,7 +270,7 @@ void testCallDart() {
     ));
     worker.activate();
     bindings.test_call_dart_string(native, worker.descriptor, 0, "test".toNativeUtf8().cast());
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -292,7 +292,7 @@ void testCallDart() {
     ));
     worker.activate();
     bindings.test_call_dart_object(native, worker.descriptor, 0, 123);
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -314,14 +314,14 @@ void testCallDart() {
     ));
     worker.activate();
     bindings.test_call_dart_bytes(native, worker.descriptor, 0, (malloc<Uint8>(3)..asTypedList(3).setAll(0, [1, 2, 3])), 3);
-    await awaitDartCall(bindings, native);
+    await _awaitDartCall(bindings, native);
     await completer.future;
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
 }
 
-Future<void> awaitDartCall(TestBindings bindings, Pointer<interactor_native_t> native) async {
+Future<void> _awaitDartCall(TestBindings bindings, Pointer<interactor_native_t> native) async {
   while (true) {
     final result = bindings.test_call_dart_check(native);
     if (result == nullptr) {
@@ -332,6 +332,6 @@ Future<void> awaitDartCall(TestBindings bindings, Pointer<interactor_native_t> n
   }
 }
 
-Future<void> awaitNativeCall(TestBindings bindings, Pointer<interactor_native_t> native) async {
+Future<void> _awaitNativeCall(TestBindings bindings, Pointer<interactor_native_t> native) async {
   while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
 }
