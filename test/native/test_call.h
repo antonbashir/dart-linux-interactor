@@ -24,7 +24,7 @@ extern "C"
     bool test_call_native_check(interactor_native_t* interactor);
     void test_call_native_echo(interactor_message_t* message);
 
-    void test_call_dart_callback(interactor_message_t* message);
+    void test_call_dart_callback(interactor_message_t* message, interactor_native_t *interactor);
     void test_call_dart_null(interactor_native_t* interactor, int32_t target, uintptr_t method);
     void test_call_dart_bool(interactor_native_t* interactor, int32_t target, uintptr_t method, bool value);
     void test_call_dart_int(interactor_native_t* interactor, int32_t target, uintptr_t method, int value);

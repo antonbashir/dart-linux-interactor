@@ -291,7 +291,6 @@ void interactor_native_callback_to_dart(interactor_native_t* interactor, interac
     message->source = interactor->ring->ring_fd;
     io_uring_prep_msg_ring(sqe, target, INTERACTOR_DART_CALLBACK, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-    interactor_native_remove_event(interactor, (uint64_t)((intptr_t)message));
 }
 
 void interactor_native_close_descriptor(int fd)

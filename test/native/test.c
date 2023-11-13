@@ -33,7 +33,7 @@ void test_interactor_process_calls(interactor_native_t* interactor)
     }
 }
 
-void test_interactor_process_callbacks(interactor_native_t* interactor, void(on_callback)(interactor_message_t*))
+void test_interactor_process_callbacks(interactor_native_t* interactor, void(on_callback)(interactor_message_t*, interactor_native_t*))
 {
     if (interactor_native_peek_timeout(interactor) > 0)
     {
@@ -46,7 +46,7 @@ void test_interactor_process_callbacks(interactor_native_t* interactor, void(on_
             if (cqe->res == INTERACTOR_NATIVE_CALLBACK)
             {
                 interactor_message_t* message = (interactor_message_t*)cqe->user_data;
-                on_callback(message);
+                on_callback(message, interactor);
             }
         }
         io_uring_cq_advance(interactor->ring, count);

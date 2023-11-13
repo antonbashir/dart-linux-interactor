@@ -125,11 +125,12 @@ void test_call_dart_bytes(interactor_native_t* interactor, int32_t target, uintp
     interactor_native_submit(interactor);
 }
 
-void test_call_dart_callback(interactor_message_t* message)
+void test_call_dart_callback(interactor_message_t* message, interactor_native_t* interactor)
 {
     message->output = message->input;
     message->output_size = message->input_size;
     called_message = message;
+    interactor_native_remove_event(interactor, (uintptr_t)message);
 }
 
 interactor_message_t* test_call_dart_check(interactor_native_t* interactor)

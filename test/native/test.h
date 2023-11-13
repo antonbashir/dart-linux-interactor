@@ -11,7 +11,7 @@ extern "C"
     interactor_native_t* test_interactor_initialize();
     void test_interactor_destroy(interactor_native_t* interactor);
     void test_interactor_process_calls(interactor_native_t* interactor);
-    void test_interactor_process_callbacks(interactor_native_t* interactor, void(on_callback)(interactor_message_t*));
+    void test_interactor_process_callbacks(interactor_native_t* interactor, void(on_callback)(interactor_message_t*, interactor_native_t*));
 
 #if defined(__cplusplus)
 }
