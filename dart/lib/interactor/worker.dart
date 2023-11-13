@@ -6,6 +6,7 @@ import 'dart:math';
 import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
+import 'data.dart';
 import 'declaration.dart';
 import 'lookup.dart';
 import 'payloads.dart';
@@ -19,6 +20,7 @@ class InteractorWorker {
   late final InteractorProducerRegistry _producers;
   late final InteractorPayloads _payloads;
   late final InteractorBuffers _buffers;
+  late final InteractorDatas _datas;
 
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _interactor;
@@ -38,6 +40,7 @@ class InteractorWorker {
   int get descriptor => _descriptor;
   InteractorPayloads get payloads => _payloads;
   InteractorBuffers get buffers => _buffers;
+  InteractorDatas get datas => _datas;
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((gracefulDuration) async {
@@ -69,6 +72,7 @@ class InteractorWorker {
     );
     _payloads = InteractorPayloads(_bindings, _interactor);
     _buffers = InteractorBuffers(_bindings, _interactor.ref.buffers, _interactor);
+    _datas = InteractorDatas(_bindings, _interactor);
     _consumers = InteractorConsumerRegistry(
       _interactor,
       _bindings,
@@ -78,6 +82,7 @@ class InteractorWorker {
       _bindings,
       _payloads,
       _buffers,
+      _datas,
     );
   }
 

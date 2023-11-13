@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
+import 'data.dart';
 import 'payloads.dart';
 
 class InteractorCall {
@@ -16,6 +17,7 @@ class InteractorCall {
   final InteractorBindings _bindings;
   final InteractorPayloads _payloads;
   final InteractorBuffers _buffers;
+  final InteractorDatas _datas;
   final Completer<InteractorCall> _completer;
 
   InteractorCall(
@@ -24,6 +26,7 @@ class InteractorCall {
     this._bindings,
     this._payloads,
     this._buffers,
+    this._datas,
     this._completer,
   );
 
@@ -41,7 +44,7 @@ class InteractorCall {
 
   @pragma(preferInlinePragma)
   void setInputDouble(double data) {
-    Pointer<Double> pointer = Pointer<Double>.fromAddress(_bindings.interactor_dart_data_allocate(_interactor, sizeOf<Double>()));
+    Pointer<Double> pointer = _datas.allocate(sizeOf<Double>()).cast();
     pointer.value = data;
     _message.ref.input = pointer.cast();
     _message.ref.input_size = sizeOf<Double>();
@@ -50,7 +53,7 @@ class InteractorCall {
   @pragma(preferInlinePragma)
   void setInputString(String data) {
     final units = utf8.encode(data);
-    final Pointer<Uint8> result = Pointer.fromAddress(_bindings.interactor_dart_data_allocate(_interactor, units.length + 1));
+    final Pointer<Uint8> result = _datas.allocate(units.length + 1).cast();
     final Uint8List nativeString = result.asTypedList(units.length + 1);
     nativeString.setAll(0, units);
     nativeString[units.length] = 0;
@@ -76,17 +79,17 @@ class InteractorCall {
 
   @pragma(preferInlinePragma)
   Future<void> setInputBytes(List<int> bytes) async {
-    final Pointer<Uint8> pointer = Pointer.fromAddress(_bindings.interactor_dart_data_allocate(_interactor, bytes.length));
+    final Pointer<Uint8> pointer = _datas.allocate(bytes.length).cast();
     pointer.asTypedList(bytes.length).setAll(0, bytes);
     _message.ref.input = pointer.cast();
     _message.ref.input_size = bytes.length;
   }
 
   @pragma(preferInlinePragma)
-  void releaseInputDouble() => _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
+  void releaseInputDouble() => _datas.free(_message.ref.input, _message.ref.input_size);
 
   @pragma(preferInlinePragma)
-  void releaseInputString() => _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
+  void releaseInputString() => _datas.free(_message.ref.input, _message.ref.input_size);
 
   @pragma(preferInlinePragma)
   void releaseInputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.input.address).cast<T>());
@@ -95,13 +98,13 @@ class InteractorCall {
   void releaseInputBuffer() => _buffers.release(_message.ref.input.address);
 
   @pragma(preferInlinePragma)
-  void releaseInputBytes() => _bindings.interactor_dart_data_free(_interactor, _message.ref.input.address, _message.ref.input_size);
+  void releaseInputBytes() => _datas.free(_message.ref.input, _message.ref.input_size);
 
   @pragma(preferInlinePragma)
-  void releaseOutputDouble() => _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
+  void releaseOutputDouble() => _datas.free(_message.ref.output, _message.ref.output_size);
 
   @pragma(preferInlinePragma)
-  void releaseOutputString() => _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
+  void releaseOutputString() => _datas.free(_message.ref.output, _message.ref.output_size);
 
   @pragma(preferInlinePragma)
   void releaseOutputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.output.address).cast<T>());
@@ -110,7 +113,7 @@ class InteractorCall {
   void releaseOutputBuffer() => _buffers.release(_message.ref.output.address);
 
   @pragma(preferInlinePragma)
-  void releaseOutputBytes() => _bindings.interactor_dart_data_free(_interactor, _message.ref.output.address, _message.ref.output_size);
+  void releaseOutputBytes() => _datas.free(_message.ref.output, _message.ref.output_size);
 
   late final bool outputBool = _message.ref.output.address == 1;
   late final int outputInt = _message.ref.output.address;

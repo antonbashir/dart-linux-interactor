@@ -4,6 +4,7 @@ import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
 import 'consumer.dart';
+import 'data.dart';
 import 'declaration.dart';
 import 'payloads.dart';
 import 'producer.dart';
@@ -38,17 +39,19 @@ class InteractorProducerRegistry {
   final InteractorBindings _bindings;
   final InteractorPayloads _payloads;
   final InteractorBuffers _buffers;
+  final InteractorDatas _datas;
 
   InteractorProducerRegistry(
     this._interactor,
     this._bindings,
     this._payloads,
     this._buffers,
+    this._datas,
   );
 
   T register<T extends NativeProducer>(T provider) {
     final id = _producers.length;
-    final executor = NativeProducerExecutor(id, _interactor, _bindings, _payloads, _buffers);
+    final executor = NativeProducerExecutor(id, _interactor, _bindings, _payloads, _buffers, _datas);
     _producers.add(executor);
     return provider..initialize(executor);
   }

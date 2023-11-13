@@ -5,7 +5,7 @@
 #include <interactor_data_pool.h>
 #include <interactor_memory.h>
 #include <interactor_messages_pool.h>
-#include <interactor_payloads_pool.h>
+#include <interactor_payload_pool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "interactor_collections.h"
@@ -74,10 +74,10 @@ extern "C"
     interactor_message_t* interactor_dart_allocate_message(interactor_dart_t* interactor);
     void interactor_dart_free_message(interactor_dart_t* interactor, interactor_message_t* message);
 
-    struct interactor_payloads_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size);
-    intptr_t interactor_dart_payload_allocate(struct interactor_payloads_pool* pool);
-    void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer);
-    void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool);
+    struct interactor_payload_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size);
+    intptr_t interactor_dart_payload_allocate(struct interactor_payload_pool* pool);
+    void interactor_dart_payload_free(struct interactor_payload_pool* pool, intptr_t pointer);
+    void interactor_dart_payload_pool_destroy(struct interactor_payload_pool* pool);
 
     intptr_t interactor_dart_data_allocate(interactor_dart_t* interactor, size_t size);
     void interactor_dart_data_free(interactor_dart_t* interactor, intptr_t pointer, size_t size);

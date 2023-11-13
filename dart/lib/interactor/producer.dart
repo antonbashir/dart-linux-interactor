@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
+import 'data.dart';
 import 'message.dart';
 import 'payloads.dart';
 
@@ -15,12 +16,28 @@ class NativeProducerExecutor {
   final InteractorBindings _bindings;
   final InteractorPayloads _payloads;
   final InteractorBuffers _buffers;
+  final InteractorDatas _datas;
 
-  NativeProducerExecutor(this._id, this._interactorPointer, this._bindings, this._payloads, this._buffers);
+  NativeProducerExecutor(
+    this._id,
+    this._interactorPointer,
+    this._bindings,
+    this._payloads,
+    this._buffers,
+    this._datas,
+  );
 
   @pragma(preferInlinePragma)
   NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
-    final executor = NativeMethodExecutor(pointer.address, _id, _interactorPointer, _bindings, _payloads, _buffers);
+    final executor = NativeMethodExecutor(
+      pointer.address,
+      _id,
+      _interactorPointer,
+      _bindings,
+      _payloads,
+      _buffers,
+      _datas,
+    );
     _methods[pointer.address] = executor;
     return executor;
   }
@@ -38,14 +55,31 @@ class NativeMethodExecutor {
   final InteractorBindings _bindings;
   final InteractorPayloads _payloads;
   final InteractorBuffers _buffers;
+  final InteractorDatas _datas;
 
-  NativeMethodExecutor(this._methodId, this._executorId, this._interactor, this._bindings, this._payloads, this._buffers);
+  NativeMethodExecutor(
+    this._methodId,
+    this._executorId,
+    this._interactor,
+    this._bindings,
+    this._payloads,
+    this._buffers,
+    this._datas,
+  );
 
   @pragma(preferInlinePragma)
   Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator, Duration? timeout}) {
     final messagePointer = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
-    var message = InteractorCall(_interactor, messagePointer, _bindings, _payloads, _buffers, completer);
+    var message = InteractorCall(
+      _interactor,
+      messagePointer,
+      _bindings,
+      _payloads,
+      _buffers,
+      _datas,
+      completer,
+    );
     message = configurator?.call(message) ?? message;
     messagePointer.ref.id = completer.hashCode;
     messagePointer.ref.owner = _executorId;

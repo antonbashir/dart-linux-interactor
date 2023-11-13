@@ -8,18 +8,13 @@ import 'package:linux_interactor/interactor/bindings.dart' as linux_interactor;
 /// Bindings for Test
 class TestBindings {
   /// Holds the symbol lookup function.
-  final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-      _lookup;
+  final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName) _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  TestBindings(ffi.DynamicLibrary dynamicLibrary)
-      : _lookup = dynamicLibrary.lookup;
+  TestBindings(ffi.DynamicLibrary dynamicLibrary) : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
-  TestBindings.fromLookup(
-      ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-          lookup)
-      : _lookup = lookup;
+  TestBindings.fromLookup(ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName) lookup) : _lookup = lookup;
 
   int interactor_buffers_pool_create(
     ffi.Pointer<interactor_buffers_pool> pool,
@@ -31,13 +26,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_buffers_pool_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<interactor_buffers_pool>,
-              ffi.Size)>>('interactor_buffers_pool_create');
-  late final _interactor_buffers_pool_create =
-      _interactor_buffers_pool_createPtr.asFunction<
-          int Function(ffi.Pointer<interactor_buffers_pool>, int)>();
+  late final _interactor_buffers_pool_createPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_buffers_pool>, ffi.Size)>>('interactor_buffers_pool_create');
+  late final _interactor_buffers_pool_create = _interactor_buffers_pool_createPtr.asFunction<int Function(ffi.Pointer<interactor_buffers_pool>, int)>();
 
   void interactor_buffers_pool_destroy(
     ffi.Pointer<interactor_buffers_pool> pool,
@@ -47,13 +37,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_buffers_pool_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_buffers_pool>)>>(
-      'interactor_buffers_pool_destroy');
-  late final _interactor_buffers_pool_destroy =
-      _interactor_buffers_pool_destroyPtr
-          .asFunction<void Function(ffi.Pointer<interactor_buffers_pool>)>();
+  late final _interactor_buffers_pool_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_buffers_pool>)>>('interactor_buffers_pool_destroy');
+  late final _interactor_buffers_pool_destroy = _interactor_buffers_pool_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_buffers_pool>)>();
 
   void interactor_buffers_pool_push(
     ffi.Pointer<interactor_buffers_pool> pool,
@@ -65,12 +50,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_buffers_pool_pushPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_buffers_pool>,
-              ffi.Int32)>>('interactor_buffers_pool_push');
-  late final _interactor_buffers_pool_push = _interactor_buffers_pool_pushPtr
-      .asFunction<void Function(ffi.Pointer<interactor_buffers_pool>, int)>();
+  late final _interactor_buffers_pool_pushPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_buffers_pool>, ffi.Int32)>>('interactor_buffers_pool_push');
+  late final _interactor_buffers_pool_push = _interactor_buffers_pool_pushPtr.asFunction<void Function(ffi.Pointer<interactor_buffers_pool>, int)>();
 
   int interactor_buffers_pool_pop(
     ffi.Pointer<interactor_buffers_pool> pool,
@@ -80,12 +61,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_buffers_pool_popPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<interactor_buffers_pool>)>>(
-      'interactor_buffers_pool_pop');
-  late final _interactor_buffers_pool_pop = _interactor_buffers_pool_popPtr
-      .asFunction<int Function(ffi.Pointer<interactor_buffers_pool>)>();
+  late final _interactor_buffers_pool_popPtr = _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_buffers_pool>)>>('interactor_buffers_pool_pop');
+  late final _interactor_buffers_pool_pop = _interactor_buffers_pool_popPtr.asFunction<int Function(ffi.Pointer<interactor_buffers_pool>)>();
 
   int interactor_memory_create(
     ffi.Pointer<interactor_memory> memory,
@@ -101,13 +78,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_memory_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<interactor_memory>, ffi.Size, ffi.Size,
-              ffi.Size)>>('interactor_memory_create');
-  late final _interactor_memory_create =
-      _interactor_memory_createPtr.asFunction<
-          int Function(ffi.Pointer<interactor_memory>, int, int, int)>();
+  late final _interactor_memory_createPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_memory>, ffi.Size, ffi.Size, ffi.Size)>>('interactor_memory_create');
+  late final _interactor_memory_create = _interactor_memory_createPtr.asFunction<int Function(ffi.Pointer<interactor_memory>, int, int, int)>();
 
   void interactor_memory_destroy(
     ffi.Pointer<interactor_memory> memory,
@@ -117,12 +89,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_memory_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_memory>)>>(
-      'interactor_memory_destroy');
-  late final _interactor_memory_destroy = _interactor_memory_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_memory>)>();
+  late final _interactor_memory_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_memory>)>>('interactor_memory_destroy');
+  late final _interactor_memory_destroy = _interactor_memory_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_memory>)>();
 
   int interactor_mempool_create(
     ffi.Pointer<interactor_mempool> pool,
@@ -134,12 +102,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_mempool_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<interactor_mempool>,
-              ffi.Size)>>('interactor_mempool_create');
-  late final _interactor_mempool_create = _interactor_mempool_createPtr
-      .asFunction<int Function(ffi.Pointer<interactor_mempool>, int)>();
+  late final _interactor_mempool_createPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_mempool>, ffi.Size)>>('interactor_mempool_create');
+  late final _interactor_mempool_create = _interactor_mempool_createPtr.asFunction<int Function(ffi.Pointer<interactor_mempool>, int)>();
 
   void interactor_mempool_destroy(
     ffi.Pointer<interactor_mempool> pool,
@@ -149,12 +113,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_mempool_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_mempool>)>>(
-      'interactor_mempool_destroy');
-  late final _interactor_mempool_destroy = _interactor_mempool_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_mempool>)>();
+  late final _interactor_mempool_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_mempool>)>>('interactor_mempool_destroy');
+  late final _interactor_mempool_destroy = _interactor_mempool_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_mempool>)>();
 
   ffi.Pointer<ffi.Void> interactor_mempool_allocate(
     ffi.Pointer<interactor_mempool> pool,
@@ -164,13 +124,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_mempool_allocatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<interactor_mempool>)>>('interactor_mempool_allocate');
-  late final _interactor_mempool_allocate =
-      _interactor_mempool_allocatePtr.asFunction<
-          ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_mempool>)>();
+  late final _interactor_mempool_allocatePtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_mempool>)>>('interactor_mempool_allocate');
+  late final _interactor_mempool_allocate = _interactor_mempool_allocatePtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_mempool>)>();
 
   void interactor_mempool_free(
     ffi.Pointer<interactor_mempool> pool,
@@ -182,12 +137,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_mempool_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_mempool>,
-              ffi.Pointer<ffi.Void>)>>('interactor_mempool_free');
-  late final _interactor_mempool_free = _interactor_mempool_freePtr.asFunction<
-      void Function(ffi.Pointer<interactor_mempool>, ffi.Pointer<ffi.Void>)>();
+  late final _interactor_mempool_freePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_mempool>, ffi.Pointer<ffi.Void>)>>('interactor_mempool_free');
+  late final _interactor_mempool_free = _interactor_mempool_freePtr.asFunction<void Function(ffi.Pointer<interactor_mempool>, ffi.Pointer<ffi.Void>)>();
 
   int interactor_small_create(
     ffi.Pointer<interactor_small> pool,
@@ -197,11 +148,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_small_createPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_small>)>>(
-      'interactor_small_create');
-  late final _interactor_small_create = _interactor_small_createPtr
-      .asFunction<int Function(ffi.Pointer<interactor_small>)>();
+  late final _interactor_small_createPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_small>)>>('interactor_small_create');
+  late final _interactor_small_create = _interactor_small_createPtr.asFunction<int Function(ffi.Pointer<interactor_small>)>();
 
   ffi.Pointer<ffi.Void> interactor_small_allocate(
     ffi.Pointer<interactor_small> pool,
@@ -213,13 +161,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_small_allocatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_small>,
-              ffi.Size)>>('interactor_small_allocate');
-  late final _interactor_small_allocate =
-      _interactor_small_allocatePtr.asFunction<
-          ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_small>, int)>();
+  late final _interactor_small_allocatePtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_small>, ffi.Size)>>('interactor_small_allocate');
+  late final _interactor_small_allocate = _interactor_small_allocatePtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_small>, int)>();
 
   void interactor_small_free(
     ffi.Pointer<interactor_small> pool,
@@ -233,13 +176,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_small_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_small>,
-              ffi.Pointer<ffi.Void>, ffi.Size)>>('interactor_small_free');
-  late final _interactor_small_free = _interactor_small_freePtr.asFunction<
-      void Function(
-          ffi.Pointer<interactor_small>, ffi.Pointer<ffi.Void>, int)>();
+  late final _interactor_small_freePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_small>, ffi.Pointer<ffi.Void>, ffi.Size)>>('interactor_small_free');
+  late final _interactor_small_free = _interactor_small_freePtr.asFunction<void Function(ffi.Pointer<interactor_small>, ffi.Pointer<ffi.Void>, int)>();
 
   void interactor_small_destroy(
     ffi.Pointer<interactor_small> pool,
@@ -249,11 +187,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_small_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_small>)>>(
-      'interactor_small_destroy');
-  late final _interactor_small_destroy = _interactor_small_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_small>)>();
+  late final _interactor_small_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_small>)>>('interactor_small_destroy');
+  late final _interactor_small_destroy = _interactor_small_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_small>)>();
 
   int interactor_data_pool_create(
     ffi.Pointer<interactor_data_pool> pool,
@@ -265,14 +200,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_data_pool_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<interactor_data_pool>,
-              ffi.Pointer<interactor_memory>)>>('interactor_data_pool_create');
-  late final _interactor_data_pool_create =
-      _interactor_data_pool_createPtr.asFunction<
-          int Function(ffi.Pointer<interactor_data_pool>,
-              ffi.Pointer<interactor_memory>)>();
+  late final _interactor_data_pool_createPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_data_pool>, ffi.Pointer<interactor_memory>)>>('interactor_data_pool_create');
+  late final _interactor_data_pool_create = _interactor_data_pool_createPtr.asFunction<int Function(ffi.Pointer<interactor_data_pool>, ffi.Pointer<interactor_memory>)>();
 
   void interactor_data_pool_destroy(
     ffi.Pointer<interactor_data_pool> pool,
@@ -282,12 +211,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_data_pool_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>(
-      'interactor_data_pool_destroy');
-  late final _interactor_data_pool_destroy = _interactor_data_pool_destroyPtr
-      .asFunction<void Function(ffi.Pointer<interactor_data_pool>)>();
+  late final _interactor_data_pool_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>('interactor_data_pool_destroy');
+  late final _interactor_data_pool_destroy = _interactor_data_pool_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_data_pool>)>();
 
   int interactor_data_pool_allocate(
     ffi.Pointer<interactor_data_pool> pool,
@@ -299,12 +224,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_data_pool_allocatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>,
-              ffi.Size)>>('interactor_data_pool_allocate');
-  late final _interactor_data_pool_allocate = _interactor_data_pool_allocatePtr
-      .asFunction<int Function(ffi.Pointer<interactor_data_pool>, int)>();
+  late final _interactor_data_pool_allocatePtr = _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>, ffi.Size)>>('interactor_data_pool_allocate');
+  late final _interactor_data_pool_allocate = _interactor_data_pool_allocatePtr.asFunction<int Function(ffi.Pointer<interactor_data_pool>, int)>();
 
   void interactor_data_pool_free(
     ffi.Pointer<interactor_data_pool> pool,
@@ -318,12 +239,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_data_pool_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_data_pool>, ffi.IntPtr,
-              ffi.Size)>>('interactor_data_pool_free');
-  late final _interactor_data_pool_free = _interactor_data_pool_freePtr
-      .asFunction<void Function(ffi.Pointer<interactor_data_pool>, int, int)>();
+  late final _interactor_data_pool_freePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>, ffi.IntPtr, ffi.Size)>>('interactor_data_pool_free');
+  late final _interactor_data_pool_free = _interactor_data_pool_freePtr.asFunction<void Function(ffi.Pointer<interactor_data_pool>, int, int)>();
 
   int interactor_messages_pool_create(
     ffi.Pointer<interactor_messages_pool> pool,
@@ -335,15 +252,9 @@ class TestBindings {
     );
   }
 
-  late final _interactor_messages_pool_createPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<interactor_messages_pool>,
-                  ffi.Pointer<interactor_memory>)>>(
-      'interactor_messages_pool_create');
-  late final _interactor_messages_pool_create =
-      _interactor_messages_pool_createPtr.asFunction<
-          int Function(ffi.Pointer<interactor_messages_pool>,
-              ffi.Pointer<interactor_memory>)>();
+  late final _interactor_messages_pool_createPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_messages_pool>, ffi.Pointer<interactor_memory>)>>('interactor_messages_pool_create');
+  late final _interactor_messages_pool_create = _interactor_messages_pool_createPtr.asFunction<int Function(ffi.Pointer<interactor_messages_pool>, ffi.Pointer<interactor_memory>)>();
 
   void interactor_messages_pool_destroy(
     ffi.Pointer<interactor_messages_pool> pool,
@@ -353,16 +264,10 @@ class TestBindings {
     );
   }
 
-  late final _interactor_messages_pool_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_messages_pool>)>>(
-      'interactor_messages_pool_destroy');
-  late final _interactor_messages_pool_destroy =
-      _interactor_messages_pool_destroyPtr
-          .asFunction<void Function(ffi.Pointer<interactor_messages_pool>)>();
+  late final _interactor_messages_pool_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_messages_pool>)>>('interactor_messages_pool_destroy');
+  late final _interactor_messages_pool_destroy = _interactor_messages_pool_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_messages_pool>)>();
 
-  ffi.Pointer<linux_interactor.interactor_message_t>
-      interactor_messages_pool_allocate(
+  ffi.Pointer<linux_interactor.interactor_message_t> interactor_messages_pool_allocate(
     ffi.Pointer<interactor_messages_pool> pool,
   ) {
     return _interactor_messages_pool_allocate(
@@ -370,15 +275,10 @@ class TestBindings {
     );
   }
 
-  late final _interactor_messages_pool_allocatePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<interactor_messages_pool>)>>(
-      'interactor_messages_pool_allocate');
+  late final _interactor_messages_pool_allocatePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<interactor_messages_pool>)>>('interactor_messages_pool_allocate');
   late final _interactor_messages_pool_allocate =
-      _interactor_messages_pool_allocatePtr.asFunction<
-          ffi.Pointer<linux_interactor.interactor_message_t> Function(
-              ffi.Pointer<interactor_messages_pool>)>();
+      _interactor_messages_pool_allocatePtr.asFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<interactor_messages_pool>)>();
 
   void interactor_messages_pool_free(
     ffi.Pointer<interactor_messages_pool> pool,
@@ -390,87 +290,60 @@ class TestBindings {
     );
   }
 
-  late final _interactor_messages_pool_freePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'interactor_messages_pool_free');
-  late final _interactor_messages_pool_free =
-      _interactor_messages_pool_freePtr.asFunction<
-          void Function(ffi.Pointer<interactor_messages_pool>,
-              ffi.Pointer<linux_interactor.interactor_message_t>)>();
+  late final _interactor_messages_pool_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_messages_pool>, ffi.Pointer<linux_interactor.interactor_message_t>)>>('interactor_messages_pool_free');
+  late final _interactor_messages_pool_free = _interactor_messages_pool_freePtr.asFunction<void Function(ffi.Pointer<interactor_messages_pool>, ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
-  int interactor_payloads_pool_create(
-    ffi.Pointer<interactor_payloads_pool> pool,
+  int interactor_payload_pool_create(
+    ffi.Pointer<interactor_payload_pool> pool,
     ffi.Pointer<interactor_memory> memory,
     int payload_size,
   ) {
-    return _interactor_payloads_pool_create(
+    return _interactor_payload_pool_create(
       pool,
       memory,
       payload_size,
     );
   }
 
-  late final _interactor_payloads_pool_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<interactor_payloads_pool>,
-              ffi.Pointer<interactor_memory>,
-              ffi.Size)>>('interactor_payloads_pool_create');
-  late final _interactor_payloads_pool_create =
-      _interactor_payloads_pool_createPtr.asFunction<
-          int Function(ffi.Pointer<interactor_payloads_pool>,
-              ffi.Pointer<interactor_memory>, int)>();
+  late final _interactor_payload_pool_createPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_payload_pool>, ffi.Pointer<interactor_memory>, ffi.Size)>>('interactor_payload_pool_create');
+  late final _interactor_payload_pool_create = _interactor_payload_pool_createPtr.asFunction<int Function(ffi.Pointer<interactor_payload_pool>, ffi.Pointer<interactor_memory>, int)>();
 
-  void interactor_payloads_pool_destroy(
-    ffi.Pointer<interactor_payloads_pool> pool,
+  void interactor_payload_pool_destroy(
+    ffi.Pointer<interactor_payload_pool> pool,
   ) {
-    return _interactor_payloads_pool_destroy(
+    return _interactor_payload_pool_destroy(
       pool,
     );
   }
 
-  late final _interactor_payloads_pool_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>(
-      'interactor_payloads_pool_destroy');
-  late final _interactor_payloads_pool_destroy =
-      _interactor_payloads_pool_destroyPtr
-          .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>();
+  late final _interactor_payload_pool_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>>('interactor_payload_pool_destroy');
+  late final _interactor_payload_pool_destroy = _interactor_payload_pool_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_payload_pool>)>();
 
-  int interactor_payloads_pool_allocate(
-    ffi.Pointer<interactor_payloads_pool> pool,
+  int interactor_payload_pool_allocate(
+    ffi.Pointer<interactor_payload_pool> pool,
   ) {
-    return _interactor_payloads_pool_allocate(
+    return _interactor_payload_pool_allocate(
       pool,
     );
   }
 
-  late final _interactor_payloads_pool_allocatePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>(
-      'interactor_payloads_pool_allocate');
-  late final _interactor_payloads_pool_allocate =
-      _interactor_payloads_pool_allocatePtr
-          .asFunction<int Function(ffi.Pointer<interactor_payloads_pool>)>();
+  late final _interactor_payload_pool_allocatePtr = _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>>('interactor_payload_pool_allocate');
+  late final _interactor_payload_pool_allocate = _interactor_payload_pool_allocatePtr.asFunction<int Function(ffi.Pointer<interactor_payload_pool>)>();
 
-  void interactor_payloads_pool_free(
-    ffi.Pointer<interactor_payloads_pool> pool,
+  void interactor_payload_pool_free(
+    ffi.Pointer<interactor_payload_pool> pool,
     int payload,
   ) {
-    return _interactor_payloads_pool_free(
+    return _interactor_payload_pool_free(
       pool,
       payload,
     );
   }
 
-  late final _interactor_payloads_pool_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_payloads_pool>,
-              ffi.IntPtr)>>('interactor_payloads_pool_free');
-  late final _interactor_payloads_pool_free = _interactor_payloads_pool_freePtr
-      .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>, int)>();
+  late final _interactor_payload_pool_freePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>>('interactor_payload_pool_free');
+  late final _interactor_payload_pool_free = _interactor_payload_pool_freePtr.asFunction<void Function(ffi.Pointer<interactor_payload_pool>, int)>();
 
   int select(
     int __nfds,
@@ -488,13 +361,8 @@ class TestBindings {
     );
   }
 
-  late final _selectPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>>('select');
-  late final _select = _selectPtr.asFunction<
-      int Function(int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>,
-          ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>();
+  late final _selectPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>>('select');
+  late final _select = _selectPtr.asFunction<int Function(int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>();
 
   int pselect(
     int __nfds,
@@ -514,23 +382,9 @@ class TestBindings {
     );
   }
 
-  late final _pselectPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<timespec>,
-              ffi.Pointer<__sigset_t>)>>('pselect');
-  late final _pselect = _pselectPtr.asFunction<
-      int Function(
-          int,
-          ffi.Pointer<fd_set>,
-          ffi.Pointer<fd_set>,
-          ffi.Pointer<fd_set>,
-          ffi.Pointer<timespec>,
-          ffi.Pointer<__sigset_t>)>();
+  late final _pselectPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timespec>, ffi.Pointer<__sigset_t>)>>('pselect');
+  late final _pselect = _pselectPtr.asFunction<int Function(int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timespec>, ffi.Pointer<__sigset_t>)>();
 
   ffi.Pointer<cmsghdr> __cmsg_nxthdr(
     ffi.Pointer<msghdr> __mhdr,
@@ -542,13 +396,8 @@ class TestBindings {
     );
   }
 
-  late final ___cmsg_nxthdrPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<cmsghdr> Function(
-              ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>>('__cmsg_nxthdr');
-  late final ___cmsg_nxthdr = ___cmsg_nxthdrPtr.asFunction<
-      ffi.Pointer<cmsghdr> Function(
-          ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>();
+  late final ___cmsg_nxthdrPtr = _lookup<ffi.NativeFunction<ffi.Pointer<cmsghdr> Function(ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>>('__cmsg_nxthdr');
+  late final ___cmsg_nxthdr = ___cmsg_nxthdrPtr.asFunction<ffi.Pointer<cmsghdr> Function(ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>();
 
   int socket(
     int __domain,
@@ -562,9 +411,7 @@ class TestBindings {
     );
   }
 
-  late final _socketPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>>(
-          'socket');
+  late final _socketPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>>('socket');
   late final _socket = _socketPtr.asFunction<int Function(int, int, int)>();
 
   int socketpair(
@@ -581,12 +428,8 @@ class TestBindings {
     );
   }
 
-  late final _socketpairPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>>('socketpair');
-  late final _socketpair = _socketpairPtr
-      .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Int>)>();
+  late final _socketpairPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>>('socketpair');
+  late final _socketpair = _socketpairPtr.asFunction<int Function(int, int, int, ffi.Pointer<ffi.Int>)>();
 
   int bind(
     int __fd,
@@ -600,11 +443,8 @@ class TestBindings {
     );
   }
 
-  late final _bindPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('bind');
-  late final _bind =
-      _bindPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, int)>();
+  late final _bindPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('bind');
+  late final _bind = _bindPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, int)>();
 
   int getsockname(
     int __fd,
@@ -618,12 +458,8 @@ class TestBindings {
     );
   }
 
-  late final _getsocknamePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>>('getsockname');
-  late final _getsockname = _getsocknamePtr.asFunction<
-      int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
+  late final _getsocknamePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>('getsockname');
+  late final _getsockname = _getsocknamePtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
 
   int connect(
     int __fd,
@@ -637,12 +473,8 @@ class TestBindings {
     );
   }
 
-  late final _connectPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('connect');
-  late final _connect =
-      _connectPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, int)>();
+  late final _connectPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('connect');
+  late final _connect = _connectPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, int)>();
 
   int getpeername(
     int __fd,
@@ -656,12 +488,8 @@ class TestBindings {
     );
   }
 
-  late final _getpeernamePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>>('getpeername');
-  late final _getpeername = _getpeernamePtr.asFunction<
-      int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
+  late final _getpeernamePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>('getpeername');
+  late final _getpeername = _getpeernamePtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
 
   int send(
     int __fd,
@@ -677,12 +505,8 @@ class TestBindings {
     );
   }
 
-  late final _sendPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('send');
-  late final _send =
-      _sendPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+  late final _sendPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('send');
+  late final _send = _sendPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int)>();
 
   int recv(
     int __fd,
@@ -698,12 +522,8 @@ class TestBindings {
     );
   }
 
-  late final _recvPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('recv');
-  late final _recv =
-      _recvPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+  late final _recvPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('recv');
+  late final _recv = _recvPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int)>();
 
   int sendto(
     int __fd,
@@ -723,13 +543,8 @@ class TestBindings {
     );
   }
 
-  late final _sendtoPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int,
-              ffi.Pointer<sockaddr>, socklen_t)>>('sendto');
-  late final _sendto = _sendtoPtr.asFunction<
-      int Function(
-          int, ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<sockaddr>, int)>();
+  late final _sendtoPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('sendto');
+  late final _sendto = _sendtoPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<sockaddr>, int)>();
 
   int recvfrom(
     int __fd,
@@ -749,13 +564,8 @@ class TestBindings {
     );
   }
 
-  late final _recvfromPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int,
-              ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>('recvfrom');
-  late final _recvfrom = _recvfromPtr.asFunction<
-      int Function(int, ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<sockaddr>,
-          ffi.Pointer<socklen_t>)>();
+  late final _recvfromPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>('recvfrom');
+  late final _recvfrom = _recvfromPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
 
   int sendmsg(
     int __fd,
@@ -769,11 +579,8 @@ class TestBindings {
     );
   }
 
-  late final _sendmsgPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>('sendmsg');
-  late final _sendmsg =
-      _sendmsgPtr.asFunction<int Function(int, ffi.Pointer<msghdr>, int)>();
+  late final _sendmsgPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>('sendmsg');
+  late final _sendmsg = _sendmsgPtr.asFunction<int Function(int, ffi.Pointer<msghdr>, int)>();
 
   int recvmsg(
     int __fd,
@@ -787,11 +594,8 @@ class TestBindings {
     );
   }
 
-  late final _recvmsgPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>('recvmsg');
-  late final _recvmsg =
-      _recvmsgPtr.asFunction<int Function(int, ffi.Pointer<msghdr>, int)>();
+  late final _recvmsgPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>('recvmsg');
+  late final _recvmsg = _recvmsgPtr.asFunction<int Function(int, ffi.Pointer<msghdr>, int)>();
 
   int getsockopt(
     int __fd,
@@ -809,13 +613,8 @@ class TestBindings {
     );
   }
 
-  late final _getsockoptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
-              ffi.Pointer<socklen_t>)>>('getsockopt');
-  late final _getsockopt = _getsockoptPtr.asFunction<
-      int Function(
-          int, int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<socklen_t>)>();
+  late final _getsockoptPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, ffi.Pointer<socklen_t>)>>('getsockopt');
+  late final _getsockopt = _getsockoptPtr.asFunction<int Function(int, int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<socklen_t>)>();
 
   int setsockopt(
     int __fd,
@@ -833,12 +632,8 @@ class TestBindings {
     );
   }
 
-  late final _setsockoptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
-              socklen_t)>>('setsockopt');
-  late final _setsockopt = _setsockoptPtr
-      .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Void>, int)>();
+  late final _setsockoptPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, socklen_t)>>('setsockopt');
+  late final _setsockopt = _setsockoptPtr.asFunction<int Function(int, int, int, ffi.Pointer<ffi.Void>, int)>();
 
   int listen(
     int __fd,
@@ -850,8 +645,7 @@ class TestBindings {
     );
   }
 
-  late final _listenPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('listen');
+  late final _listenPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('listen');
   late final _listen = _listenPtr.asFunction<int Function(int, int)>();
 
   int accept(
@@ -866,12 +660,8 @@ class TestBindings {
     );
   }
 
-  late final _acceptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>>('accept');
-  late final _accept = _acceptPtr.asFunction<
-      int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
+  late final _acceptPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>('accept');
+  late final _accept = _acceptPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
 
   int shutdown(
     int __fd,
@@ -883,9 +673,7 @@ class TestBindings {
     );
   }
 
-  late final _shutdownPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>(
-          'shutdown');
+  late final _shutdownPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('shutdown');
   late final _shutdown = _shutdownPtr.asFunction<int Function(int, int)>();
 
   int sockatmark(
@@ -896,8 +684,7 @@ class TestBindings {
     );
   }
 
-  late final _sockatmarkPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sockatmark');
+  late final _sockatmarkPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sockatmark');
   late final _sockatmark = _sockatmarkPtr.asFunction<int Function(int)>();
 
   int isfdtype(
@@ -910,9 +697,7 @@ class TestBindings {
     );
   }
 
-  late final _isfdtypePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>(
-          'isfdtype');
+  late final _isfdtypePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('isfdtype');
   late final _isfdtype = _isfdtypePtr.asFunction<int Function(int, int)>();
 
   int stat1(
@@ -925,11 +710,8 @@ class TestBindings {
     );
   }
 
-  late final _stat1Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>>('stat');
-  late final _stat1 = _stat1Ptr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>();
+  late final _stat1Ptr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>>('stat');
+  late final _stat1 = _stat1Ptr.asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>();
 
   int fstat(
     int __fd,
@@ -941,11 +723,8 @@ class TestBindings {
     );
   }
 
-  late final _fstatPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<stat>)>>(
-          'fstat');
-  late final _fstat =
-      _fstatPtr.asFunction<int Function(int, ffi.Pointer<stat>)>();
+  late final _fstatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<stat>)>>('fstat');
+  late final _fstat = _fstatPtr.asFunction<int Function(int, ffi.Pointer<stat>)>();
 
   int fstatat(
     int __fd,
@@ -961,12 +740,8 @@ class TestBindings {
     );
   }
 
-  late final _fstatatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>,
-              ffi.Int)>>('fstatat');
-  late final _fstatat = _fstatatPtr.asFunction<
-      int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>, int)>();
+  late final _fstatatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>, ffi.Int)>>('fstatat');
+  late final _fstatat = _fstatatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>, int)>();
 
   int lstat(
     ffi.Pointer<ffi.Char> __file,
@@ -978,11 +753,8 @@ class TestBindings {
     );
   }
 
-  late final _lstatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>>('lstat');
-  late final _lstat = _lstatPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>();
+  late final _lstatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>>('lstat');
+  late final _lstat = _lstatPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>();
 
   int chmod(
     ffi.Pointer<ffi.Char> __file,
@@ -994,12 +766,8 @@ class TestBindings {
     );
   }
 
-  late final _chmodPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>(
-      'chmod');
-  late final _chmod =
-      _chmodPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+  late final _chmodPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>('chmod');
+  late final _chmod = _chmodPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   int lchmod(
     ffi.Pointer<ffi.Char> __file,
@@ -1011,12 +779,8 @@ class TestBindings {
     );
   }
 
-  late final _lchmodPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>(
-      'lchmod');
-  late final _lchmod =
-      _lchmodPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+  late final _lchmodPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>('lchmod');
+  late final _lchmod = _lchmodPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   int fchmod(
     int __fd,
@@ -1028,9 +792,7 @@ class TestBindings {
     );
   }
 
-  late final _fchmodPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, __mode_t)>>(
-          'fchmod');
+  late final _fchmodPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, __mode_t)>>('fchmod');
   late final _fchmod = _fchmodPtr.asFunction<int Function(int, int)>();
 
   int fchmodat(
@@ -1047,12 +809,8 @@ class TestBindings {
     );
   }
 
-  late final _fchmodatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, ffi.Int)>>('fchmodat');
-  late final _fchmodat = _fchmodatPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Char>, int, int)>();
+  late final _fchmodatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, ffi.Int)>>('fchmodat');
+  late final _fchmodat = _fchmodatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int, int)>();
 
   int umask(
     int __mask,
@@ -1062,8 +820,7 @@ class TestBindings {
     );
   }
 
-  late final _umaskPtr =
-      _lookup<ffi.NativeFunction<__mode_t Function(__mode_t)>>('umask');
+  late final _umaskPtr = _lookup<ffi.NativeFunction<__mode_t Function(__mode_t)>>('umask');
   late final _umask = _umaskPtr.asFunction<int Function(int)>();
 
   int mkdir(
@@ -1076,12 +833,8 @@ class TestBindings {
     );
   }
 
-  late final _mkdirPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>(
-      'mkdir');
-  late final _mkdir =
-      _mkdirPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+  late final _mkdirPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>('mkdir');
+  late final _mkdir = _mkdirPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   int mkdirat(
     int __fd,
@@ -1095,12 +848,8 @@ class TestBindings {
     );
   }
 
-  late final _mkdiratPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>>('mkdirat');
-  late final _mkdirat =
-      _mkdiratPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
+  late final _mkdiratPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>>('mkdirat');
+  late final _mkdirat = _mkdiratPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
 
   int mknod(
     ffi.Pointer<ffi.Char> __path,
@@ -1114,11 +863,8 @@ class TestBindings {
     );
   }
 
-  late final _mknodPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>>('mknod');
-  late final _mknod =
-      _mknodPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int, int)>();
+  late final _mknodPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>>('mknod');
+  late final _mknod = _mknodPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int, int)>();
 
   int mknodat(
     int __fd,
@@ -1134,12 +880,8 @@ class TestBindings {
     );
   }
 
-  late final _mknodatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>>('mknodat');
-  late final _mknodat = _mknodatPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Char>, int, int)>();
+  late final _mknodatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>>('mknodat');
+  late final _mknodat = _mknodatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int, int)>();
 
   int mkfifo(
     ffi.Pointer<ffi.Char> __path,
@@ -1151,12 +893,8 @@ class TestBindings {
     );
   }
 
-  late final _mkfifoPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>(
-      'mkfifo');
-  late final _mkfifo =
-      _mkfifoPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+  late final _mkfifoPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>('mkfifo');
+  late final _mkfifo = _mkfifoPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   int mkfifoat(
     int __fd,
@@ -1170,12 +908,8 @@ class TestBindings {
     );
   }
 
-  late final _mkfifoatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>>('mkfifoat');
-  late final _mkfifoat =
-      _mkfifoatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
+  late final _mkfifoatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>>('mkfifoat');
+  late final _mkfifoat = _mkfifoatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
 
   int utimensat(
     int __fd,
@@ -1191,12 +925,8 @@ class TestBindings {
     );
   }
 
-  late final _utimensatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<timespec>, ffi.Int)>>('utimensat');
-  late final _utimensat = _utimensatPtr.asFunction<
-      int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<timespec>, int)>();
+  late final _utimensatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<timespec>, ffi.Int)>>('utimensat');
+  late final _utimensat = _utimensatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<timespec>, int)>();
 
   int futimens(
     int __fd,
@@ -1208,11 +938,8 @@ class TestBindings {
     );
   }
 
-  late final _futimensPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<timespec>)>>(
-      'futimens');
-  late final _futimens =
-      _futimensPtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
+  late final _futimensPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<timespec>)>>('futimens');
+  late final _futimens = _futimensPtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
 
   int readv(
     int __fd,
@@ -1226,11 +953,8 @@ class TestBindings {
     );
   }
 
-  late final _readvPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>>('readv');
-  late final _readv =
-      _readvPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int)>();
+  late final _readvPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>>('readv');
+  late final _readv = _readvPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int)>();
 
   int writev(
     int __fd,
@@ -1244,11 +968,8 @@ class TestBindings {
     );
   }
 
-  late final _writevPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>>('writev');
-  late final _writev =
-      _writevPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int)>();
+  late final _writevPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>>('writev');
+  late final _writev = _writevPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int)>();
 
   int preadv(
     int __fd,
@@ -1264,12 +985,8 @@ class TestBindings {
     );
   }
 
-  late final _preadvPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>>('preadv');
-  late final _preadv =
-      _preadvPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int, int)>();
+  late final _preadvPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>>('preadv');
+  late final _preadv = _preadvPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int, int)>();
 
   int pwritev(
     int __fd,
@@ -1285,22 +1002,15 @@ class TestBindings {
     );
   }
 
-  late final _pwritevPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>>('pwritev');
-  late final _pwritev =
-      _pwritevPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int, int)>();
+  late final _pwritevPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>>('pwritev');
+  late final _pwritev = _pwritevPtr.asFunction<int Function(int, ffi.Pointer<iovec>, int, int)>();
 
   ffi.Pointer<ffi.Int> __errno_location() {
     return ___errno_location();
   }
 
-  late final ___errno_locationPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>>(
-          '__errno_location');
-  late final ___errno_location =
-      ___errno_locationPtr.asFunction<ffi.Pointer<ffi.Int> Function()>();
+  late final ___errno_locationPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>>('__errno_location');
+  late final ___errno_location = ___errno_locationPtr.asFunction<ffi.Pointer<ffi.Int> Function()>();
 
   __sighandler_t __sysv_signal(
     int __sig,
@@ -1312,11 +1022,8 @@ class TestBindings {
     );
   }
 
-  late final ___sysv_signalPtr = _lookup<
-          ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>(
-      '__sysv_signal');
-  late final ___sysv_signal = ___sysv_signalPtr
-      .asFunction<__sighandler_t Function(int, __sighandler_t)>();
+  late final ___sysv_signalPtr = _lookup<ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>('__sysv_signal');
+  late final ___sysv_signal = ___sysv_signalPtr.asFunction<__sighandler_t Function(int, __sighandler_t)>();
 
   __sighandler_t signal(
     int __sig,
@@ -1328,11 +1035,8 @@ class TestBindings {
     );
   }
 
-  late final _signalPtr = _lookup<
-          ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>(
-      'signal');
-  late final _signal =
-      _signalPtr.asFunction<__sighandler_t Function(int, __sighandler_t)>();
+  late final _signalPtr = _lookup<ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>('signal');
+  late final _signal = _signalPtr.asFunction<__sighandler_t Function(int, __sighandler_t)>();
 
   int kill(
     int __pid,
@@ -1344,8 +1048,7 @@ class TestBindings {
     );
   }
 
-  late final _killPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>>('kill');
+  late final _killPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>>('kill');
   late final _kill = _killPtr.asFunction<int Function(int, int)>();
 
   int killpg(
@@ -1358,8 +1061,7 @@ class TestBindings {
     );
   }
 
-  late final _killpgPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>>('killpg');
+  late final _killpgPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>>('killpg');
   late final _killpg = _killpgPtr.asFunction<int Function(int, int)>();
 
   int raise(
@@ -1370,8 +1072,7 @@ class TestBindings {
     );
   }
 
-  late final _raisePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('raise');
+  late final _raisePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('raise');
   late final _raise = _raisePtr.asFunction<int Function(int)>();
 
   __sighandler_t ssignal(
@@ -1384,11 +1085,8 @@ class TestBindings {
     );
   }
 
-  late final _ssignalPtr = _lookup<
-          ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>(
-      'ssignal');
-  late final _ssignal =
-      _ssignalPtr.asFunction<__sighandler_t Function(int, __sighandler_t)>();
+  late final _ssignalPtr = _lookup<ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>('ssignal');
+  late final _ssignal = _ssignalPtr.asFunction<__sighandler_t Function(int, __sighandler_t)>();
 
   int gsignal(
     int __sig,
@@ -1398,8 +1096,7 @@ class TestBindings {
     );
   }
 
-  late final _gsignalPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('gsignal');
+  late final _gsignalPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('gsignal');
   late final _gsignal = _gsignalPtr.asFunction<int Function(int)>();
 
   void psignal(
@@ -1412,12 +1109,8 @@ class TestBindings {
     );
   }
 
-  late final _psignalPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>)>>(
-      'psignal');
-  late final _psignal =
-      _psignalPtr.asFunction<void Function(int, ffi.Pointer<ffi.Char>)>();
+  late final _psignalPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>)>>('psignal');
+  late final _psignal = _psignalPtr.asFunction<void Function(int, ffi.Pointer<ffi.Char>)>();
 
   void psiginfo(
     ffi.Pointer<siginfo_t> __pinfo,
@@ -1429,12 +1122,8 @@ class TestBindings {
     );
   }
 
-  late final _psiginfoPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>>('psiginfo');
-  late final _psiginfo = _psiginfoPtr.asFunction<
-      void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>();
+  late final _psiginfoPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>>('psiginfo');
+  late final _psiginfo = _psiginfoPtr.asFunction<void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>();
 
   int sigblock(
     int __mask,
@@ -1444,8 +1133,7 @@ class TestBindings {
     );
   }
 
-  late final _sigblockPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sigblock');
+  late final _sigblockPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sigblock');
   late final _sigblock = _sigblockPtr.asFunction<int Function(int)>();
 
   int sigsetmask(
@@ -1456,16 +1144,14 @@ class TestBindings {
     );
   }
 
-  late final _sigsetmaskPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sigsetmask');
+  late final _sigsetmaskPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sigsetmask');
   late final _sigsetmask = _sigsetmaskPtr.asFunction<int Function(int)>();
 
   int siggetmask() {
     return _siggetmask();
   }
 
-  late final _siggetmaskPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('siggetmask');
+  late final _siggetmaskPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>('siggetmask');
   late final _siggetmask = _siggetmaskPtr.asFunction<int Function()>();
 
   int sigemptyset(
@@ -1476,11 +1162,8 @@ class TestBindings {
     );
   }
 
-  late final _sigemptysetPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>(
-          'sigemptyset');
-  late final _sigemptyset =
-      _sigemptysetPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
+  late final _sigemptysetPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>('sigemptyset');
+  late final _sigemptyset = _sigemptysetPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
 
   int sigfillset(
     ffi.Pointer<sigset_t> __set,
@@ -1490,11 +1173,8 @@ class TestBindings {
     );
   }
 
-  late final _sigfillsetPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>(
-          'sigfillset');
-  late final _sigfillset =
-      _sigfillsetPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
+  late final _sigfillsetPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>('sigfillset');
+  late final _sigfillset = _sigfillsetPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
 
   int sigaddset(
     ffi.Pointer<sigset_t> __set,
@@ -1506,11 +1186,8 @@ class TestBindings {
     );
   }
 
-  late final _sigaddsetPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>(
-      'sigaddset');
-  late final _sigaddset =
-      _sigaddsetPtr.asFunction<int Function(ffi.Pointer<sigset_t>, int)>();
+  late final _sigaddsetPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>('sigaddset');
+  late final _sigaddset = _sigaddsetPtr.asFunction<int Function(ffi.Pointer<sigset_t>, int)>();
 
   int sigdelset(
     ffi.Pointer<sigset_t> __set,
@@ -1522,11 +1199,8 @@ class TestBindings {
     );
   }
 
-  late final _sigdelsetPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>(
-      'sigdelset');
-  late final _sigdelset =
-      _sigdelsetPtr.asFunction<int Function(ffi.Pointer<sigset_t>, int)>();
+  late final _sigdelsetPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>('sigdelset');
+  late final _sigdelset = _sigdelsetPtr.asFunction<int Function(ffi.Pointer<sigset_t>, int)>();
 
   int sigismember(
     ffi.Pointer<sigset_t> __set,
@@ -1538,11 +1212,8 @@ class TestBindings {
     );
   }
 
-  late final _sigismemberPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>(
-      'sigismember');
-  late final _sigismember =
-      _sigismemberPtr.asFunction<int Function(ffi.Pointer<sigset_t>, int)>();
+  late final _sigismemberPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>('sigismember');
+  late final _sigismember = _sigismemberPtr.asFunction<int Function(ffi.Pointer<sigset_t>, int)>();
 
   int sigprocmask(
     int __how,
@@ -1556,12 +1227,8 @@ class TestBindings {
     );
   }
 
-  late final _sigprocmaskPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sigset_t>,
-              ffi.Pointer<sigset_t>)>>('sigprocmask');
-  late final _sigprocmask = _sigprocmaskPtr.asFunction<
-      int Function(int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>();
+  late final _sigprocmaskPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>>('sigprocmask');
+  late final _sigprocmask = _sigprocmaskPtr.asFunction<int Function(int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>();
 
   int sigsuspend(
     ffi.Pointer<sigset_t> __set,
@@ -1571,11 +1238,8 @@ class TestBindings {
     );
   }
 
-  late final _sigsuspendPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>(
-          'sigsuspend');
-  late final _sigsuspend =
-      _sigsuspendPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
+  late final _sigsuspendPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>('sigsuspend');
+  late final _sigsuspend = _sigsuspendPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
 
   int sigaction1(
     int __sig,
@@ -1589,12 +1253,8 @@ class TestBindings {
     );
   }
 
-  late final _sigaction1Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sigaction>,
-              ffi.Pointer<sigaction>)>>('sigaction');
-  late final _sigaction1 = _sigaction1Ptr.asFunction<
-      int Function(int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>();
+  late final _sigaction1Ptr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>>('sigaction');
+  late final _sigaction1 = _sigaction1Ptr.asFunction<int Function(int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>();
 
   int sigpending(
     ffi.Pointer<sigset_t> __set,
@@ -1604,11 +1264,8 @@ class TestBindings {
     );
   }
 
-  late final _sigpendingPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>(
-          'sigpending');
-  late final _sigpending =
-      _sigpendingPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
+  late final _sigpendingPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>('sigpending');
+  late final _sigpending = _sigpendingPtr.asFunction<int Function(ffi.Pointer<sigset_t>)>();
 
   int sigwait(
     ffi.Pointer<sigset_t> __set,
@@ -1620,12 +1277,8 @@ class TestBindings {
     );
   }
 
-  late final _sigwaitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>>('sigwait');
-  late final _sigwait = _sigwaitPtr
-      .asFunction<int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>();
+  late final _sigwaitPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>>('sigwait');
+  late final _sigwait = _sigwaitPtr.asFunction<int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>();
 
   int sigwaitinfo(
     ffi.Pointer<sigset_t> __set,
@@ -1637,12 +1290,8 @@ class TestBindings {
     );
   }
 
-  late final _sigwaitinfoPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>>('sigwaitinfo');
-  late final _sigwaitinfo = _sigwaitinfoPtr.asFunction<
-      int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>();
+  late final _sigwaitinfoPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>>('sigwaitinfo');
+  late final _sigwaitinfo = _sigwaitinfoPtr.asFunction<int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>();
 
   int sigtimedwait(
     ffi.Pointer<sigset_t> __set,
@@ -1656,13 +1305,8 @@ class TestBindings {
     );
   }
 
-  late final _sigtimedwaitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>,
-              ffi.Pointer<timespec>)>>('sigtimedwait');
-  late final _sigtimedwait = _sigtimedwaitPtr.asFunction<
-      int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>,
-          ffi.Pointer<timespec>)>();
+  late final _sigtimedwaitPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>, ffi.Pointer<timespec>)>>('sigtimedwait');
+  late final _sigtimedwait = _sigtimedwaitPtr.asFunction<int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>, ffi.Pointer<timespec>)>();
 
   int sigqueue(
     int __pid,
@@ -1676,11 +1320,8 @@ class TestBindings {
     );
   }
 
-  late final _sigqueuePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int, sigval)>>(
-          'sigqueue');
-  late final _sigqueue =
-      _sigqueuePtr.asFunction<int Function(int, int, sigval)>();
+  late final _sigqueuePtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int, sigval)>>('sigqueue');
+  late final _sigqueue = _sigqueuePtr.asFunction<int Function(int, int, sigval)>();
 
   int sigreturn(
     ffi.Pointer<sigcontext> __scp,
@@ -1690,11 +1331,8 @@ class TestBindings {
     );
   }
 
-  late final _sigreturnPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigcontext>)>>(
-          'sigreturn');
-  late final _sigreturn =
-      _sigreturnPtr.asFunction<int Function(ffi.Pointer<sigcontext>)>();
+  late final _sigreturnPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigcontext>)>>('sigreturn');
+  late final _sigreturn = _sigreturnPtr.asFunction<int Function(ffi.Pointer<sigcontext>)>();
 
   int siginterrupt(
     int __sig,
@@ -1706,11 +1344,8 @@ class TestBindings {
     );
   }
 
-  late final _siginterruptPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>(
-          'siginterrupt');
-  late final _siginterrupt =
-      _siginterruptPtr.asFunction<int Function(int, int)>();
+  late final _siginterruptPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('siginterrupt');
+  late final _siginterrupt = _siginterruptPtr.asFunction<int Function(int, int)>();
 
   int sigaltstack(
     ffi.Pointer<stack_t> __ss,
@@ -1722,12 +1357,8 @@ class TestBindings {
     );
   }
 
-  late final _sigaltstackPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>>('sigaltstack');
-  late final _sigaltstack = _sigaltstackPtr
-      .asFunction<int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>();
+  late final _sigaltstackPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>>('sigaltstack');
+  late final _sigaltstack = _sigaltstackPtr.asFunction<int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>();
 
   int sigstack1(
     ffi.Pointer<sigstack> __ss,
@@ -1739,12 +1370,8 @@ class TestBindings {
     );
   }
 
-  late final _sigstack1Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>>('sigstack');
-  late final _sigstack1 = _sigstack1Ptr
-      .asFunction<int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>();
+  late final _sigstack1Ptr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>>('sigstack');
+  late final _sigstack1 = _sigstack1Ptr.asFunction<int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>();
 
   int pthread_sigmask(
     int __how,
@@ -1758,12 +1385,8 @@ class TestBindings {
     );
   }
 
-  late final _pthread_sigmaskPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<__sigset_t>,
-              ffi.Pointer<__sigset_t>)>>('pthread_sigmask');
-  late final _pthread_sigmask = _pthread_sigmaskPtr.asFunction<
-      int Function(int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>();
+  late final _pthread_sigmaskPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>>('pthread_sigmask');
+  late final _pthread_sigmask = _pthread_sigmaskPtr.asFunction<int Function(int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>();
 
   int pthread_kill(
     int __threadid,
@@ -1775,31 +1398,22 @@ class TestBindings {
     );
   }
 
-  late final _pthread_killPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(pthread_t, ffi.Int)>>(
-          'pthread_kill');
-  late final _pthread_kill =
-      _pthread_killPtr.asFunction<int Function(int, int)>();
+  late final _pthread_killPtr = _lookup<ffi.NativeFunction<ffi.Int Function(pthread_t, ffi.Int)>>('pthread_kill');
+  late final _pthread_kill = _pthread_killPtr.asFunction<int Function(int, int)>();
 
   int __libc_current_sigrtmin() {
     return ___libc_current_sigrtmin();
   }
 
-  late final ___libc_current_sigrtminPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>(
-          '__libc_current_sigrtmin');
-  late final ___libc_current_sigrtmin =
-      ___libc_current_sigrtminPtr.asFunction<int Function()>();
+  late final ___libc_current_sigrtminPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>('__libc_current_sigrtmin');
+  late final ___libc_current_sigrtmin = ___libc_current_sigrtminPtr.asFunction<int Function()>();
 
   int __libc_current_sigrtmax() {
     return ___libc_current_sigrtmax();
   }
 
-  late final ___libc_current_sigrtmaxPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>(
-          '__libc_current_sigrtmax');
-  late final ___libc_current_sigrtmax =
-      ___libc_current_sigrtmaxPtr.asFunction<int Function()>();
+  late final ___libc_current_sigrtmaxPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>('__libc_current_sigrtmax');
+  late final ___libc_current_sigrtmax = ___libc_current_sigrtmaxPtr.asFunction<int Function()>();
 
   int imaxabs(
     int __n,
@@ -1809,8 +1423,7 @@ class TestBindings {
     );
   }
 
-  late final _imaxabsPtr =
-      _lookup<ffi.NativeFunction<intmax_t Function(intmax_t)>>('imaxabs');
+  late final _imaxabsPtr = _lookup<ffi.NativeFunction<intmax_t Function(intmax_t)>>('imaxabs');
   late final _imaxabs = _imaxabsPtr.asFunction<int Function(int)>();
 
   imaxdiv_t imaxdiv(
@@ -1823,9 +1436,7 @@ class TestBindings {
     );
   }
 
-  late final _imaxdivPtr =
-      _lookup<ffi.NativeFunction<imaxdiv_t Function(intmax_t, intmax_t)>>(
-          'imaxdiv');
+  late final _imaxdivPtr = _lookup<ffi.NativeFunction<imaxdiv_t Function(intmax_t, intmax_t)>>('imaxdiv');
   late final _imaxdiv = _imaxdivPtr.asFunction<imaxdiv_t Function(int, int)>();
 
   int strtoimax(
@@ -1840,13 +1451,8 @@ class TestBindings {
     );
   }
 
-  late final _strtoimaxPtr = _lookup<
-      ffi.NativeFunction<
-          intmax_t Function(ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>>('strtoimax');
-  late final _strtoimax = _strtoimaxPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+  late final _strtoimaxPtr = _lookup<ffi.NativeFunction<intmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>>('strtoimax');
+  late final _strtoimax = _strtoimaxPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
   int strtoumax(
     ffi.Pointer<ffi.Char> __nptr,
@@ -1860,13 +1466,8 @@ class TestBindings {
     );
   }
 
-  late final _strtoumaxPtr = _lookup<
-      ffi.NativeFunction<
-          uintmax_t Function(ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>>('strtoumax');
-  late final _strtoumax = _strtoumaxPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+  late final _strtoumaxPtr = _lookup<ffi.NativeFunction<uintmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>>('strtoumax');
+  late final _strtoumax = _strtoumaxPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
   int wcstoimax(
     ffi.Pointer<__gwchar_t> __nptr,
@@ -1880,13 +1481,8 @@ class TestBindings {
     );
   }
 
-  late final _wcstoimaxPtr = _lookup<
-      ffi.NativeFunction<
-          intmax_t Function(ffi.Pointer<__gwchar_t>,
-              ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>>('wcstoimax');
-  late final _wcstoimax = _wcstoimaxPtr.asFunction<
-      int Function(ffi.Pointer<__gwchar_t>,
-          ffi.Pointer<ffi.Pointer<__gwchar_t>>, int)>();
+  late final _wcstoimaxPtr = _lookup<ffi.NativeFunction<intmax_t Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>>('wcstoimax');
+  late final _wcstoimax = _wcstoimaxPtr.asFunction<int Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, int)>();
 
   int wcstoumax(
     ffi.Pointer<__gwchar_t> __nptr,
@@ -1900,20 +1496,14 @@ class TestBindings {
     );
   }
 
-  late final _wcstoumaxPtr = _lookup<
-      ffi.NativeFunction<
-          uintmax_t Function(ffi.Pointer<__gwchar_t>,
-              ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>>('wcstoumax');
-  late final _wcstoumax = _wcstoumaxPtr.asFunction<
-      int Function(ffi.Pointer<__gwchar_t>,
-          ffi.Pointer<ffi.Pointer<__gwchar_t>>, int)>();
+  late final _wcstoumaxPtr = _lookup<ffi.NativeFunction<uintmax_t Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>>('wcstoumax');
+  late final _wcstoumax = _wcstoumaxPtr.asFunction<int Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, int)>();
 
   int clock() {
     return _clock();
   }
 
-  late final _clockPtr =
-      _lookup<ffi.NativeFunction<clock_t Function()>>('clock');
+  late final _clockPtr = _lookup<ffi.NativeFunction<clock_t Function()>>('clock');
   late final _clock = _clockPtr.asFunction<int Function()>();
 
   int time(
@@ -1924,8 +1514,7 @@ class TestBindings {
     );
   }
 
-  late final _timePtr =
-      _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<time_t>)>>('time');
+  late final _timePtr = _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<time_t>)>>('time');
   late final _time = _timePtr.asFunction<int Function(ffi.Pointer<time_t>)>();
 
   double difftime(
@@ -1938,9 +1527,7 @@ class TestBindings {
     );
   }
 
-  late final _difftimePtr =
-      _lookup<ffi.NativeFunction<ffi.Double Function(time_t, time_t)>>(
-          'difftime');
+  late final _difftimePtr = _lookup<ffi.NativeFunction<ffi.Double Function(time_t, time_t)>>('difftime');
   late final _difftime = _difftimePtr.asFunction<double Function(int, int)>();
 
   int mktime(
@@ -1951,8 +1538,7 @@ class TestBindings {
     );
   }
 
-  late final _mktimePtr =
-      _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>('mktime');
+  late final _mktimePtr = _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>('mktime');
   late final _mktime = _mktimePtr.asFunction<int Function(ffi.Pointer<tm>)>();
 
   int strftime(
@@ -1969,13 +1555,8 @@ class TestBindings {
     );
   }
 
-  late final _strftimePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size,
-              ffi.Pointer<ffi.Char>, ffi.Pointer<tm>)>>('strftime');
-  late final _strftime = _strftimePtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<tm>)>();
+  late final _strftimePtr = _lookup<ffi.NativeFunction<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>)>>('strftime');
+  late final _strftime = _strftimePtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>)>();
 
   int strftime_l(
     ffi.Pointer<ffi.Char> __s,
@@ -1993,13 +1574,8 @@ class TestBindings {
     );
   }
 
-  late final _strftime_lPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size,
-              ffi.Pointer<ffi.Char>, ffi.Pointer<tm>, locale_t)>>('strftime_l');
-  late final _strftime_l = _strftime_lPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<tm>, locale_t)>();
+  late final _strftime_lPtr = _lookup<ffi.NativeFunction<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>, locale_t)>>('strftime_l');
+  late final _strftime_l = _strftime_lPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>, locale_t)>();
 
   ffi.Pointer<tm> gmtime(
     ffi.Pointer<time_t> __timer,
@@ -2009,11 +1585,8 @@ class TestBindings {
     );
   }
 
-  late final _gmtimePtr = _lookup<
-      ffi
-      .NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>>('gmtime');
-  late final _gmtime =
-      _gmtimePtr.asFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>();
+  late final _gmtimePtr = _lookup<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>>('gmtime');
+  late final _gmtime = _gmtimePtr.asFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>();
 
   ffi.Pointer<tm> localtime(
     ffi.Pointer<time_t> __timer,
@@ -2023,11 +1596,8 @@ class TestBindings {
     );
   }
 
-  late final _localtimePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>>(
-      'localtime');
-  late final _localtime =
-      _localtimePtr.asFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>();
+  late final _localtimePtr = _lookup<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>>('localtime');
+  late final _localtime = _localtimePtr.asFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>();
 
   ffi.Pointer<tm> gmtime_r(
     ffi.Pointer<time_t> __timer,
@@ -2039,12 +1609,8 @@ class TestBindings {
     );
   }
 
-  late final _gmtime_rPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<tm> Function(
-              ffi.Pointer<time_t>, ffi.Pointer<tm>)>>('gmtime_r');
-  late final _gmtime_r = _gmtime_rPtr.asFunction<
-      ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>();
+  late final _gmtime_rPtr = _lookup<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>>('gmtime_r');
+  late final _gmtime_r = _gmtime_rPtr.asFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>();
 
   ffi.Pointer<tm> localtime_r(
     ffi.Pointer<time_t> __timer,
@@ -2056,12 +1622,8 @@ class TestBindings {
     );
   }
 
-  late final _localtime_rPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<tm> Function(
-              ffi.Pointer<time_t>, ffi.Pointer<tm>)>>('localtime_r');
-  late final _localtime_r = _localtime_rPtr.asFunction<
-      ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>();
+  late final _localtime_rPtr = _lookup<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>>('localtime_r');
+  late final _localtime_r = _localtime_rPtr.asFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>();
 
   ffi.Pointer<ffi.Char> asctime(
     ffi.Pointer<tm> __tp,
@@ -2071,11 +1633,8 @@ class TestBindings {
     );
   }
 
-  late final _asctimePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>>(
-      'asctime');
-  late final _asctime =
-      _asctimePtr.asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>();
+  late final _asctimePtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>>('asctime');
+  late final _asctime = _asctimePtr.asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>();
 
   ffi.Pointer<ffi.Char> ctime(
     ffi.Pointer<time_t> __timer,
@@ -2085,12 +1644,8 @@ class TestBindings {
     );
   }
 
-  late final _ctimePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>>(
-      'ctime');
-  late final _ctime = _ctimePtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>();
+  late final _ctimePtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>>('ctime');
+  late final _ctime = _ctimePtr.asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>();
 
   ffi.Pointer<ffi.Char> asctime_r(
     ffi.Pointer<tm> __tp,
@@ -2102,12 +1657,8 @@ class TestBindings {
     );
   }
 
-  late final _asctime_rPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>>('asctime_r');
-  late final _asctime_r = _asctime_rPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>();
+  late final _asctime_rPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>>('asctime_r');
+  late final _asctime_r = _asctime_rPtr.asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>();
 
   ffi.Pointer<ffi.Char> ctime_r(
     ffi.Pointer<time_t> __timer,
@@ -2119,21 +1670,14 @@ class TestBindings {
     );
   }
 
-  late final _ctime_rPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>>('ctime_r');
-  late final _ctime_r = _ctime_rPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(
-          ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>();
+  late final _ctime_rPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>>('ctime_r');
+  late final _ctime_r = _ctime_rPtr.asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>();
 
-  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> ___tzname =
-      _lookup<ffi.Pointer<ffi.Pointer<ffi.Char>>>('__tzname');
+  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> ___tzname = _lookup<ffi.Pointer<ffi.Pointer<ffi.Char>>>('__tzname');
 
   ffi.Pointer<ffi.Pointer<ffi.Char>> get __tzname => ___tzname.value;
 
-  set __tzname(ffi.Pointer<ffi.Pointer<ffi.Char>> value) =>
-      ___tzname.value = value;
+  set __tzname(ffi.Pointer<ffi.Pointer<ffi.Char>> value) => ___tzname.value = value;
 
   late final ffi.Pointer<ffi.Int> ___daylight = _lookup<ffi.Int>('__daylight');
 
@@ -2141,15 +1685,13 @@ class TestBindings {
 
   set __daylight(int value) => ___daylight.value = value;
 
-  late final ffi.Pointer<ffi.Long> ___timezone =
-      _lookup<ffi.Long>('__timezone');
+  late final ffi.Pointer<ffi.Long> ___timezone = _lookup<ffi.Long>('__timezone');
 
   int get __timezone => ___timezone.value;
 
   set __timezone(int value) => ___timezone.value = value;
 
-  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> _tzname =
-      _lookup<ffi.Pointer<ffi.Pointer<ffi.Char>>>('tzname');
+  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> _tzname = _lookup<ffi.Pointer<ffi.Pointer<ffi.Char>>>('tzname');
 
   ffi.Pointer<ffi.Pointer<ffi.Char>> get tzname => _tzname.value;
 
@@ -2159,8 +1701,7 @@ class TestBindings {
     return _tzset();
   }
 
-  late final _tzsetPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('tzset');
+  late final _tzsetPtr = _lookup<ffi.NativeFunction<ffi.Void Function()>>('tzset');
   late final _tzset = _tzsetPtr.asFunction<void Function()>();
 
   late final ffi.Pointer<ffi.Int> _daylight = _lookup<ffi.Int>('daylight');
@@ -2183,8 +1724,7 @@ class TestBindings {
     );
   }
 
-  late final _timegmPtr =
-      _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>('timegm');
+  late final _timegmPtr = _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>('timegm');
   late final _timegm = _timegmPtr.asFunction<int Function(ffi.Pointer<tm>)>();
 
   int timelocal(
@@ -2195,11 +1735,8 @@ class TestBindings {
     );
   }
 
-  late final _timelocalPtr =
-      _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>(
-          'timelocal');
-  late final _timelocal =
-      _timelocalPtr.asFunction<int Function(ffi.Pointer<tm>)>();
+  late final _timelocalPtr = _lookup<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>('timelocal');
+  late final _timelocal = _timelocalPtr.asFunction<int Function(ffi.Pointer<tm>)>();
 
   int dysize(
     int __year,
@@ -2209,8 +1746,7 @@ class TestBindings {
     );
   }
 
-  late final _dysizePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('dysize');
+  late final _dysizePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('dysize');
   late final _dysize = _dysizePtr.asFunction<int Function(int)>();
 
   int nanosleep(
@@ -2223,12 +1759,8 @@ class TestBindings {
     );
   }
 
-  late final _nanosleepPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<timespec>, ffi.Pointer<timespec>)>>('nanosleep');
-  late final _nanosleep = _nanosleepPtr
-      .asFunction<int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>();
+  late final _nanosleepPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>>('nanosleep');
+  late final _nanosleep = _nanosleepPtr.asFunction<int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>();
 
   int clock_getres(
     int __clock_id,
@@ -2240,12 +1772,8 @@ class TestBindings {
     );
   }
 
-  late final _clock_getresPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>(
-      'clock_getres');
-  late final _clock_getres =
-      _clock_getresPtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
+  late final _clock_getresPtr = _lookup<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>('clock_getres');
+  late final _clock_getres = _clock_getresPtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
 
   int clock_gettime(
     int __clock_id,
@@ -2257,12 +1785,8 @@ class TestBindings {
     );
   }
 
-  late final _clock_gettimePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>(
-      'clock_gettime');
-  late final _clock_gettime =
-      _clock_gettimePtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
+  late final _clock_gettimePtr = _lookup<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>('clock_gettime');
+  late final _clock_gettime = _clock_gettimePtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
 
   int clock_settime(
     int __clock_id,
@@ -2274,12 +1798,8 @@ class TestBindings {
     );
   }
 
-  late final _clock_settimePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>(
-      'clock_settime');
-  late final _clock_settime =
-      _clock_settimePtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
+  late final _clock_settimePtr = _lookup<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>('clock_settime');
+  late final _clock_settime = _clock_settimePtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
 
   int clock_nanosleep(
     int __clock_id,
@@ -2295,12 +1815,8 @@ class TestBindings {
     );
   }
 
-  late final _clock_nanosleepPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(clockid_t, ffi.Int, ffi.Pointer<timespec>,
-              ffi.Pointer<timespec>)>>('clock_nanosleep');
-  late final _clock_nanosleep = _clock_nanosleepPtr.asFunction<
-      int Function(int, int, ffi.Pointer<timespec>, ffi.Pointer<timespec>)>();
+  late final _clock_nanosleepPtr = _lookup<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Int, ffi.Pointer<timespec>, ffi.Pointer<timespec>)>>('clock_nanosleep');
+  late final _clock_nanosleep = _clock_nanosleepPtr.asFunction<int Function(int, int, ffi.Pointer<timespec>, ffi.Pointer<timespec>)>();
 
   int clock_getcpuclockid(
     int __pid,
@@ -2312,11 +1828,8 @@ class TestBindings {
     );
   }
 
-  late final _clock_getcpuclockidPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(pid_t, ffi.Pointer<clockid_t>)>>(
-      'clock_getcpuclockid');
-  late final _clock_getcpuclockid = _clock_getcpuclockidPtr
-      .asFunction<int Function(int, ffi.Pointer<clockid_t>)>();
+  late final _clock_getcpuclockidPtr = _lookup<ffi.NativeFunction<ffi.Int Function(pid_t, ffi.Pointer<clockid_t>)>>('clock_getcpuclockid');
+  late final _clock_getcpuclockid = _clock_getcpuclockidPtr.asFunction<int Function(int, ffi.Pointer<clockid_t>)>();
 
   int timer_create(
     int __clock_id,
@@ -2330,12 +1843,8 @@ class TestBindings {
     );
   }
 
-  late final _timer_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(clockid_t, ffi.Pointer<sigevent>,
-              ffi.Pointer<timer_t>)>>('timer_create');
-  late final _timer_create = _timer_createPtr.asFunction<
-      int Function(int, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>();
+  late final _timer_createPtr = _lookup<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>>('timer_create');
+  late final _timer_create = _timer_createPtr.asFunction<int Function(int, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>();
 
   int timer_delete(
     timer_t __timerid,
@@ -2345,10 +1854,8 @@ class TestBindings {
     );
   }
 
-  late final _timer_deletePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(timer_t)>>('timer_delete');
-  late final _timer_delete =
-      _timer_deletePtr.asFunction<int Function(timer_t)>();
+  late final _timer_deletePtr = _lookup<ffi.NativeFunction<ffi.Int Function(timer_t)>>('timer_delete');
+  late final _timer_delete = _timer_deletePtr.asFunction<int Function(timer_t)>();
 
   int timer_settime(
     timer_t __timerid,
@@ -2364,13 +1871,8 @@ class TestBindings {
     );
   }
 
-  late final _timer_settimePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(timer_t, ffi.Int, ffi.Pointer<itimerspec>,
-              ffi.Pointer<itimerspec>)>>('timer_settime');
-  late final _timer_settime = _timer_settimePtr.asFunction<
-      int Function(
-          timer_t, int, ffi.Pointer<itimerspec>, ffi.Pointer<itimerspec>)>();
+  late final _timer_settimePtr = _lookup<ffi.NativeFunction<ffi.Int Function(timer_t, ffi.Int, ffi.Pointer<itimerspec>, ffi.Pointer<itimerspec>)>>('timer_settime');
+  late final _timer_settime = _timer_settimePtr.asFunction<int Function(timer_t, int, ffi.Pointer<itimerspec>, ffi.Pointer<itimerspec>)>();
 
   int timer_gettime(
     timer_t __timerid,
@@ -2382,12 +1884,8 @@ class TestBindings {
     );
   }
 
-  late final _timer_gettimePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(timer_t, ffi.Pointer<itimerspec>)>>(
-      'timer_gettime');
-  late final _timer_gettime = _timer_gettimePtr
-      .asFunction<int Function(timer_t, ffi.Pointer<itimerspec>)>();
+  late final _timer_gettimePtr = _lookup<ffi.NativeFunction<ffi.Int Function(timer_t, ffi.Pointer<itimerspec>)>>('timer_gettime');
+  late final _timer_gettime = _timer_gettimePtr.asFunction<int Function(timer_t, ffi.Pointer<itimerspec>)>();
 
   int timer_getoverrun(
     timer_t __timerid,
@@ -2397,11 +1895,8 @@ class TestBindings {
     );
   }
 
-  late final _timer_getoverrunPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(timer_t)>>(
-          'timer_getoverrun');
-  late final _timer_getoverrun =
-      _timer_getoverrunPtr.asFunction<int Function(timer_t)>();
+  late final _timer_getoverrunPtr = _lookup<ffi.NativeFunction<ffi.Int Function(timer_t)>>('timer_getoverrun');
+  late final _timer_getoverrun = _timer_getoverrunPtr.asFunction<int Function(timer_t)>();
 
   int timespec_get(
     ffi.Pointer<timespec> __ts,
@@ -2413,11 +1908,8 @@ class TestBindings {
     );
   }
 
-  late final _timespec_getPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<timespec>, ffi.Int)>>(
-      'timespec_get');
-  late final _timespec_get =
-      _timespec_getPtr.asFunction<int Function(ffi.Pointer<timespec>, int)>();
+  late final _timespec_getPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<timespec>, ffi.Int)>>('timespec_get');
+  late final _timespec_get = _timespec_getPtr.asFunction<int Function(ffi.Pointer<timespec>, int)>();
 
   int fcntl(
     int __fd,
@@ -2429,8 +1921,7 @@ class TestBindings {
     );
   }
 
-  late final _fcntlPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('fcntl');
+  late final _fcntlPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('fcntl');
   late final _fcntl = _fcntlPtr.asFunction<int Function(int, int)>();
 
   int open(
@@ -2443,11 +1934,8 @@ class TestBindings {
     );
   }
 
-  late final _openPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>>(
-      'open');
-  late final _open =
-      _openPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+  late final _openPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>>('open');
+  late final _open = _openPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   int openat(
     int __fd,
@@ -2461,11 +1949,8 @@ class TestBindings {
     );
   }
 
-  late final _openatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>>('openat');
-  late final _openat =
-      _openatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
+  late final _openatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>>('openat');
+  late final _openat = _openatPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
 
   int creat(
     ffi.Pointer<ffi.Char> __file,
@@ -2477,11 +1962,8 @@ class TestBindings {
     );
   }
 
-  late final _creatPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, mode_t)>>(
-      'creat');
-  late final _creat =
-      _creatPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+  late final _creatPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, mode_t)>>('creat');
+  late final _creat = _creatPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   int lockf(
     int __fd,
@@ -2495,9 +1977,7 @@ class TestBindings {
     );
   }
 
-  late final _lockfPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, off_t)>>(
-          'lockf');
+  late final _lockfPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, off_t)>>('lockf');
   late final _lockf = _lockfPtr.asFunction<int Function(int, int, int)>();
 
   int posix_fadvise(
@@ -2514,11 +1994,8 @@ class TestBindings {
     );
   }
 
-  late final _posix_fadvisePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t, ffi.Int)>>(
-      'posix_fadvise');
-  late final _posix_fadvise =
-      _posix_fadvisePtr.asFunction<int Function(int, int, int, int)>();
+  late final _posix_fadvisePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t, ffi.Int)>>('posix_fadvise');
+  late final _posix_fadvise = _posix_fadvisePtr.asFunction<int Function(int, int, int, int)>();
 
   int posix_fallocate(
     int __fd,
@@ -2532,11 +2009,8 @@ class TestBindings {
     );
   }
 
-  late final _posix_fallocatePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t)>>(
-          'posix_fallocate');
-  late final _posix_fallocate =
-      _posix_fallocatePtr.asFunction<int Function(int, int, int)>();
+  late final _posix_fallocatePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t)>>('posix_fallocate');
+  late final _posix_fallocate = _posix_fallocatePtr.asFunction<int Function(int, int, int)>();
 
   int __sched_cpucount(
     int __setsize,
@@ -2548,12 +2022,8 @@ class TestBindings {
     );
   }
 
-  late final ___sched_cpucountPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Size, ffi.Pointer<cpu_set_t>)>>(
-      '__sched_cpucount');
-  late final ___sched_cpucount = ___sched_cpucountPtr
-      .asFunction<int Function(int, ffi.Pointer<cpu_set_t>)>();
+  late final ___sched_cpucountPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Size, ffi.Pointer<cpu_set_t>)>>('__sched_cpucount');
+  late final ___sched_cpucount = ___sched_cpucountPtr.asFunction<int Function(int, ffi.Pointer<cpu_set_t>)>();
 
   ffi.Pointer<cpu_set_t> __sched_cpualloc(
     int __count,
@@ -2563,11 +2033,8 @@ class TestBindings {
     );
   }
 
-  late final ___sched_cpuallocPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<cpu_set_t> Function(ffi.Size)>>(
-          '__sched_cpualloc');
-  late final ___sched_cpualloc =
-      ___sched_cpuallocPtr.asFunction<ffi.Pointer<cpu_set_t> Function(int)>();
+  late final ___sched_cpuallocPtr = _lookup<ffi.NativeFunction<ffi.Pointer<cpu_set_t> Function(ffi.Size)>>('__sched_cpualloc');
+  late final ___sched_cpualloc = ___sched_cpuallocPtr.asFunction<ffi.Pointer<cpu_set_t> Function(int)>();
 
   void __sched_cpufree(
     ffi.Pointer<cpu_set_t> __set,
@@ -2577,11 +2044,8 @@ class TestBindings {
     );
   }
 
-  late final ___sched_cpufreePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<cpu_set_t>)>>(
-          '__sched_cpufree');
-  late final ___sched_cpufree =
-      ___sched_cpufreePtr.asFunction<void Function(ffi.Pointer<cpu_set_t>)>();
+  late final ___sched_cpufreePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<cpu_set_t>)>>('__sched_cpufree');
+  late final ___sched_cpufree = ___sched_cpufreePtr.asFunction<void Function(ffi.Pointer<cpu_set_t>)>();
 
   int sched_setparam(
     int __pid,
@@ -2593,12 +2057,8 @@ class TestBindings {
     );
   }
 
-  late final _sched_setparamPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>>(
-      'sched_setparam');
-  late final _sched_setparam = _sched_setparamPtr
-      .asFunction<int Function(int, ffi.Pointer<sched_param>)>();
+  late final _sched_setparamPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>>('sched_setparam');
+  late final _sched_setparam = _sched_setparamPtr.asFunction<int Function(int, ffi.Pointer<sched_param>)>();
 
   int sched_getparam(
     int __pid,
@@ -2610,12 +2070,8 @@ class TestBindings {
     );
   }
 
-  late final _sched_getparamPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>>(
-      'sched_getparam');
-  late final _sched_getparam = _sched_getparamPtr
-      .asFunction<int Function(int, ffi.Pointer<sched_param>)>();
+  late final _sched_getparamPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>>('sched_getparam');
+  late final _sched_getparam = _sched_getparamPtr.asFunction<int Function(int, ffi.Pointer<sched_param>)>();
 
   int sched_setscheduler(
     int __pid,
@@ -2629,12 +2085,8 @@ class TestBindings {
     );
   }
 
-  late final _sched_setschedulerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(__pid_t, ffi.Int,
-              ffi.Pointer<sched_param>)>>('sched_setscheduler');
-  late final _sched_setscheduler = _sched_setschedulerPtr
-      .asFunction<int Function(int, int, ffi.Pointer<sched_param>)>();
+  late final _sched_setschedulerPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int, ffi.Pointer<sched_param>)>>('sched_setscheduler');
+  late final _sched_setscheduler = _sched_setschedulerPtr.asFunction<int Function(int, int, ffi.Pointer<sched_param>)>();
 
   int sched_getscheduler(
     int __pid,
@@ -2644,18 +2096,14 @@ class TestBindings {
     );
   }
 
-  late final _sched_getschedulerPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t)>>(
-          'sched_getscheduler');
-  late final _sched_getscheduler =
-      _sched_getschedulerPtr.asFunction<int Function(int)>();
+  late final _sched_getschedulerPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t)>>('sched_getscheduler');
+  late final _sched_getscheduler = _sched_getschedulerPtr.asFunction<int Function(int)>();
 
   int sched_yield() {
     return _sched_yield();
   }
 
-  late final _sched_yieldPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('sched_yield');
+  late final _sched_yieldPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>('sched_yield');
   late final _sched_yield = _sched_yieldPtr.asFunction<int Function()>();
 
   int sched_get_priority_max(
@@ -2666,11 +2114,8 @@ class TestBindings {
     );
   }
 
-  late final _sched_get_priority_maxPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>(
-          'sched_get_priority_max');
-  late final _sched_get_priority_max =
-      _sched_get_priority_maxPtr.asFunction<int Function(int)>();
+  late final _sched_get_priority_maxPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sched_get_priority_max');
+  late final _sched_get_priority_max = _sched_get_priority_maxPtr.asFunction<int Function(int)>();
 
   int sched_get_priority_min(
     int __algorithm,
@@ -2680,11 +2125,8 @@ class TestBindings {
     );
   }
 
-  late final _sched_get_priority_minPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>(
-          'sched_get_priority_min');
-  late final _sched_get_priority_min =
-      _sched_get_priority_minPtr.asFunction<int Function(int)>();
+  late final _sched_get_priority_minPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sched_get_priority_min');
+  late final _sched_get_priority_min = _sched_get_priority_minPtr.asFunction<int Function(int)>();
 
   int sched_rr_get_interval(
     int __pid,
@@ -2696,11 +2138,8 @@ class TestBindings {
     );
   }
 
-  late final _sched_rr_get_intervalPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<timespec>)>>(
-      'sched_rr_get_interval');
-  late final _sched_rr_get_interval = _sched_rr_get_intervalPtr
-      .asFunction<int Function(int, ffi.Pointer<timespec>)>();
+  late final _sched_rr_get_intervalPtr = _lookup<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<timespec>)>>('sched_rr_get_interval');
+  late final _sched_rr_get_interval = _sched_rr_get_intervalPtr.asFunction<int Function(int, ffi.Pointer<timespec>)>();
 
   void atomic_thread_fence(
     int arg0,
@@ -2710,11 +2149,8 @@ class TestBindings {
     );
   }
 
-  late final _atomic_thread_fencePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
-          'atomic_thread_fence');
-  late final _atomic_thread_fence =
-      _atomic_thread_fencePtr.asFunction<void Function(int)>();
+  late final _atomic_thread_fencePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>('atomic_thread_fence');
+  late final _atomic_thread_fence = _atomic_thread_fencePtr.asFunction<void Function(int)>();
 
   void atomic_signal_fence(
     int arg0,
@@ -2724,11 +2160,8 @@ class TestBindings {
     );
   }
 
-  late final _atomic_signal_fencePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
-          'atomic_signal_fence');
-  late final _atomic_signal_fence =
-      _atomic_signal_fencePtr.asFunction<void Function(int)>();
+  late final _atomic_signal_fencePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>('atomic_signal_fence');
+  late final _atomic_signal_fence = _atomic_signal_fencePtr.asFunction<void Function(int)>();
 
   ffi.Pointer<io_uring_probe> io_uring_get_probe_ring(
     ffi.Pointer<io_uring> ring,
@@ -2738,22 +2171,15 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_get_probe_ringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<io_uring_probe> Function(
-              ffi.Pointer<io_uring>)>>('io_uring_get_probe_ring');
-  late final _io_uring_get_probe_ring = _io_uring_get_probe_ringPtr.asFunction<
-      ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_get_probe_ringPtr = _lookup<ffi.NativeFunction<ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>>('io_uring_get_probe_ring');
+  late final _io_uring_get_probe_ring = _io_uring_get_probe_ringPtr.asFunction<ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>();
 
   ffi.Pointer<io_uring_probe> io_uring_get_probe() {
     return _io_uring_get_probe();
   }
 
-  late final _io_uring_get_probePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<io_uring_probe> Function()>>(
-          'io_uring_get_probe');
-  late final _io_uring_get_probe = _io_uring_get_probePtr
-      .asFunction<ffi.Pointer<io_uring_probe> Function()>();
+  late final _io_uring_get_probePtr = _lookup<ffi.NativeFunction<ffi.Pointer<io_uring_probe> Function()>>('io_uring_get_probe');
+  late final _io_uring_get_probe = _io_uring_get_probePtr.asFunction<ffi.Pointer<io_uring_probe> Function()>();
 
   void io_uring_free_probe(
     ffi.Pointer<io_uring_probe> probe,
@@ -2763,11 +2189,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_free_probePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring_probe>)>>(
-      'io_uring_free_probe');
-  late final _io_uring_free_probe = _io_uring_free_probePtr
-      .asFunction<void Function(ffi.Pointer<io_uring_probe>)>();
+  late final _io_uring_free_probePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring_probe>)>>('io_uring_free_probe');
+  late final _io_uring_free_probe = _io_uring_free_probePtr.asFunction<void Function(ffi.Pointer<io_uring_probe>)>();
 
   int io_uring_queue_init_params(
     int entries,
@@ -2781,14 +2204,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_queue_init_paramsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>,
-              ffi.Pointer<io_uring_params>)>>('io_uring_queue_init_params');
-  late final _io_uring_queue_init_params =
-      _io_uring_queue_init_paramsPtr.asFunction<
-          int Function(
-              int, ffi.Pointer<io_uring>, ffi.Pointer<io_uring_params>)>();
+  late final _io_uring_queue_init_paramsPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.Pointer<io_uring_params>)>>('io_uring_queue_init_params');
+  late final _io_uring_queue_init_params = _io_uring_queue_init_paramsPtr.asFunction<int Function(int, ffi.Pointer<io_uring>, ffi.Pointer<io_uring_params>)>();
 
   int io_uring_queue_init(
     int entries,
@@ -2802,12 +2219,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_queue_initPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>,
-              ffi.UnsignedInt)>>('io_uring_queue_init');
-  late final _io_uring_queue_init = _io_uring_queue_initPtr
-      .asFunction<int Function(int, ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_queue_initPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.UnsignedInt)>>('io_uring_queue_init');
+  late final _io_uring_queue_init = _io_uring_queue_initPtr.asFunction<int Function(int, ffi.Pointer<io_uring>, int)>();
 
   int io_uring_queue_mmap(
     int fd,
@@ -2821,12 +2234,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_queue_mmapPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<io_uring_params>,
-              ffi.Pointer<io_uring>)>>('io_uring_queue_mmap');
-  late final _io_uring_queue_mmap = _io_uring_queue_mmapPtr.asFunction<
-      int Function(int, ffi.Pointer<io_uring_params>, ffi.Pointer<io_uring>)>();
+  late final _io_uring_queue_mmapPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<io_uring_params>, ffi.Pointer<io_uring>)>>('io_uring_queue_mmap');
+  late final _io_uring_queue_mmap = _io_uring_queue_mmapPtr.asFunction<int Function(int, ffi.Pointer<io_uring_params>, ffi.Pointer<io_uring>)>();
 
   int io_uring_ring_dontfork(
     ffi.Pointer<io_uring> ring,
@@ -2836,11 +2245,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_ring_dontforkPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_ring_dontfork');
-  late final _io_uring_ring_dontfork = _io_uring_ring_dontforkPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_ring_dontforkPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_ring_dontfork');
+  late final _io_uring_ring_dontfork = _io_uring_ring_dontforkPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   void io_uring_queue_exit(
     ffi.Pointer<io_uring> ring,
@@ -2850,11 +2256,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_queue_exitPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_queue_exit');
-  late final _io_uring_queue_exit = _io_uring_queue_exitPtr
-      .asFunction<void Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_queue_exitPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>)>>('io_uring_queue_exit');
+  late final _io_uring_queue_exit = _io_uring_queue_exitPtr.asFunction<void Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_peek_batch_cqe(
     ffi.Pointer<io_uring> ring,
@@ -2868,15 +2271,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_peek_batch_cqePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.UnsignedInt Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt)>>('io_uring_peek_batch_cqe');
-  late final _io_uring_peek_batch_cqe = _io_uring_peek_batch_cqePtr.asFunction<
-      int Function(ffi.Pointer<io_uring>,
-          ffi.Pointer<ffi.Pointer<io_uring_cqe>>, int)>();
+  late final _io_uring_peek_batch_cqePtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt)>>('io_uring_peek_batch_cqe');
+  late final _io_uring_peek_batch_cqe = _io_uring_peek_batch_cqePtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, int)>();
 
   int io_uring_wait_cqes(
     ffi.Pointer<io_uring> ring,
@@ -2894,21 +2291,11 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_wait_cqesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt,
-              ffi.Pointer<__kernel_timespec>,
-              ffi.Pointer<sigset_t>)>>('io_uring_wait_cqes');
-  late final _io_uring_wait_cqes = _io_uring_wait_cqesPtr.asFunction<
-      int Function(
-          ffi.Pointer<io_uring>,
-          ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-          int,
-          ffi.Pointer<__kernel_timespec>,
-          ffi.Pointer<sigset_t>)>();
+  late final _io_uring_wait_cqesPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>>(
+          'io_uring_wait_cqes');
+  late final _io_uring_wait_cqes =
+      _io_uring_wait_cqesPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, int, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>();
 
   int io_uring_wait_cqe_timeout(
     ffi.Pointer<io_uring> ring,
@@ -2922,18 +2309,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_wait_cqe_timeoutPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.Pointer<__kernel_timespec>)>>('io_uring_wait_cqe_timeout');
-  late final _io_uring_wait_cqe_timeout =
-      _io_uring_wait_cqe_timeoutPtr.asFunction<
-          int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.Pointer<__kernel_timespec>)>();
+  late final _io_uring_wait_cqe_timeoutPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.Pointer<__kernel_timespec>)>>('io_uring_wait_cqe_timeout');
+  late final _io_uring_wait_cqe_timeout = _io_uring_wait_cqe_timeoutPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.Pointer<__kernel_timespec>)>();
 
   int io_uring_submit(
     ffi.Pointer<io_uring> ring,
@@ -2943,11 +2321,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_submitPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_submit');
-  late final _io_uring_submit =
-      _io_uring_submitPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_submitPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_submit');
+  late final _io_uring_submit = _io_uring_submitPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_submit_and_wait(
     ffi.Pointer<io_uring> ring,
@@ -2959,12 +2334,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_submit_and_waitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>,
-              ffi.UnsignedInt)>>('io_uring_submit_and_wait');
-  late final _io_uring_submit_and_wait = _io_uring_submit_and_waitPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_submit_and_waitPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>>('io_uring_submit_and_wait');
+  late final _io_uring_submit_and_wait = _io_uring_submit_and_waitPtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_submit_and_wait_timeout(
     ffi.Pointer<io_uring> ring,
@@ -2982,22 +2353,11 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_submit_and_wait_timeoutPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt,
-              ffi.Pointer<__kernel_timespec>,
-              ffi.Pointer<sigset_t>)>>('io_uring_submit_and_wait_timeout');
+  late final _io_uring_submit_and_wait_timeoutPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>>(
+          'io_uring_submit_and_wait_timeout');
   late final _io_uring_submit_and_wait_timeout =
-      _io_uring_submit_and_wait_timeoutPtr.asFunction<
-          int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              int,
-              ffi.Pointer<__kernel_timespec>,
-              ffi.Pointer<sigset_t>)>();
+      _io_uring_submit_and_wait_timeoutPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, int, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>();
 
   int io_uring_register_buffers(
     ffi.Pointer<io_uring> ring,
@@ -3011,13 +2371,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_buffersPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>,
-              ffi.UnsignedInt)>>('io_uring_register_buffers');
-  late final _io_uring_register_buffers =
-      _io_uring_register_buffersPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, int)>();
+  late final _io_uring_register_buffersPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.UnsignedInt)>>('io_uring_register_buffers');
+  late final _io_uring_register_buffers = _io_uring_register_buffersPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, int)>();
 
   int io_uring_register_buffers_tags(
     ffi.Pointer<io_uring> ring,
@@ -3033,17 +2388,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_buffers_tagsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<iovec>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>>('io_uring_register_buffers_tags');
-  late final _io_uring_register_buffers_tags =
-      _io_uring_register_buffers_tagsPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>,
-              ffi.Pointer<__u64>, int)>();
+  late final _io_uring_register_buffers_tagsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>>('io_uring_register_buffers_tags');
+  late final _io_uring_register_buffers_tags = _io_uring_register_buffers_tagsPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.Pointer<__u64>, int)>();
 
   int io_uring_register_buffers_sparse(
     ffi.Pointer<io_uring> ring,
@@ -3055,13 +2402,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_buffers_sparsePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>,
-              ffi.UnsignedInt)>>('io_uring_register_buffers_sparse');
-  late final _io_uring_register_buffers_sparse =
-      _io_uring_register_buffers_sparsePtr
-          .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_register_buffers_sparsePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>>('io_uring_register_buffers_sparse');
+  late final _io_uring_register_buffers_sparse = _io_uring_register_buffers_sparsePtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_register_buffers_update_tag(
     ffi.Pointer<io_uring> ring,
@@ -3079,18 +2421,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_buffers_update_tagPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Pointer<iovec>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>>('io_uring_register_buffers_update_tag');
-  late final _io_uring_register_buffers_update_tag =
-      _io_uring_register_buffers_update_tagPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<iovec>,
-              ffi.Pointer<__u64>, int)>();
+  late final _io_uring_register_buffers_update_tagPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>>('io_uring_register_buffers_update_tag');
+  late final _io_uring_register_buffers_update_tag = _io_uring_register_buffers_update_tagPtr.asFunction<int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<iovec>, ffi.Pointer<__u64>, int)>();
 
   int io_uring_unregister_buffers(
     ffi.Pointer<io_uring> ring,
@@ -3100,11 +2433,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_buffersPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_unregister_buffers');
-  late final _io_uring_unregister_buffers = _io_uring_unregister_buffersPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_unregister_buffersPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_unregister_buffers');
+  late final _io_uring_unregister_buffers = _io_uring_unregister_buffersPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_register_files(
     ffi.Pointer<io_uring> ring,
@@ -3118,12 +2448,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_filesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>,
-              ffi.UnsignedInt)>>('io_uring_register_files');
-  late final _io_uring_register_files = _io_uring_register_filesPtr.asFunction<
-      int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, int)>();
+  late final _io_uring_register_filesPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>>('io_uring_register_files');
+  late final _io_uring_register_files = _io_uring_register_filesPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, int)>();
 
   int io_uring_register_files_tags(
     ffi.Pointer<io_uring> ring,
@@ -3139,17 +2465,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_files_tagsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Int>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>>('io_uring_register_files_tags');
-  late final _io_uring_register_files_tags =
-      _io_uring_register_files_tagsPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>,
-              ffi.Pointer<__u64>, int)>();
+  late final _io_uring_register_files_tagsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>>('io_uring_register_files_tags');
+  late final _io_uring_register_files_tags = _io_uring_register_files_tagsPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, int)>();
 
   int io_uring_register_files_sparse(
     ffi.Pointer<io_uring> ring,
@@ -3161,13 +2479,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_files_sparsePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>,
-              ffi.UnsignedInt)>>('io_uring_register_files_sparse');
-  late final _io_uring_register_files_sparse =
-      _io_uring_register_files_sparsePtr
-          .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_register_files_sparsePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>>('io_uring_register_files_sparse');
+  late final _io_uring_register_files_sparse = _io_uring_register_files_sparsePtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_register_files_update_tag(
     ffi.Pointer<io_uring> ring,
@@ -3185,18 +2498,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_files_update_tagPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Int>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>>('io_uring_register_files_update_tag');
-  late final _io_uring_register_files_update_tag =
-      _io_uring_register_files_update_tagPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<ffi.Int>,
-              ffi.Pointer<__u64>, int)>();
+  late final _io_uring_register_files_update_tagPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>>('io_uring_register_files_update_tag');
+  late final _io_uring_register_files_update_tag = _io_uring_register_files_update_tagPtr.asFunction<int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, int)>();
 
   int io_uring_unregister_files(
     ffi.Pointer<io_uring> ring,
@@ -3206,11 +2510,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_filesPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_unregister_files');
-  late final _io_uring_unregister_files = _io_uring_unregister_filesPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_unregister_filesPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_unregister_files');
+  late final _io_uring_unregister_files = _io_uring_unregister_filesPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_register_files_update(
     ffi.Pointer<io_uring> ring,
@@ -3226,17 +2527,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_files_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Int>,
-              ffi.UnsignedInt)>>('io_uring_register_files_update');
-  late final _io_uring_register_files_update =
-      _io_uring_register_files_updatePtr.asFunction<
-          int Function(
-              ffi.Pointer<io_uring>, int, ffi.Pointer<ffi.Int>, int)>();
+  late final _io_uring_register_files_updatePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>>('io_uring_register_files_update');
+  late final _io_uring_register_files_update = _io_uring_register_files_updatePtr.asFunction<int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<ffi.Int>, int)>();
 
   int io_uring_register_eventfd(
     ffi.Pointer<io_uring> ring,
@@ -3248,11 +2541,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_eventfdPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>(
-      'io_uring_register_eventfd');
-  late final _io_uring_register_eventfd = _io_uring_register_eventfdPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_register_eventfdPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>('io_uring_register_eventfd');
+  late final _io_uring_register_eventfd = _io_uring_register_eventfdPtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_register_eventfd_async(
     ffi.Pointer<io_uring> ring,
@@ -3264,12 +2554,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_eventfd_asyncPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>(
-      'io_uring_register_eventfd_async');
-  late final _io_uring_register_eventfd_async =
-      _io_uring_register_eventfd_asyncPtr
-          .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_register_eventfd_asyncPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>('io_uring_register_eventfd_async');
+  late final _io_uring_register_eventfd_async = _io_uring_register_eventfd_asyncPtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_unregister_eventfd(
     ffi.Pointer<io_uring> ring,
@@ -3279,11 +2565,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_eventfdPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_unregister_eventfd');
-  late final _io_uring_unregister_eventfd = _io_uring_unregister_eventfdPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_unregister_eventfdPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_unregister_eventfd');
+  late final _io_uring_unregister_eventfd = _io_uring_unregister_eventfdPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_register_probe(
     ffi.Pointer<io_uring> ring,
@@ -3297,12 +2580,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_probePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>,
-              ffi.UnsignedInt)>>('io_uring_register_probe');
-  late final _io_uring_register_probe = _io_uring_register_probePtr.asFunction<
-      int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>, int)>();
+  late final _io_uring_register_probePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>, ffi.UnsignedInt)>>('io_uring_register_probe');
+  late final _io_uring_register_probe = _io_uring_register_probePtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>, int)>();
 
   int io_uring_register_personality(
     ffi.Pointer<io_uring> ring,
@@ -3312,11 +2591,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_personalityPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_register_personality');
-  late final _io_uring_register_personality = _io_uring_register_personalityPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_register_personalityPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_register_personality');
+  late final _io_uring_register_personality = _io_uring_register_personalityPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_unregister_personality(
     ffi.Pointer<io_uring> ring,
@@ -3328,12 +2604,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_personalityPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>(
-      'io_uring_unregister_personality');
-  late final _io_uring_unregister_personality =
-      _io_uring_unregister_personalityPtr
-          .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_unregister_personalityPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>('io_uring_unregister_personality');
+  late final _io_uring_unregister_personality = _io_uring_unregister_personalityPtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_register_restrictions(
     ffi.Pointer<io_uring> ring,
@@ -3347,16 +2619,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_restrictionsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<io_uring_restriction>,
-              ffi.UnsignedInt)>>('io_uring_register_restrictions');
-  late final _io_uring_register_restrictions =
-      _io_uring_register_restrictionsPtr.asFunction<
-          int Function(
-              ffi.Pointer<io_uring>, ffi.Pointer<io_uring_restriction>, int)>();
+  late final _io_uring_register_restrictionsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_restriction>, ffi.UnsignedInt)>>('io_uring_register_restrictions');
+  late final _io_uring_register_restrictions = _io_uring_register_restrictionsPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_restriction>, int)>();
 
   int io_uring_enable_rings(
     ffi.Pointer<io_uring> ring,
@@ -3366,11 +2631,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_enable_ringsPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_enable_rings');
-  late final _io_uring_enable_rings = _io_uring_enable_ringsPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_enable_ringsPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_enable_rings');
+  late final _io_uring_enable_rings = _io_uring_enable_ringsPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int __io_uring_sqring_wait(
     ffi.Pointer<io_uring> ring,
@@ -3380,11 +2642,8 @@ class TestBindings {
     );
   }
 
-  late final ___io_uring_sqring_waitPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          '__io_uring_sqring_wait');
-  late final ___io_uring_sqring_wait = ___io_uring_sqring_waitPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final ___io_uring_sqring_waitPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('__io_uring_sqring_wait');
+  late final ___io_uring_sqring_wait = ___io_uring_sqring_waitPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_register_iowq_aff(
     ffi.Pointer<io_uring> ring,
@@ -3398,13 +2657,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_iowq_affPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Size,
-              ffi.Pointer<cpu_set_t>)>>('io_uring_register_iowq_aff');
-  late final _io_uring_register_iowq_aff =
-      _io_uring_register_iowq_affPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<cpu_set_t>)>();
+  late final _io_uring_register_iowq_affPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Size, ffi.Pointer<cpu_set_t>)>>('io_uring_register_iowq_aff');
+  late final _io_uring_register_iowq_aff = _io_uring_register_iowq_affPtr.asFunction<int Function(ffi.Pointer<io_uring>, int, ffi.Pointer<cpu_set_t>)>();
 
   int io_uring_unregister_iowq_aff(
     ffi.Pointer<io_uring> ring,
@@ -3414,11 +2668,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_iowq_affPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_unregister_iowq_aff');
-  late final _io_uring_unregister_iowq_aff = _io_uring_unregister_iowq_affPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_unregister_iowq_affPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_unregister_iowq_aff');
+  late final _io_uring_unregister_iowq_aff = _io_uring_unregister_iowq_affPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_register_iowq_max_workers(
     ffi.Pointer<io_uring> ring,
@@ -3430,14 +2681,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_iowq_max_workersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>>(
-      'io_uring_register_iowq_max_workers');
-  late final _io_uring_register_iowq_max_workers =
-      _io_uring_register_iowq_max_workersPtr.asFunction<
-          int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>();
+  late final _io_uring_register_iowq_max_workersPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>>('io_uring_register_iowq_max_workers');
+  late final _io_uring_register_iowq_max_workers = _io_uring_register_iowq_max_workersPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>();
 
   int io_uring_register_ring_fd(
     ffi.Pointer<io_uring> ring,
@@ -3447,11 +2692,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_ring_fdPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_register_ring_fd');
-  late final _io_uring_register_ring_fd = _io_uring_register_ring_fdPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_register_ring_fdPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_register_ring_fd');
+  late final _io_uring_register_ring_fd = _io_uring_register_ring_fdPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_unregister_ring_fd(
     ffi.Pointer<io_uring> ring,
@@ -3461,11 +2703,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_ring_fdPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_unregister_ring_fd');
-  late final _io_uring_unregister_ring_fd = _io_uring_unregister_ring_fdPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_unregister_ring_fdPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_unregister_ring_fd');
+  late final _io_uring_unregister_ring_fd = _io_uring_unregister_ring_fdPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_close_ring_fd(
     ffi.Pointer<io_uring> ring,
@@ -3475,11 +2714,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_close_ring_fdPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_close_ring_fd');
-  late final _io_uring_close_ring_fd = _io_uring_close_ring_fdPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_close_ring_fdPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_close_ring_fd');
+  late final _io_uring_close_ring_fd = _io_uring_close_ring_fdPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_register_buf_ring(
     ffi.Pointer<io_uring> ring,
@@ -3493,14 +2729,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_buf_ringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>,
-              ffi.UnsignedInt)>>('io_uring_register_buf_ring');
-  late final _io_uring_register_buf_ring =
-      _io_uring_register_buf_ringPtr.asFunction<
-          int Function(
-              ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>, int)>();
+  late final _io_uring_register_buf_ringPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>, ffi.UnsignedInt)>>('io_uring_register_buf_ring');
+  late final _io_uring_register_buf_ring = _io_uring_register_buf_ringPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>, int)>();
 
   int io_uring_unregister_buf_ring(
     ffi.Pointer<io_uring> ring,
@@ -3512,11 +2742,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_unregister_buf_ringPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>(
-      'io_uring_unregister_buf_ring');
-  late final _io_uring_unregister_buf_ring = _io_uring_unregister_buf_ringPtr
-      .asFunction<int Function(ffi.Pointer<io_uring>, int)>();
+  late final _io_uring_unregister_buf_ringPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>('io_uring_unregister_buf_ring');
+  late final _io_uring_unregister_buf_ring = _io_uring_unregister_buf_ringPtr.asFunction<int Function(ffi.Pointer<io_uring>, int)>();
 
   int io_uring_register_sync_cancel(
     ffi.Pointer<io_uring> ring,
@@ -3528,15 +2755,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_sync_cancelPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<io_uring>,
-                  ffi.Pointer<io_uring_sync_cancel_reg>)>>(
-      'io_uring_register_sync_cancel');
-  late final _io_uring_register_sync_cancel =
-      _io_uring_register_sync_cancelPtr.asFunction<
-          int Function(
-              ffi.Pointer<io_uring>, ffi.Pointer<io_uring_sync_cancel_reg>)>();
+  late final _io_uring_register_sync_cancelPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_sync_cancel_reg>)>>('io_uring_register_sync_cancel');
+  late final _io_uring_register_sync_cancel = _io_uring_register_sync_cancelPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_sync_cancel_reg>)>();
 
   int io_uring_register_file_alloc_range(
     ffi.Pointer<io_uring> ring,
@@ -3550,13 +2770,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_register_file_alloc_rangePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt,
-              ffi.UnsignedInt)>>('io_uring_register_file_alloc_range');
-  late final _io_uring_register_file_alloc_range =
-      _io_uring_register_file_alloc_rangePtr
-          .asFunction<int Function(ffi.Pointer<io_uring>, int, int)>();
+  late final _io_uring_register_file_alloc_rangePtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.UnsignedInt)>>('io_uring_register_file_alloc_range');
+  late final _io_uring_register_file_alloc_range = _io_uring_register_file_alloc_rangePtr.asFunction<int Function(ffi.Pointer<io_uring>, int, int)>();
 
   int io_uring_get_events(
     ffi.Pointer<io_uring> ring,
@@ -3566,11 +2781,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_get_eventsPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_get_events');
-  late final _io_uring_get_events =
-      _io_uring_get_eventsPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_get_eventsPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_get_events');
+  late final _io_uring_get_events = _io_uring_get_eventsPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_submit_and_get_events(
     ffi.Pointer<io_uring> ring,
@@ -3580,12 +2792,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_submit_and_get_eventsPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>(
-          'io_uring_submit_and_get_events');
-  late final _io_uring_submit_and_get_events =
-      _io_uring_submit_and_get_eventsPtr
-          .asFunction<int Function(ffi.Pointer<io_uring>)>();
+  late final _io_uring_submit_and_get_eventsPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>('io_uring_submit_and_get_events');
+  late final _io_uring_submit_and_get_events = _io_uring_submit_and_get_eventsPtr.asFunction<int Function(ffi.Pointer<io_uring>)>();
 
   int io_uring_enter(
     int fd,
@@ -3603,12 +2811,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_enterPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt,
-              ffi.UnsignedInt, ffi.Pointer<sigset_t>)>>('io_uring_enter');
-  late final _io_uring_enter = _io_uring_enterPtr
-      .asFunction<int Function(int, int, int, int, ffi.Pointer<sigset_t>)>();
+  late final _io_uring_enterPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>)>>('io_uring_enter');
+  late final _io_uring_enter = _io_uring_enterPtr.asFunction<int Function(int, int, int, int, ffi.Pointer<sigset_t>)>();
 
   int io_uring_enter2(
     int fd,
@@ -3628,17 +2832,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_enter2Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<sigset_t>,
-              ffi.Size)>>('io_uring_enter2');
-  late final _io_uring_enter2 = _io_uring_enter2Ptr.asFunction<
-      int Function(int, int, int, int, ffi.Pointer<sigset_t>, int)>();
+  late final _io_uring_enter2Ptr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>, ffi.Size)>>('io_uring_enter2');
+  late final _io_uring_enter2 = _io_uring_enter2Ptr.asFunction<int Function(int, int, int, int, ffi.Pointer<sigset_t>, int)>();
 
   int io_uring_setup(
     int entries,
@@ -3650,12 +2846,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_setupPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.UnsignedInt,
-              ffi.Pointer<io_uring_params>)>>('io_uring_setup');
-  late final _io_uring_setup = _io_uring_setupPtr
-      .asFunction<int Function(int, ffi.Pointer<io_uring_params>)>();
+  late final _io_uring_setupPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>>('io_uring_setup');
+  late final _io_uring_setup = _io_uring_setupPtr.asFunction<int Function(int, ffi.Pointer<io_uring_params>)>();
 
   int io_uring_register(
     int fd,
@@ -3671,12 +2863,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_registerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt,
-              ffi.Pointer<ffi.Void>, ffi.UnsignedInt)>>('io_uring_register');
-  late final _io_uring_register = _io_uring_registerPtr
-      .asFunction<int Function(int, int, ffi.Pointer<ffi.Void>, int)>();
+  late final _io_uring_registerPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<ffi.Void>, ffi.UnsignedInt)>>('io_uring_register');
+  late final _io_uring_register = _io_uring_registerPtr.asFunction<int Function(int, int, ffi.Pointer<ffi.Void>, int)>();
 
   ffi.Pointer<io_uring_buf_ring> io_uring_setup_buf_ring(
     ffi.Pointer<io_uring> ring,
@@ -3694,17 +2882,9 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_setup_buf_ringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<io_uring_buf_ring> Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Int,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Int>)>>('io_uring_setup_buf_ring');
-  late final _io_uring_setup_buf_ring = _io_uring_setup_buf_ringPtr.asFunction<
-      ffi.Pointer<io_uring_buf_ring> Function(
-          ffi.Pointer<io_uring>, int, int, int, ffi.Pointer<ffi.Int>)>();
+  late final _io_uring_setup_buf_ringPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<io_uring_buf_ring> Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Int, ffi.UnsignedInt, ffi.Pointer<ffi.Int>)>>('io_uring_setup_buf_ring');
+  late final _io_uring_setup_buf_ring = _io_uring_setup_buf_ringPtr.asFunction<ffi.Pointer<io_uring_buf_ring> Function(ffi.Pointer<io_uring>, int, int, int, ffi.Pointer<ffi.Int>)>();
 
   int io_uring_free_buf_ring(
     ffi.Pointer<io_uring> ring,
@@ -3720,16 +2900,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_free_buf_ringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<io_uring_buf_ring>,
-              ffi.UnsignedInt,
-              ffi.Int)>>('io_uring_free_buf_ring');
-  late final _io_uring_free_buf_ring = _io_uring_free_buf_ringPtr.asFunction<
-      int Function(
-          ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_ring>, int, int)>();
+  late final _io_uring_free_buf_ringPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_ring>, ffi.UnsignedInt, ffi.Int)>>('io_uring_free_buf_ring');
+  late final _io_uring_free_buf_ring = _io_uring_free_buf_ringPtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_ring>, int, int)>();
 
   int __io_uring_get_cqe(
     ffi.Pointer<io_uring> ring,
@@ -3747,21 +2919,9 @@ class TestBindings {
     );
   }
 
-  late final ___io_uring_get_cqePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<sigset_t>)>>('__io_uring_get_cqe');
-  late final ___io_uring_get_cqe = ___io_uring_get_cqePtr.asFunction<
-      int Function(
-          ffi.Pointer<io_uring>,
-          ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-          int,
-          int,
-          ffi.Pointer<sigset_t>)>();
+  late final ___io_uring_get_cqePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>)>>('__io_uring_get_cqe');
+  late final ___io_uring_get_cqe = ___io_uring_get_cqePtr.asFunction<int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, int, int, ffi.Pointer<sigset_t>)>();
 
   int io_uring_mlock_size(
     int entries,
@@ -3773,12 +2933,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_mlock_sizePtr = _lookup<
-          ffi
-          .NativeFunction<ssize_t Function(ffi.UnsignedInt, ffi.UnsignedInt)>>(
-      'io_uring_mlock_size');
-  late final _io_uring_mlock_size =
-      _io_uring_mlock_sizePtr.asFunction<int Function(int, int)>();
+  late final _io_uring_mlock_sizePtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.UnsignedInt, ffi.UnsignedInt)>>('io_uring_mlock_size');
+  late final _io_uring_mlock_size = _io_uring_mlock_sizePtr.asFunction<int Function(int, int)>();
 
   int io_uring_mlock_size_params(
     int entries,
@@ -3790,30 +2946,22 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_mlock_size_paramsPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.UnsignedInt,
-              ffi.Pointer<io_uring_params>)>>('io_uring_mlock_size_params');
-  late final _io_uring_mlock_size_params = _io_uring_mlock_size_paramsPtr
-      .asFunction<int Function(int, ffi.Pointer<io_uring_params>)>();
+  late final _io_uring_mlock_size_paramsPtr = _lookup<ffi.NativeFunction<ssize_t Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>>('io_uring_mlock_size_params');
+  late final _io_uring_mlock_size_params = _io_uring_mlock_size_paramsPtr.asFunction<int Function(int, ffi.Pointer<io_uring_params>)>();
 
   int io_uring_major_version() {
     return _io_uring_major_version();
   }
 
-  late final _io_uring_major_versionPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('io_uring_major_version');
-  late final _io_uring_major_version =
-      _io_uring_major_versionPtr.asFunction<int Function()>();
+  late final _io_uring_major_versionPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>('io_uring_major_version');
+  late final _io_uring_major_version = _io_uring_major_versionPtr.asFunction<int Function()>();
 
   int io_uring_minor_version() {
     return _io_uring_minor_version();
   }
 
-  late final _io_uring_minor_versionPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('io_uring_minor_version');
-  late final _io_uring_minor_version =
-      _io_uring_minor_versionPtr.asFunction<int Function()>();
+  late final _io_uring_minor_versionPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>('io_uring_minor_version');
+  late final _io_uring_minor_version = _io_uring_minor_versionPtr.asFunction<int Function()>();
 
   bool io_uring_check_version(
     int major,
@@ -3825,11 +2973,8 @@ class TestBindings {
     );
   }
 
-  late final _io_uring_check_versionPtr =
-      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int)>>(
-          'io_uring_check_version');
-  late final _io_uring_check_version =
-      _io_uring_check_versionPtr.asFunction<bool Function(int, int)>();
+  late final _io_uring_check_versionPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int)>>('io_uring_check_version');
+  late final _io_uring_check_version = _io_uring_check_versionPtr.asFunction<bool Function(int, int)>();
 
   int interactor_native_initialize(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3843,16 +2988,10 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Pointer<interactor_native_configuration_t>,
-              ffi.Uint8)>>('interactor_native_initialize');
+  late final _interactor_native_initializePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<interactor_native_configuration_t>, ffi.Uint8)>>('interactor_native_initialize');
   late final _interactor_native_initialize =
-      _interactor_native_initializePtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Pointer<interactor_native_configuration_t>, int)>();
+      _interactor_native_initializePtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<interactor_native_configuration_t>, int)>();
 
   int interactor_native_initialize_default(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3864,14 +3003,9 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_initialize_defaultPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint8)>>('interactor_native_initialize_default');
-  late final _interactor_native_initialize_default =
-      _interactor_native_initialize_defaultPtr.asFunction<
-          int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+  late final _interactor_native_initialize_defaultPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Uint8)>>('interactor_native_initialize_default');
+  late final _interactor_native_initialize_default = _interactor_native_initialize_defaultPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
   void interactor_native_cancel_by_fd(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3883,14 +3017,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_cancel_by_fdPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int)>>('interactor_native_cancel_by_fd');
-  late final _interactor_native_cancel_by_fd =
-      _interactor_native_cancel_by_fdPtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+  late final _interactor_native_cancel_by_fdPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int)>>('interactor_native_cancel_by_fd');
+  late final _interactor_native_cancel_by_fd = _interactor_native_cancel_by_fdPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
   void interactor_native_check_event_timeouts(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3900,14 +3028,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_check_event_timeoutsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_check_event_timeouts');
-  late final _interactor_native_check_event_timeouts =
-      _interactor_native_check_event_timeoutsPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_check_event_timeoutsPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_check_event_timeouts');
+  late final _interactor_native_check_event_timeouts = _interactor_native_check_event_timeoutsPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void interactor_native_remove_event(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3919,14 +3041,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_remove_eventPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint64)>>('interactor_native_remove_event');
-  late final _interactor_native_remove_event =
-      _interactor_native_remove_eventPtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+  late final _interactor_native_remove_eventPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Uint64)>>('interactor_native_remove_event');
+  late final _interactor_native_remove_event = _interactor_native_remove_eventPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
   int interactor_native_get_buffer(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3936,14 +3052,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_get_bufferPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_get_buffer');
-  late final _interactor_native_get_buffer =
-      _interactor_native_get_bufferPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_get_bufferPtr = _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_get_buffer');
+  late final _interactor_native_get_buffer = _interactor_native_get_bufferPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void interactor_native_release_buffer(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3955,14 +3065,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_release_bufferPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint16)>>('interactor_native_release_buffer');
-  late final _interactor_native_release_buffer =
-      _interactor_native_release_bufferPtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+  late final _interactor_native_release_bufferPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Uint16)>>('interactor_native_release_buffer');
+  late final _interactor_native_release_buffer = _interactor_native_release_bufferPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
   int interactor_native_available_buffers(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3972,14 +3076,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_available_buffersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_available_buffers');
-  late final _interactor_native_available_buffers =
-      _interactor_native_available_buffersPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_available_buffersPtr = _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_available_buffers');
+  late final _interactor_native_available_buffers = _interactor_native_available_buffersPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   int interactor_native_used_buffers(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -3989,17 +3087,10 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_used_buffersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_used_buffers');
-  late final _interactor_native_used_buffers =
-      _interactor_native_used_buffersPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_used_buffersPtr = _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_used_buffers');
+  late final _interactor_native_used_buffers = _interactor_native_used_buffersPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
-  ffi.Pointer<linux_interactor.interactor_message_t>
-      interactor_native_allocate_message(
+  ffi.Pointer<linux_interactor.interactor_message_t> interactor_native_allocate_message(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
   ) {
     return _interactor_native_allocate_message(
@@ -4007,15 +3098,10 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_allocate_messagePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_allocate_message');
+  late final _interactor_native_allocate_messagePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_allocate_message');
   late final _interactor_native_allocate_message =
-      _interactor_native_allocate_messagePtr.asFunction<
-          ffi.Pointer<linux_interactor.interactor_message_t> Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_allocate_messagePtr.asFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void interactor_native_free_message(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4027,18 +3113,12 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_free_messagePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'interactor_native_free_message');
+  late final _interactor_native_free_messagePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>>('interactor_native_free_message');
   late final _interactor_native_free_message =
-      _interactor_native_free_messagePtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Pointer<linux_interactor.interactor_message_t>)>();
+      _interactor_native_free_messagePtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
-  ffi.Pointer<interactor_payloads_pool> interactor_native_payload_pool_create(
+  ffi.Pointer<interactor_payload_pool> interactor_native_payload_pool_create(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
     int size,
   ) {
@@ -4048,34 +3128,24 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_payload_pool_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<interactor_payloads_pool> Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Size)>>('interactor_native_payload_pool_create');
+  late final _interactor_native_payload_pool_createPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<interactor_payload_pool> Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>>('interactor_native_payload_pool_create');
   late final _interactor_native_payload_pool_create =
-      _interactor_native_payload_pool_createPtr.asFunction<
-          ffi.Pointer<interactor_payloads_pool> Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+      _interactor_native_payload_pool_createPtr.asFunction<ffi.Pointer<interactor_payload_pool> Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
   int interactor_native_payload_allocate(
-    ffi.Pointer<interactor_payloads_pool> pool,
+    ffi.Pointer<interactor_payload_pool> pool,
   ) {
     return _interactor_native_payload_allocate(
       pool,
     );
   }
 
-  late final _interactor_native_payload_allocatePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>(
-      'interactor_native_payload_allocate');
-  late final _interactor_native_payload_allocate =
-      _interactor_native_payload_allocatePtr
-          .asFunction<int Function(ffi.Pointer<interactor_payloads_pool>)>();
+  late final _interactor_native_payload_allocatePtr = _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>>('interactor_native_payload_allocate');
+  late final _interactor_native_payload_allocate = _interactor_native_payload_allocatePtr.asFunction<int Function(ffi.Pointer<interactor_payload_pool>)>();
 
   void interactor_native_payload_free(
-    ffi.Pointer<interactor_payloads_pool> pool,
+    ffi.Pointer<interactor_payload_pool> pool,
     int pointer,
   ) {
     return _interactor_native_payload_free(
@@ -4084,29 +3154,19 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_payload_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<interactor_payloads_pool>,
-              ffi.IntPtr)>>('interactor_native_payload_free');
-  late final _interactor_native_payload_free =
-      _interactor_native_payload_freePtr.asFunction<
-          void Function(ffi.Pointer<interactor_payloads_pool>, int)>();
+  late final _interactor_native_payload_freePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>>('interactor_native_payload_free');
+  late final _interactor_native_payload_free = _interactor_native_payload_freePtr.asFunction<void Function(ffi.Pointer<interactor_payload_pool>, int)>();
 
   void interactor_native_payload_pool_destroy(
-    ffi.Pointer<interactor_payloads_pool> pool,
+    ffi.Pointer<interactor_payload_pool> pool,
   ) {
     return _interactor_native_payload_pool_destroy(
       pool,
     );
   }
 
-  late final _interactor_native_payload_pool_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>(
-      'interactor_native_payload_pool_destroy');
-  late final _interactor_native_payload_pool_destroy =
-      _interactor_native_payload_pool_destroyPtr
-          .asFunction<void Function(ffi.Pointer<interactor_payloads_pool>)>();
+  late final _interactor_native_payload_pool_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>>('interactor_native_payload_pool_destroy');
+  late final _interactor_native_payload_pool_destroy = _interactor_native_payload_pool_destroyPtr.asFunction<void Function(ffi.Pointer<interactor_payload_pool>)>();
 
   int interactor_native_data_allocate(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4118,14 +3178,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_data_allocatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.IntPtr Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Size)>>('interactor_native_data_allocate');
-  late final _interactor_native_data_allocate =
-      _interactor_native_data_allocatePtr.asFunction<
-          int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+  late final _interactor_native_data_allocatePtr = _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>>('interactor_native_data_allocate');
+  late final _interactor_native_data_allocate = _interactor_native_data_allocatePtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
 
   void interactor_native_data_free(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4139,14 +3193,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_data_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.IntPtr, ffi.Size)>>('interactor_native_data_free');
-  late final _interactor_native_data_free =
-      _interactor_native_data_freePtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int, int)>();
+  late final _interactor_native_data_freePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.IntPtr, ffi.Size)>>('interactor_native_data_free');
+  late final _interactor_native_data_free = _interactor_native_data_freePtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int)>();
 
   int interactor_native_peek_infinity(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4156,14 +3204,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_peek_infinityPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_peek_infinity');
-  late final _interactor_native_peek_infinity =
-      _interactor_native_peek_infinityPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_peek_infinityPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_peek_infinity');
+  late final _interactor_native_peek_infinity = _interactor_native_peek_infinityPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   int interactor_native_peek_timeout(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4173,14 +3215,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_peek_timeoutPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_peek_timeout');
-  late final _interactor_native_peek_timeout =
-      _interactor_native_peek_timeoutPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_peek_timeoutPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_peek_timeout');
+  late final _interactor_native_peek_timeout = _interactor_native_peek_timeoutPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   int interactor_native_submit(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4190,14 +3226,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_submitPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_submit');
-  late final _interactor_native_submit =
-      _interactor_native_submitPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_submitPtr = _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_submit');
+  late final _interactor_native_submit = _interactor_native_submitPtr.asFunction<int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void interactor_native_destroy(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4207,14 +3237,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'interactor_native_destroy');
-  late final _interactor_native_destroy =
-      _interactor_native_destroyPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('interactor_native_destroy');
+  late final _interactor_native_destroy = _interactor_native_destroyPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void interactor_native_cqe_advance(
     ffi.Pointer<io_uring> ring,
@@ -4226,12 +3250,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_cqe_advancePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>(
-      'interactor_native_cqe_advance');
-  late final _interactor_native_cqe_advance = _interactor_native_cqe_advancePtr
-      .asFunction<void Function(ffi.Pointer<io_uring>, int)>();
+  late final _interactor_native_cqe_advancePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>('interactor_native_cqe_advance');
+  late final _interactor_native_cqe_advance = _interactor_native_cqe_advancePtr.asFunction<void Function(ffi.Pointer<io_uring>, int)>();
 
   void interactor_native_close_descriptor(
     int fd,
@@ -4241,11 +3261,8 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_close_descriptorPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
-          'interactor_native_close_descriptor');
-  late final _interactor_native_close_descriptor =
-      _interactor_native_close_descriptorPtr.asFunction<void Function(int)>();
+  late final _interactor_native_close_descriptorPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>('interactor_native_close_descriptor');
+  late final _interactor_native_close_descriptor = _interactor_native_close_descriptorPtr.asFunction<void Function(int)>();
 
   void interactor_native_call_dart(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4259,17 +3276,10 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_call_dartPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Int,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'interactor_native_call_dart');
+  late final _interactor_native_call_dartPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int, ffi.Pointer<linux_interactor.interactor_message_t>)>>('interactor_native_call_dart');
   late final _interactor_native_call_dart =
-      _interactor_native_call_dartPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int,
-              ffi.Pointer<linux_interactor.interactor_message_t>)>();
+      _interactor_native_call_dartPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void interactor_native_callback_to_dart(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4281,29 +3291,17 @@ class TestBindings {
     );
   }
 
-  late final _interactor_native_callback_to_dartPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'interactor_native_callback_to_dart');
+  late final _interactor_native_callback_to_dartPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>>('interactor_native_callback_to_dart');
   late final _interactor_native_callback_to_dart =
-      _interactor_native_callback_to_dartPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Pointer<linux_interactor.interactor_message_t>)>();
+      _interactor_native_callback_to_dartPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
-  ffi.Pointer<linux_interactor.interactor_native_t>
-      test_interactor_initialize() {
+  ffi.Pointer<linux_interactor.interactor_native_t> test_interactor_initialize() {
     return _test_interactor_initialize();
   }
 
-  late final _test_interactor_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<linux_interactor.interactor_native_t>
-              Function()>>('test_interactor_initialize');
-  late final _test_interactor_initialize =
-      _test_interactor_initializePtr.asFunction<
-          ffi.Pointer<linux_interactor.interactor_native_t> Function()>();
+  late final _test_interactor_initializePtr = _lookup<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_native_t> Function()>>('test_interactor_initialize');
+  late final _test_interactor_initialize = _test_interactor_initializePtr.asFunction<ffi.Pointer<linux_interactor.interactor_native_t> Function()>();
 
   void test_interactor_destroy(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4313,13 +3311,8 @@ class TestBindings {
     );
   }
 
-  late final _test_interactor_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'test_interactor_destroy');
-  late final _test_interactor_destroy = _test_interactor_destroyPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _test_interactor_destroyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('test_interactor_destroy');
+  late final _test_interactor_destroy = _test_interactor_destroyPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void test_interactor_process_calls(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4329,22 +3322,12 @@ class TestBindings {
     );
   }
 
-  late final _test_interactor_process_callsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'test_interactor_process_calls');
-  late final _test_interactor_process_calls =
-      _test_interactor_process_callsPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _test_interactor_process_callsPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('test_interactor_process_calls');
+  late final _test_interactor_process_calls = _test_interactor_process_callsPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void test_interactor_process_callbacks(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
-    ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<linux_interactor.interactor_message_t>)>>
-        on_callback,
+    ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>> on_callback,
   ) {
     return _test_interactor_process_callbacks(
       interactor,
@@ -4353,33 +3336,18 @@ class TestBindings {
   }
 
   late final _test_interactor_process_callbacksPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<
-                                  linux_interactor.interactor_message_t>)>>)>>(
-      'test_interactor_process_callbacks');
-  late final _test_interactor_process_callbacks =
-      _test_interactor_process_callbacksPtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<
-                              linux_interactor.interactor_message_t>)>>)>();
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>)>>('test_interactor_process_callbacks');
+  late final _test_interactor_process_callbacks = _test_interactor_process_callbacksPtr
+      .asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>)>();
 
   void test_call_reset() {
     return _test_call_reset();
   }
 
-  late final _test_call_resetPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_call_reset');
-  late final _test_call_reset =
-      _test_call_resetPtr.asFunction<void Function()>();
+  late final _test_call_resetPtr = _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_call_reset');
+  late final _test_call_reset = _test_call_resetPtr.asFunction<void Function()>();
 
   bool test_call_native_check(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4389,13 +3357,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_native_checkPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Bool Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'test_call_native_check');
-  late final _test_call_native_check = _test_call_native_checkPtr.asFunction<
-      bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _test_call_native_checkPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('test_call_native_check');
+  late final _test_call_native_check = _test_call_native_checkPtr.asFunction<bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   void test_call_native_echo(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -4405,13 +3368,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_native_echoPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'test_call_native_echo');
-  late final _test_call_native_echo = _test_call_native_echoPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
+  late final _test_call_native_echoPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>('test_call_native_echo');
+  late final _test_call_native_echo = _test_call_native_echoPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void test_call_dart_callback(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -4421,13 +3379,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_callbackPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'test_call_dart_callback');
-  late final _test_call_dart_callback = _test_call_dart_callbackPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
+  late final _test_call_dart_callbackPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>('test_call_dart_callback');
+  late final _test_call_dart_callback = _test_call_dart_callbackPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void test_call_dart_null(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4441,13 +3394,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_nullPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr)>>('test_call_dart_null');
-  late final _test_call_dart_null = _test_call_dart_nullPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int)>();
+  late final _test_call_dart_nullPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr)>>('test_call_dart_null');
+  late final _test_call_dart_null = _test_call_dart_nullPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int)>();
 
   void test_call_dart_bool(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4463,13 +3411,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_boolPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Bool)>>('test_call_dart_bool');
-  late final _test_call_dart_bool = _test_call_dart_boolPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int, bool)>();
+  late final _test_call_dart_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Bool)>>('test_call_dart_bool');
+  late final _test_call_dart_bool = _test_call_dart_boolPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, bool)>();
 
   void test_call_dart_int(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4485,13 +3428,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_intPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Int)>>('test_call_dart_int');
-  late final _test_call_dart_int = _test_call_dart_intPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int, int)>();
+  late final _test_call_dart_intPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>>('test_call_dart_int');
+  late final _test_call_dart_int = _test_call_dart_intPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, int)>();
 
   void test_call_dart_double(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4507,13 +3445,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_doublePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Double)>>('test_call_dart_double');
-  late final _test_call_dart_double = _test_call_dart_doublePtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
-          double)>();
+  late final _test_call_dart_doublePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Double)>>('test_call_dart_double');
+  late final _test_call_dart_double = _test_call_dart_doublePtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, double)>();
 
   void test_call_dart_string(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4529,16 +3462,9 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_stringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Char>)>>('test_call_dart_string');
-  late final _test_call_dart_string = _test_call_dart_stringPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
-          ffi.Pointer<ffi.Char>)>();
+  late final _test_call_dart_stringPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Char>)>>('test_call_dart_string');
+  late final _test_call_dart_string = _test_call_dart_stringPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, ffi.Pointer<ffi.Char>)>();
 
   void test_call_dart_object(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4554,13 +3480,8 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_objectPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Int)>>('test_call_dart_object');
-  late final _test_call_dart_object = _test_call_dart_objectPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int, int)>();
+  late final _test_call_dart_objectPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>>('test_call_dart_object');
+  late final _test_call_dart_object = _test_call_dart_objectPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, int)>();
 
   void test_call_dart_buffer(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4578,17 +3499,9 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_bufferPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Size)>>('test_call_dart_buffer');
-  late final _test_call_dart_buffer = _test_call_dart_bufferPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
-          ffi.Pointer<ffi.Uint8>, int)>();
+  late final _test_call_dart_bufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>>('test_call_dart_buffer');
+  late final _test_call_dart_buffer = _test_call_dart_bufferPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, ffi.Pointer<ffi.Uint8>, int)>();
 
   void test_call_dart_bytes(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4606,17 +3519,9 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_bytesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Size)>>('test_call_dart_bytes');
-  late final _test_call_dart_bytes = _test_call_dart_bytesPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
-          ffi.Pointer<ffi.Uint8>, int)>();
+  late final _test_call_dart_bytesPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>>('test_call_dart_bytes');
+  late final _test_call_dart_bytes = _test_call_dart_bytesPtr.asFunction<void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int, ffi.Pointer<ffi.Uint8>, int)>();
 
   ffi.Pointer<linux_interactor.interactor_message_t> test_call_dart_check(
     ffi.Pointer<linux_interactor.interactor_native_t> interactor,
@@ -4626,14 +3531,9 @@ class TestBindings {
     );
   }
 
-  late final _test_call_dart_checkPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'test_call_dart_check');
-  late final _test_call_dart_check = _test_call_dart_checkPtr.asFunction<
-      ffi.Pointer<linux_interactor.interactor_message_t> Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _test_call_dart_checkPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<linux_interactor.interactor_native_t>)>>('test_call_dart_check');
+  late final _test_call_dart_check = _test_call_dart_checkPtr.asFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
   late final addresses = _SymbolAddresses(this);
 }
@@ -4641,1155 +3541,308 @@ class TestBindings {
 class _SymbolAddresses {
   final TestBindings _library;
   _SymbolAddresses(this._library);
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<interactor_buffers_pool>, ffi.Size)>>
-      get interactor_buffers_pool_create =>
-          _library._interactor_buffers_pool_createPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_buffers_pool>)>>
-      get interactor_buffers_pool_destroy =>
-          _library._interactor_buffers_pool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<interactor_buffers_pool>, ffi.Int32)>>
-      get interactor_buffers_pool_push =>
-          _library._interactor_buffers_pool_pushPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<interactor_buffers_pool>)>>
-      get interactor_buffers_pool_pop =>
-          _library._interactor_buffers_pool_popPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<interactor_memory>, ffi.Size, ffi.Size,
-              ffi.Size)>> get interactor_memory_create =>
-      _library._interactor_memory_createPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_memory>)>>
-      get interactor_memory_destroy => _library._interactor_memory_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<interactor_mempool>, ffi.Size)>>
-      get interactor_mempool_create => _library._interactor_mempool_createPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_mempool>)>>
-      get interactor_mempool_destroy => _library._interactor_mempool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_mempool>)>>
-      get interactor_mempool_allocate =>
-          _library._interactor_mempool_allocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<interactor_mempool>, ffi.Pointer<ffi.Void>)>>
-      get interactor_mempool_free => _library._interactor_mempool_freePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_small>)>>
-      get interactor_small_create => _library._interactor_small_createPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Void> Function(
-                  ffi.Pointer<interactor_small>, ffi.Size)>>
-      get interactor_small_allocate => _library._interactor_small_allocatePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<interactor_small>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size)>> get interactor_small_free =>
-      _library._interactor_small_freePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_small>)>>
-      get interactor_small_destroy => _library._interactor_small_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<interactor_data_pool>,
-                  ffi.Pointer<interactor_memory>)>>
-      get interactor_data_pool_create =>
-          _library._interactor_data_pool_createPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>)>>
-      get interactor_data_pool_destroy =>
-          _library._interactor_data_pool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>, ffi.Size)>>
-      get interactor_data_pool_allocate =>
-          _library._interactor_data_pool_allocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<interactor_data_pool>, ffi.IntPtr, ffi.Size)>>
-      get interactor_data_pool_free => _library._interactor_data_pool_freePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<interactor_messages_pool>,
-                  ffi.Pointer<interactor_memory>)>>
-      get interactor_messages_pool_create =>
-          _library._interactor_messages_pool_createPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_messages_pool>)>>
-      get interactor_messages_pool_destroy =>
-          _library._interactor_messages_pool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<interactor_messages_pool>)>>
-      get interactor_messages_pool_allocate =>
-          _library._interactor_messages_pool_allocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_messages_pool>,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get interactor_messages_pool_free =>
-          _library._interactor_messages_pool_freePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<interactor_payloads_pool>,
-              ffi.Pointer<interactor_memory>,
-              ffi.Size)>> get interactor_payloads_pool_create =>
-      _library._interactor_payloads_pool_createPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>
-      get interactor_payloads_pool_destroy =>
-          _library._interactor_payloads_pool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>
-      get interactor_payloads_pool_allocate =>
-          _library._interactor_payloads_pool_allocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<interactor_payloads_pool>, ffi.IntPtr)>>
-      get interactor_payloads_pool_free =>
-          _library._interactor_payloads_pool_freePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<timeval>)>> get select => _library._selectPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<fd_set>,
-              ffi.Pointer<timespec>,
-              ffi.Pointer<__sigset_t>)>> get pselect => _library._pselectPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Pointer<cmsghdr> Function(
-              ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>> get __cmsg_nxthdr =>
-      _library.___cmsg_nxthdrPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>>
-      get socket => _library._socketPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>>
-      get socketpair => _library._socketpairPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>
-      get bind => _library._bindPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>
-      get getsockname => _library._getsocknamePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>
-      get connect => _library._connectPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>
-      get getpeername => _library._getpeernamePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>> get send =>
-      _library._sendPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>> get recv =>
-      _library._recvPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int,
-              ffi.Pointer<sockaddr>,
-              socklen_t)>> get sendto => _library._sendtoPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int,
-              ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>> get recvfrom => _library._recvfromPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>
-      get sendmsg => _library._sendmsgPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>
-      get recvmsg => _library._recvmsgPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
-              ffi.Pointer<socklen_t>)>> get getsockopt =>
-      _library._getsockoptPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, socklen_t)>>
-      get setsockopt => _library._setsockoptPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>
-      get listen => _library._listenPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>
-      get accept => _library._acceptPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>
-      get shutdown => _library._shutdownPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sockatmark =>
-      _library._sockatmarkPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>
-      get isfdtype => _library._isfdtypePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>>
-      get stat1 => _library._stat1Ptr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<stat>)>>
-      get fstat => _library._fstatPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>, ffi.Int)>>
-      get fstatat => _library._fstatatPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>>
-      get lstat => _library._lstatPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>
-      get chmod => _library._chmodPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>
-      get lchmod => _library._lchmodPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, __mode_t)>>
-      get fchmod => _library._fchmodPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, ffi.Int)>>
-      get fchmodat => _library._fchmodatPtr;
-  ffi.Pointer<ffi.NativeFunction<__mode_t Function(__mode_t)>> get umask =>
-      _library._umaskPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>
-      get mkdir => _library._mkdirPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>>
-      get mkdirat => _library._mkdiratPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>>
-      get mknod => _library._mknodPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>>
-      get mknodat => _library._mknodatPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>>
-      get mkfifo => _library._mkfifoPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>>
-      get mkfifoat => _library._mkfifoatPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<timespec>,
-              ffi.Int)>> get utimensat => _library._utimensatPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<timespec>)>>
-      get futimens => _library._futimensPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>> get readv =>
-      _library._readvPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>> get writev =>
-      _library._writevPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>>
-      get preadv => _library._preadvPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>>
-      get pwritev => _library._pwritevPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>>
-      get __errno_location => _library.___errno_locationPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>
-      get __sysv_signal => _library.___sysv_signalPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>
-      get signal => _library._signalPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>>
-      get kill => _library._killPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>>
-      get killpg => _library._killpgPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get raise =>
-      _library._raisePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>>
-      get ssignal => _library._ssignalPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get gsignal =>
-      _library._gsignalPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>)>>
-      get psignal => _library._psignalPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>>
-      get psiginfo => _library._psiginfoPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sigblock =>
-      _library._sigblockPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sigsetmask =>
-      _library._sigsetmaskPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get siggetmask =>
-      _library._siggetmaskPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>
-      get sigemptyset => _library._sigemptysetPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>
-      get sigfillset => _library._sigfillsetPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>
-      get sigaddset => _library._sigaddsetPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>
-      get sigdelset => _library._sigdelsetPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>>
-      get sigismember => _library._sigismemberPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>>
-      get sigprocmask => _library._sigprocmaskPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>
-      get sigsuspend => _library._sigsuspendPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>>
-      get sigaction1 => _library._sigaction1Ptr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>>
-      get sigpending => _library._sigpendingPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>>
-      get sigwait => _library._sigwaitPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>>
-      get sigwaitinfo => _library._sigwaitinfoPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>,
-              ffi.Pointer<timespec>)>> get sigtimedwait =>
-      _library._sigtimedwaitPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int, sigval)>>
-      get sigqueue => _library._sigqueuePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigcontext>)>>
-      get sigreturn => _library._sigreturnPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>
-      get siginterrupt => _library._siginterruptPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>>
-      get sigaltstack => _library._sigaltstackPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>>
-      get sigstack1 => _library._sigstack1Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>>
-      get pthread_sigmask => _library._pthread_sigmaskPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(pthread_t, ffi.Int)>>
-      get pthread_kill => _library._pthread_killPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
-      get __libc_current_sigrtmin => _library.___libc_current_sigrtminPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
-      get __libc_current_sigrtmax => _library.___libc_current_sigrtmaxPtr;
-  ffi.Pointer<ffi.NativeFunction<intmax_t Function(intmax_t)>> get imaxabs =>
-      _library._imaxabsPtr;
-  ffi.Pointer<ffi.NativeFunction<imaxdiv_t Function(intmax_t, intmax_t)>>
-      get imaxdiv => _library._imaxdivPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          intmax_t Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Int)>> get strtoimax => _library._strtoimaxPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          uintmax_t Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Int)>> get strtoumax => _library._strtoumaxPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          intmax_t Function(
-              ffi.Pointer<__gwchar_t>,
-              ffi.Pointer<ffi.Pointer<__gwchar_t>>,
-              ffi.Int)>> get wcstoimax => _library._wcstoimaxPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          uintmax_t Function(
-              ffi.Pointer<__gwchar_t>,
-              ffi.Pointer<ffi.Pointer<__gwchar_t>>,
-              ffi.Int)>> get wcstoumax => _library._wcstoumaxPtr;
-  ffi.Pointer<ffi.NativeFunction<clock_t Function()>> get clock =>
-      _library._clockPtr;
-  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<time_t>)>>
-      get time => _library._timePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Double Function(time_t, time_t)>>
-      get difftime => _library._difftimePtr;
-  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>
-      get mktime => _library._mktimePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Size Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<tm>)>> get strftime => _library._strftimePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Size Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<tm>,
-              locale_t)>> get strftime_l => _library._strftime_lPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>>
-      get gmtime => _library._gmtimePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>>
-      get localtime => _library._localtimePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>>
-      get gmtime_r => _library._gmtime_rPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>>
-      get localtime_r => _library._localtime_rPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>>
-      get asctime => _library._asctimePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>>
-      get ctime => _library._ctimePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>> get asctime_r =>
-      _library._asctime_rPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>> get ctime_r =>
-      _library._ctime_rPtr;
-  ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> get __tzname =>
-      _library.___tzname;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_buffers_pool>, ffi.Size)>> get interactor_buffers_pool_create => _library._interactor_buffers_pool_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_buffers_pool>)>> get interactor_buffers_pool_destroy => _library._interactor_buffers_pool_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_buffers_pool>, ffi.Int32)>> get interactor_buffers_pool_push => _library._interactor_buffers_pool_pushPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_buffers_pool>)>> get interactor_buffers_pool_pop => _library._interactor_buffers_pool_popPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_memory>, ffi.Size, ffi.Size, ffi.Size)>> get interactor_memory_create => _library._interactor_memory_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_memory>)>> get interactor_memory_destroy => _library._interactor_memory_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_mempool>, ffi.Size)>> get interactor_mempool_create => _library._interactor_mempool_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_mempool>)>> get interactor_mempool_destroy => _library._interactor_mempool_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_mempool>)>> get interactor_mempool_allocate => _library._interactor_mempool_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_mempool>, ffi.Pointer<ffi.Void>)>> get interactor_mempool_free => _library._interactor_mempool_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_small>)>> get interactor_small_create => _library._interactor_small_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_small>, ffi.Size)>> get interactor_small_allocate => _library._interactor_small_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_small>, ffi.Pointer<ffi.Void>, ffi.Size)>> get interactor_small_free => _library._interactor_small_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_small>)>> get interactor_small_destroy => _library._interactor_small_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_data_pool>, ffi.Pointer<interactor_memory>)>> get interactor_data_pool_create => _library._interactor_data_pool_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>)>> get interactor_data_pool_destroy => _library._interactor_data_pool_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<interactor_data_pool>, ffi.Size)>> get interactor_data_pool_allocate => _library._interactor_data_pool_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_data_pool>, ffi.IntPtr, ffi.Size)>> get interactor_data_pool_free => _library._interactor_data_pool_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_messages_pool>, ffi.Pointer<interactor_memory>)>> get interactor_messages_pool_create =>
+      _library._interactor_messages_pool_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_messages_pool>)>> get interactor_messages_pool_destroy => _library._interactor_messages_pool_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<interactor_messages_pool>)>> get interactor_messages_pool_allocate =>
+      _library._interactor_messages_pool_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_messages_pool>, ffi.Pointer<linux_interactor.interactor_message_t>)>> get interactor_messages_pool_free =>
+      _library._interactor_messages_pool_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_payload_pool>, ffi.Pointer<interactor_memory>, ffi.Size)>> get interactor_payload_pool_create =>
+      _library._interactor_payload_pool_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>> get interactor_payload_pool_destroy => _library._interactor_payload_pool_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>> get interactor_payload_pool_allocate => _library._interactor_payload_pool_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>> get interactor_payload_pool_free => _library._interactor_payload_pool_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>> get select => _library._selectPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timespec>, ffi.Pointer<__sigset_t>)>> get pselect =>
+      _library._pselectPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<cmsghdr> Function(ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>> get __cmsg_nxthdr => _library.___cmsg_nxthdrPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>> get socket => _library._socketPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>> get socketpair => _library._socketpairPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>> get bind => _library._bindPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>> get getsockname => _library._getsocknamePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>> get connect => _library._connectPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>> get getpeername => _library._getpeernamePtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>> get send => _library._sendPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>> get recv => _library._recvPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>> get sendto => _library._sendtoPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>> get recvfrom => _library._recvfromPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>> get sendmsg => _library._sendmsgPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>> get recvmsg => _library._recvmsgPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, ffi.Pointer<socklen_t>)>> get getsockopt => _library._getsockoptPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, socklen_t)>> get setsockopt => _library._setsockoptPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>> get listen => _library._listenPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>> get accept => _library._acceptPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>> get shutdown => _library._shutdownPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sockatmark => _library._sockatmarkPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>> get isfdtype => _library._isfdtypePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>> get stat1 => _library._stat1Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<stat>)>> get fstat => _library._fstatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>, ffi.Int)>> get fstatat => _library._fstatatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>> get lstat => _library._lstatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>> get chmod => _library._chmodPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>> get lchmod => _library._lchmodPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, __mode_t)>> get fchmod => _library._fchmodPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, ffi.Int)>> get fchmodat => _library._fchmodatPtr;
+  ffi.Pointer<ffi.NativeFunction<__mode_t Function(__mode_t)>> get umask => _library._umaskPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>> get mkdir => _library._mkdirPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>> get mkdirat => _library._mkdiratPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>> get mknod => _library._mknodPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>> get mknodat => _library._mknodatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>> get mkfifo => _library._mkfifoPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>> get mkfifoat => _library._mkfifoatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<timespec>, ffi.Int)>> get utimensat => _library._utimensatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<timespec>)>> get futimens => _library._futimensPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>> get readv => _library._readvPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>> get writev => _library._writevPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>> get preadv => _library._preadvPtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>> get pwritev => _library._pwritevPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>> get __errno_location => _library.___errno_locationPtr;
+  ffi.Pointer<ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>> get __sysv_signal => _library.___sysv_signalPtr;
+  ffi.Pointer<ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>> get signal => _library._signalPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>> get kill => _library._killPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int)>> get killpg => _library._killpgPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get raise => _library._raisePtr;
+  ffi.Pointer<ffi.NativeFunction<__sighandler_t Function(ffi.Int, __sighandler_t)>> get ssignal => _library._ssignalPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get gsignal => _library._gsignalPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>)>> get psignal => _library._psignalPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>> get psiginfo => _library._psiginfoPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sigblock => _library._sigblockPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sigsetmask => _library._sigsetmaskPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get siggetmask => _library._siggetmaskPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>> get sigemptyset => _library._sigemptysetPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>> get sigfillset => _library._sigfillsetPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>> get sigaddset => _library._sigaddsetPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>> get sigdelset => _library._sigdelsetPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>> get sigismember => _library._sigismemberPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>> get sigprocmask => _library._sigprocmaskPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>> get sigsuspend => _library._sigsuspendPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>> get sigaction1 => _library._sigaction1Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>)>> get sigpending => _library._sigpendingPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>> get sigwait => _library._sigwaitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>> get sigwaitinfo => _library._sigwaitinfoPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>, ffi.Pointer<timespec>)>> get sigtimedwait => _library._sigtimedwaitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int, sigval)>> get sigqueue => _library._sigqueuePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigcontext>)>> get sigreturn => _library._sigreturnPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>> get siginterrupt => _library._siginterruptPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>> get sigaltstack => _library._sigaltstackPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>> get sigstack1 => _library._sigstack1Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>> get pthread_sigmask => _library._pthread_sigmaskPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(pthread_t, ffi.Int)>> get pthread_kill => _library._pthread_killPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get __libc_current_sigrtmin => _library.___libc_current_sigrtminPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get __libc_current_sigrtmax => _library.___libc_current_sigrtmaxPtr;
+  ffi.Pointer<ffi.NativeFunction<intmax_t Function(intmax_t)>> get imaxabs => _library._imaxabsPtr;
+  ffi.Pointer<ffi.NativeFunction<imaxdiv_t Function(intmax_t, intmax_t)>> get imaxdiv => _library._imaxdivPtr;
+  ffi.Pointer<ffi.NativeFunction<intmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>> get strtoimax => _library._strtoimaxPtr;
+  ffi.Pointer<ffi.NativeFunction<uintmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>> get strtoumax => _library._strtoumaxPtr;
+  ffi.Pointer<ffi.NativeFunction<intmax_t Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>> get wcstoimax => _library._wcstoimaxPtr;
+  ffi.Pointer<ffi.NativeFunction<uintmax_t Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>> get wcstoumax => _library._wcstoumaxPtr;
+  ffi.Pointer<ffi.NativeFunction<clock_t Function()>> get clock => _library._clockPtr;
+  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<time_t>)>> get time => _library._timePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Double Function(time_t, time_t)>> get difftime => _library._difftimePtr;
+  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>> get mktime => _library._mktimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>)>> get strftime => _library._strftimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>, locale_t)>> get strftime_l => _library._strftime_lPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>> get gmtime => _library._gmtimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>> get localtime => _library._localtimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>> get gmtime_r => _library._gmtime_rPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>> get localtime_r => _library._localtime_rPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>> get asctime => _library._asctimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>> get ctime => _library._ctimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>> get asctime_r => _library._asctime_rPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>> get ctime_r => _library._ctime_rPtr;
+  ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> get __tzname => _library.___tzname;
   ffi.Pointer<ffi.Int> get __daylight => _library.___daylight;
   ffi.Pointer<ffi.Long> get __timezone => _library.___timezone;
-  ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> get tzname =>
-      _library._tzname;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get tzset =>
-      _library._tzsetPtr;
+  ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> get tzname => _library._tzname;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get tzset => _library._tzsetPtr;
   ffi.Pointer<ffi.Int> get daylight => _library._daylight;
   ffi.Pointer<ffi.Long> get timezone => _library._timezone;
-  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>
-      get timegm => _library._timegmPtr;
-  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>>
-      get timelocal => _library._timelocalPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get dysize =>
-      _library._dysizePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>>
-      get nanosleep => _library._nanosleepPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>
-      get clock_getres => _library._clock_getresPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>
-      get clock_gettime => _library._clock_gettimePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>>
-      get clock_settime => _library._clock_settimePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(clockid_t, ffi.Int, ffi.Pointer<timespec>,
-              ffi.Pointer<timespec>)>> get clock_nanosleep =>
-      _library._clock_nanosleepPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(pid_t, ffi.Pointer<clockid_t>)>>
-      get clock_getcpuclockid => _library._clock_getcpuclockidPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  clockid_t, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>>
-      get timer_create => _library._timer_createPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(timer_t)>> get timer_delete =>
-      _library._timer_deletePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(timer_t, ffi.Int, ffi.Pointer<itimerspec>,
-              ffi.Pointer<itimerspec>)>> get timer_settime =>
-      _library._timer_settimePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(timer_t, ffi.Pointer<itimerspec>)>>
-      get timer_gettime => _library._timer_gettimePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(timer_t)>>
-      get timer_getoverrun => _library._timer_getoverrunPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<timespec>, ffi.Int)>>
-      get timespec_get => _library._timespec_getPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>
-      get fcntl => _library._fcntlPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>>
-      get open => _library._openPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>>
-      get openat => _library._openatPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, mode_t)>>
-      get creat => _library._creatPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, off_t)>>
-      get lockf => _library._lockfPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t, ffi.Int)>>
-      get posix_fadvise => _library._posix_fadvisePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t)>>
-      get posix_fallocate => _library._posix_fallocatePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Size, ffi.Pointer<cpu_set_t>)>>
-      get __sched_cpucount => _library.___sched_cpucountPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<cpu_set_t> Function(ffi.Size)>>
-      get __sched_cpualloc => _library.___sched_cpuallocPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<cpu_set_t>)>>
-      get __sched_cpufree => _library.___sched_cpufreePtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>>
-      get sched_setparam => _library._sched_setparamPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>>
-      get sched_getparam => _library._sched_getparamPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(__pid_t, ffi.Int, ffi.Pointer<sched_param>)>>
-      get sched_setscheduler => _library._sched_setschedulerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t)>>
-      get sched_getscheduler => _library._sched_getschedulerPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get sched_yield =>
-      _library._sched_yieldPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>
-      get sched_get_priority_max => _library._sched_get_priority_maxPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>
-      get sched_get_priority_min => _library._sched_get_priority_minPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<timespec>)>>
-      get sched_rr_get_interval => _library._sched_rr_get_intervalPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>
-      get atomic_thread_fence => _library._atomic_thread_fencePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>
-      get atomic_signal_fence => _library._atomic_signal_fencePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>>
-      get io_uring_get_probe_ring => _library._io_uring_get_probe_ringPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<io_uring_probe> Function()>>
-      get io_uring_get_probe => _library._io_uring_get_probePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring_probe>)>>
-      get io_uring_free_probe => _library._io_uring_free_probePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>,
-              ffi.Pointer<io_uring_params>)>> get io_uring_queue_init_params =>
-      _library._io_uring_queue_init_paramsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.UnsignedInt)>>
-      get io_uring_queue_init => _library._io_uring_queue_initPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<io_uring_params>,
-              ffi.Pointer<io_uring>)>> get io_uring_queue_mmap =>
-      _library._io_uring_queue_mmapPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_ring_dontfork => _library._io_uring_ring_dontforkPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>)>>
-      get io_uring_queue_exit => _library._io_uring_queue_exitPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.UnsignedInt Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt)>> get io_uring_peek_batch_cqe =>
+  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>> get timegm => _library._timegmPtr;
+  ffi.Pointer<ffi.NativeFunction<time_t Function(ffi.Pointer<tm>)>> get timelocal => _library._timelocalPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get dysize => _library._dysizePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>> get nanosleep => _library._nanosleepPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>> get clock_getres => _library._clock_getresPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>> get clock_gettime => _library._clock_gettimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>> get clock_settime => _library._clock_settimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Int, ffi.Pointer<timespec>, ffi.Pointer<timespec>)>> get clock_nanosleep => _library._clock_nanosleepPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(pid_t, ffi.Pointer<clockid_t>)>> get clock_getcpuclockid => _library._clock_getcpuclockidPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(clockid_t, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>> get timer_create => _library._timer_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(timer_t)>> get timer_delete => _library._timer_deletePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(timer_t, ffi.Int, ffi.Pointer<itimerspec>, ffi.Pointer<itimerspec>)>> get timer_settime => _library._timer_settimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(timer_t, ffi.Pointer<itimerspec>)>> get timer_gettime => _library._timer_gettimePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(timer_t)>> get timer_getoverrun => _library._timer_getoverrunPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<timespec>, ffi.Int)>> get timespec_get => _library._timespec_getPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>> get fcntl => _library._fcntlPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>> get open => _library._openPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>> get openat => _library._openatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, mode_t)>> get creat => _library._creatPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, off_t)>> get lockf => _library._lockfPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t, ffi.Int)>> get posix_fadvise => _library._posix_fadvisePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, off_t, off_t)>> get posix_fallocate => _library._posix_fallocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Size, ffi.Pointer<cpu_set_t>)>> get __sched_cpucount => _library.___sched_cpucountPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<cpu_set_t> Function(ffi.Size)>> get __sched_cpualloc => _library.___sched_cpuallocPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<cpu_set_t>)>> get __sched_cpufree => _library.___sched_cpufreePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>> get sched_setparam => _library._sched_setparamPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>> get sched_getparam => _library._sched_getparamPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Int, ffi.Pointer<sched_param>)>> get sched_setscheduler => _library._sched_setschedulerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t)>> get sched_getscheduler => _library._sched_getschedulerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get sched_yield => _library._sched_yieldPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sched_get_priority_max => _library._sched_get_priority_maxPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int)>> get sched_get_priority_min => _library._sched_get_priority_minPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(__pid_t, ffi.Pointer<timespec>)>> get sched_rr_get_interval => _library._sched_rr_get_intervalPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>> get atomic_thread_fence => _library._atomic_thread_fencePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>> get atomic_signal_fence => _library._atomic_signal_fencePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>> get io_uring_get_probe_ring => _library._io_uring_get_probe_ringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<io_uring_probe> Function()>> get io_uring_get_probe => _library._io_uring_get_probePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring_probe>)>> get io_uring_free_probe => _library._io_uring_free_probePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.Pointer<io_uring_params>)>> get io_uring_queue_init_params => _library._io_uring_queue_init_paramsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.UnsignedInt)>> get io_uring_queue_init => _library._io_uring_queue_initPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<io_uring_params>, ffi.Pointer<io_uring>)>> get io_uring_queue_mmap => _library._io_uring_queue_mmapPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_ring_dontfork => _library._io_uring_ring_dontforkPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>)>> get io_uring_queue_exit => _library._io_uring_queue_exitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt)>> get io_uring_peek_batch_cqe =>
       _library._io_uring_peek_batch_cqePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt,
-              ffi.Pointer<__kernel_timespec>,
-              ffi.Pointer<sigset_t>)>> get io_uring_wait_cqes =>
-      _library._io_uring_wait_cqesPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.Pointer<__kernel_timespec>)>> get io_uring_wait_cqe_timeout =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>>
+      get io_uring_wait_cqes => _library._io_uring_wait_cqesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.Pointer<__kernel_timespec>)>> get io_uring_wait_cqe_timeout =>
       _library._io_uring_wait_cqe_timeoutPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_submit => _library._io_uring_submitPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>>
-      get io_uring_submit_and_wait => _library._io_uring_submit_and_waitPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt,
-              ffi.Pointer<__kernel_timespec>,
-              ffi.Pointer<sigset_t>)>> get io_uring_submit_and_wait_timeout =>
-      _library._io_uring_submit_and_wait_timeoutPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.UnsignedInt)>>
-      get io_uring_register_buffers => _library._io_uring_register_buffersPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<iovec>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>> get io_uring_register_buffers_tags =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_submit => _library._io_uring_submitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>> get io_uring_submit_and_wait => _library._io_uring_submit_and_waitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>>
+      get io_uring_submit_and_wait_timeout => _library._io_uring_submit_and_wait_timeoutPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.UnsignedInt)>> get io_uring_register_buffers => _library._io_uring_register_buffersPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>> get io_uring_register_buffers_tags =>
       _library._io_uring_register_buffers_tagsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>>
-      get io_uring_register_buffers_sparse =>
-          _library._io_uring_register_buffers_sparsePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Pointer<iovec>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>> get io_uring_register_buffers_update_tag =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>> get io_uring_register_buffers_sparse => _library._io_uring_register_buffers_sparsePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>> get io_uring_register_buffers_update_tag =>
       _library._io_uring_register_buffers_update_tagPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_unregister_buffers =>
-          _library._io_uring_unregister_buffersPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>,
-              ffi.UnsignedInt)>> get io_uring_register_files =>
-      _library._io_uring_register_filesPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Int>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>> get io_uring_register_files_tags =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_unregister_buffers => _library._io_uring_unregister_buffersPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>> get io_uring_register_files => _library._io_uring_register_filesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>> get io_uring_register_files_tags =>
       _library._io_uring_register_files_tagsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>>
-      get io_uring_register_files_sparse =>
-          _library._io_uring_register_files_sparsePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Int>,
-              ffi.Pointer<__u64>,
-              ffi.UnsignedInt)>> get io_uring_register_files_update_tag =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>> get io_uring_register_files_sparse => _library._io_uring_register_files_sparsePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>> get io_uring_register_files_update_tag =>
       _library._io_uring_register_files_update_tagPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_unregister_files => _library._io_uring_unregister_filesPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Int>,
-              ffi.UnsignedInt)>> get io_uring_register_files_update =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_unregister_files => _library._io_uring_unregister_filesPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>> get io_uring_register_files_update =>
       _library._io_uring_register_files_updatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>
-      get io_uring_register_eventfd => _library._io_uring_register_eventfdPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>
-      get io_uring_register_eventfd_async =>
-          _library._io_uring_register_eventfd_asyncPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_unregister_eventfd =>
-          _library._io_uring_unregister_eventfdPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>,
-              ffi.UnsignedInt)>> get io_uring_register_probe =>
-      _library._io_uring_register_probePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_register_personality =>
-          _library._io_uring_register_personalityPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>
-      get io_uring_unregister_personality =>
-          _library._io_uring_unregister_personalityPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<io_uring_restriction>,
-              ffi.UnsignedInt)>> get io_uring_register_restrictions =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>> get io_uring_register_eventfd => _library._io_uring_register_eventfdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>> get io_uring_register_eventfd_async => _library._io_uring_register_eventfd_asyncPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_unregister_eventfd => _library._io_uring_unregister_eventfdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>, ffi.UnsignedInt)>> get io_uring_register_probe => _library._io_uring_register_probePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_register_personality => _library._io_uring_register_personalityPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>> get io_uring_unregister_personality => _library._io_uring_unregister_personalityPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_restriction>, ffi.UnsignedInt)>> get io_uring_register_restrictions =>
       _library._io_uring_register_restrictionsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_enable_rings => _library._io_uring_enable_ringsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get __io_uring_sqring_wait => _library.___io_uring_sqring_waitPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<io_uring>, ffi.Size, ffi.Pointer<cpu_set_t>)>>
-      get io_uring_register_iowq_aff => _library._io_uring_register_iowq_affPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_unregister_iowq_aff =>
-          _library._io_uring_unregister_iowq_affPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>>
-      get io_uring_register_iowq_max_workers =>
-          _library._io_uring_register_iowq_max_workersPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_register_ring_fd => _library._io_uring_register_ring_fdPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_unregister_ring_fd =>
-          _library._io_uring_unregister_ring_fdPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_close_ring_fd => _library._io_uring_close_ring_fdPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>,
-              ffi.UnsignedInt)>> get io_uring_register_buf_ring =>
-      _library._io_uring_register_buf_ringPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>>
-      get io_uring_unregister_buf_ring =>
-          _library._io_uring_unregister_buf_ringPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<io_uring>,
-                  ffi.Pointer<io_uring_sync_cancel_reg>)>>
-      get io_uring_register_sync_cancel =>
-          _library._io_uring_register_sync_cancelPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.UnsignedInt)>>
-      get io_uring_register_file_alloc_range =>
-          _library._io_uring_register_file_alloc_rangePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_get_events => _library._io_uring_get_eventsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>>
-      get io_uring_submit_and_get_events =>
-          _library._io_uring_submit_and_get_eventsPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<sigset_t>)>> get io_uring_enter =>
-      _library._io_uring_enterPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<sigset_t>,
-              ffi.Size)>> get io_uring_enter2 => _library._io_uring_enter2Ptr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>>
-      get io_uring_setup => _library._io_uring_setupPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Void>,
-              ffi.UnsignedInt)>> get io_uring_register =>
-      _library._io_uring_registerPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Pointer<io_uring_buf_ring> Function(
-              ffi.Pointer<io_uring>,
-              ffi.UnsignedInt,
-              ffi.Int,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Int>)>> get io_uring_setup_buf_ring =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_enable_rings => _library._io_uring_enable_ringsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get __io_uring_sqring_wait => _library.___io_uring_sqring_waitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Size, ffi.Pointer<cpu_set_t>)>> get io_uring_register_iowq_aff => _library._io_uring_register_iowq_affPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_unregister_iowq_aff => _library._io_uring_unregister_iowq_affPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>> get io_uring_register_iowq_max_workers => _library._io_uring_register_iowq_max_workersPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_register_ring_fd => _library._io_uring_register_ring_fdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_unregister_ring_fd => _library._io_uring_unregister_ring_fdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_close_ring_fd => _library._io_uring_close_ring_fdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>, ffi.UnsignedInt)>> get io_uring_register_buf_ring => _library._io_uring_register_buf_ringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>> get io_uring_unregister_buf_ring => _library._io_uring_unregister_buf_ringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_sync_cancel_reg>)>> get io_uring_register_sync_cancel => _library._io_uring_register_sync_cancelPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.UnsignedInt)>> get io_uring_register_file_alloc_range => _library._io_uring_register_file_alloc_rangePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_get_events => _library._io_uring_get_eventsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>)>> get io_uring_submit_and_get_events => _library._io_uring_submit_and_get_eventsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>)>> get io_uring_enter => _library._io_uring_enterPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>, ffi.Size)>> get io_uring_enter2 =>
+      _library._io_uring_enter2Ptr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>> get io_uring_setup => _library._io_uring_setupPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<ffi.Void>, ffi.UnsignedInt)>> get io_uring_register => _library._io_uring_registerPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<io_uring_buf_ring> Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Int, ffi.UnsignedInt, ffi.Pointer<ffi.Int>)>> get io_uring_setup_buf_ring =>
       _library._io_uring_setup_buf_ringPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<io_uring_buf_ring>,
-              ffi.UnsignedInt,
-              ffi.Int)>> get io_uring_free_buf_ring =>
-      _library._io_uring_free_buf_ringPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<io_uring>,
-              ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<sigset_t>)>> get __io_uring_get_cqe =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_ring>, ffi.UnsignedInt, ffi.Int)>> get io_uring_free_buf_ring => _library._io_uring_free_buf_ringPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>)>> get __io_uring_get_cqe =>
       _library.___io_uring_get_cqePtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.UnsignedInt, ffi.UnsignedInt)>> get io_uring_mlock_size => _library._io_uring_mlock_sizePtr;
+  ffi.Pointer<ffi.NativeFunction<ssize_t Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>> get io_uring_mlock_size_params => _library._io_uring_mlock_size_paramsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get io_uring_major_version => _library._io_uring_major_versionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>> get io_uring_minor_version => _library._io_uring_minor_versionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int)>> get io_uring_check_version => _library._io_uring_check_versionPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<interactor_native_configuration_t>, ffi.Uint8)>> get interactor_native_initialize =>
+      _library._interactor_native_initializePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Uint8)>> get interactor_native_initialize_default =>
+      _library._interactor_native_initialize_defaultPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int)>> get interactor_native_cancel_by_fd => _library._interactor_native_cancel_by_fdPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_check_event_timeouts =>
+      _library._interactor_native_check_event_timeoutsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Uint64)>> get interactor_native_remove_event => _library._interactor_native_remove_eventPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_get_buffer => _library._interactor_native_get_bufferPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Uint16)>> get interactor_native_release_buffer =>
+      _library._interactor_native_release_bufferPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_available_buffers => _library._interactor_native_available_buffersPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_used_buffers => _library._interactor_native_used_buffersPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_allocate_message =>
+      _library._interactor_native_allocate_messagePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>> get interactor_native_free_message =>
+      _library._interactor_native_free_messagePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<interactor_payload_pool> Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>> get interactor_native_payload_pool_create =>
+      _library._interactor_native_payload_pool_createPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>> get interactor_native_payload_allocate => _library._interactor_native_payload_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>> get interactor_native_payload_free => _library._interactor_native_payload_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>> get interactor_native_payload_pool_destroy => _library._interactor_native_payload_pool_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>> get interactor_native_data_allocate => _library._interactor_native_data_allocatePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.IntPtr, ffi.Size)>> get interactor_native_data_free =>
+      _library._interactor_native_data_freePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_peek_infinity => _library._interactor_native_peek_infinityPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_peek_timeout => _library._interactor_native_peek_timeoutPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_submit => _library._interactor_native_submitPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get interactor_native_destroy => _library._interactor_native_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>> get interactor_native_cqe_advance => _library._interactor_native_cqe_advancePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>> get interactor_native_close_descriptor => _library._interactor_native_close_descriptorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int, ffi.Pointer<linux_interactor.interactor_message_t>)>> get interactor_native_call_dart =>
+      _library._interactor_native_call_dartPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>> get interactor_native_callback_to_dart =>
+      _library._interactor_native_callback_to_dartPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_native_t> Function()>> get test_interactor_initialize => _library._test_interactor_initializePtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get test_interactor_destroy => _library._test_interactor_destroyPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get test_interactor_process_calls => _library._test_interactor_process_callsPtr;
   ffi.Pointer<
           ffi
-          .NativeFunction<ssize_t Function(ffi.UnsignedInt, ffi.UnsignedInt)>>
-      get io_uring_mlock_size => _library._io_uring_mlock_sizePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ssize_t Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>>
-      get io_uring_mlock_size_params => _library._io_uring_mlock_size_paramsPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
-      get io_uring_major_version => _library._io_uring_major_versionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
-      get io_uring_minor_version => _library._io_uring_minor_versionPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int)>>
-      get io_uring_check_version => _library._io_uring_check_versionPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Pointer<interactor_native_configuration_t>,
-              ffi.Uint8)>> get interactor_native_initialize =>
-      _library._interactor_native_initializePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint8)>> get interactor_native_initialize_default =>
-      _library._interactor_native_initialize_defaultPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int)>>
-      get interactor_native_cancel_by_fd =>
-          _library._interactor_native_cancel_by_fdPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_check_event_timeouts =>
-          _library._interactor_native_check_event_timeoutsPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint64)>> get interactor_native_remove_event =>
-      _library._interactor_native_remove_eventPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_get_buffer =>
-          _library._interactor_native_get_bufferPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint16)>> get interactor_native_release_buffer =>
-      _library._interactor_native_release_bufferPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_available_buffers =>
-          _library._interactor_native_available_buffersPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_used_buffers =>
-          _library._interactor_native_used_buffersPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_allocate_message =>
-          _library._interactor_native_allocate_messagePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get interactor_native_free_message =>
-          _library._interactor_native_free_messagePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<interactor_payloads_pool> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>>
-      get interactor_native_payload_pool_create =>
-          _library._interactor_native_payload_pool_createPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(ffi.Pointer<interactor_payloads_pool>)>>
-      get interactor_native_payload_allocate =>
-          _library._interactor_native_payload_allocatePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<interactor_payloads_pool>, ffi.IntPtr)>>
-      get interactor_native_payload_free =>
-          _library._interactor_native_payload_freePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<interactor_payloads_pool>)>>
-      get interactor_native_payload_pool_destroy =>
-          _library._interactor_native_payload_pool_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.IntPtr Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>>
-      get interactor_native_data_allocate =>
-          _library._interactor_native_data_allocatePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.IntPtr,
-              ffi.Size)>> get interactor_native_data_free =>
-      _library._interactor_native_data_freePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_peek_infinity =>
-          _library._interactor_native_peek_infinityPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_peek_timeout =>
-          _library._interactor_native_peek_timeoutPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_submit => _library._interactor_native_submitPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get interactor_native_destroy => _library._interactor_native_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<io_uring>, ffi.Int)>>
-      get interactor_native_cqe_advance =>
-          _library._interactor_native_cqe_advancePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
-      get interactor_native_close_descriptor =>
-          _library._interactor_native_close_descriptorPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Int,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get interactor_native_call_dart =>
-          _library._interactor_native_call_dartPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get interactor_native_callback_to_dart =>
-          _library._interactor_native_callback_to_dartPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_native_t> Function()>>
-      get test_interactor_initialize => _library._test_interactor_initializePtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get test_interactor_destroy => _library._test_interactor_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get test_interactor_process_calls =>
-          _library._test_interactor_process_callsPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<
-                                  linux_interactor.interactor_message_t>)>>)>>
-      get test_interactor_process_callbacks =>
-          _library._test_interactor_process_callbacksPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_call_reset =>
-      _library._test_call_resetPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Bool Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get test_call_native_check => _library._test_call_native_checkPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get test_call_native_echo => _library._test_call_native_echoPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get test_call_dart_callback => _library._test_call_dart_callbackPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr)>> get test_call_dart_null =>
-      _library._test_call_dart_nullPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Bool)>> get test_call_dart_bool =>
-      _library._test_call_dart_boolPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Int)>> get test_call_dart_int =>
-      _library._test_call_dart_intPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Double)>> get test_call_dart_double =>
+          .NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>)>>
+      get test_interactor_process_callbacks => _library._test_interactor_process_callbacksPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_call_reset => _library._test_call_resetPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get test_call_native_check => _library._test_call_native_checkPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>> get test_call_native_echo => _library._test_call_native_echoPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>> get test_call_dart_callback => _library._test_call_dart_callbackPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr)>> get test_call_dart_null => _library._test_call_dart_nullPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Bool)>> get test_call_dart_bool => _library._test_call_dart_boolPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>> get test_call_dart_int => _library._test_call_dart_intPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Double)>> get test_call_dart_double =>
       _library._test_call_dart_doublePtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Char>)>> get test_call_dart_string =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Char>)>> get test_call_dart_string =>
       _library._test_call_dart_stringPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Int)>> get test_call_dart_object =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>> get test_call_dart_object =>
       _library._test_call_dart_objectPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Size)>> get test_call_dart_buffer =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>> get test_call_dart_buffer =>
       _library._test_call_dart_bufferPtr;
-  ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Uint8>,
-              ffi.Size)>> get test_call_dart_bytes =>
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>> get test_call_dart_bytes =>
       _library._test_call_dart_bytesPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get test_call_dart_check => _library._test_call_dart_checkPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<linux_interactor.interactor_native_t>)>> get test_call_dart_check =>
+      _library._test_call_dart_checkPtr;
 }
 
 final class max_align_t extends ffi.Opaque {}
@@ -5860,7 +3913,7 @@ final class interactor_messages_pool extends ffi.Struct {
   external interactor_mempool pool;
 }
 
-final class interactor_payloads_pool extends ffi.Struct {
+final class interactor_payload_pool extends ffi.Struct {
   external interactor_mempool pool;
 
   @ffi.Size()
@@ -6400,14 +4453,12 @@ final class UnnamedUnion3 extends ffi.Union {
 }
 
 final class UnnamedStruct10 extends ffi.Struct {
-  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(__sigval_t)>>
-      _function;
+  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(__sigval_t)>> _function;
 
   external ffi.Pointer<pthread_attr_t> _attribute;
 }
 
-typedef __sighandler_t
-    = ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>;
+typedef __sighandler_t = ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>;
 typedef sigset_t = __sigset_t;
 
 final class sigaction extends ffi.Struct {
@@ -6424,11 +4475,7 @@ final class sigaction extends ffi.Struct {
 final class UnnamedUnion4 extends ffi.Union {
   external __sighandler_t sa_handler;
 
-  external ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int, ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Void>)>>
-      sa_sigaction;
+  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Void>)>> sa_sigaction;
 }
 
 final class _fpx_sw_bytes extends ffi.Struct {

@@ -114,27 +114,27 @@ void interactor_dart_free_message(interactor_dart_t* interactor, interactor_mess
     interactor_messages_pool_free(&interactor->messages_pool, message);
 }
 
-struct interactor_payloads_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size)
+struct interactor_payload_pool* interactor_dart_payload_pool_create(interactor_dart_t* interactor, size_t size)
 {
-    struct interactor_payloads_pool* pool = malloc(sizeof(struct interactor_payloads_pool));
+    struct interactor_payload_pool* pool = malloc(sizeof(struct interactor_payload_pool));
     pool->size = size;
-    interactor_payloads_pool_create(pool, &interactor->memory, size);
+    interactor_payload_pool_create(pool, &interactor->memory, size);
     return pool;
 }
 
-intptr_t interactor_dart_payload_allocate(struct interactor_payloads_pool* pool)
+intptr_t interactor_dart_payload_allocate(struct interactor_payload_pool* pool)
 {
-    return interactor_payloads_pool_allocate(pool);
+    return interactor_payload_pool_allocate(pool);
 }
 
-void interactor_dart_payload_free(struct interactor_payloads_pool* pool, intptr_t pointer)
+void interactor_dart_payload_free(struct interactor_payload_pool* pool, intptr_t pointer)
 {
-    interactor_payloads_pool_free(pool, pointer);
+    interactor_payload_pool_free(pool, pointer);
 }
 
-void interactor_dart_payload_pool_destroy(struct interactor_payloads_pool* pool)
+void interactor_dart_payload_pool_destroy(struct interactor_payload_pool* pool)
 {
-    interactor_payloads_pool_destroy(pool);
+    interactor_payload_pool_destroy(pool);
     free(pool);
 }
 
