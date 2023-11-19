@@ -3,8 +3,8 @@ project(interactor_test C ASM)
 
 add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g -fPIE -static-libgcc -static-libstdc++ -fno-stack-protector")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O2 -fPIE -static-libgcc -static-libstdc++ -fno-stack-protector")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g -static-libgcc -static-libstdc++ -fno-stack-protector")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O3 -static-libgcc -static-libstdc++ -fno-stack-protector")
 
 file(GLOB sources
   *.c
