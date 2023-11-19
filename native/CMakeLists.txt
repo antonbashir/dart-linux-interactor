@@ -29,6 +29,7 @@ FetchContent_MakeAvailable(liburing)
 include_directories(${liburing_SOURCE_DIR}/src/include)
 add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/build && make && make install WORKING_DIRECTORY ${liburing_SOURCE_DIR})
 
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-fPIC -O3 -fno-stack-protector")
 FetchContent_Declare(
   small

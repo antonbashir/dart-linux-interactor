@@ -3,8 +3,8 @@ project(interactor_test C ASM)
 
 add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g -static-libgcc -static-libstdc++ -fno-stack-protector")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O3 -static-libgcc -static-libstdc++ -fno-stack-protector")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g  -fno-stack-protector")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -fno-stack-protector")
 
 file(GLOB sources
   *.c
@@ -14,6 +14,7 @@ file(GLOB sources
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../native/include)
+include_directories(${liburing_SOURCE_DIR}/src/include)
 
 add_library(interactor_test SHARED ${sources})
 target_link_libraries(interactor_test PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../dart/native/libinteractor.so")

@@ -1,6 +1,7 @@
 #include "interactor_dart.h"
 #include <interactor_memory.h>
 #include <interactor_messages_pool.h>
+#include <liburing.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
 #include <sys/socket.h>
@@ -8,7 +9,6 @@
 #include "interactor_constants.h"
 #include "interactor_data_pool.h"
 #include "interactor_message.h"
-#include "liburing.h"
 
 int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id)
 {

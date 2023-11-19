@@ -7,7 +7,6 @@
 #include "interactor_common.h"
 #include "interactor_constants.h"
 #include "interactor_message.h"
-#include "liburing.h"
 
 int interactor_native_initialize(interactor_native_t* interactor, interactor_native_configuration_t* configuration, uint8_t id)
 {
