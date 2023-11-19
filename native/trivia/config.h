@@ -234,7 +234,7 @@
 /** \cond public */
 
 /** System configuration dir (e.g /etc) */
-#define SYSCONF_DIR ""
+#define SYSCONF_DIR "etc"
 /** Install prefix (e.g. /usr) */
 #define INSTALL_PREFIX "/usr/local"
 /** Build type, e.g. Debug or Release */
@@ -245,9 +245,9 @@
 #define BUILD_OPTIONS "cmake . "
 /** Compiler ID and version, assuming the C and C++ compiler IDs are equal. */
 #define COMPILER_INFO "GNU-13.2.1"
-/** C compile flags used to build Tarantool */
+/** C compile flags used to build */
 #define INTERACTOR_C_FLAGS ""
-/** CXX compile flags used to build Tarantool */
+/** CXX compile flags used to build */
 #define INTERACTOR_CXX_FLAGS ""
 
 /** A path to install *.lua module files */

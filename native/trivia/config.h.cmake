@@ -245,9 +245,9 @@
 #define BUILD_OPTIONS "cmake . @INTERACTOR_OPTIONS@"
 /** Compiler ID and version, assuming the C and C++ compiler IDs are equal. */
 #define COMPILER_INFO "@CMAKE_C_COMPILER_ID@-@CMAKE_C_COMPILER_VERSION@"
-/** C compile flags used to build Tarantool */
+/** C compile flags used to build */
 #define INTERACTOR_C_FLAGS "@INTERACTOR_C_FLAGS@"
-/** CXX compile flags used to build Tarantool */
+/** CXX compile flags used to build */
 #define INTERACTOR_CXX_FLAGS "@INTERACTOR_CXX_FLAGS@"
 
 /** A path to install *.lua module files */
