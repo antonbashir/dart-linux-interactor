@@ -208,15 +208,15 @@ diff --unified --recursive --no-dereference small-old/CMakeLists.txt small-new/C
 +  add_definitions(-DNVALGRIND=1)
 +endif()
 
-diff --unified --recursive --no-dereference a/small/slab_cache.c b/small/slab_cache.c
---- a/small/slab_cache.c
-+++ b/small/slab_cache.c
-@@ -63,7 +63,7 @@ static inline void
+diff --unified --recursive --no-dereference small-old/small/slab_cache.c small-new/small/slab_cache.c
+--- small-old/small/slab_cache.c	2023-11-19 17:18:04.426924436 +0200
++++ small-new/small/slab_cache.c	2023-11-19 17:17:35.773783165 +0200
+@@ -63,7 +63,7 @@
  slab_assert(struct slab_cache *cache, struct slab *slab)
  {
-        (void) slab;
-+       //assert(pthread_equal(cache->thread_id, pthread_self()));
--       assert(pthread_equal(cache->thread_id, pthread_self()));
-        assert(slab->magic == slab_magic);
-        assert(slab->order <= cache->order_max + 1);
-        if (slab->order <= cache->order_max) {
+ 	(void) slab;
+-	assert(pthread_equal(cache->thread_id, pthread_self()));
++	//assert(pthread_equal(cache->thread_id, pthread_self()));
+ 	assert(slab->magic == slab_magic);
+ 	assert(slab->order <= cache->order_max + 1);
+ 	if (slab->order <= cache->order_max) {
