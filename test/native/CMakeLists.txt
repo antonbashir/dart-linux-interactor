@@ -17,6 +17,4 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../native/include)
 
 add_library(interactor_test SHARED ${sources})
 target_link_libraries(interactor_test PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../dart/native/libinteractor.so")
-add_custom_command(TARGET interactor_test POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:interactor_test> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractortest.so
-)
+add_custom_command(TARGET interactor_test POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:interactor_test> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractortest.so)
