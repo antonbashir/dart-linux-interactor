@@ -37,6 +37,14 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(small)
 execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/small-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
+FetchContent_Declare(
+  dart
+  URL "https://github.com/antonbashir/dart-native-api/archive/refs/tags/${DART_VERSION}.tar.gz"
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dart
+)
+FetchContent_MakeAvailable(dart)
+execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/dart-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
 include_directories(${small_SOURCE_DIR}/src/include)
 include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
