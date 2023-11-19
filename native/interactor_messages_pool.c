@@ -3,7 +3,7 @@
 #include <interactor_messages_pool.h>
 #include "interactor_constants.h"
 #include "small/include/small/small.h"
-#include "trivia/util.h"
+#include "common/common.h"
 
 int interactor_messages_pool_create(struct interactor_messages_pool* pool, struct interactor_memory* memory)
 {

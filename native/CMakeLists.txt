@@ -32,18 +32,19 @@ add_custom_target(liburing
 )
 
 configure_file(
-  "${PROJECT_SOURCE_DIR}/trivia/config.h.cmake"
-  "${PROJECT_SOURCE_DIR}/trivia/config.h"
+  "${PROJECT_SOURCE_DIR}/common/configuration.h.cmake"
+  "${PROJECT_SOURCE_DIR}/common/configuration.h"
 )
-message(STATUS "")
 
 file(GLOB sources
   *.c
   *.h
   dart/*.h
   dart/*.c
-  salad/*.h
-  salad/*.c
+  collections/*.h
+  collections/*.c
+  common/*.h
+  common/*.c
 )
 
 include_directories(${PROJECT_BINARY_DIR})

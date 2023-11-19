@@ -2,7 +2,7 @@
 #include <interactor_payload_pool.h>
 #include "interactor_constants.h"
 #include "small/include/small/small.h"
-#include "trivia/util.h"
+#include "common/common.h"
 
 int interactor_payload_pool_create(struct interactor_payload_pool* pool, struct interactor_memory* memory, size_t payload_size)
 {

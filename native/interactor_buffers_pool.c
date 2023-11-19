@@ -1,6 +1,6 @@
 #include "interactor_buffers_pool.h"
 #include "interactor_constants.h"
-#include "trivia/util.h"
+#include "common/common.h"
 
 int interactor_buffers_pool_create(struct interactor_buffers_pool* pool, size_t size)
 {

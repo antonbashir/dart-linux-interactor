@@ -2,7 +2,7 @@
 #include <interactor_memory.h>
 #include "interactor_constants.h"
 #include "small/include/small/small.h"
-#include "trivia/util.h"
+#include "common/common.h"
 
 int interactor_data_pool_create(struct interactor_data_pool* pool, struct interactor_memory* memory)
 {
