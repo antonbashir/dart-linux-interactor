@@ -14,7 +14,7 @@ file(GLOB sources
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../native/include)
-include_directories(${liburing_SOURCE_DIR}/src/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../native/liburing/src/include)
 
 add_library(interactor_test SHARED ${sources})
 target_link_libraries(interactor_test PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../dart/native/libinteractor.so")
