@@ -6,19 +6,19 @@
 #include "interactor_message.h"
 #include "test.h"
 
-static interactor_message_t* called_message = NULL;
+static interactor_message_t* current_message = NULL;
 
 void test_call_reset()
 {
-    called_message = NULL;
+    current_message = NULL;
 }
 
 bool test_call_native_check(interactor_native_t* interactor)
 {
     test_interactor_process_calls(interactor);
-    if (called_message)
+    if (current_message)
     {
-        interactor_native_callback_to_dart(interactor, called_message);
+        interactor_native_callback_to_dart(interactor, current_message);
         interactor_native_submit(interactor);
         return true;
     }
@@ -29,7 +29,7 @@ void test_call_native_echo(interactor_message_t* message)
 {
     message->output = message->input;
     message->output_size = message->input_size;
-    called_message = message;
+    current_message = message;
 }
 
 void test_call_dart_null(interactor_native_t* interactor, int32_t target, uintptr_t method)
@@ -129,12 +129,12 @@ void test_call_dart_callback(interactor_message_t* message, interactor_native_t*
 {
     message->output = message->input;
     message->output_size = message->input_size;
-    called_message = message;
+    current_message = message;
     interactor_native_remove_event(interactor, (uintptr_t)message);
 }
 
 interactor_message_t* test_call_dart_check(interactor_native_t* interactor)
 {
     test_interactor_process_callbacks(interactor, test_call_dart_callback);
-    return called_message;
+    return current_message;
 }

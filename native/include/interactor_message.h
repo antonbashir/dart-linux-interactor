@@ -13,6 +13,7 @@ extern "C"
     {
         uint64_t id;
         uint64_t source;
+        uint64_t target;
         uint64_t owner;
         uint64_t method;
         void* input;
