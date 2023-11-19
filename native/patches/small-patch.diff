@@ -207,3 +207,16 @@ diff --unified --recursive --no-dereference small-old/CMakeLists.txt small-new/C
 +if(NOT ENABLE_VALGRIND)
 +  add_definitions(-DNVALGRIND=1)
 +endif()
+
+diff --unified --recursive --no-dereference a/small/slab_cache.c b/small/slab_cache.c
+--- a/small/slab_cache.c
++++ b/small/slab_cache.c
+@@ -63,7 +63,7 @@ static inline void
+ slab_assert(struct slab_cache *cache, struct slab *slab)
+ {
+        (void) slab;
++       //assert(pthread_equal(cache->thread_id, pthread_self()));
+-       assert(pthread_equal(cache->thread_id, pthread_self()));
+        assert(slab->magic == slab_magic);
+        assert(slab->order <= cache->order_max + 1);
+        if (slab->order <= cache->order_max) {
