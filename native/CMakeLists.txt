@@ -48,12 +48,14 @@ execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/dart-patch-app
 include_directories(${small_SOURCE_DIR}/src/include)
 include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
+include_directories(${small_BINARY_DIR}/small/include)
 add_subdirectory(${small_SOURCE_DIR})
 
 configure_file(
   "${PROJECT_SOURCE_DIR}/common/configuration.h.cmake"
   "${PROJECT_SOURCE_DIR}/common/configuration.h"
 )
+message(STATUS "")
 
 file(GLOB sources
   *.c
