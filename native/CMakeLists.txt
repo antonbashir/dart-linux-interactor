@@ -14,7 +14,7 @@ add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g -fno-stack-protector")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O3 -fno-stack-protector")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -fno-stack-protector")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
 set(HAVE_CLOCK_GETTIME_DECL ON)
 
@@ -29,6 +29,7 @@ FetchContent_MakeAvailable(liburing)
 include_directories(${liburing_SOURCE_DIR}/src/include)
 add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/build && make && make install WORKING_DIRECTORY ${liburing_SOURCE_DIR})
 
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-fPIC -O3 -fno-stack-protector")
 FetchContent_Declare(
   small
   URL "https://github.com/tarantool/small/archive/refs/heads/${SMALL_VERSION}.tar.gz"
@@ -41,6 +42,7 @@ include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
 include_directories(${small_BINARY_DIR}/small/include)
 add_subdirectory(${small_SOURCE_DIR})
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -fno-stack-protector")
 
 FetchContent_Declare(
   dart
