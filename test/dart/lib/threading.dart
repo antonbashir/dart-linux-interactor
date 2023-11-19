@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ffi';
-import 'dart:io';
 import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
@@ -20,9 +19,10 @@ void testThreadingNative() {
     final interactor = Interactor();
     final messages = 1024;
     final isolates = 4;
+    final threads = 4;
 
     final bindings = loadBindings();
-    bindings.test_threading_initialize(Platform.numberOfProcessors);
+    bindings.test_threading_initialize(threads, messages * isolates);
     final spawnedIsolates = <Future<Isolate>>[];
     final exitIsolates = <ReceivePort>[];
     final errorIsolates = <ReceivePort>[];
