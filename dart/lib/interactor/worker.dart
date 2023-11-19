@@ -11,7 +11,6 @@ import 'declaration.dart';
 import 'lookup.dart';
 import 'payloads.dart';
 import 'registry.dart';
-import 'timeout.dart';
 
 class InteractorWorker {
   final _fromInteractor = ReceivePort();
@@ -29,7 +28,6 @@ class InteractorWorker {
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
   late final RawReceivePort _closer;
   late final SendPort _destroyer;
-  late final InteractorTimeoutChecker _timeoutChecker;
   late final List<Duration> _delays;
 
   var _active = true;
@@ -44,7 +42,6 @@ class InteractorWorker {
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((gracefulDuration) async {
-      _timeoutChecker.stop();
       _active = false;
       await _done.future;
       _payloads.destroy();
@@ -65,11 +62,6 @@ class InteractorWorker {
     _bindings = InteractorBindings(InteractorLibrary.load(libraryPath: libraryPath).library);
     _ring = _interactor.ref.ring;
     _cqes = _interactor.ref.cqes;
-    _timeoutChecker = InteractorTimeoutChecker(
-      _bindings,
-      _interactor,
-      Duration(milliseconds: _interactor.ref.timeout_checker_period_millis),
-    );
     _payloads = InteractorPayloads(_bindings, _interactor);
     _buffers = InteractorBuffers(_bindings, _interactor.ref.buffers, _interactor);
     _datas = InteractorDatas(_bindings, _interactor);
@@ -88,7 +80,6 @@ class InteractorWorker {
 
   void activate() {
     _delays = _calculateDelays();
-    _timeoutChecker.start();
     unawaited(_listen());
   }
 
@@ -118,7 +109,6 @@ class InteractorWorker {
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
       Pointer<io_uring_cqe> cqe = _cqes.elementAt(cqeIndex).value;
       final data = cqe.ref.user_data;
-      _bindings.interactor_dart_remove_event(_interactor, data);
       final result = cqe.ref.res;
       if (result & interactorDartCall > 0) {
         Pointer<interactor_message_t> message = Pointer.fromAddress(data);

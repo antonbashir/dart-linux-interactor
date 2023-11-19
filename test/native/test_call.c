@@ -15,7 +15,7 @@ void test_call_reset()
 
 bool test_call_native_check(interactor_native_t* interactor)
 {
-    test_interactor_process_calls(interactor);
+    interactor_native_process_timeout(interactor);
     if (current_message)
     {
         interactor_native_callback_to_dart(interactor, current_message);
@@ -130,7 +130,6 @@ void test_call_dart_callback(interactor_message_t* message, interactor_native_t*
     message->output = message->input;
     message->output_size = message->input_size;
     current_message = message;
-    interactor_native_remove_event(interactor, (uintptr_t)message);
 }
 
 interactor_message_t* test_call_dart_check(interactor_native_t* interactor)

@@ -45,7 +45,6 @@ extern "C"
         uint32_t base_delay_micros;
         double delay_randomization_factor;
         uint64_t max_delay_micros;
-        struct mh_events_t* events;
         size_t ring_size;
         int ring_flags;
         struct io_uring_cqe** cqes;
@@ -60,11 +59,6 @@ extern "C"
     } interactor_dart_t;
 
     int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id);
-
-    void interactor_dart_cancel_by_id(interactor_dart_t* interactor, int id);
-
-    void interactor_dart_check_event_timeouts(interactor_dart_t* interactor);
-    void interactor_dart_remove_event(interactor_dart_t* interactor, uint64_t data);
 
     int32_t interactor_dart_get_buffer(interactor_dart_t* interactor);
     void interactor_dart_release_buffer(interactor_dart_t* interactor, uint16_t buffer_id);
@@ -84,13 +78,12 @@ extern "C"
 
     int interactor_dart_peek(interactor_dart_t* interactor);
 
-    void interactor_dart_destroy(interactor_dart_t* interactor);
+    void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout);
+    void interactor_dart_callback_to_native(interactor_dart_t* interactor, interactor_message_t* message);
 
     void interactor_dart_cqe_advance(struct io_uring* ring, int count);
 
-    void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout);
-
-    void interactor_dart_callback_to_native(interactor_dart_t* interactor, interactor_message_t* message);
+    void interactor_dart_destroy(interactor_dart_t* interactor);
 
     void interactor_dart_close_descriptor(int fd);
 

@@ -90,8 +90,5 @@ class NativeMethodExecutor {
   }
 
   @pragma(preferInlinePragma)
-  void callback(Pointer<interactor_message_t> message) {
-    _bindings.interactor_dart_remove_event(_interactor, message.address);
-    _calls[message.ref.id]?.callback(message);
-  }
+  void callback(Pointer<interactor_message_t> message) => _calls[message.ref.id]?.callback(message);
 }

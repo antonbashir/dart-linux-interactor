@@ -29,12 +29,11 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory);
     interactor_data_pool_create(&interactor->data_pool, &interactor->memory);
 
-    interactor->events = mh_events_new();
-    if (!interactor->events)
+    interactor->callbacks = mh_native_callbacks_new();
+    if (!interactor->callbacks)
     {
         return -ENOMEM;
     }
-    mh_events_reserve((struct mh_events_t*)interactor->events, interactor->buffers_count, 0);
 
     int result = interactor_buffers_pool_create(&interactor->buffers_pool, configuration->buffers_count);
     if (result == -1)
@@ -90,6 +89,18 @@ int interactor_native_initialize_default(interactor_native_t* interactor, uint8_
         .ring_flags = 0,
     };
     return interactor_native_initialize(interactor, &configuration, id);
+}
+
+void interactor_native_register_callback(interactor_native_t* interactor, uint64_t owner, uint64_t method, void (*callback)(interactor_message_t*))
+{
+    struct mh_native_callbacks_node_t node = {
+        .callback = callback,
+        .key = {
+            .method = method,
+            .owner = owner,
+        },
+    };
+    mh_native_callbacks_put((struct mh_native_callbacks_t*)interactor->callbacks, &node, NULL, 0);
 }
 
 int32_t interactor_native_get_buffer(interactor_native_t* interactor)
@@ -164,42 +175,7 @@ void interactor_native_data_free(interactor_native_t* interactor, intptr_t point
     interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
 
-static inline void interactor_native_add_event(interactor_native_t* interactor, int id, uint64_t data, int64_t timeout)
-{
-    struct mh_events_node_t node = {
-        .data = data,
-        .timeout = timeout,
-        .timestamp = time(NULL),
-        .id = id,
-    };
-    mh_events_put((struct mh_events_t*)interactor->events, &node, NULL, 0);
-}
-
-void interactor_native_cancel_by_id(interactor_native_t* interactor, int id)
-{
-    mh_int_t index;
-    mh_int_t to_delete[((struct mh_events_t*)interactor->events)->size];
-    int to_delete_count = 0;
-    mh_foreach(((struct mh_events_t*)interactor->events), index)
-    {
-        struct mh_events_node_t* node = mh_events_node(interactor->events, index);
-        if (node->id == id)
-        {
-            struct io_uring* ring = interactor->ring;
-            struct io_uring_sqe* sqe = interactor_provide_sqe(ring);
-            io_uring_prep_cancel(sqe, (void*)node->data, IORING_ASYNC_CANCEL_ALL);
-            sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-            to_delete[to_delete_count++] = index;
-        }
-    }
-    for (int index = 0; index < to_delete_count; index++)
-    {
-        mh_events_del(interactor->events, to_delete[index], 0);
-    }
-    io_uring_submit(interactor->ring);
-}
-
-int interactor_native_peek_infinity(interactor_native_t* interactor)
+inline int interactor_native_peek_infinity(interactor_native_t* interactor)
 {
     io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
@@ -215,65 +191,67 @@ int interactor_native_peek_timeout(interactor_native_t* interactor)
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
 }
 
-void interactor_native_check_event_timeouts(interactor_native_t* interactor)
+static inline void interactor_native_process(interactor_native_t* interactor)
 {
-    mh_int_t index;
-    mh_int_t to_delete[((struct mh_events_t*)interactor->events)->size];
-    int to_delete_count = 0;
-    mh_foreach(((struct mh_events_t*)interactor->events), index)
+    struct io_uring_cqe* cqe;
+    unsigned head;
+    unsigned count = 0;
+    io_uring_for_each_cqe(interactor->ring, head, cqe)
     {
-        struct mh_events_node_t* node = mh_events_node(interactor->events, index);
-        int64_t timeout = node->timeout;
-        if (timeout == INTERACTOR_TIMEOUT_INFINITY)
+        count++;
+        if (cqe->res == INTERACTOR_NATIVE_CALL)
         {
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            void (*pointer)(interactor_message_t*) = (void (*)(interactor_message_t*))message->method;
+            pointer(message);
+            struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
+            uint64_t target = message->source;
+            message->source = interactor->ring->ring_fd;
+            message->target = target;
+            io_uring_prep_msg_ring(sqe, target, INTERACTOR_DART_CALLBACK, (uint64_t)((intptr_t)message), 0);
+            sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
             continue;
         }
-        uint64_t timestamp = node->timestamp;
-        uint64_t data = node->data;
-        time_t current_time = time(NULL);
-        if (current_time - timestamp > timeout)
+
+        if (cqe->res == INTERACTOR_NATIVE_CALLBACK)
         {
-            struct io_uring* ring = interactor->ring;
-            struct io_uring_sqe* sqe = interactor_provide_sqe(ring);
-            io_uring_prep_cancel(sqe, (void*)data, IORING_ASYNC_CANCEL_ALL);
-            sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-            to_delete[to_delete_count++] = index;
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            struct mh_native_callbacks_key_t key = {
+                .owner = message->owner,
+                .method = message->method,
+            };
+            mh_int_t callback;
+            if ((callback = mh_native_callbacks_find(interactor->callbacks, key, 0)) != mh_end((struct mh_native_callbacks_t*)interactor->callbacks))
+            {
+                struct mh_native_callbacks_node_t* node = mh_native_callbacks_node((struct mh_native_callbacks_t*)interactor->callbacks, callback);
+                node->callback(message);
+            }
+            continue;
         }
     }
-    for (int index = 0; index < to_delete_count; index++)
-    {
-        mh_events_del(interactor->events, to_delete[index], 0);
-    }
-    io_uring_submit(interactor->ring);
+    io_uring_cq_advance(interactor->ring, count);
 }
 
-void interactor_native_remove_event(interactor_native_t* interactor, uint64_t data)
+void interactor_native_process_infinity(interactor_native_t* interactor)
 {
-    mh_int_t event;
-    if ((event = mh_events_find(interactor->events, data, 0)) != mh_end((struct mh_events_t*)interactor->events))
+    io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
+    if (likely(io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count) > 0))
     {
-        mh_events_del(interactor->events, event, 0);
+        interactor_native_process(interactor);
     }
 }
 
-void interactor_native_destroy(interactor_native_t* interactor)
+void interactor_native_process_timeout(interactor_native_t* interactor)
 {
-    io_uring_queue_exit(interactor->ring);
-    for (size_t index = 0; index < interactor->buffers_count; index++)
+    struct __kernel_timespec timeout = {
+        .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
+        .tv_sec = 0,
+    };
+    io_uring_submit_and_wait_timeout(interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
+    if (io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count) > 0)
     {
-        free(interactor->buffers[index].iov_base);
+        interactor_native_process(interactor);
     }
-    interactor_buffers_pool_destroy(&interactor->buffers_pool);
-    mh_events_delete(interactor->events);
-    free(interactor->cqes);
-    free(interactor->buffers);
-    free(interactor->ring);
-    free(interactor);
-}
-
-void interactor_native_cqe_advance(struct io_uring* ring, int count)
-{
-    io_uring_cq_advance(ring, count);
 }
 
 int interactor_native_submit(interactor_native_t* interactor)
@@ -288,7 +266,6 @@ void interactor_native_call_dart(interactor_native_t* interactor, int target_rin
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_DART_CALL, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
-    interactor_native_add_event(interactor, message->id, (uint64_t)((intptr_t)message), timeout);
 }
 
 void interactor_native_callback_to_dart(interactor_native_t* interactor, interactor_message_t* message)
@@ -299,6 +276,21 @@ void interactor_native_callback_to_dart(interactor_native_t* interactor, interac
     message->target = target;
     io_uring_prep_msg_ring(sqe, target, INTERACTOR_DART_CALLBACK, (uint64_t)((intptr_t)message), 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
+}
+
+void interactor_native_destroy(interactor_native_t* interactor)
+{
+    io_uring_queue_exit(interactor->ring);
+    for (size_t index = 0; index < interactor->buffers_count; index++)
+    {
+        free(interactor->buffers[index].iov_base);
+    }
+    interactor_buffers_pool_destroy(&interactor->buffers_pool);
+    mh_native_callbacks_delete(interactor->callbacks);
+    free(interactor->cqes);
+    free(interactor->buffers);
+    free(interactor->ring);
+    free(interactor);
 }
 
 void interactor_native_close_descriptor(int fd)

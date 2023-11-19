@@ -14,6 +14,4 @@ void main() {
   group("[call dart]", testCallDart);
   group("[threading native]", testThreadingNative);
   group("[threading dart]", testThreadingDart);
-  // group("[timeout native]", testTimeoutNative);
-  // group("[timeout dart]", testTimeoutDart);
 }

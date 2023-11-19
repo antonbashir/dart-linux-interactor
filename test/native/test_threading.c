@@ -67,7 +67,7 @@ int test_threading_call_native_check()
     for (int id = 0; id < threads.count; id++)
     {
         test_thread_t* thread = threads.threads[id];
-        test_interactor_process_calls(thread->interactor);
+        interactor_native_process_timeout(thread->interactor);
         for (int message_id = 0; message_id < thread->received_messages_count; message_id++)
         {
             interactor_native_callback_to_dart(thread->interactor, thread->messages[message_id]);
@@ -116,7 +116,6 @@ void test_threading_call_dart_callback(interactor_message_t* message, interactor
         message->output_size = message->input_size;
         thread->messages[thread->received_messages_count] = message;
         thread->received_messages_count++;
-        interactor_native_remove_event(thread->interactor, (uintptr_t)message);
     }
 }
 
