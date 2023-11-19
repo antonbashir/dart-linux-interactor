@@ -258,6 +258,7 @@ void interactor_dart_cqe_advance(struct io_uring* ring, int count)
 void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout)
 {
     message->source = interactor->ring->ring_fd;
+    message->target = target_ring_fd;
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_NATIVE_CALL, (intptr_t)message, 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
@@ -269,6 +270,7 @@ void interactor_dart_callback_to_native(interactor_dart_t* interactor, interacto
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     uint64_t target = message->source;
     message->source = interactor->ring->ring_fd;
+    message->target = target;
     io_uring_prep_msg_ring(sqe, target, INTERACTOR_NATIVE_CALLBACK, (intptr_t)message, 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
 }

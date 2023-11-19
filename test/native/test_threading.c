@@ -19,6 +19,11 @@ static inline test_thread_t* thread_by_fd(int fd)
     return NULL;
 }
 
+test_threads_t* test_threading_threads()
+{
+  return &threads;
+}
+
 test_threads_t* test_threading_initialize(int count)
 {
     threads.count = count;

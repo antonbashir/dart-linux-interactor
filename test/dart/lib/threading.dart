@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:ffi';
+import 'dart:io';
+import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
 import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
+import 'package:linux_interactor/interactor/message.dart';
 import 'package:linux_interactor/interactor/worker.dart';
 import 'package:linux_interactor_test/bindings.dart';
 import 'package:linux_interactor_test/consumer.dart';
@@ -15,20 +18,43 @@ import 'package:test/test.dart';
 void testThreadingNative() {
   test("[isolates]dart(string) <-> [threads]native(string)", () async {
     final interactor = Interactor();
-    final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+    final messages = 1024;
+    final isolates = 4;
+
     final bindings = loadBindings();
-    bindings.test_call_reset();
-    await worker.initialize();
-    final native = bindings.test_interactor_initialize();
-    final producer = worker.producer(TestNativeProducer(bindings));
-    worker.activate();
-    final call = producer.testCallNativeEcho(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test"));
-    while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
-    final result = await call;
-    expect(result.outputString, "test");
-    result.release();
+    bindings.test_threading_initialize(Platform.numberOfProcessors);
+    var spawnedIsolates = <Future<Isolate>>[];
+
+    for (var isolate = 0; isolate < isolates; isolate++) {
+      final isolate = Isolate.spawn<SendPort>((toInteractor) async {
+        final bindings = loadBindings();
+        final threads = bindings.test_threading_threads();
+        final calls = <Future<InteractorCall>>[];
+        final worker = InteractorWorker(toInteractor);
+        await worker.initialize();
+        final producer = worker.producer(TestNativeProducer(bindings));
+        worker.activate();
+        for (var threadId = 0; threadId < threads.ref.count; threadId++) {
+          final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor;
+          for (var messageId = 0; messageId < messages; messageId++) {
+            calls.add(producer.testCallNativeEcho(interactor.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test")));
+          }
+        }
+        final results = await Future.wait(calls);
+        results.forEach((result) {
+          expect(result.outputString, "test");
+          result.release();
+        });
+        Isolate.exit();
+      }, interactor.worker(InteractorDefaults.worker()));
+      spawnedIsolates.add(isolate);
+    }
+
+    while (bindings.test_threading_call_native_check() < messages * isolates) await Future.delayed(Duration(milliseconds: 100));
+    Future.wait(spawnedIsolates).then((value) => value.forEach((isolate) => isolate.kill()));
+
     await interactor.shutdown();
-    bindings.test_interactor_destroy(native);
+    //bindings.test_interactor_destroy(native);
   });
 }
 

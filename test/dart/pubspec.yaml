@@ -41,3 +41,4 @@ ffigen:
     entry-points:
       - "../native/test.h"
       - "../native/test_call.h"
+      - "../native/test_threading.h"
