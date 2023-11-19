@@ -4395,20 +4395,20 @@ class TestBindings {
   late final _test_call_native_check = _test_call_native_checkPtr.asFunction<
       bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
 
-  void test_call_native_echo(
+  void test_call_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
-    return _test_call_native_echo(
+    return _test_call_native(
       message,
     );
   }
 
-  late final _test_call_native_echoPtr = _lookup<
+  late final _test_call_nativePtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'test_call_native_echo');
-  late final _test_call_native_echo = _test_call_native_echoPtr.asFunction<
+      'test_call_native');
+  late final _test_call_native = _test_call_nativePtr.asFunction<
       void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void test_call_dart_null(
@@ -6283,7 +6283,7 @@ class TestBindings {
           ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>,
           ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>();
 
-  ffi.Pointer<test_threads_t> test_threading_initialize(
+  void test_threading_initialize(
     int thread_count,
     int messages_count,
   ) {
@@ -6293,12 +6293,11 @@ class TestBindings {
     );
   }
 
-  late final _test_threading_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<test_threads_t> Function(
-              ffi.Int, ffi.Int)>>('test_threading_initialize');
-  late final _test_threading_initialize = _test_threading_initializePtr
-      .asFunction<ffi.Pointer<test_threads_t> Function(int, int)>();
+  late final _test_threading_initializePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
+          'test_threading_initialize');
+  late final _test_threading_initialize =
+      _test_threading_initializePtr.asFunction<void Function(int, int)>();
 
   ffi.Pointer<test_threads_t> test_threading_threads() {
     return _test_threading_threads();
@@ -6310,21 +6309,21 @@ class TestBindings {
   late final _test_threading_threads = _test_threading_threadsPtr
       .asFunction<ffi.Pointer<test_threads_t> Function()>();
 
-  void test_threading_call_native_echo(
+  void test_threading_call_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
-    return _test_threading_call_native_echo(
+    return _test_threading_call_native(
       message,
     );
   }
 
-  late final _test_threading_call_native_echoPtr = _lookup<
+  late final _test_threading_call_nativePtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
-      'test_threading_call_native_echo');
-  late final _test_threading_call_native_echo =
-      _test_threading_call_native_echoPtr.asFunction<
+      'test_threading_call_native');
+  late final _test_threading_call_native =
+      _test_threading_call_nativePtr.asFunction<
           void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   int test_threading_call_native_check() {
@@ -7483,7 +7482,7 @@ class _SymbolAddresses {
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get test_call_native_echo => _library._test_call_native_echoPtr;
+      get test_call_native => _library._test_call_nativePtr;
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
@@ -7982,9 +7981,7 @@ class _SymbolAddresses {
                   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>,
                   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>>
       get pthread_atfork => _library._pthread_atforkPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<test_threads_t> Function(ffi.Int, ffi.Int)>>
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>
       get test_threading_initialize => _library._test_threading_initializePtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Pointer<test_threads_t> Function()>>
       get test_threading_threads => _library._test_threading_threadsPtr;
@@ -7992,8 +7989,7 @@ class _SymbolAddresses {
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
-      get test_threading_call_native_echo =>
-          _library._test_threading_call_native_echoPtr;
+      get test_threading_call_native => _library._test_threading_call_nativePtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
       get test_threading_call_native_check =>
           _library._test_threading_call_native_checkPtr;

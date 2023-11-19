@@ -25,7 +25,7 @@ bool test_call_native_check(interactor_native_t* interactor)
     return false;
 }
 
-void test_call_native_echo(interactor_message_t* message)
+void test_call_native(interactor_message_t* message)
 {
     message->output = message->input;
     message->output_size = message->input_size;
