@@ -14,7 +14,7 @@ import 'package:linux_interactor_test/test.dart';
 import 'package:test/test.dart';
 
 void testThreadingNative() {
-  test("[isolates]dart(string) <-> [threads]native(string)", () async {
+  test("[isolates]dart(bytes) <-> [threads]native(bytes)", () async {
     final interactor = Interactor();
     final messages = 1024;
     final isolates = 4;
@@ -61,7 +61,7 @@ void testThreadingNative() {
 }
 
 void testThreadingDart() {
-  test("[threads]native(string) <-> [isolates]dart(string)", () async {
+  test("[threads]native(bytes) <-> [isolates]dart(bytes)", () async {
     final interactor = Interactor();
     final messages = 1024;
     final isolates = 4;
