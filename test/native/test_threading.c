@@ -68,11 +68,7 @@ int test_threading_call_native_check()
     {
         test_thread_t* thread = threads.threads[id];
         interactor_native_process_timeout(thread->interactor);
-        for (int message_id = 0; message_id < thread->received_messages_count; message_id++)
-        {
-            interactor_native_callback_to_dart(thread->interactor, thread->messages[message_id]);
-            messages++;
-        }
+        messages += thread->received_messages_count;
         interactor_native_submit(thread->interactor);
     }
     return messages;
