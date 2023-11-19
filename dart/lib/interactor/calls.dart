@@ -28,14 +28,15 @@ class InteractorCallDelegate {
 }
 
 class InteractorCall {
+  Pointer<interactor_message> _message;
   final Pointer<interactor_dart> _interactor;
   final InteractorBindings _bindings;
   final InteractorPayloads _payloads;
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
-  late Pointer<interactor_message> _message;
 
   InteractorCall(
+    this._message,
     this._interactor,
     this._bindings,
     this._payloads,

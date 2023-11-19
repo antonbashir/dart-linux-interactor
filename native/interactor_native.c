@@ -261,17 +261,17 @@ void interactor_native_foreach(interactor_native_t* interactor, void (*call)(int
     io_uring_for_each_cqe(interactor->ring, head, cqe)
     {
         count++;
-        if (cqe->res == INTERACTOR_NATIVE_CALL)
+        if (cqe->res == INTERACTOR_NATIVE_CALL && call)
         {
             interactor_message_t* message = (interactor_message_t*)cqe->user_data;
-            if (call) call(message);
+            call(message);
             continue;
         }
 
-        if (cqe->res == INTERACTOR_NATIVE_CALLBACK)
+        if (cqe->res == INTERACTOR_NATIVE_CALLBACK && callback)
         {
             interactor_message_t* message = (interactor_message_t*)cqe->user_data;
-            if (callback) callback(message);
+            callback(message);
             continue;
         }
     }

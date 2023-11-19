@@ -1,5 +1,5 @@
 import 'package:linux_interactor/interactor/declaration.dart';
-import 'package:linux_interactor/interactor/message.dart';
+import 'package:linux_interactor/interactor/notifications.dart';
 
 class TestNativeConsumer implements NativeConsumer {
   void Function(InteractorNotification message) _checker;
