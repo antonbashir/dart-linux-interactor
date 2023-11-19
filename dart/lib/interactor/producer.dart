@@ -3,9 +3,9 @@ import 'dart:ffi';
 
 import 'bindings.dart';
 import 'buffers.dart';
+import 'calls.dart';
 import 'constants.dart';
 import 'data.dart';
-import 'message.dart';
 import 'payloads.dart';
 
 class NativeProducerExecutor {
@@ -47,7 +47,7 @@ class NativeProducerExecutor {
 }
 
 class NativeMethodExecutor {
-  Map<int, InteractorCall> _calls = {};
+  Map<int, InteractorCallDelegate> _calls = {};
 
   final int _methodId;
   final int _executorId;
@@ -71,20 +71,22 @@ class NativeMethodExecutor {
   Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator, Duration? timeout}) {
     final messagePointer = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
-    var message = InteractorCall(
+    final delegate = InteractorCallDelegate(
+      completer,
+    );
+    var call = InteractorCall(
       _interactor,
-      messagePointer,
       _bindings,
       _payloads,
       _buffers,
       _datas,
-      completer,
+      delegate,
     );
-    message = configurator?.call(message) ?? message;
+    call = configurator?.call(call) ?? call;
     messagePointer.ref.id = completer.hashCode;
     messagePointer.ref.owner = _executorId;
     messagePointer.ref.method = _methodId;
-    _calls[completer.hashCode] = message;
+    _calls[completer.hashCode] = delegate;
     _bindings.interactor_dart_call_native(_interactor, target, messagePointer, timeout?.inMilliseconds ?? interactorTimeoutInfinity);
     return completer.future.whenComplete(() => _calls.remove(completer.hashCode));
   }

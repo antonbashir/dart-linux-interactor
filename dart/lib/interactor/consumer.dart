@@ -3,7 +3,7 @@ import 'dart:ffi';
 
 import 'bindings.dart';
 import 'constants.dart';
-import 'message.dart';
+import 'notifications.dart';
 
 class NativeConsumerExecutor {
   final List<NativeCallbackExecutor> _callbacks;

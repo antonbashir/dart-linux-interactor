@@ -30,13 +30,16 @@ void testThreadingNative() {
     for (var isolate = 0; isolate < isolates; isolate++) {
       final exitPort = ReceivePort();
       exitPorts.add(exitPort);
+
       final errorPort = ReceivePort();
       errorPorts.add(errorPort);
+
       final isolate = Isolate.spawn<List<dynamic>>(
         _callNativeIsolate,
         onError: errorPort.sendPort,
         [messages, interactor.worker(InteractorDefaults.worker()), exitPort.sendPort],
       );
+
       spawnedIsolates.add(isolate);
     }
 

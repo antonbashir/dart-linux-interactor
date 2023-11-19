@@ -11,24 +11,40 @@ import 'constants.dart';
 import 'data.dart';
 import 'payloads.dart';
 
+class InteractorCallDelegate {
+  final Completer<InteractorCall> _completer;
+  late InteractorCall call;
+
+  InteractorCallDelegate(this._completer);
+
+  @pragma(preferInlinePragma)
+  void register(InteractorCall call) => this.call = call;
+
+  @pragma(preferInlinePragma)
+  void callback(Pointer<interactor_message> message) {
+    call._message = message;
+    _completer.complete(call);
+  }
+}
+
 class InteractorCall {
-  Pointer<interactor_message> _message;
   final Pointer<interactor_dart> _interactor;
   final InteractorBindings _bindings;
   final InteractorPayloads _payloads;
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
-  final Completer<InteractorCall> _completer;
+  late Pointer<interactor_message> _message;
 
   InteractorCall(
     this._interactor,
-    this._message,
     this._bindings,
     this._payloads,
     this._buffers,
     this._datas,
-    this._completer,
-  );
+    InteractorCallDelegate delegate,
+  ) {
+    delegate.register(this);
+  }
 
   @pragma(preferInlinePragma)
   void setInputInt(int data) {
@@ -133,65 +149,5 @@ class InteractorCall {
   }
 
   @pragma(preferInlinePragma)
-  void callback(Pointer<interactor_message> message) {
-    _message = message;
-    _completer.complete(this);
-  }
-
-  @pragma(preferInlinePragma)
   void release() => _bindings.interactor_dart_free_message(_interactor, _message);
-}
-
-class InteractorNotification {
-  final Pointer<interactor_message> _message;
-
-  InteractorNotification(this._message);
-
-  late final bool inputBool = _message.ref.input.address == 1;
-  late final int inputInt = _message.ref.input.address;
-  late final double inputDouble = _message.ref.input.cast<Double>().value;
-  late final String inputString = _message.ref.input.cast<Utf8>().toDartString();
-  late final List<int> inputBytes = _message.ref.input.cast<Uint8>().asTypedList(_message.ref.input_size);
-
-  @pragma(preferInlinePragma)
-  Pointer<T> getInputObject<T extends Struct>() => Pointer.fromAddress(_message.ref.input.address).cast();
-
-  @pragma(preferInlinePragma)
-  T parseInputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) {
-    final object = getInputObject<O>();
-    final result = mapper(object);
-    return result;
-  }
-
-  @pragma(preferInlinePragma)
-  void setOutputInt(int data) => _message.ref.output = Pointer.fromAddress(data);
-
-  @pragma(preferInlinePragma)
-  void setOutputBool(bool data) => _message.ref.output = Pointer.fromAddress(data ? 1 : 0);
-
-  @pragma(preferInlinePragma)
-  void setOutputDouble(double data) {
-    Pointer<Double> pointer = _message.ref.output.cast();
-    _message.ref.output = pointer.cast();
-    _message.ref.output_size = sizeOf<Double>();
-  }
-
-  @pragma(preferInlinePragma)
-  void setOutputString(String data) {
-    final units = utf8.encode(data);
-    final Pointer<Uint8> result = _message.ref.output.cast();
-    final Uint8List nativeString = result.asTypedList(units.length + 1);
-    nativeString.setAll(0, units);
-    nativeString[units.length] = 0;
-  }
-
-  @pragma(preferInlinePragma)
-  void setOutputObject<T extends Struct>(void Function(Pointer<T> object) configurator) => configurator.call(_message.ref.output.cast());
-
-  @pragma(preferInlinePragma)
-  Future<void> setOutputBytes(List<int> bytes) async {
-    final Pointer<Uint8> pointer = _message.ref.output.cast();
-    pointer.asTypedList(bytes.length).setAll(0, bytes);
-    _message.ref.output_size = bytes.length;
-  }
 }
