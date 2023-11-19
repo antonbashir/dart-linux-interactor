@@ -36,6 +36,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(small)
 execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/small-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${small_SOURCE_DIR}/src/include)
+include_directories(${small_SOURCE_DIR}/include)
+include_directories(${small_SOURCE_DIR}/third_party)
+include_directories(${small_BINARY_DIR}/small/include)
+add_subdirectory(${small_SOURCE_DIR})
 
 FetchContent_Declare(
   dart
@@ -44,12 +49,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(dart)
 execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/dart-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-include_directories(${small_SOURCE_DIR}/src/include)
-include_directories(${small_SOURCE_DIR}/include)
-include_directories(${small_SOURCE_DIR}/third_party)
-include_directories(${small_BINARY_DIR}/small/include)
-add_subdirectory(${small_SOURCE_DIR})
 
 configure_file(
   "${PROJECT_SOURCE_DIR}/common/configuration.h.cmake"
