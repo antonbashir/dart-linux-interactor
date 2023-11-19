@@ -12,49 +12,45 @@ struct quota quota;
 static void
 test_ibuf_basic(void)
 {
+	plan(6);
 	header();
 
 	struct ibuf ibuf;
-
 	ibuf_create(&ibuf, &cache, 16320);
-
-	fail_unless(ibuf_used(&ibuf) == 0);
-
+	ok(ibuf_used(&ibuf) == 0);
 	void *ptr = ibuf_alloc(&ibuf, 10);
-
-	fail_unless(ptr);
-
-	fail_unless(ibuf_used(&ibuf) == 10);
+	ok(ptr != NULL);
+	ok(ibuf_used(&ibuf) == 10);
 
 	ptr = ibuf_alloc(&ibuf, 1000000);
-	fail_unless(ptr);
-
-	fail_unless(ibuf_used(&ibuf) == 1000010);
+	ok(ptr != NULL);
+	ok(ibuf_used(&ibuf) == 1000010);
 
 	ibuf_reset(&ibuf);
-
-	fail_unless(ibuf_used(&ibuf) == 0);
+	ok(ibuf_used(&ibuf) == 0);
 
 	footer();
+	check_plan();
 }
 
 static void
 test_ibuf_shrink(void)
 {
+	plan(12);
 	header();
 
 	struct ibuf ibuf;
 	const size_t start_capacity = 16 * 1024;
 	ibuf_create(&ibuf, &cache, start_capacity);
-	fail_unless(ibuf_alloc(&ibuf, 100 * 1024));
+	ok(ibuf_alloc(&ibuf, 100 * 1024) != NULL);
 	/*
 	 * Check that ibuf is not shrunk lower than ibuf_used().
 	 */
-	ibuf.rpos += 70 * 1024;
+	ibuf_consume(&ibuf, 70 * 1024);
 	ibuf_shrink(&ibuf);
-	fail_unless(ibuf_used(&ibuf) == (100 - 70) * 1024);
-	fail_unless(ibuf_capacity(&ibuf) >= ibuf_used(&ibuf));
-	fail_unless(ibuf_capacity(&ibuf) < start_capacity * 4);
+	ok(ibuf_used(&ibuf) == (100 - 70) * 1024);
+	ok(ibuf_capacity(&ibuf) >= ibuf_used(&ibuf));
+	ok(ibuf_capacity(&ibuf) < start_capacity * 4);
 	/*
 	 * Check that there is no relocation if the actual size of the new slab
 	 * equals the old slab size.
@@ -62,43 +58,45 @@ test_ibuf_shrink(void)
 	ibuf.rpos++;
 	char *prev_buf = ibuf.buf;
 	ibuf_shrink(&ibuf);
-	fail_unless(prev_buf == ibuf.buf);
+	ok(prev_buf == ibuf.buf);
 	/*
 	 * Check that ibuf is not shrunk lower than start_capacity.
 	 */
-	ibuf.rpos = ibuf.wpos - 1;
+	ibuf_consume(&ibuf, ibuf_used(&ibuf) - 1);
 	ibuf_shrink(&ibuf);
-	fail_unless(ibuf_capacity(&ibuf) >= start_capacity);
-	fail_unless(ibuf_capacity(&ibuf) < start_capacity * 2);
+	ok(ibuf_capacity(&ibuf) >= start_capacity);
+	ok(ibuf_capacity(&ibuf) < start_capacity * 2);
 	/*
 	 * Check that empty ibuf is shrunk to the zero capacity.
 	 */
-	ibuf.rpos = ibuf.wpos;
+	ibuf_consume(&ibuf, ibuf_used(&ibuf));
 	ibuf_shrink(&ibuf);
-	fail_unless(ibuf_capacity(&ibuf) == 0);
+	ok(ibuf_capacity(&ibuf) == 0);
 	/*
 	 * Check that ibuf_shrink() does shrink large "unordered" slabs,
 	 * i.e. allocated by slab_get_large().
 	 */
-	fail_unless(ibuf_alloc(&ibuf, 9 * 1024 * 1024));
-	fail_unless(ibuf_capacity(&ibuf) == 16 * 1024 * 1024);
-	ibuf.rpos += 2 * 1024 * 1024;
+	ok(ibuf_alloc(&ibuf, 9 * 1024 * 1024) != NULL);
+	ok_no_asan(ibuf_capacity(&ibuf) == 16 * 1024 * 1024);
+	ibuf_consume(&ibuf, 2 * 1024 * 1024);
 	ibuf_shrink(&ibuf);
-	fail_unless(ibuf_capacity(&ibuf) == 7 * 1024 * 1024);
+	ok_no_asan(ibuf_capacity(&ibuf) == 7 * 1024 * 1024);
 	/*
 	 * Check that there is no relocation if the size of a large slab
 	 * doesn't change.
 	 */
 	prev_buf = ibuf.buf;
 	ibuf_shrink(&ibuf);
-	fail_unless(prev_buf == ibuf.buf);
+	ok(prev_buf == ibuf.buf);
 
 	footer();
+	check_plan();
 }
 
 static void
 test_ibuf_truncate()
 {
+	plan(4);
 	header();
 
 	char *ptr;
@@ -108,7 +106,7 @@ test_ibuf_truncate()
 
 	ibuf_create(&ibuf, &cache, 16 * 1024);
 	ibuf_alloc(&ibuf, 10);
-	ibuf.rpos += 10;
+	ibuf_consume(&ibuf, 10);
 	ptr = ibuf_alloc(&ibuf, strlen(hello) + 1);
 	fail_unless(ptr != NULL);
 	strcpy(ptr, hello);
@@ -121,8 +119,8 @@ test_ibuf_truncate()
 	fail_unless(ptr != NULL);
 	strcpy(ptr, goodbye);
 	ibuf_truncate(&ibuf, svp);
-	fail_unless(ibuf_used(&ibuf) == svp);
-	fail_unless(strcmp(ibuf.rpos, hello) == 0);
+	ok(ibuf_used(&ibuf) == svp);
+	ok(strcmp(ibuf.rpos, hello) == 0);
 
 	/*
 	 * Test when there IS reallocation in between used/truncate.
@@ -131,14 +129,234 @@ test_ibuf_truncate()
 	fail_unless(ptr != NULL);
 	strcpy(ptr, goodbye);
 	ibuf_truncate(&ibuf, svp);
-	fail_unless(ibuf_used(&ibuf) == svp);
-	fail_unless(strcmp(ibuf.rpos, hello) == 0);
+	ok(ibuf_used(&ibuf) == svp);
+	ok(strcmp(ibuf.rpos, hello) == 0);
 
 	footer();
+	check_plan();
 }
+
+static void
+test_ibuf_discard(void)
+{
+	plan(4);
+	header();
+
+	struct ibuf ibuf;
+	ibuf_create(&ibuf, &cache, 1024);
+	ibuf_alloc(&ibuf, 512);
+	char *pos = ibuf.rpos;
+	ibuf_discard(&ibuf, 100);
+	ok(ibuf.rpos == pos);
+	ok(ibuf_used(&ibuf) == 412);
+	ibuf_discard(&ibuf, 412);
+	ok(ibuf.rpos == pos);
+	ok(ibuf_used(&ibuf) == 0);
+
+	footer();
+	check_plan();
+}
+
+static void
+test_ibuf_consume(void)
+{
+	plan(4);
+	header();
+
+	struct ibuf ibuf;
+	ibuf_create(&ibuf, &cache, 1024);
+	ibuf_alloc(&ibuf, 512);
+	char *pos = ibuf.wpos;
+	ibuf_consume(&ibuf, 200);
+	ok(ibuf.wpos == pos);
+	ok(ibuf_used(&ibuf) == 312);
+	ibuf_consume(&ibuf, 312);
+	ok(ibuf.wpos == pos);
+	ok(ibuf_used(&ibuf) == 0);
+
+	footer();
+	check_plan();
+}
+
+static void
+test_ibuf_consume_before(void)
+{
+	plan(4);
+	header();
+
+	struct ibuf ibuf;
+	ibuf_create(&ibuf, &cache, 1024);
+	ibuf_alloc(&ibuf, 5000);
+	char *pos = ibuf.wpos;
+	ibuf_consume_before(&ibuf, ibuf.wpos - 1000);
+	ok(ibuf.wpos == pos);
+	ok(ibuf_used(&ibuf) == 1000);
+	ibuf_consume_before(&ibuf, ibuf.wpos);
+	ok(ibuf.wpos == pos);
+	ok(ibuf_used(&ibuf) == 0);
+
+	footer();
+	check_plan();
+}
+
+#ifdef ENABLE_ASAN
+
+static void
+test_ibuf_poison(void)
+{
+	plan(14);
+	header();
+
+	struct ibuf ibuf;
+	ibuf_create(&ibuf, &cache, 16 * 1024);
+
+	/* Test poison on allocation. */
+	ok(ibuf.buf == NULL);
+	char *ptr = ibuf_alloc(&ibuf, 99);
+	fail_unless(ptr != NULL);
+	memset(ptr, 0, 99);
+	for (char *p = ptr + 99; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	ok(ibuf_unused(&ibuf) > 133);
+	ptr = ibuf_alloc(&ibuf, 133);
+	fail_unless(ptr != NULL);
+	memset(ptr, 0, 133);
+	for (char *p = ptr + 133; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	size_t size = ibuf_unused(&ibuf) + 77;
+	ptr = ibuf_alloc(&ibuf, size);
+	fail_unless(ptr != NULL);
+	memset(ptr, 0, size);
+	ok(ibuf_unused(&ibuf) > 0);
+	for (char *p = ptr + size; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on reset. */
+	ibuf_reset(&ibuf);
+	ok(ibuf.buf != NULL);
+	ok(ibuf.end != NULL);
+	for (char *p = ibuf.buf; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on reserve. */
+	ptr = ibuf_reserve(&ibuf, 777);
+	fail_unless(ptr != NULL);
+	ok(ibuf_unused(&ibuf) >= 777);
+	memset(ptr, 0, ibuf_unused(&ibuf));
+	ptr = ibuf_alloc(&ibuf, 333);
+	fail_unless(ptr != NULL);
+	memset(ptr, 0, 333);
+	for (char *p = ptr + 333; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	ok(ibuf_unused(&ibuf) > 888);
+	ptr = ibuf_reserve(&ibuf, 333);
+	fail_unless(ptr != NULL);
+	ok(ibuf_unused(&ibuf) >= 333);
+	memset(ptr, 0, ibuf_unused(&ibuf));
+	ptr = ibuf_alloc(&ibuf, 888);
+	fail_unless(ptr != NULL);
+	memset(ptr, 0, 888);
+	for (char *p = ptr + 888; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	size = ibuf_unused(&ibuf) + 133;
+	ptr = ibuf_reserve(&ibuf, size);
+	fail_unless(ptr != NULL);
+	ok(ibuf_unused(&ibuf) >= size);
+	memset(ptr, 0, ibuf_unused(&ibuf));
+	ok(ibuf_unused(&ibuf) > 0);
+	ptr = ibuf_alloc(&ibuf, size);
+	fail_unless(ptr != NULL);
+	ok(ibuf_unused(&ibuf) > 0);
+	for (char *p = ptr + size; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	size = ibuf_unused(&ibuf) + 221;
+	ibuf_consume(&ibuf, 377);
+	ptr = ibuf_reserve(&ibuf, size);
+	fail_unless(ptr != NULL);
+	ok(ibuf_unused(&ibuf) >= size);
+	memset(ptr, 0, ibuf_unused(&ibuf));
+	ptr = ibuf_alloc(&ibuf, size);
+	ok(ibuf_unused(&ibuf) > 0);
+	for (char *p = ptr + size; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on truncate. */
+	ibuf_truncate(&ibuf, ibuf_used(&ibuf) - 431);
+	memset(ibuf.buf, 0, ibuf_used(&ibuf));
+	for (char *p = ibuf.wpos; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on discard. */
+	ibuf_discard(&ibuf, 100);
+	memset(ibuf.buf, 0, ibuf_used(&ibuf));
+	for (char *p = ibuf.wpos; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on consume. */
+	ibuf_consume(&ibuf, 100);
+	memset(ibuf.rpos, 0, ibuf_used(&ibuf));
+	char *poison_end;
+	poison_end = (char *)small_align_down((uintptr_t)ibuf.rpos,
+					      SMALL_POISON_ALIGNMENT);
+	for (char *p = ibuf.buf; p < poison_end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test no unpoisoned area left between this and previous consume. */
+	ibuf_consume(&ibuf, 77);
+	memset(ibuf.rpos, 0, ibuf_used(&ibuf));
+	poison_end = (char *)small_align_down((uintptr_t)ibuf.rpos,
+					      SMALL_POISON_ALIGNMENT);
+	for (char *p = ibuf.buf; p < poison_end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on consume_before. */
+	ibuf_consume(&ibuf, 150);
+	memset(ibuf.rpos, 0, ibuf_used(&ibuf));
+	poison_end = (char *)small_align_down((uintptr_t)ibuf.rpos,
+					      SMALL_POISON_ALIGNMENT);
+	for (char *p = ibuf.buf; p < poison_end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test no unpoisoned area left between this and previous consume. */
+	ibuf_consume(&ibuf, 44);
+	memset(ibuf.rpos, 0, ibuf_used(&ibuf));
+	poison_end = (char *)small_align_down((uintptr_t)ibuf.rpos,
+					      SMALL_POISON_ALIGNMENT);
+	for (char *p = ibuf.buf; p < poison_end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	/* Test poison on shrink. */
+	ibuf_reset(&ibuf);
+	ptr = ibuf_alloc(&ibuf, 333);
+	fail_unless(ptr != NULL);
+	ibuf_shrink(&ibuf);
+	ok(ptr != ibuf.buf);
+	memset(ibuf.buf, 0, ibuf_used(&ibuf));
+	for (char *p = ibuf.wpos; p < ibuf.end; p++)
+		fail_unless(__asan_address_is_poisoned(p));
+
+	ibuf_destroy(&ibuf);
+
+	footer();
+	check_plan();
+}
+
+#endif /* ifdef ENABLE_ASAN */
 
 int main()
 {
+#ifdef ENABLE_ASAN
+	plan(7);
+#else
+	plan(6);
+#endif
+	header();
+
 	quota_init(&quota, UINT_MAX);
 	slab_arena_create(&arena, &quota, 0,
 			  4000000, MAP_PRIVATE);
@@ -147,6 +365,15 @@ int main()
 	test_ibuf_basic();
 	test_ibuf_shrink();
 	test_ibuf_truncate();
+	test_ibuf_discard();
+	test_ibuf_consume();
+	test_ibuf_consume_before();
+#ifdef ENABLE_ASAN
+	test_ibuf_poison();
+#endif
 
 	slab_cache_destroy(&cache);
+
+	footer();
+	return check_plan();
 }

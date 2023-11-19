@@ -6,10 +6,13 @@ endif()
 
 project(native C ASM)
 
+set(LIBURING_VERSION liburing-2.4)
+set(SMALL_VERSION master)
+set(DART_VERSION 3.2.0)
+
 add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 
-set(LIBURING_VERSION liburing-2.4)
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g -fPIE -static-libgcc -static-libstdc++ -fno-stack-protector")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O2 -fPIE -static-libgcc -static-libstdc++ -fno-stack-protector")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
@@ -24,12 +27,20 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(liburing)
 include_directories(${liburing_SOURCE_DIR}/src/include)
+add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/build && make && make install WORKING_DIRECTORY ${liburing_SOURCE_DIR})
 
-add_custom_target(liburing
-  COMMAND ./configure
-  --prefix=${liburing_SOURCE_DIR}/build && make && make install
-  WORKING_DIRECTORY ${liburing_SOURCE_DIR}
+FetchContent_Declare(
+  small
+  URL "https://github.com/tarantool/small/archive/refs/heads/${SMALL_VERSION}.tar.gz"
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/small
 )
+FetchContent_MakeAvailable(small)
+execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/small-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+include_directories(${small_SOURCE_DIR}/src/include)
+include_directories(${small_SOURCE_DIR}/include)
+include_directories(${small_SOURCE_DIR}/third_party)
+add_subdirectory(${small_SOURCE_DIR})
 
 configure_file(
   "${PROJECT_SOURCE_DIR}/common/configuration.h.cmake"
@@ -50,14 +61,8 @@ file(GLOB sources
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories(include)
-include_directories(small/include)
-include_directories(small/third_party)
-
-add_subdirectory(small)
 
 add_library(native SHARED ${sources})
 add_dependencies(native liburing small)
 target_link_libraries(native PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small)
-add_custom_command(TARGET native POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:native> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor.so
-)
+add_custom_command(TARGET native POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:native> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor.so)

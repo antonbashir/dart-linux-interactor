@@ -26,6 +26,9 @@ plan(int count)
 	tests_done[level] = 0;
 	tests_failed[level] = 0;
 
+	if (level == 0)
+		printf("TAP version 13\n");
+
 	_space(stdout);
 	printf("%d..%d\n", 1, plan_test[level]);
 }
@@ -56,19 +59,24 @@ check_plan(void)
 	return r;
 }
 
-int
-_ok(int condition, const char *fmt, ...)
+void
+_ok(int condition, const char *expr, const char *file, int line,
+    const char *fmt, ...)
 {
 	va_list ap;
 
 	_space(stdout);
 	printf("%s %d - ", condition ? "ok" : "not ok", ++tests_done[level]);
-	if (!condition)
-		tests_failed[level]++;
 	va_start(ap, fmt);
 	vprintf(fmt, ap);
 	printf("\n");
 	va_end(ap);
-	return condition;
+	if (!condition) {
+		tests_failed[level]++;
+		_space(stderr);
+		fprintf(stderr, "#   Failed test `%s'\n", expr);
+		_space(stderr);
+		fprintf(stderr, "#   in %s at line %d\n", file, line);
+	}
 }
 

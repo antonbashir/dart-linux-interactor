@@ -33,6 +33,8 @@
 #include <stddef.h>
 #include <assert.h>
 
+#include "util.h"
+
 #if defined(__cplusplus)
 extern "C" {
 #endif /* defined(__cplusplus) */
@@ -52,7 +54,7 @@ struct slab_cache;
  * coio_bread(coio, in, request_len);
  * if (ibuf_size(in) >= request_len) {
  *	process_request(in->rpos, request_len);
- *	in->rpos += request_len;
+ *	ibuf_consume(in, request_len);
  * }
  */
 struct ibuf
@@ -111,11 +113,36 @@ ibuf_pos(struct ibuf *ibuf)
 	return ibuf->rpos - ibuf->buf;
 }
 
+static inline void
+ibuf_poison_unallocated(const struct ibuf *ibuf)
+{
+	ASAN_POISON_MEMORY_REGION(ibuf->wpos, ibuf->end - ibuf->wpos);
+}
+
+static inline void
+ibuf_unpoison_unallocated(const struct ibuf *ibuf)
+{
+	ASAN_UNPOISON_MEMORY_REGION(ibuf->wpos, ibuf->end - ibuf->wpos);
+}
+
+static inline void
+ibuf_poison_consumed(const struct ibuf *ibuf)
+{
+	ASAN_POISON_MEMORY_REGION(ibuf->buf, ibuf->rpos - ibuf->buf);
+}
+
+static inline void
+ibuf_unpoison_consumed(const struct ibuf *ibuf)
+{
+	ASAN_UNPOISON_MEMORY_REGION(ibuf->buf, ibuf->rpos - ibuf->buf);
+}
+
 /** Forget all cached input. */
 static inline void
 ibuf_reset(struct ibuf *ibuf)
 {
 	ibuf->rpos = ibuf->wpos = ibuf->buf;
+	ibuf_poison_unallocated(ibuf);
 }
 
 void *
@@ -124,8 +151,10 @@ ibuf_reserve_slow(struct ibuf *ibuf, size_t size);
 static inline void *
 ibuf_reserve(struct ibuf *ibuf, size_t size)
 {
-	if (ibuf->wpos + size <= ibuf->end)
+	if (ibuf->wpos + size <= ibuf->end) {
+		ibuf_unpoison_unallocated(ibuf);
 		return ibuf->wpos;
+	}
 	return ibuf_reserve_slow(ibuf, size);
 }
 
@@ -133,14 +162,21 @@ static inline void *
 ibuf_alloc(struct ibuf *ibuf, size_t size)
 {
 	void *ptr;
-	if (ibuf->wpos + size <= ibuf->end)
+	if (ibuf->wpos + size <= ibuf->end) {
+		/*
+		 * In case of using same buffer we need to unpoison newly
+		 * allocated memory after previous ibuf_alloc or poison after
+		 * newly allocated memory after previous ibuf_reserve.
+		 */
+		ibuf_unpoison_unallocated(ibuf);
 		ptr = ibuf->wpos;
-	else {
+	} else {
 		ptr = ibuf_reserve_slow(ibuf, size);
 		if (ptr == NULL)
 			return NULL;
 	}
 	ibuf->wpos += size;
+	ibuf_poison_unallocated(ibuf);
 	return ptr;
 }
 
@@ -151,6 +187,15 @@ ibuf_alloc(struct ibuf *ibuf, size_t size)
 void
 ibuf_shrink(struct ibuf *ibuf);
 
+/** Discard size bytes of data from write end of the buffer. */
+static inline void
+ibuf_discard(struct ibuf *ibuf, size_t size)
+{
+	assert(size <= ibuf_used(ibuf));
+	ibuf->wpos -= size;
+	ibuf_poison_unallocated(ibuf);
+}
+
 /**
  * Discard data written after position. Use ibuf_used to get position.
  * Note that you should not update read position in between. It is safe
@@ -160,7 +205,25 @@ static inline void
 ibuf_truncate(struct ibuf *ibuf, size_t used)
 {
 	assert(used <= ibuf_used(ibuf));
-	ibuf->wpos = ibuf->rpos + used;
+	ibuf_discard(ibuf, ibuf_used(ibuf) - used);
+}
+
+/** Consume size bytes of data from the read end of the buffer. */
+static inline void
+ibuf_consume(struct ibuf *ibuf, size_t size)
+{
+	assert(size <= ibuf_used(ibuf));
+	ibuf->rpos += size;
+	ibuf_poison_consumed(ibuf);
+}
+
+/** Consume bytes before ptr from the read end of the buffer. */
+static inline void
+ibuf_consume_before(struct ibuf *ibuf, const void *ptr)
+{
+	assert((const char *)ptr >= ibuf->rpos);
+	assert((const char *)ptr <= ibuf->wpos);
+	ibuf_consume(ibuf, (const char *)ptr - ibuf->rpos);
 }
 
 static inline void *
@@ -180,46 +243,6 @@ ibuf_alloc_cb(void *ctx, size_t size)
 
 #if defined(__cplusplus)
 } /* extern "C" */
-
-#include "exception.h"
-
-/** Reserve space for sz bytes in the input buffer. */
-static inline void *
-ibuf_reserve_xc(struct ibuf *ibuf, size_t size)
-{
-	void *ptr = ibuf_reserve(ibuf, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "ibuf", "reserve");
-	return ptr;
-}
-
-static inline void *
-ibuf_alloc_xc(struct ibuf *ibuf, size_t size)
-{
-	void *ptr = ibuf_alloc(ibuf, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "ibuf", "alloc");
-	return ptr;
-}
-
-static inline void *
-ibuf_reserve_xc_cb(void *ctx, size_t *size)
-{
-	void *ptr = ibuf_reserve_cb(ctx, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, *size, "ibuf", "reserve");
-	return ptr;
-}
-
-static inline void *
-ibuf_alloc_xc_cb(void *ctx, size_t size)
-{
-	void *ptr = ibuf_alloc_cb(ctx, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "ibuf", "alloc");
-	return ptr;
-}
-
 #endif /* defined(__cplusplus) */
 
 #endif /* TARANTOOL_SMALL_IBUF_H_INCLUDED */

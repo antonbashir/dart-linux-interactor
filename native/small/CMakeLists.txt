@@ -1,18 +1,22 @@
 project(small C CXX)
 cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
 
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+  cmake_policy(SET CMP0135 NEW)
+endif()
+
 include(CheckFunctionExists)
 include(CheckSymbolExists)
 
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
+  set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 if(NOT DEFINED SMALL_EMBEDDED)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -fPIC -Wall -Wextra")
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -Werror")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -Wall -Wextra")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fPIC -O0 -Werror")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -Wall -Wextra")
+  set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -Werror")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -Werror")
 endif()
 
 # Enable GNU glibc extentions.
@@ -28,10 +32,10 @@ check_symbol_exists(MADV_DONTDUMP sys/mman.h TARANTOOL_SMALL_HAVE_MADV_DONTDUMP)
 
 set(config_h "${CMAKE_CURRENT_BINARY_DIR}/small/include/small_config.h")
 configure_file(
-    "small/small_config.h.cmake"
-    "${config_h}"
-    )
-message (STATUS "")
+  "small/small_config.h.cmake"
+  "${config_h}"
+)
+message(STATUS "")
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/small/include")
 include_directories("${PROJECT_SOURCE_DIR}/include/small")
@@ -40,74 +44,81 @@ include_directories("${PROJECT_SOURCE_DIR}/include/small")
 include_directories(third_party)
 
 set(lib_headers
-    "${config_h}"
-    include/small/util.h
-    include/small/small_features.h
-    include/small/ibuf.h
-    include/small/lf_lifo.h
-    include/small/lifo.h
-    include/small/matras.h
-    include/small/mempool.h
-    include/small/obuf.h
-    include/small/quota.h
-    include/small/rb.h
-    include/small/region.h
-    include/small/rlist.h
-    include/small/slab_arena.h
-    include/small/slab_cache.h
-    include/small/small_class.h
-    include/small/small.h
-    include/small/lsregion.h
-    include/small/static.h)
+  "${config_h}"
+  include/small/util.h
+  include/small/small_features.h
+  include/small/ibuf.h
+  include/small/lf_lifo.h
+  include/small/lifo.h
+  include/small/matras.h
+  include/small/mempool.h
+  include/small/obuf.h
+  include/small/quota.h
+  include/small/rb.h
+  include/small/region.h
+  include/small/rlist.h
+  include/small/slab_arena.h
+  include/small/slab_cache.h
+  include/small/slab_list.h
+  include/small/small_class.h
+  include/small/small.h
+  include/small/lsregion.h
+  include/small/static.h)
+
+# ASAN implementation has extra headers that are included from regular headers.
+if(ENABLE_ASAN)
+  list(APPEND lib_headers
+    include/small/slab_arena_asan.h
+    include/small/slab_cache_asan.h
+    include/small/mempool_asan.h
+    include/small/obuf_asan.h
+    include/small/lsregion_asan.h
+    include/small/region_asan.h
+    include/small/small_asan.h)
+endif()
 
 set(lib_sources
-    small/small_features.c
-    small/slab_cache.c
-    small/region.c
-    small/mempool.c
+  small/util.c
+  small/small_features.c
+  small/matras.c
+  small/ibuf.c
+  small/static.c)
+
+if(ENABLE_ASAN)
+  list(APPEND lib_sources
+    small/slab_arena_asan.c
+    small/slab_cache_asan.c
+    small/mempool_asan.c
+    small/obuf_asan.c
+    small/lsregion_asan.c
+    small/region_asan.c
+    small/small_asan.c)
+else()
+  list(APPEND lib_sources
     small/slab_arena.c
-    small/small_class.c
-    small/small.c
-    small/matras.c
-    small/ibuf.c
+    small/slab_cache.c
+    small/mempool.c
     small/obuf.c
     small/lsregion.c
-    small/static.c)
+    small/region.c
+    small/small_class.c
+    small/small.c)
+endif()
 
-add_library(${PROJECT_NAME} STATIC ${lib_sources})
+if(NOT TARGET ${PROJECT_NAME})
+  add_library(${PROJECT_NAME} STATIC ${lib_sources})
+endif()
+
 target_link_libraries(${PROJECT_NAME} m)
 
-enable_testing()
-add_subdirectory(test)
-add_subdirectory(perf)
-
 if(DEFINED SMALL_EMBEDDED)
-    # Don't build shared library and skip INSTALL() targets if this
-    # library is used as submodule in other project.
-    return()
+  # Don't build shared library and skip INSTALL() targets if this
+  # library is used as submodule in other project.
+  return()
 endif()
 
 option(ENABLE_VALGRIND "Enable integration with valgrind, a memory analyzing tool" OFF)
-if (NOT ENABLE_VALGRIND)
-    add_definitions(-DNVALGRIND=1)
+
+if(NOT ENABLE_VALGRIND)
+  add_definitions(-DNVALGRIND=1)
 endif()
-
-add_library(${PROJECT_NAME}_shared SHARED ${lib_sources})
-target_link_libraries(${PROJECT_NAME}_shared m)
-set_target_properties(${PROJECT_NAME}_shared PROPERTIES VERSION 1.0 SOVERSION 1)
-set_target_properties(${PROJECT_NAME}_shared PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
-
-include(GNUInstallDirs)
-
-install(TARGETS ${PROJECT_NAME}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    COMPONENT library)
-
-install(TARGETS ${PROJECT_NAME}_shared
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    COMPONENT library)
-
-install(FILES ${lib_headers} DESTINATION include/${PROJECT_NAME})
-install(DIRECTORY third_party DESTINATION include/${PROJECT_NAME} FILES_MATCHING PATTERN "*.h")

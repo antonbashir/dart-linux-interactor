@@ -72,6 +72,9 @@ obuf_create(struct obuf *buf, struct slab_cache *slabc, size_t start_capacity)
 	buf->iov[0].iov_base = NULL;
 	buf->iov[0].iov_len = 0;
 	buf->capacity[0] = 0;
+#ifndef NDEBUG
+	buf->reserved = false;
+#endif
 }
 
 
@@ -85,6 +88,9 @@ obuf_reset(struct obuf *buf)
 		buf->iov[i].iov_len = 0;
 	buf->pos = 0;
 	buf->used = 0;
+#ifndef NDEBUG
+	buf->reserved = false;
+#endif
 }
 
 void
@@ -95,9 +101,8 @@ obuf_destroy(struct obuf *buf)
 		struct slab *slab = slab_from_data(buf->iov[i].iov_base);
 		slab_put(buf->slabc, slab);
 	}
-#ifndef NDEBUG
-	obuf_create(buf, buf->slabc, buf->start_capacity);
-#endif
+	/* Safety and also makes obuf_is_initialized work. */
+	memset(buf, 0, sizeof(*buf));
 }
 
 /** Add data to the output buffer. Copies the data. */
@@ -205,6 +210,7 @@ obuf_reserve_slow(struct obuf *buf, size_t size)
 void
 obuf_rollback_to_svp(struct obuf *buf, struct obuf_svp *svp)
 {
+	assert(svp->pos <= (size_t)buf->pos);
 	int iovcnt = obuf_iovcnt(buf);
 
 	buf->pos = svp->pos;
@@ -213,4 +219,7 @@ obuf_rollback_to_svp(struct obuf *buf, struct obuf_svp *svp)
 	int i;
 	for (i = buf->pos + 1; i < iovcnt; i++)
 		buf->iov[i].iov_len = 0;
+#ifndef NDEBUG
+	buf->reserved = false;
+#endif
 }

@@ -34,8 +34,19 @@
 #include <stdlib.h> /* exit() */
 #include <stdio.h>
 
-#define header() printf("\t*** %s ***\n", __func__)
-#define footer() printf("\t*** %s: done ***\n", __func__)
+#define header()					\
+	do {						\
+		_space(stdout);				\
+		printf("# *** %s ***\n", __func__);	\
+	} while (0)
+
+#define footer()						\
+	do {							\
+		_space(stdout);					\
+		printf("# *** %s: done ***\n", __func__);	\
+	} while (0)
+
+#include "small_config.h"
 
 #define fail(expr, result) do {					\
 	fprintf(stderr, "Test failed: %s is %s at %s:%d, in function '%s'\n",\
@@ -70,12 +81,12 @@ extern "C" {
 		return check_plan();	// print resume
 	}
 @endcode
-
-
 */
 
 /* private function, use ok(...) instead */
-int _ok(int condition, const char *fmt, ...);
+void
+_ok(int condition, const char *expr, const char *file, int line,
+    const char *fmt, ...);
 
 /* private function, use note(...) or diag(...) instead */
 void _space(FILE *stream);
@@ -100,44 +111,64 @@ void plan(int count);
 */
 int check_plan(void);
 
-#define ok(condition, fmt, args...)	{		\
-	int res = _ok(condition, fmt, ##args);		\
-	if (!res) {					\
-		_space(stderr);			\
-		fprintf(stderr, "#   Failed test '");	\
-		fprintf(stderr, fmt, ##args);		\
-		fprintf(stderr, "'\n");			\
-		_space(stderr);			\
-		fprintf(stderr, "#   in %s at line %d\n", __FILE__, __LINE__); \
-	}						\
-}
+/*
+ * The ok macro is defined so that it can be called without a message:
+ *
+ *   ok(true);
+ *   ok(true, "message");
+ *   ok(true, "message %d", i);
+ *
+ * It supports up to 7 format arguments.
+ */
+#define _select_10th(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, ...) f10
+#define _ok0(cond, expr, ...)						\
+	_select_10th(, ##__VA_ARGS__,					\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, __VA_ARGS__),	\
+		     _ok(cond, expr, __FILE__, __LINE__, "line %d", __LINE__))
 
-#define is(a, b, fmt, args...)	{			\
-	int res = _ok((a) == (b), fmt, ##args);	\
-	if (!res) {					\
-		_space(stderr);			\
-		fprintf(stderr, "#   Failed test '");	\
-		fprintf(stderr, fmt, ##args);		\
-		fprintf(stderr, "'\n");			\
-		_space(stderr);			\
-		fprintf(stderr, "#   in %s at line %d\n", __FILE__, __LINE__); \
-	}						\
-}
-
-#define isnt(a, b, fmt, args...) {			\
-	int res = _ok((a) != (b), fmt, ##args);	\
-	if (!res) {					\
-		_space(stderr);			\
-		fprintf(stderr, "#   Failed test '");	\
-		fprintf(stderr, fmt, ##args);		\
-		fprintf(stderr, "'\n");			\
-		_space(stderr);			\
-		fprintf(stderr, "#   in %s at line %d\n", __FILE__, __LINE__); \
-	}						\
-}
+#define ok(cond, ...)		_ok0(cond, #cond, ##__VA_ARGS__)
+#define is(a, b, ...)		_ok0((a) == (b), #a " == " #b, ##__VA_ARGS__)
+#define isnt(a, b, ...)		_ok0((a) != (b), #a " != " #b, ##__VA_ARGS__)
 
 #if defined(__cplusplus)
 }
 #endif /* defined(__cplusplus) */
+
+/**
+ * _no_asan version of tests are skipped in case ENABLE_ASAN is set and
+ * executed if it is not set. Similarly for _asan version of tests.
+ *
+ * Note that in the case of ok/is/isnt tests the tests with _no_asan/_asan
+ * suffixes are counted just as if there is no suffix.
+ */
+#ifndef ENABLE_ASAN
+  #define fail_unless_no_asan(expr) fail_unless(expr)
+  #define fail_if_no_asan(expr) fail_if(expr)
+  #define ok_no_asan(cond, ...) ok(cond, ##__VA_ARGS__)
+  #define is_no_asan(a, b, ...) is(a, b, ##__VA_ARGS__)
+  #define isnt_no_asan(a, b, ...) isnt(a, b, ##__VA_ARGS__)
+
+  #define fail_unless_asan(expr)
+  #define ok_asan(cond, ...) _ok0(true, #cond, "[SKIPPED] " #cond)
+#else /* ifdef ENABLE_ASAN */
+  #define fail_unless_no_asan(expr)
+  #define fail_if_no_asan(expr)
+  #define ok_no_asan(cond, ...) _ok0(true, #cond, "[SKIPPED] " #cond)
+  #define is_no_asan(a, b, ...) \
+			_ok0(true, #a " == " #b, "[SKIPPED] " #a " == " #b)
+  #define isnt_no_asan(a, b, ...) \
+			_ok0(true, #a " != " #b, "[SKIPPED] " #a " != " #b)
+
+  #define fail_unless_asan(expr) fail_unless(expr)
+  #define ok_asan(cond, ...) ok(cond, ##__VA_ARGS__)
+
+#endif /* ifdef ENABLE_ASAN */
 
 #endif /* INCLUDES_TARANTOOL_TEST_UNIT_H */

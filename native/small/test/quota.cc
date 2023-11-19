@@ -59,14 +59,15 @@ void *thread_routine(void *vparam)
 }
 
 int
-main(int n, char **a)
+main()
 {
-	(void)n;
-	(void)a;
-	quota_init(&quota, 0);
-	srand(time(0));
-
 	plan(5);
+	header();
+
+	quota_init(&quota, 0);
+	unsigned int seed = time(NULL);
+	note("random seed is %u", seed);
+	srand(seed);
 
 	for (size_t i = 0; i < THREAD_CNT; i++) {
 		pthread_create(threads + i, 0, thread_routine, (void *)(datum + i));
@@ -96,5 +97,6 @@ main(int n, char **a)
 	ok(use_success_count > THREAD_CNT * RUN_CNT * .1, "uses are mosly successful");
 	ok(set_success_count > THREAD_CNT * RUN_CNT * .1, "sets are mosly successful");
 
+	footer();
 	return check_plan();
 }

@@ -16,6 +16,7 @@ static struct slab *runs[NRUNS];
 static void
 test_slab_cache(void)
 {
+	plan(1);
 	header();
 
 	slab_arena_create(&arena, &quota, 0, 4000000, MAP_PRIVATE);
@@ -47,44 +48,99 @@ test_slab_cache(void)
 	 * If at lest one block was allocated then after freeing
 	 * all memory it must be exactly one slab.
 	 */
-	if (cache.allocated.stats.total != arena.slab_size) {
-		fail("Slab cache returned memory to arena", "false");
-	}
+	ok_no_asan(cache.allocated.stats.total == arena.slab_size);
 
 	slab_cache_destroy(&cache);
 	slab_arena_destroy(&arena);
 
 	footer();
+	check_plan();
 }
+
+#ifndef ENABLE_ASAN
 
 static void
 test_slab_real_size(void)
 {
+	plan(4);
 	header();
 
 	slab_arena_create(&arena, &quota, 0, 4000000, MAP_PRIVATE);
 	slab_cache_create(&cache, &arena);
 
 	const size_t MB = 1024 * 1024;
-	fail_unless(slab_real_size(&cache, 0) == cache.order0_size);
-	fail_unless(slab_real_size(&cache, MB - slab_sizeof()) == MB);
-	fail_unless(slab_real_size(&cache, MB - slab_sizeof() + 1) == 2 * MB);
-	fail_unless(slab_real_size(&cache, 4564477 - slab_sizeof()) == 4564477);
+	ok(slab_real_size(&cache, 0) == cache.order0_size);
+	ok(slab_real_size(&cache, MB - slab_sizeof()) == MB);
+	ok(slab_real_size(&cache, MB - slab_sizeof() + 1) == 2 * MB);
+	ok(slab_real_size(&cache, 4564477 - slab_sizeof()) == 4564477);
 
 	slab_cache_destroy(&cache);
 	slab_arena_destroy(&arena);
 
 	footer();
+	check_plan();
 }
+
+#else
+
+static char assert_msg_buf[128];
+
+static void
+on_assert_failure(const char *filename, int line, const char *funcname,
+		  const char *expr)
+{
+	(void)filename;
+	(void)line;
+	snprintf(assert_msg_buf, sizeof(assert_msg_buf), "%s in %s",
+		 expr, funcname);
+	small_on_assert_failure = small_on_assert_failure_default;
+}
+
+static void
+test_slab_membership(void)
+{
+	plan(1);
+	header();
+
+	struct slab_cache cache1;
+	struct slab_cache cache2;
+
+	slab_arena_create(&arena, &quota, 0, 4000000, MAP_PRIVATE);
+	slab_cache_create(&cache1, &arena);
+	slab_cache_create(&cache2, &arena);
+
+	void *ptr = slab_get(&cache1, 1000);
+	fail_unless(ptr != NULL);
+	small_on_assert_failure = on_assert_failure;
+	slab_put(&cache2, ptr);
+	small_on_assert_failure = small_on_assert_failure_default;
+	ok(strstr(assert_msg_buf,
+		  "object and cache id mismatch\" in slab_put") != NULL);
+
+	footer();
+	check_plan();
+}
+
+#endif
 
 int
 main(void)
 {
-	srand(time(0));
+	plan(2);
+	header();
+
+	unsigned int seed = time(NULL);
+	note("random seed is %u", seed);
+	srand(seed);
 	quota_init(&quota, UINT_MAX);
 
 	test_slab_cache();
+#ifdef ENABLE_ASAN
+	test_slab_membership();
+#else
 	test_slab_real_size();
+#endif
 
-	return 0;
+	footer();
+	return check_plan();
 }

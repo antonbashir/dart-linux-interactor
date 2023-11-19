@@ -228,7 +228,12 @@ void delete_all(tree_t *tree, my_set& stl_tree)
 
 int main()
 {
-	srand (time(NULL));
+	plan(1);
+	header();
+
+	unsigned int seed = time(NULL);
+	note("random seed is %u", seed);
+	srand(seed);
 	tree_t tree;
 	test_new(&tree);
 	my_set stl_tree;
@@ -236,5 +241,8 @@ int main()
 	opers(&tree, stl_tree);
 	/* clear all remaining in tree*/
 	delete_all(&tree, stl_tree);
-	printf("success");
+	ok(true);
+
+	footer();
+	check_plan();
 }

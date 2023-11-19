@@ -31,6 +31,22 @@
  * SUCH DAMAGE.
  */
 #include <stddef.h>
+
+struct region;
+
+typedef void (*region_on_alloc_f)(struct region *region,
+			          size_t size, void *cb_arg);
+typedef void (*region_on_truncate_f)(struct region *region,
+			             size_t used, void *cb_arg);
+
+#include "small_config.h"
+
+#ifdef ENABLE_ASAN
+#  include "region_asan.h"
+#endif
+
+#ifndef ENABLE_ASAN
+
 #include <inttypes.h>
 #include <assert.h>
 #include <stdio.h>
@@ -39,7 +55,7 @@
 #include "slab_cache.h"
 #include "util.h"
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -79,13 +95,6 @@ extern "C" {
  * region_free().
  */
 
-struct region;
-
-typedef void (*region_on_alloc_f)(struct region *region,
-			          size_t size, void *cb_arg);
-typedef void (*region_on_truncate_f)(struct region *region,
-			             size_t used, void *cb_arg);
-
 struct region
 {
 	struct slab_cache *cache;
@@ -97,6 +106,13 @@ struct region
 	region_on_truncate_f on_truncate_cb;
 	/** User supplied argument passed to the callbacks. */
 	void *cb_arg;
+#ifndef NDEBUG
+	/**
+	 * The flag is used to check that there is no 2 reservations in a row.
+	 * The same check that has the ASAN version.
+	 */
+	size_t reserved;
+#endif
 };
 
 /**
@@ -111,7 +127,9 @@ region_create(struct region *region, struct slab_cache *cache)
 	region->on_alloc_cb = NULL;
 	region->on_truncate_cb = NULL;
 	region->cb_arg = NULL;
-
+#ifndef NDEBUG
+	region->reserved = false;
+#endif
 }
 
 /**
@@ -196,20 +214,32 @@ region_reserve_slow(struct region *region, size_t size);
 static inline void *
 region_reserve(struct region *region, size_t size)
 {
+	void *ptr = NULL;
+	assert(!region->reserved);
 	if (! rlist_empty(&region->slabs.slabs)) {
 		struct rslab *slab = rlist_first_entry(&region->slabs.slabs,
 						       struct rslab,
 						       slab.next_in_list);
 		if (size <= rslab_unused(slab))
-			return (char *) rslab_data(slab) + slab->used;
+			ptr = (char *) rslab_data(slab) + slab->used;
 	}
-	return region_reserve_slow(region, size);
+	if (ptr == NULL)
+		ptr = region_reserve_slow(region, size);
+#ifndef NDEBUG
+	if (ptr != NULL)
+		region->reserved = true;
+#endif
+	return ptr;
 }
 
 /** Allocate size bytes from a region. */
 static inline void *
 region_alloc(struct region *region, size_t size)
 {
+	assert(size > 0);
+#ifndef NDEBUG
+	region->reserved = false;
+#endif
 	void *ptr = region_reserve(region, size);
 	if (ptr != NULL) {
 		struct rslab *slab = rlist_first_entry(&region->slabs.slabs,
@@ -221,6 +251,9 @@ region_alloc(struct region *region, size_t size)
 			region->on_alloc_cb(region, size, region->cb_arg);
 		region->slabs.stats.used += size;
 		slab->used += size;
+#ifndef NDEBUG
+		region->reserved = false;
+#endif
 	}
 	return ptr;
 }
@@ -237,6 +270,10 @@ region_aligned_reserve(struct region *region, size_t size, size_t alignment)
 static inline void *
 region_aligned_alloc(struct region *region, size_t size, size_t alignment)
 {
+	assert(size > 0);
+#ifndef NDEBUG
+	region->reserved = false;
+#endif
 	void *ptr = region_aligned_reserve(region, size, alignment);
 	if (ptr != NULL) {
 		struct rslab *slab = rlist_first_entry(&region->slabs.slabs,
@@ -257,6 +294,9 @@ region_aligned_alloc(struct region *region, size_t size, size_t alignment)
 					    region->cb_arg);
 		region->slabs.stats.used += effective_size;
 		slab->used += effective_size;
+#ifndef NDEBUG
+		region->reserved = false;
+#endif
 	}
 	return ptr;
 }
@@ -274,6 +314,9 @@ region_reset(struct region *region)
 		region->slabs.stats.used -= slab->used;
 		slab->used = 0;
 	}
+#ifndef NDEBUG
+	region->reserved = false;
+#endif
 }
 
 /** How much memory is used by this region. */
@@ -325,100 +368,11 @@ region_reserve_cb(void *ctx, size_t *size)
 
 #if defined(__cplusplus)
 } /* extern "C" */
-#include "exception.h"
+#endif /* defined(__cplusplus) */
 
-static inline void *
-region_alloc_xc(struct region *region, size_t size)
-{
-	void *ptr = region_alloc(region, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "region", "new slab");
-	return ptr;
-}
+#endif /* ifndef ENABLE_ASAN */
 
-static inline void *
-region_alloc_xc_cb(void *ctx, size_t size)
-{
-	return region_alloc_xc((struct region *) ctx, size);
-}
-
-static inline void *
-region_reserve_xc(struct region *region, size_t size)
-{
-	void *ptr = region_reserve(region, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "region", "new slab");
-	return ptr;
-}
-
-static inline void *
-region_reserve_xc_cb(void *ctx, size_t *size)
-{
-	void *ptr = region_reserve_cb(ctx, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, *size, "region", "new slab");
-	return ptr;
-}
-
-static inline void *
-region_join_xc(struct region *region, size_t size)
-{
-	void *ptr = region_join(region, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "region", "join");
-	return ptr;
-}
-
-static inline void *
-region_alloc0_xc(struct region *region, size_t size)
-{
-	return memset(region_alloc_xc(region, size), 0, size);
-}
-
-static inline void
-region_dup_xc(struct region *region, const void *ptr, size_t size)
-{
-	(void) memcpy(region_alloc_xc(region, size), ptr, size);
-}
-
-static inline void *
-region_aligned_alloc_xc(struct region *region, size_t size, size_t alignment)
-{
-	void *ptr = region_aligned_alloc(region, size, alignment);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "region", "new slab");
-	return ptr;
-}
-
-static inline void *
-region_aligned_reserve_xc(struct region *region, size_t size, size_t alignment)
-{
-	void *ptr = region_aligned_reserve(region, size, alignment);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "region", "new slab");
-	return ptr;
-}
-
-static inline void *
-region_aligned_calloc_xc(struct region *region, size_t size, size_t align)
-{
-	return memset(region_aligned_alloc_xc(region, size, align), 0, size);
-}
-
-static inline void *
-region_aligned_alloc_xc_cb(void *ctx, size_t size)
-{
-	return region_aligned_alloc_xc((struct region *) ctx, size, alignof(uint64_t));
-}
-
-#define region_reserve_object_xc(region, T) \
-	(T *)region_aligned_reserve_xc((region), sizeof(T), alignof(T))
-
-#define region_alloc_object_xc(region, T) \
-	(T *)region_aligned_alloc_xc((region), sizeof(T), alignof(T))
-
-#define region_calloc_object_xc(region, T) \
-	(T *)region_aligned_calloc_xc((region), sizeof(T), alignof(T))
+#if defined(__cplusplus)
 
 struct RegionGuard {
 	struct region *region;
@@ -435,7 +389,8 @@ struct RegionGuard {
 		region_truncate(region, used);
 	}
 };
-#endif /* __cplusplus */
+
+#endif /* defined(__cplusplus) */
 
 #define region_alloc_object(region, T, size) ({					\
 	*(size) = sizeof(T);							\

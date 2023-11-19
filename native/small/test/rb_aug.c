@@ -139,6 +139,7 @@ wtree_rank_slow(wtree_t *tree, int value)
 static void
 check_aug(void)
 {
+	plan(1);
 	header();
 
 	int count = 0;		/* actual number of tree nodes */
@@ -177,17 +178,26 @@ check_aug(void)
 		fail_unless(wtree_rank(&tree, value) ==
 			    wtree_rank_slow(&tree, value));
 	}
+	ok(true);
 
 	for (int i = 0; i < count; i++)
 		free(nodes[i]);
 	free(nodes);
 
 	footer();
+	check_plan();
 }
 
 int main()
 {
-	srand(time(NULL));
+	plan(1);
+	header();
+
+	unsigned int seed = time(NULL);
+	note("random seed is %u", seed);
+	srand(seed);
 	check_aug();
-	return 0;
+
+	footer();
+	return check_plan();
 }

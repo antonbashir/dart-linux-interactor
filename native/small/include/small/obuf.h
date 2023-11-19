@@ -30,18 +30,7 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-#include <sys/uio.h>
-#include <stdbool.h>
 #include <stddef.h>
-#include <assert.h>
-
-#if defined(__cplusplus)
-extern "C" {
-#endif /* defined(__cplusplus) */
-
-enum { SMALL_OBUF_IOV_MAX = 31 };
-
-struct slab_cache;
 
 /**
  * Output buffer savepoint. It's possible to
@@ -67,6 +56,26 @@ obuf_svp_reset(struct obuf_svp *svp)
 	svp->iov_len = 0;
 	svp->used = 0;
 }
+
+#include "small_config.h"
+
+#ifdef ENABLE_ASAN
+#  include "obuf_asan.h"
+#endif
+
+#ifndef ENABLE_ASAN
+
+#include <sys/uio.h>
+#include <assert.h>
+#include <stdbool.h>
+
+#if defined(__cplusplus)
+extern "C" {
+#endif /* defined(__cplusplus) */
+
+enum { SMALL_OBUF_IOV_MAX = 31 };
+
+struct slab_cache;
 
 /**
  * An output buffer is a vector of struct iovec
@@ -101,10 +110,29 @@ struct obuf
 	 * (iov_base = NULL, iov_len = 0).
 	 */
 	struct iovec iov[SMALL_OBUF_IOV_MAX + 1];
+#ifndef NDEBUG
+	/**
+	 * The flag is used to check that there is no 2 reservations in a row.
+	 * The same check that has the ASAN version.
+	 */
+	bool reserved;
+#endif
 };
 
 void
 obuf_create(struct obuf *buf, struct slab_cache *slabc, size_t start_capacity);
+
+/**
+ * Return true after obuf_create and false after obuf_destroy.
+ *
+ * The result of calling before obuf_create is undefined unless buf struct
+ * is zeroed out.
+ */
+static inline bool
+obuf_is_initialized(const struct obuf *buf)
+{
+	return buf->slabc != NULL;
+}
 
 void
 obuf_destroy(struct obuf *buf);
@@ -145,10 +173,19 @@ obuf_reserve_slow(struct obuf *buf, size_t size);
 static inline void *
 obuf_reserve(struct obuf *buf, size_t size)
 {
-	if (buf->iov[buf->pos].iov_len + size > buf->capacity[buf->pos])
-		return obuf_reserve_slow(buf, size);
-	struct iovec *iov = &buf->iov[buf->pos];
-	return (char *) iov->iov_base + iov->iov_len;
+	void *ptr = NULL;
+	assert(!buf->reserved);
+	if (buf->iov[buf->pos].iov_len + size > buf->capacity[buf->pos]) {
+		ptr = obuf_reserve_slow(buf, size);
+	} else {
+		struct iovec *iov = &buf->iov[buf->pos];
+		ptr = (char *) iov->iov_base + iov->iov_len;
+	}
+#ifndef NDEBUG
+	if (ptr != NULL)
+		buf->reserved = true;
+#endif
+	return ptr;
 }
 
 /**
@@ -171,6 +208,9 @@ obuf_alloc(struct obuf *buf, size_t size)
 		iov = &buf->iov[buf->pos];
 		assert(iov->iov_len <= buf->capacity[buf->pos]);
 	}
+#ifndef NDEBUG
+	buf->reserved = false;
+#endif
 	iov->iov_len += size;
 	buf->used += size;
 	return ptr;
@@ -179,13 +219,6 @@ obuf_alloc(struct obuf *buf, size_t size)
 /** Append data to the output buffer. */
 size_t
 obuf_dup(struct obuf *buf, const void *data, size_t size);
-
-static inline size_t
-obuf_capacity(struct obuf *buf)
-{
-	/** This is an approximation, see obuf_alloc_pos() */
-	return buf->capacity[buf->n_iov ? buf->n_iov - 1 : 0] * 2;
-}
 
 static inline struct obuf_svp
 obuf_create_svp(struct obuf *buf)
@@ -225,52 +258,8 @@ obuf_alloc_cb(void *ctx, size_t size)
 
 #if defined(__cplusplus)
 } /* extern "C" */
-
-#include "exception.h"
-
-static inline void *
-obuf_reserve_xc(struct obuf *buf, size_t size)
-{
-	void *ptr = obuf_reserve(buf, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "obuf", "reserve");
-	return ptr;
-}
-
-static inline void *
-obuf_reserve_xc_cb(void *ctx, size_t *size)
-{
-	void *ptr = obuf_reserve_cb(ctx, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, *size, "obuf", "reserve");
-	return ptr;
-}
-
-static inline void *
-obuf_alloc_xc(struct obuf *buf, size_t size)
-{
-	void *ptr = obuf_alloc(buf, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "obuf", "alloc");
-	return ptr;
-}
-
-static inline void *
-obuf_alloc_xc_cb(void *ctx, size_t size)
-{
-	void *ptr = obuf_alloc_cb(ctx, size);
-	if (ptr == NULL)
-		tnt_raise(OutOfMemory, size, "obuf", "alloc");
-	return ptr;
-}
-
-static inline void
-obuf_dup_xc(struct obuf *buf, const void *data, size_t size)
-{
-	if (obuf_dup(buf, data, size) != size)
-		tnt_raise(OutOfMemory, size, "obuf", "dup");
-}
-
 #endif /* defined(__cplusplus) */
+
+#endif /* ifndef ENABLE_ASAN */
 
 #endif /* TARANTOOL_SMALL_OBUF_H_INCLUDED */

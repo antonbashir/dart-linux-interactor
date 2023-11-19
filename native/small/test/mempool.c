@@ -3,6 +3,7 @@
 #include <stdalign.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 #include "unit.h"
 
@@ -23,7 +24,7 @@ size_t used;
 /* Streak type - allocating or freeing */
 bool allocating = true;
 /** Keep global to easily inspect the core. */
-long seed;
+unsigned int seed;
 
 static int *ptrs[OBJECTS_MAX];
 
@@ -76,27 +77,29 @@ void
 mempool_basic()
 {
 	int i;
+
+	plan(2);
 	header();
 
 	mempool_create(&pool, &cache, objsize);
+	ok(mempool_is_initialized(&pool));
 
 	for (i = 0; i < ITERATIONS_MAX; i++) {
 		basic_alloc_streak();
 		allocating = ! allocating;
-#if 0
-		printf("%zu %zu\n", mempool_used(&pool),
-		       mempool_total(&pool));
-#endif
 	}
 
 	mempool_destroy(&pool);
+	ok(!mempool_is_initialized(&pool));
 
 	footer();
+	check_plan();
 }
 
 void
 mempool_align()
 {
+	plan(1);
 	header();
 
 	for (uint32_t size = OBJSIZE_MIN; size < OBJSIZE_MAX; size <<= 1) {
@@ -109,14 +112,63 @@ mempool_align()
 		}
 		mempool_destroy(&pool);
 	}
+	ok(true);
 
 	footer();
+	check_plan();
 }
+
+#ifdef ENABLE_ASAN
+
+static char assert_msg_buf[128];
+
+static void
+on_assert_failure(const char *filename, int line, const char *funcname,
+		  const char *expr)
+{
+	(void)filename;
+	(void)line;
+	snprintf(assert_msg_buf, sizeof(assert_msg_buf), "%s in %s",
+		 expr, funcname);
+	small_on_assert_failure = small_on_assert_failure_default;
+}
+
+static void
+mempool_membership(void)
+{
+	plan(1);
+	header();
+
+	struct mempool pool1;
+	struct mempool pool2;
+
+	mempool_create(&pool1, &cache, 100);
+	mempool_create(&pool2, &cache, 200);
+	void *ptr = mempool_alloc(&pool1);
+	fail_unless(ptr != NULL);
+	small_on_assert_failure = on_assert_failure;
+	mempool_free(&pool2, ptr);
+	small_on_assert_failure = small_on_assert_failure_default;
+	ok(strstr(assert_msg_buf,
+		  "object and pool id mismatch\" in mempool_free") != NULL);
+
+	footer();
+	check_plan();
+}
+
+#endif /* ifdef ENABLE_ASAN */
 
 int main()
 {
-	seed = time(0);
+#ifdef ENABLE_ASAN
+	plan(3);
+#else
+	plan(2);
+#endif
+	header();
 
+	seed = time(NULL);
+	note("random seed is %u", seed);
 	srand(seed);
 
 	objsize = rand() % OBJSIZE_MAX;
@@ -136,8 +188,13 @@ int main()
 	slab_cache_create(&cache, &arena);
 
 	mempool_basic();
-
 	mempool_align();
+#ifdef ENABLE_ASAN
+	mempool_membership();
+#endif
 
 	slab_cache_destroy(&cache);
+
+	footer();
+	return check_plan();
 }

@@ -20,8 +20,9 @@ main(void)
 	struct test *it, *tmp;
 	struct rlist *rlist;
 
-	header();
 	plan(104);
+	header();
+
 	ok(rlist_empty(&head), "list is empty");
 	for (i = 0; i < ITEMS; i++) {
 		items[i].no = i;
@@ -132,7 +133,7 @@ main(void)
 	i = 0;
 	rlist_foreach_entry_safe_reverse(it, &head, list, tmp)
 		++i;
-	ok(i == 0, "list is empty")
+	ok(i == 0, "list is empty");
 	for (i = 0; i < ITEMS; i++) {
 		items[i].no = i;
 		rlist_add(&head, &(items[i].list));
@@ -163,7 +164,6 @@ main(void)
 		i++;
 	}
 
-	int rc = check_plan();
 	footer();
-	return rc;
+	return check_plan();
 }
