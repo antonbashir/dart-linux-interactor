@@ -1,0 +1,22 @@
+name: Dart Linux Interactor
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Native build
+        run: cd native && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo . && make -j
+
+      - name: Native build test
+        run: cd test/native && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo . && make -j 
+
+      - name: Dart test
+        run: cd test/dart && dart pub get && dart compile run lib/test.dart
