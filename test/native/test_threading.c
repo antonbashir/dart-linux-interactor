@@ -21,7 +21,7 @@ static inline test_thread_t* thread_by_fd(int fd)
 
 test_threads_t* test_threading_threads()
 {
-  return &threads;
+    return &threads;
 }
 
 test_threads_t* test_threading_initialize(int count)
@@ -52,6 +52,8 @@ void test_threading_call_native_echo(interactor_message_t* message)
     test_thread_t* thread = thread_by_fd(message->target);
     if (thread)
     {
+        message->output = message->input;
+        message->output_size = message->input_size;
         thread->messages[thread->messages_count] = message;
         thread->messages = reallocarray(thread->messages, 1, sizeof(interactor_message_t*));
         thread->messages_count++;

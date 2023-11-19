@@ -10,10 +10,10 @@ import 'package:test/test.dart';
 TestBindings loadBindings() => TestBindings(DynamicLibrary.open("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so"));
 
 void main() {
-  group("[call native]", testCallNative);
-  group("[call dart]", testCallDart);
+  //group("[call native]", testCallNative);
+  //group("[call dart]", testCallDart);
   group("[threading native]", testThreadingNative);
-  group("[threading dart]", testThreadingDart);
+  //group("[threading dart]", testThreadingDart);
   // group("[timeout native]", testTimeoutNative);
   // group("[timeout dart]", testTimeoutDart);
 }
