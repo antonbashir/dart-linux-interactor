@@ -117,7 +117,9 @@ void interactor_native_release_buffer(interactor_native_t* interactor, uint16_t 
 
 interactor_message_t* interactor_native_allocate_message(interactor_native_t* interactor)
 {
-    return interactor_messages_pool_allocate(&interactor->messages_pool);
+    interactor_message_t* message = interactor_messages_pool_allocate(&interactor->messages_pool);
+    memset(message, 0, sizeof(interactor_message_t));
+    return message;
 }
 
 void interactor_native_free_message(interactor_native_t* interactor, interactor_message_t* message)
@@ -134,7 +136,9 @@ struct interactor_payload_pool* interactor_native_payload_pool_create(interactor
 
 intptr_t interactor_native_payload_allocate(struct interactor_payload_pool* pool)
 {
-    return interactor_payload_pool_allocate(pool);
+    void* payload = (void*)interactor_payload_pool_allocate(pool);
+    memset(payload, 0, pool->size);
+    return (intptr_t)payload;
 }
 
 void interactor_native_payload_free(struct interactor_payload_pool* pool, intptr_t pointer)
@@ -150,7 +154,9 @@ void interactor_native_payload_pool_destroy(struct interactor_payload_pool* pool
 
 intptr_t interactor_native_data_allocate(interactor_native_t* interactor, size_t size)
 {
-    return interactor_data_pool_allocate(&interactor->data_pool, size);
+    void* data = (void*)interactor_data_pool_allocate(&interactor->data_pool, size);
+    memset(data, 0, size);
+    return (intptr_t)data;
 }
 
 void interactor_native_data_free(interactor_native_t* interactor, intptr_t pointer, size_t size)

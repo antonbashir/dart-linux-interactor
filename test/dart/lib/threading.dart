@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:isolate';
 
+import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart';
 import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
@@ -44,12 +45,13 @@ void testThreadingNative() {
           for (var threadId = 0; threadId < threads.ref.count; threadId++) {
             final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor;
             for (var messageId = 0; messageId < messages; messageId++) {
-              calls.add(producer.testThreadingCallNativeEcho(interactor.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test")));
+              calls.add(producer.testThreadingCallNativeEcho(interactor.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3])));
             }
           }
           final results = await Future.wait(calls);
           results.forEach((result) {
-            expect(result.outputString, "test");
+            expect(ListEquality().equals(result.outputBuffer, [1, 2, 3]), true);
+            result.releaseOutputBuffer();
             result.release();
           });
           Isolate.exit();
