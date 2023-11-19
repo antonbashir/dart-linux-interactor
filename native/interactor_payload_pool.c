@@ -1,12 +1,13 @@
 #include <interactor_memory.h>
 #include <interactor_payload_pool.h>
+#include "common/common.h"
 #include "interactor_constants.h"
 #include "small/include/small/small.h"
-#include "common/common.h"
 
 int interactor_payload_pool_create(struct interactor_payload_pool* pool, struct interactor_memory* memory, size_t payload_size)
 {
     pool->pool.memory = memory;
+    pool->size = payload_size;
     return interactor_mempool_create(&pool->pool, payload_size);
 }
 

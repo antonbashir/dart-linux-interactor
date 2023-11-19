@@ -1,6 +1,7 @@
 #include "test_threading.h"
 #include <pthread.h>
 #include <stdlib.h>
+#include <string.h>
 #include "interactor_constants.h"
 #include "interactor_message.h"
 #include "interactor_native.h"
@@ -89,6 +90,51 @@ void test_threading_call_native_echo(interactor_message_t* message)
         thread->messages[thread->received_messages_count] = message;
         thread->received_messages_count++;
     }
+}
+
+void test_threading_call_dart_bytes(int32_t target, uintptr_t method, const uint8_t* value, size_t count)
+{
+    for (int id = 0; id < threads.count; id++)
+    {
+        test_thread_t* thread = threads.threads[id];
+        interactor_message_t* message = interactor_native_allocate_message(thread->interactor);
+        message->id = 0;
+        message->input = (void*)(intptr_t)interactor_native_data_allocate(thread->interactor, count);
+        memcpy(message->input, value, count);
+        message->input_size = count;
+        message->owner = 0;
+        message->method = method;
+        interactor_native_call_dart(thread->interactor, target, message, -1);
+        interactor_native_submit(thread->interactor);
+    }
+}
+
+void test_threading_call_dart_callback(interactor_message_t* message, interactor_native_t* interactor)
+{
+    test_thread_t* thread = thread_by_fd(message->target);
+    if (thread)
+    {
+        message->output = message->input;
+        message->output_size = message->input_size;
+        thread->messages[thread->received_messages_count] = message;
+        thread->received_messages_count++;
+        interactor_native_remove_event(thread->interactor, (uintptr_t)message);
+    }
+}
+
+int test_threading_call_dart_check()
+{
+    int sum = 0;
+    for (int id = 0; id < threads.count; id++)
+    {
+        test_thread_t* thread = threads.threads[id];
+        test_interactor_process_callbacks(thread->interactor, test_threading_call_dart_callback);
+        for (int message_id = 0; message_id < thread->received_messages_count; message_id++)
+        {
+            sum++;
+        }
+    }
+    return sum;
 }
 
 void test_threading_destroy()
