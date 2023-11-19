@@ -107,7 +107,7 @@ void test_threading_call_dart_bytes(int32_t target, uintptr_t method, const uint
     }
 }
 
-void test_threading_call_dart_callback(interactor_message_t* message, interactor_native_t* interactor)
+void test_threading_call_dart_callback(interactor_message_t* message)
 {
     test_thread_t* thread = test_threading_thread_by_fd(message->target);
     if (thread)

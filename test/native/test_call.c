@@ -16,13 +16,8 @@ void test_call_reset()
 bool test_call_native_check(interactor_native_t* interactor)
 {
     interactor_native_process_timeout(interactor);
-    if (current_message)
-    {
-        interactor_native_callback_to_dart(interactor, current_message);
-        interactor_native_submit(interactor);
-        return true;
-    }
-    return false;
+    interactor_native_submit(interactor);
+    return current_message;
 }
 
 void test_call_native(interactor_message_t* message)
@@ -125,7 +120,7 @@ void test_call_dart_bytes(interactor_native_t* interactor, int32_t target, uintp
     interactor_native_submit(interactor);
 }
 
-void test_call_dart_callback(interactor_message_t* message, interactor_native_t* interactor)
+void test_call_dart_callback(interactor_message_t* message)
 {
     message->output = message->input;
     message->output_size = message->input_size;

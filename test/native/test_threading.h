@@ -35,7 +35,7 @@ extern "C"
 
     void test_threading_call_dart_bytes(int32_t target, uintptr_t method, const uint8_t* value, size_t count);
     int test_threading_call_dart_check();
-    void test_threading_call_dart_callback(interactor_message_t* message, interactor_native_t* interactor);
+    void test_threading_call_dart_callback(interactor_message_t* message);
 
     void test_threading_destroy();
 

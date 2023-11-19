@@ -254,6 +254,67 @@ void interactor_native_process_timeout(interactor_native_t* interactor)
     }
 }
 
+void interactor_native_foreach(interactor_native_t* interactor, void (*call)(interactor_message_t*), void (*callback)(interactor_message_t*))
+{
+    struct io_uring_cqe* cqe;
+    unsigned head;
+    unsigned count = 0;
+    io_uring_for_each_cqe(interactor->ring, head, cqe)
+    {
+        count++;
+        if (cqe->res == INTERACTOR_NATIVE_CALL)
+        {
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            if (call) call(message);
+            continue;
+        }
+
+        if (cqe->res == INTERACTOR_NATIVE_CALLBACK)
+        {
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            if (callback) callback(message);
+            continue;
+        }
+    }
+    io_uring_cq_advance(interactor->ring, count);
+}
+
+void interactor_native_foreach_call(interactor_native_t* interactor, void (*call)(interactor_message_t*))
+{
+    struct io_uring_cqe* cqe;
+    unsigned head;
+    unsigned count = 0;
+    io_uring_for_each_cqe(interactor->ring, head, cqe)
+    {
+        count++;
+        if (cqe->res == INTERACTOR_NATIVE_CALL)
+        {
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            call(message);
+            continue;
+        }
+    }
+    io_uring_cq_advance(interactor->ring, count);
+}
+
+void interactor_native_foreach_callback(interactor_native_t* interactor, void (*callback)(interactor_message_t*))
+{
+    struct io_uring_cqe* cqe;
+    unsigned head;
+    unsigned count = 0;
+    io_uring_for_each_cqe(interactor->ring, head, cqe)
+    {
+        count++;
+        if (cqe->res == INTERACTOR_NATIVE_CALLBACK)
+        {
+            interactor_message_t* message = (interactor_message_t*)cqe->user_data;
+            callback(message);
+            continue;
+        }
+    }
+    io_uring_cq_advance(interactor->ring, count);
+}
+
 int interactor_native_submit(interactor_native_t* interactor)
 {
     return io_uring_submit(interactor->ring);
