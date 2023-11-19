@@ -25,57 +25,67 @@ void testThreadingNative() {
     final bindings = loadBindings();
     bindings.test_threading_initialize(threads, messages * isolates);
     final spawnedIsolates = <Future<Isolate>>[];
-    final exitIsolates = <ReceivePort>[];
-    final errorIsolates = <ReceivePort>[];
+    final exitPorts = <ReceivePort>[];
+    final errorPorts = <ReceivePort>[];
 
     for (var isolate = 0; isolate < isolates; isolate++) {
       final exitPort = ReceivePort();
-      exitIsolates.add(exitPort);
+      exitPorts.add(exitPort);
       final errorPort = ReceivePort();
-      errorIsolates.add(errorPort);
-      final isolate = Isolate.spawn<SendPort>(
-        (input) async {
-          final bindings = loadBindings();
-          final threads = bindings.test_threading_threads();
-          final calls = <Future<InteractorCall>>[];
-          final worker = InteractorWorker(input);
-          await worker.initialize();
-          final producer = worker.producer(TestNativeProducer(bindings));
-          worker.activate();
-          for (var threadId = 0; threadId < threads.ref.count; threadId++) {
-            final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor;
-            for (var messageId = 0; messageId < messages; messageId++) {
-              calls.add(producer.testThreadingCallNativeEcho(interactor.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3])));
-            }
-          }
-          final results = await Future.wait(calls);
-          results.forEach((result) {
-            expect(ListEquality().equals(result.outputBuffer, [1, 2, 3]), true);
-            result.releaseOutputBuffer();
-            result.release();
-          });
-          Isolate.exit();
-        },
+      errorPorts.add(errorPort);
+      final isolate = Isolate.spawn<List<SendPort>>(
+        _callNativeIsolate,
         onError: errorPort.sendPort,
-        onExit: exitPort.sendPort,
-        interactor.worker(InteractorDefaults.worker()),
+        [interactor.worker(InteractorDefaults.worker()), exitPort.sendPort],
       );
       spawnedIsolates.add(isolate);
     }
 
-    errorIsolates.forEach(
+    errorPorts.forEach(
       (element) => element.listen((message) {
-        element.close();
+        exitPorts.forEach((port) => port.close());
+        errorPorts.forEach((port) => port.close());
         fail(message.toString());
       }),
     );
 
     await Future.wait(spawnedIsolates);
     while (bindings.test_threading_call_native_check() < messages * isolates) await Future.delayed(Duration(milliseconds: 100));
+    await Future.wait(exitPorts.map((port) => port.first));
+
+    bindings.test_threading_destroy();
+
+    exitPorts.forEach((port) => port.close());
+    errorPorts.forEach((port) => port.close());
 
     await interactor.shutdown();
-    //bindings.test_interactor_destroy(native);
   });
+}
+
+Future<void> _callNativeIsolate(List<SendPort> input) async {
+  final messages = 1024;
+  final bindings = loadBindings();
+  final threads = bindings.test_threading_threads();
+  final calls = <Future<InteractorCall>>[];
+  final worker = InteractorWorker(input[0]);
+  await worker.initialize();
+  final producer = worker.producer(TestNativeProducer(bindings));
+  worker.activate();
+  for (var threadId = 0; threadId < threads.ref.count; threadId++) {
+    final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor;
+    for (var messageId = 0; messageId < messages; messageId++) {
+      calls.add(producer.testThreadingCallNativeEcho(interactor.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3])));
+    }
+  }
+  final results = await Future.wait(calls);
+  results.forEach((result) {
+    if (!ListEquality().equals(result.outputBuffer, [1, 2, 3])) {
+      throw TestFailure("outputBuffer != ${[1, 2, 3]}");
+    }
+    result.releaseOutputBuffer();
+    result.release();
+  });
+  input[1].send(null);
 }
 
 void testThreadingDart() {

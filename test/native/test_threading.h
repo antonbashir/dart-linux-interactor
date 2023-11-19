@@ -31,6 +31,7 @@ extern "C"
     test_threads_t* test_threading_threads();
     void test_threading_call_native_echo(interactor_message_t* message);
     int test_threading_call_native_check();
+    void test_threading_destroy();
 
 #if defined(__cplusplus)
 }

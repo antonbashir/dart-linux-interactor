@@ -6337,6 +6337,16 @@ class TestBindings {
   late final _test_threading_call_native_check =
       _test_threading_call_native_checkPtr.asFunction<int Function()>();
 
+  void test_threading_destroy() {
+    return _test_threading_destroy();
+  }
+
+  late final _test_threading_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'test_threading_destroy');
+  late final _test_threading_destroy =
+      _test_threading_destroyPtr.asFunction<void Function()>();
+
   late final addresses = _SymbolAddresses(this);
 }
 
@@ -7934,6 +7944,8 @@ class _SymbolAddresses {
   ffi.Pointer<ffi.NativeFunction<ffi.Int Function()>>
       get test_threading_call_native_check =>
           _library._test_threading_call_native_checkPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>
+      get test_threading_destroy => _library._test_threading_destroyPtr;
 }
 
 final class max_align_t extends ffi.Opaque {}
@@ -9885,6 +9897,9 @@ final class test_thread extends ffi.Struct {
 
   @ffi.Size()
   external int messages_count;
+
+  @ffi.Size()
+  external int received_messages_count;
 
   external pthread_cond_t shutdown_condition;
 

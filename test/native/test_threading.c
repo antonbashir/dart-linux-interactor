@@ -29,7 +29,9 @@ static void* thread_function(void* thread)
     {
         pthread_mutex_lock(&casted->shutdown_mutex);
         pthread_cond_wait(&casted->shutdown_condition, &casted->shutdown_mutex);
+        pthread_mutex_unlock(&casted->shutdown_mutex);
     }
+    test_interactor_destroy(casted->interactor);
     return NULL;
 }
 
@@ -86,5 +88,19 @@ void test_threading_call_native_echo(interactor_message_t* message)
         message->output_size = message->input_size;
         thread->messages[thread->received_messages_count] = message;
         thread->received_messages_count++;
+    }
+}
+
+void test_threading_destroy()
+{
+    for (int thread_id = 0; thread_id < threads.count; thread_id++)
+    {
+        threads.threads[thread_id]->alive = false;
+        pthread_mutex_lock(&threads.threads[thread_id]->shutdown_mutex);
+        pthread_cond_signal(&threads.threads[thread_id]->shutdown_condition);
+        pthread_mutex_unlock(&threads.threads[thread_id]->shutdown_mutex);
+        while (threads.threads[thread_id]->alive)
+        {
+        }
     }
 }
