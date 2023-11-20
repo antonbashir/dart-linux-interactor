@@ -278,7 +278,7 @@ int interactor_native_submit(interactor_native_t* interactor)
     return io_uring_submit(interactor->ring);
 }
 
-void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout)
+void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message)
 {
     message->source = interactor->ring->ring_fd;
     message->target = target_ring_fd;

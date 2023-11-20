@@ -57,7 +57,6 @@ class InteractorMessages {
 }
 
 const interactorBufferUsed = -1;
-const interactorTimeoutInfinity = -1;
 
 const interactorDartCallback = 1 << 0;
 const interactorNativeCallback = 1 << 1;

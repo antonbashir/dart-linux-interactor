@@ -151,7 +151,7 @@ int interactor_dart_peek(interactor_dart_t* interactor)
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
 }
 
-void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout)
+void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message)
 {
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     message->source = interactor->ring->ring_fd;

@@ -2967,6 +2967,50 @@ class InteractorBindings {
           .asFunction<void Function(ffi.Pointer<interactor_native_t>)>(
               isLeaf: true);
 
+  void interactor_native_foreach(
+    ffi.Pointer<interactor_native_t> interactor,
+    ffi.Pointer<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<interactor_message_t>)>>
+        call,
+    ffi.Pointer<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<interactor_message_t>)>>
+        callback,
+  ) {
+    return _interactor_native_foreach(
+      interactor,
+      call,
+      callback,
+    );
+  }
+
+  late final _interactor_native_foreachPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_native_t>,
+                  ffi
+                      .Pointer<
+                          ffi.NativeFunction<
+                              ffi.Void Function(
+                                  ffi.Pointer<interactor_message_t>)>>,
+                  ffi.Pointer<
+                      ffi.NativeFunction<
+                          ffi.Void Function(
+                              ffi.Pointer<interactor_message_t>)>>)>>(
+      'interactor_native_foreach');
+  late final _interactor_native_foreach =
+      _interactor_native_foreachPtr.asFunction<
+          void Function(
+              ffi.Pointer<interactor_native_t>,
+              ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(ffi.Pointer<interactor_message_t>)>>,
+              ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(
+                          ffi.Pointer<interactor_message_t>)>>)>(isLeaf: true);
+
   int interactor_native_submit(
     ffi.Pointer<interactor_native_t> interactor,
   ) {
@@ -2986,27 +3030,23 @@ class InteractorBindings {
     ffi.Pointer<interactor_native_t> interactor,
     int target_ring_fd,
     ffi.Pointer<interactor_message_t> message,
-    int timeout,
   ) {
     return _interactor_native_call_dart(
       interactor,
       target_ring_fd,
       message,
-      timeout,
     );
   }
 
   late final _interactor_native_call_dartPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<interactor_native_t>,
-              ffi.Int,
-              ffi.Pointer<interactor_message_t>,
-              ffi.Int64)>>('interactor_native_call_dart');
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int,
+                  ffi.Pointer<interactor_message_t>)>>(
+      'interactor_native_call_dart');
   late final _interactor_native_call_dart =
       _interactor_native_call_dartPtr.asFunction<
           void Function(ffi.Pointer<interactor_native_t>, int,
-              ffi.Pointer<interactor_message_t>, int)>(isLeaf: true);
+              ffi.Pointer<interactor_message_t>)>(isLeaf: true);
 
   void interactor_native_callback_to_dart(
     ffi.Pointer<interactor_native_t> interactor,
@@ -12746,27 +12786,23 @@ class InteractorBindings {
     ffi.Pointer<interactor_dart_t> interactor,
     int target_ring_fd,
     ffi.Pointer<interactor_message_t> message,
-    int timeout,
   ) {
     return _interactor_dart_call_native(
       interactor,
       target_ring_fd,
       message,
-      timeout,
     );
   }
 
   late final _interactor_dart_call_nativePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<interactor_dart_t>,
-              ffi.Int,
-              ffi.Pointer<interactor_message_t>,
-              ffi.Int64)>>('interactor_dart_call_native');
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Int,
+                  ffi.Pointer<interactor_message_t>)>>(
+      'interactor_dart_call_native');
   late final _interactor_dart_call_native =
       _interactor_dart_call_nativePtr.asFunction<
           void Function(ffi.Pointer<interactor_dart_t>, int,
-              ffi.Pointer<interactor_message_t>, int)>(isLeaf: true);
+              ffi.Pointer<interactor_message_t>)>(isLeaf: true);
 
   void interactor_dart_callback_to_native(
     ffi.Pointer<interactor_dart_t> interactor,
@@ -13550,17 +13586,29 @@ class _SymbolAddresses {
       get interactor_native_process_timeout =>
           _library._interactor_native_process_timeoutPtr;
   ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_native_t>,
+                  ffi
+                      .Pointer<
+                          ffi.NativeFunction<
+                              ffi.Void Function(
+                                  ffi.Pointer<interactor_message_t>)>>,
+                  ffi.Pointer<
+                      ffi.NativeFunction<
+                          ffi.Void Function(
+                              ffi.Pointer<interactor_message_t>)>>)>>
+      get interactor_native_foreach => _library._interactor_native_foreachPtr;
+  ffi.Pointer<
           ffi
           .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_submit => _library._interactor_native_submitPtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<interactor_native_t>,
-              ffi.Int,
-              ffi.Pointer<interactor_message_t>,
-              ffi.Int64)>> get interactor_native_call_dart =>
-      _library._interactor_native_call_dartPtr;
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int,
+                  ffi.Pointer<interactor_message_t>)>>
+      get interactor_native_call_dart =>
+          _library._interactor_native_call_dartPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(ffi.Pointer<interactor_native_t>,
@@ -15721,13 +15769,11 @@ class _SymbolAddresses {
           ffi.NativeFunction<ffi.Int Function(ffi.Pointer<interactor_dart_t>)>>
       get interactor_dart_peek => _library._interactor_dart_peekPtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<interactor_dart_t>,
-              ffi.Int,
-              ffi.Pointer<interactor_message_t>,
-              ffi.Int64)>> get interactor_dart_call_native =>
-      _library._interactor_dart_call_nativePtr;
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Int,
+                  ffi.Pointer<interactor_message_t>)>>
+      get interactor_dart_call_native =>
+          _library._interactor_dart_call_nativePtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(ffi.Pointer<interactor_dart_t>,

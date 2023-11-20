@@ -99,7 +99,7 @@ void test_threading_call_dart_bytes(int32_t target, uintptr_t method, const uint
         message->input_size = count;
         message->owner = 0;
         message->method = method;
-        interactor_native_call_dart(thread->interactor, target, message, -1);
+        interactor_native_call_dart(thread->interactor, target, message);
         interactor_native_submit(thread->interactor);
     }
 }

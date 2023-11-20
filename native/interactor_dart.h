@@ -78,7 +78,7 @@ extern "C"
 
     int interactor_dart_peek(interactor_dart_t* interactor);
 
-    void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout);
+    void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_fd, interactor_message_t* message);
     void interactor_dart_callback_to_native(interactor_dart_t* interactor, interactor_message_t* message);
 
     void interactor_dart_cqe_advance(struct io_uring* ring, int count);

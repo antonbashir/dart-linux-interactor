@@ -78,7 +78,7 @@ extern "C"
 
     int interactor_native_submit(interactor_native_t* interactor);
 
-    void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message, int64_t timeout);
+    void interactor_native_call_dart(interactor_native_t* interactor, int target_ring_fd, interactor_message_t* message);
     void interactor_native_callback_to_dart(interactor_native_t* interactor, interactor_message_t* message);
 
     void interactor_native_destroy(interactor_native_t* interactor);
