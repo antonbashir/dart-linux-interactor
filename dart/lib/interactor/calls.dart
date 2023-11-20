@@ -47,6 +47,8 @@ class InteractorCall {
     delegate.register(this);
   }
 
+  int get id => _message.ref.id;
+
   @pragma(preferInlinePragma)
   void setInputInt(int data) {
     _message.ref.input = Pointer.fromAddress(data);

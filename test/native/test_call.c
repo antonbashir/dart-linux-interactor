@@ -129,6 +129,8 @@ void test_call_dart_callback(interactor_message_t* message)
 
 interactor_message_t* test_call_dart_check(interactor_native_t* interactor)
 {
-    test_interactor_process_callbacks(interactor, test_call_dart_callback);
+    interactor_native_register_callback(interactor, 0, 0, test_call_dart_callback);
+    interactor_native_process_timeout(interactor);
+    interactor_native_submit(interactor);
     return current_message;
 }

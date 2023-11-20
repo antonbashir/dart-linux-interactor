@@ -1,5 +1,6 @@
 #include "test_threading.h"
 #include <pthread.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "interactor_constants.h"
@@ -26,11 +27,10 @@ static void* test_threading_run(void* thread)
     test_thread_t* casted = (test_thread_t*)thread;
     casted->interactor = test_interactor_initialize();
     casted->alive = true;
+    interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
     while (casted->alive)
     {
         interactor_native_process_timeout(casted->interactor);
-        interactor_native_submit(casted->interactor);
-        test_interactor_process_callbacks(casted->interactor, test_threading_call_dart_callback);
     }
     test_interactor_destroy(casted->interactor);
     return NULL;

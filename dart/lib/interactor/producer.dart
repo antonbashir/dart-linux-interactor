@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ffi';
+import 'dart:math';
 
 import 'bindings.dart';
 import 'buffers.dart';
@@ -57,6 +58,15 @@ class NativeMethodExecutor {
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
 
+  var _nextId = 0;
+  int get nextId {
+    if (_nextId > pow(2, 63) - 1) {
+      _nextId = 0;
+      return 0;
+    }
+    return ++_nextId;
+  }
+
   NativeMethodExecutor(
     this._methodId,
     this._executorId,
@@ -84,12 +94,15 @@ class NativeMethodExecutor {
       delegate,
     );
     call = configurator?.call(call) ?? call;
-    message.ref.id = completer.hashCode;
+    message.ref.id = nextId;
     message.ref.owner = _executorId;
     message.ref.method = _methodId;
-    _calls[completer.hashCode] = delegate;
+    _calls[_nextId] = delegate;
     _bindings.interactor_dart_call_native(_interactor, target, message, timeout?.inMilliseconds ?? interactorTimeoutInfinity);
-    return completer.future.whenComplete(() => _calls.remove(completer.hashCode));
+    return completer.future.then((message) {
+      _calls.remove(message.id);
+      return message;
+    });
   }
 
   @pragma(preferInlinePragma)

@@ -4,6 +4,7 @@ import 'package:linux_interactor_test/bindings.dart';
 
 class TestNativeProducer implements NativeProducer {
   final TestBindings _bindings;
+  
   TestNativeProducer(this._bindings);
 
   late final NativeMethodExecutor testCallNative;

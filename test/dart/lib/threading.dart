@@ -52,7 +52,7 @@ void testThreadingNative() {
     );
 
     await Future.wait(spawnedIsolates);
-    while (bindings.test_threading_call_native_check() < messages * isolates) await Future.delayed(Duration(milliseconds: 100));
+    while (bindings.test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 100));
     await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
@@ -110,7 +110,7 @@ void testThreadingDart() {
       }
     });
 
-    while (bindings.test_threading_call_dart_check() < messages * isolates) await Future.delayed(Duration(milliseconds: 100));
+    while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 100));
     await Future.wait(exitPorts.map((port) => port.first));
 
     bindings.test_threading_destroy();
@@ -132,9 +132,9 @@ Future<void> _callNativeIsolate(List<dynamic> input) async {
   final producer = worker.producer(TestNativeProducer(bindings));
   worker.activate();
   for (var threadId = 0; threadId < threads.ref.count; threadId++) {
-    final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor;
+    final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor.ref.ring.ref.ring_fd;
     for (var messageId = 0; messageId < messages; messageId++) {
-      calls.add(producer.testThreadingCallNative(interactor.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3])));
+      calls.add(producer.testThreadingCallNative(interactor, configurator: (message) => message..setInputBuffer([1, 2, 3])));
     }
   }
   (await Future.wait(calls)).forEach((result) {
@@ -152,12 +152,10 @@ Future<void> _callDartIsolate(List<dynamic> input) async {
   final worker = InteractorWorker(input[1]);
   await worker.initialize();
   var count = 0;
-
   final completer = Completer();
-
   worker.consumer(TestNativeConsumer(
-    (message) {
-      if (!ListEquality().equals(message.inputBytes, [1, 2, 3])) {
+    (notification) {
+      if (!ListEquality().equals(notification.inputBytes, [1, 2, 3])) {
         completer.completeError(throw TestFailure("inputBytes != ${[1, 2, 3]}"));
       }
       if (++count == messages) {

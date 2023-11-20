@@ -12,14 +12,6 @@ interactor_native_t* test_interactor_initialize()
     return test_interactor;
 }
 
-void test_interactor_process_callbacks(interactor_native_t* interactor, void(on_callback)(interactor_message_t*))
-{
-    if (interactor_native_peek_timeout(interactor) > 0)
-    {
-        interactor_native_foreach_callback(interactor, on_callback);
-    }
-}
-
 void test_interactor_destroy(interactor_native_t* interactor)
 {
     interactor_native_destroy(interactor);

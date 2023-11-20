@@ -75,8 +75,6 @@ extern "C"
     void interactor_native_process_timeout(interactor_native_t* interactor);
 
     void interactor_native_foreach(interactor_native_t* interactor, void (*call)(interactor_message_t*), void (*callback)(interactor_message_t*));
-    void interactor_native_foreach_call(interactor_native_t* interactor, void (*call)(interactor_message_t*));
-    void interactor_native_foreach_callback(interactor_native_t* interactor, void (*callback)(interactor_message_t*));
 
     int interactor_native_submit(interactor_native_t* interactor);
 
