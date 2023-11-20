@@ -97,7 +97,7 @@ class InteractorCall {
   }
 
   @pragma(preferInlinePragma)
-  Future<void> setInputBytes(List<int> bytes) async {
+  void setInputBytes(List<int> bytes) {
     final Pointer<Uint8> pointer = _datas.allocate(bytes.length).cast();
     pointer.asTypedList(bytes.length).setAll(0, bytes);
     _message.ref.input = pointer.cast();
@@ -134,6 +134,7 @@ class InteractorCall {
   @pragma(preferInlinePragma)
   void releaseOutputBytes() => _datas.free(_message.ref.output, _message.ref.output_size);
 
+  late final int outputSize = _message.ref.output_size;
   late final bool outputBool = _message.ref.output.address == 1;
   late final int outputInt = _message.ref.output.address;
   late final double outputDouble = _message.ref.output.cast<Double>().value;

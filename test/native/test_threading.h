@@ -17,6 +17,8 @@ extern "C"
         interactor_message_t** messages;
         size_t messages_count;
         size_t received_messages_count;
+        pthread_cond_t shutdown_condition;
+        pthread_mutex_t shutdown_mutex;
     } test_thread_t;
 
     typedef struct test_threads

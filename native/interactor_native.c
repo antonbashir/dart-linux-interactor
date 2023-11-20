@@ -64,12 +64,6 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
         return result;
     }
 
-    result = io_uring_register_buffers(interactor->ring, interactor->buffers, interactor->buffers_count);
-    if (result)
-    {
-        return result;
-    }
-
     return 0;
 }
 

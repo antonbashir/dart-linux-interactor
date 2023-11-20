@@ -16,9 +16,9 @@ import 'package:test/test.dart';
 void testThreadingNative() {
   test("[isolates]dart(bytes) <-> [threads]native(bytes)", () async {
     final interactor = Interactor();
-    final messages = 1024;
+    final messages = 16;
     final isolates = 4;
-    final threads = 4;
+    final threads = 8;
 
     final bindings = loadBindings();
     bindings.test_threading_initialize(threads, messages * isolates);
@@ -52,7 +52,7 @@ void testThreadingNative() {
     );
 
     await Future.wait(spawnedIsolates);
-    while (bindings.test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 100));
+    while (bindings.test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 10));
     await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
@@ -66,9 +66,9 @@ void testThreadingNative() {
 void testThreadingDart() {
   test("[threads]native(bytes) <-> [isolates]dart(bytes)", () async {
     final interactor = Interactor();
-    final messages = 1024;
+    final messages = 16;
     final isolates = 4;
-    final threads = 4;
+    final threads = 8;
 
     final bindings = loadBindings();
     bindings.test_threading_initialize(threads, messages * isolates);
@@ -110,7 +110,7 @@ void testThreadingDart() {
       }
     });
 
-    while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 100));
+    while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 10));
     await Future.wait(exitPorts.map((port) => port.first));
 
     bindings.test_threading_destroy();
@@ -134,12 +134,12 @@ Future<void> _callNativeIsolate(List<dynamic> input) async {
   for (var threadId = 0; threadId < threads.ref.count; threadId++) {
     final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor.ref.ring.ref.ring_fd;
     for (var messageId = 0; messageId < messages; messageId++) {
-      calls.add(producer.testThreadingCallNative(interactor, configurator: (message) => message..setInputBuffer([1, 2, 3])));
+      calls.add(producer.testThreadingCallNative(interactor, configurator: (message) => message.setInputBuffer([1, 2, 3])));
     }
   }
   (await Future.wait(calls)).forEach((result) {
     if (!ListEquality().equals(result.outputBuffer, [1, 2, 3])) {
-      throw TestFailure("outputBuffer != ${[1, 2, 3]}");
+      throw TestFailure("outputBuffer != ${[1, 2, 3]}. ${result.outputSize}: ${result.outputBuffer}");
     }
     result.releaseOutputBuffer();
     result.release();

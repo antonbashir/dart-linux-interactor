@@ -26,13 +26,17 @@ static void* test_threading_run(void* thread)
 {
     test_thread_t* casted = (test_thread_t*)thread;
     casted->interactor = test_interactor_initialize();
-    casted->alive = true;
     interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
+    interactor_native_process_timeout(casted->interactor);
+    casted->alive = true;
     while (casted->alive)
     {
         interactor_native_process_timeout(casted->interactor);
     }
+    pthread_mutex_lock(&casted->shutdown_mutex);
     test_interactor_destroy(casted->interactor);
+    pthread_cond_signal(&casted->shutdown_condition);
+    pthread_mutex_unlock(&casted->shutdown_mutex);
     return NULL;
 }
 
@@ -53,6 +57,8 @@ void test_threading_initialize(int thread_count, int messages_count)
         threads.threads[threadId]->messages = malloc(messages_count * sizeof(interactor_message_t*));
         pthread_t thread;
         pthread_create(&thread, NULL, test_threading_run, threads.threads[threadId]);
+        pthread_mutex_init(&threads.threads[threadId]->shutdown_mutex, NULL);
+        pthread_cond_init(&threads.threads[threadId]->shutdown_condition, NULL);
         while (!threads.threads[threadId]->alive)
         {
         }
@@ -125,8 +131,8 @@ void test_threading_destroy()
     for (int thread_id = 0; thread_id < threads.count; thread_id++)
     {
         threads.threads[thread_id]->alive = false;
-        while (threads.threads[thread_id]->alive)
-        {
-        }
+        pthread_mutex_lock(&threads.threads[thread_id]->shutdown_mutex);
+        pthread_cond_wait(&threads.threads[thread_id]->shutdown_condition, &threads.threads[thread_id]->shutdown_mutex);
+        pthread_mutex_unlock(&threads.threads[thread_id]->shutdown_mutex);
     }
 }

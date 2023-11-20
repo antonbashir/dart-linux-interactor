@@ -40,7 +40,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBool(true));
+    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputBool(true));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputBool, true);
@@ -58,7 +58,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputInt(123));
+    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputInt(123));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputInt, 123);
@@ -76,7 +76,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputDouble(123.45));
+    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputDouble(123.45));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputDouble, 123.45);
@@ -94,7 +94,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputString("test"));
+    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputString("test"));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputString, "test");
@@ -142,7 +142,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBuffer([1, 2, 3]));
+    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputBuffer([1, 2, 3]));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBuffer, [1, 2, 3]));
@@ -160,7 +160,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message..setInputBytes([1, 2, 3]));
+    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputBytes([1, 2, 3]));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBytes, [1, 2, 3]));
@@ -325,7 +325,7 @@ Future<void> _awaitDartCall(TestBindings bindings, Pointer<interactor_native_t> 
   while (true) {
     final result = bindings.test_call_dart_check(native);
     if (result == nullptr) {
-      await Future.delayed(Duration(milliseconds: 100));
+      await Future.delayed(Duration(milliseconds: 10));
       continue;
     }
     break;
@@ -333,5 +333,5 @@ Future<void> _awaitDartCall(TestBindings bindings, Pointer<interactor_native_t> 
 }
 
 Future<void> _awaitNativeCall(TestBindings bindings, Pointer<interactor_native_t> native) async {
-  while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 100));
+  while (!bindings.test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 10));
 }

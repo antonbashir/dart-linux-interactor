@@ -65,12 +65,6 @@ int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_co
         return result;
     }
 
-    result = io_uring_register_buffers(interactor->ring, interactor->buffers, interactor->buffers_count);
-    if (result)
-    {
-        return result;
-    }
-
     return interactor->ring->ring_fd;
 }
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ffi';
-import 'dart:math';
 
 import 'bindings.dart';
 import 'buffers.dart';
@@ -60,7 +59,7 @@ class NativeMethodExecutor {
 
   var _nextId = 0;
   int get nextId {
-    if (_nextId > pow(2, 63) - 1) {
+    if (_nextId == intMaxValue - 1) {
       _nextId = 0;
       return 0;
     }
@@ -78,7 +77,7 @@ class NativeMethodExecutor {
   );
 
   @pragma(preferInlinePragma)
-  Future<InteractorCall> call(int target, {InteractorCall Function(InteractorCall message)? configurator, Duration? timeout}) {
+  Future<InteractorCall> call(int target, {FutureOr<void> Function(InteractorCall message)? configurator, Duration? timeout}) {
     final message = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
     final delegate = InteractorCallDelegate(
@@ -93,15 +92,27 @@ class NativeMethodExecutor {
       _datas,
       delegate,
     );
-    call = configurator?.call(call) ?? call;
-    message.ref.id = nextId;
-    message.ref.owner = _executorId;
-    message.ref.method = _methodId;
-    _calls[_nextId] = delegate;
-    _bindings.interactor_dart_call_native(_interactor, target, message, timeout?.inMilliseconds ?? interactorTimeoutInfinity);
-    return completer.future.then((message) {
-      _calls.remove(message.id);
-      return message;
+    if (configurator == null) {
+      message.ref.id = nextId;
+      message.ref.owner = _executorId;
+      message.ref.method = _methodId;
+      _calls[_nextId] = delegate;
+      _bindings.interactor_dart_call_native(_interactor, target, message, timeout?.inMilliseconds ?? interactorTimeoutInfinity);
+      return completer.future.then((message) {
+        _calls.remove(message.id);
+        return message;
+      });
+    }
+    return Future.value(configurator.call(call)).then((call) {
+      message.ref.id = nextId;
+      message.ref.owner = _executorId;
+      message.ref.method = _methodId;
+      _calls[_nextId] = delegate;
+      _bindings.interactor_dart_call_native(_interactor, target, message, timeout?.inMilliseconds ?? interactorTimeoutInfinity);
+      return completer.future.then((message) {
+        _calls.remove(message.id);
+        return message;
+      });
     });
   }
 

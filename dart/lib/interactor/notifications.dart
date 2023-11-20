@@ -13,6 +13,7 @@ class InteractorNotification {
 
   InteractorNotification(this._message);
 
+  late final int inputSize = _message.ref.input_size;
   late final bool inputBool = _message.ref.input.address == 1;
   late final int inputInt = _message.ref.input.address;
   late final double inputDouble = _message.ref.input.cast<Double>().value;
