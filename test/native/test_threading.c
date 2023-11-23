@@ -17,17 +17,14 @@ test_threads_t* test_threading_threads()
 
 static inline test_thread_t* test_threading_thread_by_fd(int fd)
 {
-    pthread_mutex_lock(&threads.global_working_mutex);
     test_thread_t* thread = NULL;
     for (int id = 0; id < threads.count; id++)
     {
         if (threads.threads[id]->interactor->ring->ring_fd == fd)
         {
-            thread = threads.threads[id];
-            break;
+            return threads.threads[id];
         }
     }
-    pthread_mutex_unlock(&threads.global_working_mutex);
     return thread;
 }
 
@@ -101,6 +98,7 @@ int test_threading_call_dart_check()
 
 void test_threading_call_native(interactor_message_t* message)
 {
+    pthread_mutex_lock(&threads.global_working_mutex);
     test_thread_t* thread = test_threading_thread_by_fd(message->target);
     if (thread)
     {
@@ -109,6 +107,7 @@ void test_threading_call_native(interactor_message_t* message)
         thread->messages[thread->received_messages_count] = message;
         thread->received_messages_count++;
     }
+    pthread_mutex_unlock(&threads.global_working_mutex);
 }
 
 void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t target_count)
@@ -140,6 +139,7 @@ void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t target_cou
 
 void test_threading_call_dart_callback(interactor_message_t* message)
 {
+    pthread_mutex_lock(&threads.global_working_mutex);
     test_thread_t* thread = test_threading_thread_by_fd(message->target);
     if (thread)
     {
@@ -148,6 +148,7 @@ void test_threading_call_dart_callback(interactor_message_t* message)
         thread->messages[thread->received_messages_count] = message;
         thread->received_messages_count++;
     }
+    pthread_mutex_unlock(&threads.global_working_mutex);
 }
 
 void test_threading_destroy()

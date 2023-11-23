@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Native build
-        run: cd native && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo . && make -j
+        run: cd native && cmake --clean -DCMAKE_BUILD_TYPE=RelWithDebInfo . && make clean && make -j
 
       - name: Native build test
-        run: cd test/native && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo . && make -j 
+        run: cd test/native && cmake --clean -DCMAKE_BUILD_TYPE=RelWithDebInfo . && make clean && make -j 
 
       - name: Dart test
         run: cd test/dart && dart pub get && dart run lib/test.dart
