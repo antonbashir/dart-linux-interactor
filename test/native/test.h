@@ -8,7 +8,6 @@ extern "C"
 {
 #endif
 
-    void test_initialize();
     interactor_native_t* test_interactor_initialize();
     void test_interactor_destroy(interactor_native_t* interactor);
 

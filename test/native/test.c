@@ -9,33 +9,22 @@
 
 static pthread_mutex_t mutex;
 
-void test_initialize()
-{
-    pthread_mutex_init(&mutex, NULL);
-}
-
 interactor_native_t* test_interactor_initialize()
 {
-    pthread_mutex_lock(&mutex);
     interactor_native_t* test_interactor = malloc(sizeof(interactor_native_t));
     if (!test_interactor)
     {
-        pthread_mutex_unlock(&mutex);
         return NULL;
     }
     int result = interactor_native_initialize_default(test_interactor, 0);
     if (result != 0)
     {
-        pthread_mutex_unlock(&mutex);
         return NULL;
     }
-    pthread_mutex_unlock(&mutex);
     return test_interactor;
 }
 
 void test_interactor_destroy(interactor_native_t* interactor)
 {
-    pthread_mutex_lock(&mutex);
     interactor_native_destroy(interactor);
-    pthread_mutex_unlock(&mutex);
 }
