@@ -20,15 +20,6 @@ set(HAVE_CLOCK_GETTIME_DECL ON)
 
 include(FetchContent)
 
-include(FetchContent)
-
-FetchContent_Declare(backward
-  GIT_REPOSITORY https://github.com/bombela/backward-cpp
-  GIT_TAG master
-  SYSTEM
-)
-FetchContent_MakeAvailable(backward)
-
 FetchContent_Declare(
   liburing
   URL "https://github.com/axboe/liburing/archive/refs/tags/${LIBURING_VERSION}.tar.gz"
@@ -82,5 +73,5 @@ include_directories(include)
 
 add_library(native SHARED ${sources})
 add_dependencies(native liburing small)
-target_link_libraries(native PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small Backward::Backward)
+target_link_libraries(native PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small)
 add_custom_command(TARGET native POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:native> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor.so)
