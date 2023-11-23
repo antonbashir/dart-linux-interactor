@@ -17,6 +17,18 @@ test_threads_t* test_threading_threads()
     return &threads;
 }
 
+int* test_threading_interactor_descriptors()
+{
+    int* descriptors = malloc(sizeof(int) * threads.count);
+    pthread_mutex_lock(&threads.global_working_mutex);
+    for (int id = 0; id < threads.count; id++)
+    {
+        descriptors[id] = interactor_native_descriptor(threads.threads[id]->interactor);
+    }
+    pthread_mutex_unlock(&threads.global_working_mutex);
+    return descriptors;
+}
+
 static inline test_thread_t* test_threading_thread_by_fd(int fd)
 {
     test_thread_t* thread = NULL;
@@ -35,25 +47,29 @@ static void* test_threading_run(void* thread)
     test_thread_t* casted = (test_thread_t*)thread;
     pthread_mutex_lock(&casted->initialize_mutex);
     casted->interactor = test_interactor_initialize();
+    casted->alive = false;
+    casted->failed = false;
     interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
+    if (!casted->interactor || interactor_native_descriptor(casted->interactor) == 0)
+    {
+        casted->failed = true;
+        pthread_cond_broadcast(&casted->initialize_condition);
+        pthread_mutex_unlock(&casted->initialize_mutex);
+        return NULL;
+    }
     casted->alive = true;
-    casted->stopped = false;
     pthread_cond_broadcast(&casted->initialize_condition);
     pthread_mutex_unlock(&casted->initialize_mutex);
     while (casted->alive)
     {
         interactor_native_process_timeout(casted->interactor);
     }
-    pthread_mutex_lock(&casted->shutdown_mutex);
     test_interactor_destroy(casted->interactor);
     free(casted->messages);
-    casted->stopped = true;
-    pthread_cond_broadcast(&casted->shutdown_condition);
-    pthread_mutex_unlock(&casted->shutdown_mutex);
     return NULL;
 }
 
-void test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count)
+bool test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count)
 {
     threads.count = thread_count;
     threads.threads = malloc(thread_count * sizeof(test_thread_t*));
@@ -64,22 +80,27 @@ void test_threading_initialize(int thread_count, int isolates_count, int per_thr
         threads.threads[thread_id]->whole_messages_count = per_thread_messages_count;
         threads.threads[thread_id]->received_messages_count = 0;
         threads.threads[thread_id]->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
-        pthread_mutex_init(&threads.threads[thread_id]->shutdown_mutex, NULL);
-        pthread_cond_init(&threads.threads[thread_id]->shutdown_condition, NULL);
         pthread_mutex_init(&threads.threads[thread_id]->initialize_mutex, NULL);
         pthread_cond_init(&threads.threads[thread_id]->initialize_condition, NULL);
 
-        pthread_t thread;
-        pthread_setname_np(thread, "test_threading");
-        pthread_create(&thread, NULL, test_threading_run, threads.threads[thread_id]);
+        pthread_create(&threads.threads[thread_id]->id, NULL, test_threading_run, threads.threads[thread_id]);
+        pthread_setname_np(threads.threads[thread_id]->id, "test_threading");
 
         pthread_mutex_lock(&threads.threads[thread_id]->initialize_mutex);
-        while (!threads.threads[thread_id]->alive)
+        while (true)
         {
-            pthread_cond_wait(&threads.threads[thread_id]->initialize_condition, &threads.threads[thread_id]->initialize_mutex);
+            struct timespec timeout = {.tv_sec = 1};
+            pthread_cond_timedwait(&threads.threads[thread_id]->initialize_condition, &threads.threads[thread_id]->initialize_mutex, &timeout);
+            if (threads.threads[thread_id]->alive || threads.threads[thread_id]->failed) break;
+        }
+        if (threads.threads[thread_id]->failed)
+        {
+            printf("failed to initialized thread\n");
+            return false;
         }
         pthread_mutex_unlock(&threads.threads[thread_id]->initialize_mutex);
     }
+    return true;
 }
 
 int test_threading_call_native_check()
@@ -165,13 +186,8 @@ void test_threading_destroy()
 {
     for (int thread_id = 0; thread_id < threads.count; thread_id++)
     {
-        pthread_mutex_lock(&threads.threads[thread_id]->shutdown_mutex);
         threads.threads[thread_id]->alive = false;
-        while (!threads.threads[thread_id]->stopped)
-        {
-            pthread_cond_wait(&threads.threads[thread_id]->shutdown_condition, &threads.threads[thread_id]->shutdown_mutex);
-        }
-        pthread_mutex_unlock(&threads.threads[thread_id]->shutdown_mutex);
+        pthread_join(threads.threads[thread_id]->id, NULL);
         free(threads.threads[thread_id]);
     }
 }

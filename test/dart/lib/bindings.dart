@@ -3822,7 +3822,7 @@ class TestBindings {
       _io_uring_check_versionPtr.asFunction<bool Function(int, int)>();
 
   int interactor_native_initialize(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     ffi.Pointer<interactor_native_configuration_t> configuration,
     int id,
   ) {
@@ -3836,16 +3836,16 @@ class TestBindings {
   late final _interactor_native_initializePtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Pointer<interactor_native_configuration_t>,
               ffi.Uint8)>>('interactor_native_initialize');
   late final _interactor_native_initialize =
       _interactor_native_initializePtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+          int Function(ffi.Pointer<interactor_native_t>,
               ffi.Pointer<interactor_native_configuration_t>, int)>();
 
   int interactor_native_initialize_default(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int id,
   ) {
     return _interactor_native_initialize_default(
@@ -3856,15 +3856,14 @@ class TestBindings {
 
   late final _interactor_native_initialize_defaultPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+          ffi.Int Function(ffi.Pointer<interactor_native_t>,
               ffi.Uint8)>>('interactor_native_initialize_default');
   late final _interactor_native_initialize_default =
-      _interactor_native_initialize_defaultPtr.asFunction<
-          int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+      _interactor_native_initialize_defaultPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>, int)>();
 
   void interactor_native_register_callback(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int owner,
     int method,
     ffi.Pointer<
@@ -3884,7 +3883,7 @@ class TestBindings {
   late final _interactor_native_register_callbackPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+                  ffi.Pointer<interactor_native_t>,
                   ffi.Uint64,
                   ffi.Uint64,
                   ffi.Pointer<
@@ -3896,7 +3895,7 @@ class TestBindings {
   late final _interactor_native_register_callback =
       _interactor_native_register_callbackPtr.asFunction<
           void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               int,
               int,
               ffi.Pointer<
@@ -3906,7 +3905,7 @@ class TestBindings {
                               linux_interactor.interactor_message_t>)>>)>();
 
   int interactor_native_get_buffer(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_get_buffer(
       interactor,
@@ -3915,15 +3914,13 @@ class TestBindings {
 
   late final _interactor_native_get_bufferPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+              ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_get_buffer');
-  late final _interactor_native_get_buffer =
-      _interactor_native_get_bufferPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_get_buffer = _interactor_native_get_bufferPtr
+      .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_release_buffer(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int buffer_id,
   ) {
     return _interactor_native_release_buffer(
@@ -3934,15 +3931,14 @@ class TestBindings {
 
   late final _interactor_native_release_bufferPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+          ffi.Void Function(ffi.Pointer<interactor_native_t>,
               ffi.Uint16)>>('interactor_native_release_buffer');
   late final _interactor_native_release_buffer =
-      _interactor_native_release_bufferPtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+      _interactor_native_release_bufferPtr
+          .asFunction<void Function(ffi.Pointer<interactor_native_t>, int)>();
 
   int interactor_native_available_buffers(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_available_buffers(
       interactor,
@@ -3951,15 +3947,14 @@ class TestBindings {
 
   late final _interactor_native_available_buffersPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+              ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_available_buffers');
   late final _interactor_native_available_buffers =
-      _interactor_native_available_buffersPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_available_buffersPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   int interactor_native_used_buffers(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_used_buffers(
       interactor,
@@ -3968,16 +3963,15 @@ class TestBindings {
 
   late final _interactor_native_used_buffersPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+              ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_used_buffers');
   late final _interactor_native_used_buffers =
-      _interactor_native_used_buffersPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_used_buffersPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   ffi.Pointer<linux_interactor.interactor_message_t>
       interactor_native_allocate_message(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_allocate_message(
       interactor,
@@ -3987,15 +3981,15 @@ class TestBindings {
   late final _interactor_native_allocate_messagePtr = _lookup<
           ffi.NativeFunction<
               ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+                  ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_allocate_message');
   late final _interactor_native_allocate_message =
       _interactor_native_allocate_messagePtr.asFunction<
           ffi.Pointer<linux_interactor.interactor_message_t> Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>)>();
+              ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_free_message(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
     return _interactor_native_free_message(
@@ -4006,17 +4000,16 @@ class TestBindings {
 
   late final _interactor_native_free_messagePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Void Function(ffi.Pointer<interactor_native_t>,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
       'interactor_native_free_message');
   late final _interactor_native_free_message =
       _interactor_native_free_messagePtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+          void Function(ffi.Pointer<interactor_native_t>,
               ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   ffi.Pointer<interactor_payload_pool> interactor_native_payload_pool_create(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int size,
   ) {
     return _interactor_native_payload_pool_create(
@@ -4028,12 +4021,12 @@ class TestBindings {
   late final _interactor_native_payload_pool_createPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<interactor_payload_pool> Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Size)>>('interactor_native_payload_pool_create');
   late final _interactor_native_payload_pool_create =
       _interactor_native_payload_pool_createPtr.asFunction<
           ffi.Pointer<interactor_payload_pool> Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+              ffi.Pointer<interactor_native_t>, int)>();
 
   int interactor_native_payload_allocate(
     ffi.Pointer<interactor_payload_pool> pool,
@@ -4086,7 +4079,7 @@ class TestBindings {
           .asFunction<void Function(ffi.Pointer<interactor_payload_pool>)>();
 
   int interactor_native_data_allocate(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int size,
   ) {
     return _interactor_native_data_allocate(
@@ -4097,15 +4090,14 @@ class TestBindings {
 
   late final _interactor_native_data_allocatePtr = _lookup<
       ffi.NativeFunction<
-          ffi.IntPtr Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+          ffi.IntPtr Function(ffi.Pointer<interactor_native_t>,
               ffi.Size)>>('interactor_native_data_allocate');
   late final _interactor_native_data_allocate =
-      _interactor_native_data_allocatePtr.asFunction<
-          int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int)>();
+      _interactor_native_data_allocatePtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>, int)>();
 
   void interactor_native_data_free(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int pointer,
     int size,
   ) {
@@ -4118,15 +4110,13 @@ class TestBindings {
 
   late final _interactor_native_data_freePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.IntPtr, ffi.Size)>>('interactor_native_data_free');
-  late final _interactor_native_data_free =
-      _interactor_native_data_freePtr.asFunction<
-          void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>, int, int)>();
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.IntPtr,
+              ffi.Size)>>('interactor_native_data_free');
+  late final _interactor_native_data_free = _interactor_native_data_freePtr
+      .asFunction<void Function(ffi.Pointer<interactor_native_t>, int, int)>();
 
   int interactor_native_peek_infinity(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_peek_infinity(
       interactor,
@@ -4134,16 +4124,15 @@ class TestBindings {
   }
 
   late final _interactor_native_peek_infinityPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_peek_infinity');
   late final _interactor_native_peek_infinity =
-      _interactor_native_peek_infinityPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_peek_infinityPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   int interactor_native_peek_timeout(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_peek_timeout(
       interactor,
@@ -4151,16 +4140,15 @@ class TestBindings {
   }
 
   late final _interactor_native_peek_timeoutPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_peek_timeout');
   late final _interactor_native_peek_timeout =
-      _interactor_native_peek_timeoutPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_peek_timeoutPtr
+          .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_process_infinity(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_process_infinity(
       interactor,
@@ -4168,16 +4156,15 @@ class TestBindings {
   }
 
   late final _interactor_native_process_infinityPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_process_infinity');
   late final _interactor_native_process_infinity =
-      _interactor_native_process_infinityPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_process_infinityPtr
+          .asFunction<void Function(ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_process_timeout(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_process_timeout(
       interactor,
@@ -4185,16 +4172,15 @@ class TestBindings {
   }
 
   late final _interactor_native_process_timeoutPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_process_timeout');
   late final _interactor_native_process_timeout =
-      _interactor_native_process_timeoutPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+      _interactor_native_process_timeoutPtr
+          .asFunction<void Function(ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_foreach(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     ffi.Pointer<
             ffi.NativeFunction<
                 ffi.Void Function(
@@ -4216,7 +4202,7 @@ class TestBindings {
   late final _interactor_native_foreachPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+                  ffi.Pointer<interactor_native_t>,
                   ffi
                       .Pointer<
                           ffi.NativeFunction<
@@ -4232,7 +4218,7 @@ class TestBindings {
   late final _interactor_native_foreach =
       _interactor_native_foreachPtr.asFunction<
           void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Pointer<
                   ffi.NativeFunction<
                       ffi.Void Function(
@@ -4244,7 +4230,7 @@ class TestBindings {
                               linux_interactor.interactor_message_t>)>>)>();
 
   int interactor_native_submit(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_submit(
       interactor,
@@ -4252,16 +4238,14 @@ class TestBindings {
   }
 
   late final _interactor_native_submitPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_submit');
-  late final _interactor_native_submit =
-      _interactor_native_submitPtr.asFunction<
-          int Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_submit = _interactor_native_submitPtr
+      .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_call_dart(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target_ring_fd,
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
@@ -4274,18 +4258,16 @@ class TestBindings {
 
   late final _interactor_native_call_dartPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Int,
+              ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
       'interactor_native_call_dart');
   late final _interactor_native_call_dart =
       _interactor_native_call_dartPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int,
+          void Function(ffi.Pointer<interactor_native_t>, int,
               ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void interactor_native_callback_to_dart(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     ffi.Pointer<linux_interactor.interactor_message_t> message,
   ) {
     return _interactor_native_callback_to_dart(
@@ -4296,17 +4278,16 @@ class TestBindings {
 
   late final _interactor_native_callback_to_dartPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Void Function(ffi.Pointer<interactor_native_t>,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>(
       'interactor_native_callback_to_dart');
   late final _interactor_native_callback_to_dart =
       _interactor_native_callback_to_dartPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
+          void Function(ffi.Pointer<interactor_native_t>,
               ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void interactor_native_destroy(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _interactor_native_destroy(
       interactor,
@@ -4314,13 +4295,26 @@ class TestBindings {
   }
 
   late final _interactor_native_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>(
       'interactor_native_destroy');
-  late final _interactor_native_destroy =
-      _interactor_native_destroyPtr.asFunction<
-          void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _interactor_native_destroy = _interactor_native_destroyPtr
+      .asFunction<void Function(ffi.Pointer<interactor_native_t>)>();
+
+  int interactor_native_descriptor(
+    ffi.Pointer<interactor_native_t> interactor,
+  ) {
+    return _interactor_native_descriptor(
+      interactor,
+    );
+  }
+
+  late final _interactor_native_descriptorPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>(
+      'interactor_native_descriptor');
+  late final _interactor_native_descriptor = _interactor_native_descriptorPtr
+      .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
 
   void interactor_native_close_descriptor(
     int fd,
@@ -4336,38 +4330,18 @@ class TestBindings {
   late final _interactor_native_close_descriptor =
       _interactor_native_close_descriptorPtr.asFunction<void Function(int)>();
 
-  void test_initialize() {
-    return _test_initialize();
-  }
-
-  late final _test_initializePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_initialize');
-  late final _test_initialize =
-      _test_initializePtr.asFunction<void Function()>();
-
-  void test_destroy() {
-    return _test_destroy();
-  }
-
-  late final _test_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_destroy');
-  late final _test_destroy = _test_destroyPtr.asFunction<void Function()>();
-
-  ffi.Pointer<linux_interactor.interactor_native_t>
-      test_interactor_initialize() {
+  ffi.Pointer<interactor_native_t> test_interactor_initialize() {
     return _test_interactor_initialize();
   }
 
-  late final _test_interactor_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<linux_interactor.interactor_native_t>
-              Function()>>('test_interactor_initialize');
-  late final _test_interactor_initialize =
-      _test_interactor_initializePtr.asFunction<
-          ffi.Pointer<linux_interactor.interactor_native_t> Function()>();
+  late final _test_interactor_initializePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<interactor_native_t> Function()>>(
+          'test_interactor_initialize');
+  late final _test_interactor_initialize = _test_interactor_initializePtr
+      .asFunction<ffi.Pointer<interactor_native_t> Function()>();
 
   void test_interactor_destroy(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _test_interactor_destroy(
       interactor,
@@ -4375,12 +4349,11 @@ class TestBindings {
   }
 
   late final _test_interactor_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>(
       'test_interactor_destroy');
-  late final _test_interactor_destroy = _test_interactor_destroyPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _test_interactor_destroy = _test_interactor_destroyPtr
+      .asFunction<void Function(ffi.Pointer<interactor_native_t>)>();
 
   void test_call_reset() {
     return _test_call_reset();
@@ -4392,7 +4365,7 @@ class TestBindings {
       _test_call_resetPtr.asFunction<void Function()>();
 
   bool test_call_native_check(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _test_call_native_check(
       interactor,
@@ -4400,12 +4373,11 @@ class TestBindings {
   }
 
   late final _test_call_native_checkPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Bool Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
+          ffi
+          .NativeFunction<ffi.Bool Function(ffi.Pointer<interactor_native_t>)>>(
       'test_call_native_check');
-  late final _test_call_native_check = _test_call_native_checkPtr.asFunction<
-      bool Function(ffi.Pointer<linux_interactor.interactor_native_t>)>();
+  late final _test_call_native_check = _test_call_native_checkPtr
+      .asFunction<bool Function(ffi.Pointer<interactor_native_t>)>();
 
   void test_call_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -4424,7 +4396,7 @@ class TestBindings {
       void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>();
 
   void test_call_dart_null(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
   ) {
@@ -4437,14 +4409,13 @@ class TestBindings {
 
   late final _test_call_dart_nullPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr)>>('test_call_dart_null');
-  late final _test_call_dart_null = _test_call_dart_nullPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int)>();
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+              ffi.UintPtr)>>('test_call_dart_null');
+  late final _test_call_dart_null = _test_call_dart_nullPtr
+      .asFunction<void Function(ffi.Pointer<interactor_native_t>, int, int)>();
 
   void test_call_dart_bool(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
     bool value,
@@ -4459,14 +4430,13 @@ class TestBindings {
 
   late final _test_call_dart_boolPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Bool)>>('test_call_dart_bool');
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+              ffi.UintPtr, ffi.Bool)>>('test_call_dart_bool');
   late final _test_call_dart_bool = _test_call_dart_boolPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int, bool)>();
+      void Function(ffi.Pointer<interactor_native_t>, int, int, bool)>();
 
   void test_call_dart_int(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
     int value,
@@ -4481,14 +4451,13 @@ class TestBindings {
 
   late final _test_call_dart_intPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Int)>>('test_call_dart_int');
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+              ffi.UintPtr, ffi.Int)>>('test_call_dart_int');
   late final _test_call_dart_int = _test_call_dart_intPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int, int)>();
+      void Function(ffi.Pointer<interactor_native_t>, int, int, int)>();
 
   void test_call_dart_double(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
     double value,
@@ -4503,14 +4472,13 @@ class TestBindings {
 
   late final _test_call_dart_doublePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Double)>>('test_call_dart_double');
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+              ffi.UintPtr, ffi.Double)>>('test_call_dart_double');
   late final _test_call_dart_double = _test_call_dart_doublePtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
-          double)>();
+      void Function(ffi.Pointer<interactor_native_t>, int, int, double)>();
 
   void test_call_dart_string(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
     ffi.Pointer<ffi.Char> value,
@@ -4525,17 +4493,14 @@ class TestBindings {
 
   late final _test_call_dart_stringPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr,
-              ffi.Pointer<ffi.Char>)>>('test_call_dart_string');
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+              ffi.UintPtr, ffi.Pointer<ffi.Char>)>>('test_call_dart_string');
   late final _test_call_dart_string = _test_call_dart_stringPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
-          ffi.Pointer<ffi.Char>)>();
+      void Function(
+          ffi.Pointer<interactor_native_t>, int, int, ffi.Pointer<ffi.Char>)>();
 
   void test_call_dart_object(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
     int field,
@@ -4550,14 +4515,13 @@ class TestBindings {
 
   late final _test_call_dart_objectPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32, ffi.UintPtr, ffi.Int)>>('test_call_dart_object');
+          ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+              ffi.UintPtr, ffi.Int)>>('test_call_dart_object');
   late final _test_call_dart_object = _test_call_dart_objectPtr.asFunction<
-      void Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>, int, int, int)>();
+      void Function(ffi.Pointer<interactor_native_t>, int, int, int)>();
 
   void test_call_dart_bytes(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
     int target,
     int method,
     ffi.Pointer<ffi.Uint8> value,
@@ -4575,17 +4539,17 @@ class TestBindings {
   late final _test_call_dart_bytesPtr = _lookup<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Pointer<ffi.Uint8>,
               ffi.Size)>>('test_call_dart_bytes');
   late final _test_call_dart_bytes = _test_call_dart_bytesPtr.asFunction<
-      void Function(ffi.Pointer<linux_interactor.interactor_native_t>, int, int,
+      void Function(ffi.Pointer<interactor_native_t>, int, int,
           ffi.Pointer<ffi.Uint8>, int)>();
 
   ffi.Pointer<linux_interactor.interactor_message_t> test_call_dart_check(
-    ffi.Pointer<linux_interactor.interactor_native_t> interactor,
+    ffi.Pointer<interactor_native_t> interactor,
   ) {
     return _test_call_dart_check(
       interactor,
@@ -4593,13 +4557,12 @@ class TestBindings {
   }
 
   late final _test_call_dart_checkPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>(
-      'test_call_dart_check');
+      ffi.NativeFunction<
+          ffi.Pointer<linux_interactor.interactor_message_t> Function(
+              ffi.Pointer<interactor_native_t>)>>('test_call_dart_check');
   late final _test_call_dart_check = _test_call_dart_checkPtr.asFunction<
       ffi.Pointer<linux_interactor.interactor_message_t> Function(
-          ffi.Pointer<linux_interactor.interactor_native_t>)>();
+          ffi.Pointer<interactor_native_t>)>();
 
   void test_call_dart_callback(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -6291,7 +6254,7 @@ class TestBindings {
           ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>,
           ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>();
 
-  void test_threading_initialize(
+  bool test_threading_initialize(
     int thread_count,
     int isolates_count,
     int per_thread_messages_count,
@@ -6304,10 +6267,10 @@ class TestBindings {
   }
 
   late final _test_threading_initializePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int, ffi.Int)>>(
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int, ffi.Int)>>(
           'test_threading_initialize');
   late final _test_threading_initialize =
-      _test_threading_initializePtr.asFunction<void Function(int, int, int)>();
+      _test_threading_initializePtr.asFunction<bool Function(int, int, int)>();
 
   ffi.Pointer<test_threads_t> test_threading_threads() {
     return _test_threading_threads();
@@ -6318,6 +6281,17 @@ class TestBindings {
           'test_threading_threads');
   late final _test_threading_threads = _test_threading_threadsPtr
       .asFunction<ffi.Pointer<test_threads_t> Function()>();
+
+  ffi.Pointer<ffi.Int> test_threading_interactor_descriptors() {
+    return _test_threading_interactor_descriptors();
+  }
+
+  late final _test_threading_interactor_descriptorsPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>>(
+          'test_threading_interactor_descriptors');
+  late final _test_threading_interactor_descriptors =
+      _test_threading_interactor_descriptorsPtr
+          .asFunction<ffi.Pointer<ffi.Int> Function()>();
 
   void test_threading_call_native(
     ffi.Pointer<linux_interactor.interactor_message_t> message,
@@ -7302,19 +7276,19 @@ class _SymbolAddresses {
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Pointer<interactor_native_configuration_t>,
               ffi.Uint8)>> get interactor_native_initialize =>
       _library._interactor_native_initializePtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint8)>> get interactor_native_initialize_default =>
-      _library._interactor_native_initialize_defaultPtr;
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<interactor_native_t>, ffi.Uint8)>>
+      get interactor_native_initialize_default =>
+          _library._interactor_native_initialize_defaultPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+                  ffi.Pointer<interactor_native_t>,
                   ffi.Uint64,
                   ffi.Uint64,
                   ffi.Pointer<
@@ -7325,45 +7299,41 @@ class _SymbolAddresses {
       get interactor_native_register_callback =>
           _library._interactor_native_register_callbackPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_get_buffer =>
           _library._interactor_native_get_bufferPtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Uint16)>> get interactor_native_release_buffer =>
-      _library._interactor_native_release_bufferPtr;
-  ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+              ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Uint16)>>
+      get interactor_native_release_buffer =>
+          _library._interactor_native_release_bufferPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_available_buffers =>
           _library._interactor_native_available_buffersPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_used_buffers =>
           _library._interactor_native_used_buffersPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+                  ffi.Pointer<interactor_native_t>)>>
       get interactor_native_allocate_message =>
           _library._interactor_native_allocate_messagePtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Void Function(ffi.Pointer<interactor_native_t>,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get interactor_native_free_message =>
           _library._interactor_native_free_messagePtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Pointer<interactor_payload_pool> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>>
+                  ffi.Pointer<interactor_native_t>, ffi.Size)>>
       get interactor_native_payload_pool_create =>
           _library._interactor_native_payload_pool_createPtr;
   ffi.Pointer<
@@ -7384,45 +7354,39 @@ class _SymbolAddresses {
           _library._interactor_native_payload_pool_destroyPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.IntPtr Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>, ffi.Size)>>
+              ffi.IntPtr Function(ffi.Pointer<interactor_native_t>, ffi.Size)>>
       get interactor_native_data_allocate =>
           _library._interactor_native_data_allocatePtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.IntPtr,
-              ffi.Size)>> get interactor_native_data_free =>
-      _library._interactor_native_data_freePtr;
-  ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+              ffi.Void Function(
+                  ffi.Pointer<interactor_native_t>, ffi.IntPtr, ffi.Size)>>
+      get interactor_native_data_free =>
+          _library._interactor_native_data_freePtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_peek_infinity =>
           _library._interactor_native_peek_infinityPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_peek_timeout =>
           _library._interactor_native_peek_timeoutPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_process_infinity =>
           _library._interactor_native_process_infinityPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_process_timeout =>
           _library._interactor_native_process_timeoutPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+                  ffi.Pointer<interactor_native_t>,
                   ffi
                       .Pointer<
                           ffi.NativeFunction<
@@ -7436,52 +7400,44 @@ class _SymbolAddresses {
                                   linux_interactor.interactor_message_t>)>>)>>
       get interactor_native_foreach => _library._interactor_native_foreachPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_submit => _library._interactor_native_submitPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
-                  ffi.Int,
+              ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get interactor_native_call_dart =>
           _library._interactor_native_call_dartPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Void Function(ffi.Pointer<interactor_native_t>,
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get interactor_native_callback_to_dart =>
           _library._interactor_native_callback_to_dartPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_destroy => _library._interactor_native_destroyPtr;
+  ffi.Pointer<
+          ffi
+          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>
+      get interactor_native_descriptor =>
+          _library._interactor_native_descriptorPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
       get interactor_native_close_descriptor =>
           _library._interactor_native_close_descriptorPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_initialize =>
-      _library._test_initializePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_destroy =>
-      _library._test_destroyPtr;
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_native_t> Function()>>
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<interactor_native_t> Function()>>
       get test_interactor_initialize => _library._test_interactor_initializePtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>
       get test_interactor_destroy => _library._test_interactor_destroyPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_call_reset =>
       _library._test_call_resetPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Bool Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
+          ffi
+          .NativeFunction<ffi.Bool Function(ffi.Pointer<interactor_native_t>)>>
       get test_call_native_check => _library._test_call_native_checkPtr;
   ffi.Pointer<
           ffi.NativeFunction<
@@ -7489,16 +7445,14 @@ class _SymbolAddresses {
                   ffi.Pointer<linux_interactor.interactor_message_t>)>>
       get test_call_native => _library._test_call_nativePtr;
   ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
-              ffi.Int32,
-              ffi.UintPtr)>> get test_call_dart_null =>
-      _library._test_call_dart_nullPtr;
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr)>>
+      get test_call_dart_null => _library._test_call_dart_nullPtr;
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Bool)>> get test_call_dart_bool =>
@@ -7506,7 +7460,7 @@ class _SymbolAddresses {
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Int)>> get test_call_dart_int =>
@@ -7514,7 +7468,7 @@ class _SymbolAddresses {
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Double)>> get test_call_dart_double =>
@@ -7522,7 +7476,7 @@ class _SymbolAddresses {
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Pointer<ffi.Char>)>> get test_call_dart_string =>
@@ -7530,7 +7484,7 @@ class _SymbolAddresses {
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Int)>> get test_call_dart_object =>
@@ -7538,17 +7492,17 @@ class _SymbolAddresses {
   ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
-              ffi.Pointer<linux_interactor.interactor_native_t>,
+              ffi.Pointer<interactor_native_t>,
               ffi.Int32,
               ffi.UintPtr,
               ffi.Pointer<ffi.Uint8>,
               ffi.Size)>> get test_call_dart_bytes =>
       _library._test_call_dart_bytesPtr;
   ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Pointer<linux_interactor.interactor_message_t> Function(
-                  ffi.Pointer<linux_interactor.interactor_native_t>)>>
-      get test_call_dart_check => _library._test_call_dart_checkPtr;
+      ffi.NativeFunction<
+          ffi.Pointer<linux_interactor.interactor_message_t> Function(
+              ffi.Pointer<interactor_native_t>)>> get test_call_dart_check =>
+      _library._test_call_dart_checkPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
@@ -7985,10 +7939,13 @@ class _SymbolAddresses {
                   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>,
                   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>>
       get pthread_atfork => _library._pthread_atforkPtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int, ffi.Int)>>
+  ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int, ffi.Int)>>
       get test_threading_initialize => _library._test_threading_initializePtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Pointer<test_threads_t> Function()>>
       get test_threading_threads => _library._test_threading_threadsPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>>
+      get test_threading_interactor_descriptors =>
+          _library._test_threading_interactor_descriptorsPtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Void Function(
@@ -9882,6 +9839,7 @@ final class interactor_native extends ffi.Struct {
   external ffi.Pointer<ffi.Void> callbacks;
 }
 
+typedef interactor_native_t = interactor_native;
 typedef interactor_native_configuration_t = interactor_native_configuration;
 
 final class test_object_child extends ffi.Struct {
@@ -9954,8 +9912,14 @@ final class __pthread_cleanup_frame extends ffi.Struct {
 typedef pthread_key_t = ffi.UnsignedInt;
 
 final class test_thread extends ffi.Struct {
+  @pthread_t()
+  external int id;
+
   @ffi.Bool()
   external bool alive;
+
+  @ffi.Bool()
+  external bool failed;
 
   @ffi.Size()
   external int whole_messages_count;
@@ -9963,14 +9927,14 @@ final class test_thread extends ffi.Struct {
   @ffi.Size()
   external int received_messages_count;
 
-  external ffi.Pointer<linux_interactor.interactor_native_t> interactor;
+  external ffi.Pointer<interactor_native_t> interactor;
 
   external ffi.Pointer<ffi.Pointer<linux_interactor.interactor_message_t>>
       messages;
 
-  external pthread_cond_t shutdown_condition;
+  external pthread_cond_t initialize_condition;
 
-  external pthread_mutex_t shutdown_mutex;
+  external pthread_mutex_t initialize_mutex;
 }
 
 final class test_threads extends ffi.Struct {

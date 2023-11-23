@@ -12,17 +12,17 @@ extern "C"
 
     typedef struct test_thread
     {
+        pthread_t id;
+
         volatile bool alive;
-        volatile bool stopped;
+
+        bool failed;
 
         size_t whole_messages_count;
         size_t received_messages_count;
 
         interactor_native_t* interactor;
         interactor_message_t** messages;
-
-        pthread_cond_t shutdown_condition;
-        pthread_mutex_t shutdown_mutex;
 
         pthread_cond_t initialize_condition;
         pthread_mutex_t initialize_mutex;
@@ -35,8 +35,9 @@ extern "C"
         pthread_mutex_t global_working_mutex;
     } test_threads_t;
 
-    void test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count);
+    bool test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count);
     test_threads_t* test_threading_threads();
+    int* test_threading_interactor_descriptors();
 
     void test_threading_call_native(interactor_message_t* message);
     int test_threading_call_native_check();

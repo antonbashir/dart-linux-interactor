@@ -21,7 +21,9 @@ void testThreadingNative() {
     final threads = 8;
 
     final bindings = loadBindings();
-    bindings.test_threading_initialize(threads, isolates, messages * isolates);
+    if (!bindings.test_threading_initialize(threads, isolates, messages * isolates)) {
+      fail("native thread failed ");
+    }
 
     final spawnedIsolates = <Future<Isolate>>[];
     final exitPorts = <ReceivePort>[];
@@ -71,7 +73,9 @@ void testThreadingDart() {
     final threads = 8;
 
     final bindings = loadBindings();
-    bindings.test_threading_initialize(threads, isolates, messages * isolates);
+    if (!bindings.test_threading_initialize(threads, isolates, messages * isolates)) {
+      fail("native thread failed ");
+    }
 
     final spawnedIsolates = <Future<Isolate>>[];
     final descriptorPorts = <ReceivePort>[];
@@ -131,10 +135,11 @@ Future<void> _callNativeIsolate(List<dynamic> input) async {
   await worker.initialize();
   final producer = worker.producer(TestNativeProducer(bindings));
   worker.activate();
+  final descriptors = bindings.test_threading_interactor_descriptors();
   for (var threadId = 0; threadId < threads.ref.count; threadId++) {
-    final interactor = threads.ref.threads.elementAt(threadId).value.ref.interactor.ref.ring.ref.ring_fd;
+    final ring = descriptors.elementAt(threadId).value;
     for (var messageId = 0; messageId < messages; messageId++) {
-      calls.add(producer.testThreadingCallNative(interactor, configurator: (message) => message.setInputBuffer([1, 2, 3])));
+      calls.add(producer.testThreadingCallNative(ring, configurator: (message) => message.setInputBuffer([1, 2, 3])));
     }
   }
   (await Future.wait(calls)).forEach((result) {

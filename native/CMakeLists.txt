@@ -14,11 +14,20 @@ add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-fPIC -O3 -fno-stack-protector")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -finstrument-functions -fPIC -O3 -fno-stack-protector")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
 set(HAVE_CLOCK_GETTIME_DECL ON)
 
 include(FetchContent)
+
+include(FetchContent)
+
+FetchContent_Declare(backward
+  GIT_REPOSITORY https://github.com/bombela/backward-cpp
+  GIT_TAG master
+  SYSTEM
+)
+FetchContent_MakeAvailable(backward)
 
 FetchContent_Declare(
   liburing
@@ -29,8 +38,6 @@ FetchContent_MakeAvailable(liburing)
 include_directories(${liburing_SOURCE_DIR}/src/include)
 add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/build && make && make install WORKING_DIRECTORY ${liburing_SOURCE_DIR})
 
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -g -O3 -fno-stack-protector")
 FetchContent_Declare(
   small
   URL "https://github.com/tarantool/small/archive/refs/heads/${SMALL_VERSION}.tar.gz"
@@ -43,8 +50,7 @@ include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
 include_directories(${small_BINARY_DIR}/small/include)
 add_subdirectory(${small_SOURCE_DIR})
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -fno-stack-protector")
-
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -O3 -fno-stack-protector")
 FetchContent_Declare(
   dart
   URL "https://github.com/antonbashir/dart-native-api/archive/refs/tags/${DART_VERSION}.tar.gz"
@@ -76,5 +82,5 @@ include_directories(include)
 
 add_library(native SHARED ${sources})
 add_dependencies(native liburing small)
-target_link_libraries(native PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small)
+target_link_libraries(native PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small Backward::Backward)
 add_custom_command(TARGET native POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:native> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor.so)

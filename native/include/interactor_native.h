@@ -83,6 +83,8 @@ extern "C"
 
     void interactor_native_destroy(interactor_native_t* interactor);
 
+    int32_t interactor_native_descriptor(interactor_native_t* interactor);
+
     void interactor_native_close_descriptor(int fd);
 
 #if defined(__cplusplus)

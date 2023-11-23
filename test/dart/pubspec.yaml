@@ -27,10 +27,6 @@ ffigen:
         lib: "linux_interactor"
         c-type: "interactor_message_t"
         dart-type: "interactor_message_t"
-      "interactor_native_t":
-        lib: "linux_interactor"
-        c-type: "interactor_native_t"
-        dart-type: "interactor_native_t"
   library-imports:
     linux_interactor: package:linux_interactor/interactor/bindings.dart
   functions:

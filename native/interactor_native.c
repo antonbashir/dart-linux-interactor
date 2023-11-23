@@ -327,6 +327,11 @@ void interactor_native_destroy(interactor_native_t* interactor)
     free(interactor);
 }
 
+int32_t interactor_native_descriptor(interactor_native_t* interactor)
+{
+    return interactor->ring->ring_fd;
+}
+
 void interactor_native_close_descriptor(int fd)
 {
     shutdown(fd, SHUT_RDWR);

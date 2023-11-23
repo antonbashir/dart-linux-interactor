@@ -31,7 +31,6 @@ ffigen:
     leaf:
       include:
         - "interactor_dart_.*"
-        - "interactor_native_.*"
     symbol-address:
       include:
         - ".*"
@@ -39,6 +38,7 @@ ffigen:
       - "_(.*)"
       - "ck(.*)"
       - "io_uring(.*)"
+      - "interactor_native_.*"
   macros:
     exclude:
       - "_(.*)"
