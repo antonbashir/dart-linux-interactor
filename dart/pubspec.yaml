@@ -26,7 +26,6 @@ ffigen:
   globals:
     exclude:
       - "_(.*)"
-      - "interactor_native_.*"
   functions:
     leaf:
       include:
@@ -37,7 +36,6 @@ ffigen:
     exclude:
       - "_(.*)"
       - "io_uring(.*)"
-      - "interactor_native_.*"
   macros:
     exclude:
       - "_(.*)"
@@ -46,11 +44,9 @@ ffigen:
   typedefs:
     exclude:
       - "_(.*)"
-      - "interactor_native_.*"
   structs:
     exclude:
       - "_(.*)"
       - "max_align_t"
       - "file_(.*)"
       - "io_uring_probe"
-      - "interactor_native_.*"

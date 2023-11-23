@@ -7,4 +7,5 @@ export 'interactor/defaults.dart' show InteractorDefaults;
 export 'interactor/notifications.dart' show InteractorNotification;
 export 'interactor/payloads.dart' show InteractorPayloads;
 export 'interactor/worker.dart' show InteractorWorker;
+export 'interactor/bindings.dart' show InteractorBindings;
 export 'interactor/lookup.dart' show InteractorLibrary;
