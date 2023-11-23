@@ -28,10 +28,12 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     {
         return -ENOMEM;
     }
+
     if (interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory))
     {
         return -ENOMEM;
     }
+
     if (interactor_data_pool_create(&interactor->data_pool, &interactor->memory))
     {
         return -ENOMEM;
@@ -79,8 +81,8 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
 int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id)
 {
     interactor_native_configuration_t configuration = {
-        .buffer_size = 4096,
-        .buffers_count = 4096,
+        .buffer_size = 64,
+        .buffers_count = 1024,
         .ring_size = 16384,
         .cqe_peek_count = 1024,
         .cqe_wait_count = 1,
