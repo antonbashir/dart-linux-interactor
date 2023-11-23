@@ -164,6 +164,7 @@ void interactor_dart_call_native(interactor_dart_t* interactor, int target_ring_
     struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     message->source = interactor->ring->ring_fd;
     message->target = target_ring_fd;
+    message->flags |= INTERACTOR_NATIVE_CALL;
     io_uring_prep_msg_ring(sqe, target_ring_fd, INTERACTOR_NATIVE_CALL, (intptr_t)message, 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
 }
@@ -174,6 +175,7 @@ void interactor_dart_callback_to_native(interactor_dart_t* interactor, interacto
     uint64_t target = message->source;
     message->source = interactor->ring->ring_fd;
     message->target = target;
+    message->flags |= INTERACTOR_NATIVE_CALLBACK;
     io_uring_prep_msg_ring(sqe, target, INTERACTOR_NATIVE_CALLBACK, (intptr_t)message, 0);
     sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
 }
