@@ -12,15 +12,18 @@ extern "C"
 
     typedef struct test_thread
     {
-        volatile bool alive;
-        volatile size_t whole_messages_count;
-        volatile size_t received_messages_count;
+        bool alive;
+        size_t whole_messages_count;
+        size_t received_messages_count;
 
         interactor_native_t* interactor;
         interactor_message_t** messages;
+
         pthread_cond_t shutdown_condition;
         pthread_mutex_t shutdown_mutex;
 
+        pthread_cond_t initialize_condition;
+        pthread_mutex_t initialize_mutex;
     } test_thread_t;
 
     typedef struct test_threads

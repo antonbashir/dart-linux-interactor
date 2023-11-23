@@ -1,8 +1,10 @@
 #include "test_threading.h"
 #include <pthread.h>
+#include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "interactor_constants.h"
 #include "interactor_message.h"
 #include "interactor_native.h"
@@ -32,14 +34,11 @@ static void* test_threading_run(void* thread)
 {
     test_thread_t* casted = (test_thread_t*)thread;
     casted->interactor = test_interactor_initialize();
-    if (!casted->interactor)
-    {
-        printf("failed to initialize native interactor\n");
-        pthread_exit(NULL);
-        return NULL;
-    }
     interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
     casted->alive = true;
+    pthread_mutex_lock(&casted->initialize_mutex);
+    pthread_cond_signal(&casted->initialize_condition);
+    pthread_mutex_unlock(&casted->initialize_mutex);
     while (casted->alive)
     {
         interactor_native_process_timeout(casted->interactor);
@@ -68,12 +67,18 @@ void test_threading_initialize(int thread_count, int isolates_count, int per_thr
         threads.threads[thread_id]->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
         pthread_mutex_init(&threads.threads[thread_id]->shutdown_mutex, NULL);
         pthread_cond_init(&threads.threads[thread_id]->shutdown_condition, NULL);
+        pthread_mutex_init(&threads.threads[thread_id]->initialize_mutex, NULL);
+        pthread_cond_init(&threads.threads[thread_id]->initialize_condition, NULL);
 
         pthread_t thread;
         pthread_setname_np(thread, "test_threading");
         pthread_create(&thread, NULL, test_threading_run, threads.threads[thread_id]);
+
         while (!threads.threads[thread_id]->alive)
         {
+            pthread_mutex_lock(&threads.threads[thread_id]->initialize_mutex);
+            pthread_cond_wait(&threads.threads[thread_id]->initialize_condition, &threads.threads[thread_id]->initialize_mutex);
+            pthread_mutex_unlock(&threads.threads[thread_id]->initialize_mutex);
         }
     }
 }

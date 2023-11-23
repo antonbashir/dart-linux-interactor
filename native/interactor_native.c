@@ -2,6 +2,7 @@
 #include <liburing.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
+#include <sys/resource.h>
 #include <sys/socket.h>
 #include "interactor_collections.h"
 #include "interactor_common.h"
@@ -61,7 +62,6 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
         }
         memset(interactor->buffers[index].iov_base, 0, configuration->buffer_size);
         interactor->buffers[index].iov_len = configuration->buffer_size;
-
         interactor_buffers_pool_push(&interactor->buffers_pool, index);
     }
 
@@ -84,7 +84,7 @@ int interactor_native_initialize_default(interactor_native_t* interactor, uint8_
 {
     interactor_native_configuration_t configuration = {
         .buffer_size = 4096,
-        .buffers_count = 64,
+        .buffers_count = 4096,
         .ring_size = 16384,
         .cqe_peek_count = 1024,
         .cqe_wait_count = 1,
