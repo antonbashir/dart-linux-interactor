@@ -19,7 +19,6 @@ jobs:
            mkdir build
            cd build 
            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-           cd ../ 
            make clean
            make -j
 
@@ -30,7 +29,6 @@ jobs:
           mkdir build
           cd build
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-          cd ../ 
           make clean 
           make -j
 
