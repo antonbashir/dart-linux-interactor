@@ -77,7 +77,7 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
         return result;
     }
 
-    return 0;
+    return interactor->ring->ring_fd;
 }
 
 int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id)
