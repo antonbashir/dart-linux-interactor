@@ -16,8 +16,6 @@ extern "C"
 
         volatile bool alive;
 
-        bool failed;
-
         size_t whole_messages_count;
         size_t received_messages_count;
 

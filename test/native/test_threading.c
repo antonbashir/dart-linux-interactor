@@ -46,17 +46,12 @@ static void* test_threading_run(void* thread)
 {
     test_thread_t* casted = (test_thread_t*)thread;
     pthread_mutex_lock(&casted->initialize_mutex);
-    casted->interactor = test_interactor_initialize();
     casted->alive = false;
-    casted->failed = false;
-    interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
-    if (!casted->interactor || interactor_native_descriptor(casted->interactor) == 0)
+    do
     {
-        casted->failed = true;
-        pthread_cond_broadcast(&casted->initialize_condition);
-        pthread_mutex_unlock(&casted->initialize_mutex);
-        return NULL;
-    }
+        casted->interactor = test_interactor_initialize();
+    } while (!casted->interactor || interactor_native_descriptor(casted->interactor) == 0);
+    interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
     casted->alive = true;
     pthread_cond_broadcast(&casted->initialize_condition);
     pthread_mutex_unlock(&casted->initialize_mutex);
@@ -87,16 +82,10 @@ bool test_threading_initialize(int thread_count, int isolates_count, int per_thr
         pthread_setname_np(threads.threads[thread_id]->id, "test_threading");
 
         pthread_mutex_lock(&threads.threads[thread_id]->initialize_mutex);
-        while (true)
+        while (!threads.threads[thread_id]->alive)
         {
             struct timespec timeout = {.tv_sec = 1};
             pthread_cond_timedwait(&threads.threads[thread_id]->initialize_condition, &threads.threads[thread_id]->initialize_mutex, &timeout);
-            if (threads.threads[thread_id]->alive || threads.threads[thread_id]->failed) break;
-        }
-        if (threads.threads[thread_id]->failed)
-        {
-            printf("failed to initialized thread\n");
-            return false;
         }
         pthread_mutex_unlock(&threads.threads[thread_id]->initialize_mutex);
     }
