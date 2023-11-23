@@ -9,3 +9,4 @@ export 'interactor/payloads.dart' show InteractorPayloads;
 export 'interactor/worker.dart' show InteractorWorker;
 export 'interactor/bindings.dart' show InteractorBindings;
 export 'interactor/lookup.dart' show InteractorLibrary;
+export 'interactor/interactor.dart' show Interactor;
