@@ -12,18 +12,18 @@ import 'producer.dart';
 class InteractorConsumerRegistry {
   final _consumers = <NativeConsumerExecutor>[];
 
-  final Pointer<interactor_dart_t> _interactorPointer;
+  final Pointer<interactor_dart_t> _interactor;
   final InteractorBindings _bindings;
 
   InteractorConsumerRegistry(
-    this._interactorPointer,
+    this._interactor,
     this._bindings,
   );
 
   void register(NativeConsumer declaration) {
     final callbacks = <NativeCallbackExecutor>[];
     for (var callback in declaration.callbacks()) {
-      callbacks.add(NativeCallbackExecutor(_bindings, _interactorPointer, callback.callback));
+      callbacks.add(NativeCallbackExecutor(_bindings, _interactor, callback.callback));
     }
     _consumers.add(NativeConsumerExecutor(callbacks));
   }

@@ -21,7 +21,7 @@ void testThreadingNative() {
     final threads = 8;
 
     final bindings = loadBindings();
-    bindings.test_threading_initialize(threads, messages * isolates);
+    bindings.test_threading_initialize(threads, isolates, messages * isolates);
 
     final spawnedIsolates = <Future<Isolate>>[];
     final exitPorts = <ReceivePort>[];
@@ -71,7 +71,7 @@ void testThreadingDart() {
     final threads = 8;
 
     final bindings = loadBindings();
-    bindings.test_threading_initialize(threads, messages * isolates);
+    bindings.test_threading_initialize(threads, isolates, messages * isolates);
 
     final spawnedIsolates = <Future<Isolate>>[];
     final descriptorPorts = <ReceivePort>[];
@@ -81,15 +81,19 @@ void testThreadingDart() {
     for (var isolate = 0; isolate < isolates; isolate++) {
       final descriptorPort = ReceivePort();
       descriptorPorts.add(descriptorPort);
+
       final exitPort = ReceivePort();
       exitPorts.add(exitPort);
+
       final errorPort = ReceivePort();
       errorPorts.add(errorPort);
+
       final isolate = Isolate.spawn<List<dynamic>>(
         _callDartIsolate,
         onError: errorPort.sendPort,
-        [messages, interactor.worker(InteractorDefaults.worker()), descriptorPort.sendPort, exitPort.sendPort],
+        [messages * isolates * threads, interactor.worker(InteractorDefaults.worker()), descriptorPort.sendPort, exitPort.sendPort],
       );
+
       spawnedIsolates.add(isolate);
     }
 
@@ -102,23 +106,22 @@ void testThreadingDart() {
     );
 
     await Future.wait(spawnedIsolates);
-
-    final descriptors = await Future.wait(descriptorPorts.map((port) => port.first));
-    descriptors.forEach((descriptor) {
-      for (var messageId = 0; messageId < messages; messageId++) {
-        bindings.test_threading_call_dart_bytes(descriptor, 0, (malloc<Uint8>(3)..asTypedList(3).setAll(0, [1, 2, 3])), 3);
-      }
-    });
+    final descriptors = (await Future.wait(descriptorPorts.map((port) => port.first))).map((descriptor) => descriptor as int).toList();
+    final Pointer<Int32> descriptorsNative = calloc(descriptors.length * sizeOf<Int32>());
+    descriptors.forEachIndexed((index, element) => descriptorsNative[index] = element);
+    bindings.test_threading_prepare_call_dart_bytes(descriptorsNative, descriptors.length);
 
     while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 10));
-    await Future.wait(exitPorts.map((port) => port.first));
 
-    bindings.test_threading_destroy();
+    await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
     errorPorts.forEach((port) => port.close());
 
+    bindings.test_threading_destroy();
     await interactor.shutdown();
+
+    print("done");
   });
 }
 
@@ -156,10 +159,12 @@ Future<void> _callDartIsolate(List<dynamic> input) async {
   worker.consumer(TestNativeConsumer(
     (notification) {
       if (!ListEquality().equals(notification.inputBytes, [1, 2, 3])) {
-        completer.completeError(throw TestFailure("inputBytes != ${[1, 2, 3]}"));
+        completer.completeError(TestFailure("inputBytes != ${[1, 2, 3]}. ${notification.inputSize}: ${notification.inputBytes}"));
+        return;
       }
       if (++count == messages) {
         completer.complete();
+        return;
       }
     },
   ));

@@ -57,15 +57,6 @@ class NativeMethodExecutor {
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
 
-  var _nextId = 0;
-  int get nextId {
-    if (_nextId == intMaxValue - 1) {
-      _nextId = 0;
-      return 0;
-    }
-    return ++_nextId;
-  }
-
   NativeMethodExecutor(
     this._methodId,
     this._executorId,
@@ -93,10 +84,10 @@ class NativeMethodExecutor {
       delegate,
     );
     if (configurator == null) {
-      message.ref.id = nextId;
+      message.ref.id = completer.hashCode;
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
-      _calls[_nextId] = delegate;
+      _calls[completer.hashCode] = delegate;
       _bindings.interactor_dart_call_native(_interactor, target, message);
       return completer.future.then((message) {
         _calls.remove(message.id);
@@ -104,10 +95,10 @@ class NativeMethodExecutor {
       });
     }
     return Future.value(configurator.call(call)).then((call) {
-      message.ref.id = nextId;
+      message.ref.id = completer.hashCode;
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
-      _calls[_nextId] = delegate;
+      _calls[completer.hashCode] = delegate;
       _bindings.interactor_dart_call_native(_interactor, target, message);
       return completer.future.then((message) {
         _calls.remove(message.id);

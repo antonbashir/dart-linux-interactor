@@ -13,27 +13,31 @@ extern "C"
     typedef struct test_thread
     {
         volatile bool alive;
+        volatile size_t whole_messages_count;
+        volatile size_t received_messages_count;
+
         interactor_native_t* interactor;
         interactor_message_t** messages;
-        size_t messages_count;
-        size_t received_messages_count;
         pthread_cond_t shutdown_condition;
         pthread_mutex_t shutdown_mutex;
+
     } test_thread_t;
 
     typedef struct test_threads
     {
         test_thread_t** threads;
         size_t count;
+        pthread_mutex_t global_working_mutex;
     } test_threads_t;
 
-    void test_threading_initialize(int thread_count, int messages_count);
+    void test_threading_initialize(int thread_count, int isolates_count, int pre_thread_messages_count);
     test_threads_t* test_threading_threads();
 
     void test_threading_call_native(interactor_message_t* message);
     int test_threading_call_native_check();
 
-    void test_threading_call_dart_bytes(int32_t target, uintptr_t method, const uint8_t* value, size_t count);
+    void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t count);
+
     int test_threading_call_dart_check();
     void test_threading_call_dart_callback(interactor_message_t* message);
 
