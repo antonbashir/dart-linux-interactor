@@ -52,7 +52,7 @@ void testThreadingNative() {
     );
 
     await Future.wait(spawnedIsolates);
-    while (bindings.test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 10));
+    while (bindings.test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 1));
     await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
@@ -91,7 +91,7 @@ void testThreadingDart() {
       final isolate = Isolate.spawn<List<dynamic>>(
         _callDartIsolate,
         onError: errorPort.sendPort,
-        [messages * isolates * threads, interactor.worker(InteractorDefaults.worker()), descriptorPort.sendPort, exitPort.sendPort],
+        [messages * threads, interactor.worker(InteractorDefaults.worker()), descriptorPort.sendPort, exitPort.sendPort],
       );
 
       spawnedIsolates.add(isolate);
@@ -111,8 +111,7 @@ void testThreadingDart() {
     descriptors.forEachIndexed((index, element) => descriptorsNative[index] = element);
     bindings.test_threading_prepare_call_dart_bytes(descriptorsNative, descriptors.length);
 
-    while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 10));
-
+    while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 1));
     await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
@@ -120,8 +119,6 @@ void testThreadingDart() {
 
     bindings.test_threading_destroy();
     await interactor.shutdown();
-
-    print("done");
   });
 }
 

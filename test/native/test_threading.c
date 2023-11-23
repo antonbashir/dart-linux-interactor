@@ -10,6 +10,11 @@
 
 static test_threads_t threads;
 
+test_threads_t* test_threading_threads()
+{
+    return &threads;
+}
+
 static inline test_thread_t* test_threading_thread_by_fd(int fd)
 {
     pthread_mutex_lock(&threads.global_working_mutex);
@@ -45,12 +50,7 @@ static void* test_threading_run(void* thread)
     return NULL;
 }
 
-test_threads_t* test_threading_threads()
-{
-    return &threads;
-}
-
-void test_threading_initialize(int thread_count, int isolates_count, int pre_thread_messages_count)
+void test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count)
 {
     threads.count = thread_count;
     threads.threads = malloc(thread_count * sizeof(test_thread_t*));
@@ -58,18 +58,18 @@ void test_threading_initialize(int thread_count, int isolates_count, int pre_thr
     pthread_mutexattr_init(&attributes);
     pthread_mutexattr_settype(&attributes, PTHREAD_MUTEX_RECURSIVE);
     pthread_mutex_init(&threads.global_working_mutex, &attributes);
-    for (int threadId = 0; threadId < thread_count; threadId++)
+    for (int thread_id = 0; thread_id < thread_count; thread_id++)
     {
-        threads.threads[threadId] = malloc(sizeof(test_thread_t));
-        threads.threads[threadId]->whole_messages_count = pre_thread_messages_count;
-        threads.threads[threadId]->received_messages_count = 0;
-        threads.threads[threadId]->messages = malloc(pre_thread_messages_count * sizeof(interactor_message_t*));
-        pthread_mutex_init(&threads.threads[threadId]->shutdown_mutex, NULL);
-        pthread_cond_init(&threads.threads[threadId]->shutdown_condition, NULL);
+        threads.threads[thread_id] = malloc(sizeof(test_thread_t));
+        threads.threads[thread_id]->whole_messages_count = per_thread_messages_count;
+        threads.threads[thread_id]->received_messages_count = 0;
+        threads.threads[thread_id]->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
+        pthread_mutex_init(&threads.threads[thread_id]->shutdown_mutex, NULL);
+        pthread_cond_init(&threads.threads[thread_id]->shutdown_condition, NULL);
 
         pthread_t thread;
-        pthread_create(&thread, NULL, test_threading_run, threads.threads[threadId]);
-        while (!threads.threads[threadId]->alive)
+        pthread_create(&thread, NULL, test_threading_run, threads.threads[thread_id]);
+        while (!threads.threads[thread_id]->alive)
         {
         }
     }
@@ -111,25 +111,29 @@ void test_threading_call_native(interactor_message_t* message)
     }
 }
 
-void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t count)
+void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t target_count)
 {
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
         test_thread_t* thread = threads.threads[id];
-        for (int32_t target = 0; target < count; target++)
+        for (int32_t target = 0; target < target_count; target++)
         {
-            interactor_message_t* message = interactor_native_allocate_message(thread->interactor);
-            message->id = 0;
-            message->input = (void*)(intptr_t)interactor_native_data_allocate(thread->interactor, 3);
-            ((char*)message->input)[0] = 0x1;
-            ((char*)message->input)[1] = 0x2;
-            ((char*)message->input)[2] = 0x3;
-            message->input_size = 3;
-            message->owner = 0;
-            message->method = 0;
-            interactor_native_call_dart(thread->interactor, target, message);
+            for (int message_id = 0; message_id < thread->whole_messages_count / target_count; message_id++)
+            {
+                interactor_message_t* message = interactor_native_allocate_message(thread->interactor);
+                message->id = message_id;
+                message->input = (void*)(intptr_t)interactor_native_data_allocate(thread->interactor, 3);
+                ((char*)message->input)[0] = 0x1;
+                ((char*)message->input)[1] = 0x2;
+                ((char*)message->input)[2] = 0x3;
+                message->input_size = 3;
+                message->owner = 0;
+                message->method = 0;
+                interactor_native_call_dart(thread->interactor, targets[target], message);
+            }
         }
+        interactor_native_submit(thread->interactor);
     }
     pthread_mutex_unlock(&threads.global_working_mutex);
 }

@@ -6277,12 +6277,12 @@ class TestBindings {
   void test_threading_initialize(
     int thread_count,
     int isolates_count,
-    int pre_thread_messages_count,
+    int per_thread_messages_count,
   ) {
     return _test_threading_initialize(
       thread_count,
       isolates_count,
-      pre_thread_messages_count,
+      per_thread_messages_count,
     );
   }
 
@@ -9936,27 +9936,20 @@ final class test_thread extends ffi.Struct {
   @ffi.Bool()
   external bool alive;
 
+  @ffi.Size()
+  external int whole_messages_count;
+
+  @ffi.Size()
+  external int received_messages_count;
+
   external ffi.Pointer<linux_interactor.interactor_native_t> interactor;
 
   external ffi.Pointer<ffi.Pointer<linux_interactor.interactor_message_t>>
       messages;
 
-  @ffi.Size()
-  external int messages_count;
-
-  @ffi.Size()
-  external int received_messages_count;
-
   external pthread_cond_t shutdown_condition;
 
   external pthread_mutex_t shutdown_mutex;
-
-  external ffi.Pointer<ffi.Int> should_send_bytes_to_descriptor;
-
-  @ffi.Int()
-  external int should_send_bytes_to_descriptor_count;
-
-  external pthread_mutex_t should_send_bytes_to_descriptor_mutex;
 }
 
 final class test_threads extends ffi.Struct {
@@ -9964,6 +9957,8 @@ final class test_threads extends ffi.Struct {
 
   @ffi.Size()
   external int count;
+
+  external pthread_mutex_t global_working_mutex;
 }
 
 typedef test_thread_t = test_thread;

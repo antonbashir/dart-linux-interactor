@@ -30,7 +30,7 @@ extern "C"
         pthread_mutex_t global_working_mutex;
     } test_threads_t;
 
-    void test_threading_initialize(int thread_count, int isolates_count, int pre_thread_messages_count);
+    void test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count);
     test_threads_t* test_threading_threads();
 
     void test_threading_call_native(interactor_message_t* message);
