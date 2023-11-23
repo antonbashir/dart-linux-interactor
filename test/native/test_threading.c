@@ -10,12 +10,7 @@
 #include "interactor_native.h"
 #include "test.h"
 
-static test_threads_t threads;
-
-test_threads_t* test_threading_threads()
-{
-    return &threads;
-}
+test_threads_t threads;
 
 int* test_threading_interactor_descriptors()
 {
@@ -23,7 +18,7 @@ int* test_threading_interactor_descriptors()
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
-        descriptors[id] = threads.threads[id]->interactor->descriptor;
+        descriptors[id] = threads.threads[id].interactor->descriptor;
     }
     pthread_mutex_unlock(&threads.global_working_mutex);
     return descriptors;
@@ -34,7 +29,7 @@ static inline test_thread_t* test_threading_thread_by_fd(int fd)
     test_thread_t* thread = NULL;
     for (int id = 0; id < threads.count; id++)
     {
-        thread = threads.threads[id];
+        thread = &threads.threads[id];
         if (thread->interactor->descriptor == fd)
         {
             return thread;
@@ -68,11 +63,12 @@ static void* test_threading_run(void* thread)
 bool test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count)
 {
     threads.count = thread_count;
-    threads.threads = malloc(thread_count * sizeof(test_thread_t*));
+    threads.threads = malloc(thread_count * sizeof(test_thread_t));
     pthread_mutex_init(&threads.global_working_mutex, NULL);
     for (int thread_id = 0; thread_id < thread_count; thread_id++)
     {
-        test_thread_t* thread = malloc(sizeof(test_thread_t));
+        test_thread_t* thread = &threads.threads[thread_id];
+        memset(thread, 0, sizeof(test_thread_t));
         thread->whole_messages_count = per_thread_messages_count;
         thread->received_messages_count = 0;
         thread->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
@@ -99,7 +95,7 @@ int test_threading_call_native_check()
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
-        messages += threads.threads[id]->received_messages_count;
+        messages += threads.threads[id].received_messages_count;
     }
     pthread_mutex_unlock(&threads.global_working_mutex);
     return messages;
@@ -111,7 +107,7 @@ int test_threading_call_dart_check()
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
-        messages += threads.threads[id]->received_messages_count;
+        messages += threads.threads[id].received_messages_count;
     }
     pthread_mutex_unlock(&threads.global_working_mutex);
     return messages;
@@ -136,7 +132,7 @@ void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t target_cou
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
-        test_thread_t* thread = threads.threads[id];
+        test_thread_t* thread = &threads.threads[id];
         for (int32_t target = 0; target < target_count; target++)
         {
             for (int message_id = 0; message_id < thread->whole_messages_count / target_count; message_id++)
@@ -174,11 +170,13 @@ void test_threading_call_dart_callback(interactor_message_t* message)
 
 void test_threading_destroy()
 {
+    pthread_mutex_lock(&threads.global_working_mutex);
     for (int thread_id = 0; thread_id < threads.count; thread_id++)
     {
-         test_thread_t* thread = threads.threads[thread_id];
+        test_thread_t* thread = &threads.threads[thread_id];
         thread->alive = false;
         pthread_join(thread->id, NULL);
-        free(thread);
     }
+    free(threads.threads);
+    pthread_mutex_unlock(&threads.global_working_mutex);
 }

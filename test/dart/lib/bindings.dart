@@ -4301,21 +4301,6 @@ class TestBindings {
   late final _interactor_native_destroy = _interactor_native_destroyPtr
       .asFunction<void Function(ffi.Pointer<interactor_native_t>)>();
 
-  int interactor_native_descriptor(
-    ffi.Pointer<interactor_native_t> interactor,
-  ) {
-    return _interactor_native_descriptor(
-      interactor,
-    );
-  }
-
-  late final _interactor_native_descriptorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>(
-      'interactor_native_descriptor');
-  late final _interactor_native_descriptor = _interactor_native_descriptorPtr
-      .asFunction<int Function(ffi.Pointer<interactor_native_t>)>();
-
   void interactor_native_close_descriptor(
     int fd,
   ) {
@@ -6272,16 +6257,6 @@ class TestBindings {
   late final _test_threading_initialize =
       _test_threading_initializePtr.asFunction<bool Function(int, int, int)>();
 
-  ffi.Pointer<test_threads_t> test_threading_threads() {
-    return _test_threading_threads();
-  }
-
-  late final _test_threading_threadsPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<test_threads_t> Function()>>(
-          'test_threading_threads');
-  late final _test_threading_threads = _test_threading_threadsPtr
-      .asFunction<ffi.Pointer<test_threads_t> Function()>();
-
   ffi.Pointer<ffi.Int> test_threading_interactor_descriptors() {
     return _test_threading_interactor_descriptors();
   }
@@ -7419,11 +7394,6 @@ class _SymbolAddresses {
           ffi
           .NativeFunction<ffi.Void Function(ffi.Pointer<interactor_native_t>)>>
       get interactor_native_destroy => _library._interactor_native_destroyPtr;
-  ffi.Pointer<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>>
-      get interactor_native_descriptor =>
-          _library._interactor_native_descriptorPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
       get interactor_native_close_descriptor =>
           _library._interactor_native_close_descriptorPtr;
@@ -7941,8 +7911,6 @@ class _SymbolAddresses {
       get pthread_atfork => _library._pthread_atforkPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Int, ffi.Int, ffi.Int)>>
       get test_threading_initialize => _library._test_threading_initializePtr;
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<test_threads_t> Function()>>
-      get test_threading_threads => _library._test_threading_threadsPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function()>>
       get test_threading_interactor_descriptors =>
           _library._test_threading_interactor_descriptorsPtr;
@@ -9801,6 +9769,9 @@ final class interactor_native extends ffi.Struct {
   @ffi.Uint8()
   external int id;
 
+  @ffi.Int32()
+  external int descriptor;
+
   external interactor_messages_pool messages_pool;
 
   external interactor_buffers_pool buffers_pool;
@@ -9918,9 +9889,6 @@ final class test_thread extends ffi.Struct {
   @ffi.Bool()
   external bool alive;
 
-  @ffi.Bool()
-  external bool failed;
-
   @ffi.Size()
   external int whole_messages_count;
 
@@ -9947,7 +9915,6 @@ final class test_threads extends ffi.Struct {
 }
 
 typedef test_thread_t = test_thread;
-typedef test_threads_t = test_threads;
 
 const int MSG_OOB = 1;
 
