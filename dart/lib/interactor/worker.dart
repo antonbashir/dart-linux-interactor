@@ -41,7 +41,7 @@ class InteractorWorker {
   InteractorDatas get datas => _datas;
 
   InteractorWorker(SendPort toInteractor) {
-    _closer = RawReceivePort((gracefulDuration) async {
+    _closer = RawReceivePort((_) async {
       _active = false;
       await _done.future;
       _payloads.destroy();
