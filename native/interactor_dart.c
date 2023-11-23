@@ -187,6 +187,8 @@ void interactor_dart_destroy(interactor_dart_t* interactor)
     }
     interactor_buffers_pool_destroy(&interactor->buffers_pool);
     interactor_data_pool_destroy(&interactor->data_pool);
+    interactor_messages_pool_destroy(&interactor->messages_pool);
+    interactor_memory_destroy(&interactor->memory);
     free(interactor->cqes);
     free(interactor->buffers);
     free(interactor->ring);

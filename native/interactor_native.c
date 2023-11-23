@@ -6,7 +6,9 @@
 #include "interactor_collections.h"
 #include "interactor_common.h"
 #include "interactor_constants.h"
+#include "interactor_memory.h"
 #include "interactor_message.h"
+#include "interactor_messages_pool.h"
 
 int interactor_native_initialize(interactor_native_t* interactor, interactor_native_configuration_t* configuration, uint8_t id)
 {
@@ -316,6 +318,8 @@ void interactor_native_destroy(interactor_native_t* interactor)
     }
     interactor_buffers_pool_destroy(&interactor->buffers_pool);
     interactor_data_pool_destroy(&interactor->data_pool);
+    interactor_messages_pool_destroy(&interactor->messages_pool);
+    interactor_memory_destroy(&interactor->memory);
     mh_native_callbacks_delete(interactor->callbacks);
     free(interactor->cqes);
     free(interactor->buffers);

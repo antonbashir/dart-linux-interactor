@@ -37,10 +37,13 @@ int interactor_memory_create(struct interactor_memory* memory, size_t quota_size
 void interactor_memory_destroy(struct interactor_memory* memory)
 {
     struct interactor_memory_context* context = memory->context;
-    size_t slab_size = context->arena.slab_size;
     slab_cache_destroy(&context->cache);
     slab_arena_destroy(&context->arena);
-    quota_release(&context->quota, slab_size);
+    if (quota_used(&context->quota))
+    {
+        quota_release(&context->quota, quota_used(&context->quota));
+    }
+    free(context);
 }
 
 int interactor_mempool_create(struct interactor_mempool* pool, size_t size)
@@ -56,6 +59,7 @@ void interactor_mempool_destroy(struct interactor_mempool* pool)
 {
     struct interactor_mempool_context* context = (struct interactor_mempool_context*)pool->context;
     mempool_destroy(&context->pool);
+    free(context);
 }
 
 void* interactor_mempool_allocate(struct interactor_mempool* pool)
@@ -96,4 +100,5 @@ void interactor_small_destroy(struct interactor_small* pool)
 {
     struct interactor_small_context* context = (struct interactor_small_context*)pool->context;
     small_alloc_destroy(&context->allocator);
+    free(context);
 }
