@@ -33,11 +33,12 @@ static inline test_thread_t* test_threading_thread_by_fd(int fd)
 static void* test_threading_run(void* thread)
 {
     test_thread_t* casted = (test_thread_t*)thread;
+    pthread_mutex_lock(&casted->initialize_mutex);
     casted->interactor = test_interactor_initialize();
     interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
     casted->alive = true;
-    pthread_mutex_lock(&casted->initialize_mutex);
-    pthread_cond_signal(&casted->initialize_condition);
+    casted->stopped = false;
+    pthread_cond_broadcast(&casted->initialize_condition);
     pthread_mutex_unlock(&casted->initialize_mutex);
     while (casted->alive)
     {
@@ -46,7 +47,8 @@ static void* test_threading_run(void* thread)
     pthread_mutex_lock(&casted->shutdown_mutex);
     test_interactor_destroy(casted->interactor);
     free(casted->messages);
-    pthread_cond_signal(&casted->shutdown_condition);
+    casted->stopped = true;
+    pthread_cond_broadcast(&casted->shutdown_condition);
     pthread_mutex_unlock(&casted->shutdown_mutex);
     return NULL;
 }
@@ -55,10 +57,7 @@ void test_threading_initialize(int thread_count, int isolates_count, int per_thr
 {
     threads.count = thread_count;
     threads.threads = malloc(thread_count * sizeof(test_thread_t*));
-    pthread_mutexattr_t attributes;
-    pthread_mutexattr_init(&attributes);
-    pthread_mutexattr_settype(&attributes, PTHREAD_MUTEX_RECURSIVE);
-    pthread_mutex_init(&threads.global_working_mutex, &attributes);
+    pthread_mutex_init(&threads.global_working_mutex, NULL);
     for (int thread_id = 0; thread_id < thread_count; thread_id++)
     {
         threads.threads[thread_id] = malloc(sizeof(test_thread_t));
@@ -74,12 +73,12 @@ void test_threading_initialize(int thread_count, int isolates_count, int per_thr
         pthread_setname_np(thread, "test_threading");
         pthread_create(&thread, NULL, test_threading_run, threads.threads[thread_id]);
 
+        pthread_mutex_lock(&threads.threads[thread_id]->initialize_mutex);
         while (!threads.threads[thread_id]->alive)
         {
-            pthread_mutex_lock(&threads.threads[thread_id]->initialize_mutex);
             pthread_cond_wait(&threads.threads[thread_id]->initialize_condition, &threads.threads[thread_id]->initialize_mutex);
-            pthread_mutex_unlock(&threads.threads[thread_id]->initialize_mutex);
         }
+        pthread_mutex_unlock(&threads.threads[thread_id]->initialize_mutex);
     }
 }
 
@@ -164,14 +163,15 @@ void test_threading_call_dart_callback(interactor_message_t* message)
 
 void test_threading_destroy()
 {
-    pthread_mutex_lock(&threads.global_working_mutex);
     for (int thread_id = 0; thread_id < threads.count; thread_id++)
     {
-        threads.threads[thread_id]->alive = false;
         pthread_mutex_lock(&threads.threads[thread_id]->shutdown_mutex);
-        pthread_cond_wait(&threads.threads[thread_id]->shutdown_condition, &threads.threads[thread_id]->shutdown_mutex);
+        threads.threads[thread_id]->alive = false;
+        while (!threads.threads[thread_id]->stopped)
+        {
+            pthread_cond_wait(&threads.threads[thread_id]->shutdown_condition, &threads.threads[thread_id]->shutdown_mutex);
+        }
         pthread_mutex_unlock(&threads.threads[thread_id]->shutdown_mutex);
         free(threads.threads[thread_id]);
     }
-    pthread_mutex_unlock(&threads.global_working_mutex);
 }

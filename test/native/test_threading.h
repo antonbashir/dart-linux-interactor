@@ -12,7 +12,9 @@ extern "C"
 
     typedef struct test_thread
     {
-        bool alive;
+        volatile bool alive;
+        volatile bool stopped;
+
         size_t whole_messages_count;
         size_t received_messages_count;
 
