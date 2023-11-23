@@ -34,9 +34,10 @@ static inline test_thread_t* test_threading_thread_by_fd(int fd)
     test_thread_t* thread = NULL;
     for (int id = 0; id < threads.count; id++)
     {
-        if (threads.threads[id]->interactor->ring->ring_fd == fd)
+        thread = threads.threads[id];
+        if (thread->interactor->descriptor == fd)
         {
-            return threads.threads[id];
+            return thread;
         }
     }
     return thread;
@@ -71,23 +72,23 @@ bool test_threading_initialize(int thread_count, int isolates_count, int per_thr
     pthread_mutex_init(&threads.global_working_mutex, NULL);
     for (int thread_id = 0; thread_id < thread_count; thread_id++)
     {
-        threads.threads[thread_id] = malloc(sizeof(test_thread_t));
-        threads.threads[thread_id]->whole_messages_count = per_thread_messages_count;
-        threads.threads[thread_id]->received_messages_count = 0;
-        threads.threads[thread_id]->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
-        pthread_mutex_init(&threads.threads[thread_id]->initialize_mutex, NULL);
-        pthread_cond_init(&threads.threads[thread_id]->initialize_condition, NULL);
+        test_thread_t* thread = malloc(sizeof(test_thread_t));
+        thread->whole_messages_count = per_thread_messages_count;
+        thread->received_messages_count = 0;
+        thread->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
+        pthread_mutex_init(&thread->initialize_mutex, NULL);
+        pthread_cond_init(&thread->initialize_condition, NULL);
 
-        pthread_create(&threads.threads[thread_id]->id, NULL, test_threading_run, threads.threads[thread_id]);
-        pthread_setname_np(threads.threads[thread_id]->id, "test_threading");
+        pthread_create(&thread->id, NULL, test_threading_run, thread);
+        pthread_setname_np(thread->id, "test_threading");
 
-        pthread_mutex_lock(&threads.threads[thread_id]->initialize_mutex);
-        while (!threads.threads[thread_id]->alive)
+        pthread_mutex_lock(&thread->initialize_mutex);
+        while (!thread->alive)
         {
             struct timespec timeout = {.tv_sec = 1};
-            pthread_cond_timedwait(&threads.threads[thread_id]->initialize_condition, &threads.threads[thread_id]->initialize_mutex, &timeout);
+            pthread_cond_timedwait(&thread->initialize_condition, &thread->initialize_mutex, &timeout);
         }
-        pthread_mutex_unlock(&threads.threads[thread_id]->initialize_mutex);
+        pthread_mutex_unlock(&thread->initialize_mutex);
     }
     return true;
 }
@@ -175,8 +176,9 @@ void test_threading_destroy()
 {
     for (int thread_id = 0; thread_id < threads.count; thread_id++)
     {
-        threads.threads[thread_id]->alive = false;
-        pthread_join(threads.threads[thread_id]->id, NULL);
-        free(threads.threads[thread_id]);
+         test_thread_t* thread = threads.threads[thread_id];
+        thread->alive = false;
+        pthread_join(thread->id, NULL);
+        free(thread);
     }
 }
