@@ -142,6 +142,30 @@ class InteractorCall {
   late final List<int> outputBuffer = _buffers.read(_message.ref.output.address);
   late final List<int> outputBytes = _message.ref.output.cast<Uint8>().asTypedList(_message.ref.output_size);
 
+  void allocateOutputDouble() {
+    _message.ref.output = _datas.allocate(sizeOf<Double>()).cast();
+    _message.ref.output_size = sizeOf<Double>();
+  }
+
+  void allocateOutputString(int size) {
+    final units = empty.padRight(size);
+    final Pointer<Uint8> result = _datas.allocate(units.length + 1).cast();
+    _message.ref.output = result.cast();
+    _message.ref.output_size = units.length + 1;
+  }
+
+  Future<void> allocateOutputBuffer(int size) async {
+    final bufferId = _buffers.get() ?? await _buffers.allocate();
+    _message.ref.output = Pointer.fromAddress(bufferId);
+    _message.ref.output_size = size;
+  }
+
+  void allocateOutputBytes(int size) {
+    final Pointer<Uint8> pointer = _datas.allocate(size).cast();
+    _message.ref.output = pointer.cast();
+    _message.ref.output_size = size;
+  }
+
   @pragma(preferInlinePragma)
   Pointer<T> getOutputObject<T extends Struct>() => Pointer.fromAddress(_message.ref.output.address).cast();
 
