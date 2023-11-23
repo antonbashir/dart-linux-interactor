@@ -17,7 +17,7 @@ interactor_native_t* test_interactor_initialize()
         return NULL;
     }
     int result = interactor_native_initialize_default(test_interactor, 0);
-    if (result != 0)
+    if (result < 0)
     {
         return NULL;
     }
