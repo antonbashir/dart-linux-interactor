@@ -22,7 +22,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd);
+    final call = producer.testCallNative(native.ref.descriptor);
     await _awaitNativeCall(bindings, native);
     final result = await call;
     result.release();
@@ -39,7 +39,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputBool(true));
+    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputBool(true));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputBool, true);
@@ -57,7 +57,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputInt(123));
+    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputInt(123));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputInt, 123);
@@ -75,7 +75,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputDouble(123.45));
+    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputDouble(123.45));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputDouble, 123.45);
@@ -93,7 +93,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputString("test"));
+    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputString("test"));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputString, "test");
@@ -113,7 +113,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd,
+    final call = producer.testCallNative(native.ref.descriptor,
         configurator: (message) => message
           ..setInputObject<test_object>(
             (object) {
@@ -141,7 +141,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputBuffer([1, 2, 3]));
+    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputBuffer([1, 2, 3]));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBuffer, [1, 2, 3]));
@@ -159,7 +159,7 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.ring.ref.ring_fd, configurator: (message) => message.setInputBytes([1, 2, 3]));
+    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputBytes([1, 2, 3]));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBytes, [1, 2, 3]));
