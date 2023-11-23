@@ -138,7 +138,7 @@ class InteractorCall {
   late final bool outputBool = _message.ref.output.address == 1;
   late final int outputInt = _message.ref.output.address;
   late final double outputDouble = _message.ref.output.cast<Double>().value;
-  late final String outputString = _message.ref.output.cast<Utf8>().toDartString(length: _message.ref.output_size);
+  late final String outputString = _message.ref.output.cast<Utf8>().toDartString();
   late final List<int> outputBuffer = _buffers.read(_message.ref.output.address);
   late final List<int> outputBytes = _message.ref.output.cast<Uint8>().asTypedList(_message.ref.output_size);
 
