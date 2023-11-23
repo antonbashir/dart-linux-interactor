@@ -25,15 +25,23 @@ int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_co
     interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;
     interactor->cqe_wait_count = configuration->cqe_wait_count;
     interactor->cqe_peek_count = configuration->cqe_peek_count;
-    interactor->trace = configuration->trace;
-    if (!interactor->buffers)
+    if (!interactor->buffers || !interactor->cqes)
     {
         return -ENOMEM;
     }
 
-    interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size);
-    interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory);
-    interactor_data_pool_create(&interactor->data_pool, &interactor->memory);
+    if (interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_data_pool_create(&interactor->data_pool, &interactor->memory))
+    {
+        return -ENOMEM;
+    }
 
     int result = interactor_buffers_pool_create(&interactor->buffers_pool, configuration->buffers_count);
     if (result == -1)

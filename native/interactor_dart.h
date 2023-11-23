@@ -28,7 +28,6 @@ extern "C"
         uint64_t cqe_wait_timeout_millis;
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
-        bool trace;
         size_t quota_size;
         size_t preallocation_size;
         size_t slab_size;
@@ -51,7 +50,6 @@ extern "C"
         uint64_t cqe_wait_timeout_millis;
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
-        bool trace;
         struct interactor_messages_pool messages_pool;
         struct interactor_buffers_pool buffers_pool;
         struct interactor_data_pool data_pool;

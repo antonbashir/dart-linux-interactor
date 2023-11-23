@@ -19,14 +19,23 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     interactor->cqe_wait_count = configuration->cqe_wait_count;
     interactor->cqe_peek_count = configuration->cqe_peek_count;
     interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;
-    if (!interactor->buffers)
+    if (!interactor->buffers || !interactor->cqes)
     {
         return -ENOMEM;
     }
 
-    interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size);
-    interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory);
-    interactor_data_pool_create(&interactor->data_pool, &interactor->memory);
+    if (interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_data_pool_create(&interactor->data_pool, &interactor->memory))
+    {
+        return -ENOMEM;
+    }
 
     interactor->callbacks = mh_native_callbacks_new();
     if (!interactor->callbacks)
@@ -272,7 +281,6 @@ void interactor_native_foreach(interactor_native_t* interactor, void (*call)(int
     io_uring_cq_advance(interactor->ring, count);
 }
 
-
 int interactor_native_submit(interactor_native_t* interactor)
 {
     return io_uring_submit(interactor->ring);
@@ -305,6 +313,7 @@ void interactor_native_destroy(interactor_native_t* interactor)
         free(interactor->buffers[index].iov_base);
     }
     interactor_buffers_pool_destroy(&interactor->buffers_pool);
+    interactor_data_pool_destroy(&interactor->data_pool);
     mh_native_callbacks_delete(interactor->callbacks);
     free(interactor->cqes);
     free(interactor->buffers);

@@ -32,8 +32,13 @@ static void* test_threading_run(void* thread)
 {
     test_thread_t* casted = (test_thread_t*)thread;
     casted->interactor = test_interactor_initialize();
+    if (!casted->interactor)
+    {
+        printf("failed to initialize native interactor\n");
+        pthread_exit(NULL);
+        return NULL;
+    }
     interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
-    interactor_native_process_timeout(casted->interactor);
     casted->alive = true;
     while (casted->alive)
     {
@@ -41,7 +46,7 @@ static void* test_threading_run(void* thread)
     }
     pthread_mutex_lock(&casted->shutdown_mutex);
     test_interactor_destroy(casted->interactor);
-    casted->interactor = NULL;
+    free(casted->messages);
     pthread_cond_signal(&casted->shutdown_condition);
     pthread_mutex_unlock(&casted->shutdown_mutex);
     return NULL;
@@ -65,6 +70,7 @@ void test_threading_initialize(int thread_count, int isolates_count, int per_thr
         pthread_cond_init(&threads.threads[thread_id]->shutdown_condition, NULL);
 
         pthread_t thread;
+        pthread_setname_np(thread, "test_threading");
         pthread_create(&thread, NULL, test_threading_run, threads.threads[thread_id]);
         while (!threads.threads[thread_id]->alive)
         {
@@ -160,6 +166,7 @@ void test_threading_destroy()
         pthread_mutex_lock(&threads.threads[thread_id]->shutdown_mutex);
         pthread_cond_wait(&threads.threads[thread_id]->shutdown_condition, &threads.threads[thread_id]->shutdown_mutex);
         pthread_mutex_unlock(&threads.threads[thread_id]->shutdown_mutex);
+        free(threads.threads[thread_id]);
     }
     pthread_mutex_unlock(&threads.global_working_mutex);
 }

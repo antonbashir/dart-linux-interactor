@@ -1,4 +1,5 @@
 #include "test.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include "interactor_constants.h"
 #include "interactor_message.h"

@@ -17763,9 +17763,6 @@ final class interactor_dart_configuration extends ffi.Struct {
   @ffi.Uint32()
   external int cqe_peek_count;
 
-  @ffi.Bool()
-  external bool trace;
-
   @ffi.Size()
   external int quota_size;
 
@@ -17818,9 +17815,6 @@ final class interactor_dart extends ffi.Struct {
 
   @ffi.Uint32()
   external int cqe_peek_count;
-
-  @ffi.Bool()
-  external bool trace;
 
   external interactor_messages_pool messages_pool;
 
@@ -21292,7 +21286,7 @@ const String SYSCONF_DIR = '';
 
 const String INSTALL_PREFIX = '/usr/local';
 
-const String BUILD_TYPE = 'Debug';
+const String BUILD_TYPE = 'RelWithDebInfo';
 
 const String BUILD_INFO = '';
 
