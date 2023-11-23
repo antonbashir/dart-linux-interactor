@@ -1,18 +1,20 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor_test/bindings.dart';
 import 'package:linux_interactor_test/call.dart';
 import 'package:linux_interactor_test/threading.dart';
 import 'package:path/path.dart';
 import 'package:test/test.dart';
 
-TestBindings loadBindings() => TestBindings(DynamicLibrary.open("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so"));
+TestBindings loadBindings() {
+  Interactor();
+  return TestBindings(DynamicLibrary.open("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so"));
+}
 
 void main() {
-  setUpAll(() {
-    loadBindings().test_initialize();
-  });
+  loadBindings().test_initialize();
   group("[call native]", testCallNative);
   group("[call dart]", testCallDart);
   group("[threading native]", () {

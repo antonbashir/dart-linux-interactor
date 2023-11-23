@@ -11,7 +11,7 @@ static pthread_mutex_t mutex;
 
 void test_initialize()
 {
-  pthread_mutex_init(&mutex, NULL);
+    pthread_mutex_init(&mutex, NULL);
 }
 
 interactor_native_t* test_interactor_initialize()
@@ -35,5 +35,7 @@ interactor_native_t* test_interactor_initialize()
 
 void test_interactor_destroy(interactor_native_t* interactor)
 {
+    pthread_mutex_lock(&mutex);
     interactor_native_destroy(interactor);
+    pthread_mutex_unlock(&mutex);
 }
