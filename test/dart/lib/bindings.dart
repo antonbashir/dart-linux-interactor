@@ -4336,6 +4336,15 @@ class TestBindings {
   late final _interactor_native_close_descriptor =
       _interactor_native_close_descriptorPtr.asFunction<void Function(int)>();
 
+  void test_initialize() {
+    return _test_initialize();
+  }
+
+  late final _test_initializePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('test_initialize');
+  late final _test_initialize =
+      _test_initializePtr.asFunction<void Function()>();
+
   ffi.Pointer<linux_interactor.interactor_native_t>
       test_interactor_initialize() {
     return _test_interactor_initialize();
@@ -7446,6 +7455,8 @@ class _SymbolAddresses {
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>
       get interactor_native_close_descriptor =>
           _library._interactor_native_close_descriptorPtr;
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> get test_initialize =>
+      _library._test_initializePtr;
   ffi.Pointer<
           ffi.NativeFunction<
               ffi.Pointer<linux_interactor.interactor_native_t> Function()>>

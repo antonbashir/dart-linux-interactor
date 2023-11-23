@@ -83,8 +83,8 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
 int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id)
 {
     interactor_native_configuration_t configuration = {
-        .buffer_size = 64,
-        .buffers_count = 1024,
+        .buffer_size = 4096,
+        .buffers_count = 4096,
         .ring_size = 16384,
         .cqe_peek_count = 1024,
         .cqe_wait_count = 1,
