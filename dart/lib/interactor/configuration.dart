@@ -1,4 +1,4 @@
-class InteractorWorkerConfiguration {
+class InteractorConfiguration {
   final int buffersCount;
   final int bufferSize;
   final int ringSize;
@@ -14,7 +14,7 @@ class InteractorWorkerConfiguration {
   final int memoryPreallocationSize;
   final int memoryQuotaSize;
 
-  InteractorWorkerConfiguration({
+  InteractorConfiguration({
     required this.buffersCount,
     required this.bufferSize,
     required this.ringSize,
@@ -31,7 +31,7 @@ class InteractorWorkerConfiguration {
     required this.memoryQuotaSize,
   });
 
-  InteractorWorkerConfiguration copyWith({
+  InteractorConfiguration copyWith({
     int? buffersCount,
     int? bufferSize,
     int? ringSize,
@@ -47,7 +47,7 @@ class InteractorWorkerConfiguration {
     int? memoryPreallocationSize,
     int? memoryQuotaSize,
   }) =>
-      InteractorWorkerConfiguration(
+      InteractorConfiguration(
         buffersCount: buffersCount ?? this.buffersCount,
         bufferSize: bufferSize ?? this.bufferSize,
         ringSize: ringSize ?? this.ringSize,

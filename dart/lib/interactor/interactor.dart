@@ -32,7 +32,7 @@ class Interactor {
     _workerPorts.forEach((port) => port.close());
   }
 
-  SendPort worker(InteractorWorkerConfiguration configuration) {
+  SendPort worker(InteractorConfiguration configuration) {
     final port = RawReceivePort((ports) async {
       SendPort toWorker = ports[0];
       _workerClosers.add(ports[1]);
