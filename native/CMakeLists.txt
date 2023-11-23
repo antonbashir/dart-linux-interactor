@@ -40,7 +40,7 @@ include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
 include_directories(${small_BINARY_DIR}/small/include)
 add_subdirectory(${small_SOURCE_DIR})
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -O3 -fno-stack-protector")
+
 FetchContent_Declare(
   dart
   URL "https://github.com/antonbashir/dart-native-api/archive/refs/tags/${DART_VERSION}.tar.gz"
