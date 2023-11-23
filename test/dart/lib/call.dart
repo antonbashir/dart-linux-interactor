@@ -3,7 +3,6 @@ import 'dart:ffi';
 
 import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart';
-import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor/interactor/worker.dart';

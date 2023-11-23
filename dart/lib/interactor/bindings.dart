@@ -16734,38 +16734,6 @@ final class statx extends ffi.Opaque {}
 
 final class epoll_event extends ffi.Opaque {}
 
-final class interactor_native_configuration extends ffi.Struct {
-  @ffi.Uint16()
-  external int buffers_count;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
-  @ffi.Size()
-  external int ring_size;
-
-  @ffi.Int()
-  external int ring_flags;
-
-  @ffi.Uint32()
-  external int cqe_wait_count;
-
-  @ffi.Uint32()
-  external int cqe_peek_count;
-
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
-
-  @ffi.Size()
-  external int quota_size;
-
-  @ffi.Size()
-  external int preallocation_size;
-
-  @ffi.Size()
-  external int slab_size;
-}
-
 final class interactor_native extends ffi.Struct {
   @ffi.Uint8()
   external int id;
