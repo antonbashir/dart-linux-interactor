@@ -76,8 +76,10 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     {
         return result;
     }
-
-    return interactor->ring->ring_fd;
+    
+    interactor->descriptor = interactor->ring->ring_fd;
+    
+    return interactor->descriptor;
 }
 
 int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id)
@@ -327,11 +329,6 @@ void interactor_native_destroy(interactor_native_t* interactor)
     free(interactor->buffers);
     free(interactor->ring);
     free(interactor);
-}
-
-int32_t interactor_native_descriptor(interactor_native_t* interactor)
-{
-    return interactor->ring->ring_fd;
 }
 
 void interactor_native_close_descriptor(int fd)

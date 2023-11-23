@@ -23,7 +23,7 @@ int* test_threading_interactor_descriptors()
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
-        descriptors[id] = interactor_native_descriptor(threads.threads[id]->interactor);
+        descriptors[id] = threads.threads[id]->interactor->descriptor;
     }
     pthread_mutex_unlock(&threads.global_working_mutex);
     return descriptors;
@@ -50,7 +50,7 @@ static void* test_threading_run(void* thread)
     do
     {
         casted->interactor = test_interactor_initialize();
-    } while (!casted->interactor || interactor_native_descriptor(casted->interactor) == 0);
+    } while (!casted->interactor || casted->interactor->descriptor <= 0);
     interactor_native_register_callback(casted->interactor, 0, 0, test_threading_call_dart_callback);
     casted->alive = true;
     pthread_cond_broadcast(&casted->initialize_condition);

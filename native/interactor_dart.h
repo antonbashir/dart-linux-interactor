@@ -36,6 +36,7 @@ extern "C"
     typedef struct interactor_dart
     {
         uint8_t id;
+        int32_t descriptor;
         struct io_uring* ring;
         struct iovec* buffers;
         uint32_t buffer_size;

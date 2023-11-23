@@ -29,6 +29,7 @@ extern "C"
     typedef struct interactor_native
     {
         uint8_t id;
+        int32_t descriptor;
         struct interactor_messages_pool messages_pool;
         struct interactor_buffers_pool buffers_pool;
         struct interactor_data_pool data_pool;
@@ -82,8 +83,6 @@ extern "C"
     void interactor_native_callback_to_dart(interactor_native_t* interactor, interactor_message_t* message);
 
     void interactor_native_destroy(interactor_native_t* interactor);
-
-    int32_t interactor_native_descriptor(interactor_native_t* interactor);
 
     void interactor_native_close_descriptor(int fd);
 

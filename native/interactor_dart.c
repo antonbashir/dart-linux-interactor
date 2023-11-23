@@ -73,7 +73,9 @@ int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_co
         return result;
     }
 
-    return interactor->ring->ring_fd;
+    interactor->descriptor = interactor->ring->ring_fd;
+
+    return interactor->descriptor;
 }
 
 int32_t interactor_dart_get_buffer(interactor_dart_t* interactor)
