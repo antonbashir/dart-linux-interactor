@@ -14,7 +14,7 @@ class InteractorCallback {
 }
 
 abstract interface class InteractorProducer {
-  void initialize(NativeProducerExecutor executor);
+  void initialize(InteractorProducerExecutor executor);
 }
 
 class InteractorMethod {

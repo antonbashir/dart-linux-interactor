@@ -7,11 +7,11 @@ class TestNativeProducer implements InteractorProducer {
 
   TestNativeProducer(this._bindings);
 
-  late final NativeMethodExecutor testCallNative;
-  late final NativeMethodExecutor testThreadingCallNative;
+  late final InteractorMethodExecutor testCallNative;
+  late final InteractorMethodExecutor testThreadingCallNative;
 
   @override
-  void initialize(NativeProducerExecutor executor) {
+  void initialize(InteractorProducerExecutor executor) {
     testCallNative = executor.register(_bindings.addresses.test_call_native);
     testThreadingCallNative = executor.register(_bindings.addresses.test_threading_call_native);
   }

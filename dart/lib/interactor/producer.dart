@@ -8,8 +8,8 @@ import 'constants.dart';
 import 'data.dart';
 import 'payloads.dart';
 
-class NativeProducerExecutor {
-  final Map<int, NativeMethodExecutor> _methods = {};
+class InteractorProducerExecutor {
+  final Map<int, InteractorMethodExecutor> _methods = {};
 
   final int _id;
   final Pointer<interactor_dart_t> _interactorPointer;
@@ -18,7 +18,7 @@ class NativeProducerExecutor {
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
 
-  NativeProducerExecutor(
+  InteractorProducerExecutor(
     this._id,
     this._interactorPointer,
     this._bindings,
@@ -28,8 +28,8 @@ class NativeProducerExecutor {
   );
 
   @pragma(preferInlinePragma)
-  NativeMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
-    final executor = NativeMethodExecutor(
+  InteractorMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
+    final executor = InteractorMethodExecutor(
       pointer.address,
       _id,
       _interactorPointer,
@@ -46,7 +46,7 @@ class NativeProducerExecutor {
   void callback(Pointer<interactor_message_t> message) => _methods[message.ref.method]?.callback(message);
 }
 
-class NativeMethodExecutor {
+class InteractorMethodExecutor {
   Map<int, InteractorCallDelegate> _calls = {};
 
   final int _methodId;
@@ -57,7 +57,7 @@ class NativeMethodExecutor {
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
 
-  NativeMethodExecutor(
+  InteractorMethodExecutor(
     this._methodId,
     this._executorId,
     this._interactor,

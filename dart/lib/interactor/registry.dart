@@ -10,7 +10,7 @@ import 'payloads.dart';
 import 'producer.dart';
 
 class InteractorConsumerRegistry {
-  final _consumers = <NativeConsumerExecutor>[];
+  final _consumers = <InteractorConsumerExecutor>[];
 
   final Pointer<interactor_dart_t> _interactor;
   final InteractorBindings _bindings;
@@ -21,11 +21,11 @@ class InteractorConsumerRegistry {
   );
 
   void register(InteractorConsumer declaration) {
-    final callbacks = <NativeCallbackExecutor>[];
+    final callbacks = <InteractorCallbackExecutor>[];
     for (var callback in declaration.callbacks()) {
-      callbacks.add(NativeCallbackExecutor(_bindings, _interactor, callback.callback));
+      callbacks.add(InteractorCallbackExecutor(_bindings, _interactor, callback.callback));
     }
-    _consumers.add(NativeConsumerExecutor(callbacks));
+    _consumers.add(InteractorConsumerExecutor(callbacks));
   }
 
   @pragma(preferInlinePragma)
@@ -33,7 +33,7 @@ class InteractorConsumerRegistry {
 }
 
 class InteractorProducerRegistry {
-  final _producers = <NativeProducerExecutor>[];
+  final _producers = <InteractorProducerExecutor>[];
 
   final Pointer<interactor_dart_t> _interactor;
   final InteractorBindings _bindings;
@@ -51,7 +51,7 @@ class InteractorProducerRegistry {
 
   T register<T extends InteractorProducer>(T provider) {
     final id = _producers.length;
-    final executor = NativeProducerExecutor(id, _interactor, _bindings, _payloads, _buffers, _datas);
+    final executor = InteractorProducerExecutor(id, _interactor, _bindings, _payloads, _buffers, _datas);
     _producers.add(executor);
     return provider..initialize(executor);
   }
