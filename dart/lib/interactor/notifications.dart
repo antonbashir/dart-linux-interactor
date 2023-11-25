@@ -19,6 +19,7 @@ class InteractorNotification {
   late final double inputDouble = _message.ref.input.cast<Double>().value;
   late final List<int> inputBytes = _message.ref.input.cast<Uint8>().asTypedList(_message.ref.input_size);
 
+  @pragma(preferInlinePragma)
   String getInputString({int? length}) => _message.ref.input.cast<Utf8>().toDartString(length: length);
 
   @pragma(preferInlinePragma)

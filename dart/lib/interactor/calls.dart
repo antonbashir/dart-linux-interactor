@@ -141,11 +141,13 @@ class InteractorCall {
   @pragma(preferInlinePragma)
   void releaseOutputBytes() => _datas.free(_message.ref.output, _message.ref.output_size);
 
+  @pragma(preferInlinePragma)
   void allocateOutputDouble() {
     _message.ref.output = _datas.allocate(sizeOf<Double>()).cast();
     _message.ref.output_size = sizeOf<Double>();
   }
 
+  @pragma(preferInlinePragma)
   void allocateOutputString(int size) {
     final units = empty.padRight(size);
     final Pointer<Uint8> result = _datas.allocate(units.length + 1).cast();
@@ -159,12 +161,14 @@ class InteractorCall {
     _message.ref.output_size = size;
   }
 
+  @pragma(preferInlinePragma)
   void allocateOutputBytes(int size) {
     final Pointer<Uint8> pointer = _datas.allocate(size).cast();
     _message.ref.output = pointer.cast();
     _message.ref.output_size = size;
   }
 
+  @pragma(preferInlinePragma)
   String getOutputString({int? length}) => _message.ref.output.cast<Utf8>().toDartString(length: length);
 
   @pragma(preferInlinePragma)

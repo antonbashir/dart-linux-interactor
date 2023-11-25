@@ -84,10 +84,8 @@ class InteractorMethodExecutor {
   Future<InteractorCall> call(int target, {FutureOr<void> Function(InteractorCall message)? configurator}) {
     final message = _bindings.interactor_dart_allocate_message(_interactor);
     final completer = Completer<InteractorCall>();
-    final delegate = InteractorCallDelegate(
-      completer,
-    );
-    var call = InteractorCall(
+    final delegate = InteractorCallDelegate(completer);
+    final call = InteractorCall(
       message,
       _interactor,
       _bindings,
