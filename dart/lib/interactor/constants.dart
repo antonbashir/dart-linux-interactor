@@ -50,6 +50,7 @@ class InteractorMessages {
 
   static const workerMemoryError = "[worker] out of memory";
   static const interactorMemoryError = "[interactor] out of memory";
+  static const interactorLimitError = "[interactor] more than $intMaxValue are in execution";
   static workerError(int result, InteractorBindings bindings) => "[worker] code = $result, message = ${_kernelErrorToString(result, bindings)}";
   static workerTrace(int id, int result, int data, int fd) => "worker = $id, result = $result,  bid = ${((data >> 16) & 0xffff)}, fd = $fd";
 

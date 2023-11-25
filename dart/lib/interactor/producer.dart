@@ -6,6 +6,7 @@ import 'buffers.dart';
 import 'calls.dart';
 import 'constants.dart';
 import 'data.dart';
+import 'exception.dart';
 import 'payloads.dart';
 
 class InteractorProducerExecutor {
@@ -58,9 +59,15 @@ class InteractorMethodExecutor {
   final InteractorDatas _datas;
 
   var _nextId = 0;
-
-  int get nextId {
-    return _nextId++;
+  int? get nextId {
+    if (_nextId == intMaxValue) _nextId = 0;
+    while (_calls.containsKey(++_nextId)) {
+      if (_nextId == intMaxValue) {
+        _nextId = 0;
+        return null;
+      }
+    }
+    return _nextId;
   }
 
   InteractorMethodExecutor(
@@ -91,6 +98,7 @@ class InteractorMethodExecutor {
     );
     if (configurator == null) {
       final id = nextId;
+      if (id == null) throw InteractorRuntimeException(InteractorMessages.interactorLimitError);
       message.ref.id = id;
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
@@ -100,6 +108,7 @@ class InteractorMethodExecutor {
     }
     return Future.value(configurator..call(call)).then((call) {
       final id = nextId;
+      if (id == null) throw InteractorRuntimeException(InteractorMessages.interactorLimitError);
       message.ref.id = id;
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
