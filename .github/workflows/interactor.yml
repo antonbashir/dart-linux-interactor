@@ -51,7 +51,6 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
           cache: yarn
           cache-dependency-path: 'documentation/yarn.lock'
       - name: Install
