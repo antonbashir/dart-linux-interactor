@@ -112,36 +112,6 @@ class InteractorCall {
   }
 
   @pragma(preferInlinePragma)
-  void releaseInputDouble() => _datas.free(_message.ref.input, _message.ref.input_size);
-
-  @pragma(preferInlinePragma)
-  void releaseInputString() => _datas.free(_message.ref.input, _message.ref.input_size);
-
-  @pragma(preferInlinePragma)
-  void releaseInputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.input.address).cast<T>());
-
-  @pragma(preferInlinePragma)
-  void releaseInputBuffer() => _buffers.release(_message.ref.input.address);
-
-  @pragma(preferInlinePragma)
-  void releaseInputBytes() => _datas.free(_message.ref.input, _message.ref.input_size);
-
-  @pragma(preferInlinePragma)
-  void releaseOutputDouble() => _datas.free(_message.ref.output, _message.ref.output_size);
-
-  @pragma(preferInlinePragma)
-  void releaseOutputString() => _datas.free(_message.ref.output, _message.ref.output_size);
-
-  @pragma(preferInlinePragma)
-  void releaseOutputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.output.address).cast<T>());
-
-  @pragma(preferInlinePragma)
-  void releaseOutputBuffer() => _buffers.release(_message.ref.output.address);
-
-  @pragma(preferInlinePragma)
-  void releaseOutputBytes() => _datas.free(_message.ref.output, _message.ref.output_size);
-
-  @pragma(preferInlinePragma)
   void allocateOutputDouble() {
     _message.ref.output = _datas.allocate(sizeOf<Double>()).cast();
     _message.ref.output_size = sizeOf<Double>();
@@ -180,6 +150,36 @@ class InteractorCall {
     final result = mapper(object);
     return result;
   }
+
+  @pragma(preferInlinePragma)
+  void releaseInputDouble() => _datas.free(_message.ref.input, _message.ref.input_size);
+
+  @pragma(preferInlinePragma)
+  void releaseInputString() => _datas.free(_message.ref.input, _message.ref.input_size);
+
+  @pragma(preferInlinePragma)
+  void releaseInputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.input.address).cast<T>());
+
+  @pragma(preferInlinePragma)
+  void releaseInputBuffer() => _buffers.release(_message.ref.input.address);
+
+  @pragma(preferInlinePragma)
+  void releaseInputBytes() => _datas.free(_message.ref.input, _message.ref.input_size);
+
+  @pragma(preferInlinePragma)
+  void releaseOutputDouble() => _datas.free(_message.ref.output, _message.ref.output_size);
+
+  @pragma(preferInlinePragma)
+  void releaseOutputString() => _datas.free(_message.ref.output, _message.ref.output_size);
+
+  @pragma(preferInlinePragma)
+  void releaseOutputObject<T extends Struct>() => _payloads.free(Pointer.fromAddress(_message.ref.output.address).cast<T>());
+
+  @pragma(preferInlinePragma)
+  void releaseOutputBuffer() => _buffers.release(_message.ref.output.address);
+
+  @pragma(preferInlinePragma)
+  void releaseOutputBytes() => _datas.free(_message.ref.output, _message.ref.output_size);
 
   @pragma(preferInlinePragma)
   void release() => _bindings.interactor_dart_free_message(_interactor, _message);
