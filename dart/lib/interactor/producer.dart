@@ -6,10 +6,11 @@ import 'buffers.dart';
 import 'calls.dart';
 import 'constants.dart';
 import 'data.dart';
+import 'declaration.dart';
 import 'exception.dart';
 import 'payloads.dart';
 
-class InteractorProducerExecutor {
+class InteractorProducerExecutor implements InteractorProducerRegistrat {
   final Map<int, InteractorMethodExecutor> _methods = {};
 
   final int _id;
@@ -29,7 +30,7 @@ class InteractorProducerExecutor {
   );
 
   @pragma(preferInlinePragma)
-  InteractorMethodExecutor register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
+  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
     final executor = InteractorMethodExecutor(
       pointer.address,
       _id,
@@ -47,7 +48,7 @@ class InteractorProducerExecutor {
   void callback(Pointer<interactor_message_t> message) => _methods[message.ref.method]?.callback(message);
 }
 
-class InteractorMethodExecutor {
+class InteractorMethodExecutor implements InteractorMethod {
   Map<int, InteractorCallDelegate> _calls = {};
 
   final int _methodId;
@@ -80,6 +81,7 @@ class InteractorMethodExecutor {
     this._datas,
   );
 
+  @override
   @pragma(preferInlinePragma)
   Future<InteractorCall> call(int target, {FutureOr<void> Function(InteractorCall message)? configurator}) {
     final message = _bindings.interactor_dart_allocate_message(_interactor);

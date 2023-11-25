@@ -1,5 +1,4 @@
 import 'package:linux_interactor/interactor/declaration.dart';
-import 'package:linux_interactor/interactor/producer.dart';
 import 'package:linux_interactor_test/bindings.dart';
 
 class TestNativeProducer implements InteractorProducer {
@@ -7,12 +6,12 @@ class TestNativeProducer implements InteractorProducer {
 
   TestNativeProducer(this._bindings);
 
-  late final InteractorMethodExecutor testCallNative;
-  late final InteractorMethodExecutor testThreadingCallNative;
+  late final InteractorMethod testCallNative;
+  late final InteractorMethod testThreadingCallNative;
 
   @override
-  void initialize(InteractorProducerExecutor executor) {
-    testCallNative = executor.register(_bindings.addresses.test_call_native);
-    testThreadingCallNative = executor.register(_bindings.addresses.test_threading_call_native);
+  void initialize(InteractorProducerRegistrat registrat) {
+    testCallNative = registrat.register(_bindings.addresses.test_call_native);
+    testThreadingCallNative = registrat.register(_bindings.addresses.test_threading_call_native);
   }
 }

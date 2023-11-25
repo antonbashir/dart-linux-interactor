@@ -23,7 +23,7 @@ class InteractorConsumerRegistry {
   void register(InteractorConsumer declaration) {
     final callbacks = <InteractorCallbackExecutor>[];
     for (var callback in declaration.callbacks()) {
-      callbacks.add(InteractorCallbackExecutor(_bindings, _interactor, callback.callback));
+      callbacks.add(InteractorCallbackExecutor(_bindings, _interactor, callback));
     }
     _consumers.add(InteractorConsumerExecutor(callbacks));
   }

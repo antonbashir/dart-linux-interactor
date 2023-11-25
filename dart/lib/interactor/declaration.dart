@@ -1,24 +1,24 @@
+import 'dart:async';
 import 'dart:ffi';
 
+import 'bindings.dart';
+import 'calls.dart';
 import 'notifications.dart';
-import 'producer.dart';
+
+typedef InteractorCallback = void Function(InteractorNotification notification);
 
 abstract interface class InteractorConsumer {
   List<InteractorCallback> callbacks();
 }
 
-class InteractorCallback {
-  final void Function(InteractorNotification notification) callback;
-
-  InteractorCallback(this.callback);
+abstract interface class InteractorProducerRegistrat {
+  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer);
 }
 
 abstract interface class InteractorProducer {
-  void initialize(InteractorProducerExecutor executor);
+  void initialize(InteractorProducerRegistrat registrat);
 }
 
-class InteractorMethod {
-  final Pointer<NativeFunction<Void Function(InteractorNotification)>> method;
-
-  InteractorMethod(this.method);
+abstract interface class InteractorMethod {
+  Future<InteractorCall> call(int target, {FutureOr<void> Function(InteractorCall message)? configurator});
 }

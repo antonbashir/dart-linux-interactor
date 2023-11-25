@@ -9,5 +9,5 @@ class TestNativeConsumer implements InteractorConsumer {
   void test(InteractorNotification message) => _checker(message);
 
   @override
-  List<InteractorCallback> callbacks() => [InteractorCallback(test)];
+  List<InteractorCallback> callbacks() => [test];
 }
