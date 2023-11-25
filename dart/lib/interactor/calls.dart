@@ -49,6 +49,13 @@ class InteractorCall {
 
   int get id => _message.ref.id;
 
+  late final int outputSize = _message.ref.output_size;
+  late final bool outputBool = _message.ref.output.address == 1;
+  late final int outputInt = _message.ref.output.address;
+  late final double outputDouble = _message.ref.output.cast<Double>().value;
+  late final List<int> outputBuffer = _buffers.read(_message.ref.output.address);
+  late final List<int> outputBytes = _message.ref.output.cast<Uint8>().asTypedList(_message.ref.output_size);
+
   @pragma(preferInlinePragma)
   void setInputInt(int data) {
     _message.ref.input = Pointer.fromAddress(data);
@@ -134,14 +141,6 @@ class InteractorCall {
   @pragma(preferInlinePragma)
   void releaseOutputBytes() => _datas.free(_message.ref.output, _message.ref.output_size);
 
-  late final int outputSize = _message.ref.output_size;
-  late final bool outputBool = _message.ref.output.address == 1;
-  late final int outputInt = _message.ref.output.address;
-  late final double outputDouble = _message.ref.output.cast<Double>().value;
-  late final String outputString = _message.ref.output.cast<Utf8>().toDartString();
-  late final List<int> outputBuffer = _buffers.read(_message.ref.output.address);
-  late final List<int> outputBytes = _message.ref.output.cast<Uint8>().asTypedList(_message.ref.output_size);
-
   void allocateOutputDouble() {
     _message.ref.output = _datas.allocate(sizeOf<Double>()).cast();
     _message.ref.output_size = sizeOf<Double>();
@@ -165,6 +164,8 @@ class InteractorCall {
     _message.ref.output = pointer.cast();
     _message.ref.output_size = size;
   }
+
+  String getOutputString({int? length}) => _message.ref.output.cast<Utf8>().toDartString(length: length);
 
   @pragma(preferInlinePragma)
   Pointer<T> getOutputObject<T extends Struct>() => Pointer.fromAddress(_message.ref.output.address).cast();

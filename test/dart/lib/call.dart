@@ -96,7 +96,7 @@ void testCallNative() {
     final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputString("test"));
     await _awaitNativeCall(bindings, native);
     final result = await call;
-    expect(result.outputString, "test");
+    expect(result.getOutputString(), "test");
     result.release();
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
@@ -263,7 +263,7 @@ void testCallDart() {
     final completer = Completer();
     worker.consumer(TestNativeConsumer(
       (message) {
-        expect(message.inputString, "test");
+        expect(message.getInputString(), "test");
         completer.complete();
       },
     ));

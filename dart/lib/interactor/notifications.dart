@@ -17,8 +17,9 @@ class InteractorNotification {
   late final bool inputBool = _message.ref.input.address == 1;
   late final int inputInt = _message.ref.input.address;
   late final double inputDouble = _message.ref.input.cast<Double>().value;
-  late final String inputString = _message.ref.input.cast<Utf8>().toDartString();
   late final List<int> inputBytes = _message.ref.input.cast<Uint8>().asTypedList(_message.ref.input_size);
+
+  String getInputString({int? length}) => _message.ref.input.cast<Utf8>().toDartString(length: length);
 
   @pragma(preferInlinePragma)
   Pointer<T> getInputObject<T extends Struct>() => Pointer.fromAddress(_message.ref.input.address).cast();

@@ -2,9 +2,9 @@ import 'package:linux_interactor/interactor/declaration.dart';
 import 'package:linux_interactor/interactor/producer.dart';
 import 'package:linux_interactor_test/bindings.dart';
 
-class TestNativeProducer implements NativeProducer {
+class TestNativeProducer implements InteractorProducer {
   final TestBindings _bindings;
-  
+
   TestNativeProducer(this._bindings);
 
   late final NativeMethodExecutor testCallNative;

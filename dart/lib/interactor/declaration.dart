@@ -3,22 +3,22 @@ import 'dart:ffi';
 import 'notifications.dart';
 import 'producer.dart';
 
-abstract interface class NativeConsumer {
-  List<NativeCallback> callbacks();
+abstract interface class InteractorConsumer {
+  List<InteractorCallback> callbacks();
 }
 
-class NativeCallback {
+class InteractorCallback {
   final void Function(InteractorNotification notification) callback;
 
-  NativeCallback(this.callback);
+  InteractorCallback(this.callback);
 }
 
-abstract interface class NativeProducer {
+abstract interface class InteractorProducer {
   void initialize(NativeProducerExecutor executor);
 }
 
-class NativeMethod {
+class InteractorMethod {
   final Pointer<NativeFunction<Void Function(InteractorNotification)>> method;
 
-  NativeMethod(this.method);
+  InteractorMethod(this.method);
 }

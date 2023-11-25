@@ -83,9 +83,9 @@ class InteractorWorker {
     unawaited(_listen());
   }
 
-  void consumer(NativeConsumer declaration) => _consumers.register(declaration);
+  void consumer(InteractorConsumer declaration) => _consumers.register(declaration);
 
-  T producer<T extends NativeProducer>(T provider) => _producers.register(provider);
+  T producer<T extends InteractorProducer>(T provider) => _producers.register(provider);
 
   Future<void> _listen() async {
     final baseDelay = _interactor.ref.base_delay_micros;

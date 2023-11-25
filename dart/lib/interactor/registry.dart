@@ -20,7 +20,7 @@ class InteractorConsumerRegistry {
     this._bindings,
   );
 
-  void register(NativeConsumer declaration) {
+  void register(InteractorConsumer declaration) {
     final callbacks = <NativeCallbackExecutor>[];
     for (var callback in declaration.callbacks()) {
       callbacks.add(NativeCallbackExecutor(_bindings, _interactor, callback.callback));
@@ -49,7 +49,7 @@ class InteractorProducerRegistry {
     this._datas,
   );
 
-  T register<T extends NativeProducer>(T provider) {
+  T register<T extends InteractorProducer>(T provider) {
     final id = _producers.length;
     final executor = NativeProducerExecutor(id, _interactor, _bindings, _payloads, _buffers, _datas);
     _producers.add(executor);

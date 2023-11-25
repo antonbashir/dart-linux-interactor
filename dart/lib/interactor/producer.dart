@@ -84,26 +84,20 @@ class NativeMethodExecutor {
       delegate,
     );
     if (configurator == null) {
-      message.ref.id = completer.hashCode;
+      message.ref.id = identityHashCode(call);
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
       _calls[completer.hashCode] = delegate;
       _bindings.interactor_dart_call_native(_interactor, target, message);
-      return completer.future.then((message) {
-        _calls.remove(message.id);
-        return message;
-      });
+      return completer.future.whenComplete(() => _calls.remove(message.ref.id));
     }
-    return Future.value(configurator.call(call)).then((call) {
-      message.ref.id = completer.hashCode;
+    return Future.value(configurator..call(call)).then((call) {
+      message.ref.id = identityHashCode(call);
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
       _calls[completer.hashCode] = delegate;
       _bindings.interactor_dart_call_native(_interactor, target, message);
-      return completer.future.then((message) {
-        _calls.remove(message.id);
-        return message;
-      });
+      return completer.future.whenComplete(() => _calls.remove(message.ref.id));
     });
   }
 
