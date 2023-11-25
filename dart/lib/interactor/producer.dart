@@ -57,6 +57,12 @@ class InteractorMethodExecutor {
   final InteractorBuffers _buffers;
   final InteractorDatas _datas;
 
+  var _nextId = 0;
+
+  int get nextId {
+    return _nextId++;
+  }
+
   InteractorMethodExecutor(
     this._methodId,
     this._executorId,
@@ -84,7 +90,7 @@ class InteractorMethodExecutor {
       delegate,
     );
     if (configurator == null) {
-      final id = identityHashCode(call);
+      final id = nextId;
       message.ref.id = id;
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
@@ -93,7 +99,7 @@ class InteractorMethodExecutor {
       return completer.future.whenComplete(() => _calls.remove(id));
     }
     return Future.value(configurator..call(call)).then((call) {
-      final id = identityHashCode(call);
+      final id = nextId;
       message.ref.id = id;
       message.ref.owner = _executorId;
       message.ref.method = _methodId;
