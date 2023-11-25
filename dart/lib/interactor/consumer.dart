@@ -22,5 +22,5 @@ class InteractorCallbackExecutor {
   InteractorCallbackExecutor(this._bindings, this._interactor, this._executor);
 
   @pragma(preferInlinePragma)
-  void call(Pointer<interactor_message_t> message) => Future.value(_executor(InteractorNotification(message))).whenComplete(() => _bindings.interactor_dart_callback_to_native(_interactor, message));
+  void call(Pointer<interactor_message_t> message) => Future.value(_executor(InteractorNotification(message))).then((_) => _bindings.interactor_dart_callback_to_native(_interactor, message));
 }
