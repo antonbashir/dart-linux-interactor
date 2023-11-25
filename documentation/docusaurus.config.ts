@@ -14,7 +14,7 @@ const config: Config = {
   baseUrl,
   organizationName,
   projectName,
-  onBrokenLinks: 'ignore',
+  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
@@ -66,7 +66,7 @@ const config: Config = {
           items: [
             {
               label: 'Tutorial',
-              to: '/docs/intro',
+              to: '/intro',
             },
           ],
         },
