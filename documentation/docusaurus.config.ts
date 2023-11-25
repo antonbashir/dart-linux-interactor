@@ -7,8 +7,8 @@ const projectName = "dart-linux-interactor";
 const baseUrl = `/${projectName}/`;
 
 const config: Config = {
-  title: 'dart-linux-interactor',
-  tagline: 'dart-linux-interactor',
+  title: 'Dart Linux Interactor',
+  tagline: 'Dart Linux Interactor',
   favicon: 'img/favicon.ico',
   url: `https://${organizationName}.github.io`,
   baseUrl,
@@ -27,9 +27,12 @@ const config: Config = {
       'classic',
       {
         docs: {
+          routeBasePath: '/',
           sidebarPath: './sidebars.ts',
           editUrl: `https://github.com/${organizationName}/${projectName}/tree/main/documentation`,
         },
+        pages: false,
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -40,7 +43,7 @@ const config: Config = {
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Dart Linux Interactor',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -53,8 +56,8 @@ const config: Config = {
           label: 'Tutorial',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          href: 'https://github.com/antonbashir/dart-linux-interactor',
+          label: 'Source',
           position: 'right',
         },
       ],
@@ -72,33 +75,25 @@ const config: Config = {
           ],
         },
         {
-          title: 'Community',
+          title: 'Projects',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
+              label: 'dart-iouring-transport',
+              href: 'https://github.com/antonbashir/dart-iouring-transport',
+            }
           ],
         },
         {
-          title: 'More',
+          title: 'Samples',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'dart-iouring-sample',
+              href: 'https://github.com/antonbashir/dart-transport-sample',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} ${organizationName}`,
     },
     prism: {
       theme: prismThemes.github,
