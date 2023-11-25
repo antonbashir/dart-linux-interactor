@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const organizationName = "antonbashir";
 const projectName = "dart-linux-interactor";
-const baseUrl = `/${projectName}/`;
+const baseUrl = `/${projectName}/docs`;
 
 const config: Config = {
   title: 'Dart Linux Interactor',
