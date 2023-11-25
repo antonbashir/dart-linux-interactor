@@ -29,7 +29,6 @@ class InteractorProducerExecutor implements InteractorProducerRegistrat {
     this._datas,
   );
 
-  @pragma(preferInlinePragma)
   InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
     final executor = InteractorMethodExecutor(
       pointer.address,
