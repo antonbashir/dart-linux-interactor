@@ -9,7 +9,7 @@ const baseUrl = `/${projectName}/`;
 const config: Config = {
   title: 'Dart Linux Interactor',
   tagline: 'Dart Linux Interactor',
-  favicon: 'img/favicon.ico',
+  favicon: 'images/favicon.ico',
   url: `https://${organizationName}.github.io`,
   baseUrl,
   organizationName,
@@ -44,16 +44,12 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Dart Linux Interactor',
-      logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
-      },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'documentationSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Documentation',
         },
         {
           href: 'https://github.com/antonbashir/dart-linux-interactor',
