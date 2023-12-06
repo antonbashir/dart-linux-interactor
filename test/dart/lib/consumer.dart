@@ -7,9 +7,7 @@ class TestNativeConsumer implements InteractorConsumer {
   TestNativeConsumer(this._checker);
 
   void test(InteractorNotification message) => _checker(message);
-  
-  Future<void> test2(InteractorNotification message) async => _checker(message);
 
   @override
-  List<InteractorCallback> callbacks() => [test, test2];
+  List<InteractorCallback> callbacks() => [test];
 }
