@@ -5,7 +5,7 @@ import 'bindings.dart';
 import 'calls.dart';
 import 'notifications.dart';
 
-typedef InteractorCallback = void Function(InteractorNotification notification);
+typedef InteractorCallback = FutureOr<void> Function(InteractorNotification notification);
 
 abstract interface class InteractorConsumer {
   List<InteractorCallback> callbacks();
