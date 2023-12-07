@@ -39,7 +39,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: true,
@@ -69,7 +68,7 @@ const config: Config = {
           items: [
             {
               label: 'About me',
-              to: '/intro',
+              to: 'antonbashir.github.com',
             },
           ],
         },
