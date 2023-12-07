@@ -1,5 +1,11 @@
 ---
-sidebar_position: 2
+slug: /
+title: Welcome
+sidebar_position: 1
 ---
 
-# Introduction
+# 👋 Welcome
+
+### Installation
+
+### Usage
