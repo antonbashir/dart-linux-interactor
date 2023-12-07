@@ -60,10 +60,10 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Author',
           items: [
             {
-              label: 'Tutorial',
+              label: 'About me',
               to: '/intro',
             },
           ],
