@@ -90,6 +90,15 @@ const config: Config = {
             },
           ],
         },
+        {
+          title: 'References',
+          items: [
+            {
+              label: 'io_uring',
+              href: 'https://github.com/espoal/awesome-iouring',
+            },
+          ],
+        },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} ${organizationName}`,
     },
