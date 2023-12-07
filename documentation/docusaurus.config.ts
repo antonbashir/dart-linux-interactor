@@ -68,7 +68,7 @@ const config: Config = {
           items: [
             {
               label: 'About me',
-              href: 'https://antonbashir.github.com',
+              href: 'https://antonbashir.github.io',
             },
           ],
         },
