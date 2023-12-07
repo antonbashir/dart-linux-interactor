@@ -70,6 +70,14 @@ const config: Config = {
               label: 'About me',
               href: 'https://antonbashir.github.io',
             },
+            {
+              label: 'Telegram',
+              href: 'https://t.me/a_bashirov',
+            },
+            {
+              label: 'Linkedin',
+              href: 'https://www.linkedin.com/in/anton-bashirov',
+            },
           ],
         },
         {
@@ -78,6 +86,18 @@ const config: Config = {
             {
               label: 'dart-iouring-transport',
               href: 'https://github.com/antonbashir/dart-iouring-transport',
+            },
+            {
+              label: 'dart-tarantool-storage',
+              href: 'https://github.com/antonbashir/dart-tarantool-storage',
+            },
+            {
+              label: 'dart-linux-interactor',
+              href: 'https://github.com/antonbashir/dart-linux-interactor',
+            },
+            {
+              label: 'dart-reactive-transport',
+              href: 'https://github.com/antonbashir/dart-reactive-transport',
             }
           ],
         },
@@ -85,14 +105,38 @@ const config: Config = {
           title: 'Samples',
           items: [
             {
-              label: 'dart-iouring-sample',
+              label: 'dart-transport-sample',
               href: 'https://github.com/antonbashir/dart-transport-sample',
             },
+            {
+              label: 'dart-tarantool-sample',
+              href: 'https://github.com/antonbashir/dart-tarantool-sample',
+            },
+            {
+              label: 'dart-linux-sample',
+              href: 'https://github.com/antonbashir/dart-linux-sample',
+            },
+            {
+              label: 'dart-reactive-sample',
+              href: 'https://github.com/antonbashir/dart-reactive-sample',
+            }
           ],
         },
         {
           title: 'References',
           items: [
+            {
+              label: 'Dart',
+              href: 'https://dart.dev/',
+            },
+            {
+              label: 'Dart FFI',
+              href: 'https://dart.dev/interop/c-interop',
+            },
+            {
+              label: 'Flutter',
+              href: 'https://flutter.dev/',
+            },
             {
               label: 'io_uring',
               href: 'https://github.com/espoal/awesome-iouring',
