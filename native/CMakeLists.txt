@@ -6,9 +6,10 @@ endif()
 
 project(native C ASM)
 
-set(LIBURING_VERSION liburing-2.4)
-set(SMALL_VERSION master)
-set(DART_VERSION 3.2.0)
+set(LIBURING_REPOSITORY "developer@git.local:dependencies/liburing.git")
+set(LIBURING_VERSION evolution)
+set(SMALL_REPOSITORY "developer@git.local:dependencies/tarantool-small.git")
+set(SMALL_VERSION evolution)
 
 add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
@@ -21,7 +22,8 @@ include(FetchContent)
 
 FetchContent_Declare(
   liburing
-  URL "https://github.com/axboe/liburing/archive/refs/tags/${LIBURING_VERSION}.tar.gz"
+  GIT_REPOSITORY ${LIBURING_REPOSITORY}
+  GIT_TAG ${LIBURING_VERSION}
   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/liburing
 )
 FetchContent_MakeAvailable(liburing)
@@ -30,24 +32,16 @@ add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/b
 
 FetchContent_Declare(
   small
-  URL "https://github.com/tarantool/small/archive/refs/heads/${SMALL_VERSION}.tar.gz"
+  GIT_REPOSITORY ${SMALL_REPOSITORY} 
+  GIT_TAG ${SMALL_VERSION}
   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/small
 )
 FetchContent_MakeAvailable(small)
-execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/small-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${small_SOURCE_DIR}/src/include)
 include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
 include_directories(${small_BINARY_DIR}/small/include)
 add_subdirectory(${small_SOURCE_DIR})
-
-FetchContent_Declare(
-  dart
-  URL "https://github.com/antonbashir/dart-native-api/archive/refs/tags/${DART_VERSION}.tar.gz"
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dart
-)
-FetchContent_MakeAvailable(dart)
-execute_process(COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/patches/dart-patch-apply.sh" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 configure_file(
   "${PROJECT_SOURCE_DIR}/common/configuration.h.cmake"
