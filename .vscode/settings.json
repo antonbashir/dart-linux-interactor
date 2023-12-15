@@ -18,6 +18,10 @@
     "stdint.h": "c",
     "mempool.h": "c",
     "interactor_collections.h": "c",
-    "small.h": "c"
+    "small.h": "c",
+    "interactor_common.h": "c",
+    "interactor_message.h": "c",
+    "mhash.h": "c",
+    "format": "c"
   }
 }

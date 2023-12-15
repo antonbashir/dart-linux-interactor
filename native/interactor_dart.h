@@ -7,9 +7,6 @@
 #include <interactor_messages_pool.h>
 #include <interactor_payload_pool.h>
 #include <stdint.h>
-#include <stdio.h>
-#include "interactor_collections.h"
-#include "interactor_common.h"
 
 #if defined(__cplusplus)
 extern "C"

@@ -1,8 +1,6 @@
 #ifndef INTERACTOR_CONSTANTS_H
 #define INTERACTOR_CONSTANTS_H
 
-#include <stdint.h>
-
 #if defined(__cplusplus)
 extern "C"
 {

@@ -9,10 +9,6 @@ extern "C"
 {
 #endif
 
-#if !MH_SOURCE
-#define MH_UNDEF
-#endif
-
 #define mh_name _native_callbacks
     struct mh_native_callbacks_key_t
     {
@@ -32,6 +28,8 @@ extern "C"
 #define mh_hash_key(a, arg) (a.owner * 31 + a.method)
 #define mh_cmp(a, b, arg) ((a->key.owner != b->key.owner) && (a->key.method != b->key.method))
 #define mh_cmp_key(a, b, arg) ((a.owner != b->key.owner) && (a.method != b->key.method))
+#define MH_SOURCE
+
 #include "collections/mhash.h"
 
 #undef mh_node_t

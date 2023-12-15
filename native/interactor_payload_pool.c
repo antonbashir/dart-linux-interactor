@@ -1,8 +1,5 @@
 #include <interactor_memory.h>
 #include <interactor_payload_pool.h>
-#include "common/common.h"
-#include "interactor_constants.h"
-#include "small/include/small/small.h"
 
 int interactor_payload_pool_create(struct interactor_payload_pool* pool, struct interactor_memory* memory, size_t payload_size)
 {
