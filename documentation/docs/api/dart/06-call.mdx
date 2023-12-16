@@ -1,3 +1,45 @@
 ---
 title: Call
 ---
+
+# API
+
+### InteractorCall 
+
+```dart title="Declaration"
+class InteractorCall {
+  get int id
+  get int outputSize
+  get bool outputBool
+  get int outputInt
+  get double outputDouble
+  get List<int> outputBuffer
+  get List<int> outputBytes
+  void setInputInt(int data) 
+  void setInputBool(bool data)
+  void setInputDouble(double data)
+  void setInputString(String data)
+  void setInputObject<T extends Struct>(void Function(Pointer<T> object)? configurator) 
+  Future<void> setInputBuffer(List<int> bytes) async 
+  void setInputBytes(List<int> bytes)
+  void allocateOutputDouble()
+  void allocateOutputString(int size)
+  Future<void> allocateOutputBuffer(int size) async 
+  void allocateOutputBytes(int size) 
+  String getOutputString({int? length})
+  Pointer<T> getOutputObject<T extends Struct>()
+  T parseOutputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) 
+  void releaseInputDouble()
+  void releaseInputString()
+  void releaseInputObject<T extends Struct>()
+  void releaseInputBuffer()
+  void releaseInputBytes()
+  void releaseOutputDouble()
+  void releaseOutputString()
+  void releaseOutputObject<T extends Struct>()
+  void releaseOutputBuffer()
+  void releaseOutputBytes()
+  void release()
+}
+
+```

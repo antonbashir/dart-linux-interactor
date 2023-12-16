@@ -1,3 +1,22 @@
 ---
 title: Notification
 ---
+
+# API
+
+### InteractorNotification 
+
+```dart title="Declaration"
+class InteractorNotification {
+  String getInputString({int? length})
+  Pointer<T> getInputObject<T extends Struct>()
+  T parseInputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) 
+  void setOutputInt(int data)
+  void setOutputBool(bool data)
+  void setOutputDouble(double data)
+  void setOutputString(String data)
+  void setOutputObject<T extends Struct>(void Function(Pointer<T> object) configurator)
+  Future<void> setOutputBytes(List<int> bytes) async
+}
+
+```
