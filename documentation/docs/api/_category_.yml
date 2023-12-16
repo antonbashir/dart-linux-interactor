@@ -1,8 +1,4 @@
-{
-  label: "🍰 API",
-  "link":
-    {
-      "type": "generated-index",
-      "description": "API documentation for dart-linux-interactor.",
-    },
-}
+label: "🍰 API"
+link:
+  type: generated-index
+  description: "API documentation for dart-linux-interactor."

@@ -1,3 +1,49 @@
 ---
 title: Consumer
 ---
+
+# Consumer
+
+### InteractorConsumer
+
+Use `InteractorConsumer` when you need to define a class for handle calls from Native side.
+
+```dart title="Declaration"
+abstract interface class InteractorConsumer {
+  List<InteractorCallback> callbacks();
+}
+```
+
+```dart title="Example"
+class TestNativeConsumer implements InteractorConsumer {
+  void test(InteractorNotification message) { /* Handle */ };
+
+  @override
+  List<InteractorCallback> callbacks() => [test];
+}
+```
+
+```dart title="Registration"
+worker.consumer(TestNativeConsumer());
+```
+
+```c title="Calling"
+interactor_message_t* message = interactor_native_allocate_message(interactor);
+message->id = // At your discretion.
+message->input = // At your discretion.
+message->input_size = // At your discretion.
+message->owner = 0; // Index of the consumer inside the worker.
+message->method = 0; // Index of the callback inside the consumer. 
+interactor_native_call_dart(interactor, target, message);
+interactor_native_submit(interactor);
+```
+
+### InteractorCallback
+```dart title="Declaration"
+typedef InteractorCallback = FutureOr<void> Function(InteractorNotification notification);
+```
+
+# References
+[InteractorWorker](worker) gives you to register consumers and producers.
+
+[InteractorNotification](notification) gives you to handle payload.
