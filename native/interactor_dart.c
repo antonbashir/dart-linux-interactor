@@ -4,6 +4,8 @@
 #include <liburing.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
 #include "interactor_common.h"
 #include "interactor_constants.h"

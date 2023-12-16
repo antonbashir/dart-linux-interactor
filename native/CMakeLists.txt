@@ -11,7 +11,6 @@ add_definitions("-D_GNU_SOURCE")
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -O3 -fno-stack-protector")
-set(HAVE_CLOCK_GETTIME_DECL ON)
 
 include(FetchContent)
 
@@ -37,12 +36,6 @@ include_directories(${small_SOURCE_DIR}/include)
 include_directories(${small_SOURCE_DIR}/third_party)
 include_directories(${small_BINARY_DIR}/small/include)
 add_subdirectory(${small_SOURCE_DIR})
-
-configure_file(
-  "${PROJECT_SOURCE_DIR}/common/configuration.h.cmake"
-  "${PROJECT_SOURCE_DIR}/common/configuration.h"
-)
-message(STATUS "")
 
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})

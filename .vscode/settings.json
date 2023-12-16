@@ -23,6 +23,10 @@
     "interactor_message.h": "c",
     "mhash.h": "c",
     "format": "c",
-    "interactor_data_pool.h": "c"
-  }
+    "interactor_data_pool.h": "c",
+    "common.h": "c",
+    "random": "c",
+    "utility": "c"
+  },
+  "C_Cpp.dimInactiveRegions": false
 }
