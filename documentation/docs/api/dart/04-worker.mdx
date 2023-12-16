@@ -1,3 +1,23 @@
 ---
 title: Worker
 ---
+
+# API
+
+### InteractorWorker 
+
+```dart title="Declaration"
+class InteractorWorker {
+  bool get active => _active;
+  int get id => _interactor.ref.id;
+  int get descriptor => _descriptor;
+  InteractorPayloads get payloads => _payloads;
+  InteractorBuffers get buffers => _buffers;
+  InteractorDatas get datas => _datas;
+  InteractorWorker(SendPort toInteractor)
+  Future<void> initialize() async 
+  void activate()
+  void consumer(InteractorConsumer declaration)
+  T producer<T extends InteractorProducer>(T provider)
+}
+```
