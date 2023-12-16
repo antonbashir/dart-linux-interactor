@@ -23,6 +23,7 @@ const config: Config = {
   themes: [
     [require.resolve("@easyops-cn/docusaurus-search-local"),
     ({
+      indexBlog: false,
       docsRouteBasePath: '/',
       hashed: true,
     })
