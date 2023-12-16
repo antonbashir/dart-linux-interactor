@@ -8,7 +8,6 @@ set(SMALL_REPOSITORY "developer@git.local:dependencies/tarantool-small.git")
 set(SMALL_VERSION evolution)
 
 add_definitions("-D_GNU_SOURCE")
-
 set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -O3 -fno-stack-protector")
@@ -28,7 +27,7 @@ add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/b
 
 FetchContent_Declare(
   small
-  GIT_REPOSITORY ${SMALL_REPOSITORY} 
+  GIT_REPOSITORY ${SMALL_REPOSITORY}
   GIT_TAG ${SMALL_VERSION}
   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/small
 )
