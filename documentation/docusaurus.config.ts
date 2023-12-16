@@ -9,7 +9,7 @@ const baseUrl = `/${projectName}/`;
 const config: Config = {
   title: 'Dart Linux Interactor',
   tagline: 'Dart Linux Interactor',
-  favicon: 'images/favicon.jpg',
+  favicon: 'images/favicon.png',
   url: `https://${organizationName}.github.io`,
   baseUrl,
   organizationName,
