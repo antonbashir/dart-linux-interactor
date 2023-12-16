@@ -16,14 +16,28 @@ class InteractorPayloads {
 }
 ```
 
-### InteractorPayloads 
+### InteractorDatas 
 
 ```dart title="Declaration"
-class InteractorPayloads {
-  void register<T extends Struct>(int size)
-  int size<T extends Struct>()
-  Pointer<T> allocate<T extends Struct>()
-  void free<T extends Struct>(Pointer<T> payload)
-  void destroy()
+class InteractorDatas {
+  Pointer<Void> allocate(int size)
+  void free(Pointer<Void> pointer, int size)
+}
+```
+
+### InteractorBuffers 
+
+```dart title="Declaration"
+class InteractorBuffers {
+  void release(int bufferId)
+  Uint8List read(int bufferId) 
+  void setLength(int bufferId, int length)
+  void write(int bufferId, Uint8List bytes)
+  int? get()
+  Future<int> allocate() async
+  Future<List<int>> allocateArray(int count) async
+  int available()
+  int used()
+  void releaseArray(List<int> buffers);
 }
 ```
