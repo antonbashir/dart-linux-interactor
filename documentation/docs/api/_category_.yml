@@ -1,3 +1,8 @@
 {
- label: "🍰 API" 
+  label: "🍰 API",
+  "link":
+    {
+      "type": "generated-index",
+      "description": "API documentation for dart-linux-interactor.",
+    },
 }

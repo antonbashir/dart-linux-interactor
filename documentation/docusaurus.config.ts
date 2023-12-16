@@ -64,84 +64,32 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Author',
-          items: [
-            {
-              label: 'About me',
-              href: 'https://antonbashir.github.io',
-            },
-            {
-              label: 'Telegram',
-              href: 'https://t.me/a_bashirov',
-            },
-            {
-              label: 'Linkedin',
-              href: 'https://www.linkedin.com/in/anton-bashirov',
-            },
-          ],
+          label: 'Author',
+          href: 'https://antonbashir.github.io',
         },
         {
-          title: 'Projects',
-          items: [
-            {
-              label: 'dart-iouring-transport',
-              href: 'https://github.com/antonbashir/dart-iouring-transport',
-            },
-            {
-              label: 'dart-tarantool-storage',
-              href: 'https://github.com/antonbashir/dart-tarantool-storage',
-            },
-            {
-              label: 'dart-linux-interactor',
-              href: 'https://github.com/antonbashir/dart-linux-interactor',
-            },
-            {
-              label: 'dart-reactive-transport',
-              href: 'https://github.com/antonbashir/dart-reactive-transport',
-            }
-          ],
+          label: 'Telegram',
+          href: 'https://t.me/a_bashirov',
         },
         {
-          title: 'Samples',
-          items: [
-            {
-              label: 'dart-transport-sample',
-              href: 'https://github.com/antonbashir/dart-transport-sample',
-            },
-            {
-              label: 'dart-tarantool-sample',
-              href: 'https://github.com/antonbashir/dart-tarantool-sample',
-            },
-            {
-              label: 'dart-linux-sample',
-              href: 'https://github.com/antonbashir/dart-linux-sample',
-            },
-            {
-              label: 'dart-reactive-sample',
-              href: 'https://github.com/antonbashir/dart-reactive-sample',
-            }
-          ],
+          label: 'Linkedin',
+          href: 'https://www.linkedin.com/in/anton-bashirov',
         },
         {
-          title: 'References',
-          items: [
-            {
-              label: 'Dart',
-              href: 'https://dart.dev/',
-            },
-            {
-              label: 'Dart FFI',
-              href: 'https://dart.dev/interop/c-interop',
-            },
-            {
-              label: 'Flutter',
-              href: 'https://flutter.dev/',
-            },
-            {
-              label: 'io_uring',
-              href: 'https://github.com/espoal/awesome-iouring',
-            },
-          ],
+          label: 'Dart',
+          href: 'https://dart.dev/',
+        },
+        {
+          label: 'Dart FFI',
+          href: 'https://dart.dev/interop/c-interop',
+        },
+        {
+          label: 'Flutter',
+          href: 'https://flutter.dev/',
+        },
+        {
+          label: 'io_uring',
+          href: 'https://github.com/espoal/awesome-iouring',
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} ${organizationName}`,
@@ -149,7 +97,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['dart', 'yaml']
+      additionalLanguages: ['dart', 'yaml',]
     },
   } satisfies Preset.ThemeConfig,
 };
