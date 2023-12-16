@@ -1,0 +1,47 @@
+---
+title: Producer
+---
+
+# Producer
+
+### InteractorProducer
+Use `InteractorProducer` when you need define a class for producing calls from Dart side.
+
+```dart title="Declaration"
+abstract interface class InteractorProducer {
+  void initialize(InteractorProducerRegistrat registrat);
+}
+```
+
+```dart title="Example"
+class TestNativeProducer implements InteractorProducer {
+  final /* Your native bindings */ _bindings;
+
+  TestNativeProducer(this._bindings);
+
+  late final InteractorMethod testCallNative;
+
+  @override
+  void initialize(InteractorProducerRegistrat registrat) {
+    testCallNative = registrat.register(/* address from binding */);
+  }
+}
+```
+
+### InteractorProducerRegistrat
+```dart title="Declaration"
+abstract interface class InteractorProducerRegistrat {
+  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer);
+}
+```
+
+### InteractorMethod
+```dart title="Declaration"
+abstract interface class InteractorMethod {
+  Future<InteractorCall> call(int target, {FutureOr<void> Function(InteractorCall message)? configurator});
+}
+```
+
+# References
+* [`InteractorCall`](call) gives you to handle payload.
+* [`interactor_message_t`](../native/message) gives you to handle payload.
