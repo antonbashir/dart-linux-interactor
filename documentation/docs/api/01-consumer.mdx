@@ -29,9 +29,9 @@ worker.consumer(TestNativeConsumer());
 
 ```c title="Calling"
 interactor_message_t* message = interactor_native_allocate_message(interactor);
-message->id = // At your discretion.
-message->input = // At your discretion.
-message->input_size = // At your discretion.
+message->id = // Your message id.
+message->input = // Your message input.
+message->input_size = // Your message input size.
 message->owner = 0; // Index of the consumer inside the worker.
 message->method = 0; // Index of the callback inside the consumer. 
 interactor_native_call_dart(interactor, target, message);
@@ -44,6 +44,5 @@ typedef InteractorCallback = FutureOr<void> Function(InteractorNotification noti
 ```
 
 # References
-[InteractorWorker](worker) gives you to register consumers and producers.
-
-[InteractorNotification](notification) gives you to handle payload.
+* [`InteractorWorker`](worker) gives you to register consumers and producers.
+* [`InteractorNotification`](notification) gives you to handle payload.
