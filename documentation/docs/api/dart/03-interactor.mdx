@@ -1,3 +1,27 @@
 ---
 title: Interactor
 ---
+
+# API
+
+### Interactor
+Use `Interactor` when you need register a [worker](worker).
+
+```dart title="Declaration"
+class Interactor {
+  Interactor({String? libraryPath})
+  Future<void> shutdown() async
+  SendPort worker(InteractorConfiguration configuration)
+}
+```
+
+```dart title="Example"
+final interactor = Interactor();
+final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+/* Do some work */
+await interactor.shutdown();
+```
+
+# References
+* Use [`InteractorConfiguration`](configuration#InteractorConfiguration) to configure the interactor parameters.
+* [`InteractorDefaults`](configuration#InteractorDefaults) contains default configurations.
