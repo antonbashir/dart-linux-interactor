@@ -20,6 +20,14 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  themes: [
+    [require.resolve("@easyops-cn/docusaurus-search-local"),
+    ({
+      docsRouteBasePath: '/',
+      hashed: true,
+    })
+    ]
+  ],
   presets: [
     [
       'classic',

@@ -8,6 +8,9 @@ html[data-theme='dark'] {
   --ifm-color-primary-lightest: #ffffff;
   --ifm-navbar-background-color: #0a0a0a;
   --ifm-background-color: #0a0a0a;
+  --search-local-modal-background: #0a0a0a;
+  --search-local-highlight-color: #ffffff;
+  --search-local-hit-active-color: #0a0a0a;
 }
 
 html[data-theme='dark'] footer {
