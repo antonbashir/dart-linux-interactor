@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.16.0)
 
-if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
-  cmake_policy(SET CMP0135 NEW)
-endif()
-
 project(native C ASM)
 
 set(LIBURING_REPOSITORY "developer@git.local:dependencies/liburing.git")
@@ -12,8 +8,8 @@ set(SMALL_REPOSITORY "developer@git.local:dependencies/tarantool-small.git")
 set(SMALL_VERSION evolution)
 
 add_definitions("-D_GNU_SOURCE")
-set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 
+set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -O3 -fno-stack-protector")
 set(HAVE_CLOCK_GETTIME_DECL ON)
@@ -49,6 +45,10 @@ configure_file(
 )
 message(STATUS "")
 
+include_directories(${PROJECT_BINARY_DIR})
+include_directories(${PROJECT_SOURCE_DIR})
+include_directories(include)
+
 file(GLOB sources
   *.c
   *.h
@@ -59,10 +59,6 @@ file(GLOB sources
   common/*.h
   common/*.c
 )
-
-include_directories(${PROJECT_BINARY_DIR})
-include_directories(${PROJECT_SOURCE_DIR})
-include_directories(include)
 
 add_library(native SHARED ${sources})
 add_dependencies(native liburing small)
