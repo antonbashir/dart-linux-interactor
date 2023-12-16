@@ -22,6 +22,7 @@
     "interactor_common.h": "c",
     "interactor_message.h": "c",
     "mhash.h": "c",
-    "format": "c"
+    "format": "c",
+    "interactor_data_pool.h": "c"
   }
 }

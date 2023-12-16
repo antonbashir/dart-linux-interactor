@@ -82,6 +82,7 @@ extern "C"
     void interactor_dart_destroy(interactor_dart_t* interactor);
 
     void interactor_dart_close_descriptor(int fd);
+    const char* interactor_dart_error_to_string(int error);
 
 #if defined(__cplusplus)
 }

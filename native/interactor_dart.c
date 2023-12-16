@@ -209,3 +209,8 @@ void interactor_dart_close_descriptor(int fd)
     shutdown(fd, SHUT_RDWR);
     close(fd);
 }
+
+const char* interactor_dart_error_to_string(int error)
+{
+    return strerror(-error);
+}
