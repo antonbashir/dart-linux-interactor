@@ -7209,6 +7209,18 @@ regjsparser@^0.9.1:
   dependencies:
     jsesc "~0.5.0"
 
+rehype-mdx-code-props@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-mdx-code-props/-/rehype-mdx-code-props-2.0.0.tgz#35af259ec84b0476cd2454103a9b790536ce4ae3"
+  integrity sha512-dGjba9oF6DrY6xKDxOuiHp2BtaWaF7hNhxPbtzDcPqRNRjw8fNhRD5Geqf8X8HRowzkykOJkqEX03CKYVpsHTw==
+  dependencies:
+    "@types/hast" "^3.0.0"
+    acorn "^8.0.0"
+    acorn-jsx "^5.0.0"
+    hast-util-to-estree "^3.0.0"
+    unified "^11.0.0"
+    unist-util-visit-parents "^6.0.0"
+
 rehype-raw@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/rehype-raw/-/rehype-raw-7.0.0.tgz#59d7348fd5dbef3807bbaa1d443efd2dd85ecee4"

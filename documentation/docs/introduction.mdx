@@ -6,13 +6,84 @@ sidebar_position: 0
 
 # 👋 Hello
 
-# 💻 Installation
+Greetings. Welcome to the documentation of the dart-linux-interactor (DLI) library.
+
+The main purpose of the project is to connect Dart-based applications and libraries with Linux-based libraries.
 
 # 🧠 Reasoning
 
+In my plans there will be my own Linux Kernel based operation system.
+It will has only Dart and Linux pure C/C++ modules. 
+And to interact and communicate between dart and linux sides there is a need of something between.
+
+For now we have the most popular way to do it is Dart FFI. But this is to low-level way. 
+
+I need something with the next features:
+* multi-isolates to multi-threads interaction
+* multi-threads to multi-isolates interaction
+* pools for objects and buffers out-of-the box
+* lock-free (at least at user-code level)
+
+So there is a solution - I combined all theese features into this package.
+
 # 🔨 Usage
 
-# 💥 Sample
+There are two parts of DLI: Native and Dart. 
+
+## How to use Dart part ?
+
+Firstly you need add to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  linux_interactor:
+    git:
+      url: https://github.com/antonbashir/dart-linux-interactor
+      path: dart
+```
+
+Secondly you need to generate FFI Bindings for the your native part.
+
+After this you can use DLI:
+
+```dart
+class SampleProducer implements InteractorProducer {
+  late final InteractorMethod sampleCallDart;
+
+  @override
+  void initialize(InteractorProducerRegistrat executor) {
+    sampleCallDart = executor.register(bindings.addresses.sample_call_dart);
+  }
+}
+
+Future<void> main(List<String> args) async {
+  final interactor = Interactor();
+  final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+  await worker.initialize();
+  final producer = worker.producer(SampleProducer());
+  worker.activate();
+  final future = producer.sampleCallDart(
+    native.ref.descriptor,
+    configurator: (message) => message
+      ..allocateOutputString(64)
+      ..setInputString("I am Dart"),
+  );
+  // Other code...
+  await interactor.shutdown();
+}
+```
+
+## How to use Native part ?
+
+The native part is here [include](https://github.com/antonbashir/dart-linux-interactor/tree/main/native/include).
+
+You can use your own C/C++ manager to download and include the headers.
+
+After this you need to load the [library](https://github.com/antonbashir/dart-linux-interactor/blob/main/dart/native/libinteractor.so) and you will be able to use DLI Native API.
+
+# 💥 Samples
+
+Basic sample of usage lives [here](https://github.com/antonbashir/dart-linux-sample). 
 
 # ✋ Limitations
 
