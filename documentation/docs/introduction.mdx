@@ -87,4 +87,15 @@ Basic sample of usage lives [here](https://github.com/antonbashir/dart-linux-sam
 
 # ✋ Limitations
 
+The main limitation is resource control management up to user. 
+
+It means that if you need to receive the string from the native part then you should allocate this is string in the Dart part and release also in the Dart part.
+
+This limitation came from the principle: requester controls the resources. 
+
+This way provides us to use efficient lock-free single-thread pools and buffers because allocation and free happens on the same thread/isolate.
+
+
 # 👨‍💻 Contribution
+
+Issues about wanted functions or existing are bugs always welcome.
