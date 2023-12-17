@@ -1,1 +1,1 @@
-**You can find the documentation 📃 [here](https://antonbashir.github.io/dart-linux-interactor/).**
+**You can find the documentation 📃 [here](https://antonbashir.github.io/dart-linux-interactor/)**
