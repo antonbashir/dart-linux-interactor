@@ -16,7 +16,7 @@ I am planning to create my own Linux Kernel based operation system.
 
 It will has only Dart and Linux pure C/C++ modules. 
 
-And so to interact or communicate between dart and linux sides there is a need of something between.
+And so to interact or communicate between dart and linux sides there is a need of the layer between.
 
 For now we have the most popular way to do it is Dart FFI. But it is too poor for my tasks.
 
@@ -34,7 +34,7 @@ There are two parts of DLI: Native and Dart.
 
 ### How to use the Dart part ?
 
-Firstly you need add to your `pubspec.yaml`:
+Firstly you need to add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
@@ -49,28 +49,14 @@ Secondly you need to generate FFI bindings for your native code.
 After this you can use DLI:
 
 ```dart
-class SampleProducer implements InteractorProducer {
-  late final InteractorMethod sampleCallDart;
-
-  @override
-  void initialize(InteractorProducerRegistrat executor) {
-    sampleCallDart = executor.register(bindings.addresses.sample_call_dart);
-  }
-}
-
 Future<void> main(List<String> args) async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
   await worker.initialize();
-  final producer = worker.producer(SampleProducer());
+  final producer = worker.producer(/* Your producer here */);
+  worker.consumer(/* Your consumer here */);
   worker.activate();
-  final future = producer.sampleCallDart(
-    native.ref.descriptor,
-    configurator: (message) => message
-      ..allocateOutputString(64)
-      ..setInputString("I am Dart"),
-  );
-  // Other code...
+  /* Your code here */ 
   await interactor.shutdown();
 }
 ```
