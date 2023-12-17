@@ -1,5 +1,25 @@
 ---
-title: Configuration
+title: Interactor
 ---
 
 # API
+
+### Interactor
+
+Use `Interactor` when you need to register a [worker](worker).
+
+```c title="Declaration"
+typedef struct interactor_native_configuration
+{
+    uint16_t buffers_count;
+    uint32_t buffer_size;
+    size_t ring_size;
+    int ring_flags;
+    uint32_t cqe_wait_count;
+    uint32_t cqe_peek_count;
+    uint64_t cqe_wait_timeout_millis;
+    size_t quota_size;
+    size_t preallocation_size;
+    size_t slab_size;
+} interactor_native_configuration_t;
+```
