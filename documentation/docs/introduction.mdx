@@ -77,7 +77,7 @@ Basic sample of usage lives [here](https://github.com/antonbashir/dart-linux-sam
 
 The main limitation is resource control management up to user. 
 
-It means that if you need to receive the string from the native part then you should allocate this is string in the Dart part and release also in the Dart part.
+It means that if you need to receive string from the native part then you should `allocate` the string in the Dart part and `free` it also in the Dart part.
 
 This limitation came from the principle: requester controls the resources. 
 
