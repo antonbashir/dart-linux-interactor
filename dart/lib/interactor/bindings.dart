@@ -5970,9 +5970,6 @@ final class interactor_dart_configuration extends ffi.Struct {
   @ffi.Int()
   external int ring_flags;
 
-  @ffi.Uint64()
-  external int timeout_checker_period_millis;
-
   @ffi.Uint32()
   external int base_delay_micros;
 
@@ -6017,9 +6014,6 @@ final class interactor_dart extends ffi.Struct {
 
   @ffi.Uint16()
   external int buffers_count;
-
-  @ffi.Uint64()
-  external int timeout_checker_period_millis;
 
   @ffi.Uint32()
   external int base_delay_micros;
