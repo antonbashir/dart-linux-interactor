@@ -8,35 +8,35 @@ sidebar_position: 0
 
 Greetings. Welcome to the documentation of the dart-linux-interactor (DLI) library.
 
-The main purpose of the project is to connect Dart-based applications and libraries with Linux-based libraries.
+The main purpose of this project is to connect Dart-based applications and libraries with Linux-based libraries.
 
 # 🧠 Reasoning
 
-I am planning to create my own Linux Kernel based operation system.
+I am planning to create my own Linux Kernel-based operation system.
 
-It will has only Dart and Linux pure C/C++ modules. 
+It will have only Dart and Linux pure C/C++ modules. 
 
-And so to interact or communicate between dart and linux sides there is a need of the layer between.
+Thus to interact or communicate between Dart and Linux sides there is a need for the layer between.
 
-For now we have the most popular way to do it is Dart FFI. But it is too poor for my tasks.
+For now, we have the most popular way to do it is Dart FFI. But it is too poor for my tasks.
 
-I need something with the next features:
-* multi-isolates to multi-threads interaction
-* multi-threads to multi-isolates interaction
-* pools for objects and buffers out-of-the box
+I need something with the following features:
+* multi-isolates to multi-thread interaction
+* multi-threads to multi-isolate interaction
+* pools for objects and buffers out-of-the-box
 * lock-free (at least at user-code level)
 
-So I've decided to combine all theese features into the single library for Dart + Linux interaction.
+So I've decided to combine all these features into a single library for Dart + Linux interaction.
 
 # 🔨 Usage
 
 There are two parts of DLI: Native and Dart. 
 
-### How to use the Dart part ?
+### How to use the Dart part?
 
-Firstly you need to add to your `pubspec.yaml`:
+Firstly you need to add dependency to your `pubspec.yaml`:
 
-```yaml
+```yaml title="pubspec.yaml"
 dependencies:
   linux_interactor:
     git:
@@ -44,11 +44,11 @@ dependencies:
       path: dart
 ```
 
-Secondly you need to generate FFI bindings for your native code.
+Then you need to generate FFI bindings for your native code.
 
-After this you can use DLI:
+Now you can use DLI:
 
-```dart
+```dart title="main.dart"
 Future<void> main(List<String> args) async {
   final interactor = Interactor();
   final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
@@ -61,29 +61,29 @@ Future<void> main(List<String> args) async {
 }
 ```
 
-### How to use the Native part ?
+### How to use the Native part?
 
 The native part placed here [include](https://github.com/antonbashir/dart-linux-interactor/tree/main/native/include).
 
 You can use your own C/C++ manager to download and include the headers.
 
-After this you need to load the [library](https://github.com/antonbashir/dart-linux-interactor/blob/main/dart/native/libinteractor.so) and you will be able to use DLI Native API.
+Then you need to load the [library](https://github.com/antonbashir/dart-linux-interactor/blob/main/dart/native/libinteractor.so) and you will be able to use DLI Native API.
 
 # 💥 Samples
 
-Basic sample of usage lives [here](https://github.com/antonbashir/dart-linux-sample). 
+A basic sample of usage lives [here](https://github.com/antonbashir/dart-linux-sample). 
 
 # ✋ Limitations
 
-The main limitation is resource control management up to user. 
+The main limitation is resource control management on the user side. 
 
-It means that if you need to receive string from the native part then you should `allocate` the string in the Dart part and `free` it also in the Dart part.
+It means that if you need to receive a string from the native part then you should `allocate` the string in the Dart part and `free` it also in the Dart part.
 
-This limitation came from the principle: requester controls the resources. 
+This limitation comes from the principle: requester controls the resources.
 
-This way provides us to use efficient lock-free single-thread pools and buffers because `allocation` and `free` operations happen on the same thread/isolate.
+This way allows us to use efficient lock-free single-thread pools and buffers because `allocation` and `free` operations happen on the same thread/isolate.
 
 
 # 👨‍💻 Contribution
 
-Issues about wanted functions or existing are bugs always welcome.
+Issues about wanted functions or existing bugs are always welcome.

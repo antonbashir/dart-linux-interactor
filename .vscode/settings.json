@@ -28,5 +28,11 @@
     "random": "c",
     "utility": "c"
   },
-  "C_Cpp.dimInactiveRegions": false
+  "C_Cpp.dimInactiveRegions": false,
+  "grammarly.selectors": [
+    {
+      "language": "mdx",
+      "scheme": "file"
+    }
+  ]
 }
