@@ -6,6 +6,10 @@ title: Worker
 
 ### InteractorWorker 
 
+Use `InteractorWorker` when you need to:
+* register a [InteractorConsumer](consumer)
+* register a [InteractorProducer](producer)
+
 ```dart title="Declaration"
 class InteractorWorker {
   get bool active => _active;
@@ -21,3 +25,20 @@ class InteractorWorker {
   T producer<T extends InteractorProducer>(T provider)
 }
 ```
+
+```dart title="Example"
+final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
+await worker.initialize();
+worker.consumer(/* your consumer */);
+worker.producer(/* your producer */);
+worker.activate();
+/* your code */
+await interactor.shutdown();
+```
+
+# References
+* Sett [`InteractorConfiguration`](configuration#InteractorConfiguration)
+* See [`InteractorDefaults`](configuration#InteractorDefaults)
+* See [`InteractorPayloads`](pools#InteractorPayloads)
+* See [`InteractorBuffers`](pools#InteractorBuffers)
+* See [`InteractorDatas`](pools#InteractorDatas)
