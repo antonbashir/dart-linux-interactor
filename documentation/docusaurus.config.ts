@@ -59,7 +59,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'documentationSidebars',
           position: 'left',
-          label: '📃Documentation',
+          label: '📃 Documentation',
         },
         {
           href: 'https://antonbashir.github.io',
