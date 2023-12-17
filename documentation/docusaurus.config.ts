@@ -77,7 +77,7 @@ const config: Config = {
         },
         {
           label: 'Telegram',
-          href: 'https://t.me/a_bashirov',
+          href: 'https://t.me/antonbashir',
         },
         {
           label: 'Linkedin',
