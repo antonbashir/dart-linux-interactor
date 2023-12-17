@@ -16,6 +16,12 @@ class InteractorPayloads {
 }
 ```
 
+#### register
+#### size
+#### allocate
+#### free
+#### destroy
+
 ### InteractorDatas 
 
 ```dart title="Declaration"
@@ -24,6 +30,9 @@ class InteractorDatas {
   void free(Pointer<Void> pointer, int size)
 }
 ```
+
+#### allocate
+#### free
 
 ### InteractorBuffers 
 
@@ -41,3 +50,14 @@ class InteractorBuffers {
   void releaseArray(List<int> buffers);
 }
 ```
+
+#### release
+#### read
+#### setLength
+#### write
+#### get
+#### allocate
+#### allocateArray
+#### available
+#### used
+#### releaseArray

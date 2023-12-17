@@ -18,5 +18,17 @@ class InteractorNotification {
   void setOutputObject<T extends Struct>(void Function(Pointer<T> object) configurator)
   Future<void> setOutputBytes(List<int> bytes) async
 }
-
 ```
+
+#### getInputString
+Parse the notification into Dart String. The result string will have `length` (if specified otherwise calculated by native string).
+
+#### getInputObject
+
+#### parseInputObject
+#### setOutputInt
+#### setOutputBool
+#### setOutputDouble
+#### setOutputString
+#### setOutputObject
+#### setOutputBytes
