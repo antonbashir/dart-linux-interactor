@@ -62,6 +62,16 @@ const config: Config = {
           label: 'Documentation',
         },
         {
+          href: 'https://antonbashir.github.io',
+          label: 'Author',
+          position: 'left',
+        },
+        {
+          href: 'https://antonbashir.github.io/#projects',
+          label: 'Projects',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/antonbashir/dart-linux-interactor',
           label: 'Source',
           position: 'right',
