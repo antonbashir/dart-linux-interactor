@@ -3,7 +3,6 @@ class InteractorConfiguration {
   final int bufferSize;
   final int ringSize;
   final int ringFlags;
-  final Duration timeoutCheckerPeriod;
   final double delayRandomizationFactor;
   final int cqePeekCount;
   final int cqeWaitCount;
@@ -19,7 +18,6 @@ class InteractorConfiguration {
     required this.bufferSize,
     required this.ringSize,
     required this.ringFlags,
-    required this.timeoutCheckerPeriod,
     required this.delayRandomizationFactor,
     required this.baseDelay,
     required this.maxDelay,
@@ -52,7 +50,6 @@ class InteractorConfiguration {
         bufferSize: bufferSize ?? this.bufferSize,
         ringSize: ringSize ?? this.ringSize,
         ringFlags: ringFlags ?? this.ringFlags,
-        timeoutCheckerPeriod: timeoutCheckerPeriod ?? this.timeoutCheckerPeriod,
         delayRandomizationFactor: delayRandomizationFactor ?? this.delayRandomizationFactor,
         baseDelay: baseDelay ?? this.baseDelay,
         maxDelay: maxDelay ?? this.maxDelay,

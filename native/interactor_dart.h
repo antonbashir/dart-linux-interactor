@@ -18,7 +18,6 @@ extern "C"
         uint32_t buffer_size;
         size_t ring_size;
         int ring_flags;
-        uint64_t timeout_checker_period_millis;
         uint32_t base_delay_micros;
         double delay_randomization_factor;
         uint64_t max_delay_micros;
@@ -38,7 +37,6 @@ extern "C"
         struct iovec* buffers;
         uint32_t buffer_size;
         uint16_t buffers_count;
-        uint64_t timeout_checker_period_millis;
         uint32_t base_delay_micros;
         double delay_randomization_factor;
         uint64_t max_delay_micros;

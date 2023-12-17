@@ -7,20 +7,19 @@ title: Configuration
 ### InteractorConfiguration
 ```dart title="Declaration"
 class InteractorConfiguration {
-  get int buffersCount;
-  get int bufferSize;
-  get int ringSize;
-  get int ringFlags;
-  get Duration timeoutCheckerPeriod;
-  get double delayRandomizationFactor;
-  get int cqePeekCount;
-  get int cqeWaitCount;
-  get Duration cqeWaitTimeout;
-  get Duration baseDelay;
-  get Duration maxDelay;
-  get int memorySlabSize;
-  get int memoryPreallocationSize;
-  get int memoryQuotaSize;
+  get int buffersCount; // Buffers count for InteractorBuffers
+  get int bufferSize; // Buffer size for InteractorBuffers
+  get int ringSize; // io_uring size
+  get int ringFlags; // io_uring flags
+  get double delayRandomizationFactor; // TODO: Describe
+  get int cqePeekCount; // TODO: Describe
+  get int cqeWaitCount; // TODO: Describe
+  get Duration cqeWaitTimeout; // TODO: Describe
+  get Duration baseDelay; // TODO: Describe
+  get Duration maxDelay; // TODO: Describe
+  get int memorySlabSize; // TODO: Describe
+  get int memoryPreallocationSize; // TODO: Describe
+  get int memoryQuotaSize; // TODO: Describe
 }
 ```
 
@@ -30,7 +29,3 @@ class InteractorDefaults {
   static InteractorConfiguration worker() => InteractorConfiguration(/* parameters */);
 }
 ```
-
-# References
-* [`InteractorCall`](call) gives you to handle payload.
-* [`interactor_message_t`](../native/message) gives you to handle payload.

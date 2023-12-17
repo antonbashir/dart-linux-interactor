@@ -21,7 +21,6 @@ int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_co
     interactor->max_delay_micros = configuration->max_delay_micros;
     interactor->buffer_size = configuration->buffer_size;
     interactor->buffers_count = configuration->buffers_count;
-    interactor->timeout_checker_period_millis = configuration->timeout_checker_period_millis;
     interactor->cqes = malloc(sizeof(struct io_uring_cqe) * interactor->ring_size);
     interactor->buffers = malloc(sizeof(struct iovec) * configuration->buffers_count);
     interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;

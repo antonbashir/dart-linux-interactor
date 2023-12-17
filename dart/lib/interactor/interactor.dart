@@ -44,7 +44,6 @@ class Interactor {
         nativeConfiguration.ref.ring_size = configuration.ringSize;
         nativeConfiguration.ref.buffer_size = configuration.bufferSize;
         nativeConfiguration.ref.buffers_count = configuration.buffersCount;
-        nativeConfiguration.ref.timeout_checker_period_millis = configuration.timeoutCheckerPeriod.inMilliseconds;
         nativeConfiguration.ref.base_delay_micros = configuration.baseDelay.inMicroseconds;
         nativeConfiguration.ref.max_delay_micros = configuration.maxDelay.inMicroseconds;
         nativeConfiguration.ref.delay_randomization_factor = configuration.delayRandomizationFactor;

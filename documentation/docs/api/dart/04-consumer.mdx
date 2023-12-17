@@ -6,7 +6,7 @@ title: Consumer
 
 ### InteractorConsumer
 
-Use `InteractorConsumer` when you need define a class for handling calls from Native side.
+Use `InteractorConsumer` when you need to define a class for handling calls from the Native side.
 
 ```dart title="Declaration"
 abstract interface class InteractorConsumer {
@@ -44,5 +44,5 @@ typedef InteractorCallback = FutureOr<void> Function(InteractorNotification noti
 ```
 
 # References
-* [`InteractorWorker`](worker) gives you to register consumers and producers.
-* [`InteractorNotification`](notification) gives you to handle payload.
+* See [`InteractorWorker`](worker)
+* See [`InteractorNotification`](notification)
