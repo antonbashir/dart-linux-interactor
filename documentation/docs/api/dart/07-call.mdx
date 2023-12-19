@@ -44,63 +44,76 @@ class InteractorCall {
 ```
 
 #### id
+Get call message ID.
 
 #### outputSize
+Get call message output size.
 
 #### outputBool
+Parse call message output to bool.
 
 #### outputInt
+Parse call message output to int.
 
 #### outputDouble
+Parse call message output to double.
 
 #### outputBuffer
+Parse call message output to buffer (from the buffer pool).
 
 #### outputBytes
+Parse call message output to bytes.
 
 #### setInputInt
+Set call input int value.
 
 #### setInputBool
+Set call input bool value.
 
 #### setInputDouble
+Set call input double value.
 
 #### setInputString
+Set call input string value.
 
 #### setInputObject
+Set call input Dart FFI value.
 
 #### setInputBuffer
+Set call input bytes (from the buffer pool).
 
 #### allocateOutputDouble
+Allocate call output double value (from the data pool).
 
 #### allocateOutputString
+Allocate call output string value (from the data pool).
 
 #### allocateOutputBuffer
+Allocate call output buffer (from the buffer pool).
 
 #### allocateOutputBytes
+Allocate call output buffer (from the data pool).
 
 #### getOutputString
+Parse call message string output value.
 
 #### getOutputObject
+Parse call message Dart FFI output value.
 
 #### parseOutputObject
+Parse call message Dart object output value by the mapper.
 
-#### releaseInputDouble
-
-#### releaseInputString
-
-#### releaseInputObject
-
-#### releaseInputBuffer
-
-#### releaseInputBytes
-
-#### releaseOutputDouble
-
-#### releaseOutputString
-
-#### releaseOutputObject
-
-#### releaseOutputBuffer
-
-#### releaseOutputBytes
+#### There are release functions for call (look at the allocators and setters and match): 
+* releaseInputDouble
+* releaseInputString
+* releaseInputObject
+* releaseInputBuffer
+* releaseInputBytes
+* releaseOutputDouble
+* releaseOutputString
+* releaseOutputObject
+* releaseOutputBuffer
+* releaseOutputBytes
 
 #### release
+Release the memory allocated for the call message native structure.
