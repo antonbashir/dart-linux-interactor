@@ -21,3 +21,19 @@ typedef struct interactor_native_configuration
     size_t slab_size;
 } interactor_native_configuration_t;
 ```
+
+#### Parameters
+
+| Name                 | Type       | Description                                                               | Defaults                      |
+| -------------------- | ---------- | ------------------------------------------------------------------------- | ----------------------------- |
+| `buffers_count`      | `int`      | Max buffers available in buffers pool                                     | `4096                       ` |
+| `buffer_size`        | `int`      | Max buffer size available in buffers pool                                 | `4096                       ` |
+| `ring_size`          | `int`      | Size of io_uring                                                          | `16384                      ` |
+| `ring_flags`         | `int`      | Flags of io_uring                                                         | `0                          ` |
+| `cqe_peek_count`     | `int`      | How many cqes should be taken on each loop iteration                      | `1024`                        |
+| `cqe_wait_count`     | `int`      | How many cqes should be waited on each loop iteration                     | `1`                           |
+| `cqe_wait_timeout`   | `Duration` | How long cqes should be waited on each loop iteration                     | `milliseconds: 1`             |
+| `slab_size`          | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `64 * 1024                  ` |
+| `preallocation_size` | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `64 * 1024                  ` |
+| `quota_size`         | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `16 * 1024 * 1024           ` |
+
