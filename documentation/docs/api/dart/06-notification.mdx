@@ -20,15 +20,33 @@ class InteractorNotification {
 }
 ```
 
+:::note
+Remember that `input` and `output` should be allocated and freed by the requester (party which makes a notification).
+:::
+
 #### getInputString
-Parse the notification into Dart String. The result string will have `length` (if specified otherwise calculated by native string).
+Parse the notification into Dart String. You can specify `length` if you need to parse a fixed-length string.
 
 #### getInputObject
+Parse the notification into Dart FFI pointer.
 
 #### parseInputObject
+Parse the notification into Dart object pointer by custom mapper.
+
 #### setOutputInt
+Set the notification output integer value.
+
 #### setOutputBool
+Set the notification output bool value.
+
 #### setOutputDouble
+Set the notification output double value.
+
 #### setOutputString
+Set the notification output string value.
+
 #### setOutputObject
+Set the notification output Dart FFI value.
+
 #### setOutputBytes
+Set the notification output bytes.
