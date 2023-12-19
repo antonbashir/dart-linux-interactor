@@ -13,16 +13,24 @@ struct interactor_payload_pool
     size_t size;
 };
 
+
 int interactor_payload_pool_create(struct interactor_payload_pool* pool, struct interactor_memory* memory, size_t payload_size);
+
 void interactor_payload_pool_destroy(struct interactor_payload_pool* pool);
+
 intptr_t interactor_payload_pool_allocate(struct interactor_payload_pool* pool);
+
 void interactor_payload_pool_free(struct interactor_payload_pool* pool, intptr_t payload);
 ```
 
 #### interactor_payload_pool_create
+
 #### interactor_payload_pool_destroy
+
 #### interactor_payload_pool_allocate
+
 #### interactor_payload_pool_free
+
 
 ### interactor_data_pool
 
@@ -32,15 +40,22 @@ struct interactor_data_pool
     struct interactor_small pool;
 };
 
+
 int interactor_data_pool_create(struct interactor_data_pool* pool, struct interactor_memory* memory);
+
 void interactor_data_pool_destroy(struct interactor_data_pool* pool);
+
 intptr_t interactor_data_pool_allocate(struct interactor_data_pool* pool, size_t size);
+
 void interactor_data_pool_free(struct interactor_data_pool* pool, intptr_t payload, size_t size);
 ```
 
 #### interactor_data_pool_create
+
 #### interactor_data_pool_destroy
+
 #### interactor_data_pool_allocate
+
 #### interactor_data_pool_free
 
 ### interactor_buffers_pool
@@ -53,13 +68,20 @@ struct interactor_buffers_pool
     size_t size;
 };
 
+
 int interactor_buffers_pool_create(struct interactor_buffers_pool* pool, size_t size);
+
 void interactor_buffers_pool_destroy(struct interactor_buffers_pool* pool);
+
 void interactor_buffers_pool_push(struct interactor_buffers_pool* pool, int32_t id);
+
 int32_t interactor_buffers_pool_pop(struct interactor_buffers_pool* pool);
 ```
 
 #### interactor_buffers_pool_create
+
 #### interactor_buffers_pool_destroy
+
 #### interactor_buffers_pool_push
+
 #### interactor_buffers_pool_pop
