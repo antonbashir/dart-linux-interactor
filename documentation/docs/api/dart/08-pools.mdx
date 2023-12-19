@@ -17,10 +17,15 @@ class InteractorPayloads {
 ```
 
 #### register
-#### size
-#### allocate
-#### free
+Create a new native pool for the `Struct`.
+
+#### Allocation specific operations for the `Struct`:
+* size
+* allocate
+* free
+
 #### destroy
+Destroy all created pools.
 
 ### InteractorDatas 
 
@@ -32,7 +37,11 @@ class InteractorDatas {
 ```
 
 #### allocate
+Similar to 'malloc' but uses [smalloc](https://github.com/tarantool/small).
+
 #### free
+Similar to 'free' but uses [smalloc](https://github.com/tarantool/small).
+
 
 ### InteractorBuffers 
 
@@ -52,12 +61,31 @@ class InteractorBuffers {
 ```
 
 #### release
+Return buffer to the pool.
+
 #### read
+Read buffer data.
+
 #### setLength
+Set buffer data size.
+
 #### write
+Write data to buffer
+
 #### get
+Get the next buffer if available.
+
 #### allocate
+Get the next buffer if available or await it.
+
 #### allocateArray
+Get the next buffers if available or await it.
+
 #### available
+How many buffers are available for now
+
 #### used
+How many buffers are used for now
+
 #### releaseArray
+Return buffers to the pool
