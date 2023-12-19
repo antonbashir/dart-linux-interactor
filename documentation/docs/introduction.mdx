@@ -79,7 +79,7 @@ The main limitation is resource control management on the user side.
 
 It means that if you need to receive a string from the native part then you should `allocate` the string in the Dart part and `free` it also in the Dart part.
 
-This limitation comes from the principle: requester controls the resources.
+This limitation comes from the principle that: the requester controls the resources.h
 
 This way allows us to use efficient lock-free single-thread pools and buffers because `allocation` and `free` operations happen on the same thread/isolate.
 

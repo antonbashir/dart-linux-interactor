@@ -18,13 +18,20 @@ class InteractorWorker {
   InteractorPayloads get payloads => _payloads;
   InteractorBuffers get buffers => _buffers;
   InteractorDatas get datas => _datas;
+
   InteractorWorker(SendPort toInteractor)
+
   Future<void> initialize() async 
   void activate()
   void consumer(InteractorConsumer declaration)
   T producer<T extends InteractorProducer>(T provider)
 }
 ```
+
+#### Pool providers
+* `InteractorPayloads get payloads => _payloads`: provides you pool for typed payloads.
+* `InteractorBuffers get buffers => _buffers`: provides you pool for fixed buffers.
+* `InteractorDatas get datas => _datas`: provides you alloc/free allocator.
 
 ```dart title="Example"
 final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
@@ -35,6 +42,13 @@ worker.activate();
 /* your code */
 await interactor.shutdown();
 ```
+:::tip
+You have to call `initialize` to set up and launch io_uring event pool
+:::
+
+:::tip
+You have to call `activate` to set up registered consumers and producers. You should call ONLY after their registration.
+:::
 
 # References
 * See [`InteractorConfiguration`](configuration#InteractorConfiguration)

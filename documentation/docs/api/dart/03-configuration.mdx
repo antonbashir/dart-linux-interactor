@@ -5,23 +5,43 @@ title: Configuration
 # API
 
 ### InteractorConfiguration
+
 ```dart title="Declaration"
 class InteractorConfiguration {
-  get int buffersCount; // Buffers count for InteractorBuffers
-  get int bufferSize; // Buffer size for InteractorBuffers
-  get int ringSize; // io_uring size
-  get int ringFlags; // io_uring flags
-  get double delayRandomizationFactor; // TODO: Describe
-  get int cqePeekCount; // TODO: Describe
-  get int cqeWaitCount; // TODO: Describe
-  get Duration cqeWaitTimeout; // TODO: Describe
-  get Duration baseDelay; // TODO: Describe
-  get Duration maxDelay; // TODO: Describe
-  get int memorySlabSize; // TODO: Describe
-  get int memoryPreallocationSize; // TODO: Describe
-  get int memoryQuotaSize; // TODO: Describe
+  get int buffersCount;
+  get int bufferSize;
+  get int ringSize;
+  get int ringFlags;
+  get double delayRandomizationFactor;
+  get int cqePeekCount;
+  get int cqeWaitCount;
+  get Duration cqeWaitTimeout;
+  get Duration baseDelay;
+  get Duration maxDelay;
+  get int memorySlabSize;
+  get int memoryPreallocationSize;
+  get int memoryQuotaSize;
 }
 ```
+
+#### Parameters
+
+| Name                       | Type       | Description                                                               | Defaults                      |
+| -------------------------- | ---------- | ------------------------------------------------------------------------- | ----------------------------- |
+| `buffersCount`             | `int`      | Max buffers available in buffers pool                                     | `4096                       ` |
+| `bufferSize`               | `int`      | Max buffer size available in buffers pool                                 | `4096                       ` |
+| `ringSize`                 | `int`      | Size of io_uring                                                          | `16384                      ` |
+| `ringFlags`                | `int`      | Flags of io_uring                                                         | `0                          ` |
+| `baseDelay`                | `Duration` | Used for event loop delay calculation                                     | `Duration(microseconds: 10)`  |
+| `maxDelay`                 | `Duration` | Used for event loop delay calculation                                     | `Duration(seconds: 5)`        |
+| `delayRandomizationFactor` | `double`   | Used for event loop delay calculation                                     | `0.25`                        |
+| `cqePeekCount`             | `int`      | How many cqes should be taken on each loop iteration                      | `1024`                        |
+| `cqeWaitCount`             | `int`      | How many cqes should be waited on each loop iteration                     | `1`                           |
+| `cqeWaitTimeout`           | `Duration` | How long cqes should be waited on each loop iteration                     | `Duration(milliseconds: 1)`   |
+| `memorySlabSize`           | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `64 * 1024                  ` |
+| `memoryPreallocationSize`  | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `64 * 1024                  ` |
+| `memoryQuotaSize`          | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `16 * 1024 * 1024           ` |
+
 
 ### InteractorDefaults
 ```dart title="Declaration"
