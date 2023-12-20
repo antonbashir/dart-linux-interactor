@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 
 import 'bindings.dart';
@@ -17,7 +19,7 @@ const comma = ",";
 const parentDirectorySymbol = '..';
 const currentDirectorySymbol = './';
 
-const interactorLibraryName = "libinteractor.so";
+final interactorLibraryName = bool.fromEnvironment("DEBUG") ? "libinteractor_debug_${Abi.current()}.so" : "libinteractor_release_${Abi.current()}.so";
 const interactorPackageName = "linux_interactor";
 
 const packageConfigJsonFile = "package_config.json";

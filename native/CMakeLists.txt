@@ -52,7 +52,14 @@ file(GLOB sources
   common/*.c
 )
 
-add_library(native SHARED ${sources})
-add_dependencies(native liburing small)
-target_link_libraries(native PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small)
-add_custom_command(TARGET native POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:native> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor.so)
+add_library(interactor_debug_linux_x64 SHARED ${sources})
+add_dependencies(interactor_debug_linux_x64 liburing small)
+target_link_libraries(interactor_debug_linux_x64 PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small)
+add_custom_command(TARGET interactor_debug_linux_x64 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:interactor_debug_linux_x64> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor_debug_linux_x64.so)
+
+add_library(interactor_release_linux_x64 SHARED ${sources})
+add_dependencies(interactor_release_linux_x64 liburing small)
+target_link_libraries(interactor_release_linux_x64 PRIVATE ${liburing_SOURCE_DIR}/build/lib/liburing.a small)
+add_custom_command(TARGET interactor_release_linux_x64 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:interactor_release_linux_x64> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractor_release_linux_x64.so)
+
+add_custom_target(native DEPENDS interactor_release_linux_x64 interactor_debug_linux_x64)
