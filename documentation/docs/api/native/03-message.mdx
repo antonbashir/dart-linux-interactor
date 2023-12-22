@@ -24,20 +24,28 @@ typedef struct interactor_message
 
 #### id
 
-#### source
+Message identifier.
 
-#### target
+#### source and target
+
+IO_Uring fds for source and target.
 
 #### owner
 
+Identifier of the message owner.
+
 #### method
 
-#### input
+Identifier (or pointer) of the message method.
 
-#### input_size
+#### input and input_size
 
-#### output
+Message input payload and size.
 
-#### output_size
+#### output and output_size
+
+Message output payload and size.
 
 #### flags
+
+Message additional flags (not using currently).
