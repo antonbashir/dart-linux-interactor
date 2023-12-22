@@ -116,11 +116,11 @@ Allocated buffer array.
 
 ##### buffer_size
 
-Max buffer size available in buffers pool.
+Max buffer size available in the buffers pool.
 
 ##### buffers_count
 
-Max buffers available in buffers pool.
+Max buffers that are available in the buffers pool.
 
 ##### ring_size
 
@@ -140,11 +140,11 @@ How long cqes should be waited on each loop iteration.
 
 ##### cqe_wait_count
 
-How many cqes should be waited on each loop iteration.
+How many CQES should be waited on each loop iteration.
 
 ##### cqe_peek_count
 
-How many cqes should be taken on each loop iteration.
+How many CQES should be taken on each loop iteration.
 
 ##### callbacks
 
@@ -257,8 +257,11 @@ Free all allocated memory and shutdown the io_uring.
 Just close Linux fd. 
 
 :::note
-Interactor callbacks are used for handling callbacks from Dart side on calls from native side.
+Interactor callbacks are used for handling callbacks from the Dart side on calls from the Native side.
 :::
 
 # References
 * See [`interactor_message_t`](message)
+* See [`interactor_payload_pool`](pools#interactor_payload_pool)
+* See [`interactor_data_pool`](pools#interactor_data_pool)
+* See [`interactor_buffers_pool`](pools#interactor_buffers_pool)

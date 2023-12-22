@@ -26,8 +26,8 @@ typedef struct interactor_native_configuration
 
 | Name                 | Type       | Description                                                               | Defaults                      |
 | -------------------- | ---------- | ------------------------------------------------------------------------- | ----------------------------- |
-| `buffers_count`      | `int`      | Max buffers available in buffers pool                                     | `4096                       ` |
-| `buffer_size`        | `int`      | Max buffer size available in buffers pool                                 | `4096                       ` |
+| `buffers_count`      | `int`      | Max buffers that available in buffers pool                                | `4096                       ` |
+| `buffer_size`        | `int`      | Max buffer size that available in buffers pool                            | `4096                       ` |
 | `ring_size`          | `int`      | Size of io_uring                                                          | `16384                      ` |
 | `ring_flags`         | `int`      | Flags of io_uring                                                         | `0                          ` |
 | `cqe_peek_count`     | `int`      | How many cqes should be taken on each loop iteration                      | `1024`                        |
