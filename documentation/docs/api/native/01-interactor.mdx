@@ -84,91 +84,181 @@ void interactor_native_close_descriptor(int fd);
 
 ##### id
 
+Interactor identifier.
+
 ##### descriptor
+
+Interactor io_uring fd.
 
 ##### messages_pool
 
+Message pool instance.
+
 ##### buffers_pool
+
+Buffers pool instance.
 
 ##### data_pool
 
+Data pool instance.
+
 ##### memory
+
+Memory holder managed by interactor.
 
 ##### ring
 
+IO_Uring managed by interactor.
+
 ##### buffers
+
+Allocated buffer array.
 
 ##### buffer_size
 
+Max buffer size available in buffers pool.
+
 ##### buffers_count
+
+Max buffers available in buffers pool.
 
 ##### ring_size
 
+Size of io_uring.
+
 ##### ring_flags
+
+Flags of io_uring.
 
 ##### cqes
 
+IO_Uring CQE array for processing events.
+
 ##### cqe_wait_timeout_millis
+
+How long cqes should be waited on each loop iteration.
 
 ##### cqe_wait_count
 
+How many cqes should be waited on each loop iteration.
+
 ##### cqe_peek_count
+
+How many cqes should be taken on each loop iteration.
 
 ##### callbacks
 
+Interactor callbacks registry.
 
 #### Functions
 
 ##### interactor_native_initialize
 
+Allocate all needed entities, set up io_uring, and initialize interactor fields. 
+
+
 ##### interactor_native_initialize_default
+
+Allocate all needed entities, set up io_uring, and initialize interactor fields with default configuration values.
 
 ##### interactor_native_register_callback
 
+Add a new callback to the registry.
+
 ##### interactor_native_get_buffer
+
+Allocate new buffer in the pool.
 
 ##### interactor_native_release_buffer
 
+Free buffer in the pool.
+
 ##### interactor_native_available_buffers
+
+Currently available buffers in the pool.
 
 ##### interactor_native_used_buffers
 
+Currently used buffers in the pool.
+
 ##### interactor_native_allocate_message
+
+Allocate a new message in the pool.
 
 ##### interactor_native_free_message
 
-##### interactor_payload_pool
+Free the message in the pool.
+
+##### interactor_native_payload_pool_create
+
+Create a new pool for the fixed-size structures.
 
 ##### interactor_native_payload_allocate
 
+Allocate a payload in the pool.
+
 ##### interactor_native_payload_free
+
+Free the payload in the pool.
 
 ##### interactor_native_payload_pool_destroy
 
+Destroy the pool for the fixed-size structures.
+
 ##### interactor_native_data_allocate
+
+Allocate a dynamic memory in the pool.
 
 ##### interactor_native_data_free
 
+Free the dynamic memory in the pool.
+
 ##### interactor_native_peek_infinity
+
+Submit and wait for the io_ring, then peek CQE batch.
 
 ##### interactor_native_peek_timeout
 
+Submit and wait for the io_ring until timeout, then peek CQE batch.
+
 ##### interactor_native_process_infinity
+Call `interactor_native_peek_infinity` and processing events:
+* For `call` events get a method pointer from the message and execute the method
+* For `callback` events get a method from the message and call callback from the registry if exists
 
 ##### interactor_native_process_timeout
+Call `interactor_native_peek_timeout` and process events:
+* For `call` events get a method pointer from the message and execute the method
+* For `callback` events get a method from the message and call callback from the registry if exists
 
 ##### interactor_native_foreach
+Iterate over CQEs:
+* For `call` events get a method pointer from the message and execute the method
+* For `callback` events get a method from the message and call callback from the registry if exists
 
 ##### interactor_native_submit
 
+Submit io_uring. 
+
 ##### interactor_native_call_dart
+
+Prepare a message for calling a Dart method.
 
 ##### interactor_native_callback_to_dart
 
+Prepare a message for executing a callback to the Dart (useful when you don't want to use `interactor_native_process_` and handle messages manually).
+
 ##### interactor_native_destroy
+
+Free all allocated memory and shutdown the io_uring. 
 
 ##### interactor_native_close_descriptor
 
+Just close Linux fd. 
+
+:::note
+Interactor callbacks are used for handling callbacks from Dart side on calls from native side.
+:::
 
 # References
 * See [`interactor_message_t`](message)
