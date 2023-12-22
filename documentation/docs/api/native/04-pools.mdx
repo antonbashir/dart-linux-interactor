@@ -6,6 +6,8 @@ title: Pools
 
 ### interactor_payload_pool
 
+Used for allocation fixed-sized structures.
+
 ```c title="Declaration"
 struct interactor_payload_pool
 {
@@ -23,16 +25,9 @@ intptr_t interactor_payload_pool_allocate(struct interactor_payload_pool* pool);
 void interactor_payload_pool_free(struct interactor_payload_pool* pool, intptr_t payload);
 ```
 
-#### interactor_payload_pool_create
-
-#### interactor_payload_pool_destroy
-
-#### interactor_payload_pool_allocate
-
-#### interactor_payload_pool_free
-
-
 ### interactor_data_pool
+
+Used for allocation dynamic-sized structures.
 
 ```c title="Declaration"
 struct interactor_data_pool
@@ -50,15 +45,9 @@ intptr_t interactor_data_pool_allocate(struct interactor_data_pool* pool, size_t
 void interactor_data_pool_free(struct interactor_data_pool* pool, intptr_t payload, size_t size);
 ```
 
-#### interactor_data_pool_create
-
-#### interactor_data_pool_destroy
-
-#### interactor_data_pool_allocate
-
-#### interactor_data_pool_free
-
 ### interactor_buffers_pool
+
+Used for sending and receiving fixed-sized buffers.
 
 ```c title="Declaration"
 struct interactor_buffers_pool
@@ -77,11 +66,3 @@ void interactor_buffers_pool_push(struct interactor_buffers_pool* pool, int32_t 
 
 int32_t interactor_buffers_pool_pop(struct interactor_buffers_pool* pool);
 ```
-
-#### interactor_buffers_pool_create
-
-#### interactor_buffers_pool_destroy
-
-#### interactor_buffers_pool_push
-
-#### interactor_buffers_pool_pop
