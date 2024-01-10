@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16.0)
-project(interactor_test C ASM)
+project(test C ASM)
 
 file(GLOB sources
   *.c
