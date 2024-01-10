@@ -13,5 +13,5 @@ include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
 
 add_library(interactor_test SHARED ${sources})
-target_link_libraries(interactor_test PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../dart/native/libinteractor_debug_linux_x64.so")
+target_link_libraries(interactor_test PUBLIC interactor_debug_linux_x64)
 add_custom_command(TARGET interactor_test POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:interactor_test> ${CMAKE_CURRENT_SOURCE_DIR}/../dart/native/libinteractortest.so)
