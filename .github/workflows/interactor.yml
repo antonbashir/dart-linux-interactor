@@ -23,7 +23,7 @@ jobs:
            rm -rf build || true
            mkdir build
            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -B$(pwd)/build -S$(pwd)
-           cd build && make clean && make -j
+           cd build && make -j
 
       - name: Dart test
         run: cd test/dart && dart pub get && dart run lib/test.dart    

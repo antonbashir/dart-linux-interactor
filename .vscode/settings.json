@@ -27,7 +27,8 @@
     "common.h": "c",
     "random": "c",
     "utility": "c",
-    "liburing.h": "c"
+    "liburing.h": "c",
+    "compat.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [
