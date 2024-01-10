@@ -78,3 +78,4 @@ perf.svg
 !dart/native/libinteractor_debug_linux_x64.so
 !dart/native/libinteractor_release_linux_x64.so
 test/native/Makefile
+dependencies/

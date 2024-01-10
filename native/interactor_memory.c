@@ -1,10 +1,10 @@
 #include <interactor_memory.h>
 #include <stddef.h>
-#include "small/include/small/quota.h"
-#include "small/include/small/small.h"
 #include "small/mempool.h"
+#include "small/quota.h"
 #include "small/slab_arena.h"
 #include "small/slab_cache.h"
+#include "small/small.h"
 
 struct interactor_memory_context
 {

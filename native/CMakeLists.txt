@@ -2,40 +2,14 @@ cmake_minimum_required(VERSION 3.16.0)
 
 project(native C ASM)
 
-set(LIBURING_REPOSITORY "developer@git.local:dependencies/liburing.git")
-set(LIBURING_VERSION evolution)
-set(SMALL_REPOSITORY "developer@git.local:dependencies/tarantool-small.git")
-set(SMALL_VERSION evolution)
-
-add_definitions("-D_GNU_SOURCE")
-set(CMAKE_REQUIRED_DEFINITIONS "-D_GNU_SOURCE")
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fPIC -O0 -g -fno-stack-protector")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -fPIC -flto -O3 -fno-stack-protector")
-
-include(FetchContent)
-
-FetchContent_Declare(
-  liburing
-  GIT_REPOSITORY ${LIBURING_REPOSITORY}
-  GIT_TAG ${LIBURING_VERSION}
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/liburing
-)
-FetchContent_MakeAvailable(liburing)
-include_directories(${liburing_SOURCE_DIR}/src/include)
-add_custom_target(liburing COMMAND ./configure --prefix=${liburing_SOURCE_DIR}/build && make && make install WORKING_DIRECTORY ${liburing_SOURCE_DIR})
-
-FetchContent_Declare(
-  small
-  GIT_REPOSITORY ${SMALL_REPOSITORY}
-  GIT_TAG ${SMALL_VERSION}
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/small
-)
-FetchContent_MakeAvailable(small)
 include_directories(${small_SOURCE_DIR}/src/include)
 include_directories(${small_SOURCE_DIR}/include)
+
 include_directories(${small_SOURCE_DIR}/third_party)
 include_directories(${small_BINARY_DIR}/small/include)
-add_subdirectory(${small_SOURCE_DIR})
+
+include_directories(${liburing_SOURCE_DIR}/src/include)
+include_directories(${liburing_BINARY_DIR}/src/include)
 
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})
