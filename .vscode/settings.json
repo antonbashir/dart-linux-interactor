@@ -26,7 +26,8 @@
     "interactor_data_pool.h": "c",
     "common.h": "c",
     "random": "c",
-    "utility": "c"
+    "utility": "c",
+    "liburing.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [
