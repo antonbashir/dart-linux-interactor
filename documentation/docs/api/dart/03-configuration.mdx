@@ -26,21 +26,21 @@ class InteractorConfiguration {
 
 #### Parameters
 
-| Name                       | Type       | Description                                                               | Defaults                      |
-| -------------------------- | ---------- | ------------------------------------------------------------------------- | ----------------------------- |
-| `buffersCount`             | `int`      | Max buffers available in buffers pool                                     | `4096                       ` |
-| `bufferSize`               | `int`      | Max buffer size available in buffers pool                                 | `4096                       ` |
-| `ringSize`                 | `int`      | Size of io_uring                                                          | `16384                      ` |
-| `ringFlags`                | `int`      | Flags of io_uring                                                         | `0                          ` |
-| `baseDelay`                | `Duration` | Used for event loop delay calculation                                     | `microseconds: 10`            |
-| `maxDelay`                 | `Duration` | Used for event loop delay calculation                                     | `seconds: 5`                  |
-| `delayRandomizationFactor` | `double`   | Used for event loop delay calculation                                     | `0.25`                        |
-| `cqePeekCount`             | `int`      | How many cqes should be taken on each loop iteration                      | `1024`                        |
-| `cqeWaitCount`             | `int`      | How many cqes should be waited on each loop iteration                     | `1`                           |
-| `cqeWaitTimeout`           | `Duration` | How long cqes should be waited on each loop iteration                     | `milliseconds: 1`             |
-| `memorySlabSize`           | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `64 * 1024                  ` |
-| `memoryPreallocationSize`  | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `64 * 1024                  ` |
-| `memoryQuotaSize`          | `int`      | Used for payload and data pools [see](https://github.com/tarantool/small) | `16 * 1024 * 1024           ` |
+| Name                     | Type     | Description                                                               | Defaults         |
+| ------------------------ | -------- | ------------------------------------------------------------------------- | ---------------- |
+| buffersCount             | int      | Max buffers available in buffers pool                                     | 4096             |
+| bufferSize               | int      | Max buffer size available in buffers pool                                 | 4096             |
+| ringSize                 | int      | Size of io_uring                                                          | 16384            |
+| ringFlags                | int      | Flags of io_uring                                                         | 0                |
+| baseDelay                | Duration | Used for event loop delay calculation                                     | microseconds: 10 |
+| maxDelay                 | Duration | Used for event loop delay calculation                                     | seconds: 5       |
+| delayRandomizationFactor | double   | Used for event loop delay calculation                                     | 0.25             |
+| cqePeekCount             | int      | How many cqes should be taken on each loop iteration                      | 1024             |
+| cqeWaitCount             | int      | How many cqes should be waited on each loop iteration                     | 1                |
+| cqeWaitTimeout           | Duration | How long cqes should be waited on each loop iteration                     | milliseconds: 1  |
+| memorySlabSize           | int      | Used for payload and data pools [see](https://github.com/tarantool/small) | 64 * 1024        |
+| memoryPreallocationSize  | int      | Used for payload and data pools [see](https://github.com/tarantool/small) | 64 * 1024        |
+| memoryQuotaSize          | int      | Used for payload and data pools [see](https://github.com/tarantool/small) | 16 * 1024 * 1024 |
 
 
 ### InteractorDefaults
