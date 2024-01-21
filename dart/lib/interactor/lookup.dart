@@ -19,8 +19,10 @@ class InteractorLibrary {
 
 InteractorLibrary _load() {
   try {
-    return InteractorLibrary(Platform.isLinux ? DynamicLibrary.open(interactorLibraryName) : throw UnsupportedError(Directory.current.path + slash + interactorLibraryName),
-        Directory.current.path + slash + interactorLibraryName);
+    return InteractorLibrary(
+      Platform.isLinux ? DynamicLibrary.open(interactorLibraryName) : throw UnsupportedError(Directory.current.path + slash + interactorLibraryName),
+      Directory.current.path + slash + interactorLibraryName,
+    );
   } on ArgumentError {
     final dotDartTool = findDotDartTool();
     if (dotDartTool != null) {
