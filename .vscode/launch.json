@@ -2,24 +2,31 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "dart-test-debug",
+      "name": "dart-test",
       "type": "dart",
       "request": "launch",
+      "toolArgs": [
+        "--define=DEBUG=true"
+      ],
       "program": "${workspaceFolder}/test/dart/lib/test.dart",
       "preLaunchTask": "interactor-native-build"
     },
     {
-      "name": "dart-test-debug (no-rebuild)",
+      "name": "dart-test (no-rebuild)",
       "type": "dart",
+      "toolArgs": [
+        "--define=DEBUG=true"
+      ],
       "request": "launch",
       "program": "${workspaceFolder}/test/dart/lib/test.dart"
     },
     {
-      "name": "dart-test-debug-native",
+      "name": "dart-test-native",
       "type": "cppdbg",
       "request": "launch",
       "program": "/usr/bin/dart",
       "args": [
+        "-DDEBUG=true",
         "${workspaceFolder}/test/dart/lib/test.dart"
       ],
       "stopAtEntry": false,
@@ -35,11 +42,12 @@
       "preLaunchTask": "interactor-native-build"
     },
     {
-      "name": "dart-test-debug-native (no-rebuild)",
+      "name": "dart-test-native (no-rebuild)",
       "type": "cppdbg",
       "request": "launch",
       "program": "/usr/bin/dart",
       "args": [
+        "-DDEBUG=true",
         "${workspaceFolder}/test/dart/lib/test.dart"
       ],
       "stopAtEntry": false,
