@@ -72,9 +72,6 @@ extern "C"
     int interactor_native_count_ready(interactor_native_t* interactor);
     int interactor_native_count_ready_submit(interactor_native_t* interactor);
     
-    int interactor_native_peek_infinity(interactor_native_t* interactor);
-    int interactor_native_peek_timeout(interactor_native_t* interactor);
-
     void interactor_native_process(interactor_native_t* interactor);
     void interactor_native_process_infinity(interactor_native_t* interactor);
     void interactor_native_process_timeout(interactor_native_t* interactor);

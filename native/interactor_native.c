@@ -194,22 +194,6 @@ int interactor_native_count_ready_submit(interactor_native_t* interactor)
     return io_uring_cq_ready(interactor->ring);
 }
 
-int interactor_native_peek_infinity(interactor_native_t* interactor)
-{
-    io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
-    return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
-}
-
-int interactor_native_peek_timeout(interactor_native_t* interactor)
-{
-    struct __kernel_timespec timeout = {
-        .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
-        .tv_sec = 0,
-    };
-    io_uring_submit_and_wait_timeout(interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
-    return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
-}
-
 static inline void interactor_native_process_implementation(interactor_native_t* interactor)
 {
     struct io_uring_cqe* cqe;
@@ -259,7 +243,7 @@ void interactor_native_process(interactor_native_t* interactor)
 void interactor_native_process_infinity(interactor_native_t* interactor)
 {
     io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
-    if (likely(io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count) > 0))
+    if (io_uring_cq_ready(interactor->ring) > 0)
     {
         interactor_native_process_implementation(interactor);
     }
@@ -272,7 +256,7 @@ void interactor_native_process_timeout(interactor_native_t* interactor)
         .tv_sec = 0,
     };
     io_uring_submit_and_wait_timeout(interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
-    if (io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count) > 0)
+    if (io_uring_cq_ready(interactor->ring) > 0)
     {
         interactor_native_process_implementation(interactor);
     }

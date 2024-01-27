@@ -60,10 +60,6 @@ intptr_t interactor_native_data_allocate(interactor_native_t* interactor, size_t
 
 void interactor_native_data_free(interactor_native_t* interactor, intptr_t pointer, size_t size);
 
-int interactor_native_peek_infinity(interactor_native_t* interactor);
-
-int interactor_native_peek_timeout(interactor_native_t* interactor);
-
 void interactor_native_process_infinity(interactor_native_t* interactor);
 
 void interactor_native_process_timeout(interactor_native_t* interactor);
@@ -214,14 +210,6 @@ Allocate a dynamic memory in the pool.
 ##### interactor_native_data_free
 
 Free the dynamic memory in the pool.
-
-##### interactor_native_peek_infinity
-
-Submit and wait for the io_ring, then peek CQE batch.
-
-##### interactor_native_peek_timeout
-
-Submit and wait for the io_ring until timeout, then peek CQE batch.
 
 ##### interactor_native_process_infinity
 Call `interactor_native_peek_infinity` and processing events:
