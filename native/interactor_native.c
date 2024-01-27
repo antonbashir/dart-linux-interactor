@@ -76,9 +76,9 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
     {
         return result;
     }
-    
+
     interactor->descriptor = interactor->ring->ring_fd;
-    
+
     return interactor->descriptor;
 }
 
@@ -185,13 +185,13 @@ void interactor_native_data_free(interactor_native_t* interactor, intptr_t point
 
 int interactor_native_count_ready(interactor_native_t* interactor)
 {
-  return io_uring_cq_ready(interactor->ring);
+    return io_uring_cq_ready(interactor->ring);
 }
 
 int interactor_native_count_ready_submit(interactor_native_t* interactor)
 {
-  io_uring_submit(interactor->ring);
-  return io_uring_cq_ready(interactor->ring);
+    io_uring_submit(interactor->ring);
+    return io_uring_cq_ready(interactor->ring);
 }
 
 int interactor_native_peek_infinity(interactor_native_t* interactor)
@@ -210,7 +210,7 @@ int interactor_native_peek_timeout(interactor_native_t* interactor)
     return io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
 }
 
-static inline void interactor_native_process(interactor_native_t* interactor)
+static inline void interactor_native_process_implementation(interactor_native_t* interactor)
 {
     struct io_uring_cqe* cqe;
     unsigned head;
@@ -251,12 +251,17 @@ static inline void interactor_native_process(interactor_native_t* interactor)
     io_uring_cq_advance(interactor->ring, count);
 }
 
+void interactor_native_process(interactor_native_t* interactor)
+{
+    interactor_native_process_implementation(interactor);
+}
+
 void interactor_native_process_infinity(interactor_native_t* interactor)
 {
     io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
     if (likely(io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count) > 0))
     {
-        interactor_native_process(interactor);
+        interactor_native_process_implementation(interactor);
     }
 }
 
@@ -269,7 +274,7 @@ void interactor_native_process_timeout(interactor_native_t* interactor)
     io_uring_submit_and_wait_timeout(interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
     if (io_uring_peek_batch_cqe(interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count) > 0)
     {
-        interactor_native_process(interactor);
+        interactor_native_process_implementation(interactor);
     }
 }
 
