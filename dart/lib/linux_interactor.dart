@@ -5,7 +5,7 @@ export 'interactor/data.dart' show InteractorDatas;
 export 'interactor/declaration.dart' show InteractorCallback, InteractorConsumer, InteractorMethod, InteractorProducer, InteractorProducerRegistrat;
 export 'interactor/defaults.dart' show InteractorDefaults;
 export 'interactor/notifications.dart' show InteractorNotification;
-export 'interactor/payloads.dart' show InteractorPayloads;
+export 'interactor/payloads.dart' show InteractorPayloads, InteractorPayloadPool;
 export 'interactor/worker.dart' show InteractorWorker;
 export 'interactor/bindings.dart' show InteractorBindings;
 export 'interactor/lookup.dart' show InteractorLibrary;
