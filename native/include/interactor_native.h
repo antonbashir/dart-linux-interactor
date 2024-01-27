@@ -69,6 +69,9 @@ extern "C"
     intptr_t interactor_native_data_allocate(interactor_native_t* interactor, size_t size);
     void interactor_native_data_free(interactor_native_t* interactor, intptr_t pointer, size_t size);
 
+    int interactor_native_count_ready(interactor_native_t* interactor);
+    int interactor_native_count_ready_submit(interactor_native_t* interactor);
+    
     int interactor_native_peek_infinity(interactor_native_t* interactor);
     int interactor_native_peek_timeout(interactor_native_t* interactor);
 

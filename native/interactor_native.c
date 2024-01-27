@@ -183,6 +183,17 @@ void interactor_native_data_free(interactor_native_t* interactor, intptr_t point
     interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
 
+int interactor_native_count_ready(interactor_native_t* interactor)
+{
+  return io_uring_cq_ready(interactor->ring);
+}
+
+int interactor_native_count_ready_submit(interactor_native_t* interactor)
+{
+  io_uring_submit(interactor->ring);
+  return io_uring_cq_ready(interactor->ring);
+}
+
 int interactor_native_peek_infinity(interactor_native_t* interactor)
 {
     io_uring_submit_and_wait(interactor->ring, interactor->cqe_wait_count);
