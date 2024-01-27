@@ -49,6 +49,13 @@ class InteractorCall {
 
   int get id => _message.ref.id;
 
+  late final int inputSize = _message.ref.input_size;
+  late final bool inputBool = _message.ref.input.address == 1;
+  late final int inputInt = _message.ref.input.address;
+  late final double inputDouble = _message.ref.input.cast<Double>().value;
+  late final List<int> inputBuffer = _buffers.read(_message.ref.input.address);
+  late final List<int> inputBytes = _message.ref.input.cast<Uint8>().asTypedList(_message.ref.input_size);
+
   late final int outputSize = _message.ref.output_size;
   late final bool outputBool = _message.ref.output.address == 1;
   late final int outputInt = _message.ref.output.address;
