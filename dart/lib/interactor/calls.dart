@@ -64,6 +64,15 @@ class InteractorCall {
   late final List<int> outputBytes = _message.ref.output.cast<Uint8>().asTypedList(_message.ref.output_size);
 
   @pragma(preferInlinePragma)
+  String getInputString({int? length}) => _message.ref.input.cast<Utf8>().toDartString(length: length);
+
+  @pragma(preferInlinePragma)
+  Pointer<T> getInputObject<T extends Struct>() => Pointer.fromAddress(_message.ref.input.address).cast();
+
+  @pragma(preferInlinePragma)
+  T parseInputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) => mapper(getInputObject<O>());
+
+  @pragma(preferInlinePragma)
   void setInputInt(int data) {
     _message.ref.input = Pointer.fromAddress(data);
     _message.ref.input_size = sizeOf<Int>();
@@ -152,11 +161,7 @@ class InteractorCall {
   Pointer<T> getOutputObject<T extends Struct>() => Pointer.fromAddress(_message.ref.output.address).cast();
 
   @pragma(preferInlinePragma)
-  T parseOutputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) {
-    final object = getOutputObject<O>();
-    final result = mapper(object);
-    return result;
-  }
+  T parseOutputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) => mapper(getOutputObject<O>());
 
   @pragma(preferInlinePragma)
   void releaseInputDouble() => _datas.free(_message.ref.input, _message.ref.input_size);
