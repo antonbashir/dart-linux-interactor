@@ -12,10 +12,10 @@ class InteractorPayloads {
 
   InteractorPayloads(this._bindings, this._interactor);
 
-  InteractorPayloadPool register<T extends Struct>(int size) {
+  InteractorPayloadPool<T> register<T extends Struct>(int size) {
     final pool = _bindings.interactor_dart_payload_pool_create(_interactor, size);
     _pools[T.hashCode] = pool;
-    return InteractorPayloadPool(_bindings, pool);
+    return InteractorPayloadPool<T>(_bindings, pool);
   }
 
   @pragma(preferInlinePragma)
@@ -42,20 +42,20 @@ class InteractorPayloads {
   }
 }
 
-class InteractorPayloadPool {
+class InteractorPayloadPool<T extends Struct> {
   final Pointer<interactor_payload_pool> _pool;
   final InteractorBindings _bindings;
 
   InteractorPayloadPool(this._bindings, this._pool);
 
   @pragma(preferInlinePragma)
-  int size<T extends Struct>() => _pool.ref.size;
+  int size() => _pool.ref.size;
 
   @pragma(preferInlinePragma)
-  Pointer<T> allocate<T extends Struct>() => Pointer.fromAddress(_bindings.interactor_dart_payload_allocate(_pool));
+  Pointer<T> allocate() => Pointer.fromAddress(_bindings.interactor_dart_payload_allocate(_pool));
 
   @pragma(preferInlinePragma)
-  void free<T extends Struct>(Pointer<T> payload) => _bindings.interactor_dart_payload_free(_pool, payload.address);
+  void free(Pointer<T> payload) => _bindings.interactor_dart_payload_free(_pool, payload.address);
 
   @pragma(preferInlinePragma)
   void destroy() => _bindings.interactor_dart_payload_pool_destroy(_pool);
