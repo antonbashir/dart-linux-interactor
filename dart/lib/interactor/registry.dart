@@ -1,12 +1,9 @@
 import 'dart:ffi';
 
 import 'bindings.dart';
-import 'buffers.dart';
 import 'constants.dart';
 import 'consumer.dart';
-import 'data.dart';
 import 'declaration.dart';
-import 'payloads.dart';
 import 'producer.dart';
 
 class InteractorConsumerRegistry {
@@ -37,21 +34,15 @@ class InteractorProducerRegistry {
 
   final Pointer<interactor_dart_t> _interactor;
   final InteractorBindings _bindings;
-  final InteractorPayloads _payloads;
-  final InteractorBuffers _buffers;
-  final InteractorDatas _datas;
 
   InteractorProducerRegistry(
     this._interactor,
     this._bindings,
-    this._payloads,
-    this._buffers,
-    this._datas,
   );
 
   T register<T extends InteractorProducer>(T provider) {
     final id = _producers.length;
-    final executor = InteractorProducerExecutor(id, _interactor, _bindings, _payloads, _buffers, _datas);
+    final executor = InteractorProducerExecutor(id, _interactor, _bindings);
     _producers.add(executor);
     return provider..initialize(executor);
   }

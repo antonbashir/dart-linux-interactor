@@ -37,7 +37,7 @@ class Interactor {
       SendPort toWorker = ports[0];
       _workerClosers.add(ports[1]);
       final interactorPointer = calloc<interactor_dart_t>();
-      if (interactorPointer == nullptr) throw InteractorInitializationException(InteractorMessages.workerMemoryError);
+      if (interactorPointer == nullptr) throw InteractorInitializationException(InteractorErrors.workerMemoryError);
       final result = using((arena) {
         final nativeConfiguration = arena<interactor_dart_configuration_t>();
         nativeConfiguration.ref.ring_flags = configuration.ringFlags;
@@ -57,7 +57,7 @@ class Interactor {
       });
       if (result < 0) {
         bindings.interactor_dart_destroy(interactorPointer);
-        throw InteractorInitializationException(InteractorMessages.workerError(result, bindings));
+        throw InteractorInitializationException(InteractorErrors.workerError(result, bindings));
       }
       final workerInput = [_libraryPath, interactorPointer.address, _workerDestroyer.sendPort, result];
       toWorker.send(workerInput);

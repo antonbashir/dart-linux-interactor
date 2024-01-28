@@ -2,10 +2,8 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'bindings.dart';
-import 'calls.dart';
-import 'notifications.dart';
 
-typedef InteractorCallback = FutureOr<void> Function(InteractorNotification notification);
+typedef InteractorCallback = FutureOr<void> Function(Pointer<interactor_message_t> notification);
 
 abstract interface class InteractorConsumer {
   List<InteractorCallback> callbacks();
@@ -20,5 +18,5 @@ abstract interface class InteractorProducer {
 }
 
 abstract interface class InteractorMethod {
-  Future<InteractorCall> call(int target, {FutureOr<void> Function(InteractorCall message)? configurator});
+  Future<Pointer<interactor_message_t>> call(int target, Pointer<interactor_message_t> message);
 }

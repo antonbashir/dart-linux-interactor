@@ -1,10 +1,9 @@
 export 'interactor/buffers.dart' show InteractorBuffers;
-export 'interactor/calls.dart' show InteractorCall;
 export 'interactor/configuration.dart' show InteractorConfiguration;
 export 'interactor/data.dart' show InteractorDatas;
 export 'interactor/declaration.dart' show InteractorCallback, InteractorConsumer, InteractorMethod, InteractorProducer, InteractorProducerRegistrat;
 export 'interactor/defaults.dart' show InteractorDefaults;
-export 'interactor/notifications.dart' show InteractorNotification;
+export 'interactor/messages.dart' show InteractorMessages;
 export 'interactor/payloads.dart' show InteractorPayloads, InteractorPayloadPool;
 export 'interactor/worker.dart' show InteractorWorker;
 export 'interactor/bindings.dart' show InteractorBindings;

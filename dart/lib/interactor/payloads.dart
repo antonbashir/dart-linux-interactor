@@ -24,7 +24,7 @@ class InteractorPayloads {
   @pragma(preferInlinePragma)
   Pointer<T> allocate<T extends Struct>() {
     final pool = _pools[T.hashCode];
-    if (pool == null) throw InteractorRuntimeException(InteractorMessages.interactorMemoryError);
+    if (pool == null) throw InteractorRuntimeException(InteractorErrors.interactorMemoryError);
     return Pointer.fromAddress(_bindings.interactor_dart_payload_allocate(pool));
   }
 

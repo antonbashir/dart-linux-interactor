@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart';
+import 'package:linux_interactor/interactor/calls.dart';
 import 'package:linux_interactor/interactor/defaults.dart';
 import 'package:linux_interactor/interactor/interactor.dart';
 import 'package:linux_interactor/interactor/worker.dart';
@@ -22,10 +23,10 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor);
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate());
     await _awaitNativeCall(bindings, native);
     final result = await call;
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -39,11 +40,11 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputBool(true));
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputBool(true));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputBool, true);
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -57,11 +58,11 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputInt(123));
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputInt(123));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputInt, 123);
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -75,11 +76,11 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputDouble(123.45));
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputDouble(worker.datas, 123.45));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.outputDouble, 123.45);
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -93,11 +94,11 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputString("test"));
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputString(worker.datas, "test"));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(result.getOutputString(), "test");
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -114,8 +115,8 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
     final call = producer.testCallNative(native.ref.descriptor,
-        configurator: (message) => message
-          ..setInputObject<test_object>(
+        worker.messages.allocate()..setInputObject<test_object>(
+            worker.payloads,
             (object) {
               object.ref.field = 123;
               object.ref.child_field = worker.payloads.allocate<test_object_child>().ref;
@@ -127,7 +128,7 @@ void testCallNative() {
     final output = result.getOutputObject<test_object>().ref;
     expect(output.field, 123);
     expect(output.child_field.field, 456);
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -141,11 +142,11 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputBuffer([1, 2, 3]));
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputBuffer(worker.buffers, [1, 2, 3]));
     await _awaitNativeCall(bindings, native);
     final result = await call;
-    expect(true, ListEquality().equals(result.outputBuffer, [1, 2, 3]));
-    result.release();
+    expect(true, ListEquality().equals(result.getOutputBuffer(worker.buffers), [1, 2, 3]));
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });
@@ -159,11 +160,11 @@ void testCallNative() {
     final native = bindings.test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer(bindings));
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, configurator: (message) => message.setInputBytes([1, 2, 3]));
+    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputBytes(worker.datas, [1, 2, 3]));
     await _awaitNativeCall(bindings, native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBytes, [1, 2, 3]));
-    result.release();
+    worker.messages.free(result);
     await interactor.shutdown();
     bindings.test_interactor_destroy(native);
   });

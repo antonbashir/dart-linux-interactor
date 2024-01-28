@@ -47,8 +47,8 @@ class InteractorPackageConfigFields {
   static const packages = 'packages';
 }
 
-class InteractorMessages {
-  InteractorMessages._();
+class InteractorErrors {
+  InteractorErrors._();
 
   static const workerMemoryError = "[worker] out of memory";
   static const interactorMemoryError = "[interactor] out of memory";

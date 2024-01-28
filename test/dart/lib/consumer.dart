@@ -1,12 +1,14 @@
+import 'dart:ffi';
+
+import 'package:linux_interactor/interactor/bindings.dart';
 import 'package:linux_interactor/interactor/declaration.dart';
-import 'package:linux_interactor/interactor/notifications.dart';
 
 class TestNativeConsumer implements InteractorConsumer {
-  void Function(InteractorNotification message) _checker;
+  void Function(Pointer<interactor_message_t> message) _checker;
 
   TestNativeConsumer(this._checker);
 
-  void test(InteractorNotification message) => _checker(message);
+  void test(Pointer<interactor_message_t> message) => _checker(message);
 
   @override
   List<InteractorCallback> callbacks() => [test];
