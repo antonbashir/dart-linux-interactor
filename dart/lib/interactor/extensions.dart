@@ -28,7 +28,7 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   double get inputDouble => ref.input.cast<Double>().value;
 
   @pragma(preferInlinePragma)
-  List<int> get inputBytes => ref.input.cast<Uint8>().asTypedList(ref.input_size);
+  Uint8List get inputBytes => ref.input.cast<Uint8>().asTypedList(ref.input_size);
 
   @pragma(preferInlinePragma)
   List<int> getOutputBuffer(InteractorBuffers buffers) => buffers.read(ref.output.address);
@@ -128,7 +128,7 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   double get outputDouble => ref.output.cast<Double>().value;
 
   @pragma(preferInlinePragma)
-  List<int> get outputBytes => ref.output.cast<Uint8>().asTypedList(ref.output_size);
+  Uint8List get outputBytes => ref.output.cast<Uint8>().asTypedList(ref.output_size);
 
   @pragma(preferInlinePragma)
   void allocateOutputDouble(InteractorDatas datas) {
