@@ -4,11 +4,7 @@ import 'dart:isolate';
 
 import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart';
-import 'package:linux_interactor/interactor/bindings.dart';
-import 'package:linux_interactor/interactor/calls.dart';
-import 'package:linux_interactor/interactor/defaults.dart';
-import 'package:linux_interactor/interactor/interactor.dart';
-import 'package:linux_interactor/interactor/worker.dart';
+import 'package:linux_interactor/linux_interactor.dart';
 import 'package:linux_interactor_test/consumer.dart';
 import 'package:linux_interactor_test/producer.dart';
 import 'package:linux_interactor_test/test.dart';
