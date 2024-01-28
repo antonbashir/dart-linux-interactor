@@ -19,7 +19,6 @@
 extern "C"
 {
 #endif
-
     struct interactor_buffers_pool
     {
         int32_t* ids;
@@ -27,7 +26,7 @@ extern "C"
         size_t size;
     };
 
-    inline int interactor_buffers_pool_create(struct interactor_buffers_pool* pool, size_t size)
+    static inline int interactor_buffers_pool_create(struct interactor_buffers_pool* pool, size_t size)
     {
         pool->size = size;
         pool->count = 0;
@@ -36,18 +35,18 @@ extern "C"
         return (pool->ids == NULL ? -1 : 0);
     }
 
-    inline void interactor_buffers_pool_destroy(struct interactor_buffers_pool* pool)
+    static inline void interactor_buffers_pool_destroy(struct interactor_buffers_pool* pool)
     {
         free(pool->ids);
         pool->ids = NULL;
     }
 
-    inline void interactor_buffers_pool_push(struct interactor_buffers_pool* pool, int32_t id)
+    static inline void interactor_buffers_pool_push(struct interactor_buffers_pool* pool, int32_t id)
     {
         pool->ids[pool->count++] = id;
     }
 
-    inline int32_t interactor_buffers_pool_pop(struct interactor_buffers_pool* pool)
+    static inline int32_t interactor_buffers_pool_pop(struct interactor_buffers_pool* pool)
     {
         if (unlikely(pool->count == 0))
             return INTERACTOR_BUFFER_USED;
