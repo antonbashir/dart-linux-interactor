@@ -2,14 +2,13 @@ cmake_minimum_required(VERSION 3.16.0)
 
 project(native C ASM)
 
-include_directories(${small_SOURCE_DIR}/src/include)
-include_directories(${small_SOURCE_DIR}/include)
-
-include_directories(${small_SOURCE_DIR}/third_party)
-include_directories(${small_BINARY_DIR}/small/include)
-
 include_directories(${liburing_SOURCE_DIR}/src/include)
 include_directories(${liburing_BINARY_DIR}/src/include)
+
+include_directories(${small_SOURCE_DIR}/include)
+include_directories(${small_SOURCE_DIR}/include/small)
+include_directories(${small_SOURCE_DIR}/third_party)
+include_directories(${small_BINARY_DIR}/small/include)
 
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${PROJECT_SOURCE_DIR})

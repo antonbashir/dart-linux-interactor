@@ -2,7 +2,11 @@
 #define INTERACTOR_MEMORY_H
 
 #include <stddef.h>
-
+#include "small/mempool.h"
+#include "small/quota.h"
+#include "small/slab_arena.h"
+#include "small/slab_cache.h"
+#include "small/small.h"
 #if defined(__cplusplus)
 extern "C"
 {
@@ -10,19 +14,21 @@ extern "C"
 
     struct interactor_memory
     {
-        void* context;
+        struct quota quota;
+        struct slab_arena arena;
+        struct slab_cache cache;
     };
 
     struct interactor_mempool
     {
         struct interactor_memory* memory;
-        void* context;
+        struct mempool pool;
     };
 
     struct interactor_small
     {
         struct interactor_memory* memory;
-        void* context;
+        struct small_alloc allocator;
     };
 
     int interactor_memory_create(struct interactor_memory* memory, size_t quota_size, size_t preallocation_size, size_t slab_size);

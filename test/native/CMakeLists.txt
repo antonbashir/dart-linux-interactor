@@ -6,6 +6,11 @@ file(GLOB sources
   *.h
 )
 
+
+include_directories(${small_SOURCE_DIR}/include)
+include_directories(${small_SOURCE_DIR}/include/small)
+include_directories(${small_SOURCE_DIR}/third_party)
+include_directories(${small_BINARY_DIR}/small/include)
 include_directories(${liburing_SOURCE_DIR}/src/include)
 include_directories(${liburing_BINARY_DIR}/src/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../native/include)

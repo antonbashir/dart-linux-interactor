@@ -1,9 +1,12 @@
 import 'dart:io';
 
 void main() {
-  if (Process.runSync("dart", ["run", "ffigen"]).exitCode != 0) {
+  final result = Process.runSync("dart", ["run", "ffigen"]);
+  if (result.exitCode != 0) {
     throw Exception("dart run ffigen");
   }
+  print(result.stdout);
+  print(result.stderr);
   final file = File("lib/interactor/bindings.dart");
   var content = file.readAsStringSync();
   content = content.replaceAll(

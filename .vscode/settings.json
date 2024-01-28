@@ -28,7 +28,11 @@
     "random": "c",
     "utility": "c",
     "liburing.h": "c",
-    "compat.h": "c"
+    "compat.h": "c",
+    "slab_list.h": "c",
+    "slab_cache.h": "c",
+    "small_config.h": "c",
+    "interactor_memory.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [
@@ -36,5 +40,6 @@
       "language": "mdx",
       "scheme": "file"
     }
-  ]
+  ],
+  "C_Cpp.errorSquiggles": "disabled"
 }
