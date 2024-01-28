@@ -215,3 +215,8 @@ const char* interactor_dart_error_to_string(int error)
 {
     return strerror(-error);
 }
+
+interactor_memory_t* interactor_dart_memory(interactor_dart_t * interactor)
+{
+  return &interactor->memory;
+}

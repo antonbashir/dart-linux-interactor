@@ -42,6 +42,7 @@ class InteractorWorker {
   InteractorBuffers get buffers => _buffers;
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
+  Pointer<interactor_memory> get memory => _bindings.interactor_dart_memory(_interactor);
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((_) async {

@@ -9943,6 +9943,22 @@ class InteractorBindings {
       _interactor_dart_error_to_stringPtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>(isLeaf: true);
 
+  ffi.Pointer<interactor_memory_t> interactor_dart_memory(
+    ffi.Pointer<interactor_dart_t> interactor,
+  ) {
+    return _interactor_dart_memory(
+      interactor,
+    );
+  }
+
+  late final _interactor_dart_memoryPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<interactor_memory_t> Function(
+              ffi.Pointer<interactor_dart_t>)>>('interactor_dart_memory');
+  late final _interactor_dart_memory = _interactor_dart_memoryPtr.asFunction<
+      ffi.Pointer<interactor_memory_t> Function(
+          ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
+
   late final addresses = _SymbolAddresses(this);
 }
 
@@ -12341,6 +12357,11 @@ class _SymbolAddresses {
   ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int)>>
       get interactor_dart_error_to_string =>
           _library._interactor_dart_error_to_stringPtr;
+  ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Pointer<interactor_memory_t> Function(
+              ffi.Pointer<interactor_dart_t>)>> get interactor_dart_memory =>
+      _library._interactor_dart_memoryPtr;
 }
 
 final class interactor_buffers_pool extends ffi.Struct {
@@ -14587,6 +14608,7 @@ final class interactor_dart extends ffi.Struct {
 
 typedef interactor_dart_t = interactor_dart;
 typedef interactor_dart_configuration_t = interactor_dart_configuration;
+typedef interactor_memory_t = interactor_memory;
 
 const int _PC_LINK_MAX = 0;
 

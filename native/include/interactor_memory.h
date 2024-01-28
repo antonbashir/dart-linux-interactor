@@ -12,12 +12,12 @@ extern "C"
 {
 #endif
 
-    struct interactor_memory
+    typedef struct interactor_memory
     {
         struct quota quota;
         struct slab_arena arena;
         struct slab_cache cache;
-    };
+    } interactor_memory_t;
 
     struct interactor_mempool
     {
