@@ -6,6 +6,6 @@ export 'interactor/defaults.dart' show InteractorDefaults;
 export 'interactor/messages.dart' show InteractorMessages;
 export 'interactor/payloads.dart' show InteractorPayloads, InteractorPayloadPool;
 export 'interactor/worker.dart' show InteractorWorker;
-export 'interactor/bindings.dart' show InteractorBindings;
+export 'interactor/bindings.dart' show InteractorBindings, interactor_message_t;
 export 'interactor/lookup.dart' show InteractorLibrary;
 export 'interactor/interactor.dart' show Interactor;
