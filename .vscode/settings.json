@@ -32,7 +32,8 @@
     "slab_list.h": "c",
     "slab_cache.h": "c",
     "small_config.h": "c",
-    "interactor_memory.h": "c"
+    "interactor_memory.h": "c",
+    "slab_arena.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [
