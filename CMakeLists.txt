@@ -36,6 +36,7 @@ FetchContent_Declare(
   GIT_REPOSITORY ${SMALL_REPOSITORY}
   GIT_TAG ${SMALL_VERSION}
   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/small
+  BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/small
 )
 FetchContent_MakeAvailable(small)
 add_subdirectory(${small_SOURCE_DIR})
