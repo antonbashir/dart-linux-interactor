@@ -41,6 +41,14 @@ ffigen:
     exclude:
       - "_(.*)"
       - "io_uring(.*)"
+      - "interactor_memory(.*)"
+      - "interactor_pool(.*)"
+      - "interactor_allocator(.*)"
+      - "interactor_messages_pool(.*)"
+      - "interactor_buffers_pool(.*)"
+      - "interactor_data_pool(.*)"
+      - "interactor_native(.*)"
+      - "interactor_payload_pool(.*)"
   macros:
     exclude:
       - "_(.*)"
