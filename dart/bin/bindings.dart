@@ -11,15 +11,15 @@ void main() {
   var content = file.readAsStringSync();
   content = content.replaceAll(
     "external ffi.Pointer<small_mempool> small_mempool",
-    "// external ffi.Pointer<small_mempool> small_mempool",
+    "external ffi.Pointer<small_mempool> small_mempool_",
   );
   content = content.replaceAll(
     "external ffi.Pointer<mempool> mempool",
-    "// external ffi.Pointer<mempool> mempool",
+    "// external ffi.Pointer<mempool> mempool_",
   );
   content = content.replaceAll(
     "external ffi.Pointer<quota> quota",
-    "// external ffi.Pointer<quota> quota",
+    "// external ffi.Pointer<quota> quota_",
   );
   content = content.replaceAll(
     "final class io_uring_cqe extends ffi.Opaque {}",

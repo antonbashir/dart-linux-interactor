@@ -12161,7 +12161,7 @@ final class slab_arena extends ffi.Struct {
 
   /// An external quota to which we must adhere.
   /// A quota exists to set a common limit on two arenas.
-  // external ffi.Pointer<quota> quota;
+  // external ffi.Pointer<quota> quota_;
 
   @ffi.Uint32()
   external int slab_size;
@@ -12427,7 +12427,7 @@ final class mempool extends ffi.Struct {
   /// Small allocator pool, the owner of this mempool in case
   /// this mempool used as a part of small_alloc, otherwise
   /// NULL
-  // external ffi.Pointer<small_mempool> small_mempool;
+  external ffi.Pointer<small_mempool> small_mempool_;
 }
 
 final class mslab_tree_t extends ffi.Struct {
@@ -12459,7 +12459,7 @@ final class mslab extends ffi.Struct {
   external bool in_hot_slabs;
 
   /// Pointer to mempool, the owner of this mslab
-  // external ffi.Pointer<mempool> mempool;
+  // external ffi.Pointer<mempool> mempool_;
 }
 
 final class UnnamedStruct3 extends ffi.Struct {
