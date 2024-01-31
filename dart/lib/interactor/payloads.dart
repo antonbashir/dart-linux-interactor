@@ -37,7 +37,7 @@ class InteractorPayloads {
 
   @pragma(preferInlinePragma)
   void destroy() {
-    _pools.values.toList().forEach((pool) => _bindings.interactor_dart_payload_pool_destroy(pool));
+    _pools.values.forEach((pool) => _bindings.interactor_dart_payload_pool_destroy(pool));
     _pools.clear();
   }
 }
@@ -56,7 +56,4 @@ class InteractorPayloadPool<T extends Struct> {
 
   @pragma(preferInlinePragma)
   void free(Pointer<T> payload) => _bindings.interactor_dart_payload_free(_pool, payload.address);
-
-  @pragma(preferInlinePragma)
-  void destroy() => _bindings.interactor_dart_payload_pool_destroy(_pool);
 }

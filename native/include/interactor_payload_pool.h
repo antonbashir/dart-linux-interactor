@@ -17,7 +17,6 @@ extern "C"
 
     static inline int interactor_payload_pool_create(struct interactor_payload_pool* pool, struct interactor_memory* memory, size_t payload_size)
     {
-        pool->size = payload_size;
         return interactor_pool_create(&pool->pool, memory, payload_size);
     }
 

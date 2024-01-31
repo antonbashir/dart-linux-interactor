@@ -101,19 +101,19 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   }
 
   @pragma(preferInlinePragma)
-  void releaseInputDouble(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
+  void freeInputDouble(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
 
   @pragma(preferInlinePragma)
-  void releaseInputString(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
+  void freeInputString(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
 
   @pragma(preferInlinePragma)
-  void releaseInputObject<T extends Struct>(InteractorPayloads payloads) => payloads.free(Pointer.fromAddress(ref.input.address).cast<T>());
+  void freeInputObject<T extends Struct>(InteractorPayloads payloads) => payloads.free(Pointer.fromAddress(ref.input.address).cast<T>());
 
   @pragma(preferInlinePragma)
   void releaseInputBuffer(InteractorBuffers buffers) => buffers.release(ref.input.address);
 
   @pragma(preferInlinePragma)
-  void releaseInputBytes(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
+  void freeInputBytes(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
 
   @pragma(preferInlinePragma)
   int get outputSize => ref.output_size;
@@ -167,17 +167,17 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   T parseOutputObject<T, O extends Struct>(T Function(Pointer<O> object) mapper) => mapper(getOutputObject<O>());
 
   @pragma(preferInlinePragma)
-  void releaseOutputDouble(InteractorDatas datas) => datas.free(ref.output, ref.output_size);
+  void freeOutputDouble(InteractorDatas datas) => datas.free(ref.output, ref.output_size);
 
   @pragma(preferInlinePragma)
-  void releaseOutputString(InteractorDatas datas) => datas.free(ref.output, ref.output_size);
+  void freeOutputString(InteractorDatas datas) => datas.free(ref.output, ref.output_size);
 
   @pragma(preferInlinePragma)
-  void releaseOutputObject<T extends Struct>(InteractorPayloads payloads) => payloads.free(Pointer.fromAddress(ref.output.address).cast<T>());
+  void freeOutputObject<T extends Struct>(InteractorPayloads payloads) => payloads.free(Pointer.fromAddress(ref.output.address).cast<T>());
 
   @pragma(preferInlinePragma)
   void releaseOutputBuffer(InteractorBuffers buffers) => buffers.release(ref.output.address);
 
   @pragma(preferInlinePragma)
-  void releaseOutputBytes(InteractorDatas datas) => datas.free(ref.output, ref.output_size);
+  void freeOutputBytes(InteractorDatas datas) => datas.free(ref.output, ref.output_size);
 }

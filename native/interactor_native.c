@@ -149,6 +149,7 @@ void interactor_native_free_message(interactor_native_t* interactor, interactor_
 struct interactor_payload_pool* interactor_native_payload_pool_create(interactor_native_t* interactor, size_t size)
 {
     struct interactor_payload_pool* pool = malloc(sizeof(struct interactor_payload_pool));
+    pool->size = size;
     interactor_payload_pool_create(pool, &interactor->memory, size);
     return pool;
 }
