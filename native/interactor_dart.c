@@ -4,6 +4,7 @@
 #include <liburing.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -185,6 +186,7 @@ void interactor_dart_callback_to_native(interactor_dart_t* interactor, interacto
 
 void interactor_dart_destroy(interactor_dart_t* interactor)
 {
+    printf("destroy %d\n", interactor->id);
     io_uring_queue_exit(interactor->ring);
     for (size_t index = 0; index < interactor->buffers_count; index++)
     {
@@ -216,7 +218,7 @@ const char* interactor_dart_error_to_string(int error)
     return strerror(-error);
 }
 
-interactor_memory_t* interactor_dart_memory(interactor_dart_t * interactor)
+interactor_memory_t* interactor_dart_memory(interactor_dart_t* interactor)
 {
-  return &interactor->memory;
+    return &interactor->memory;
 }
