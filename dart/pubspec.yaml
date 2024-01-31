@@ -49,6 +49,7 @@ ffigen:
       - "interactor_data_pool(.*)"
       - "interactor_native(.*)"
       - "interactor_payload_pool(.*)"
+      - "slab_(.*)"
   macros:
     exclude:
       - "_(.*)"
