@@ -16,6 +16,9 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   int get id => ref.id;
 
   @pragma(preferInlinePragma)
+  Pointer<Void> get inputPointer => ref.input;
+
+  @pragma(preferInlinePragma)
   int get inputSize => ref.input_size;
 
   @pragma(preferInlinePragma)
@@ -117,6 +120,9 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
 
   @pragma(preferInlinePragma)
   int get outputSize => ref.output_size;
+
+  @pragma(preferInlinePragma)
+  Pointer<Void> get outputPointer => ref.output;
 
   @pragma(preferInlinePragma)
   bool get outputBool => ref.output.address == 1;
