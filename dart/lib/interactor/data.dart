@@ -19,11 +19,11 @@ class InteractorDatas {
   void free(Pointer<Void> pointer, int size) => _bindings.interactor_dart_data_free(_interactor, pointer.address, size);
 
   @pragma(preferInlinePragma)
-  Uint8List allocateDataTuple(int size) {
+  ByteData allocateDataTuple(int size) {
     final address = _bindings.interactor_dart_data_allocate(_interactor, size);
     final pointer = Pointer<Uint8>.fromAddress(address);
     final tuple = pointer.asTypedList(size);
     _dataTupleFinalizer.attach(tuple, (address, size));
-    return tuple;
+    return ByteData.view(tuple.buffer, tuple.offsetInBytes);
   }
 }
