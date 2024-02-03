@@ -12,6 +12,7 @@
 #include "interactor_constants.h"
 #include "interactor_data_pool.h"
 #include "interactor_message.h"
+#include "msgpuck.h"
 
 int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id)
 {
@@ -221,4 +222,9 @@ const char* interactor_dart_error_to_string(int error)
 interactor_memory_t* interactor_dart_memory(interactor_dart_t* interactor)
 {
     return &interactor->memory;
+}
+
+void interactor_dart_tuple_next(const char* buffer)
+{
+  mp_next(&buffer);
 }

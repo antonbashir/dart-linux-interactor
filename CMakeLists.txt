@@ -19,6 +19,8 @@ set(LIBURING_REPOSITORY "developer@git.local:dependencies/liburing.git")
 set(LIBURING_VERSION evolution)
 set(SMALL_REPOSITORY "developer@git.local:dependencies/tarantool-small.git")
 set(SMALL_VERSION evolution)
+set(MSGPUCK_REPOSITORY "developer@git.local:dependencies/tarantool-msgpuck.git")
+set(MSGPUCK_VERSION master)
 
 include(FetchContent)
 
@@ -40,6 +42,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(small)
 add_subdirectory(${small_SOURCE_DIR})
+
+FetchContent_Declare(
+  msgpuck
+  GIT_REPOSITORY ${MSGPUCK_REPOSITORY}
+  GIT_TAG ${MSGPUCK_VERSION}
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/msgpuck
+  BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/msgpuck
+)
+FetchContent_MakeAvailable(msgpuck)
+add_subdirectory(${msgpuck_SOURCE_DIR})
 
 add_subdirectory(native)
 add_subdirectory(test/native)
