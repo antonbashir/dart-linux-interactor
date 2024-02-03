@@ -346,10 +346,10 @@ int tupleSizeOfInt(int number) {
   if (number >= -127 && number <= 127) {
     return 2;
   }
-  if (number >= (-327678) && number <= 0xFFFF) {
+  if (number >= -327678 && number <= 0xFFFF) {
     return 3;
   }
-  if (number >= (-2147483648) && number <= 0xFFFFFFFF) {
+  if (number >= -2147483648 && number <= 0xFFFFFFFF) {
     return 5;
   }
   return 9;
