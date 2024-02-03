@@ -12,6 +12,7 @@ import 'lookup.dart';
 import 'payloads.dart';
 import 'registry.dart';
 import 'messages.dart';
+import 'tuple.dart';
 
 class InteractorWorker {
   final _fromInteractor = ReceivePort();
@@ -22,6 +23,7 @@ class InteractorWorker {
   late final InteractorBuffers _buffers;
   late final InteractorDatas _datas;
   late final InteractorMessages _messages;
+  late final InteractorTuples _tuples;
 
   late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _interactor;
@@ -42,6 +44,7 @@ class InteractorWorker {
   InteractorBuffers get buffers => _buffers;
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
+  InteractorTuples get tuples => _tuples;
   Pointer<interactor_memory_t> get memory => _bindings.interactor_dart_memory(_interactor);
 
   InteractorWorker(SendPort toInteractor) {
@@ -70,6 +73,7 @@ class InteractorWorker {
     _buffers = InteractorBuffers(_bindings, _interactor.ref.buffers, _interactor);
     _datas = InteractorDatas(_bindings, _interactor);
     _messages = InteractorMessages(_bindings, _interactor);
+    _tuples = InteractorTuples(_bindings, _interactor);
     _consumers = InteractorConsumerRegistry(
       _interactor,
       _bindings,
