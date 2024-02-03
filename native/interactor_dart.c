@@ -1,3 +1,4 @@
+#include "msgpuck.h"
 #include "interactor_dart.h"
 #include <interactor_memory.h>
 #include <interactor_messages_pool.h>
@@ -12,7 +13,6 @@
 #include "interactor_constants.h"
 #include "interactor_data_pool.h"
 #include "interactor_message.h"
-#include "msgpuck.h"
 
 int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id)
 {
@@ -224,7 +224,7 @@ interactor_memory_t* interactor_dart_memory(interactor_dart_t* interactor)
     return &interactor->memory;
 }
 
-uint64_t interactor_dart_tuple_next(uint64_t offset, const char* buffer)
+uint64_t interactor_dart_tuple_next(const char* buffer, uint64_t offset)
 {
   const char* offset_buffer = buffer + offset;
   mp_next(&offset_buffer);

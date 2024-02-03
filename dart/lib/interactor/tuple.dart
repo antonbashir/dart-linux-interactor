@@ -415,5 +415,5 @@ class InteractorTuples {
   void free(Pointer<Uint8> tuple, int size) => _bindings.interactor_dart_data_free(_interactor, tuple.address, size);
 
   @pragma(preferInlinePragma)
-  int next(Pointer<Uint8> pointer, int offset) => _bindings.interactor_dart_tuple_next(offset, pointer.cast());
+  int next(Pointer<Uint8> pointer, int offset) => _bindings.interactor_dart_tuple_next(pointer.cast(), offset);
 }

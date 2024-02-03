@@ -7672,21 +7672,21 @@ class InteractorBindings {
           ffi.Pointer<interactor_dart_t>)>(isLeaf: true);
 
   int interactor_dart_tuple_next(
-    int offset,
     ffi.Pointer<ffi.Char> buffer,
+    int offset,
   ) {
     return _interactor_dart_tuple_next(
-      offset,
       buffer,
+      offset,
     );
   }
 
   late final _interactor_dart_tuple_nextPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Uint64 Function(ffi.Uint64,
-              ffi.Pointer<ffi.Char>)>>('interactor_dart_tuple_next');
+          ffi.Uint64 Function(ffi.Pointer<ffi.Char>,
+              ffi.Uint64)>>('interactor_dart_tuple_next');
   late final _interactor_dart_tuple_next = _interactor_dart_tuple_nextPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>(isLeaf: true);
+      .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>(isLeaf: true);
 
   int socket(
     int __domain,
@@ -11361,7 +11361,7 @@ class _SymbolAddresses {
       _library._interactor_dart_memoryPtr;
   ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Uint64 Function(ffi.Uint64, ffi.Pointer<ffi.Char>)>>
+              ffi.Uint64 Function(ffi.Pointer<ffi.Char>, ffi.Uint64)>>
       get interactor_dart_tuple_next => _library._interactor_dart_tuple_nextPtr;
   ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>>
       get socket => _library._socketPtr;

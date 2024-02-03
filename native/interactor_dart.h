@@ -84,7 +84,7 @@ extern "C"
     
     interactor_memory_t* interactor_dart_memory(interactor_dart_t * interactor);
 
-    uint64_t interactor_dart_tuple_next(uint64_t offset, const char* buffer);
+    uint64_t interactor_dart_tuple_next(const char* buffer, uint64_t offset);
 #if defined(__cplusplus)
 }
 #endif
