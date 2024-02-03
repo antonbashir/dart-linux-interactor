@@ -11,21 +11,13 @@ int tuplePutNull(ByteData data, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int tuplePutBool(ByteData data, bool? value, {int offset = 0}) {
-  if (value == null) {
-    data.setUint8(offset++, 0xc0);
-    return offset;
-  }
+int tuplePutBool(ByteData data, bool value, {int offset = 0}) {
   data.setUint8(offset++, value ? 0xc3 : 0xc2);
   return offset;
 }
 
 @pragma(preferInlinePragma)
-int tuplePutInt(ByteData data, int? value, {int offset = 0}) {
-  if (value == null) {
-    data.setUint8(offset++, 0xc0);
-    return offset;
-  }
+int tuplePutInt(ByteData data, int value, {int offset = 0}) {
   if (value >= 0) {
     if (value <= 127) {
       data.setUint8(offset++, value);
