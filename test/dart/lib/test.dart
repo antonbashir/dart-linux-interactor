@@ -39,11 +39,11 @@ void main() {
       final pointer = tuples.allocate(1024);
       final buffer = pointer.asTypedList(1024);
       final data = ByteData.view(buffer.buffer, buffer.offsetInBytes);
-      var offset = tuplePutBool(data, false);
-      tuplePutString(buffer, data, "test", offset: offset);
-      var (result, resultOffset) = tupleTakeString(buffer, data);
+      var offset = tupleWriteBool(data, false);
+      tupleWriteString(buffer, data, "test", offset: offset);
+      var (result, resultOffset) = tupleReadString(buffer, data);
       print(result);
-      print(tupleTakeBool(data, offset: resultOffset));
+      print(tupleReadBool(data, offset: resultOffset));
     }
     print("micro: ${sw.elapsedMicroseconds}");
     print("ms: ${sw.elapsedMilliseconds}");

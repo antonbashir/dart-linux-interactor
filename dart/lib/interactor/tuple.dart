@@ -5,19 +5,19 @@ import 'bindings.dart';
 import 'constants.dart';
 
 @pragma(preferInlinePragma)
-int tuplePutNull(ByteData data, {int offset = 0}) {
+int tupleWriteNull(ByteData data, {int offset = 0}) {
   data.setUint8(offset++, 0xc0);
   return offset;
 }
 
 @pragma(preferInlinePragma)
-int tuplePutBool(ByteData data, bool value, {int offset = 0}) {
+int tupleWriteBool(ByteData data, bool value, {int offset = 0}) {
   data.setUint8(offset++, value ? 0xc3 : 0xc2);
   return offset;
 }
 
 @pragma(preferInlinePragma)
-int tuplePutInt(ByteData data, int value, {int offset = 0}) {
+int tupleWriteInt(ByteData data, int value, {int offset = 0}) {
   if (value >= 0) {
     if (value <= 127) {
       data.setUint8(offset++, value);
@@ -72,7 +72,7 @@ int tuplePutInt(ByteData data, int value, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int tuplePutDouble(ByteData data, double value, {int offset = 0}) {
+int tupleWriteDouble(ByteData data, double value, {int offset = 0}) {
   data.setUint8(offset++, 0xcb);
   data.setFloat64(offset, value);
   offset += 8;
@@ -80,7 +80,7 @@ int tuplePutDouble(ByteData data, double value, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int tuplePutString(Uint8List buffer, ByteData data, String value, {int offset = 0}) {
+int tupleWriteString(Uint8List buffer, ByteData data, String value, {int offset = 0}) {
   final encoded = utf8.encode(value);
   final length = encoded.length;
   if (length <= 31) {
@@ -116,7 +116,7 @@ int tuplePutString(Uint8List buffer, ByteData data, String value, {int offset = 
 }
 
 @pragma(preferInlinePragma)
-int tuplePutBinary(Uint8List buffer, ByteData data, Uint8List value, {int offset = 0}) {
+int tupleWriteBinary(Uint8List buffer, ByteData data, Uint8List value, {int offset = 0}) {
   final length = value.length;
   if (length <= 0xFF) {
     data.setUint8(offset++, 0xc4);
@@ -145,7 +145,7 @@ int tuplePutBinary(Uint8List buffer, ByteData data, Uint8List value, {int offset
 }
 
 @pragma(preferInlinePragma)
-int tuplePutList(ByteData data, int length, {int offset = 0}) {
+int tupleWriteList(ByteData data, int length, {int offset = 0}) {
   if (length <= 0xF) {
     data.setUint8(offset++, 0x90 | length);
     return offset;
@@ -166,7 +166,7 @@ int tuplePutList(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int tuplePutMap(ByteData data, int length, {int offset = 0}) {
+int tupleWriteMap(ByteData data, int length, {int offset = 0}) {
   if (length <= 0xF) {
     data.setUint8(offset++, 0x80 | length);
     return offset;
@@ -187,21 +187,15 @@ int tuplePutMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(bool?, int) tupleTakeBool(ByteData data, {int offset = 0}) {
+(bool?, int) tupleReadBool(ByteData data, {int offset = 0}) {
   final value = data.getUint8(offset);
-  if (value == 0xc2) {
-    return (false, offset + 1);
-  }
-  if (value == 0xc3) {
-    return (true, offset + 1);
-  }
-  if (value == 0xc0) {
-    return (null, offset + 1);
-  }
+  if (value == 0xc2) return (false, offset + 1);
+  if (value == 0xc3) return (true, offset + 1);
+  if (value == 0xc0) return (null, offset + 1);
   throw FormatException('bool', value);
 }
 
-(int?, int) tupleTakeInt(ByteData data, {int offset = 0}) {
+(int?, int) tupleReadInt(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   int? value;
   if (bytes <= 0x7f || bytes >= 0xe0) {
@@ -209,78 +203,70 @@ int tuplePutMap(ByteData data, int length, {int offset = 0}) {
     offset += 1;
     return (value, offset);
   }
-  if (bytes == 0xcc) {
-    value = data.getUint8(++offset);
-    offset += 1;
-    return (value, offset);
-  }
-  if (bytes == 0xcd) {
-    value = data.getUint16(++offset);
-    offset += 2;
-    return (value, offset);
-  }
-  if (bytes == 0xce) {
-    value = data.getUint32(++offset);
-    offset += 4;
-    return (value, offset);
-  }
-  if (bytes == 0xcf) {
-    value = data.getUint64(++offset);
-    offset += 8;
-    return (value, offset);
-  }
-  if (bytes == 0xd0) {
-    value = data.getInt8(++offset);
-    offset += 1;
-    return (value, offset);
-  }
-  if (bytes == 0xd1) {
-    value = data.getInt16(++offset);
-    offset += 2;
-    return (value, offset);
-  }
-  if (bytes == 0xd2) {
-    value = data.getInt32(++offset);
-    offset += 4;
-    return (value, offset);
-  }
-  if (bytes == 0xd3) {
-    value = data.getInt64(++offset);
-    offset += 8;
-    return (value, offset);
-  }
-  if (bytes == 0xc0) {
-    value = null;
-    offset += 1;
-    return (value, offset);
+  switch (bytes) {
+    case 0xcc:
+      value = data.getUint8(++offset);
+      offset += 1;
+      return (value, offset);
+    case 0xcd:
+      value = data.getUint16(++offset);
+      offset += 2;
+      return (value, offset);
+    case 0xce:
+      value = data.getUint32(++offset);
+      offset += 4;
+      return (value, offset);
+    case 0xcf:
+      value = data.getUint64(++offset);
+      offset += 8;
+      return (value, offset);
+    case 0xd0:
+      value = data.getInt8(++offset);
+      offset += 1;
+      return (value, offset);
+    case 0xd1:
+      value = data.getInt16(++offset);
+      offset += 2;
+      return (value, offset);
+    case 0xd2:
+      value = data.getInt32(++offset);
+      offset += 4;
+      return (value, offset);
+    case 0xd3:
+      value = data.getInt64(++offset);
+      offset += 8;
+      return (value, offset);
+    case 0xc0:
+      value = null;
+      offset += 1;
+      return (value, offset);
   }
   throw FormatException('bool', value);
 }
 
 @pragma(preferInlinePragma)
-(double?, int) tupleTakeDouble(ByteData data, {int offset = 0}) {
+(double?, int) tupleReadDouble(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   double? value;
-  if (bytes == 0xca) {
-    value = data.getFloat32(++offset);
-    offset += 4;
-    return (value, offset);
-  }
-  if (bytes == 0xcb) {
-    value = data.getFloat64(++offset);
-    offset += 8;
-    return (value, offset);
-  }
-  if (bytes == 0xc0) {
-    value = null;
-    offset += 1;
-    return (value, offset);
+  switch (bytes) {
+    case 0xca:
+      value = data.getFloat32(++offset);
+      offset += 4;
+      return (value, offset);
+    case 0xcb:
+      value = data.getFloat64(++offset);
+      offset += 8;
+      return (value, offset);
+    case 0xc0:
+      value = null;
+      offset += 1;
+      return (value, offset);
   }
   throw FormatException('double', bytes);
 }
 
 @pragma(preferInlinePragma)
-(String?, int) tupleTakeString(Uint8List buffer, ByteData data, {int offset = 0}) {
+(String?, int) tupleReadString(Uint8List buffer, ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   if (bytes == 0xc0) {
     return (null, offset + 1);
@@ -293,114 +279,121 @@ int tuplePutMap(ByteData data, int length, {int offset = 0}) {
     offset += length;
     return (utf8.decode(view), offset);
   }
-  if (bytes == 0xc0) {
-    return (null, offset + 1);
+  switch (bytes) {
+    case 0xc0:
+      return (null, offset + 1);
+    case 0xd9:
+      length = data.getUint8(++offset);
+      offset += 1;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (utf8.decode(view), offset);
+    case 0xda:
+      length = data.getUint16(++offset);
+      offset += 2;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (utf8.decode(view), offset);
+    case 0xdb:
+      length = data.getUint32(++offset);
+      offset += 4;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (utf8.decode(view), offset);
   }
-  if (bytes == 0xd9) {
-    length = data.getUint8(++offset);
-    offset += 1;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (utf8.decode(view), offset);
-  }
-  if (bytes == 0xda) {
-    length = data.getUint16(++offset);
-    offset += 2;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (utf8.decode(view), offset);
-  }
-  if (bytes == 0xdb) {
-    length = data.getUint32(++offset);
-    offset += 4;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (utf8.decode(view), offset);
-  }
-
   throw FormatException('double', bytes);
 }
 
 @pragma(preferInlinePragma)
-(Uint8List, int) tupleTakeBinary(Uint8List buffer, ByteData data, {int offset = 0}) {
-  final b = data.getUint8(offset);
+(Uint8List, int) tupleReadBinary(Uint8List buffer, ByteData data, {int offset = 0}) {
+  final bytes = data.getUint8(offset);
   int length;
-  if (b == 0xc4) {
-    length = data.getUint8(++offset);
-    offset += 1;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (view, offset);
+  switch (bytes) {
+    case 0xc4:
+      length = data.getUint8(++offset);
+      offset += 1;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (view, offset);
+    case 0xc0:
+      length = 0;
+      offset += 1;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (view, offset);
+    case 0xc5:
+      length = data.getUint16(++offset);
+      offset += 2;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (view, offset);
+    case 0xc6:
+      length = data.getUint32(++offset);
+      offset += 4;
+      final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
+      offset += length;
+      return (view, offset);
   }
-  if (b == 0xc0) {
-    length = 0;
-    offset += 1;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (view, offset);
-  }
-  if (b == 0xc5) {
-    length = data.getUint16(++offset);
-    offset += 2;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (view, offset);
-  }
-  if (b == 0xc6) {
-    length = data.getUint32(++offset);
-    offset += 4;
-    final view = buffer.buffer.asUint8List(buffer.offsetInBytes + offset, length);
-    offset += length;
-    return (view, offset);
-  }
-  throw FormatException(
-    'double',
-  );
+  throw FormatException('double');
 }
 
 @pragma(preferInlinePragma)
-(int, int) tupleTakeList(ByteData data, {int offset = 0}) {
+(int, int) tupleReadList(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   if (bytes & 0xF0 == 0x90) {
     return (bytes & 0xF, offset + 1);
   }
-  if (bytes == 0xc0) {
-    return (offset += 1, 0);
+  switch (bytes) {
+    case 0xc0:
+      return (offset += 1, 0);
+    case 0xdc:
+      return (data.getUint16(++offset), offset + 2);
+    case 0xdd:
+      return (data.getUint32(++offset), offset += 4);
   }
-  if (bytes == 0xdc) {
-    return (data.getUint16(++offset), offset + 2);
-  }
-  if (bytes == 0xdd) {
-    return (data.getUint32(++offset), offset += 4);
-  }
-  throw FormatException(
-    'double',
-  );
+  throw FormatException('double');
 }
 
 @pragma(preferInlinePragma)
-(int, int) tupleTakeMap(ByteData data, {int offset = 0}) {
+(int, int) tupleReadMap(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   if (bytes & 0xF0 == 0x80) {
     return (bytes & 0xF, offset + 1);
   }
-  if (bytes == 0xc0) {
-    return (offset += 1, 0);
+  switch (bytes) {
+    case 0xc0:
+      return (offset += 1, 0);
+    case 0xde:
+      return (data.getUint16(++offset), offset + 2);
+    case 0xdf:
+      return (data.getUint32(++offset), offset += 4);
   }
-  if (bytes == 0xde) {
-    return (data.getUint16(++offset), offset + 2);
+  throw FormatException('double');
+}
+
+const tupleSizeOfNull = 1;
+const tupleSizeOfBool = 1;
+const tupleSizeOfDouble = 1 + 8;
+
+@pragma(preferInlinePragma)
+int tupleSizeOfInt(int number) {
+  if (number >= -0x20) {
+    return 1;
   }
-  if (bytes == 0xdf) {
-    return (data.getUint32(++offset), offset += 4);
+  if (number >= -127 && number <= 127) {
+    return 1 + 1;
   }
-  throw FormatException(
-    'double',
-  );
+  if (number >= (-32767 - 1) && number <= 0xFFFF) {
+    return 1 + 2;
+  }
+  if (number >= (-2147483647 - 1) && number <= 0xFFFFFFFF) {
+    return 1 + 4;
+  }
+  return 1 + 8;
 }
 
 @pragma(preferInlinePragma)
-int tupleSizeOfString(String value) {
-  final length = value.length;
+int tupleSizeOfString(int length) {
   if (length <= 31) {
     return 1 + length;
   }
@@ -411,6 +404,39 @@ int tupleSizeOfString(String value) {
     return 1 + 2 + length;
   }
   return 1 + 4 + length;
+}
+
+@pragma(preferInlinePragma)
+int tupleSizeOfBinary(int length) {
+  if (length <= 255) {
+    return 1 + 1;
+  }
+  if (length <= 0xFFFF) {
+    return 1 + 2;
+  }
+  return 1 + 4;
+}
+
+@pragma(preferInlinePragma)
+int tupleSizeOfList(int length) {
+  if (length <= 15) {
+    return 1;
+  }
+  if (length <= 0xFFFF) {
+    return 1 + 2;
+  }
+  return 1 + 4;
+}
+
+@pragma(preferInlinePragma)
+int tupleSizeOfMap(int length) {
+  if (length <= 15) {
+    return 1;
+  }
+  if (length <= 0xFFFF) {
+    return 1 + 2;
+  }
+  return 1 + 4;
 }
 
 class InteractorTuples {
