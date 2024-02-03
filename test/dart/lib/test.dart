@@ -21,7 +21,7 @@ void main() {
   // });
   // group("[threading dart]", () {
   //   for (var i = 0; i < 100; i++) {
-  //     testThreadingDart();
+  //     testThreadingDart();offset
   //   }
   // });
   test("test", () async {
@@ -32,22 +32,24 @@ void main() {
     worker.activate();
 
     final tuples = worker.tuples;
-
     final sw = Stopwatch();
     sw.start();
+    final size = tupleSizeOfBool + tupleSizeOfString("test-1".length) + tupleSizeOfString("test-2".length);
     for (var i = 0; i < 1000000; i++) {
-      final pointer = tuples.allocate(1024);
-      final buffer = pointer.asTypedList(1024);
+      final pointer = tuples.allocate(size);
+      final buffer = pointer.asTypedList(size);
       final data = ByteData.view(buffer.buffer, buffer.offsetInBytes);
-      var offset = tupleWriteBool(data, false);
-      tupleWriteString(buffer, data, "test", offset: offset);
-      var (result, resultOffset) = tupleReadString(buffer, data);
-      print(result);
-      print(tupleReadBool(data, offset: resultOffset));
+      var offset = 0;
+      offset = tupleWriteBool(data, false, 0);
+      offset = tupleWriteString(buffer, data, "test-1", offset);
+      offset = tupleWriteString(buffer, data, "test-2", offset);
+      offset = tuples.next(pointer, 0);
+      var result = tupleReadString(buffer, data, offset);
+      result = tupleReadString(buffer, data, result.offset);
+      tuples.free(pointer, size);
     }
-    print("micro: ${sw.elapsedMicroseconds}");
-    print("ms: ${sw.elapsedMilliseconds}");
-    print("s: ${sw.elapsed.inSeconds}");
+    print(sw.elapsedMicroseconds);
+    print(sw.elapsedMilliseconds);
 
     await completer.future;
     await interactor.shutdown();
