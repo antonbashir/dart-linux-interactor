@@ -19,7 +19,7 @@ int tupleWriteBool(ByteData data, bool value, int offset) {
 @pragma(preferInlinePragma)
 int tupleWriteInt(ByteData data, int value, int offset) {
   if (value >= 0) {
-    if (value <= 127) {
+    if (value <= 0x7f) {
       data.setUint8(offset++, value);
       return offset;
     }
@@ -44,7 +44,7 @@ int tupleWriteInt(ByteData data, int value, int offset) {
     offset += 8;
     return offset;
   }
-  if (value >= -32) {
+  if (value >= -0x20) {
     data.setUint8(offset++, value);
     return offset;
   }
@@ -85,31 +85,31 @@ int tupleWriteString(Uint8List buffer, ByteData data, String value, int offset) 
   final length = encoded.length;
   if (length <= 31) {
     data.setUint8(offset++, 0xA0 | length);
-    buffer.setRange(offset, offset + encoded.length, encoded);
-    offset += encoded.length;
+    buffer.setRange(offset, offset + length, encoded);
+    offset += length;
     return offset;
   }
   if (length <= 0xFF) {
     data.setUint8(offset++, 0xd9);
     data.setUint8(offset++, length);
-    buffer.setRange(offset, offset + encoded.length, encoded);
-    offset += encoded.length;
+    buffer.setRange(offset, offset + length, encoded);
+    offset += length;
     return offset;
   }
   if (length <= 0xFFFF) {
     data.setUint8(offset++, 0xda);
     data.setUint16(offset, length);
     offset += 2;
-    buffer.setRange(offset, offset + encoded.length, encoded);
-    offset += encoded.length;
+    buffer.setRange(offset, offset + length, encoded);
+    offset += length;
     return offset;
   }
   if (length <= 0xFFFFFFFF) {
     data.setUint8(offset++, 0xdb);
     data.setUint32(offset, length);
     offset += 4;
-    buffer.setRange(offset, offset + encoded.length, encoded);
-    offset += encoded.length;
+    buffer.setRange(offset, offset + length, encoded);
+    offset += length;
     return offset;
   }
   throw ArgumentError('Max String length is 0xFFFFFFFF');
@@ -189,9 +189,14 @@ int tupleWriteMap(ByteData data, int length, int offset) {
 @pragma(preferInlinePragma)
 ({bool? value, int offset}) tupleReadBool(ByteData data, int offset) {
   final value = data.getUint8(offset);
-  if (value == 0xc2) return (value: false, offset: offset + 1);
-  if (value == 0xc3) return (value: true, offset: offset + 1);
-  if (value == 0xc0) return (value: null, offset: offset + 1);
+  switch (value) {
+    case 0xc2:
+      return (value: false, offset: offset + 1);
+    case 0xc3:
+      return (value: true, offset: offset + 1);
+    case 0xc0:
+      return (value: null, offset: offset + 1);
+  }
   throw FormatException('bool', value);
 }
 
@@ -200,46 +205,36 @@ int tupleWriteMap(ByteData data, int length, int offset) {
   int? value;
   if (bytes <= 0x7f || bytes >= 0xe0) {
     value = data.getInt8(offset);
-    offset += 1;
-    return (value: value, offset: offset);
+    return (value: value, offset: offset + 1);
   }
   switch (bytes) {
     case 0xcc:
       value = data.getUint8(++offset);
-      offset += 1;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 1);
     case 0xcd:
       value = data.getUint16(++offset);
-      offset += 2;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 2);
     case 0xce:
       value = data.getUint32(++offset);
-      offset += 4;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 4);
     case 0xcf:
       value = data.getUint64(++offset);
-      offset += 8;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 8);
     case 0xd0:
       value = data.getInt8(++offset);
-      offset += 1;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 1);
     case 0xd1:
       value = data.getInt16(++offset);
-      offset += 2;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 2);
     case 0xd2:
       value = data.getInt32(++offset);
-      offset += 4;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 4);
     case 0xd3:
       value = data.getInt64(++offset);
-      offset += 8;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 8);
     case 0xc0:
       value = null;
-      offset += 1;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 1);
   }
   throw FormatException('bool', value);
 }
@@ -251,16 +246,13 @@ int tupleWriteMap(ByteData data, int length, int offset) {
   switch (bytes) {
     case 0xca:
       value = data.getFloat32(++offset);
-      offset += 4;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 4);
     case 0xcb:
       value = data.getFloat64(++offset);
-      offset += 8;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 8);
     case 0xc0:
       value = null;
-      offset += 1;
-      return (value: value, offset: offset);
+      return (value: value, offset: offset + 1);
   }
   throw FormatException('double', bytes);
 }
