@@ -224,7 +224,9 @@ interactor_memory_t* interactor_dart_memory(interactor_dart_t* interactor)
     return &interactor->memory;
 }
 
-void interactor_dart_tuple_next(const char* buffer)
+uint64_t interactor_dart_tuple_next(uint64_t offset, const char* buffer)
 {
-  mp_next(&buffer);
+  const char* offset_buffer = buffer + offset;
+  mp_next(&offset_buffer);
+  return (uint64_t)(offset_buffer - buffer);
 }
