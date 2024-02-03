@@ -101,7 +101,7 @@ int tupleWriteString(Uint8List buffer, ByteData data, String value, int offset) 
     buffer.setRange(offset, offset + length, encoded);
     return offset + length;
   }
-  throw ArgumentError('Max String length is 0xFFFFFFFF');
+  throw ArgumentError('Max string length is 0xFFFFFFFF');
 }
 
 @pragma(preferInlinePragma)
@@ -146,7 +146,7 @@ int tupleWriteList(ByteData data, int length, int offset) {
     data.setUint32(offset, length);
     return offset + 4;
   }
-  throw ArgumentError('Max length is 4294967295');
+  throw ArgumentError('Max list length is 4294967295');
 }
 
 @pragma(preferInlinePragma)
@@ -165,7 +165,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
     data.setUint32(offset, length);
     return offset + 4;
   }
-  throw ArgumentError('Max length is 4294967295');
+  throw ArgumentError('Max map length is 4294967295');
 }
 
 @pragma(preferInlinePragma)
@@ -179,7 +179,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
     case 0xc0:
       return (value: null, offset: offset + 1);
   }
-  throw FormatException('bool', value);
+  throw FormatException("Byte $value is not bool");
 }
 
 ({int? value, int offset}) tupleReadInt(ByteData data, int offset) {
@@ -218,7 +218,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
       value = null;
       return (value: value, offset: offset + 1);
   }
-  throw FormatException('bool', value);
+  throw FormatException("Byte $value is not int");
 }
 
 @pragma(preferInlinePragma)
@@ -236,7 +236,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
       value = null;
       return (value: value, offset: offset + 1);
   }
-  throw FormatException('double', bytes);
+  throw FormatException("Byte $value is not double");
 }
 
 @pragma(preferInlinePragma)
@@ -270,7 +270,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
       offset += 4;
       return (value: utf8.decode(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
   }
-  throw FormatException('double', bytes);
+  throw FormatException("Byte $bytes is not string");
 }
 
 @pragma(preferInlinePragma)
@@ -297,7 +297,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
       offset += 4;
       return (value: innerBuffer.asUint8List(offsetInBytes + offset, length), offset: offset + length);
   }
-  throw FormatException('double');
+  throw FormatException("Byte $bytes is not binary");
 }
 
 @pragma(preferInlinePragma)
@@ -314,7 +314,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
     case 0xdd:
       return (length: data.getUint32(++offset), offset: offset + 4);
   }
-  throw FormatException('double');
+  throw FormatException("Byte $bytes is invalid list length");
 }
 
 @pragma(preferInlinePragma)
@@ -331,7 +331,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
     case 0xdf:
       return (length: data.getUint32(++offset), offset: offset + 4);
   }
-  throw FormatException('double');
+  throw FormatException("Byte $bytes is invalid map length");
 }
 
 const tupleSizeOfNull = 1;
