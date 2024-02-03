@@ -5,13 +5,13 @@ import 'bindings.dart';
 import 'constants.dart';
 
 @pragma(preferInlinePragma)
-int putNull(ByteData data, {int offset = 0}) {
+int tuplePutNull(ByteData data, {int offset = 0}) {
   data.setUint8(offset++, 0xc0);
   return offset;
 }
 
 @pragma(preferInlinePragma)
-int putBool(ByteData data, bool? value, {int offset = 0}) {
+int tuplePutBool(ByteData data, bool? value, {int offset = 0}) {
   if (value == null) {
     data.setUint8(offset++, 0xc0);
     return offset;
@@ -21,7 +21,7 @@ int putBool(ByteData data, bool? value, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int putInt(ByteData data, int? value, {int offset = 0}) {
+int tuplePutInt(ByteData data, int? value, {int offset = 0}) {
   if (value == null) {
     data.setUint8(offset++, 0xc0);
     return offset;
@@ -80,7 +80,7 @@ int putInt(ByteData data, int? value, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int putDouble(ByteData data, double value, {int offset = 0}) {
+int tuplePutDouble(ByteData data, double value, {int offset = 0}) {
   data.setUint8(offset++, 0xcb);
   data.setFloat64(offset, value);
   offset += 8;
@@ -88,7 +88,7 @@ int putDouble(ByteData data, double value, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int putString(Uint8List buffer, ByteData data, String value, {int offset = 0}) {
+int tuplePutString(Uint8List buffer, ByteData data, String value, {int offset = 0}) {
   final encoded = utf8.encode(value);
   final length = encoded.length;
   if (length <= 31) {
@@ -124,7 +124,7 @@ int putString(Uint8List buffer, ByteData data, String value, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int putBinary(Uint8List buffer, ByteData data, Uint8List value, {int offset = 0}) {
+int tuplePutBinary(Uint8List buffer, ByteData data, Uint8List value, {int offset = 0}) {
   final length = value.length;
   if (length <= 0xFF) {
     data.setUint8(offset++, 0xc4);
@@ -153,7 +153,7 @@ int putBinary(Uint8List buffer, ByteData data, Uint8List value, {int offset = 0}
 }
 
 @pragma(preferInlinePragma)
-int putList(ByteData data, int length, {int offset = 0}) {
+int tuplePutList(ByteData data, int length, {int offset = 0}) {
   if (length <= 0xF) {
     data.setUint8(offset++, 0x90 | length);
     return offset;
@@ -174,7 +174,7 @@ int putList(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-int putMap(ByteData data, int length, {int offset = 0}) {
+int tuplePutMap(ByteData data, int length, {int offset = 0}) {
   if (length <= 0xF) {
     data.setUint8(offset++, 0x80 | length);
     return offset;
@@ -195,7 +195,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(bool?, int) takeBool(ByteData data, {int offset = 0}) {
+(bool?, int) tupleTakeBool(ByteData data, {int offset = 0}) {
   final value = data.getUint8(offset);
   if (value == 0xc2) {
     return (false, offset + 1);
@@ -209,7 +209,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
   throw FormatException('bool', value);
 }
 
-(int?, int) takeInt(ByteData data, {int offset = 0}) {
+(int?, int) tupleTakeInt(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   int? value;
   if (bytes <= 0x7f || bytes >= 0xe0) {
@@ -266,7 +266,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(double?, int) takeDouble(ByteData data, {int offset = 0}) {
+(double?, int) tupleTakeDouble(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   double? value;
   if (bytes == 0xca) {
@@ -288,7 +288,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(String?, int) takeString(Uint8List buffer, ByteData data, {int offset = 0}) {
+(String?, int) tupleTakeString(Uint8List buffer, ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   if (bytes == 0xc0) {
     return (null, offset + 1);
@@ -330,7 +330,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(Uint8List, int) takeBinary(Uint8List buffer, ByteData data, {int offset = 0}) {
+(Uint8List, int) tupleTakeBinary(Uint8List buffer, ByteData data, {int offset = 0}) {
   final b = data.getUint8(offset);
   int length;
   if (b == 0xc4) {
@@ -367,7 +367,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(int, int) takeList(ByteData data, {int offset = 0}) {
+(int, int) tupleTakeList(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   if (bytes & 0xF0 == 0x90) {
     return (bytes & 0xF, offset + 1);
@@ -387,7 +387,7 @@ int putMap(ByteData data, int length, {int offset = 0}) {
 }
 
 @pragma(preferInlinePragma)
-(int, int) takeMap(ByteData data, {int offset = 0}) {
+(int, int) tupleTakeMap(ByteData data, {int offset = 0}) {
   final bytes = data.getUint8(offset);
   if (bytes & 0xF0 == 0x80) {
     return (bytes & 0xF, offset + 1);
@@ -404,6 +404,21 @@ int putMap(ByteData data, int length, {int offset = 0}) {
   throw FormatException(
     'double',
   );
+}
+
+@pragma(preferInlinePragma)
+int tupleSizeOfString(String value) {
+  final length = value.length;
+  if (length <= 31) {
+    return 1 + length;
+  }
+  if (length <= 0xFFFF) {
+    return 1 + 1 + length;
+  }
+  if (length <= 0xFFFFFFFF) {
+    return 1 + 2 + length;
+  }
+  return 1 + 4 + length;
 }
 
 class InteractorTuples {
