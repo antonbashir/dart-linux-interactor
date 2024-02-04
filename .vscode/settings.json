@@ -43,5 +43,15 @@
       "scheme": "file"
     }
   ],
-  "C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp.errorSquiggles": "disabled",
+  "clangd.checkUpdates": true,
+  "clangd.onConfigChanged": "restart",
+  "clangd.arguments": [
+    "-background-index",
+    "-header-insertion=iwyu",
+    "-header-insertion-decorators",
+    "--inlay-hints",
+    "--function-arg-placeholders",
+  ],
+  "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
 }
