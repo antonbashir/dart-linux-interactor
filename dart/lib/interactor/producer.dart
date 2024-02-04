@@ -35,8 +35,7 @@ class InteractorProducerExecutor implements InteractorProducerRegistrat {
 }
 
 class InteractorMethodExecutor implements InteractorMethod {
-  Map<int, Completer<Pointer<interactor_message_t>>> _calls = {};
-
+  final Map<int, Completer<Pointer<interactor_message_t>>> _calls = {};
   final int _methodId;
   final int _executorId;
   final Pointer<interactor_dart_t> _interactor;
