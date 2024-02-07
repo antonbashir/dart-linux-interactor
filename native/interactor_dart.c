@@ -5,7 +5,6 @@
 #include <liburing.h>
 #include <liburing/io_uring.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
