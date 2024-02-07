@@ -187,7 +187,6 @@ void interactor_dart_callback_to_native(interactor_dart_t* interactor, interacto
 
 void interactor_dart_destroy(interactor_dart_t* interactor)
 {
-    printf("destroy %d\n", interactor->id);
     io_uring_queue_exit(interactor->ring);
     for (size_t index = 0; index < interactor->buffers_count; index++)
     {
