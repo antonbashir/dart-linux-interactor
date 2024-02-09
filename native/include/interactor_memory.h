@@ -2,7 +2,10 @@
 #define INTERACTOR_MEMORY_H
 
 #include <stddef.h>
+#include "ibuf.h"
+#include "small/ibuf.h"
 #include "small/mempool.h"
+#include "small/obuf.h"
 #include "small/quota.h"
 #include "small/slab_arena.h"
 #include "small/slab_cache.h"
@@ -20,15 +23,27 @@ extern "C"
         struct slab_cache cache;
     } interactor_memory_t;
 
-    struct interactor_pool
+    typedef struct interactor_pool
     {
         struct mempool pool;
-    };
+    } interactor_pool_t;
 
-    struct interactor_allocator
+    typedef struct interactor_allocator
     {
         struct small_alloc allocator;
-    };
+    } interactor_allocator_t;
+
+    typedef struct interactor_input_buffer
+    {
+        struct ibuf buffer;
+        size_t last_reserved_size;
+    } interactor_input_buffer_t;
+
+    typedef struct interactor_output_buffer
+    {
+        struct obuf buffer;
+        size_t last_reserved_size;
+    } interactor_output_buffer_t;
 
     static inline int interactor_memory_create(struct interactor_memory* memory, size_t quota_size, size_t preallocation_size, size_t slab_size)
     {

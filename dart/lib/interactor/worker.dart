@@ -19,7 +19,7 @@ class InteractorWorker {
   late final InteractorConsumerRegistry _consumers;
   late final InteractorProducerRegistry _producers;
   late final InteractorPayloads _payloads;
-  late final InteractorBuffers _buffers;
+  late final InteractorStaticBuffers _buffers;
   late final InteractorDatas _datas;
   late final InteractorMessages _messages;
   late final InteractorTuples _tuples;
@@ -39,7 +39,7 @@ class InteractorWorker {
   int get id => _interactor.ref.id;
   int get descriptor => _descriptor;
   InteractorPayloads get payloads => _payloads;
-  InteractorBuffers get buffers => _buffers;
+  InteractorStaticBuffers get buffers => _buffers;
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
   InteractorTuples get tuples => _tuples;
@@ -66,7 +66,7 @@ class InteractorWorker {
     _ring = _interactor.ref.ring;
     _cqes = _interactor.ref.cqes;
     _payloads = InteractorPayloads(_interactor);
-    _buffers = InteractorBuffers(_interactor.ref.buffers, _interactor);
+    _buffers = InteractorStaticBuffers(_interactor.ref.static_buffers.buffers, _interactor);
     _datas = InteractorDatas(_interactor);
     _messages = InteractorMessages(_interactor);
     _tuples = InteractorTuples(_interactor);

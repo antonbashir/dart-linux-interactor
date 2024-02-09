@@ -36,8 +36,8 @@ class Interactor {
         final nativeConfiguration = arena<interactor_dart_configuration_t>();
         nativeConfiguration.ref.ring_flags = configuration.ringFlags;
         nativeConfiguration.ref.ring_size = configuration.ringSize;
-        nativeConfiguration.ref.buffer_size = configuration.bufferSize;
-        nativeConfiguration.ref.buffers_count = configuration.buffersCount;
+        nativeConfiguration.ref.static_buffer_size = configuration.staticBufferSize;
+        nativeConfiguration.ref.static_buffers_capacity = configuration.staticBuffersCount;
         nativeConfiguration.ref.base_delay_micros = configuration.baseDelay.inMicroseconds;
         nativeConfiguration.ref.max_delay_micros = configuration.maxDelay.inMicroseconds;
         nativeConfiguration.ref.delay_randomization_factor = configuration.delayRandomizationFactor;

@@ -4,6 +4,1153 @@
 // ignore_for_file: type=lint, unused_field
 import 'dart:ffi' as ffi;
 
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'access', assetId: 'interactor-bindings')
+external int access(
+  ffi.Pointer<ffi.Char> __name,
+  int __type,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Int)>(
+    symbol: 'faccessat', assetId: 'interactor-bindings')
+external int faccessat(
+  int __fd,
+  ffi.Pointer<ffi.Char> __file,
+  int __type,
+  int __flag,
+);
+
+@ffi.Native<ffi.Long Function(ffi.Int, ffi.Long, ffi.Int)>(
+    symbol: 'lseek', assetId: 'interactor-bindings')
+external int lseek(
+  int __fd,
+  int __offset,
+  int __whence,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'close', assetId: 'interactor-bindings')
+external int close(
+  int __fd,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: 'closefrom', assetId: 'interactor-bindings')
+external void closefrom(
+  int __lowfd,
+);
+
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'read', assetId: 'interactor-bindings')
+external int read(
+  int __fd,
+  ffi.Pointer<ffi.Void> __buf,
+  int __nbytes,
+);
+
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'write', assetId: 'interactor-bindings')
+external int write(
+  int __fd,
+  ffi.Pointer<ffi.Void> __buf,
+  int __n,
+);
+
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Long)>(
+    symbol: 'pread', assetId: 'interactor-bindings')
+external int pread(
+  int __fd,
+  ffi.Pointer<ffi.Void> __buf,
+  int __nbytes,
+  int __offset,
+);
+
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Long)>(
+    symbol: 'pwrite', assetId: 'interactor-bindings')
+external int pwrite(
+  int __fd,
+  ffi.Pointer<ffi.Void> __buf,
+  int __n,
+  int __offset,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Int>)>(
+    symbol: 'pipe', assetId: 'interactor-bindings')
+external int pipe(
+  ffi.Pointer<ffi.Int> __pipedes,
+);
+
+@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(
+    symbol: 'alarm', assetId: 'interactor-bindings')
+external int alarm(
+  int __seconds,
+);
+
+@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(
+    symbol: 'sleep', assetId: 'interactor-bindings')
+external int sleep(
+  int __seconds,
+);
+
+@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
+    symbol: 'ualarm', assetId: 'interactor-bindings')
+external int ualarm(
+  int __value,
+  int __interval,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
+    symbol: 'usleep', assetId: 'interactor-bindings')
+external int usleep(
+  int __useconds,
+);
+
+@ffi.Native<ffi.Int Function()>(symbol: 'pause', assetId: 'interactor-bindings')
+external int pause();
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.UnsignedInt,
+        ffi.UnsignedInt)>(symbol: 'chown', assetId: 'interactor-bindings')
+external int chown(
+  ffi.Pointer<ffi.Char> __file,
+  int __owner,
+  int __group,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.UnsignedInt, ffi.UnsignedInt)>(
+    symbol: 'fchown', assetId: 'interactor-bindings')
+external int fchown(
+  int __fd,
+  int __owner,
+  int __group,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.UnsignedInt,
+        ffi.UnsignedInt)>(symbol: 'lchown', assetId: 'interactor-bindings')
+external int lchown(
+  ffi.Pointer<ffi.Char> __file,
+  int __owner,
+  int __group,
+);
+
+@ffi.Native<
+    ffi.Int Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.UnsignedInt,
+        ffi.Int)>(symbol: 'fchownat', assetId: 'interactor-bindings')
+external int fchownat(
+  int __fd,
+  ffi.Pointer<ffi.Char> __file,
+  int __owner,
+  int __group,
+  int __flag,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'chdir', assetId: 'interactor-bindings')
+external int chdir(
+  ffi.Pointer<ffi.Char> __path,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'fchdir', assetId: 'interactor-bindings')
+external int fchdir(
+  int __fd,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'getcwd', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> getcwd(
+  ffi.Pointer<ffi.Char> __buf,
+  int __size,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'getwd', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> getwd(
+  ffi.Pointer<ffi.Char> __buf,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'dup', assetId: 'interactor-bindings')
+external int dup(
+  int __fd,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'dup2', assetId: 'interactor-bindings')
+external int dup2(
+  int __fd,
+  int __fd2,
+);
+
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'execve', assetId: 'interactor-bindings')
+external int execve(
+  ffi.Pointer<ffi.Char> __path,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __envp,
+);
+
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'fexecve', assetId: 'interactor-bindings')
+external int fexecve(
+  int __fd,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __envp,
+);
+
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'execv', assetId: 'interactor-bindings')
+external int execv(
+  ffi.Pointer<ffi.Char> __path,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'execle', assetId: 'interactor-bindings')
+external int execle(
+  ffi.Pointer<ffi.Char> __path,
+  ffi.Pointer<ffi.Char> __arg,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'execl', assetId: 'interactor-bindings')
+external int execl(
+  ffi.Pointer<ffi.Char> __path,
+  ffi.Pointer<ffi.Char> __arg,
+);
+
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'execvp', assetId: 'interactor-bindings')
+external int execvp(
+  ffi.Pointer<ffi.Char> __file,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'execlp', assetId: 'interactor-bindings')
+external int execlp(
+  ffi.Pointer<ffi.Char> __file,
+  ffi.Pointer<ffi.Char> __arg,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'nice', assetId: 'interactor-bindings')
+external int nice(
+  int __inc,
+);
+
+@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'pathconf', assetId: 'interactor-bindings')
+external int pathconf(
+  ffi.Pointer<ffi.Char> __path,
+  int __name,
+);
+
+@ffi.Native<ffi.Long Function(ffi.Int, ffi.Int)>(
+    symbol: 'fpathconf', assetId: 'interactor-bindings')
+external int fpathconf(
+  int __fd,
+  int __name,
+);
+
+@ffi.Native<ffi.Long Function(ffi.Int)>(
+    symbol: 'sysconf', assetId: 'interactor-bindings')
+external int sysconf(
+  int __name,
+);
+
+@ffi.Native<ffi.Size Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'confstr', assetId: 'interactor-bindings')
+external int confstr(
+  int __name,
+  ffi.Pointer<ffi.Char> __buf,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getpid', assetId: 'interactor-bindings')
+external int getpid();
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getppid', assetId: 'interactor-bindings')
+external int getppid();
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getpgrp', assetId: 'interactor-bindings')
+external int getpgrp();
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'getpgid', assetId: 'interactor-bindings')
+external int getpgid(
+  int __pid,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'setpgid', assetId: 'interactor-bindings')
+external int setpgid(
+  int __pid,
+  int __pgid,
+);
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'setpgrp', assetId: 'interactor-bindings')
+external int setpgrp();
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'setsid', assetId: 'interactor-bindings')
+external int setsid();
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'getsid', assetId: 'interactor-bindings')
+external int getsid(
+  int __pid,
+);
+
+@ffi.Native<ffi.UnsignedInt Function()>(
+    symbol: 'getuid', assetId: 'interactor-bindings')
+external int getuid();
+
+@ffi.Native<ffi.UnsignedInt Function()>(
+    symbol: 'geteuid', assetId: 'interactor-bindings')
+external int geteuid();
+
+@ffi.Native<ffi.UnsignedInt Function()>(
+    symbol: 'getgid', assetId: 'interactor-bindings')
+external int getgid();
+
+@ffi.Native<ffi.UnsignedInt Function()>(
+    symbol: 'getegid', assetId: 'interactor-bindings')
+external int getegid();
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.UnsignedInt>)>(
+    symbol: 'getgroups', assetId: 'interactor-bindings')
+external int getgroups(
+  int __size,
+  ffi.Pointer<ffi.UnsignedInt> __list,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
+    symbol: 'setuid', assetId: 'interactor-bindings')
+external int setuid(
+  int __uid,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
+    symbol: 'setreuid', assetId: 'interactor-bindings')
+external int setreuid(
+  int __ruid,
+  int __euid,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
+    symbol: 'seteuid', assetId: 'interactor-bindings')
+external int seteuid(
+  int __uid,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
+    symbol: 'setgid', assetId: 'interactor-bindings')
+external int setgid(
+  int __gid,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
+    symbol: 'setregid', assetId: 'interactor-bindings')
+external int setregid(
+  int __rgid,
+  int __egid,
+);
+
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
+    symbol: 'setegid', assetId: 'interactor-bindings')
+external int setegid(
+  int __gid,
+);
+
+@ffi.Native<ffi.Int Function()>(symbol: 'fork', assetId: 'interactor-bindings')
+external int fork();
+
+@ffi.Native<ffi.Int Function()>(symbol: 'vfork', assetId: 'interactor-bindings')
+external int vfork();
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
+    symbol: 'ttyname', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> ttyname(
+  int __fd,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'ttyname_r', assetId: 'interactor-bindings')
+external int ttyname_r(
+  int __fd,
+  ffi.Pointer<ffi.Char> __buf,
+  int __buflen,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'isatty', assetId: 'interactor-bindings')
+external int isatty(
+  int __fd,
+);
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'ttyslot', assetId: 'interactor-bindings')
+external int ttyslot();
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'link', assetId: 'interactor-bindings')
+external int link(
+  ffi.Pointer<ffi.Char> __from,
+  ffi.Pointer<ffi.Char> __to,
+);
+
+@ffi.Native<
+    ffi.Int Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int)>(symbol: 'linkat', assetId: 'interactor-bindings')
+external int linkat(
+  int __fromfd,
+  ffi.Pointer<ffi.Char> __from,
+  int __tofd,
+  ffi.Pointer<ffi.Char> __to,
+  int __flags,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'symlink', assetId: 'interactor-bindings')
+external int symlink(
+  ffi.Pointer<ffi.Char> __from,
+  ffi.Pointer<ffi.Char> __to,
+);
+
+@ffi.Native<
+    ssize_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'readlink', assetId: 'interactor-bindings')
+external int readlink(
+  ffi.Pointer<ffi.Char> __path,
+  ffi.Pointer<ffi.Char> __buf,
+  int __len,
+);
+
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'symlinkat', assetId: 'interactor-bindings')
+external int symlinkat(
+  ffi.Pointer<ffi.Char> __from,
+  int __tofd,
+  ffi.Pointer<ffi.Char> __to,
+);
+
+@ffi.Native<
+    ssize_t Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'readlinkat', assetId: 'interactor-bindings')
+external int readlinkat(
+  int __fd,
+  ffi.Pointer<ffi.Char> __path,
+  ffi.Pointer<ffi.Char> __buf,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'unlink', assetId: 'interactor-bindings')
+external int unlink(
+  ffi.Pointer<ffi.Char> __name,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'unlinkat', assetId: 'interactor-bindings')
+external int unlinkat(
+  int __fd,
+  ffi.Pointer<ffi.Char> __name,
+  int __flag,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'rmdir', assetId: 'interactor-bindings')
+external int rmdir(
+  ffi.Pointer<ffi.Char> __path,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'tcgetpgrp', assetId: 'interactor-bindings')
+external int tcgetpgrp(
+  int __fd,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'tcsetpgrp', assetId: 'interactor-bindings')
+external int tcsetpgrp(
+  int __fd,
+  int __pgrp_id,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function()>(
+    symbol: 'getlogin', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> getlogin();
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'getlogin_r', assetId: 'interactor-bindings')
+external int getlogin_r(
+  ffi.Pointer<ffi.Char> __name,
+  int __name_len,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'setlogin', assetId: 'interactor-bindings')
+external int setlogin(
+  ffi.Pointer<ffi.Char> __name,
+);
+
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Char>)>(
+    symbol: 'getopt', assetId: 'interactor-bindings')
+external int getopt(
+  int ___argc,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> ___argv,
+  ffi.Pointer<ffi.Char> __shortopts,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'gethostname', assetId: 'interactor-bindings')
+external int gethostname(
+  ffi.Pointer<ffi.Char> __name,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'sethostname', assetId: 'interactor-bindings')
+external int sethostname(
+  ffi.Pointer<ffi.Char> __name,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Long)>(
+    symbol: 'sethostid', assetId: 'interactor-bindings')
+external int sethostid(
+  int __id,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'getdomainname', assetId: 'interactor-bindings')
+external int getdomainname(
+  ffi.Pointer<ffi.Char> __name,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'setdomainname', assetId: 'interactor-bindings')
+external int setdomainname(
+  ffi.Pointer<ffi.Char> __name,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'vhangup', assetId: 'interactor-bindings')
+external int vhangup();
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'revoke', assetId: 'interactor-bindings')
+external int revoke(
+  ffi.Pointer<ffi.Char> __file,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Size, ffi.Size,
+        ffi.UnsignedInt)>(symbol: 'profil', assetId: 'interactor-bindings')
+external int profil(
+  ffi.Pointer<ffi.UnsignedShort> __sample_buffer,
+  int __size,
+  int __offset,
+  int __scale,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'acct', assetId: 'interactor-bindings')
+external int acct(
+  ffi.Pointer<ffi.Char> __name,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function()>(
+    symbol: 'getusershell', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> getusershell();
+
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'endusershell', assetId: 'interactor-bindings')
+external void endusershell();
+
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'setusershell', assetId: 'interactor-bindings')
+external void setusershell();
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'daemon', assetId: 'interactor-bindings')
+external int daemon(
+  int __nochdir,
+  int __noclose,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'chroot', assetId: 'interactor-bindings')
+external int chroot(
+  ffi.Pointer<ffi.Char> __path,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'getpass', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> getpass(
+  ffi.Pointer<ffi.Char> __prompt,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'fsync', assetId: 'interactor-bindings')
+external int fsync(
+  int __fd,
+);
+
+@ffi.Native<ffi.Long Function()>(
+    symbol: 'gethostid', assetId: 'interactor-bindings')
+external int gethostid();
+
+@ffi.Native<ffi.Void Function()>(symbol: 'sync', assetId: 'interactor-bindings')
+external void sync1();
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getpagesize', assetId: 'interactor-bindings')
+external int getpagesize();
+
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getdtablesize', assetId: 'interactor-bindings')
+external int getdtablesize();
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Long)>(
+    symbol: 'truncate', assetId: 'interactor-bindings')
+external int truncate(
+  ffi.Pointer<ffi.Char> __file,
+  int __length,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Long)>(
+    symbol: 'ftruncate', assetId: 'interactor-bindings')
+external int ftruncate(
+  int __fd,
+  int __length,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>)>(
+    symbol: 'brk', assetId: 'interactor-bindings')
+external int brk(
+  ffi.Pointer<ffi.Void> __addr,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.IntPtr)>(
+    symbol: 'sbrk', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> sbrk(
+  int __delta,
+);
+
+@ffi.Native<ffi.Long Function(ffi.Long)>(
+    symbol: 'syscall', assetId: 'interactor-bindings')
+external int syscall(
+  int __sysno,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Long)>(
+    symbol: 'lockf', assetId: 'interactor-bindings')
+external int lockf(
+  int __fd,
+  int __cmd,
+  int __len,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'fdatasync', assetId: 'interactor-bindings')
+external int fdatasync(
+  int __fildes,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>)>(symbol: 'crypt', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> crypt(
+  ffi.Pointer<ffi.Char> __key,
+  ffi.Pointer<ffi.Char> __salt,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'getentropy', assetId: 'interactor-bindings')
+external int getentropy(
+  ffi.Pointer<ffi.Void> __buffer,
+  int __length,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memcpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> memcpy(
+  ffi.Pointer<ffi.Void> __dest,
+  ffi.Pointer<ffi.Void> __src,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memmove', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> memmove(
+  ffi.Pointer<ffi.Void> __dest,
+  ffi.Pointer<ffi.Void> __src,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Int, ffi.Size)>(symbol: 'memccpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> memccpy(
+  ffi.Pointer<ffi.Void> __dest,
+  ffi.Pointer<ffi.Void> __src,
+  int __c,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int,
+        ffi.Size)>(symbol: 'memset', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> memset(
+  ffi.Pointer<ffi.Void> __s,
+  int __c,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memcmp', assetId: 'interactor-bindings')
+external int memcmp(
+  ffi.Pointer<ffi.Void> __s1,
+  ffi.Pointer<ffi.Void> __s2,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int,
+        ffi.Size)>(symbol: 'memchr', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> memchr(
+  ffi.Pointer<ffi.Void> __s,
+  int __c,
+  int __n,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strcpy(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strncpy(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcat', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strcat(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncat', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strncat(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcmp', assetId: 'interactor-bindings')
+external int strcmp(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncmp', assetId: 'interactor-bindings')
+external int strncmp(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+  int __n,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcoll', assetId: 'interactor-bindings')
+external int strcoll(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+);
+
+@ffi.Native<
+    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strxfrm', assetId: 'interactor-bindings')
+external int strxfrm(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        locale_t)>(symbol: 'strcoll_l', assetId: 'interactor-bindings')
+external int strcoll_l(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+  locale_t __l,
+);
+
+@ffi.Native<
+    ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size,
+        locale_t)>(symbol: 'strxfrm_l', assetId: 'interactor-bindings')
+external int strxfrm_l(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+  locale_t __l,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'strdup', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strdup(
+  ffi.Pointer<ffi.Char> __s,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'strndup', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strndup(
+  ffi.Pointer<ffi.Char> __string,
+  int __n,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'strchr', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strchr(
+  ffi.Pointer<ffi.Char> __s,
+  int __c,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'strrchr', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strrchr(
+  ffi.Pointer<ffi.Char> __s,
+  int __c,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'strchrnul', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strchrnul(
+  ffi.Pointer<ffi.Char> __s,
+  int __c,
+);
+
+@ffi.Native<
+        ffi.UnsignedLong Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcspn', assetId: 'interactor-bindings')
+external int strcspn(
+  ffi.Pointer<ffi.Char> __s,
+  ffi.Pointer<ffi.Char> __reject,
+);
+
+@ffi.Native<
+        ffi.UnsignedLong Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strspn', assetId: 'interactor-bindings')
+external int strspn(
+  ffi.Pointer<ffi.Char> __s,
+  ffi.Pointer<ffi.Char> __accept,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strpbrk', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strpbrk(
+  ffi.Pointer<ffi.Char> __s,
+  ffi.Pointer<ffi.Char> __accept,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strstr', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strstr(
+  ffi.Pointer<ffi.Char> __haystack,
+  ffi.Pointer<ffi.Char> __needle,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strtok', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strtok(
+  ffi.Pointer<ffi.Char> __s,
+  ffi.Pointer<ffi.Char> __delim,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'strtok_r', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strtok_r(
+  ffi.Pointer<ffi.Char> __s,
+  ffi.Pointer<ffi.Char> __delim,
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __save_ptr,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcasestr', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strcasestr(
+  ffi.Pointer<ffi.Char> __haystack,
+  ffi.Pointer<ffi.Char> __needle,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memmem', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> memmem(
+  ffi.Pointer<ffi.Void> __haystack,
+  int __haystacklen,
+  ffi.Pointer<ffi.Void> __needle,
+  int __needlelen,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'mempcpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> mempcpy(
+  ffi.Pointer<ffi.Void> __dest,
+  ffi.Pointer<ffi.Void> __src,
+  int __n,
+);
+
+@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'strlen', assetId: 'interactor-bindings')
+external int strlen(
+  ffi.Pointer<ffi.Char> __s,
+);
+
+@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'strnlen', assetId: 'interactor-bindings')
+external int strnlen(
+  ffi.Pointer<ffi.Char> __string,
+  int __maxlen,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
+    symbol: 'strerror', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strerror(
+  int __errnum,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'strerror_r', assetId: 'interactor-bindings')
+external int strerror_r(
+  int __errnum,
+  ffi.Pointer<ffi.Char> __buf,
+  int __buflen,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int, locale_t)>(
+    symbol: 'strerror_l', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strerror_l(
+  int __errnum,
+  locale_t __l,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'bcmp', assetId: 'interactor-bindings')
+external int bcmp(
+  ffi.Pointer<ffi.Void> __s1,
+  ffi.Pointer<ffi.Void> __s2,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'bcopy', assetId: 'interactor-bindings')
+external void bcopy(
+  ffi.Pointer<ffi.Void> __src,
+  ffi.Pointer<ffi.Void> __dest,
+  int __n,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'bzero', assetId: 'interactor-bindings')
+external void bzero(
+  ffi.Pointer<ffi.Void> __s,
+  int __n,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'index', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> index(
+  ffi.Pointer<ffi.Char> __s,
+  int __c,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'rindex', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> rindex(
+  ffi.Pointer<ffi.Char> __s,
+  int __c,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'ffs', assetId: 'interactor-bindings')
+external int ffs(
+  int __i,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Long)>(
+    symbol: 'ffsl', assetId: 'interactor-bindings')
+external int ffsl(
+  int __l,
+);
+
+@ffi.Native<ffi.Int Function(ffi.LongLong)>(
+    symbol: 'ffsll', assetId: 'interactor-bindings')
+external int ffsll(
+  int __ll,
+);
+
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcasecmp', assetId: 'interactor-bindings')
+external int strcasecmp(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncasecmp', assetId: 'interactor-bindings')
+external int strncasecmp(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        locale_t)>(symbol: 'strcasecmp_l', assetId: 'interactor-bindings')
+external int strcasecmp_l(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+  locale_t __loc,
+);
+
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size,
+        locale_t)>(symbol: 'strncasecmp_l', assetId: 'interactor-bindings')
+external int strncasecmp_l(
+  ffi.Pointer<ffi.Char> __s1,
+  ffi.Pointer<ffi.Char> __s2,
+  int __n,
+  locale_t __loc,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'explicit_bzero', assetId: 'interactor-bindings')
+external void explicit_bzero(
+  ffi.Pointer<ffi.Void> __s,
+  int __n,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strsep', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strsep(
+  ffi.Pointer<ffi.Pointer<ffi.Char>> __stringp,
+  ffi.Pointer<ffi.Char> __delim,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
+    symbol: 'strsignal', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> strsignal(
+  int __sig,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'stpcpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> stpcpy(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+);
+
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'stpncpy', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Char> stpncpy(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strlcpy', assetId: 'interactor-bindings')
+external int strlcpy(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+);
+
+@ffi.Native<
+    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strlcat', assetId: 'interactor-bindings')
+external int strlcat(
+  ffi.Pointer<ffi.Char> __dest,
+  ffi.Pointer<ffi.Char> __src,
+  int __n,
+);
+
 @ffi.Native<ffi.Double Function(ffi.Pointer<ffi.Char>)>(
     symbol: 'atof', assetId: 'interactor-bindings')
 external double atof(
@@ -761,1153 +1908,6 @@ external int getloadavg(
   int __nelem,
 );
 
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'memcpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> memcpy(
-  ffi.Pointer<ffi.Void> __dest,
-  ffi.Pointer<ffi.Void> __src,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'memmove', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> memmove(
-  ffi.Pointer<ffi.Void> __dest,
-  ffi.Pointer<ffi.Void> __src,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Int, ffi.Size)>(symbol: 'memccpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> memccpy(
-  ffi.Pointer<ffi.Void> __dest,
-  ffi.Pointer<ffi.Void> __src,
-  int __c,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int,
-        ffi.Size)>(symbol: 'memset', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> memset(
-  ffi.Pointer<ffi.Void> __s,
-  int __c,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'memcmp', assetId: 'interactor-bindings')
-external int memcmp(
-  ffi.Pointer<ffi.Void> __s1,
-  ffi.Pointer<ffi.Void> __s2,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int,
-        ffi.Size)>(symbol: 'memchr', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> memchr(
-  ffi.Pointer<ffi.Void> __s,
-  int __c,
-  int __n,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strcpy(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strncpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strncpy(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcat', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strcat(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strncat', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strncat(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcmp', assetId: 'interactor-bindings')
-external int strcmp(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strncmp', assetId: 'interactor-bindings')
-external int strncmp(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-  int __n,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcoll', assetId: 'interactor-bindings')
-external int strcoll(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-);
-
-@ffi.Native<
-    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strxfrm', assetId: 'interactor-bindings')
-external int strxfrm(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        locale_t)>(symbol: 'strcoll_l', assetId: 'interactor-bindings')
-external int strcoll_l(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-  locale_t __l,
-);
-
-@ffi.Native<
-    ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size,
-        locale_t)>(symbol: 'strxfrm_l', assetId: 'interactor-bindings')
-external int strxfrm_l(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-  locale_t __l,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'strdup', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strdup(
-  ffi.Pointer<ffi.Char> __s,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'strndup', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strndup(
-  ffi.Pointer<ffi.Char> __string,
-  int __n,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'strchr', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strchr(
-  ffi.Pointer<ffi.Char> __s,
-  int __c,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'strrchr', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strrchr(
-  ffi.Pointer<ffi.Char> __s,
-  int __c,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'strchrnul', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strchrnul(
-  ffi.Pointer<ffi.Char> __s,
-  int __c,
-);
-
-@ffi.Native<
-        ffi.UnsignedLong Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcspn', assetId: 'interactor-bindings')
-external int strcspn(
-  ffi.Pointer<ffi.Char> __s,
-  ffi.Pointer<ffi.Char> __reject,
-);
-
-@ffi.Native<
-        ffi.UnsignedLong Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strspn', assetId: 'interactor-bindings')
-external int strspn(
-  ffi.Pointer<ffi.Char> __s,
-  ffi.Pointer<ffi.Char> __accept,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strpbrk', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strpbrk(
-  ffi.Pointer<ffi.Char> __s,
-  ffi.Pointer<ffi.Char> __accept,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strstr', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strstr(
-  ffi.Pointer<ffi.Char> __haystack,
-  ffi.Pointer<ffi.Char> __needle,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strtok', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strtok(
-  ffi.Pointer<ffi.Char> __s,
-  ffi.Pointer<ffi.Char> __delim,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
-    symbol: 'strtok_r', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strtok_r(
-  ffi.Pointer<ffi.Char> __s,
-  ffi.Pointer<ffi.Char> __delim,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __save_ptr,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcasestr', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strcasestr(
-  ffi.Pointer<ffi.Char> __haystack,
-  ffi.Pointer<ffi.Char> __needle,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(
-        ffi.Pointer<ffi.Void>,
-        ffi.Size,
-        ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'memmem', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> memmem(
-  ffi.Pointer<ffi.Void> __haystack,
-  int __haystacklen,
-  ffi.Pointer<ffi.Void> __needle,
-  int __needlelen,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'mempcpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> mempcpy(
-  ffi.Pointer<ffi.Void> __dest,
-  ffi.Pointer<ffi.Void> __src,
-  int __n,
-);
-
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'strlen', assetId: 'interactor-bindings')
-external int strlen(
-  ffi.Pointer<ffi.Char> __s,
-);
-
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'strnlen', assetId: 'interactor-bindings')
-external int strnlen(
-  ffi.Pointer<ffi.Char> __string,
-  int __maxlen,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
-    symbol: 'strerror', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strerror(
-  int __errnum,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'strerror_r', assetId: 'interactor-bindings')
-external int strerror_r(
-  int __errnum,
-  ffi.Pointer<ffi.Char> __buf,
-  int __buflen,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int, locale_t)>(
-    symbol: 'strerror_l', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strerror_l(
-  int __errnum,
-  locale_t __l,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'bcmp', assetId: 'interactor-bindings')
-external int bcmp(
-  ffi.Pointer<ffi.Void> __s1,
-  ffi.Pointer<ffi.Void> __s2,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-        ffi.Size)>(symbol: 'bcopy', assetId: 'interactor-bindings')
-external void bcopy(
-  ffi.Pointer<ffi.Void> __src,
-  ffi.Pointer<ffi.Void> __dest,
-  int __n,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
-    symbol: 'bzero', assetId: 'interactor-bindings')
-external void bzero(
-  ffi.Pointer<ffi.Void> __s,
-  int __n,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'index', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> index(
-  ffi.Pointer<ffi.Char> __s,
-  int __c,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'rindex', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> rindex(
-  ffi.Pointer<ffi.Char> __s,
-  int __c,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'ffs', assetId: 'interactor-bindings')
-external int ffs(
-  int __i,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Long)>(
-    symbol: 'ffsl', assetId: 'interactor-bindings')
-external int ffsl(
-  int __l,
-);
-
-@ffi.Native<ffi.Int Function(ffi.LongLong)>(
-    symbol: 'ffsll', assetId: 'interactor-bindings')
-external int ffsll(
-  int __ll,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strcasecmp', assetId: 'interactor-bindings')
-external int strcasecmp(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strncasecmp', assetId: 'interactor-bindings')
-external int strncasecmp(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        locale_t)>(symbol: 'strcasecmp_l', assetId: 'interactor-bindings')
-external int strcasecmp_l(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-  locale_t __loc,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size,
-        locale_t)>(symbol: 'strncasecmp_l', assetId: 'interactor-bindings')
-external int strncasecmp_l(
-  ffi.Pointer<ffi.Char> __s1,
-  ffi.Pointer<ffi.Char> __s2,
-  int __n,
-  locale_t __loc,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
-    symbol: 'explicit_bzero', assetId: 'interactor-bindings')
-external void explicit_bzero(
-  ffi.Pointer<ffi.Void> __s,
-  int __n,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'strsep', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strsep(
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __stringp,
-  ffi.Pointer<ffi.Char> __delim,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
-    symbol: 'strsignal', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> strsignal(
-  int __sig,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'stpcpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> stpcpy(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'stpncpy', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> stpncpy(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strlcpy', assetId: 'interactor-bindings')
-external int strlcpy(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-);
-
-@ffi.Native<
-    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'strlcat', assetId: 'interactor-bindings')
-external int strlcat(
-  ffi.Pointer<ffi.Char> __dest,
-  ffi.Pointer<ffi.Char> __src,
-  int __n,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'access', assetId: 'interactor-bindings')
-external int access(
-  ffi.Pointer<ffi.Char> __name,
-  int __type,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Int)>(
-    symbol: 'faccessat', assetId: 'interactor-bindings')
-external int faccessat(
-  int __fd,
-  ffi.Pointer<ffi.Char> __file,
-  int __type,
-  int __flag,
-);
-
-@ffi.Native<ffi.Long Function(ffi.Int, ffi.Long, ffi.Int)>(
-    symbol: 'lseek', assetId: 'interactor-bindings')
-external int lseek(
-  int __fd,
-  int __offset,
-  int __whence,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'close', assetId: 'interactor-bindings')
-external int close(
-  int __fd,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Int)>(
-    symbol: 'closefrom', assetId: 'interactor-bindings')
-external void closefrom(
-  int __lowfd,
-);
-
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(
-    symbol: 'read', assetId: 'interactor-bindings')
-external int read(
-  int __fd,
-  ffi.Pointer<ffi.Void> __buf,
-  int __nbytes,
-);
-
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(
-    symbol: 'write', assetId: 'interactor-bindings')
-external int write(
-  int __fd,
-  ffi.Pointer<ffi.Void> __buf,
-  int __n,
-);
-
-@ffi.Native<
-        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Long)>(
-    symbol: 'pread', assetId: 'interactor-bindings')
-external int pread(
-  int __fd,
-  ffi.Pointer<ffi.Void> __buf,
-  int __nbytes,
-  int __offset,
-);
-
-@ffi.Native<
-        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Long)>(
-    symbol: 'pwrite', assetId: 'interactor-bindings')
-external int pwrite(
-  int __fd,
-  ffi.Pointer<ffi.Void> __buf,
-  int __n,
-  int __offset,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Int>)>(
-    symbol: 'pipe', assetId: 'interactor-bindings')
-external int pipe(
-  ffi.Pointer<ffi.Int> __pipedes,
-);
-
-@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(
-    symbol: 'alarm', assetId: 'interactor-bindings')
-external int alarm(
-  int __seconds,
-);
-
-@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(
-    symbol: 'sleep', assetId: 'interactor-bindings')
-external int sleep(
-  int __seconds,
-);
-
-@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
-    symbol: 'ualarm', assetId: 'interactor-bindings')
-external int ualarm(
-  int __value,
-  int __interval,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
-    symbol: 'usleep', assetId: 'interactor-bindings')
-external int usleep(
-  int __useconds,
-);
-
-@ffi.Native<ffi.Int Function()>(symbol: 'pause', assetId: 'interactor-bindings')
-external int pause();
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.UnsignedInt,
-        ffi.UnsignedInt)>(symbol: 'chown', assetId: 'interactor-bindings')
-external int chown(
-  ffi.Pointer<ffi.Char> __file,
-  int __owner,
-  int __group,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.UnsignedInt, ffi.UnsignedInt)>(
-    symbol: 'fchown', assetId: 'interactor-bindings')
-external int fchown(
-  int __fd,
-  int __owner,
-  int __group,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.UnsignedInt,
-        ffi.UnsignedInt)>(symbol: 'lchown', assetId: 'interactor-bindings')
-external int lchown(
-  ffi.Pointer<ffi.Char> __file,
-  int __owner,
-  int __group,
-);
-
-@ffi.Native<
-    ffi.Int Function(
-        ffi.Int,
-        ffi.Pointer<ffi.Char>,
-        ffi.UnsignedInt,
-        ffi.UnsignedInt,
-        ffi.Int)>(symbol: 'fchownat', assetId: 'interactor-bindings')
-external int fchownat(
-  int __fd,
-  ffi.Pointer<ffi.Char> __file,
-  int __owner,
-  int __group,
-  int __flag,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'chdir', assetId: 'interactor-bindings')
-external int chdir(
-  ffi.Pointer<ffi.Char> __path,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'fchdir', assetId: 'interactor-bindings')
-external int fchdir(
-  int __fd,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'getcwd', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> getcwd(
-  ffi.Pointer<ffi.Char> __buf,
-  int __size,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'getwd', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> getwd(
-  ffi.Pointer<ffi.Char> __buf,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'dup', assetId: 'interactor-bindings')
-external int dup(
-  int __fd,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
-    symbol: 'dup2', assetId: 'interactor-bindings')
-external int dup2(
-  int __fd,
-  int __fd2,
-);
-
-@ffi.Native<
-        ffi.Int Function(
-            ffi.Pointer<ffi.Char>,
-            ffi.Pointer<ffi.Pointer<ffi.Char>>,
-            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
-    symbol: 'execve', assetId: 'interactor-bindings')
-external int execve(
-  ffi.Pointer<ffi.Char> __path,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __envp,
-);
-
-@ffi.Native<
-        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
-            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
-    symbol: 'fexecve', assetId: 'interactor-bindings')
-external int fexecve(
-  int __fd,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __envp,
-);
-
-@ffi.Native<
-        ffi.Int Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
-    symbol: 'execv', assetId: 'interactor-bindings')
-external int execv(
-  ffi.Pointer<ffi.Char> __path,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'execle', assetId: 'interactor-bindings')
-external int execle(
-  ffi.Pointer<ffi.Char> __path,
-  ffi.Pointer<ffi.Char> __arg,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'execl', assetId: 'interactor-bindings')
-external int execl(
-  ffi.Pointer<ffi.Char> __path,
-  ffi.Pointer<ffi.Char> __arg,
-);
-
-@ffi.Native<
-        ffi.Int Function(
-            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
-    symbol: 'execvp', assetId: 'interactor-bindings')
-external int execvp(
-  ffi.Pointer<ffi.Char> __file,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'execlp', assetId: 'interactor-bindings')
-external int execlp(
-  ffi.Pointer<ffi.Char> __file,
-  ffi.Pointer<ffi.Char> __arg,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'nice', assetId: 'interactor-bindings')
-external int nice(
-  int __inc,
-);
-
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'pathconf', assetId: 'interactor-bindings')
-external int pathconf(
-  ffi.Pointer<ffi.Char> __path,
-  int __name,
-);
-
-@ffi.Native<ffi.Long Function(ffi.Int, ffi.Int)>(
-    symbol: 'fpathconf', assetId: 'interactor-bindings')
-external int fpathconf(
-  int __fd,
-  int __name,
-);
-
-@ffi.Native<ffi.Long Function(ffi.Int)>(
-    symbol: 'sysconf', assetId: 'interactor-bindings')
-external int sysconf(
-  int __name,
-);
-
-@ffi.Native<ffi.Size Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'confstr', assetId: 'interactor-bindings')
-external int confstr(
-  int __name,
-  ffi.Pointer<ffi.Char> __buf,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'getpid', assetId: 'interactor-bindings')
-external int getpid();
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'getppid', assetId: 'interactor-bindings')
-external int getppid();
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'getpgrp', assetId: 'interactor-bindings')
-external int getpgrp();
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'getpgid', assetId: 'interactor-bindings')
-external int getpgid(
-  int __pid,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
-    symbol: 'setpgid', assetId: 'interactor-bindings')
-external int setpgid(
-  int __pid,
-  int __pgid,
-);
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'setpgrp', assetId: 'interactor-bindings')
-external int setpgrp();
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'setsid', assetId: 'interactor-bindings')
-external int setsid();
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'getsid', assetId: 'interactor-bindings')
-external int getsid(
-  int __pid,
-);
-
-@ffi.Native<ffi.UnsignedInt Function()>(
-    symbol: 'getuid', assetId: 'interactor-bindings')
-external int getuid();
-
-@ffi.Native<ffi.UnsignedInt Function()>(
-    symbol: 'geteuid', assetId: 'interactor-bindings')
-external int geteuid();
-
-@ffi.Native<ffi.UnsignedInt Function()>(
-    symbol: 'getgid', assetId: 'interactor-bindings')
-external int getgid();
-
-@ffi.Native<ffi.UnsignedInt Function()>(
-    symbol: 'getegid', assetId: 'interactor-bindings')
-external int getegid();
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.UnsignedInt>)>(
-    symbol: 'getgroups', assetId: 'interactor-bindings')
-external int getgroups(
-  int __size,
-  ffi.Pointer<ffi.UnsignedInt> __list,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
-    symbol: 'setuid', assetId: 'interactor-bindings')
-external int setuid(
-  int __uid,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
-    symbol: 'setreuid', assetId: 'interactor-bindings')
-external int setreuid(
-  int __ruid,
-  int __euid,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
-    symbol: 'seteuid', assetId: 'interactor-bindings')
-external int seteuid(
-  int __uid,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
-    symbol: 'setgid', assetId: 'interactor-bindings')
-external int setgid(
-  int __gid,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
-    symbol: 'setregid', assetId: 'interactor-bindings')
-external int setregid(
-  int __rgid,
-  int __egid,
-);
-
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt)>(
-    symbol: 'setegid', assetId: 'interactor-bindings')
-external int setegid(
-  int __gid,
-);
-
-@ffi.Native<ffi.Int Function()>(symbol: 'fork', assetId: 'interactor-bindings')
-external int fork();
-
-@ffi.Native<ffi.Int Function()>(symbol: 'vfork', assetId: 'interactor-bindings')
-external int vfork();
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
-    symbol: 'ttyname', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> ttyname(
-  int __fd,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'ttyname_r', assetId: 'interactor-bindings')
-external int ttyname_r(
-  int __fd,
-  ffi.Pointer<ffi.Char> __buf,
-  int __buflen,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'isatty', assetId: 'interactor-bindings')
-external int isatty(
-  int __fd,
-);
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'ttyslot', assetId: 'interactor-bindings')
-external int ttyslot();
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'link', assetId: 'interactor-bindings')
-external int link(
-  ffi.Pointer<ffi.Char> __from,
-  ffi.Pointer<ffi.Char> __to,
-);
-
-@ffi.Native<
-    ffi.Int Function(
-        ffi.Int,
-        ffi.Pointer<ffi.Char>,
-        ffi.Int,
-        ffi.Pointer<ffi.Char>,
-        ffi.Int)>(symbol: 'linkat', assetId: 'interactor-bindings')
-external int linkat(
-  int __fromfd,
-  ffi.Pointer<ffi.Char> __from,
-  int __tofd,
-  ffi.Pointer<ffi.Char> __to,
-  int __flags,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
-    symbol: 'symlink', assetId: 'interactor-bindings')
-external int symlink(
-  ffi.Pointer<ffi.Char> __from,
-  ffi.Pointer<ffi.Char> __to,
-);
-
-@ffi.Native<
-    ssize_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'readlink', assetId: 'interactor-bindings')
-external int readlink(
-  ffi.Pointer<ffi.Char> __path,
-  ffi.Pointer<ffi.Char> __buf,
-  int __len,
-);
-
-@ffi.Native<
-        ffi.Int Function(
-            ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>)>(
-    symbol: 'symlinkat', assetId: 'interactor-bindings')
-external int symlinkat(
-  ffi.Pointer<ffi.Char> __from,
-  int __tofd,
-  ffi.Pointer<ffi.Char> __to,
-);
-
-@ffi.Native<
-    ssize_t Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-        ffi.Size)>(symbol: 'readlinkat', assetId: 'interactor-bindings')
-external int readlinkat(
-  int __fd,
-  ffi.Pointer<ffi.Char> __path,
-  ffi.Pointer<ffi.Char> __buf,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'unlink', assetId: 'interactor-bindings')
-external int unlink(
-  ffi.Pointer<ffi.Char> __name,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(
-    symbol: 'unlinkat', assetId: 'interactor-bindings')
-external int unlinkat(
-  int __fd,
-  ffi.Pointer<ffi.Char> __name,
-  int __flag,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'rmdir', assetId: 'interactor-bindings')
-external int rmdir(
-  ffi.Pointer<ffi.Char> __path,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'tcgetpgrp', assetId: 'interactor-bindings')
-external int tcgetpgrp(
-  int __fd,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
-    symbol: 'tcsetpgrp', assetId: 'interactor-bindings')
-external int tcsetpgrp(
-  int __fd,
-  int __pgrp_id,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function()>(
-    symbol: 'getlogin', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> getlogin();
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'getlogin_r', assetId: 'interactor-bindings')
-external int getlogin_r(
-  ffi.Pointer<ffi.Char> __name,
-  int __name_len,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'setlogin', assetId: 'interactor-bindings')
-external int setlogin(
-  ffi.Pointer<ffi.Char> __name,
-);
-
-@ffi.Native<
-        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
-            ffi.Pointer<ffi.Char>)>(
-    symbol: 'getopt', assetId: 'interactor-bindings')
-external int getopt(
-  int ___argc,
-  ffi.Pointer<ffi.Pointer<ffi.Char>> ___argv,
-  ffi.Pointer<ffi.Char> __shortopts,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'gethostname', assetId: 'interactor-bindings')
-external int gethostname(
-  ffi.Pointer<ffi.Char> __name,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'sethostname', assetId: 'interactor-bindings')
-external int sethostname(
-  ffi.Pointer<ffi.Char> __name,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Long)>(
-    symbol: 'sethostid', assetId: 'interactor-bindings')
-external int sethostid(
-  int __id,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'getdomainname', assetId: 'interactor-bindings')
-external int getdomainname(
-  ffi.Pointer<ffi.Char> __name,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
-    symbol: 'setdomainname', assetId: 'interactor-bindings')
-external int setdomainname(
-  ffi.Pointer<ffi.Char> __name,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'vhangup', assetId: 'interactor-bindings')
-external int vhangup();
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'revoke', assetId: 'interactor-bindings')
-external int revoke(
-  ffi.Pointer<ffi.Char> __file,
-);
-
-@ffi.Native<
-    ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Size, ffi.Size,
-        ffi.UnsignedInt)>(symbol: 'profil', assetId: 'interactor-bindings')
-external int profil(
-  ffi.Pointer<ffi.UnsignedShort> __sample_buffer,
-  int __size,
-  int __offset,
-  int __scale,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'acct', assetId: 'interactor-bindings')
-external int acct(
-  ffi.Pointer<ffi.Char> __name,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function()>(
-    symbol: 'getusershell', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> getusershell();
-
-@ffi.Native<ffi.Void Function()>(
-    symbol: 'endusershell', assetId: 'interactor-bindings')
-external void endusershell();
-
-@ffi.Native<ffi.Void Function()>(
-    symbol: 'setusershell', assetId: 'interactor-bindings')
-external void setusershell();
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
-    symbol: 'daemon', assetId: 'interactor-bindings')
-external int daemon(
-  int __nochdir,
-  int __noclose,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'chroot', assetId: 'interactor-bindings')
-external int chroot(
-  ffi.Pointer<ffi.Char> __path,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
-    symbol: 'getpass', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> getpass(
-  ffi.Pointer<ffi.Char> __prompt,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'fsync', assetId: 'interactor-bindings')
-external int fsync(
-  int __fd,
-);
-
-@ffi.Native<ffi.Long Function()>(
-    symbol: 'gethostid', assetId: 'interactor-bindings')
-external int gethostid();
-
-@ffi.Native<ffi.Void Function()>(symbol: 'sync', assetId: 'interactor-bindings')
-external void sync1();
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'getpagesize', assetId: 'interactor-bindings')
-external int getpagesize();
-
-@ffi.Native<ffi.Int Function()>(
-    symbol: 'getdtablesize', assetId: 'interactor-bindings')
-external int getdtablesize();
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Long)>(
-    symbol: 'truncate', assetId: 'interactor-bindings')
-external int truncate(
-  ffi.Pointer<ffi.Char> __file,
-  int __length,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Long)>(
-    symbol: 'ftruncate', assetId: 'interactor-bindings')
-external int ftruncate(
-  int __fd,
-  int __length,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>)>(
-    symbol: 'brk', assetId: 'interactor-bindings')
-external int brk(
-  ffi.Pointer<ffi.Void> __addr,
-);
-
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.IntPtr)>(
-    symbol: 'sbrk', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Void> sbrk(
-  int __delta,
-);
-
-@ffi.Native<ffi.Long Function(ffi.Long)>(
-    symbol: 'syscall', assetId: 'interactor-bindings')
-external int syscall(
-  int __sysno,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Long)>(
-    symbol: 'lockf', assetId: 'interactor-bindings')
-external int lockf(
-  int __fd,
-  int __cmd,
-  int __len,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Int)>(
-    symbol: 'fdatasync', assetId: 'interactor-bindings')
-external int fdatasync(
-  int __fildes,
-);
-
-@ffi.Native<
-    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
-        ffi.Pointer<ffi.Char>)>(symbol: 'crypt', assetId: 'interactor-bindings')
-external ffi.Pointer<ffi.Char> crypt(
-  ffi.Pointer<ffi.Char> __key,
-  ffi.Pointer<ffi.Char> __salt,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
-    symbol: 'getentropy', assetId: 'interactor-bindings')
-external int getentropy(
-  ffi.Pointer<ffi.Void> __buffer,
-  int __length,
-);
-
 /// It is called on allocation failure in small_xmalloc. Print failure diagonstic
 /// and exit with failure.
 @ffi.Native<ffi.Void Function(ffi.Size, ffi.Pointer<ffi.Char>, ffi.Int)>(
@@ -1916,6 +1916,42 @@ external void small_xmalloc_fail(
   int size,
   ffi.Pointer<ffi.Char> filename,
   int line,
+);
+
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<ibuf>, ffi.Pointer<slab_cache>,
+        ffi.Size)>(symbol: 'ibuf_create', assetId: 'interactor-bindings')
+external void ibuf_create(
+  ffi.Pointer<ibuf> ibuf,
+  ffi.Pointer<slab_cache> slabc,
+  int start_capacity,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(
+    symbol: 'ibuf_destroy', assetId: 'interactor-bindings')
+external void ibuf_destroy(
+  ffi.Pointer<ibuf> ibuf,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(
+    symbol: 'ibuf_reinit', assetId: 'interactor-bindings')
+external void ibuf_reinit(
+  ffi.Pointer<ibuf> ibuf,
+);
+
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ibuf>, ffi.Size)>(
+    symbol: 'ibuf_reserve_slow', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> ibuf_reserve_slow(
+  ffi.Pointer<ibuf> ibuf,
+  int size,
+);
+
+/// Shrink the buffer to the minimal possible capacity needed to store the data
+/// written to the buffer and not yet consumed.
+@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(
+    symbol: 'ibuf_shrink', assetId: 'interactor-bindings')
+external void ibuf_shrink(
+  ffi.Pointer<ibuf> ibuf,
 );
 
 @ffi.Native<
@@ -3232,6 +3268,88 @@ external void mslab_free(
   ffi.Pointer<ffi.Void> ptr,
 );
 
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(
+    symbol: 'readv', assetId: 'interactor-bindings')
+external int readv(
+  int __fd,
+  ffi.Pointer<iovec> __iovec,
+  int __count,
+);
+
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(
+    symbol: 'writev', assetId: 'interactor-bindings')
+external int writev(
+  int __fd,
+  ffi.Pointer<iovec> __iovec,
+  int __count,
+);
+
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, ffi.Long)>(
+    symbol: 'preadv', assetId: 'interactor-bindings')
+external int preadv(
+  int __fd,
+  ffi.Pointer<iovec> __iovec,
+  int __count,
+  int __offset,
+);
+
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, ffi.Long)>(
+    symbol: 'pwritev', assetId: 'interactor-bindings')
+external int pwritev(
+  int __fd,
+  ffi.Pointer<iovec> __iovec,
+  int __count,
+  int __offset,
+);
+
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<obuf>, ffi.Pointer<slab_cache>,
+        ffi.Size)>(symbol: 'obuf_create', assetId: 'interactor-bindings')
+external void obuf_create(
+  ffi.Pointer<obuf> buf,
+  ffi.Pointer<slab_cache> slabc,
+  int start_capacity,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>)>(
+    symbol: 'obuf_destroy', assetId: 'interactor-bindings')
+external void obuf_destroy(
+  ffi.Pointer<obuf> buf,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>)>(
+    symbol: 'obuf_reset', assetId: 'interactor-bindings')
+external void obuf_reset(
+  ffi.Pointer<obuf> buf,
+);
+
+/// Slow path of obuf_reserve(), which actually reallocates
+/// memory and moves data if necessary.
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<obuf>, ffi.Size)>(
+    symbol: 'obuf_reserve_slow', assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> obuf_reserve_slow(
+  ffi.Pointer<obuf> buf,
+  int size,
+);
+
+/// Append data to the output buffer.
+@ffi.Native<
+        ffi.Size Function(ffi.Pointer<obuf>, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'obuf_dup', assetId: 'interactor-bindings')
+external int obuf_dup(
+  ffi.Pointer<obuf> buf,
+  ffi.Pointer<ffi.Void> data,
+  int size,
+);
+
+/// Forget anything added to output buffer after the savepoint.
+@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>, ffi.Pointer<obuf_svp>)>(
+    symbol: 'obuf_rollback_to_svp', assetId: 'interactor-bindings')
+external void obuf_rollback_to_svp(
+  ffi.Pointer<obuf> buf,
+  ffi.Pointer<obuf_svp> svp,
+);
+
 /// Create an instance of small_class evaluator. All args must meet the
 /// requirements, undefined behaviour otherwise (at least assert).
 /// @param sc - instance to create.
@@ -3391,36 +3509,126 @@ external int interactor_dart_initialize(
 );
 
 @ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>(
-    symbol: 'interactor_dart_get_buffer',
+    symbol: 'interactor_dart_get_static_buffer',
     assetId: 'interactor-bindings',
     isLeaf: true)
-external int interactor_dart_get_buffer(
+external int interactor_dart_get_static_buffer(
   ffi.Pointer<interactor_dart_t> interactor,
 );
 
 @ffi.Native<ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Uint16)>(
-    symbol: 'interactor_dart_release_buffer',
+    symbol: 'interactor_dart_release_static_buffer',
     assetId: 'interactor-bindings',
     isLeaf: true)
-external void interactor_dart_release_buffer(
+external void interactor_dart_release_static_buffer(
   ffi.Pointer<interactor_dart_t> interactor,
   int buffer_id,
 );
 
 @ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>(
-    symbol: 'interactor_dart_available_buffers',
+    symbol: 'interactor_dart_available_static_buffers',
     assetId: 'interactor-bindings',
     isLeaf: true)
-external int interactor_dart_available_buffers(
+external int interactor_dart_available_static_buffers(
   ffi.Pointer<interactor_dart_t> interactor,
 );
 
 @ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_dart_t>)>(
-    symbol: 'interactor_dart_used_buffers',
+    symbol: 'interactor_dart_used_static_buffers',
     assetId: 'interactor-bindings',
     isLeaf: true)
-external int interactor_dart_used_buffers(
+external int interactor_dart_used_static_buffers(
   ffi.Pointer<interactor_dart_t> interactor,
+);
+
+@ffi.Native<
+        ffi.Pointer<interactor_input_buffer_t> Function(
+            ffi.Pointer<interactor_dart_t>, ffi.Size)>(
+    symbol: 'interactor_dart_io_buffers_allocate_input',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<interactor_input_buffer_t>
+    interactor_dart_io_buffers_allocate_input(
+  ffi.Pointer<interactor_dart_t> interactor,
+  int initial_capacity,
+);
+
+@ffi.Native<
+        ffi.Pointer<interactor_output_buffer_t> Function(
+            ffi.Pointer<interactor_dart_t>, ffi.Size)>(
+    symbol: 'interactor_dart_io_buffers_allocate_ouput',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<interactor_output_buffer_t>
+    interactor_dart_io_buffers_allocate_ouput(
+  ffi.Pointer<interactor_dart_t> interactor,
+  int initial_capacity,
+);
+
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+            ffi.Pointer<interactor_input_buffer_t>)>(
+    symbol: 'interactor_dart_io_buffers_free_input',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external void interactor_dart_io_buffers_free_input(
+  ffi.Pointer<interactor_dart_t> interactor,
+  ffi.Pointer<interactor_input_buffer_t> buffer,
+);
+
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_dart_t>,
+            ffi.Pointer<interactor_output_buffer_t>)>(
+    symbol: 'interactor_dart_io_buffers_free_ouput',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external void interactor_dart_io_buffers_free_ouput(
+  ffi.Pointer<interactor_dart_t> interactor,
+  ffi.Pointer<interactor_output_buffer_t> buffer,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_dart_input_buffer_reserve',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<ffi.Void> interactor_dart_input_buffer_reserve(
+  ffi.Pointer<interactor_input_buffer_t> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_dart_input_buffer_allocate',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<ffi.Void> interactor_dart_input_buffer_allocate(
+  ffi.Pointer<interactor_input_buffer_t> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_dart_output_buffer_reserve',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<ffi.Void> interactor_dart_output_buffer_reserve(
+  ffi.Pointer<interactor_output_buffer_t> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_dart_output_buffer_allocate',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<ffi.Void> interactor_dart_output_buffer_allocate(
+  ffi.Pointer<interactor_output_buffer_t> buffer,
+  int size,
 );
 
 @ffi.Native<
@@ -3899,40 +4107,6 @@ external int futimens(
   ffi.Pointer<timespec> __times,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(
-    symbol: 'readv', assetId: 'interactor-bindings')
-external int readv(
-  int __fd,
-  ffi.Pointer<iovec> __iovec,
-  int __count,
-);
-
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(
-    symbol: 'writev', assetId: 'interactor-bindings')
-external int writev(
-  int __fd,
-  ffi.Pointer<iovec> __iovec,
-  int __count,
-);
-
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, ffi.Long)>(
-    symbol: 'preadv', assetId: 'interactor-bindings')
-external int preadv(
-  int __fd,
-  ffi.Pointer<iovec> __iovec,
-  int __count,
-  int __offset,
-);
-
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, ffi.Long)>(
-    symbol: 'pwritev', assetId: 'interactor-bindings')
-external int pwritev(
-  int __fd,
-  ffi.Pointer<iovec> __iovec,
-  int __count,
-  int __offset,
-);
-
 @ffi.Native<
         ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int)>> Function(
             ffi.Int,
@@ -4247,29 +4421,114 @@ external void interactor_native_register_callback(
 );
 
 @ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(
-    symbol: 'interactor_native_get_buffer', assetId: 'interactor-bindings')
-external int interactor_native_get_buffer(
+    symbol: 'interactor_native_get_static_buffer',
+    assetId: 'interactor-bindings')
+external int interactor_native_get_static_buffer(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
 @ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Uint16)>(
-    symbol: 'interactor_native_release_buffer', assetId: 'interactor-bindings')
-external void interactor_native_release_buffer(
+    symbol: 'interactor_native_release_static_buffer',
+    assetId: 'interactor-bindings')
+external void interactor_native_release_static_buffer(
   ffi.Pointer<interactor_native_t> interactor,
   int buffer_id,
 );
 
 @ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(
-    symbol: 'interactor_native_available_buffers',
+    symbol: 'interactor_native_available_static_buffers',
     assetId: 'interactor-bindings')
-external int interactor_native_available_buffers(
+external int interactor_native_available_static_buffers(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
 @ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(
-    symbol: 'interactor_native_used_buffers', assetId: 'interactor-bindings')
-external int interactor_native_used_buffers(
+    symbol: 'interactor_native_used_static_buffers',
+    assetId: 'interactor-bindings')
+external int interactor_native_used_static_buffers(
   ffi.Pointer<interactor_native_t> interactor,
+);
+
+@ffi.Native<
+        ffi.Pointer<interactor_input_buffer_t> Function(
+            ffi.Pointer<interactor_native_t>, ffi.Size)>(
+    symbol: 'interactor_native_io_buffers_allocate_input',
+    assetId: 'interactor-bindings')
+external ffi.Pointer<interactor_input_buffer_t>
+    interactor_native_io_buffers_allocate_input(
+  ffi.Pointer<interactor_native_t> interactor,
+  int initial_capacity,
+);
+
+@ffi.Native<
+        ffi.Pointer<interactor_output_buffer_t> Function(
+            ffi.Pointer<interactor_native_t>, ffi.Size)>(
+    symbol: 'interactor_native_io_buffers_allocate_ouput',
+    assetId: 'interactor-bindings')
+external ffi.Pointer<interactor_output_buffer_t>
+    interactor_native_io_buffers_allocate_ouput(
+  ffi.Pointer<interactor_native_t> interactor,
+  int initial_capacity,
+);
+
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<interactor_input_buffer_t>)>(
+    symbol: 'interactor_native_io_buffers_free_input',
+    assetId: 'interactor-bindings')
+external void interactor_native_io_buffers_free_input(
+  ffi.Pointer<interactor_native_t> interactor,
+  ffi.Pointer<interactor_input_buffer_t> buffer,
+);
+
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<interactor_output_buffer_t>)>(
+    symbol: 'interactor_native_io_buffers_free_ouput',
+    assetId: 'interactor-bindings')
+external void interactor_native_io_buffers_free_ouput(
+  ffi.Pointer<interactor_native_t> interactor,
+  ffi.Pointer<interactor_output_buffer_t> buffer,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_input_buffer_reserve',
+    assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> interactor_native_input_buffer_reserve(
+  ffi.Pointer<interactor_input_buffer_t> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_input_buffer_allocate',
+    assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> interactor_native_input_buffer_allocate(
+  ffi.Pointer<interactor_input_buffer_t> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_output_buffer_reserve',
+    assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> interactor_native_output_buffer_reserve(
+  ffi.Pointer<interactor_output_buffer_t> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_output_buffer_allocate',
+    assetId: 'interactor-bindings')
+external ffi.Pointer<ffi.Void> interactor_native_output_buffer_allocate(
+  ffi.Pointer<interactor_output_buffer_t> buffer,
+  int size,
 );
 
 @ffi.Native<
@@ -4432,6 +4691,26 @@ external void interactor_native_destroy(
 external void interactor_native_close_descriptor(
   int fd,
 );
+
+typedef ssize_t = ffi.Long;
+typedef Dartssize_t = int;
+typedef locale_t = ffi.Pointer<__locale_struct>;
+
+final class __locale_struct extends ffi.Struct {
+  @ffi.Array.multi([13])
+  external ffi.Array<ffi.Pointer<__locale_data>> __locales;
+
+  external ffi.Pointer<ffi.UnsignedShort> __ctype_b;
+
+  external ffi.Pointer<ffi.Int> __ctype_tolower;
+
+  external ffi.Pointer<ffi.Int> __ctype_toupper;
+
+  @ffi.Array.multi([13])
+  external ffi.Array<ffi.Pointer<ffi.Char>> __names;
+}
+
+final class __locale_data extends ffi.Opaque {}
 
 final class div_t extends ffi.Struct {
   @ffi.Int()
@@ -4702,89 +4981,33 @@ final class drand48_data extends ffi.Struct {
   external int __a;
 }
 
-typedef locale_t = ffi.Pointer<__locale_struct>;
+/// @module Input buffer.
+final class slab_cache extends ffi.Struct {
+  external ffi.Pointer<slab_arena> arena;
 
-final class __locale_struct extends ffi.Struct {
-  @ffi.Array.multi([13])
-  external ffi.Array<ffi.Pointer<__locale_data>> __locales;
+  @ffi.Uint32()
+  external int order0_size;
 
-  external ffi.Pointer<ffi.UnsignedShort> __ctype_b;
+  @ffi.Uint8()
+  external int order0_size_lb;
 
-  external ffi.Pointer<ffi.Int> __ctype_tolower;
+  @ffi.Uint8()
+  external int order_max;
 
-  external ffi.Pointer<ffi.Int> __ctype_toupper;
+  /// All allocated slabs used in the cache.
+  /// The stats reflect the total used/allocated
+  /// memory in the cache.
+  external slab_list allocated;
 
-  @ffi.Array.multi([13])
-  external ffi.Array<ffi.Pointer<ffi.Char>> __names;
-}
+  /// Lists of unused slabs, for each slab order.
+  ///
+  /// A used slab is removed from the list and its
+  /// next_in_list link may be reused for some other purpose.
+  @ffi.Array.multi([17])
+  external ffi.Array<slab_list> orders;
 
-final class __locale_data extends ffi.Opaque {}
-
-final class interactor_buffers_pool extends ffi.Struct {
-  external ffi.Pointer<ffi.Int32> ids;
-
-  @ffi.Size()
-  external int count;
-
-  @ffi.Size()
-  external int size;
-}
-
-typedef ssize_t = ffi.Long;
-typedef Dartssize_t = int;
-
-/// List entry and head structure.
-///
-/// All functions has always_inline attribute. This way if caller
-/// has no_sanitize_address attribute then rlist functions are not
-/// ASAN instrumented too.
-final class rlist extends ffi.Struct {
-  external ffi.Pointer<rlist> prev;
-
-  external ffi.Pointer<rlist> next;
-}
-
-final class small_stats extends ffi.Struct {
-  @ffi.Size()
-  external int used;
-
-  @ffi.Size()
-  external int total;
-}
-
-/// A general purpose list of slabs. Is used
-/// to store unused slabs of a certain order in the
-/// slab cache, as well as to contain allocated
-/// slabs of a specialized allocator.
-final class slab_list extends ffi.Struct {
-  external rlist slabs;
-
-  /// Total/used bytes in this list.
-  external small_stats stats;
-}
-
-typedef mode_t = ffi.UnsignedInt;
-typedef Dartmode_t = int;
-
-abstract class pm_memory_order {
-  static const int pm_memory_order_relaxed = 0;
-  static const int pm_memory_order_consume = 1;
-  static const int pm_memory_order_acquire = 2;
-  static const int pm_memory_order_release = 3;
-  static const int pm_memory_order_acq_rel = 4;
-  static const int pm_memory_order_seq_cst = 5;
-}
-
-/// A very primitive implementation of lock-free
-/// LIFO (last in first out, AKA stack, AKA single-linked
-/// list with head-only add and remove).
-///
-/// It is only usable to store free pages of a memory allocator
-/// or similar, since it assumes that all addresses are aligned,
-/// and lower 16 bits of address can be used as a counter-based
-/// solution for ABA problem.
-final class lf_lifo extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> next;
+  @pthread_t()
+  external int thread_id;
 }
 
 /// slab_arena -- a source of large aligned blocks of memory.
@@ -4824,6 +5047,18 @@ final class slab_arena extends ffi.Struct {
   external int flags;
 }
 
+/// A very primitive implementation of lock-free
+/// LIFO (last in first out, AKA stack, AKA single-linked
+/// list with head-only add and remove).
+///
+/// It is only usable to store free pages of a memory allocator
+/// or similar, since it assumes that all addresses are aligned,
+/// and lower 16 bits of address can be used as a counter-based
+/// solution for ABA problem.
+final class lf_lifo extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> next;
+}
+
 /// A basic limit on memory usage
 final class quota extends ffi.Struct {
   /// High order dword is the total available memory
@@ -4832,6 +5067,69 @@ final class quota extends ffi.Struct {
   /// QUOTA_UNIT_SIZE.
   @ffi.Uint64()
   external int value;
+}
+
+/// A general purpose list of slabs. Is used
+/// to store unused slabs of a certain order in the
+/// slab cache, as well as to contain allocated
+/// slabs of a specialized allocator.
+final class slab_list extends ffi.Struct {
+  external rlist slabs;
+
+  /// Total/used bytes in this list.
+  external small_stats stats;
+}
+
+/// List entry and head structure.
+///
+/// All functions has always_inline attribute. This way if caller
+/// has no_sanitize_address attribute then rlist functions are not
+/// ASAN instrumented too.
+final class rlist extends ffi.Struct {
+  external ffi.Pointer<rlist> prev;
+
+  external ffi.Pointer<rlist> next;
+}
+
+final class small_stats extends ffi.Struct {
+  @ffi.Size()
+  external int used;
+
+  @ffi.Size()
+  external int total;
+}
+
+typedef pthread_t = ffi.UnsignedLong;
+typedef Dartpthread_t = int;
+
+final class ibuf extends ffi.Struct {
+  external ffi.Pointer<slab_cache> slabc;
+
+  external ffi.Pointer<ffi.Char> buf;
+
+  /// Start of input.
+  external ffi.Pointer<ffi.Char> rpos;
+
+  /// End of useful input
+  external ffi.Pointer<ffi.Char> wpos;
+
+  /// End of buffer.
+  external ffi.Pointer<ffi.Char> end;
+
+  @ffi.Size()
+  external int start_capacity;
+}
+
+typedef mode_t = ffi.UnsignedInt;
+typedef Dartmode_t = int;
+
+abstract class pm_memory_order {
+  static const int pm_memory_order_relaxed = 0;
+  static const int pm_memory_order_consume = 1;
+  static const int pm_memory_order_acquire = 2;
+  static const int pm_memory_order_release = 3;
+  static const int pm_memory_order_acq_rel = 4;
+  static const int pm_memory_order_seq_cst = 5;
 }
 
 final class sched_param extends ffi.Struct {
@@ -4928,8 +5226,6 @@ typedef Dartclockid_t = int;
 typedef pid_t = ffi.Int;
 typedef Dartpid_t = int;
 typedef timer_t = ffi.Pointer<ffi.Void>;
-typedef pthread_t = ffi.UnsignedLong;
-typedef Dartpthread_t = int;
 typedef pthread_once_t = ffi.Int;
 typedef Dartpthread_once_t = int;
 typedef pthread_key_t = ffi.UnsignedInt;
@@ -4976,34 +5272,6 @@ final class slab extends ffi.Struct {
   /// slab->in_use is set to slab->order + 1.
   @ffi.Uint8()
   external int in_use;
-}
-
-final class slab_cache extends ffi.Struct {
-  external ffi.Pointer<slab_arena> arena;
-
-  @ffi.Uint32()
-  external int order0_size;
-
-  @ffi.Uint8()
-  external int order0_size_lb;
-
-  @ffi.Uint8()
-  external int order_max;
-
-  /// All allocated slabs used in the cache.
-  /// The stats reflect the total used/allocated
-  /// memory in the cache.
-  external slab_list allocated;
-
-  /// Lists of unused slabs, for each slab order.
-  ///
-  /// A used slab is removed from the list and its
-  /// next_in_list link may be reused for some other purpose.
-  @ffi.Array.multi([17])
-  external ffi.Array<slab_list> orders;
-
-  @pthread_t()
-  external int thread_id;
 }
 
 /// Allocation statistics.
@@ -5191,6 +5459,71 @@ final class small_mempool_group extends ffi.Struct {
   external int waste_max;
 }
 
+/// Output buffer savepoint. It's possible to
+/// save the current buffer state in a savepoint
+/// and roll back to the saved state at any time
+/// before obuf_reset()
+final class obuf_svp extends ffi.Struct {
+  @ffi.Size()
+  external int pos;
+
+  @ffi.Size()
+  external int iov_len;
+
+  @ffi.Size()
+  external int used;
+}
+
+final class iovec extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> iov_base;
+
+  @ffi.Size()
+  external int iov_len;
+}
+
+/// An output buffer is a vector of struct iovec
+/// for writev().
+/// Each iovec buffer is allocated using slab allocator.
+/// Buffer size grows by a factor of 2. With this growth factor,
+/// the number of used buffers is unlikely to ever exceed the
+/// hard limit of SMALL_OBUF_IOV_MAX. If it does, an exception is
+/// raised.
+final class obuf extends ffi.Struct {
+  external ffi.Pointer<slab_cache> slabc;
+
+  /// Position of the "current" iovec.
+  @ffi.Int()
+  external int pos;
+
+  @ffi.Int()
+  external int n_iov;
+
+  @ffi.Size()
+  external int used;
+
+  /// iov[0] size (allocations are normally a multiple of this number),
+  /// but can be larger if a large chunk is requested by
+  /// obuf_reserve().
+  @ffi.Size()
+  external int start_capacity;
+
+  /// How many bytes are actually allocated for each iovec.
+  @ffi.Array.multi([32])
+  external ffi.Array<ffi.Size> capacity;
+
+  /// List of iovec vectors, each vector is at least twice
+  /// as big as the previous one. The vector following the
+  /// last allocated one is always zero-initialized
+  /// (iov_base = NULL, iov_len = 0).
+  @ffi.Array.multi([32])
+  external ffi.Array<iovec> iov;
+
+  /// The flag is used to check that there is no 2 reservations in a row.
+  /// The same check that has the ASAN version.
+  @ffi.Bool()
+  external bool reserved;
+}
+
 /// Information on the memory allocation.
 final class small_alloc_info extends ffi.Struct {
   /// True if the object is allocated on the large slab (by malloc),
@@ -5290,6 +5623,20 @@ final class interactor_allocator extends ffi.Struct {
   external small_alloc allocator;
 }
 
+final class interactor_input_buffer extends ffi.Struct {
+  external ibuf buffer;
+
+  @ffi.Size()
+  external int last_reserved_size;
+}
+
+final class interactor_output_buffer extends ffi.Struct {
+  external obuf buffer;
+
+  @ffi.Size()
+  external int last_reserved_size;
+}
+
 final class interactor_data_pool extends ffi.Struct {
   external interactor_allocator pool;
 }
@@ -5335,13 +5682,30 @@ final class interactor_payload_pool extends ffi.Struct {
   external int size;
 }
 
+final class interactor_io_buffers extends ffi.Struct {
+  external ffi.Pointer<interactor_memory> memory;
+
+  external interactor_pool input_buffers;
+
+  external interactor_pool output_buffers;
+}
+
+final class interactor_static_buffers extends ffi.Struct {
+  external ffi.Pointer<ffi.Int32> ids;
+
+  external ffi.Pointer<iovec> buffers;
+
+  @ffi.Size()
+  external int count;
+
+  @ffi.Size()
+  external int size;
+
+  @ffi.Size()
+  external int capacity;
+}
+
 final class interactor_dart_configuration extends ffi.Struct {
-  @ffi.Uint16()
-  external int buffers_count;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
   @ffi.Size()
   external int ring_size;
 
@@ -5374,6 +5738,12 @@ final class interactor_dart_configuration extends ffi.Struct {
 
   @ffi.Size()
   external int slab_size;
+
+  @ffi.Size()
+  external int static_buffers_capacity;
+
+  @ffi.Size()
+  external int static_buffer_size;
 }
 
 final class interactor_dart extends ffi.Struct {
@@ -5384,14 +5754,6 @@ final class interactor_dart extends ffi.Struct {
   external int descriptor;
 
   external ffi.Pointer<io_uring> ring;
-
-  external ffi.Pointer<iovec> buffers;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
-  @ffi.Uint16()
-  external int buffers_count;
 
   @ffi.Uint32()
   external int base_delay_micros;
@@ -5421,7 +5783,9 @@ final class interactor_dart extends ffi.Struct {
 
   external interactor_messages_pool messages_pool;
 
-  external interactor_buffers_pool buffers_pool;
+  external interactor_static_buffers static_buffers;
+
+  external interactor_io_buffers io_buffers;
 
   external interactor_data_pool data_pool;
 
@@ -5527,15 +5891,10 @@ final class io_uring_cq extends ffi.Struct {
 
 final class io_uring_cqe extends ffi.Struct {@ffi.UnsignedLongLong()external int user_data; @ffi.Int() external int res; @ffi.UnsignedInt()external int flags;}
 
-final class iovec extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> iov_base;
-
-  @ffi.Size()
-  external int iov_len;
-}
-
 typedef interactor_dart_t = interactor_dart;
 typedef interactor_dart_configuration_t = interactor_dart_configuration;
+typedef interactor_input_buffer_t = interactor_input_buffer;
+typedef interactor_output_buffer_t = interactor_output_buffer;
 typedef interactor_message_t = interactor_message;
 typedef interactor_memory_t = interactor_memory;
 
@@ -6620,12 +6979,6 @@ final class statx extends ffi.Opaque {}
 final class epoll_event extends ffi.Opaque {}
 
 final class interactor_native_configuration extends ffi.Struct {
-  @ffi.Uint16()
-  external int buffers_count;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
   @ffi.Size()
   external int ring_size;
 
@@ -6649,6 +7002,12 @@ final class interactor_native_configuration extends ffi.Struct {
 
   @ffi.Size()
   external int slab_size;
+
+  @ffi.Size()
+  external int static_buffers_capacity;
+
+  @ffi.Size()
+  external int static_buffer_size;
 }
 
 final class interactor_native extends ffi.Struct {
@@ -6660,21 +7019,15 @@ final class interactor_native extends ffi.Struct {
 
   external interactor_messages_pool messages_pool;
 
-  external interactor_buffers_pool buffers_pool;
+  external interactor_static_buffers static_buffers;
+
+  external interactor_io_buffers io_buffers;
 
   external interactor_data_pool data_pool;
 
   external interactor_memory memory;
 
   external ffi.Pointer<io_uring> ring;
-
-  external ffi.Pointer<iovec> buffers;
-
-  @ffi.Uint32()
-  external int buffer_size;
-
-  @ffi.Uint16()
-  external int buffers_count;
 
   @ffi.Size()
   external int ring_size;
@@ -7381,6 +7734,8 @@ const int RB_WALK_LEFT = 1;
 
 const int RB_WALK_RIGHT = 2;
 
+const int SMALL_OBUF_IOV_MAX = 31;
+
 const int SMALL_MEMPOOL_MAX = 1024;
 
 const int MSG_OOB = 1;
@@ -7653,148 +8008,6 @@ const int SOCKET_URING_OP_SIOCOUTQ = 1;
 
 const int NULL = 0;
 
-const int INT8_MIN = -128;
-
-const int INT16_MIN = -32768;
-
-const int INT32_MIN = -2147483648;
-
-const int INT64_MIN = -9223372036854775808;
-
-const int INT8_MAX = 127;
-
-const int INT16_MAX = 32767;
-
-const int INT32_MAX = 2147483647;
-
-const int INT64_MAX = 9223372036854775807;
-
-const int UINT8_MAX = 255;
-
-const int UINT16_MAX = 65535;
-
-const int UINT32_MAX = 4294967295;
-
-const int UINT64_MAX = -1;
-
-const int INT_LEAST8_MIN = -128;
-
-const int INT_LEAST16_MIN = -32768;
-
-const int INT_LEAST32_MIN = -2147483648;
-
-const int INT_LEAST64_MIN = -9223372036854775808;
-
-const int INT_LEAST8_MAX = 127;
-
-const int INT_LEAST16_MAX = 32767;
-
-const int INT_LEAST32_MAX = 2147483647;
-
-const int INT_LEAST64_MAX = 9223372036854775807;
-
-const int UINT_LEAST8_MAX = 255;
-
-const int UINT_LEAST16_MAX = 65535;
-
-const int UINT_LEAST32_MAX = 4294967295;
-
-const int UINT_LEAST64_MAX = -1;
-
-const int INT_FAST8_MIN = -128;
-
-const int INT_FAST16_MIN = -9223372036854775808;
-
-const int INT_FAST32_MIN = -9223372036854775808;
-
-const int INT_FAST64_MIN = -9223372036854775808;
-
-const int INT_FAST8_MAX = 127;
-
-const int INT_FAST16_MAX = 9223372036854775807;
-
-const int INT_FAST32_MAX = 9223372036854775807;
-
-const int INT_FAST64_MAX = 9223372036854775807;
-
-const int UINT_FAST8_MAX = 255;
-
-const int UINT_FAST16_MAX = -1;
-
-const int UINT_FAST32_MAX = -1;
-
-const int UINT_FAST64_MAX = -1;
-
-const int INTPTR_MIN = -9223372036854775808;
-
-const int INTPTR_MAX = 9223372036854775807;
-
-const int UINTPTR_MAX = -1;
-
-const int INTMAX_MIN = -9223372036854775808;
-
-const int INTMAX_MAX = 9223372036854775807;
-
-const int UINTMAX_MAX = -1;
-
-const int PTRDIFF_MIN = -9223372036854775808;
-
-const int PTRDIFF_MAX = 9223372036854775807;
-
-const int SIG_ATOMIC_MIN = -2147483648;
-
-const int SIG_ATOMIC_MAX = 2147483647;
-
-const int SIZE_MAX = -1;
-
-const int WCHAR_MIN = -2147483648;
-
-const int WCHAR_MAX = 2147483647;
-
-const int WINT_MIN = 0;
-
-const int WINT_MAX = 4294967295;
-
-const int WNOHANG = 1;
-
-const int WUNTRACED = 2;
-
-const int WSTOPPED = 2;
-
-const int WEXITED = 4;
-
-const int WCONTINUED = 8;
-
-const int WNOWAIT = 16777216;
-
-const int RAND_MAX = 2147483647;
-
-const int EXIT_FAILURE = 1;
-
-const int EXIT_SUCCESS = 0;
-
-const int LITTLE_ENDIAN = 1234;
-
-const int BIG_ENDIAN = 4321;
-
-const int PDP_ENDIAN = 3412;
-
-const int BYTE_ORDER = 1234;
-
-const int FD_SETSIZE = 1024;
-
-const int NFDBITS = 64;
-
-const int INTERACTOR_BUFFER_USED = -1;
-
-const int INTERACTOR_DART_CALLBACK = 1;
-
-const int INTERACTOR_NATIVE_CALLBACK = 2;
-
-const int INTERACTOR_DART_CALL = 4;
-
-const int INTERACTOR_NATIVE_CALL = 8;
-
 const int STDIN_FILENO = 0;
 
 const int STDOUT_FILENO = 1;
@@ -7924,6 +8137,138 @@ const int LONG_MIN = -9223372036854775808;
 const int LONG_MAX = 9223372036854775807;
 
 const int ULONG_MAX = -1;
+
+const int WNOHANG = 1;
+
+const int WUNTRACED = 2;
+
+const int WSTOPPED = 2;
+
+const int WEXITED = 4;
+
+const int WCONTINUED = 8;
+
+const int WNOWAIT = 16777216;
+
+const int RAND_MAX = 2147483647;
+
+const int EXIT_FAILURE = 1;
+
+const int EXIT_SUCCESS = 0;
+
+const int LITTLE_ENDIAN = 1234;
+
+const int BIG_ENDIAN = 4321;
+
+const int PDP_ENDIAN = 3412;
+
+const int BYTE_ORDER = 1234;
+
+const int FD_SETSIZE = 1024;
+
+const int NFDBITS = 64;
+
+const int INT8_MIN = -128;
+
+const int INT16_MIN = -32768;
+
+const int INT32_MIN = -2147483648;
+
+const int INT64_MIN = -9223372036854775808;
+
+const int INT8_MAX = 127;
+
+const int INT16_MAX = 32767;
+
+const int INT32_MAX = 2147483647;
+
+const int INT64_MAX = 9223372036854775807;
+
+const int UINT8_MAX = 255;
+
+const int UINT16_MAX = 65535;
+
+const int UINT32_MAX = 4294967295;
+
+const int UINT64_MAX = -1;
+
+const int INT_LEAST8_MIN = -128;
+
+const int INT_LEAST16_MIN = -32768;
+
+const int INT_LEAST32_MIN = -2147483648;
+
+const int INT_LEAST64_MIN = -9223372036854775808;
+
+const int INT_LEAST8_MAX = 127;
+
+const int INT_LEAST16_MAX = 32767;
+
+const int INT_LEAST32_MAX = 2147483647;
+
+const int INT_LEAST64_MAX = 9223372036854775807;
+
+const int UINT_LEAST8_MAX = 255;
+
+const int UINT_LEAST16_MAX = 65535;
+
+const int UINT_LEAST32_MAX = 4294967295;
+
+const int UINT_LEAST64_MAX = -1;
+
+const int INT_FAST8_MIN = -128;
+
+const int INT_FAST16_MIN = -9223372036854775808;
+
+const int INT_FAST32_MIN = -9223372036854775808;
+
+const int INT_FAST64_MIN = -9223372036854775808;
+
+const int INT_FAST8_MAX = 127;
+
+const int INT_FAST16_MAX = 9223372036854775807;
+
+const int INT_FAST32_MAX = 9223372036854775807;
+
+const int INT_FAST64_MAX = 9223372036854775807;
+
+const int UINT_FAST8_MAX = 255;
+
+const int UINT_FAST16_MAX = -1;
+
+const int UINT_FAST32_MAX = -1;
+
+const int UINT_FAST64_MAX = -1;
+
+const int INTPTR_MIN = -9223372036854775808;
+
+const int INTPTR_MAX = 9223372036854775807;
+
+const int UINTPTR_MAX = -1;
+
+const int INTMAX_MIN = -9223372036854775808;
+
+const int INTMAX_MAX = 9223372036854775807;
+
+const int UINTMAX_MAX = -1;
+
+const int PTRDIFF_MIN = -9223372036854775808;
+
+const int PTRDIFF_MAX = 9223372036854775807;
+
+const int SIG_ATOMIC_MIN = -2147483648;
+
+const int SIG_ATOMIC_MAX = 2147483647;
+
+const int SIZE_MAX = -1;
+
+const int WCHAR_MIN = -2147483648;
+
+const int WCHAR_MAX = 2147483647;
+
+const int WINT_MIN = 0;
+
+const int WINT_MAX = 4294967295;
 
 const int TARANTOOL_SMALL_HAVE_MAP_ANON = 1;
 
@@ -8437,7 +8782,87 @@ const int RB_COMPACT = 1;
 
 const int RB_MAX_TREE_HEIGHT = 48;
 
+const int UIO_MAXIOV = 1024;
+
 const int QUOTA_UNIT_SIZE = 1024;
+
+const int EPERM = 1;
+
+const int ENOENT = 2;
+
+const int ESRCH = 3;
+
+const int EINTR = 4;
+
+const int EIO = 5;
+
+const int ENXIO = 6;
+
+const int E2BIG = 7;
+
+const int ENOEXEC = 8;
+
+const int EBADF = 9;
+
+const int ECHILD = 10;
+
+const int EAGAIN = 11;
+
+const int ENOMEM = 12;
+
+const int EACCES = 13;
+
+const int EFAULT = 14;
+
+const int ENOTBLK = 15;
+
+const int EBUSY = 16;
+
+const int EEXIST = 17;
+
+const int EXDEV = 18;
+
+const int ENODEV = 19;
+
+const int ENOTDIR = 20;
+
+const int EISDIR = 21;
+
+const int EINVAL = 22;
+
+const int ENFILE = 23;
+
+const int EMFILE = 24;
+
+const int ENOTTY = 25;
+
+const int ETXTBSY = 26;
+
+const int EFBIG = 27;
+
+const int ENOSPC = 28;
+
+const int ESPIPE = 29;
+
+const int EROFS = 30;
+
+const int EMLINK = 31;
+
+const int EPIPE = 32;
+
+const int EDOM = 33;
+
+const int ERANGE = 34;
+
+const int INTERACTOR_BUFFER_USED = -1;
+
+const int INTERACTOR_DART_CALLBACK = 1;
+
+const int INTERACTOR_NATIVE_CALLBACK = 2;
+
+const int INTERACTOR_DART_CALL = 4;
+
+const int INTERACTOR_NATIVE_CALL = 8;
 
 const int SOCK_STREAM = 1;
 
@@ -9016,76 +9441,6 @@ const int ALLPERMS = 4095;
 const int DEFFILEMODE = 438;
 
 const int S_BLKSIZE = 512;
-
-const int UIO_MAXIOV = 1024;
-
-const int EPERM = 1;
-
-const int ENOENT = 2;
-
-const int ESRCH = 3;
-
-const int EINTR = 4;
-
-const int EIO = 5;
-
-const int ENXIO = 6;
-
-const int E2BIG = 7;
-
-const int ENOEXEC = 8;
-
-const int EBADF = 9;
-
-const int ECHILD = 10;
-
-const int EAGAIN = 11;
-
-const int ENOMEM = 12;
-
-const int EACCES = 13;
-
-const int EFAULT = 14;
-
-const int ENOTBLK = 15;
-
-const int EBUSY = 16;
-
-const int EEXIST = 17;
-
-const int EXDEV = 18;
-
-const int ENODEV = 19;
-
-const int ENOTDIR = 20;
-
-const int EISDIR = 21;
-
-const int EINVAL = 22;
-
-const int ENFILE = 23;
-
-const int EMFILE = 24;
-
-const int ENOTTY = 25;
-
-const int ETXTBSY = 26;
-
-const int EFBIG = 27;
-
-const int ENOSPC = 28;
-
-const int ESPIPE = 29;
-
-const int EROFS = 30;
-
-const int EMLINK = 31;
-
-const int EPIPE = 32;
-
-const int EDOM = 33;
-
-const int ERANGE = 34;
 
 const int EDEADLK = 35;
 

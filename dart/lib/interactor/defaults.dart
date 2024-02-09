@@ -4,8 +4,8 @@ class InteractorDefaults {
   InteractorDefaults._();
 
   static InteractorConfiguration worker() => InteractorConfiguration(
-        buffersCount: 4096,
-        bufferSize: 4096,
+        staticBuffersCount: 4096,
+        staticBufferSize: 4096,
         ringSize: 16384,
         ringFlags: 0,
         baseDelay: Duration(microseconds: 10),

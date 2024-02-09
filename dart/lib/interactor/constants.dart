@@ -85,3 +85,5 @@ const int intMaxValue = 9223372036854775807;
 
 const soFileExtension = "so";
 const nativeDirectory = "native";
+
+const ioBuffersInitialCapacity = 1024;

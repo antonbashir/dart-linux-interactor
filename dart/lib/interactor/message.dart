@@ -34,10 +34,10 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   Uint8List get inputBytes => ref.input.cast<Uint8>().asTypedList(ref.input_size);
 
   @pragma(preferInlinePragma)
-  List<int> getOutputBuffer(InteractorBuffers buffers) => buffers.read(ref.output.address);
+  List<int> getOutputStaticBuffer(InteractorStaticBuffers buffers) => buffers.read(ref.output.address);
 
   @pragma(preferInlinePragma)
-  List<int> getInputBuffer(InteractorBuffers buffers) => buffers.read(ref.input.address);
+  List<int> getInputStaticBuffer(InteractorStaticBuffers buffers) => buffers.read(ref.input.address);
 
   @pragma(preferInlinePragma)
   String getInputString({int? length}) => ref.input.cast<Utf8>().toDartString(length: length);
@@ -88,7 +88,7 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   }
 
   @pragma(preferInlinePragma)
-  Future<void> setInputBuffer(InteractorBuffers buffers, List<int> bytes) async {
+  Future<void> setInputStaticBuffer(InteractorStaticBuffers buffers, List<int> bytes) async {
     final bufferId = buffers.get() ?? await buffers.allocate();
     buffers.write(bufferId, Uint8List.fromList(bytes));
     ref.input = Pointer.fromAddress(bufferId);
@@ -113,7 +113,7 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   void freeInputObject<T extends Struct>(InteractorPayloads payloads) => payloads.free(Pointer.fromAddress(ref.input.address).cast<T>());
 
   @pragma(preferInlinePragma)
-  void releaseInputBuffer(InteractorBuffers buffers) => buffers.release(ref.input.address);
+  void releaseInputStaticBuffer(InteractorStaticBuffers buffers) => buffers.release(ref.input.address);
 
   @pragma(preferInlinePragma)
   void freeInputBytes(InteractorDatas datas) => datas.free(ref.input, ref.input_size);
@@ -150,7 +150,7 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
     ref.output_size = units.length + 1;
   }
 
-  Future<void> allocateOutputBuffer(InteractorBuffers buffers, int size) async {
+  Future<void> allocateOutputStaticBuffer(InteractorStaticBuffers buffers, int size) async {
     final bufferId = buffers.get() ?? await buffers.allocate();
     ref.output = Pointer.fromAddress(bufferId);
     ref.output_size = size;
@@ -182,7 +182,7 @@ extension InteractorMessageExtensions on Pointer<interactor_message_t> {
   void freeOutputObject<T extends Struct>(InteractorPayloads payloads) => payloads.free(Pointer.fromAddress(ref.output.address).cast<T>());
 
   @pragma(preferInlinePragma)
-  void releaseOutputBuffer(InteractorBuffers buffers) => buffers.release(ref.output.address);
+  void releaseOutputStaticBuffer(InteractorStaticBuffers buffers) => buffers.release(ref.output.address);
 
   @pragma(preferInlinePragma)
   void freeOutputBytes(InteractorDatas datas) => datas.free(ref.output, ref.output_size);

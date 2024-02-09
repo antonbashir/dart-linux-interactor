@@ -1,6 +1,6 @@
 class InteractorConfiguration {
-  final int buffersCount;
-  final int bufferSize;
+  final int staticBuffersCount;
+  final int staticBufferSize;
   final int ringSize;
   final int ringFlags;
   final double delayRandomizationFactor;
@@ -14,8 +14,8 @@ class InteractorConfiguration {
   final int memoryQuotaSize;
 
   InteractorConfiguration({
-    required this.buffersCount,
-    required this.bufferSize,
+    required this.staticBuffersCount,
+    required this.staticBufferSize,
     required this.ringSize,
     required this.ringFlags,
     required this.delayRandomizationFactor,
@@ -46,8 +46,8 @@ class InteractorConfiguration {
     int? memoryQuotaSize,
   }) =>
       InteractorConfiguration(
-        buffersCount: buffersCount ?? this.buffersCount,
-        bufferSize: bufferSize ?? this.bufferSize,
+        staticBuffersCount: buffersCount ?? this.staticBuffersCount,
+        staticBufferSize: bufferSize ?? this.staticBufferSize,
         ringSize: ringSize ?? this.ringSize,
         ringFlags: ringFlags ?? this.ringFlags,
         delayRandomizationFactor: delayRandomizationFactor ?? this.delayRandomizationFactor,

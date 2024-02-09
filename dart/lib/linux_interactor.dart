@@ -1,4 +1,4 @@
-export 'interactor/buffers.dart' show InteractorBuffers;
+export 'interactor/buffers.dart' show InteractorStaticBuffers;
 export 'interactor/configuration.dart' show InteractorConfiguration;
 export 'interactor/data.dart' show InteractorDatas;
 export 'interactor/declaration.dart' show InteractorCallback, InteractorConsumer, InteractorMethod, InteractorProducer, InteractorProducerRegistrat;
