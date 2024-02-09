@@ -134,3 +134,7 @@ interactor_message_t* test_call_dart_check(interactor_native_t* interactor)
     interactor_native_submit(interactor);
     return current_message;
 }
+
+intptr_t test_call_native_address_lookup() {
+  return (intptr_t)&test_call_native;
+}

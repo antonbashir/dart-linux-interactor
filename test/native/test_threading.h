@@ -46,6 +46,8 @@ extern "C"
 
     void test_threading_destroy();
 
+    intptr_t test_threading_call_native_address_lookup();
+
 #if defined(__cplusplus)
 }
 #endif

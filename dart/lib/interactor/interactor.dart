@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:isolate';
 
-import 'package:ffi/ffi.dart';
+import 'package:ffi/ffi.dart' as ffi;
 
 import 'bindings.dart';
 import 'configuration.dart';
@@ -14,16 +14,9 @@ class Interactor {
   final _workerClosers = <SendPort>[];
   final _workerPorts = <RawReceivePort>[];
   final _workerDestroyer = ReceivePort();
+  final InteractorLibrary _library;
 
-  late final String? _libraryPath;
-  late final InteractorLibrary _library;
-  late final InteractorBindings bindings;
-
-  Interactor({String? libraryPath}) {
-    this._libraryPath = libraryPath;
-    _library = InteractorLibrary.load(libraryPath: libraryPath);
-    bindings = InteractorBindings(_library.library);
-  }
+  Interactor({String? libraryPath}) : _library = InteractorLibrary.load(libraryPath: libraryPath);
 
   Future<void> shutdown() async {
     _workerClosers.forEach((worker) => worker.send(null));
@@ -36,9 +29,9 @@ class Interactor {
     final port = RawReceivePort((ports) async {
       SendPort toWorker = ports[0];
       _workerClosers.add(ports[1]);
-      final interactorPointer = calloc<interactor_dart_t>();
+      final interactorPointer = ffi.calloc<interactor_dart_t>();
       if (interactorPointer == nullptr) throw InteractorInitializationException(InteractorErrors.workerMemoryError);
-      final result = using((arena) {
+      final result = ffi.using((arena) {
         final nativeConfiguration = arena<interactor_dart_configuration_t>();
         nativeConfiguration.ref.ring_flags = configuration.ringFlags;
         nativeConfiguration.ref.ring_size = configuration.ringSize;
@@ -53,13 +46,13 @@ class Interactor {
         nativeConfiguration.ref.slab_size = configuration.memorySlabSize;
         nativeConfiguration.ref.preallocation_size = configuration.memoryPreallocationSize;
         nativeConfiguration.ref.quota_size = configuration.memoryQuotaSize;
-        return bindings.interactor_dart_initialize(interactorPointer, nativeConfiguration, _workerClosers.length);
+        return interactor_dart_initialize(interactorPointer, nativeConfiguration, _workerClosers.length);
       });
       if (result < 0) {
-        bindings.interactor_dart_destroy(interactorPointer);
-        throw InteractorInitializationException(InteractorErrors.workerError(result, bindings));
+        interactor_dart_destroy(interactorPointer);
+        throw InteractorInitializationException(InteractorErrors.workerError(result));
       }
-      final workerInput = [_libraryPath, interactorPointer.address, _workerDestroyer.sendPort, result];
+      final workerInput = [interactorPointer.address, _workerDestroyer.sendPort, result];
       toWorker.send(workerInput);
     });
     _workerPorts.add(port);

@@ -403,17 +403,16 @@ int tupleSizeOfMap(int length) {
 }
 
 class InteractorTuples {
-  final InteractorBindings _bindings;
   final Pointer<interactor_dart_t> _interactor;
 
-  InteractorTuples(this._bindings, this._interactor);
+  InteractorTuples(this._interactor);
 
   @pragma(preferInlinePragma)
-  Pointer<Uint8> allocate(int size) => Pointer<Uint8>.fromAddress(_bindings.interactor_dart_data_allocate(_interactor, size));
+  Pointer<Uint8> allocate(int size) => Pointer<Uint8>.fromAddress(interactor_dart_data_allocate(_interactor, size));
 
   @pragma(preferInlinePragma)
-  void free(Pointer<Uint8> tuple, int size) => _bindings.interactor_dart_data_free(_interactor, tuple.address, size);
+  void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.address, size);
 
   @pragma(preferInlinePragma)
-  int next(Pointer<Uint8> pointer, int offset) => _bindings.interactor_dart_tuple_next(pointer.cast(), offset);
+  int next(Pointer<Uint8> pointer, int offset) => interactor_dart_tuple_next(pointer.cast(), offset);
 }

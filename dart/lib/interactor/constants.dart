@@ -53,10 +53,10 @@ class InteractorErrors {
   static const workerMemoryError = "[worker] out of memory";
   static const interactorMemoryError = "[interactor] out of memory";
   static const interactorLimitError = "[interactor] more than $intMaxValue are in execution";
-  static workerError(int result, InteractorBindings bindings) => "[worker] code = $result, message = ${_kernelErrorToString(result, bindings)}";
+  static workerError(int result) => "[worker] code = $result, message = ${_kernelErrorToString(result)}";
   static workerTrace(int id, int result, int data, int fd) => "worker = $id, result = $result,  bid = ${((data >> 16) & 0xffff)}, fd = $fd";
 
-  static _kernelErrorToString(int error, InteractorBindings bindings) => bindings.interactor_dart_error_to_string(error).cast<Utf8>().toDartString();
+  static _kernelErrorToString(int error) => interactor_dart_error_to_string(error).cast<Utf8>().toDartString();
 }
 
 const interactorBufferUsed = -1;

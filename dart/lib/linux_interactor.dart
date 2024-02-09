@@ -11,4 +11,4 @@ export 'interactor/worker.dart' show InteractorWorker;
 export 'interactor/bindings.dart' show InteractorBindings, interactor_message_t, interactor_memory_t;
 export 'interactor/lookup.dart' show InteractorLibrary;
 export 'interactor/interactor.dart' show Interactor;
-export 'interactor/system.dart' show dlclose, dlopen;
+export 'interactor/system.dart';

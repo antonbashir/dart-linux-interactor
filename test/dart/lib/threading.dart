@@ -3,12 +3,13 @@ import 'dart:ffi';
 import 'dart:isolate';
 
 import 'package:collection/collection.dart';
-import 'package:ffi/ffi.dart';
+import 'package:ffi/ffi.dart' as ffi;
 import 'package:linux_interactor/linux_interactor.dart';
 import 'package:linux_interactor_test/consumer.dart';
 import 'package:linux_interactor_test/producer.dart';
-import 'package:linux_interactor_test/test.dart';
 import 'package:test/test.dart';
+
+import 'bindings.dart';
 
 void testThreadingNative() {
   test("[isolates]dart(bytes) <-> [threads]native(bytes)", () async {
@@ -17,8 +18,7 @@ void testThreadingNative() {
     final isolates = 4;
     final threads = 8;
 
-    final bindings = loadBindings();
-    if (!bindings.test_threading_initialize(threads, isolates, messages * isolates)) {
+    if (!test_threading_initialize(threads, isolates, messages * isolates)) {
       fail("native thread failed ");
     }
 
@@ -51,13 +51,13 @@ void testThreadingNative() {
     );
 
     await Future.wait(spawnedIsolates);
-    while (bindings.test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 1));
+    while (test_threading_call_native_check() != messages * isolates * threads) await Future.delayed(Duration(milliseconds: 1));
     await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
     errorPorts.forEach((port) => port.close());
 
-    bindings.test_threading_destroy();
+    test_threading_destroy();
     await interactor.shutdown();
   });
 }
@@ -69,8 +69,7 @@ void testThreadingDart() {
     final isolates = 4;
     final threads = 8;
 
-    final bindings = loadBindings();
-    if (!bindings.test_threading_initialize(threads, isolates, messages * isolates)) {
+    if (!test_threading_initialize(threads, isolates, messages * isolates)) {
       fail("native thread failed ");
     }
 
@@ -108,17 +107,17 @@ void testThreadingDart() {
 
     await Future.wait(spawnedIsolates);
     final descriptors = (await Future.wait(descriptorPorts.map((port) => port.first))).map((descriptor) => descriptor as int).toList();
-    final Pointer<Int32> descriptorsNative = calloc(descriptors.length * sizeOf<Int32>());
+    final Pointer<Int32> descriptorsNative = ffi.calloc(descriptors.length * sizeOf<Int32>());
     descriptors.forEachIndexed((index, element) => descriptorsNative[index] = element);
-    bindings.test_threading_prepare_call_dart_bytes(descriptorsNative, descriptors.length);
+    test_threading_prepare_call_dart_bytes(descriptorsNative, descriptors.length);
 
-    while (bindings.test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 1));
+    while (test_threading_call_dart_check() != messages * threads * isolates) await Future.delayed(Duration(milliseconds: 1));
     await Future.wait(exitPorts.map((port) => port.first));
 
     exitPorts.forEach((port) => port.close());
     errorPorts.forEach((port) => port.close());
 
-    bindings.test_threading_destroy();
+    test_threading_destroy();
     await interactor.shutdown();
   });
 }
@@ -126,13 +125,12 @@ void testThreadingDart() {
 Future<void> _callNativeIsolate(List<dynamic> input) async {
   final messages = input[0];
   final threads = input[1];
-  final bindings = loadBindings();
   final calls = <Future<Pointer<interactor_message_t>>>[];
   final worker = InteractorWorker(input[2]);
   await worker.initialize();
-  final producer = worker.producer(TestNativeProducer(bindings));
+  final producer = worker.producer(TestNativeProducer());
   worker.activate();
-  final descriptors = bindings.test_threading_interactor_descriptors();
+  final descriptors = test_threading_interactor_descriptors();
   for (var threadId = 0; threadId < threads; threadId++) {
     final ring = descriptors.elementAt(threadId).value;
     for (var messageId = 0; messageId < messages; messageId++) {

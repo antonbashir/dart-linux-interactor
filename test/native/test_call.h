@@ -34,6 +34,8 @@ extern "C"
     interactor_message_t* test_call_dart_check(interactor_native_t* interactor);
     void test_call_dart_callback(interactor_message_t* message);
 
+    intptr_t test_call_native_address_lookup();
+
 #if defined(__cplusplus)
 }
 #endif

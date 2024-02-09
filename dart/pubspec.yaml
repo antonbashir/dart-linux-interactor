@@ -5,7 +5,7 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dev_dependencies:
-  ffigen: ^9.0.1
+  ffigen: ^11.0.0
 
 dependencies:
   ffi: ^2.1.0
@@ -13,6 +13,8 @@ dependencies:
 
 ffigen:
   name: "InteractorBindings"
+  ffi-native:
+    assetId: "interactor-bindings"
   description: "Bindings for Interactor"
   output: "lib/interactor/bindings.dart"
   compiler-opts:
@@ -33,9 +35,6 @@ ffigen:
     leaf:
       include:
         - "interactor_dart_.*"
-    symbol-address:
-      include:
-        - ".*"
     exclude:
       - "_(.*)"
       - "io_uring(.*)"

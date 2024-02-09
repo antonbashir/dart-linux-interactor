@@ -180,3 +180,8 @@ void test_threading_destroy()
     free(threads.threads);
     pthread_mutex_unlock(&threads.global_working_mutex);
 }
+
+intptr_t test_threading_call_native_address_lookup()
+{
+  return (intptr_t)&test_threading_call_native;
+}

@@ -8,10 +8,9 @@ import 'buffers.dart';
 import 'constants.dart';
 import 'data.dart';
 import 'declaration.dart';
-import 'lookup.dart';
+import 'messages.dart';
 import 'payloads.dart';
 import 'registry.dart';
-import 'messages.dart';
 import 'tuple.dart';
 
 class InteractorWorker {
@@ -25,7 +24,6 @@ class InteractorWorker {
   late final InteractorMessages _messages;
   late final InteractorTuples _tuples;
 
-  late final InteractorBindings _bindings;
   late final Pointer<interactor_dart_t> _interactor;
   late final Pointer<io_uring> _ring;
   late final int _descriptor;
@@ -45,14 +43,14 @@ class InteractorWorker {
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
   InteractorTuples get tuples => _tuples;
-  Pointer<interactor_memory_t> get memory => _bindings.interactor_dart_memory(_interactor);
+  Pointer<interactor_memory_t> get memory => interactor_dart_memory(_interactor);
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((_) async {
       _active = false;
       await _done.future;
       _payloads.destroy();
-      _bindings.interactor_dart_destroy(_interactor);
+      interactor_dart_destroy(_interactor);
       _closer.close();
       _destroyer.send(null);
     });
@@ -61,27 +59,19 @@ class InteractorWorker {
 
   Future<void> initialize() async {
     final configuration = await _fromInteractor.first as List;
-    final libraryPath = configuration[0] as String?;
-    _interactor = Pointer.fromAddress(configuration[1] as int).cast<interactor_dart_t>();
-    _destroyer = configuration[2] as SendPort;
-    _descriptor = configuration[3] as int;
+    _interactor = Pointer.fromAddress(configuration[0] as int).cast<interactor_dart_t>();
+    _destroyer = configuration[1] as SendPort;
+    _descriptor = configuration[2] as int;
     _fromInteractor.close();
-    _bindings = InteractorBindings(InteractorLibrary.load(libraryPath: libraryPath).library);
     _ring = _interactor.ref.ring;
     _cqes = _interactor.ref.cqes;
-    _payloads = InteractorPayloads(_bindings, _interactor);
-    _buffers = InteractorBuffers(_bindings, _interactor.ref.buffers, _interactor);
-    _datas = InteractorDatas(_bindings, _interactor);
-    _messages = InteractorMessages(_bindings, _interactor);
-    _tuples = InteractorTuples(_bindings, _interactor);
-    _consumers = InteractorConsumerRegistry(
-      _interactor,
-      _bindings,
-    );
-    _producers = InteractorProducerRegistry(
-      _interactor,
-      _bindings,
-    );
+    _payloads = InteractorPayloads(_interactor);
+    _buffers = InteractorBuffers(_interactor.ref.buffers, _interactor);
+    _datas = InteractorDatas(_interactor);
+    _messages = InteractorMessages(_interactor);
+    _tuples = InteractorTuples(_interactor);
+    _consumers = InteractorConsumerRegistry(_interactor);
+    _producers = InteractorProducerRegistry(_interactor);
   }
 
   void activate() {
@@ -110,7 +100,7 @@ class InteractorWorker {
   }
 
   bool _handleCqes() {
-    final cqeCount = _bindings.interactor_dart_peek(_interactor);
+    final cqeCount = interactor_dart_peek(_interactor);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
       Pointer<io_uring_cqe> cqe = _cqes.elementAt(cqeIndex).value;
@@ -127,7 +117,7 @@ class InteractorWorker {
         continue;
       }
     }
-    _bindings.interactor_dart_cqe_advance(_ring, cqeCount);
+    interactor_dart_cqe_advance(_ring, cqeCount);
     return true;
   }
 

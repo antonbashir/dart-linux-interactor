@@ -2,13 +2,18 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io' show Platform, Directory, File;
 
+import 'package:ffi/ffi.dart';
+
 import 'constants.dart';
+import 'system.dart';
 
 class InteractorLibrary {
   final DynamicLibrary library;
   final String path;
 
-  InteractorLibrary(this.library, this.path);
+  InteractorLibrary(this.library, this.path) {
+    using((Arena arena) => dlopen(path.toNativeUtf8(allocator: arena).cast(), RTLD_GLOBAL | RTLD_LAZY));
+  }
 
   factory InteractorLibrary.load({String? libraryPath}) => libraryPath != null
       ? File(libraryPath).existsSync()

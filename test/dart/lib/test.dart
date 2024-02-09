@@ -1,15 +1,15 @@
-import 'dart:ffi';
 import 'dart:io';
 
-import 'package:linux_interactor_test/bindings.dart';
+import 'package:ffi/ffi.dart';
+import 'package:linux_interactor/linux_interactor.dart';
 import 'package:linux_interactor_test/call.dart';
 import 'package:linux_interactor_test/threading.dart';
 import 'package:path/path.dart';
 import 'package:test/test.dart';
 
-TestBindings loadBindings() => TestBindings(DynamicLibrary.open("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so"));
-
 void main() {
+  using((Arena arena) => dlopen("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so".toNativeUtf8(allocator: arena).cast(), RTLD_GLOBAL | RTLD_LAZY));
+
   group("[call native]", testCallNative);
   group("[call dart]", testCallDart);
   group("[threading native]", () {
