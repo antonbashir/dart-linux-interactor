@@ -6,14 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "interactor_constants.h"
-
-#if __has_builtin(__builtin_expect) || defined(__GNUC__)
-#define likely(x) __builtin_expect(!!(x), 1)
-#define unlikely(x) __builtin_expect(!!(x), 0)
-#else
-#define likely(x) (x)
-#define unlikely(x) (x)
-#endif
+#include "interactor_native_common.h"
 
 #if defined(__cplusplus)
 extern "C"
@@ -48,7 +41,7 @@ extern "C"
 
     static inline int32_t interactor_buffers_pool_pop(struct interactor_buffers_pool* pool)
     {
-        if (unlikely(pool->count == 0))
+        if (interactor_likely(pool->count == 0))
             return INTERACTOR_BUFFER_USED;
         return pool->ids[--pool->count];
     }
