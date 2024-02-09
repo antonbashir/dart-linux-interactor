@@ -12,7 +12,7 @@ class InteractorLibrary {
   final String path;
 
   InteractorLibrary(this.library, this.path) {
-    using((Arena arena) => dlopen(path.toNativeUtf8(allocator: arena).cast(), RTLD_GLOBAL | RTLD_LAZY));
+    using((Arena arena) => dlopen(path.toNativeUtf8(allocator: arena).cast(), rtldGlobal | rtldLazy));
   }
 
   factory InteractorLibrary.load({String? libraryPath}) => libraryPath != null

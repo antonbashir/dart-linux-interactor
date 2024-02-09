@@ -8,7 +8,7 @@ import 'package:path/path.dart';
 import 'package:test/test.dart';
 
 void main() {
-  using((Arena arena) => dlopen("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so".toNativeUtf8(allocator: arena).cast(), RTLD_GLOBAL | RTLD_LAZY));
+  using((Arena arena) => dlopen("${dirname(Platform.script.toFilePath())}/../native/libinteractortest.so".toNativeUtf8(allocator: arena).cast(), rtldGlobal | rtldLazy));
 
   group("[call native]", testCallNative);
   group("[call dart]", testCallDart);

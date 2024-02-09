@@ -82,3 +82,6 @@ const ringSetupSingleIssuer = 1 << 12;
 const ringSetupDeferTaskrun = 1 << 13;
 
 const int intMaxValue = 9223372036854775807;
+
+const soFileExtension = "so";
+const nativeDirectory = "native";
