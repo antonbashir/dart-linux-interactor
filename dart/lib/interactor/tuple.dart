@@ -402,6 +402,31 @@ int tupleSizeOfMap(int length) {
   return 5;
 }
 
+extension InteractorTupleIntExtension on int {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfInt(this);
+}
+
+extension InteractorTupleStringExtension on String {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfString(length);
+}
+
+extension InteractorTupleBinaryExtension on Uint8List {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfBinary(length);
+}
+
+extension InteractorTupleListExtension on List {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfList(length);
+}
+
+extension InteractorTupleMapExtension on Map {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfMap(length);
+}
+
 class InteractorTuples {
   final Pointer<interactor_dart_t> _interactor;
 
