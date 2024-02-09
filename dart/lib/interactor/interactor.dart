@@ -14,9 +14,10 @@ class Interactor {
   final _workerClosers = <SendPort>[];
   final _workerPorts = <RawReceivePort>[];
   final _workerDestroyer = ReceivePort();
-  final InteractorLibrary _library;
 
-  Interactor({String? libraryPath}) : _library = InteractorLibrary.load(libraryPath: libraryPath);
+  Interactor({String? libraryPath}) {
+    InteractorLibrary.load(libraryPath: libraryPath);
+  }
 
   Future<void> shutdown() async {
     _workerClosers.forEach((worker) => worker.send(null));
