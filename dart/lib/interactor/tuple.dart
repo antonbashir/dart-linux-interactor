@@ -370,7 +370,7 @@ int _encodeString(String str, Uint8List buffer, int offset) {
 
 const tupleSizeOfNull = 1;
 const tupleSizeOfBool = 1;
-const tupleSizeOfDouble = 1 + 8;
+const tupleSizeOfDouble = 9;
 
 @pragma(preferInlinePragma)
 int tupleSizeOfInt(int number) {
@@ -558,19 +558,19 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
           offset = tupleWriteNull(data, offset);
           break;
         case int asInt:
-          offset = asInt.writeToTuple(data, offset);
+          offset = tupleWriteInt(data, asInt, offset);
           break;
         case double asDouble:
-          offset = asDouble.writeToTuple(data, offset);
+          offset = tupleWriteDouble(data, asDouble, offset);
           break;
         case bool asBool:
-          offset = asBool.writeToTuple(data, offset);
+          offset = tupleWriteBool(data, asBool, offset);
           break;
         case String asString:
-          offset = asString.writeToTuple(buffer, data, offset);
+          offset = tupleWriteString(buffer, data, asString, offset);
           break;
         case Uint8List asBinary:
-          offset = asBinary.writeToTuple(buffer, data, offset);
+          offset = tupleWriteBinary(buffer, data, asBinary, offset);
           break;
         case List asList:
           offset = asList.dumpToTuple(buffer, data, offset);
@@ -587,19 +587,19 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
           offset = tupleWriteNull(data, offset);
           break;
         case int asInt:
-          offset = asInt.writeToTuple(data, offset);
+          offset = tupleWriteInt(data, asInt, offset);
           break;
         case double asDouble:
-          offset = asDouble.writeToTuple(data, offset);
+          offset = tupleWriteDouble(data, asDouble, offset);
           break;
         case bool asBool:
-          offset = asBool.writeToTuple(data, offset);
+          offset = tupleWriteBool(data, asBool, offset);
           break;
         case String asString:
-          offset = asString.writeToTuple(buffer, data, offset);
+          offset = tupleWriteString(buffer, data, asString, offset);
           break;
         case Uint8List asBinary:
-          offset = asBinary.writeToTuple(buffer, data, offset);
+          offset = tupleWriteBinary(buffer, data, asBinary, offset);
           break;
         case List asList:
           offset = asList.dumpToTuple(buffer, data, offset);
@@ -669,19 +669,19 @@ extension InteractorTupleListExtension<T> on List<T> {
           offset = tupleWriteNull(data, offset);
           break;
         case int asInt:
-          offset = asInt.writeToTuple(data, offset);
+          offset = tupleWriteInt(data, asInt, offset);
           break;
         case double asDouble:
-          offset = asDouble.writeToTuple(data, offset);
+          offset = tupleWriteDouble(data, asDouble, offset);
           break;
         case bool asBool:
-          offset = asBool.writeToTuple(data, offset);
+          offset = tupleWriteBool(data, asBool, offset);
           break;
         case String asString:
-          offset = asString.writeToTuple(buffer, data, offset);
+          offset = tupleWriteString(buffer, data, asString, offset);
           break;
         case Uint8List asBinary:
-          offset = asBinary.writeToTuple(buffer, data, offset);
+          offset = tupleWriteBinary(buffer, data, asBinary, offset);
           break;
         case List asList:
           offset = asList.dumpToTuple(buffer, data, offset);
