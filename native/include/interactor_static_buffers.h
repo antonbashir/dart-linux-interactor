@@ -31,14 +31,14 @@ extern "C"
         pool->capacity = capacity;
         pool->count = 0;
 
-        pool->ids = (int32_t*)malloc(capacity * sizeof(int32_t));
+        pool->ids = malloc(capacity * sizeof(int32_t));
         if (pool->ids == NULL)
         {
             return -1;
         }
         memset(pool->ids, 0, capacity * sizeof(int32_t));
 
-        pool->buffers = (struct iovec*)malloc(capacity * sizeof(struct iovec));
+        pool->buffers = malloc(capacity * sizeof(struct iovec));
         if (pool->buffers == NULL)
         {
             return -1;
@@ -46,7 +46,6 @@ extern "C"
         
         for (size_t index = 0; index < capacity; index++)
         {
-            printf("%d\n", getpagesize());
             if (posix_memalign(&pool->buffers[index].iov_base, getpagesize(), size))
             {
                 return -1;
