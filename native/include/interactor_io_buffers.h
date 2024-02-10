@@ -12,9 +12,9 @@ extern "C"
 #endif
     struct interactor_io_buffers
     {
-        struct interactor_memory* memory;
         struct interactor_pool input_buffers;
         struct interactor_pool output_buffers;
+        struct interactor_memory* memory;
     };
 
     static inline int interactor_io_buffers_create(struct interactor_io_buffers* pool, struct interactor_memory* memory)

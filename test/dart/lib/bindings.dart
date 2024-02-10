@@ -5,7 +5,10 @@
 import 'dart:ffi' as ffi;
 import 'package:linux_interactor/interactor/bindings.dart' as linux_interactor;
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.UnsignedInt, ffi.Pointer<ffi.Char>)>(symbol: '__assert_fail', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+            ffi.UnsignedInt, ffi.Pointer<ffi.Char>)>(
+    symbol: '__assert_fail', assetId: 'interactor-bindings-test')
 external void __assert_fail(
   ffi.Pointer<ffi.Char> __assertion,
   ffi.Pointer<ffi.Char> __file,
@@ -13,7 +16,10 @@ external void __assert_fail(
   ffi.Pointer<ffi.Char> __function,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.UnsignedInt, ffi.Pointer<ffi.Char>)>(symbol: '__assert_perror_fail', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.UnsignedInt,
+            ffi.Pointer<ffi.Char>)>(
+    symbol: '__assert_perror_fail', assetId: 'interactor-bindings-test')
 external void __assert_perror_fail(
   int __errnum,
   ffi.Pointer<ffi.Char> __file,
@@ -21,20 +27,24 @@ external void __assert_perror_fail(
   ffi.Pointer<ffi.Char> __function,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: '__assert', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Int)>(symbol: '__assert', assetId: 'interactor-bindings-test')
 external void __assert(
   ffi.Pointer<ffi.Char> __assertion,
   ffi.Pointer<ffi.Char> __file,
   int __line,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'access', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'access', assetId: 'interactor-bindings-test')
 external int access(
   ffi.Pointer<ffi.Char> __name,
   int __type,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Int)>(symbol: 'faccessat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Int)>(
+    symbol: 'faccessat', assetId: 'interactor-bindings-test')
 external int faccessat(
   int __fd,
   ffi.Pointer<ffi.Char> __file,
@@ -42,38 +52,45 @@ external int faccessat(
   int __flag,
 );
 
-@ffi.Native<__off_t Function(ffi.Int, __off_t, ffi.Int)>(symbol: 'lseek', assetId: 'interactor-bindings-test')
+@ffi.Native<__off_t Function(ffi.Int, __off_t, ffi.Int)>(
+    symbol: 'lseek', assetId: 'interactor-bindings-test')
 external int lseek(
   int __fd,
   int __offset,
   int __whence,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'close', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'close', assetId: 'interactor-bindings-test')
 external int close(
   int __fd,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int)>(symbol: 'closefrom', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: 'closefrom', assetId: 'interactor-bindings-test')
 external void closefrom(
   int __lowfd,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'read', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'read', assetId: 'interactor-bindings-test')
 external int read(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
   int __nbytes,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'write', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'write', assetId: 'interactor-bindings-test')
 external int write(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
   int __n,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, __off_t)>(symbol: 'pread', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, __off_t)>(
+    symbol: 'pread', assetId: 'interactor-bindings-test')
 external int pread(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
@@ -81,7 +98,9 @@ external int pread(
   int __offset,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, __off_t)>(symbol: 'pwrite', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, __off_t)>(
+    symbol: 'pwrite', assetId: 'interactor-bindings-test')
 external int pwrite(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
@@ -89,57 +108,68 @@ external int pwrite(
   int __offset,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Int>)>(symbol: 'pipe', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Int>)>(
+    symbol: 'pipe', assetId: 'interactor-bindings-test')
 external int pipe(
   ffi.Pointer<ffi.Int> __pipedes,
 );
 
-@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(symbol: 'alarm', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(
+    symbol: 'alarm', assetId: 'interactor-bindings-test')
 external int alarm(
   int __seconds,
 );
 
-@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(symbol: 'sleep', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.UnsignedInt Function(ffi.UnsignedInt)>(
+    symbol: 'sleep', assetId: 'interactor-bindings-test')
 external int sleep(
   int __seconds,
 );
 
-@ffi.Native<__useconds_t Function(__useconds_t, __useconds_t)>(symbol: 'ualarm', assetId: 'interactor-bindings-test')
+@ffi.Native<__useconds_t Function(__useconds_t, __useconds_t)>(
+    symbol: 'ualarm', assetId: 'interactor-bindings-test')
 external int ualarm(
   int __value,
   int __interval,
 );
 
-@ffi.Native<ffi.Int Function(__useconds_t)>(symbol: 'usleep', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__useconds_t)>(
+    symbol: 'usleep', assetId: 'interactor-bindings-test')
 external int usleep(
   int __useconds,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'pause', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'pause', assetId: 'interactor-bindings-test')
 external int pause();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __uid_t, __gid_t)>(symbol: 'chown', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __uid_t, __gid_t)>(
+    symbol: 'chown', assetId: 'interactor-bindings-test')
 external int chown(
   ffi.Pointer<ffi.Char> __file,
   int __owner,
   int __group,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, __uid_t, __gid_t)>(symbol: 'fchown', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, __uid_t, __gid_t)>(
+    symbol: 'fchown', assetId: 'interactor-bindings-test')
 external int fchown(
   int __fd,
   int __owner,
   int __group,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __uid_t, __gid_t)>(symbol: 'lchown', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __uid_t, __gid_t)>(
+    symbol: 'lchown', assetId: 'interactor-bindings-test')
 external int lchown(
   ffi.Pointer<ffi.Char> __file,
   int __owner,
   int __group,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __uid_t, __gid_t, ffi.Int)>(symbol: 'fchownat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __uid_t, __gid_t,
+        ffi.Int)>(symbol: 'fchownat', assetId: 'interactor-bindings-test')
 external int fchownat(
   int __fd,
   ffi.Pointer<ffi.Char> __file,
@@ -148,235 +178,297 @@ external int fchownat(
   int __flag,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'chdir', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'chdir', assetId: 'interactor-bindings-test')
 external int chdir(
   ffi.Pointer<ffi.Char> __path,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'fchdir', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'fchdir', assetId: 'interactor-bindings-test')
 external int fchdir(
   int __fd,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'getcwd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'getcwd', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> getcwd(
   ffi.Pointer<ffi.Char> __buf,
   int __size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'getwd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'getwd', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> getwd(
   ffi.Pointer<ffi.Char> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'dup', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'dup', assetId: 'interactor-bindings-test')
 external int dup(
   int __fd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'dup2', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'dup2', assetId: 'interactor-bindings-test')
 external int dup2(
   int __fd,
   int __fd2,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'execve', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'execve', assetId: 'interactor-bindings-test')
 external int execve(
   ffi.Pointer<ffi.Char> __path,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __envp,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'fexecve', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'fexecve', assetId: 'interactor-bindings-test')
 external int fexecve(
   int __fd,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __envp,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'execv', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'execv', assetId: 'interactor-bindings-test')
 external int execv(
   ffi.Pointer<ffi.Char> __path,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'execle', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'execle', assetId: 'interactor-bindings-test')
 external int execle(
   ffi.Pointer<ffi.Char> __path,
   ffi.Pointer<ffi.Char> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'execl', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'execl', assetId: 'interactor-bindings-test')
 external int execl(
   ffi.Pointer<ffi.Char> __path,
   ffi.Pointer<ffi.Char> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'execvp', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'execvp', assetId: 'interactor-bindings-test')
 external int execvp(
   ffi.Pointer<ffi.Char> __file,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __argv,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'execlp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'execlp', assetId: 'interactor-bindings-test')
 external int execlp(
   ffi.Pointer<ffi.Char> __file,
   ffi.Pointer<ffi.Char> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'nice', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'nice', assetId: 'interactor-bindings-test')
 external int nice(
   int __inc,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int)>(symbol: '_exit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: '_exit', assetId: 'interactor-bindings-test')
 external void _exit(
   int __status,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'pathconf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'pathconf', assetId: 'interactor-bindings-test')
 external int pathconf(
   ffi.Pointer<ffi.Char> __path,
   int __name,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Int, ffi.Int)>(symbol: 'fpathconf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Int, ffi.Int)>(
+    symbol: 'fpathconf', assetId: 'interactor-bindings-test')
 external int fpathconf(
   int __fd,
   int __name,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Int)>(symbol: 'sysconf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Int)>(
+    symbol: 'sysconf', assetId: 'interactor-bindings-test')
 external int sysconf(
   int __name,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'confstr', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Size Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'confstr', assetId: 'interactor-bindings-test')
 external int confstr(
   int __name,
   ffi.Pointer<ffi.Char> __buf,
   int __len,
 );
 
-@ffi.Native<__pid_t Function()>(symbol: 'getpid', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function()>(
+    symbol: 'getpid', assetId: 'interactor-bindings-test')
 external int getpid();
 
-@ffi.Native<__pid_t Function()>(symbol: 'getppid', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function()>(
+    symbol: 'getppid', assetId: 'interactor-bindings-test')
 external int getppid();
 
-@ffi.Native<__pid_t Function()>(symbol: 'getpgrp', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function()>(
+    symbol: 'getpgrp', assetId: 'interactor-bindings-test')
 external int getpgrp();
 
-@ffi.Native<__pid_t Function(__pid_t)>(symbol: '__getpgid', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function(__pid_t)>(
+    symbol: '__getpgid', assetId: 'interactor-bindings-test')
 external int __getpgid(
   int __pid,
 );
 
-@ffi.Native<__pid_t Function(__pid_t)>(symbol: 'getpgid', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function(__pid_t)>(
+    symbol: 'getpgid', assetId: 'interactor-bindings-test')
 external int getpgid(
   int __pid,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, __pid_t)>(symbol: 'setpgid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, __pid_t)>(
+    symbol: 'setpgid', assetId: 'interactor-bindings-test')
 external int setpgid(
   int __pid,
   int __pgid,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'setpgrp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'setpgrp', assetId: 'interactor-bindings-test')
 external int setpgrp();
 
-@ffi.Native<__pid_t Function()>(symbol: 'setsid', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function()>(
+    symbol: 'setsid', assetId: 'interactor-bindings-test')
 external int setsid();
 
-@ffi.Native<__pid_t Function(__pid_t)>(symbol: 'getsid', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function(__pid_t)>(
+    symbol: 'getsid', assetId: 'interactor-bindings-test')
 external int getsid(
   int __pid,
 );
 
-@ffi.Native<__uid_t Function()>(symbol: 'getuid', assetId: 'interactor-bindings-test')
+@ffi.Native<__uid_t Function()>(
+    symbol: 'getuid', assetId: 'interactor-bindings-test')
 external int getuid();
 
-@ffi.Native<__uid_t Function()>(symbol: 'geteuid', assetId: 'interactor-bindings-test')
+@ffi.Native<__uid_t Function()>(
+    symbol: 'geteuid', assetId: 'interactor-bindings-test')
 external int geteuid();
 
-@ffi.Native<__gid_t Function()>(symbol: 'getgid', assetId: 'interactor-bindings-test')
+@ffi.Native<__gid_t Function()>(
+    symbol: 'getgid', assetId: 'interactor-bindings-test')
 external int getgid();
 
-@ffi.Native<__gid_t Function()>(symbol: 'getegid', assetId: 'interactor-bindings-test')
+@ffi.Native<__gid_t Function()>(
+    symbol: 'getegid', assetId: 'interactor-bindings-test')
 external int getegid();
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<__gid_t>)>(symbol: 'getgroups', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<__gid_t>)>(
+    symbol: 'getgroups', assetId: 'interactor-bindings-test')
 external int getgroups(
   int __size,
   ffi.Pointer<__gid_t> __list,
 );
 
-@ffi.Native<ffi.Int Function(__uid_t)>(symbol: 'setuid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__uid_t)>(
+    symbol: 'setuid', assetId: 'interactor-bindings-test')
 external int setuid(
   int __uid,
 );
 
-@ffi.Native<ffi.Int Function(__uid_t, __uid_t)>(symbol: 'setreuid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__uid_t, __uid_t)>(
+    symbol: 'setreuid', assetId: 'interactor-bindings-test')
 external int setreuid(
   int __ruid,
   int __euid,
 );
 
-@ffi.Native<ffi.Int Function(__uid_t)>(symbol: 'seteuid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__uid_t)>(
+    symbol: 'seteuid', assetId: 'interactor-bindings-test')
 external int seteuid(
   int __uid,
 );
 
-@ffi.Native<ffi.Int Function(__gid_t)>(symbol: 'setgid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__gid_t)>(
+    symbol: 'setgid', assetId: 'interactor-bindings-test')
 external int setgid(
   int __gid,
 );
 
-@ffi.Native<ffi.Int Function(__gid_t, __gid_t)>(symbol: 'setregid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__gid_t, __gid_t)>(
+    symbol: 'setregid', assetId: 'interactor-bindings-test')
 external int setregid(
   int __rgid,
   int __egid,
 );
 
-@ffi.Native<ffi.Int Function(__gid_t)>(symbol: 'setegid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__gid_t)>(
+    symbol: 'setegid', assetId: 'interactor-bindings-test')
 external int setegid(
   int __gid,
 );
 
-@ffi.Native<__pid_t Function()>(symbol: 'fork', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function()>(
+    symbol: 'fork', assetId: 'interactor-bindings-test')
 external int fork();
 
-@ffi.Native<ffi.Int Function()>(symbol: 'vfork', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'vfork', assetId: 'interactor-bindings-test')
 external int vfork();
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(symbol: 'ttyname', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
+    symbol: 'ttyname', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> ttyname(
   int __fd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'ttyname_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'ttyname_r', assetId: 'interactor-bindings-test')
 external int ttyname_r(
   int __fd,
   ffi.Pointer<ffi.Char> __buf,
   int __buflen,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'isatty', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'isatty', assetId: 'interactor-bindings-test')
 external int isatty(
   int __fd,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'ttyslot', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'ttyslot', assetId: 'interactor-bindings-test')
 external int ttyslot();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'link', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'link', assetId: 'interactor-bindings-test')
 external int link(
   ffi.Pointer<ffi.Char> __from,
   ffi.Pointer<ffi.Char> __to,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'linkat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int)>(symbol: 'linkat', assetId: 'interactor-bindings-test')
 external int linkat(
   int __fromfd,
   ffi.Pointer<ffi.Char> __from,
@@ -385,27 +477,35 @@ external int linkat(
   int __flags,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'symlink', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'symlink', assetId: 'interactor-bindings-test')
 external int symlink(
   ffi.Pointer<ffi.Char> __from,
   ffi.Pointer<ffi.Char> __to,
 );
 
-@ffi.Native<ssize_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'readlink', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ssize_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'readlink', assetId: 'interactor-bindings-test')
 external int readlink(
   ffi.Pointer<ffi.Char> __path,
   ffi.Pointer<ffi.Char> __buf,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>)>(symbol: 'symlinkat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'symlinkat', assetId: 'interactor-bindings-test')
 external int symlinkat(
   ffi.Pointer<ffi.Char> __from,
   int __tofd,
   ffi.Pointer<ffi.Char> __to,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'readlinkat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ssize_t Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'readlinkat', assetId: 'interactor-bindings-test')
 external int readlinkat(
   int __fd,
   ffi.Pointer<ffi.Char> __path,
@@ -413,93 +513,113 @@ external int readlinkat(
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'unlink', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'unlink', assetId: 'interactor-bindings-test')
 external int unlink(
   ffi.Pointer<ffi.Char> __name,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'unlinkat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'unlinkat', assetId: 'interactor-bindings-test')
 external int unlinkat(
   int __fd,
   ffi.Pointer<ffi.Char> __name,
   int __flag,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'rmdir', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'rmdir', assetId: 'interactor-bindings-test')
 external int rmdir(
   ffi.Pointer<ffi.Char> __path,
 );
 
-@ffi.Native<__pid_t Function(ffi.Int)>(symbol: 'tcgetpgrp', assetId: 'interactor-bindings-test')
+@ffi.Native<__pid_t Function(ffi.Int)>(
+    symbol: 'tcgetpgrp', assetId: 'interactor-bindings-test')
 external int tcgetpgrp(
   int __fd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, __pid_t)>(symbol: 'tcsetpgrp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, __pid_t)>(
+    symbol: 'tcsetpgrp', assetId: 'interactor-bindings-test')
 external int tcsetpgrp(
   int __fd,
   int __pgrp_id,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function()>(symbol: 'getlogin', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function()>(
+    symbol: 'getlogin', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> getlogin();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'getlogin_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'getlogin_r', assetId: 'interactor-bindings-test')
 external int getlogin_r(
   ffi.Pointer<ffi.Char> __name,
   int __name_len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'setlogin', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'setlogin', assetId: 'interactor-bindings-test')
 external int setlogin(
   ffi.Pointer<ffi.Char> __name,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(symbol: 'getopt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Char>)>(
+    symbol: 'getopt', assetId: 'interactor-bindings-test')
 external int getopt(
   int ___argc,
   ffi.Pointer<ffi.Pointer<ffi.Char>> ___argv,
   ffi.Pointer<ffi.Char> __shortopts,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'gethostname', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'gethostname', assetId: 'interactor-bindings-test')
 external int gethostname(
   ffi.Pointer<ffi.Char> __name,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'sethostname', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'sethostname', assetId: 'interactor-bindings-test')
 external int sethostname(
   ffi.Pointer<ffi.Char> __name,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Long)>(symbol: 'sethostid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Long)>(
+    symbol: 'sethostid', assetId: 'interactor-bindings-test')
 external int sethostid(
   int __id,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'getdomainname', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'getdomainname', assetId: 'interactor-bindings-test')
 external int getdomainname(
   ffi.Pointer<ffi.Char> __name,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'setdomainname', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'setdomainname', assetId: 'interactor-bindings-test')
 external int setdomainname(
   ffi.Pointer<ffi.Char> __name,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'vhangup', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'vhangup', assetId: 'interactor-bindings-test')
 external int vhangup();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'revoke', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'revoke', assetId: 'interactor-bindings-test')
 external int revoke(
   ffi.Pointer<ffi.Char> __file,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Size, ffi.Size, ffi.UnsignedInt)>(symbol: 'profil', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Size, ffi.Size,
+        ffi.UnsignedInt)>(symbol: 'profil', assetId: 'interactor-bindings-test')
 external int profil(
   ffi.Pointer<ffi.UnsignedShort> __sample_buffer,
   int __size,
@@ -507,119 +627,151 @@ external int profil(
   int __scale,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'acct', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'acct', assetId: 'interactor-bindings-test')
 external int acct(
   ffi.Pointer<ffi.Char> __name,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function()>(symbol: 'getusershell', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function()>(
+    symbol: 'getusershell', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> getusershell();
 
-@ffi.Native<ffi.Void Function()>(symbol: 'endusershell', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'endusershell', assetId: 'interactor-bindings-test')
 external void endusershell();
 
-@ffi.Native<ffi.Void Function()>(symbol: 'setusershell', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'setusershell', assetId: 'interactor-bindings-test')
 external void setusershell();
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'daemon', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'daemon', assetId: 'interactor-bindings-test')
 external int daemon(
   int __nochdir,
   int __noclose,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'chroot', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'chroot', assetId: 'interactor-bindings-test')
 external int chroot(
   ffi.Pointer<ffi.Char> __path,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'getpass', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'getpass', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> getpass(
   ffi.Pointer<ffi.Char> __prompt,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'fsync', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'fsync', assetId: 'interactor-bindings-test')
 external int fsync(
   int __fd,
 );
 
-@ffi.Native<ffi.Long Function()>(symbol: 'gethostid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function()>(
+    symbol: 'gethostid', assetId: 'interactor-bindings-test')
 external int gethostid();
 
-@ffi.Native<ffi.Void Function()>(symbol: 'sync', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'sync', assetId: 'interactor-bindings-test')
 external void sync1();
 
-@ffi.Native<ffi.Int Function()>(symbol: 'getpagesize', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getpagesize', assetId: 'interactor-bindings-test')
 external int getpagesize();
 
-@ffi.Native<ffi.Int Function()>(symbol: 'getdtablesize', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getdtablesize', assetId: 'interactor-bindings-test')
 external int getdtablesize();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __off_t)>(symbol: 'truncate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __off_t)>(
+    symbol: 'truncate', assetId: 'interactor-bindings-test')
 external int truncate(
   ffi.Pointer<ffi.Char> __file,
   int __length,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, __off_t)>(symbol: 'ftruncate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, __off_t)>(
+    symbol: 'ftruncate', assetId: 'interactor-bindings-test')
 external int ftruncate(
   int __fd,
   int __length,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>)>(symbol: 'brk', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>)>(
+    symbol: 'brk', assetId: 'interactor-bindings-test')
 external int brk(
   ffi.Pointer<ffi.Void> __addr,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.IntPtr)>(symbol: 'sbrk', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.IntPtr)>(
+    symbol: 'sbrk', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> sbrk(
   int __delta,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Long)>(symbol: 'syscall', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Long)>(
+    symbol: 'syscall', assetId: 'interactor-bindings-test')
 external int syscall(
   int __sysno,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, __off_t)>(symbol: 'lockf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, __off_t)>(
+    symbol: 'lockf', assetId: 'interactor-bindings-test')
 external int lockf(
   int __fd,
   int __cmd,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'fdatasync', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'fdatasync', assetId: 'interactor-bindings-test')
 external int fdatasync(
   int __fildes,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'crypt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'crypt', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> crypt(
   ffi.Pointer<ffi.Char> __key,
   ffi.Pointer<ffi.Char> __salt,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'getentropy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'getentropy', assetId: 'interactor-bindings-test')
 external int getentropy(
   ffi.Pointer<ffi.Void> __buffer,
   int __length,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'memcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memcpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> memcpy(
   ffi.Pointer<ffi.Void> __dest,
   ffi.Pointer<ffi.Void> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'memmove', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memmove', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> memmove(
   ffi.Pointer<ffi.Void> __dest,
   ffi.Pointer<ffi.Void> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Int, ffi.Size)>(symbol: 'memccpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Int,
+        ffi.Size)>(symbol: 'memccpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> memccpy(
   ffi.Pointer<ffi.Void> __dest,
   ffi.Pointer<ffi.Void> __src,
@@ -627,94 +779,122 @@ external ffi.Pointer<ffi.Void> memccpy(
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int, ffi.Size)>(symbol: 'memset', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int,
+        ffi.Size)>(symbol: 'memset', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> memset(
   ffi.Pointer<ffi.Void> __s,
   int __c,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'memcmp', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memcmp', assetId: 'interactor-bindings-test')
 external int memcmp(
   ffi.Pointer<ffi.Void> __s1,
   ffi.Pointer<ffi.Void> __s2,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: '__memcmpeq', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: '__memcmpeq', assetId: 'interactor-bindings-test')
 external int __memcmpeq(
   ffi.Pointer<ffi.Void> __s1,
   ffi.Pointer<ffi.Void> __s2,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int, ffi.Size)>(symbol: 'memchr', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Int,
+        ffi.Size)>(symbol: 'memchr', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> memchr(
   ffi.Pointer<ffi.Void> __s,
   int __c,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strcpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strncpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strncpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcat', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strcat(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strncat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncat', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strncat(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcmp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcmp', assetId: 'interactor-bindings-test')
 external int strcmp(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strncmp', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncmp', assetId: 'interactor-bindings-test')
 external int strncmp(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcoll', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcoll', assetId: 'interactor-bindings-test')
 external int strcoll(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strxfrm', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strxfrm', assetId: 'interactor-bindings-test')
 external int strxfrm(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, locale_t)>(symbol: 'strcoll_l', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        locale_t)>(symbol: 'strcoll_l', assetId: 'interactor-bindings-test')
 external int strcoll_l(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
   locale_t __l,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size, locale_t)>(symbol: 'strxfrm_l', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size,
+        locale_t)>(symbol: 'strxfrm_l', assetId: 'interactor-bindings-test')
 external int strxfrm_l(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
@@ -722,86 +902,120 @@ external int strxfrm_l(
   locale_t __l,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'strdup', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'strdup', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strdup(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strndup', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'strndup', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strndup(
   ffi.Pointer<ffi.Char> __string,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'strchr', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'strchr', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strchr(
   ffi.Pointer<ffi.Char> __s,
   int __c,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'strrchr', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'strrchr', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strrchr(
   ffi.Pointer<ffi.Char> __s,
   int __c,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'strchrnul', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'strchrnul', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strchrnul(
   ffi.Pointer<ffi.Char> __s,
   int __c,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcspn', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.UnsignedLong Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcspn', assetId: 'interactor-bindings-test')
 external int strcspn(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __reject,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strspn', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.UnsignedLong Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strspn', assetId: 'interactor-bindings-test')
 external int strspn(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __accept,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strpbrk', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strpbrk', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strpbrk(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __accept,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strstr', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strstr', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strstr(
   ffi.Pointer<ffi.Char> __haystack,
   ffi.Pointer<ffi.Char> __needle,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strtok', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strtok', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strtok(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __delim,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: '__strtok_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: '__strtok_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> __strtok_r(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __delim,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __save_ptr,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'strtok_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'strtok_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strtok_r(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __delim,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __save_ptr,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcasestr', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcasestr', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strcasestr(
   ffi.Pointer<ffi.Char> __haystack,
   ffi.Pointer<ffi.Char> __needle,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'memmem', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'memmem', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> memmem(
   ffi.Pointer<ffi.Void> __haystack,
   int __haystacklen,
@@ -809,117 +1023,143 @@ external ffi.Pointer<ffi.Void> memmem(
   int __needlelen,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: '__mempcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: '__mempcpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> __mempcpy(
   ffi.Pointer<ffi.Void> __dest,
   ffi.Pointer<ffi.Void> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'mempcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'mempcpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> mempcpy(
   ffi.Pointer<ffi.Void> __dest,
   ffi.Pointer<ffi.Void> __src,
   int __n,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>)>(symbol: 'strlen', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'strlen', assetId: 'interactor-bindings-test')
 external int strlen(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strnlen', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'strnlen', assetId: 'interactor-bindings-test')
 external int strnlen(
   ffi.Pointer<ffi.Char> __string,
   int __maxlen,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(symbol: 'strerror', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
+    symbol: 'strerror', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strerror(
   int __errnum,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strerror_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'strerror_r', assetId: 'interactor-bindings-test')
 external int strerror_r(
   int __errnum,
   ffi.Pointer<ffi.Char> __buf,
   int __buflen,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int, locale_t)>(symbol: 'strerror_l', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int, locale_t)>(
+    symbol: 'strerror_l', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strerror_l(
   int __errnum,
   locale_t __l,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'bcmp', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'bcmp', assetId: 'interactor-bindings-test')
 external int bcmp(
   ffi.Pointer<ffi.Void> __s1,
   ffi.Pointer<ffi.Void> __s2,
   int __n,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'bcopy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'bcopy', assetId: 'interactor-bindings-test')
 external void bcopy(
   ffi.Pointer<ffi.Void> __src,
   ffi.Pointer<ffi.Void> __dest,
   int __n,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'bzero', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'bzero', assetId: 'interactor-bindings-test')
 external void bzero(
   ffi.Pointer<ffi.Void> __s,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'index', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'index', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> index(
   ffi.Pointer<ffi.Char> __s,
   int __c,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'rindex', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'rindex', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> rindex(
   ffi.Pointer<ffi.Char> __s,
   int __c,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'ffs', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'ffs', assetId: 'interactor-bindings-test')
 external int ffs(
   int __i,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Long)>(symbol: 'ffsl', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Long)>(
+    symbol: 'ffsl', assetId: 'interactor-bindings-test')
 external int ffsl(
   int __l,
 );
 
-@ffi.Native<ffi.Int Function(ffi.LongLong)>(symbol: 'ffsll', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.LongLong)>(
+    symbol: 'ffsll', assetId: 'interactor-bindings-test')
 external int ffsll(
   int __ll,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'strcasecmp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strcasecmp', assetId: 'interactor-bindings-test')
 external int strcasecmp(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strncasecmp', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strncasecmp', assetId: 'interactor-bindings-test')
 external int strncasecmp(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, locale_t)>(symbol: 'strcasecmp_l', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        locale_t)>(symbol: 'strcasecmp_l', assetId: 'interactor-bindings-test')
 external int strcasecmp_l(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
   locale_t __loc,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size, locale_t)>(symbol: 'strncasecmp_l', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size,
+        locale_t)>(symbol: 'strncasecmp_l', assetId: 'interactor-bindings-test')
 external int strncasecmp_l(
   ffi.Pointer<ffi.Char> __s1,
   ffi.Pointer<ffi.Char> __s2,
@@ -927,151 +1167,208 @@ external int strncasecmp_l(
   locale_t __loc,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'explicit_bzero', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'explicit_bzero', assetId: 'interactor-bindings-test')
 external void explicit_bzero(
   ffi.Pointer<ffi.Void> __s,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(symbol: 'strsep', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'strsep', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strsep(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __stringp,
   ffi.Pointer<ffi.Char> __delim,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(symbol: 'strsignal', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Int)>(
+    symbol: 'strsignal', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> strsignal(
   int __sig,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: '__stpcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: '__stpcpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> __stpcpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'stpcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'stpcpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> stpcpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: '__stpncpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: '__stpncpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> __stpncpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'stpncpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'stpncpy', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> stpncpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strlcpy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strlcpy', assetId: 'interactor-bindings-test')
 external int strlcpy(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'strlcat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'strlcat', assetId: 'interactor-bindings-test')
 external int strlcat(
   ffi.Pointer<ffi.Char> __dest,
   ffi.Pointer<ffi.Char> __src,
   int __n,
 );
 
-@ffi.Native<ffi.Size Function()>(symbol: '__ctype_get_mb_cur_max', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Size Function()>(
+    symbol: '__ctype_get_mb_cur_max', assetId: 'interactor-bindings-test')
 external int __ctype_get_mb_cur_max();
 
-@ffi.Native<ffi.Double Function(ffi.Pointer<ffi.Char>)>(symbol: 'atof', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Double Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'atof', assetId: 'interactor-bindings-test')
 external double atof(
   ffi.Pointer<ffi.Char> __nptr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'atoi', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'atoi', assetId: 'interactor-bindings-test')
 external int atoi(
   ffi.Pointer<ffi.Char> __nptr,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>)>(symbol: 'atol', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'atol', assetId: 'interactor-bindings-test')
 external int atol(
   ffi.Pointer<ffi.Char> __nptr,
 );
 
-@ffi.Native<ffi.LongLong Function(ffi.Pointer<ffi.Char>)>(symbol: 'atoll', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.LongLong Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'atoll', assetId: 'interactor-bindings-test')
 external int atoll(
   ffi.Pointer<ffi.Char> __nptr,
 );
 
-@ffi.Native<ffi.Double Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'strtod', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Double Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'strtod', assetId: 'interactor-bindings-test')
 external double strtod(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
 );
 
-@ffi.Native<ffi.Float Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'strtof', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Float Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'strtof', assetId: 'interactor-bindings-test')
 external double strtof(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtol', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Long Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtol', assetId: 'interactor-bindings-test')
 external int strtol(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtoul', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.UnsignedLong Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtoul', assetId: 'interactor-bindings-test')
 external int strtoul(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.LongLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtoq', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.LongLong Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtoq', assetId: 'interactor-bindings-test')
 external int strtoq(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.UnsignedLongLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtouq', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.UnsignedLongLong Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtouq', assetId: 'interactor-bindings-test')
 external int strtouq(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.LongLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtoll', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.LongLong Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtoll', assetId: 'interactor-bindings-test')
 external int strtoll(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.UnsignedLongLong Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtoull', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.UnsignedLongLong Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtoull', assetId: 'interactor-bindings-test')
 external int strtoull(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Long)>(symbol: 'l64a', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Long)>(
+    symbol: 'l64a', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> l64a(
   int __n,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>)>(symbol: 'a64l', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'a64l', assetId: 'interactor-bindings-test')
 external int a64l(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>(symbol: 'select', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>,
+            ffi.Pointer<fd_set>, ffi.Pointer<timeval>)>(
+    symbol: 'select', assetId: 'interactor-bindings-test')
 external int select(
   int __nfds,
   ffi.Pointer<fd_set> __readfds,
@@ -1080,7 +1377,14 @@ external int select(
   ffi.Pointer<timeval> __timeout,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<fd_set>, ffi.Pointer<timespec>, ffi.Pointer<__sigset_t>)>(
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int,
+            ffi.Pointer<fd_set>,
+            ffi.Pointer<fd_set>,
+            ffi.Pointer<fd_set>,
+            ffi.Pointer<timespec>,
+            ffi.Pointer<__sigset_t>)>(
     symbol: 'pselect', assetId: 'interactor-bindings-test')
 external int pselect(
   int __nfds,
@@ -1091,39 +1395,49 @@ external int pselect(
   ffi.Pointer<__sigset_t> __sigmask,
 );
 
-@ffi.Native<ffi.Long Function()>(symbol: 'random', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function()>(
+    symbol: 'random', assetId: 'interactor-bindings-test')
 external int random();
 
-@ffi.Native<ffi.Void Function(ffi.UnsignedInt)>(symbol: 'srandom', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.UnsignedInt)>(
+    symbol: 'srandom', assetId: 'interactor-bindings-test')
 external void srandom(
   int __seed,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'initstate', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'initstate', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> initstate(
   int __seed,
   ffi.Pointer<ffi.Char> __statebuf,
   int __statelen,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'setstate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'setstate', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> setstate(
   ffi.Pointer<ffi.Char> __statebuf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<random_data>, ffi.Pointer<ffi.Int32>)>(symbol: 'random_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<random_data>, ffi.Pointer<ffi.Int32>)>(
+    symbol: 'random_r', assetId: 'interactor-bindings-test')
 external int random_r(
   ffi.Pointer<random_data> __buf,
   ffi.Pointer<ffi.Int32> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<random_data>)>(symbol: 'srandom_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<random_data>)>(
+    symbol: 'srandom_r', assetId: 'interactor-bindings-test')
 external int srandom_r(
   int __seed,
   ffi.Pointer<random_data> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<random_data>)>(symbol: 'initstate_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<ffi.Char>, ffi.Size,
+            ffi.Pointer<random_data>)>(
+    symbol: 'initstate_r', assetId: 'interactor-bindings-test')
 external int initstate_r(
   int __seed,
   ffi.Pointer<ffi.Char> __statebuf,
@@ -1131,280 +1445,367 @@ external int initstate_r(
   ffi.Pointer<random_data> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<random_data>)>(symbol: 'setstate_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<random_data>)>(
+    symbol: 'setstate_r', assetId: 'interactor-bindings-test')
 external int setstate_r(
   ffi.Pointer<ffi.Char> __statebuf,
   ffi.Pointer<random_data> __buf,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'rand', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'rand', assetId: 'interactor-bindings-test')
 external int rand();
 
-@ffi.Native<ffi.Void Function(ffi.UnsignedInt)>(symbol: 'srand', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.UnsignedInt)>(
+    symbol: 'srand', assetId: 'interactor-bindings-test')
 external void srand(
   int __seed,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedInt>)>(symbol: 'rand_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedInt>)>(
+    symbol: 'rand_r', assetId: 'interactor-bindings-test')
 external int rand_r(
   ffi.Pointer<ffi.UnsignedInt> __seed,
 );
 
-@ffi.Native<ffi.Double Function()>(symbol: 'drand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Double Function()>(
+    symbol: 'drand48', assetId: 'interactor-bindings-test')
 external double drand48();
 
-@ffi.Native<ffi.Double Function(ffi.Pointer<ffi.UnsignedShort>)>(symbol: 'erand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Double Function(ffi.Pointer<ffi.UnsignedShort>)>(
+    symbol: 'erand48', assetId: 'interactor-bindings-test')
 external double erand48(
   ffi.Pointer<ffi.UnsignedShort> __xsubi,
 );
 
-@ffi.Native<ffi.Long Function()>(symbol: 'lrand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function()>(
+    symbol: 'lrand48', assetId: 'interactor-bindings-test')
 external int lrand48();
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.UnsignedShort>)>(symbol: 'nrand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.UnsignedShort>)>(
+    symbol: 'nrand48', assetId: 'interactor-bindings-test')
 external int nrand48(
   ffi.Pointer<ffi.UnsignedShort> __xsubi,
 );
 
-@ffi.Native<ffi.Long Function()>(symbol: 'mrand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function()>(
+    symbol: 'mrand48', assetId: 'interactor-bindings-test')
 external int mrand48();
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.UnsignedShort>)>(symbol: 'jrand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Pointer<ffi.UnsignedShort>)>(
+    symbol: 'jrand48', assetId: 'interactor-bindings-test')
 external int jrand48(
   ffi.Pointer<ffi.UnsignedShort> __xsubi,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Long)>(symbol: 'srand48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Long)>(
+    symbol: 'srand48', assetId: 'interactor-bindings-test')
 external void srand48(
   int __seedval,
 );
 
-@ffi.Native<ffi.Pointer<ffi.UnsignedShort> Function(ffi.Pointer<ffi.UnsignedShort>)>(symbol: 'seed48', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.UnsignedShort> Function(
+            ffi.Pointer<ffi.UnsignedShort>)>(
+    symbol: 'seed48', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.UnsignedShort> seed48(
   ffi.Pointer<ffi.UnsignedShort> __seed16v,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.UnsignedShort>)>(symbol: 'lcong48', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.UnsignedShort>)>(
+    symbol: 'lcong48', assetId: 'interactor-bindings-test')
 external void lcong48(
   ffi.Pointer<ffi.UnsignedShort> __param,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Double>)>(symbol: 'drand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Double>)>(
+    symbol: 'drand48_r', assetId: 'interactor-bindings-test')
 external int drand48_r(
   ffi.Pointer<drand48_data> __buffer,
   ffi.Pointer<ffi.Double> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Double>)>(symbol: 'erand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>,
+            ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Double>)>(
+    symbol: 'erand48_r', assetId: 'interactor-bindings-test')
 external int erand48_r(
   ffi.Pointer<ffi.UnsignedShort> __xsubi,
   ffi.Pointer<drand48_data> __buffer,
   ffi.Pointer<ffi.Double> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(symbol: 'lrand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(
+    symbol: 'lrand48_r', assetId: 'interactor-bindings-test')
 external int lrand48_r(
   ffi.Pointer<drand48_data> __buffer,
   ffi.Pointer<ffi.Long> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(symbol: 'nrand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>,
+            ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(
+    symbol: 'nrand48_r', assetId: 'interactor-bindings-test')
 external int nrand48_r(
   ffi.Pointer<ffi.UnsignedShort> __xsubi,
   ffi.Pointer<drand48_data> __buffer,
   ffi.Pointer<ffi.Long> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(symbol: 'mrand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(
+    symbol: 'mrand48_r', assetId: 'interactor-bindings-test')
 external int mrand48_r(
   ffi.Pointer<drand48_data> __buffer,
   ffi.Pointer<ffi.Long> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(symbol: 'jrand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>,
+            ffi.Pointer<drand48_data>, ffi.Pointer<ffi.Long>)>(
+    symbol: 'jrand48_r', assetId: 'interactor-bindings-test')
 external int jrand48_r(
   ffi.Pointer<ffi.UnsignedShort> __xsubi,
   ffi.Pointer<drand48_data> __buffer,
   ffi.Pointer<ffi.Long> __result,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Long, ffi.Pointer<drand48_data>)>(symbol: 'srand48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Long, ffi.Pointer<drand48_data>)>(
+    symbol: 'srand48_r', assetId: 'interactor-bindings-test')
 external int srand48_r(
   int __seedval,
   ffi.Pointer<drand48_data> __buffer,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>)>(symbol: 'seed48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>)>(
+    symbol: 'seed48_r', assetId: 'interactor-bindings-test')
 external int seed48_r(
   ffi.Pointer<ffi.UnsignedShort> __seed16v,
   ffi.Pointer<drand48_data> __buffer,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>)>(symbol: 'lcong48_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>)>(
+    symbol: 'lcong48_r', assetId: 'interactor-bindings-test')
 external int lcong48_r(
   ffi.Pointer<ffi.UnsignedShort> __param,
   ffi.Pointer<drand48_data> __buffer,
 );
 
-@ffi.Native<__uint32_t Function()>(symbol: 'arc4random', assetId: 'interactor-bindings-test')
+@ffi.Native<__uint32_t Function()>(
+    symbol: 'arc4random', assetId: 'interactor-bindings-test')
 external int arc4random();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'arc4random_buf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'arc4random_buf', assetId: 'interactor-bindings-test')
 external void arc4random_buf(
   ffi.Pointer<ffi.Void> __buf,
   int __size,
 );
 
-@ffi.Native<__uint32_t Function(__uint32_t)>(symbol: 'arc4random_uniform', assetId: 'interactor-bindings-test')
+@ffi.Native<__uint32_t Function(__uint32_t)>(
+    symbol: 'arc4random_uniform', assetId: 'interactor-bindings-test')
 external int arc4random_uniform(
   int __upper_bound,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size)>(symbol: 'malloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size)>(
+    symbol: 'malloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> malloc(
   int __size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size, ffi.Size)>(symbol: 'calloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size, ffi.Size)>(
+    symbol: 'calloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> calloc(
   int __nmemb,
   int __size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'realloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'realloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> realloc(
   ffi.Pointer<ffi.Void> __ptr,
   int __size,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>)>(symbol: 'free', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>)>(
+    symbol: 'free', assetId: 'interactor-bindings-test')
 external void free(
   ffi.Pointer<ffi.Void> __ptr,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size)>(symbol: 'reallocarray', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size,
+        ffi.Size)>(symbol: 'reallocarray', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> reallocarray(
   ffi.Pointer<ffi.Void> __ptr,
   int __nmemb,
   int __size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size)>(symbol: 'alloca', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size)>(
+    symbol: 'alloca', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> alloca(
   int __size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size)>(symbol: 'valloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size)>(
+    symbol: 'valloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> valloc(
   int __size,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Size, ffi.Size)>(symbol: 'posix_memalign', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Size, ffi.Size)>(
+    symbol: 'posix_memalign', assetId: 'interactor-bindings-test')
 external int posix_memalign(
   ffi.Pointer<ffi.Pointer<ffi.Void>> __memptr,
   int __alignment,
   int __size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size, ffi.Size)>(symbol: 'aligned_alloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Size, ffi.Size)>(
+    symbol: 'aligned_alloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> aligned_alloc(
   int __alignment,
   int __size,
 );
 
-@ffi.Native<ffi.Void Function()>(symbol: 'abort', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'abort', assetId: 'interactor-bindings-test')
 external void abort();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(symbol: 'atexit', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(
+    symbol: 'atexit', assetId: 'interactor-bindings-test')
 external int atexit(
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> __func,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(symbol: 'at_quick_exit', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(
+    symbol: 'at_quick_exit', assetId: 'interactor-bindings-test')
 external int at_quick_exit(
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> __func,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int __status, ffi.Pointer<ffi.Void> __arg)>>, ffi.Pointer<ffi.Void>)>(
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<
+                ffi.NativeFunction<
+                    ffi.Void Function(
+                        ffi.Int __status, ffi.Pointer<ffi.Void> __arg)>>,
+            ffi.Pointer<ffi.Void>)>(
     symbol: 'on_exit', assetId: 'interactor-bindings-test')
 external int on_exit(
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int __status, ffi.Pointer<ffi.Void> __arg)>> __func,
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int __status, ffi.Pointer<ffi.Void> __arg)>>
+      __func,
   ffi.Pointer<ffi.Void> __arg,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int)>(symbol: 'exit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: 'exit', assetId: 'interactor-bindings-test')
 external void exit(
   int __status,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int)>(symbol: 'quick_exit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: 'quick_exit', assetId: 'interactor-bindings-test')
 external void quick_exit(
   int __status,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int)>(symbol: '_Exit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: '_Exit', assetId: 'interactor-bindings-test')
 external void _Exit(
   int __status,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'getenv', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'getenv', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> getenv(
   ffi.Pointer<ffi.Char> __name,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'putenv', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'putenv', assetId: 'interactor-bindings-test')
 external int putenv(
   ffi.Pointer<ffi.Char> __string,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'setenv', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+        ffi.Int)>(symbol: 'setenv', assetId: 'interactor-bindings-test')
 external int setenv(
   ffi.Pointer<ffi.Char> __name,
   ffi.Pointer<ffi.Char> __value,
   int __replace,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'unsetenv', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'unsetenv', assetId: 'interactor-bindings-test')
 external int unsetenv(
   ffi.Pointer<ffi.Char> __name,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'clearenv', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'clearenv', assetId: 'interactor-bindings-test')
 external int clearenv();
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'mktemp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'mktemp', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> mktemp(
   ffi.Pointer<ffi.Char> __template,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'mkstemp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'mkstemp', assetId: 'interactor-bindings-test')
 external int mkstemp(
   ffi.Pointer<ffi.Char> __template,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'mkstemps', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'mkstemps', assetId: 'interactor-bindings-test')
 external int mkstemps(
   ffi.Pointer<ffi.Char> __template,
   int __suffixlen,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'mkdtemp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'mkdtemp', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> mkdtemp(
   ffi.Pointer<ffi.Char> __template,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'system', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'system', assetId: 'interactor-bindings-test')
 external int system(
   ffi.Pointer<ffi.Char> __command,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'realpath', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'realpath', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> realpath(
   ffi.Pointer<ffi.Char> __name,
   ffi.Pointer<ffi.Char> __resolved,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, __compar_fn_t)>(symbol: 'bsearch', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Size,
+        __compar_fn_t)>(symbol: 'bsearch', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> bsearch(
   ffi.Pointer<ffi.Void> __key,
   ffi.Pointer<ffi.Void> __base,
@@ -1413,7 +1814,9 @@ external ffi.Pointer<ffi.Void> bsearch(
   __compar_fn_t __compar,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, __compar_fn_t)>(symbol: 'qsort', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size,
+        __compar_fn_t)>(symbol: 'qsort', assetId: 'interactor-bindings-test')
 external void qsort(
   ffi.Pointer<ffi.Void> __base,
   int __nmemb,
@@ -1421,40 +1824,49 @@ external void qsort(
   __compar_fn_t __compar,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'abs', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'abs', assetId: 'interactor-bindings-test')
 external int abs(
   int __x,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Long)>(symbol: 'labs', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Long)>(
+    symbol: 'labs', assetId: 'interactor-bindings-test')
 external int labs(
   int __x,
 );
 
-@ffi.Native<ffi.LongLong Function(ffi.LongLong)>(symbol: 'llabs', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.LongLong Function(ffi.LongLong)>(
+    symbol: 'llabs', assetId: 'interactor-bindings-test')
 external int llabs(
   int __x,
 );
 
-@ffi.Native<div_t Function(ffi.Int, ffi.Int)>(symbol: 'div', assetId: 'interactor-bindings-test')
+@ffi.Native<div_t Function(ffi.Int, ffi.Int)>(
+    symbol: 'div', assetId: 'interactor-bindings-test')
 external div_t div(
   int __numer,
   int __denom,
 );
 
-@ffi.Native<ldiv_t Function(ffi.Long, ffi.Long)>(symbol: 'ldiv', assetId: 'interactor-bindings-test')
+@ffi.Native<ldiv_t Function(ffi.Long, ffi.Long)>(
+    symbol: 'ldiv', assetId: 'interactor-bindings-test')
 external ldiv_t ldiv(
   int __numer,
   int __denom,
 );
 
-@ffi.Native<lldiv_t Function(ffi.LongLong, ffi.LongLong)>(symbol: 'lldiv', assetId: 'interactor-bindings-test')
+@ffi.Native<lldiv_t Function(ffi.LongLong, ffi.LongLong)>(
+    symbol: 'lldiv', assetId: 'interactor-bindings-test')
 external lldiv_t lldiv(
   int __numer,
   int __denom,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Double, ffi.Int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>(symbol: 'ecvt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Double, ffi.Int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'ecvt', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> ecvt(
   double __value,
   int __ndigit,
@@ -1462,7 +1874,10 @@ external ffi.Pointer<ffi.Char> ecvt(
   ffi.Pointer<ffi.Int> __sign,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Double, ffi.Int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>(symbol: 'fcvt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Double, ffi.Int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'fcvt', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> fcvt(
   double __value,
   int __ndigit,
@@ -1470,14 +1885,24 @@ external ffi.Pointer<ffi.Char> fcvt(
   ffi.Pointer<ffi.Int> __sign,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Double, ffi.Int, ffi.Pointer<ffi.Char>)>(symbol: 'gcvt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Double, ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'gcvt', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> gcvt(
   double __value,
   int __ndigit,
   ffi.Pointer<ffi.Char> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Double, ffi.Int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'ecvt_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(
+        ffi.Double,
+        ffi.Int,
+        ffi.Pointer<ffi.Int>,
+        ffi.Pointer<ffi.Int>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'ecvt_r', assetId: 'interactor-bindings-test')
 external int ecvt_r(
   double __value,
   int __ndigit,
@@ -1487,7 +1912,14 @@ external int ecvt_r(
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Double, ffi.Int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'fcvt_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(
+        ffi.Double,
+        ffi.Int,
+        ffi.Pointer<ffi.Int>,
+        ffi.Pointer<ffi.Int>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'fcvt_r', assetId: 'interactor-bindings-test')
 external int fcvt_r(
   double __value,
   int __ndigit,
@@ -1497,52 +1929,67 @@ external int fcvt_r(
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'mblen', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'mblen', assetId: 'interactor-bindings-test')
 external int mblen(
   ffi.Pointer<ffi.Char> __s,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.WChar>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'mbtowc', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<ffi.WChar>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'mbtowc', assetId: 'interactor-bindings-test')
 external int mbtowc(
   ffi.Pointer<ffi.WChar> __pwc,
   ffi.Pointer<ffi.Char> __s,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.WChar)>(symbol: 'wctomb', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.WChar)>(
+    symbol: 'wctomb', assetId: 'interactor-bindings-test')
 external int wctomb(
   ffi.Pointer<ffi.Char> __s,
   int __wchar,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.WChar>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'mbstowcs', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Size Function(ffi.Pointer<ffi.WChar>, ffi.Pointer<ffi.Char>,
+        ffi.Size)>(symbol: 'mbstowcs', assetId: 'interactor-bindings-test')
 external int mbstowcs(
   ffi.Pointer<ffi.WChar> __pwcs,
   ffi.Pointer<ffi.Char> __s,
   int __n,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.WChar>, ffi.Size)>(symbol: 'wcstombs', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.WChar>,
+        ffi.Size)>(symbol: 'wcstombs', assetId: 'interactor-bindings-test')
 external int wcstombs(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.WChar> __pwcs,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'rpmatch', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'rpmatch', assetId: 'interactor-bindings-test')
 external int rpmatch(
   ffi.Pointer<ffi.Char> __response,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>(symbol: 'getsubopt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Pointer<ffi.Char>>)>(
+    symbol: 'getsubopt', assetId: 'interactor-bindings-test')
 external int getsubopt(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __optionp,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __tokens,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __valuep,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Double>, ffi.Int)>(symbol: 'getloadavg', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Double>, ffi.Int)>(
+    symbol: 'getloadavg', assetId: 'interactor-bindings-test')
 external int getloadavg(
   ffi.Pointer<ffi.Double> __loadavg,
   int __nelem,
@@ -1550,31 +1997,37 @@ external int getloadavg(
 
 /// It is called on allocation failure in small_xmalloc. Print failure diagonstic
 /// and exit with failure.
-@ffi.Native<ffi.Void Function(ffi.Size, ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'small_xmalloc_fail', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Size, ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'small_xmalloc_fail', assetId: 'interactor-bindings-test')
 external void small_xmalloc_fail(
   int size,
   ffi.Pointer<ffi.Char> filename,
   int line,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>, ffi.Pointer<slab_cache>, ffi.Size)>(symbol: 'ibuf_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<ibuf>, ffi.Pointer<slab_cache>,
+        ffi.Size)>(symbol: 'ibuf_create', assetId: 'interactor-bindings-test')
 external void ibuf_create(
   ffi.Pointer<ibuf> ibuf,
   ffi.Pointer<slab_cache> slabc,
   int start_capacity,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(symbol: 'ibuf_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(
+    symbol: 'ibuf_destroy', assetId: 'interactor-bindings-test')
 external void ibuf_destroy(
   ffi.Pointer<ibuf> ibuf,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(symbol: 'ibuf_reinit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(
+    symbol: 'ibuf_reinit', assetId: 'interactor-bindings-test')
 external void ibuf_reinit(
   ffi.Pointer<ibuf> ibuf,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ibuf>, ffi.Size)>(symbol: 'ibuf_reserve_slow', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ibuf>, ffi.Size)>(
+    symbol: 'ibuf_reserve_slow', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> ibuf_reserve_slow(
   ffi.Pointer<ibuf> ibuf,
   int size,
@@ -1582,12 +2035,20 @@ external ffi.Pointer<ffi.Void> ibuf_reserve_slow(
 
 /// Shrink the buffer to the minimal possible capacity needed to store the data
 /// written to the buffer and not yet consumed.
-@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(symbol: 'ibuf_shrink', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ibuf>)>(
+    symbol: 'ibuf_shrink', assetId: 'interactor-bindings-test')
 external void ibuf_shrink(
   ffi.Pointer<ibuf> ibuf,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Int, ffi.Int, __off_t)>(symbol: 'mmap', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int,
+        ffi.Int,
+        ffi.Int,
+        __off_t)>(symbol: 'mmap', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> mmap(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
@@ -1597,81 +2058,98 @@ external ffi.Pointer<ffi.Void> mmap(
   int __offset,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'munmap', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'munmap', assetId: 'interactor-bindings-test')
 external int munmap(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(symbol: 'mprotect', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(
+    symbol: 'mprotect', assetId: 'interactor-bindings-test')
 external int mprotect(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
   int __prot,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(symbol: 'msync', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(
+    symbol: 'msync', assetId: 'interactor-bindings-test')
 external int msync(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
   int __flags,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(symbol: 'madvise', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(
+    symbol: 'madvise', assetId: 'interactor-bindings-test')
 external int madvise(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
   int __advice,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(symbol: 'posix_madvise', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(
+    symbol: 'posix_madvise', assetId: 'interactor-bindings-test')
 external int posix_madvise(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
   int __advice,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'mlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'mlock', assetId: 'interactor-bindings-test')
 external int mlock(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'munlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'munlock', assetId: 'interactor-bindings-test')
 external int munlock(
   ffi.Pointer<ffi.Void> __addr,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'mlockall', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'mlockall', assetId: 'interactor-bindings-test')
 external int mlockall(
   int __flags,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'munlockall', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'munlockall', assetId: 'interactor-bindings-test')
 external int munlockall();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<ffi.UnsignedChar>)>(symbol: 'mincore', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<ffi.UnsignedChar>)>(
+    symbol: 'mincore', assetId: 'interactor-bindings-test')
 external int mincore(
   ffi.Pointer<ffi.Void> __start,
   int __len,
   ffi.Pointer<ffi.UnsignedChar> __vec,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int, mode_t)>(symbol: 'shm_open', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int, mode_t)>(
+    symbol: 'shm_open', assetId: 'interactor-bindings-test')
 external int shm_open(
   ffi.Pointer<ffi.Char> __name,
   int __oflag,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'shm_unlink', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'shm_unlink', assetId: 'interactor-bindings-test')
 external int shm_unlink(
   ffi.Pointer<ffi.Char> __name,
 );
 
 /// Initialize an arena.
-@ffi.Native<ffi.Int Function(ffi.Pointer<slab_arena>, ffi.Pointer<quota>, ffi.Size, ffi.Uint32, ffi.Int)>(symbol: 'slab_arena_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<slab_arena>, ffi.Pointer<quota>, ffi.Size,
+            ffi.Uint32, ffi.Int)>(
+    symbol: 'slab_arena_create', assetId: 'interactor-bindings-test')
 external int slab_arena_create(
   ffi.Pointer<slab_arena> arena,
   ffi.Pointer<quota> quota,
@@ -1681,109 +2159,131 @@ external int slab_arena_create(
 );
 
 /// Destroy an arena.
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_arena>)>(symbol: 'slab_arena_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_arena>)>(
+    symbol: 'slab_arena_destroy', assetId: 'interactor-bindings-test')
 external void slab_arena_destroy(
   ffi.Pointer<slab_arena> arena,
 );
 
 /// Get a slab.
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<slab_arena>)>(symbol: 'slab_map', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<slab_arena>)>(
+    symbol: 'slab_map', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> slab_map(
   ffi.Pointer<slab_arena> arena,
 );
 
 /// Put a slab into cache.
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_arena>, ffi.Pointer<ffi.Void>)>(symbol: 'slab_unmap', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_arena>, ffi.Pointer<ffi.Void>)>(
+    symbol: 'slab_unmap', assetId: 'interactor-bindings-test')
 external void slab_unmap(
   ffi.Pointer<slab_arena> arena,
   ffi.Pointer<ffi.Void> ptr,
 );
 
 /// mprotect() the preallocated arena.
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_arena>)>(symbol: 'slab_arena_mprotect', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_arena>)>(
+    symbol: 'slab_arena_mprotect', assetId: 'interactor-bindings-test')
 external void slab_arena_mprotect(
   ffi.Pointer<slab_arena> arena,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Size, ffi.Pointer<cpu_set_t>)>(symbol: '__sched_cpucount', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Size, ffi.Pointer<cpu_set_t>)>(
+    symbol: '__sched_cpucount', assetId: 'interactor-bindings-test')
 external int __sched_cpucount(
   int __setsize,
   ffi.Pointer<cpu_set_t> __setp,
 );
 
-@ffi.Native<ffi.Pointer<cpu_set_t> Function(ffi.Size)>(symbol: '__sched_cpualloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<cpu_set_t> Function(ffi.Size)>(
+    symbol: '__sched_cpualloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<cpu_set_t> __sched_cpualloc(
   int __count,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<cpu_set_t>)>(symbol: '__sched_cpufree', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<cpu_set_t>)>(
+    symbol: '__sched_cpufree', assetId: 'interactor-bindings-test')
 external void __sched_cpufree(
   ffi.Pointer<cpu_set_t> __set,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>(symbol: 'sched_setparam', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>(
+    symbol: 'sched_setparam', assetId: 'interactor-bindings-test')
 external int sched_setparam(
   int __pid,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>(symbol: 'sched_getparam', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Pointer<sched_param>)>(
+    symbol: 'sched_getparam', assetId: 'interactor-bindings-test')
 external int sched_getparam(
   int __pid,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Int, ffi.Pointer<sched_param>)>(symbol: 'sched_setscheduler', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Int, ffi.Pointer<sched_param>)>(
+    symbol: 'sched_setscheduler', assetId: 'interactor-bindings-test')
 external int sched_setscheduler(
   int __pid,
   int __policy,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t)>(symbol: 'sched_getscheduler', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t)>(
+    symbol: 'sched_getscheduler', assetId: 'interactor-bindings-test')
 external int sched_getscheduler(
   int __pid,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'sched_yield', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'sched_yield', assetId: 'interactor-bindings-test')
 external int sched_yield();
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'sched_get_priority_max', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'sched_get_priority_max', assetId: 'interactor-bindings-test')
 external int sched_get_priority_max(
   int __algorithm,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'sched_get_priority_min', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'sched_get_priority_min', assetId: 'interactor-bindings-test')
 external int sched_get_priority_min(
   int __algorithm,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Pointer<timespec>)>(symbol: 'sched_rr_get_interval', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Pointer<timespec>)>(
+    symbol: 'sched_rr_get_interval', assetId: 'interactor-bindings-test')
 external int sched_rr_get_interval(
   int __pid,
   ffi.Pointer<timespec> __t,
 );
 
-@ffi.Native<clock_t Function()>(symbol: 'clock', assetId: 'interactor-bindings-test')
+@ffi.Native<clock_t Function()>(
+    symbol: 'clock', assetId: 'interactor-bindings-test')
 external int clock();
 
-@ffi.Native<time_t Function(ffi.Pointer<time_t>)>(symbol: 'time', assetId: 'interactor-bindings-test')
+@ffi.Native<time_t Function(ffi.Pointer<time_t>)>(
+    symbol: 'time', assetId: 'interactor-bindings-test')
 external int time(
   ffi.Pointer<time_t> __timer,
 );
 
-@ffi.Native<ffi.Double Function(time_t, time_t)>(symbol: 'difftime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Double Function(time_t, time_t)>(
+    symbol: 'difftime', assetId: 'interactor-bindings-test')
 external double difftime(
   int __time1,
   int __time0,
 );
 
-@ffi.Native<time_t Function(ffi.Pointer<tm>)>(symbol: 'mktime', assetId: 'interactor-bindings-test')
+@ffi.Native<time_t Function(ffi.Pointer<tm>)>(
+    symbol: 'mktime', assetId: 'interactor-bindings-test')
 external int mktime(
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>)>(symbol: 'strftime', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size,
+            ffi.Pointer<ffi.Char>, ffi.Pointer<tm>)>(
+    symbol: 'strftime', assetId: 'interactor-bindings-test')
 external int strftime(
   ffi.Pointer<ffi.Char> __s,
   int __maxsize,
@@ -1791,7 +2291,13 @@ external int strftime(
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<tm>, locale_t)>(symbol: 'strftime_l', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Size Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<tm>,
+        locale_t)>(symbol: 'strftime_l', assetId: 'interactor-bindings-test')
 external int strftime_l(
   ffi.Pointer<ffi.Char> __s,
   int __maxsize,
@@ -1800,93 +2306,115 @@ external int strftime_l(
   locale_t __loc,
 );
 
-@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>(symbol: 'gmtime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>(
+    symbol: 'gmtime', assetId: 'interactor-bindings-test')
 external ffi.Pointer<tm> gmtime(
   ffi.Pointer<time_t> __timer,
 );
 
-@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>(symbol: 'localtime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>)>(
+    symbol: 'localtime', assetId: 'interactor-bindings-test')
 external ffi.Pointer<tm> localtime(
   ffi.Pointer<time_t> __timer,
 );
 
-@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>(symbol: 'gmtime_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>(
+    symbol: 'gmtime_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<tm> gmtime_r(
   ffi.Pointer<time_t> __timer,
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>(symbol: 'localtime_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<tm> Function(ffi.Pointer<time_t>, ffi.Pointer<tm>)>(
+    symbol: 'localtime_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<tm> localtime_r(
   ffi.Pointer<time_t> __timer,
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>(symbol: 'asctime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>)>(
+    symbol: 'asctime', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> asctime(
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>(symbol: 'ctime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>)>(
+    symbol: 'ctime', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> ctime(
   ffi.Pointer<time_t> __timer,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>(symbol: 'asctime_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(ffi.Pointer<tm>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'asctime_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> asctime_r(
   ffi.Pointer<tm> __tp,
   ffi.Pointer<ffi.Char> __buf,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>(symbol: 'ctime_r', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<time_t>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'ctime_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> ctime_r(
   ffi.Pointer<time_t> __timer,
   ffi.Pointer<ffi.Char> __buf,
 );
 
-@ffi.Native<ffi.Void Function()>(symbol: 'tzset', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'tzset', assetId: 'interactor-bindings-test')
 external void tzset();
 
-@ffi.Native<time_t Function(ffi.Pointer<tm>)>(symbol: 'timegm', assetId: 'interactor-bindings-test')
+@ffi.Native<time_t Function(ffi.Pointer<tm>)>(
+    symbol: 'timegm', assetId: 'interactor-bindings-test')
 external int timegm(
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<time_t Function(ffi.Pointer<tm>)>(symbol: 'timelocal', assetId: 'interactor-bindings-test')
+@ffi.Native<time_t Function(ffi.Pointer<tm>)>(
+    symbol: 'timelocal', assetId: 'interactor-bindings-test')
 external int timelocal(
   ffi.Pointer<tm> __tp,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'dysize', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'dysize', assetId: 'interactor-bindings-test')
 external int dysize(
   int __year,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>(symbol: 'nanosleep', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<timespec>, ffi.Pointer<timespec>)>(
+    symbol: 'nanosleep', assetId: 'interactor-bindings-test')
 external int nanosleep(
   ffi.Pointer<timespec> __requested_time,
   ffi.Pointer<timespec> __remaining,
 );
 
-@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>(symbol: 'clock_getres', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>(
+    symbol: 'clock_getres', assetId: 'interactor-bindings-test')
 external int clock_getres(
   int __clock_id,
   ffi.Pointer<timespec> __res,
 );
 
-@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>(symbol: 'clock_gettime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>(
+    symbol: 'clock_gettime', assetId: 'interactor-bindings-test')
 external int clock_gettime(
   int __clock_id,
   ffi.Pointer<timespec> __tp,
 );
 
-@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>(symbol: 'clock_settime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<timespec>)>(
+    symbol: 'clock_settime', assetId: 'interactor-bindings-test')
 external int clock_settime(
   int __clock_id,
   ffi.Pointer<timespec> __tp,
 );
 
-@ffi.Native<ffi.Int Function(clockid_t, ffi.Int, ffi.Pointer<timespec>, ffi.Pointer<timespec>)>(symbol: 'clock_nanosleep', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            clockid_t, ffi.Int, ffi.Pointer<timespec>, ffi.Pointer<timespec>)>(
+    symbol: 'clock_nanosleep', assetId: 'interactor-bindings-test')
 external int clock_nanosleep(
   int __clock_id,
   int __flags,
@@ -1894,25 +2422,33 @@ external int clock_nanosleep(
   ffi.Pointer<timespec> __rem,
 );
 
-@ffi.Native<ffi.Int Function(pid_t, ffi.Pointer<clockid_t>)>(symbol: 'clock_getcpuclockid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pid_t, ffi.Pointer<clockid_t>)>(
+    symbol: 'clock_getcpuclockid', assetId: 'interactor-bindings-test')
 external int clock_getcpuclockid(
   int __pid,
   ffi.Pointer<clockid_t> __clock_id,
 );
 
-@ffi.Native<ffi.Int Function(clockid_t, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>(symbol: 'timer_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            clockid_t, ffi.Pointer<sigevent>, ffi.Pointer<timer_t>)>(
+    symbol: 'timer_create', assetId: 'interactor-bindings-test')
 external int timer_create(
   int __clock_id,
   ffi.Pointer<sigevent> __evp,
   ffi.Pointer<timer_t> __timerid,
 );
 
-@ffi.Native<ffi.Int Function(timer_t)>(symbol: 'timer_delete', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(timer_t)>(
+    symbol: 'timer_delete', assetId: 'interactor-bindings-test')
 external int timer_delete(
   timer_t __timerid,
 );
 
-@ffi.Native<ffi.Int Function(timer_t, ffi.Int, ffi.Pointer<itimerspec>, ffi.Pointer<itimerspec>)>(symbol: 'timer_settime', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(timer_t, ffi.Int, ffi.Pointer<itimerspec>,
+            ffi.Pointer<itimerspec>)>(
+    symbol: 'timer_settime', assetId: 'interactor-bindings-test')
 external int timer_settime(
   timer_t __timerid,
   int __flags,
@@ -1920,582 +2456,770 @@ external int timer_settime(
   ffi.Pointer<itimerspec> __ovalue,
 );
 
-@ffi.Native<ffi.Int Function(timer_t, ffi.Pointer<itimerspec>)>(symbol: 'timer_gettime', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(timer_t, ffi.Pointer<itimerspec>)>(
+    symbol: 'timer_gettime', assetId: 'interactor-bindings-test')
 external int timer_gettime(
   timer_t __timerid,
   ffi.Pointer<itimerspec> __value,
 );
 
-@ffi.Native<ffi.Int Function(timer_t)>(symbol: 'timer_getoverrun', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(timer_t)>(
+    symbol: 'timer_getoverrun', assetId: 'interactor-bindings-test')
 external int timer_getoverrun(
   timer_t __timerid,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<timespec>, ffi.Int)>(symbol: 'timespec_get', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<timespec>, ffi.Int)>(
+    symbol: 'timespec_get', assetId: 'interactor-bindings-test')
 external int timespec_get(
   ffi.Pointer<timespec> __ts,
   int __base,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_t>, ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>, ffi.Pointer<ffi.Void>)>(
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_t>,
+            ffi.Pointer<pthread_attr_t>,
+            ffi.Pointer<
+                ffi.NativeFunction<
+                    ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>,
+            ffi.Pointer<ffi.Void>)>(
     symbol: 'pthread_create', assetId: 'interactor-bindings-test')
 external int pthread_create(
   ffi.Pointer<pthread_t> __newthread,
   ffi.Pointer<pthread_attr_t> __attr,
-  ffi.Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>> __start_routine,
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>
+      __start_routine,
   ffi.Pointer<ffi.Void> __arg,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>)>(symbol: 'pthread_exit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Void>)>(
+    symbol: 'pthread_exit', assetId: 'interactor-bindings-test')
 external void pthread_exit(
   ffi.Pointer<ffi.Void> __retval,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t, ffi.Pointer<ffi.Pointer<ffi.Void>>)>(symbol: 'pthread_join', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t, ffi.Pointer<ffi.Pointer<ffi.Void>>)>(
+    symbol: 'pthread_join', assetId: 'interactor-bindings-test')
 external int pthread_join(
   int __th,
   ffi.Pointer<ffi.Pointer<ffi.Void>> __thread_return,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t)>(symbol: 'pthread_detach', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t)>(
+    symbol: 'pthread_detach', assetId: 'interactor-bindings-test')
 external int pthread_detach(
   int __th,
 );
 
-@ffi.Native<pthread_t Function()>(symbol: 'pthread_self', assetId: 'interactor-bindings-test')
+@ffi.Native<pthread_t Function()>(
+    symbol: 'pthread_self', assetId: 'interactor-bindings-test')
 external int pthread_self();
 
-@ffi.Native<ffi.Int Function(pthread_t, pthread_t)>(symbol: 'pthread_equal', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t, pthread_t)>(
+    symbol: 'pthread_equal', assetId: 'interactor-bindings-test')
 external int pthread_equal(
   int __thread1,
   int __thread2,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>)>(symbol: 'pthread_attr_init', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>)>(
+    symbol: 'pthread_attr_init', assetId: 'interactor-bindings-test')
 external int pthread_attr_init(
   ffi.Pointer<pthread_attr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>)>(symbol: 'pthread_attr_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>)>(
+    symbol: 'pthread_attr_destroy', assetId: 'interactor-bindings-test')
 external int pthread_attr_destroy(
   ffi.Pointer<pthread_attr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_attr_getdetachstate', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_attr_getdetachstate', assetId: 'interactor-bindings-test')
 external int pthread_attr_getdetachstate(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Int> __detachstate,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(symbol: 'pthread_attr_setdetachstate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(
+    symbol: 'pthread_attr_setdetachstate', assetId: 'interactor-bindings-test')
 external int pthread_attr_setdetachstate(
   ffi.Pointer<pthread_attr_t> __attr,
   int __detachstate,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Size>)>(symbol: 'pthread_attr_getguardsize', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Size>)>(
+    symbol: 'pthread_attr_getguardsize', assetId: 'interactor-bindings-test')
 external int pthread_attr_getguardsize(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Size> __guardsize,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Size)>(symbol: 'pthread_attr_setguardsize', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Size)>(
+    symbol: 'pthread_attr_setguardsize', assetId: 'interactor-bindings-test')
 external int pthread_attr_setguardsize(
   ffi.Pointer<pthread_attr_t> __attr,
   int __guardsize,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<sched_param>)>(symbol: 'pthread_attr_getschedparam', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_attr_t>, ffi.Pointer<sched_param>)>(
+    symbol: 'pthread_attr_getschedparam', assetId: 'interactor-bindings-test')
 external int pthread_attr_getschedparam(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<sched_param>)>(symbol: 'pthread_attr_setschedparam', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_attr_t>, ffi.Pointer<sched_param>)>(
+    symbol: 'pthread_attr_setschedparam', assetId: 'interactor-bindings-test')
 external int pthread_attr_setschedparam(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_attr_getschedpolicy', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_attr_getschedpolicy', assetId: 'interactor-bindings-test')
 external int pthread_attr_getschedpolicy(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Int> __policy,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(symbol: 'pthread_attr_setschedpolicy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(
+    symbol: 'pthread_attr_setschedpolicy', assetId: 'interactor-bindings-test')
 external int pthread_attr_setschedpolicy(
   ffi.Pointer<pthread_attr_t> __attr,
   int __policy,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_attr_getinheritsched', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_attr_getinheritsched', assetId: 'interactor-bindings-test')
 external int pthread_attr_getinheritsched(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Int> __inherit,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(symbol: 'pthread_attr_setinheritsched', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(
+    symbol: 'pthread_attr_setinheritsched', assetId: 'interactor-bindings-test')
 external int pthread_attr_setinheritsched(
   ffi.Pointer<pthread_attr_t> __attr,
   int __inherit,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_attr_getscope', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_attr_getscope', assetId: 'interactor-bindings-test')
 external int pthread_attr_getscope(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Int> __scope,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(symbol: 'pthread_attr_setscope', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Int)>(
+    symbol: 'pthread_attr_setscope', assetId: 'interactor-bindings-test')
 external int pthread_attr_setscope(
   ffi.Pointer<pthread_attr_t> __attr,
   int __scope,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>(symbol: 'pthread_attr_getstackaddr', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>(
+    symbol: 'pthread_attr_getstackaddr', assetId: 'interactor-bindings-test')
 external int pthread_attr_getstackaddr(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Pointer<ffi.Void>> __stackaddr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Void>)>(symbol: 'pthread_attr_setstackaddr', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Void>)>(
+    symbol: 'pthread_attr_setstackaddr', assetId: 'interactor-bindings-test')
 external int pthread_attr_setstackaddr(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Void> __stackaddr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Size>)>(symbol: 'pthread_attr_getstacksize', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Size>)>(
+    symbol: 'pthread_attr_getstacksize', assetId: 'interactor-bindings-test')
 external int pthread_attr_getstacksize(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Size> __stacksize,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Size)>(symbol: 'pthread_attr_setstacksize', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Size)>(
+    symbol: 'pthread_attr_setstacksize', assetId: 'interactor-bindings-test')
 external int pthread_attr_setstacksize(
   ffi.Pointer<pthread_attr_t> __attr,
   int __stacksize,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>(symbol: 'pthread_attr_getstack', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_attr_t>,
+            ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>(
+    symbol: 'pthread_attr_getstack', assetId: 'interactor-bindings-test')
 external int pthread_attr_getstack(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Pointer<ffi.Void>> __stackaddr,
   ffi.Pointer<ffi.Size> __stacksize,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'pthread_attr_setstack', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_attr_t>, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'pthread_attr_setstack', assetId: 'interactor-bindings-test')
 external int pthread_attr_setstack(
   ffi.Pointer<pthread_attr_t> __attr,
   ffi.Pointer<ffi.Void> __stackaddr,
   int __stacksize,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t, ffi.Int, ffi.Pointer<sched_param>)>(symbol: 'pthread_setschedparam', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t, ffi.Int, ffi.Pointer<sched_param>)>(
+    symbol: 'pthread_setschedparam', assetId: 'interactor-bindings-test')
 external int pthread_setschedparam(
   int __target_thread,
   int __policy,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t, ffi.Pointer<ffi.Int>, ffi.Pointer<sched_param>)>(symbol: 'pthread_getschedparam', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            pthread_t, ffi.Pointer<ffi.Int>, ffi.Pointer<sched_param>)>(
+    symbol: 'pthread_getschedparam', assetId: 'interactor-bindings-test')
 external int pthread_getschedparam(
   int __target_thread,
   ffi.Pointer<ffi.Int> __policy,
   ffi.Pointer<sched_param> __param,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t, ffi.Int)>(symbol: 'pthread_setschedprio', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t, ffi.Int)>(
+    symbol: 'pthread_setschedprio', assetId: 'interactor-bindings-test')
 external int pthread_setschedprio(
   int __target_thread,
   int __prio,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_once_t>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(symbol: 'pthread_once', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_once_t>,
+            ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(
+    symbol: 'pthread_once', assetId: 'interactor-bindings-test')
 external int pthread_once(
   ffi.Pointer<pthread_once_t> __once_control,
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> __init_routine,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_setcancelstate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_setcancelstate', assetId: 'interactor-bindings-test')
 external int pthread_setcancelstate(
   int __state,
   ffi.Pointer<ffi.Int> __oldstate,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_setcanceltype', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_setcanceltype', assetId: 'interactor-bindings-test')
 external int pthread_setcanceltype(
   int __type,
   ffi.Pointer<ffi.Int> __oldtype,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t)>(symbol: 'pthread_cancel', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t)>(
+    symbol: 'pthread_cancel', assetId: 'interactor-bindings-test')
 external int pthread_cancel(
   int __th,
 );
 
-@ffi.Native<ffi.Void Function()>(symbol: 'pthread_testcancel', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'pthread_testcancel', assetId: 'interactor-bindings-test')
 external void pthread_testcancel();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<__pthread_unwind_buf_t>)>(symbol: '__pthread_register_cancel', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<__pthread_unwind_buf_t>)>(
+    symbol: '__pthread_register_cancel', assetId: 'interactor-bindings-test')
 external void __pthread_register_cancel(
   ffi.Pointer<__pthread_unwind_buf_t> __buf,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<__pthread_unwind_buf_t>)>(symbol: '__pthread_unregister_cancel', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<__pthread_unwind_buf_t>)>(
+    symbol: '__pthread_unregister_cancel', assetId: 'interactor-bindings-test')
 external void __pthread_unregister_cancel(
   ffi.Pointer<__pthread_unwind_buf_t> __buf,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<__pthread_unwind_buf_t>)>(symbol: '__pthread_unwind_next', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<__pthread_unwind_buf_t>)>(
+    symbol: '__pthread_unwind_next', assetId: 'interactor-bindings-test')
 external void __pthread_unwind_next(
   ffi.Pointer<__pthread_unwind_buf_t> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<__jmp_buf_tag>, ffi.Int)>(symbol: '__sigsetjmp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<__jmp_buf_tag>, ffi.Int)>(
+    symbol: '__sigsetjmp', assetId: 'interactor-bindings-test')
 external int __sigsetjmp(
   ffi.Pointer<__jmp_buf_tag> __env,
   int __savemask,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>, ffi.Pointer<pthread_mutexattr_t>)>(symbol: 'pthread_mutex_init', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutex_t>, ffi.Pointer<pthread_mutexattr_t>)>(
+    symbol: 'pthread_mutex_init', assetId: 'interactor-bindings-test')
 external int pthread_mutex_init(
   ffi.Pointer<pthread_mutex_t> __mutex,
   ffi.Pointer<pthread_mutexattr_t> __mutexattr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(symbol: 'pthread_mutex_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(
+    symbol: 'pthread_mutex_destroy', assetId: 'interactor-bindings-test')
 external int pthread_mutex_destroy(
   ffi.Pointer<pthread_mutex_t> __mutex,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(symbol: 'pthread_mutex_trylock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(
+    symbol: 'pthread_mutex_trylock', assetId: 'interactor-bindings-test')
 external int pthread_mutex_trylock(
   ffi.Pointer<pthread_mutex_t> __mutex,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(symbol: 'pthread_mutex_lock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(
+    symbol: 'pthread_mutex_lock', assetId: 'interactor-bindings-test')
 external int pthread_mutex_lock(
   ffi.Pointer<pthread_mutex_t> __mutex,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>, ffi.Pointer<timespec>)>(symbol: 'pthread_mutex_timedlock', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_mutex_t>, ffi.Pointer<timespec>)>(
+    symbol: 'pthread_mutex_timedlock', assetId: 'interactor-bindings-test')
 external int pthread_mutex_timedlock(
   ffi.Pointer<pthread_mutex_t> __mutex,
   ffi.Pointer<timespec> __abstime,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(symbol: 'pthread_mutex_unlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(
+    symbol: 'pthread_mutex_unlock', assetId: 'interactor-bindings-test')
 external int pthread_mutex_unlock(
   ffi.Pointer<pthread_mutex_t> __mutex,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutex_getprioceiling', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_mutex_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutex_getprioceiling', assetId: 'interactor-bindings-test')
 external int pthread_mutex_getprioceiling(
   ffi.Pointer<pthread_mutex_t> __mutex,
   ffi.Pointer<ffi.Int> __prioceiling,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>, ffi.Int, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutex_setprioceiling', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutex_t>, ffi.Int, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutex_setprioceiling', assetId: 'interactor-bindings-test')
 external int pthread_mutex_setprioceiling(
   ffi.Pointer<pthread_mutex_t> __mutex,
   int __prioceiling,
   ffi.Pointer<ffi.Int> __old_ceiling,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(symbol: 'pthread_mutex_consistent', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutex_t>)>(
+    symbol: 'pthread_mutex_consistent', assetId: 'interactor-bindings-test')
 external int pthread_mutex_consistent(
   ffi.Pointer<pthread_mutex_t> __mutex,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>)>(symbol: 'pthread_mutexattr_init', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>)>(
+    symbol: 'pthread_mutexattr_init', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_init(
   ffi.Pointer<pthread_mutexattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>)>(symbol: 'pthread_mutexattr_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>)>(
+    symbol: 'pthread_mutexattr_destroy', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_destroy(
   ffi.Pointer<pthread_mutexattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutexattr_getpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutexattr_getpshared', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_getpshared(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   ffi.Pointer<ffi.Int> __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(symbol: 'pthread_mutexattr_setpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(
+    symbol: 'pthread_mutexattr_setpshared', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_setpshared(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   int __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutexattr_gettype', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutexattr_gettype', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_gettype(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   ffi.Pointer<ffi.Int> __kind,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(symbol: 'pthread_mutexattr_settype', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(
+    symbol: 'pthread_mutexattr_settype', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_settype(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   int __kind,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutexattr_getprotocol', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutexattr_getprotocol',
+    assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_getprotocol(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   ffi.Pointer<ffi.Int> __protocol,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(symbol: 'pthread_mutexattr_setprotocol', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(
+    symbol: 'pthread_mutexattr_setprotocol',
+    assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_setprotocol(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   int __protocol,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutexattr_getprioceiling', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutexattr_getprioceiling',
+    assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_getprioceiling(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   ffi.Pointer<ffi.Int> __prioceiling,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(symbol: 'pthread_mutexattr_setprioceiling', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(
+    symbol: 'pthread_mutexattr_setprioceiling',
+    assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_setprioceiling(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   int __prioceiling,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_mutexattr_getrobust', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_mutexattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_mutexattr_getrobust', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_getrobust(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   ffi.Pointer<ffi.Int> __robustness,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(symbol: 'pthread_mutexattr_setrobust', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_mutexattr_t>, ffi.Int)>(
+    symbol: 'pthread_mutexattr_setrobust', assetId: 'interactor-bindings-test')
 external int pthread_mutexattr_setrobust(
   ffi.Pointer<pthread_mutexattr_t> __attr,
   int __robustness,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>, ffi.Pointer<pthread_rwlockattr_t>)>(symbol: 'pthread_rwlock_init', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_rwlock_t>, ffi.Pointer<pthread_rwlockattr_t>)>(
+    symbol: 'pthread_rwlock_init', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_init(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
   ffi.Pointer<pthread_rwlockattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(symbol: 'pthread_rwlock_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(
+    symbol: 'pthread_rwlock_destroy', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_destroy(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(symbol: 'pthread_rwlock_rdlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(
+    symbol: 'pthread_rwlock_rdlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_rdlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(symbol: 'pthread_rwlock_tryrdlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(
+    symbol: 'pthread_rwlock_tryrdlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_tryrdlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>, ffi.Pointer<timespec>)>(symbol: 'pthread_rwlock_timedrdlock', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_rwlock_t>, ffi.Pointer<timespec>)>(
+    symbol: 'pthread_rwlock_timedrdlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_timedrdlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
   ffi.Pointer<timespec> __abstime,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(symbol: 'pthread_rwlock_wrlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(
+    symbol: 'pthread_rwlock_wrlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_wrlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(symbol: 'pthread_rwlock_trywrlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(
+    symbol: 'pthread_rwlock_trywrlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_trywrlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>, ffi.Pointer<timespec>)>(symbol: 'pthread_rwlock_timedwrlock', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_rwlock_t>, ffi.Pointer<timespec>)>(
+    symbol: 'pthread_rwlock_timedwrlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_timedwrlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
   ffi.Pointer<timespec> __abstime,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(symbol: 'pthread_rwlock_unlock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlock_t>)>(
+    symbol: 'pthread_rwlock_unlock', assetId: 'interactor-bindings-test')
 external int pthread_rwlock_unlock(
   ffi.Pointer<pthread_rwlock_t> __rwlock,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>)>(symbol: 'pthread_rwlockattr_init', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>)>(
+    symbol: 'pthread_rwlockattr_init', assetId: 'interactor-bindings-test')
 external int pthread_rwlockattr_init(
   ffi.Pointer<pthread_rwlockattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>)>(symbol: 'pthread_rwlockattr_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>)>(
+    symbol: 'pthread_rwlockattr_destroy', assetId: 'interactor-bindings-test')
 external int pthread_rwlockattr_destroy(
   ffi.Pointer<pthread_rwlockattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_rwlockattr_getpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_rwlockattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_rwlockattr_getpshared',
+    assetId: 'interactor-bindings-test')
 external int pthread_rwlockattr_getpshared(
   ffi.Pointer<pthread_rwlockattr_t> __attr,
   ffi.Pointer<ffi.Int> __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>, ffi.Int)>(symbol: 'pthread_rwlockattr_setpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>, ffi.Int)>(
+    symbol: 'pthread_rwlockattr_setpshared',
+    assetId: 'interactor-bindings-test')
 external int pthread_rwlockattr_setpshared(
   ffi.Pointer<pthread_rwlockattr_t> __attr,
   int __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_rwlockattr_getkind_np', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_rwlockattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_rwlockattr_getkind_np',
+    assetId: 'interactor-bindings-test')
 external int pthread_rwlockattr_getkind_np(
   ffi.Pointer<pthread_rwlockattr_t> __attr,
   ffi.Pointer<ffi.Int> __pref,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>, ffi.Int)>(symbol: 'pthread_rwlockattr_setkind_np', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_rwlockattr_t>, ffi.Int)>(
+    symbol: 'pthread_rwlockattr_setkind_np',
+    assetId: 'interactor-bindings-test')
 external int pthread_rwlockattr_setkind_np(
   ffi.Pointer<pthread_rwlockattr_t> __attr,
   int __pref,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>, ffi.Pointer<pthread_condattr_t>)>(symbol: 'pthread_cond_init', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_cond_t>, ffi.Pointer<pthread_condattr_t>)>(
+    symbol: 'pthread_cond_init', assetId: 'interactor-bindings-test')
 external int pthread_cond_init(
   ffi.Pointer<pthread_cond_t> __cond,
   ffi.Pointer<pthread_condattr_t> __cond_attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>)>(symbol: 'pthread_cond_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>)>(
+    symbol: 'pthread_cond_destroy', assetId: 'interactor-bindings-test')
 external int pthread_cond_destroy(
   ffi.Pointer<pthread_cond_t> __cond,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>)>(symbol: 'pthread_cond_signal', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>)>(
+    symbol: 'pthread_cond_signal', assetId: 'interactor-bindings-test')
 external int pthread_cond_signal(
   ffi.Pointer<pthread_cond_t> __cond,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>)>(symbol: 'pthread_cond_broadcast', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>)>(
+    symbol: 'pthread_cond_broadcast', assetId: 'interactor-bindings-test')
 external int pthread_cond_broadcast(
   ffi.Pointer<pthread_cond_t> __cond,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>, ffi.Pointer<pthread_mutex_t>)>(symbol: 'pthread_cond_wait', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_cond_t>, ffi.Pointer<pthread_mutex_t>)>(
+    symbol: 'pthread_cond_wait', assetId: 'interactor-bindings-test')
 external int pthread_cond_wait(
   ffi.Pointer<pthread_cond_t> __cond,
   ffi.Pointer<pthread_mutex_t> __mutex,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_cond_t>, ffi.Pointer<pthread_mutex_t>, ffi.Pointer<timespec>)>(symbol: 'pthread_cond_timedwait', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_cond_t>,
+            ffi.Pointer<pthread_mutex_t>, ffi.Pointer<timespec>)>(
+    symbol: 'pthread_cond_timedwait', assetId: 'interactor-bindings-test')
 external int pthread_cond_timedwait(
   ffi.Pointer<pthread_cond_t> __cond,
   ffi.Pointer<pthread_mutex_t> __mutex,
   ffi.Pointer<timespec> __abstime,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>)>(symbol: 'pthread_condattr_init', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>)>(
+    symbol: 'pthread_condattr_init', assetId: 'interactor-bindings-test')
 external int pthread_condattr_init(
   ffi.Pointer<pthread_condattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>)>(symbol: 'pthread_condattr_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>)>(
+    symbol: 'pthread_condattr_destroy', assetId: 'interactor-bindings-test')
 external int pthread_condattr_destroy(
   ffi.Pointer<pthread_condattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_condattr_getpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_condattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_condattr_getpshared', assetId: 'interactor-bindings-test')
 external int pthread_condattr_getpshared(
   ffi.Pointer<pthread_condattr_t> __attr,
   ffi.Pointer<ffi.Int> __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>, ffi.Int)>(symbol: 'pthread_condattr_setpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>, ffi.Int)>(
+    symbol: 'pthread_condattr_setpshared', assetId: 'interactor-bindings-test')
 external int pthread_condattr_setpshared(
   ffi.Pointer<pthread_condattr_t> __attr,
   int __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>, ffi.Pointer<__clockid_t>)>(symbol: 'pthread_condattr_getclock', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_condattr_t>, ffi.Pointer<__clockid_t>)>(
+    symbol: 'pthread_condattr_getclock', assetId: 'interactor-bindings-test')
 external int pthread_condattr_getclock(
   ffi.Pointer<pthread_condattr_t> __attr,
   ffi.Pointer<__clockid_t> __clock_id,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>, __clockid_t)>(symbol: 'pthread_condattr_setclock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_condattr_t>, __clockid_t)>(
+    symbol: 'pthread_condattr_setclock', assetId: 'interactor-bindings-test')
 external int pthread_condattr_setclock(
   ffi.Pointer<pthread_condattr_t> __attr,
   int __clock_id,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrier_t>, ffi.Pointer<pthread_barrierattr_t>, ffi.UnsignedInt)>(symbol: 'pthread_barrier_init', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<pthread_barrier_t>,
+            ffi.Pointer<pthread_barrierattr_t>, ffi.UnsignedInt)>(
+    symbol: 'pthread_barrier_init', assetId: 'interactor-bindings-test')
 external int pthread_barrier_init(
   ffi.Pointer<pthread_barrier_t> __barrier,
   ffi.Pointer<pthread_barrierattr_t> __attr,
   int __count,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrier_t>)>(symbol: 'pthread_barrier_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrier_t>)>(
+    symbol: 'pthread_barrier_destroy', assetId: 'interactor-bindings-test')
 external int pthread_barrier_destroy(
   ffi.Pointer<pthread_barrier_t> __barrier,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrier_t>)>(symbol: 'pthread_barrier_wait', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrier_t>)>(
+    symbol: 'pthread_barrier_wait', assetId: 'interactor-bindings-test')
 external int pthread_barrier_wait(
   ffi.Pointer<pthread_barrier_t> __barrier,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>)>(symbol: 'pthread_barrierattr_init', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>)>(
+    symbol: 'pthread_barrierattr_init', assetId: 'interactor-bindings-test')
 external int pthread_barrierattr_init(
   ffi.Pointer<pthread_barrierattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>)>(symbol: 'pthread_barrierattr_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>)>(
+    symbol: 'pthread_barrierattr_destroy', assetId: 'interactor-bindings-test')
 external int pthread_barrierattr_destroy(
   ffi.Pointer<pthread_barrierattr_t> __attr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>, ffi.Pointer<ffi.Int>)>(symbol: 'pthread_barrierattr_getpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_barrierattr_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'pthread_barrierattr_getpshared',
+    assetId: 'interactor-bindings-test')
 external int pthread_barrierattr_getpshared(
   ffi.Pointer<pthread_barrierattr_t> __attr,
   ffi.Pointer<ffi.Int> __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>, ffi.Int)>(symbol: 'pthread_barrierattr_setpshared', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_barrierattr_t>, ffi.Int)>(
+    symbol: 'pthread_barrierattr_setpshared',
+    assetId: 'interactor-bindings-test')
 external int pthread_barrierattr_setpshared(
   ffi.Pointer<pthread_barrierattr_t> __attr,
   int __pshared,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<pthread_key_t>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>)>(symbol: 'pthread_key_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<pthread_key_t>,
+            ffi.Pointer<
+                ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>)>(
+    symbol: 'pthread_key_create', assetId: 'interactor-bindings-test')
 external int pthread_key_create(
   ffi.Pointer<pthread_key_t> __key,
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>> __destr_function,
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
+      __destr_function,
 );
 
-@ffi.Native<ffi.Int Function(pthread_key_t)>(symbol: 'pthread_key_delete', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_key_t)>(
+    symbol: 'pthread_key_delete', assetId: 'interactor-bindings-test')
 external int pthread_key_delete(
   int __key,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(pthread_key_t)>(symbol: 'pthread_getspecific', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(pthread_key_t)>(
+    symbol: 'pthread_getspecific', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> pthread_getspecific(
   int __key,
 );
 
-@ffi.Native<ffi.Int Function(pthread_key_t, ffi.Pointer<ffi.Void>)>(symbol: 'pthread_setspecific', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_key_t, ffi.Pointer<ffi.Void>)>(
+    symbol: 'pthread_setspecific', assetId: 'interactor-bindings-test')
 external int pthread_setspecific(
   int __key,
   ffi.Pointer<ffi.Void> __pointer,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t, ffi.Pointer<__clockid_t>)>(symbol: 'pthread_getcpuclockid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t, ffi.Pointer<__clockid_t>)>(
+    symbol: 'pthread_getcpuclockid', assetId: 'interactor-bindings-test')
 external int pthread_getcpuclockid(
   int __thread_id,
   ffi.Pointer<__clockid_t> __clock_id,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>,
+            ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>,
+            ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>>)>(
     symbol: 'pthread_atfork', assetId: 'interactor-bindings-test')
 external int pthread_atfork(
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> __prepare,
@@ -2503,66 +3227,87 @@ external int pthread_atfork(
   ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> __child,
 );
 
-@ffi.Native<intmax_t Function(intmax_t)>(symbol: 'imaxabs', assetId: 'interactor-bindings-test')
+@ffi.Native<intmax_t Function(intmax_t)>(
+    symbol: 'imaxabs', assetId: 'interactor-bindings-test')
 external int imaxabs(
   int __n,
 );
 
-@ffi.Native<imaxdiv_t Function(intmax_t, intmax_t)>(symbol: 'imaxdiv', assetId: 'interactor-bindings-test')
+@ffi.Native<imaxdiv_t Function(intmax_t, intmax_t)>(
+    symbol: 'imaxdiv', assetId: 'interactor-bindings-test')
 external imaxdiv_t imaxdiv(
   int __numer,
   int __denom,
 );
 
-@ffi.Native<intmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtoimax', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    intmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtoimax', assetId: 'interactor-bindings-test')
 external int strtoimax(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<uintmax_t Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>(symbol: 'strtoumax', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    uintmax_t Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int)>(symbol: 'strtoumax', assetId: 'interactor-bindings-test')
 external int strtoumax(
   ffi.Pointer<ffi.Char> __nptr,
   ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
   int __base,
 );
 
-@ffi.Native<intmax_t Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>(symbol: 'wcstoimax', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    intmax_t Function(
+        ffi.Pointer<__gwchar_t>,
+        ffi.Pointer<ffi.Pointer<__gwchar_t>>,
+        ffi.Int)>(symbol: 'wcstoimax', assetId: 'interactor-bindings-test')
 external int wcstoimax(
   ffi.Pointer<__gwchar_t> __nptr,
   ffi.Pointer<ffi.Pointer<__gwchar_t>> __endptr,
   int __base,
 );
 
-@ffi.Native<uintmax_t Function(ffi.Pointer<__gwchar_t>, ffi.Pointer<ffi.Pointer<__gwchar_t>>, ffi.Int)>(symbol: 'wcstoumax', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    uintmax_t Function(
+        ffi.Pointer<__gwchar_t>,
+        ffi.Pointer<ffi.Pointer<__gwchar_t>>,
+        ffi.Int)>(symbol: 'wcstoumax', assetId: 'interactor-bindings-test')
 external int wcstoumax(
   ffi.Pointer<__gwchar_t> __nptr,
   ffi.Pointer<ffi.Pointer<__gwchar_t>> __endptr,
   int __base,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab_arena>)>(symbol: 'slab_cache_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab_arena>)>(
+    symbol: 'slab_cache_create', assetId: 'interactor-bindings-test')
 external void slab_cache_create(
   ffi.Pointer<slab_cache> cache,
   ffi.Pointer<slab_arena> arena,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>)>(symbol: 'slab_cache_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>)>(
+    symbol: 'slab_cache_destroy', assetId: 'interactor-bindings-test')
 external void slab_cache_destroy(
   ffi.Pointer<slab_cache> cache,
 );
 
 /// Allocate ordered slab
 /// @see slab_order()
-@ffi.Native<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Uint8)>(symbol: 'slab_get_with_order', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Uint8)>(
+    symbol: 'slab_get_with_order', assetId: 'interactor-bindings-test')
 external ffi.Pointer<slab> slab_get_with_order(
   ffi.Pointer<slab_cache> cache,
   int order,
 );
 
 /// Deallocate ordered slab
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>(symbol: 'slab_put_with_order', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>(
+    symbol: 'slab_put_with_order', assetId: 'interactor-bindings-test')
 external void slab_put_with_order(
   ffi.Pointer<slab_cache> cache,
   ffi.Pointer<slab> slab,
@@ -2570,7 +3315,8 @@ external void slab_put_with_order(
 
 /// Allocate large slab.
 /// @pre size > slab_order_size(cache->arena->slab_size)
-@ffi.Native<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Size)>(symbol: 'slab_get_large', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Size)>(
+    symbol: 'slab_get_large', assetId: 'interactor-bindings-test')
 external ffi.Pointer<slab> slab_get_large(
   ffi.Pointer<slab_cache> slab,
   int size,
@@ -2578,7 +3324,8 @@ external ffi.Pointer<slab> slab_get_large(
 
 /// Deallocate large slab.
 /// @pre slab was allocated with slab_get_large()
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>(symbol: 'slab_put_large', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>(
+    symbol: 'slab_put_large', assetId: 'interactor-bindings-test')
 external void slab_put_large(
   ffi.Pointer<slab_cache> cache,
   ffi.Pointer<slab> slab,
@@ -2587,7 +3334,8 @@ external void slab_put_large(
 /// A shortcut for slab_get_with_order()/slab_get_large()
 /// @see slab_get_with_order()
 /// @see slab_get_large()
-@ffi.Native<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Size)>(symbol: 'slab_get', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<slab> Function(ffi.Pointer<slab_cache>, ffi.Size)>(
+    symbol: 'slab_get', assetId: 'interactor-bindings-test')
 external ffi.Pointer<slab> slab_get(
   ffi.Pointer<slab_cache> cache,
   int size,
@@ -2596,13 +3344,15 @@ external ffi.Pointer<slab> slab_get(
 /// Shortcut for slab_put_with_order()/slab_put_large()
 /// @see slab_get_with_order()
 /// @see slab_get_large()
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>(symbol: 'slab_put', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>, ffi.Pointer<slab>)>(
+    symbol: 'slab_put', assetId: 'interactor-bindings-test')
 external void slab_put(
   ffi.Pointer<slab_cache> cache,
   ffi.Pointer<slab> slab,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>)>(symbol: 'slab_cache_check', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<slab_cache>)>(
+    symbol: 'slab_cache_check', assetId: 'interactor-bindings-test')
 external void slab_cache_check(
   ffi.Pointer<slab_cache> cache,
 );
@@ -2610,20 +3360,26 @@ external void slab_cache_check(
 /// Given the requested size, calculate the actual size of a slab, that will be
 /// allocated by slab_get(). Note that the real capacity of such a slab will be
 /// less than the real size by slab_sizeof().
-@ffi.Native<ffi.Size Function(ffi.Pointer<slab_cache>, ffi.Size)>(symbol: 'slab_real_size', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Size Function(ffi.Pointer<slab_cache>, ffi.Size)>(
+    symbol: 'slab_real_size', assetId: 'interactor-bindings-test')
 external int slab_real_size(
   ffi.Pointer<slab_cache> cache,
   int size,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<mempool_stats>)>(symbol: 'mempool_stats', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<mempool_stats>)>(
+    symbol: 'mempool_stats', assetId: 'interactor-bindings-test')
 external void mempool_stats1(
   ffi.Pointer<mempool> mempool,
   ffi.Pointer<mempool_stats> stats,
 );
 
 /// @todo: struct mempool_iterator
-@ffi.Native<ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<slab_cache>, ffi.Uint32, ffi.Uint8)>(symbol: 'mempool_create_with_order', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<slab_cache>,
+            ffi.Uint32, ffi.Uint8)>(
+    symbol: 'mempool_create_with_order', assetId: 'interactor-bindings-test')
 external void mempool_create_with_order(
   ffi.Pointer<mempool> pool,
   ffi.Pointer<slab_cache> cache,
@@ -2633,39 +3389,47 @@ external void mempool_create_with_order(
 
 /// Free the memory pool and release all cached memory blocks.
 /// @sa mempool_create()
-@ffi.Native<ffi.Void Function(ffi.Pointer<mempool>)>(symbol: 'mempool_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<mempool>)>(
+    symbol: 'mempool_destroy', assetId: 'interactor-bindings-test')
 external void mempool_destroy(
   ffi.Pointer<mempool> pool,
 );
 
 /// Allocate an object.
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<mempool>)>(symbol: 'mempool_alloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<mempool>)>(
+    symbol: 'mempool_alloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> mempool_alloc(
   ffi.Pointer<mempool> pool,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<mempool>, ffi.Pointer<mslab>, ffi.Pointer<ffi.Void>)>(symbol: 'mslab_free', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(
+            ffi.Pointer<mempool>, ffi.Pointer<mslab>, ffi.Pointer<ffi.Void>)>(
+    symbol: 'mslab_free', assetId: 'interactor-bindings-test')
 external void mslab_free(
   ffi.Pointer<mempool> pool,
   ffi.Pointer<mslab> slab,
   ffi.Pointer<ffi.Void> ptr,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(symbol: 'readv', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(
+    symbol: 'readv', assetId: 'interactor-bindings-test')
 external int readv(
   int __fd,
   ffi.Pointer<iovec> __iovec,
   int __count,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(symbol: 'writev', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int)>(
+    symbol: 'writev', assetId: 'interactor-bindings-test')
 external int writev(
   int __fd,
   ffi.Pointer<iovec> __iovec,
   int __count,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>(symbol: 'preadv', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>(
+    symbol: 'preadv', assetId: 'interactor-bindings-test')
 external int preadv(
   int __fd,
   ffi.Pointer<iovec> __iovec,
@@ -2673,7 +3437,8 @@ external int preadv(
   int __offset,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>(symbol: 'pwritev', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<iovec>, ffi.Int, __off_t)>(
+    symbol: 'pwritev', assetId: 'interactor-bindings-test')
 external int pwritev(
   int __fd,
   ffi.Pointer<iovec> __iovec,
@@ -2681,33 +3446,40 @@ external int pwritev(
   int __offset,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>, ffi.Pointer<slab_cache>, ffi.Size)>(symbol: 'obuf_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<obuf>, ffi.Pointer<slab_cache>,
+        ffi.Size)>(symbol: 'obuf_create', assetId: 'interactor-bindings-test')
 external void obuf_create(
   ffi.Pointer<obuf> buf,
   ffi.Pointer<slab_cache> slabc,
   int start_capacity,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>)>(symbol: 'obuf_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>)>(
+    symbol: 'obuf_destroy', assetId: 'interactor-bindings-test')
 external void obuf_destroy(
   ffi.Pointer<obuf> buf,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>)>(symbol: 'obuf_reset', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>)>(
+    symbol: 'obuf_reset', assetId: 'interactor-bindings-test')
 external void obuf_reset(
   ffi.Pointer<obuf> buf,
 );
 
 /// Slow path of obuf_reserve(), which actually reallocates
 /// memory and moves data if necessary.
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<obuf>, ffi.Size)>(symbol: 'obuf_reserve_slow', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<obuf>, ffi.Size)>(
+    symbol: 'obuf_reserve_slow', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> obuf_reserve_slow(
   ffi.Pointer<obuf> buf,
   int size,
 );
 
 /// Append data to the output buffer.
-@ffi.Native<ffi.Size Function(ffi.Pointer<obuf>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'obuf_dup', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Size Function(ffi.Pointer<obuf>, ffi.Pointer<ffi.Void>, ffi.Size)>(
+    symbol: 'obuf_dup', assetId: 'interactor-bindings-test')
 external int obuf_dup(
   ffi.Pointer<obuf> buf,
   ffi.Pointer<ffi.Void> data,
@@ -2715,7 +3487,8 @@ external int obuf_dup(
 );
 
 /// Forget anything added to output buffer after the savepoint.
-@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>, ffi.Pointer<obuf_svp>)>(symbol: 'obuf_rollback_to_svp', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<obuf>, ffi.Pointer<obuf_svp>)>(
+    symbol: 'obuf_rollback_to_svp', assetId: 'interactor-bindings-test')
 external void obuf_rollback_to_svp(
   ffi.Pointer<obuf> buf,
   ffi.Pointer<obuf_svp> svp,
@@ -2731,7 +3504,10 @@ external void obuf_rollback_to_svp(
 /// @param min_alloc - the lowest class size, must be greater than zero.
 /// The good choice is the same value as granularity.
 /// @param actual_factor calculated on the basis of desired factor
-@ffi.Native<ffi.Void Function(ffi.Pointer<small_class>, ffi.UnsignedInt, ffi.Float, ffi.UnsignedInt, ffi.Pointer<ffi.Float>)>(symbol: 'small_class_create', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<small_class>, ffi.UnsignedInt, ffi.Float,
+            ffi.UnsignedInt, ffi.Pointer<ffi.Float>)>(
+    symbol: 'small_class_create', assetId: 'interactor-bindings-test')
 external void small_class_create(
   ffi.Pointer<small_class> sc,
   int granularity,
@@ -2749,7 +3525,9 @@ external void small_class_create(
 /// Must be in (1, 2] range.
 /// @param actual_alloc_factor real allocation factor calculated the basis of
 /// desired alloc_factor
-@ffi.Native<ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<slab_cache>, ffi.Uint32, ffi.UnsignedInt, ffi.Float, ffi.Pointer<ffi.Float>)>(
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<slab_cache>,
+            ffi.Uint32, ffi.UnsignedInt, ffi.Float, ffi.Pointer<ffi.Float>)>(
     symbol: 'small_alloc_create', assetId: 'interactor-bindings-test')
 external void small_alloc_create(
   ffi.Pointer<small_alloc> alloc,
@@ -2761,7 +3539,8 @@ external void small_alloc_create(
 );
 
 /// Destroy the allocator and all allocated memory.
-@ffi.Native<ffi.Void Function(ffi.Pointer<small_alloc>)>(symbol: 'small_alloc_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<small_alloc>)>(
+    symbol: 'small_alloc_destroy', assetId: 'interactor-bindings-test')
 external void small_alloc_destroy(
   ffi.Pointer<small_alloc> alloc,
 );
@@ -2770,7 +3549,8 @@ external void small_alloc_destroy(
 ///
 /// @retval NULL   the requested size is beyond objsize_max
 /// or out of memory
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<small_alloc>, ffi.Size)>(symbol: 'smalloc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<small_alloc>, ffi.Size)>(
+    symbol: 'smalloc', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> smalloc(
   ffi.Pointer<small_alloc> alloc,
   int size,
@@ -2782,7 +3562,9 @@ external ffi.Pointer<ffi.Void> smalloc(
 ///
 /// This boils down to finding the object's mempool and delegating
 /// to mempool_free().
-@ffi.Native<ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>, ffi.Size)>(symbol: 'smfree', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>,
+        ffi.Size)>(symbol: 'smfree', assetId: 'interactor-bindings-test')
 external void smfree(
   ffi.Pointer<small_alloc> alloc,
   ffi.Pointer<ffi.Void> ptr,
@@ -2808,26 +3590,38 @@ external void smfree(
 ///
 /// @param ptr pointer to memory allocated in small_alloc
 /// @return unique index
-@ffi.Native<ffi.Size Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>)>(symbol: 'small_ptr_compress', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Size Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>)>(
+    symbol: 'small_ptr_compress', assetId: 'interactor-bindings-test')
 external int small_ptr_compress(
   ffi.Pointer<small_alloc> alloc,
   ffi.Pointer<ffi.Void> ptr,
 );
 
 /// Perform the opposite action of small_ptr_compress().
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<small_alloc>, ffi.Size)>(symbol: 'small_ptr_decompress', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<small_alloc>, ffi.Size)>(
+    symbol: 'small_ptr_decompress', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> small_ptr_decompress(
   ffi.Pointer<small_alloc> alloc,
   int val,
 );
 
 @ffi.Native<
-        ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<small_stats>, ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>, ffi.Pointer<ffi.Void>)>(
+        ffi.Void Function(
+            ffi.Pointer<small_alloc>,
+            ffi.Pointer<small_stats>,
+            ffi.Pointer<
+                ffi.NativeFunction<
+                    ffi.Int Function(
+                        ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>,
+            ffi.Pointer<ffi.Void>)>(
     symbol: 'small_stats', assetId: 'interactor-bindings-test')
 external void small_stats1(
   ffi.Pointer<small_alloc> alloc,
   ffi.Pointer<small_stats> totals,
-  ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>> cb,
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>
+      cb,
   ffi.Pointer<ffi.Void> cb_ctx,
 );
 
@@ -2835,7 +3629,10 @@ external void small_stats1(
 /// See `struct small_alloc_info' for the description of each field.
 /// Note that this function can return different `info->real_size' for the same
 /// input, depending on the current `small_mempool->used_pool'.
-@ffi.Native<ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<small_alloc_info>)>(symbol: 'small_alloc_info', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<small_alloc>, ffi.Pointer<ffi.Void>,
+            ffi.Size, ffi.Pointer<small_alloc_info>)>(
+    symbol: 'small_alloc_info', assetId: 'interactor-bindings-test')
 external void small_alloc_info1(
   ffi.Pointer<small_alloc> alloc,
   ffi.Pointer<ffi.Void> ptr,
@@ -2843,20 +3640,25 @@ external void small_alloc_info1(
   ffi.Pointer<small_alloc_info> info,
 );
 
-@ffi.Native<ffi.Pointer<cmsghdr> Function(ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>(symbol: '__cmsg_nxthdr', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<cmsghdr> Function(
+            ffi.Pointer<msghdr>, ffi.Pointer<cmsghdr>)>(
+    symbol: '__cmsg_nxthdr', assetId: 'interactor-bindings-test')
 external ffi.Pointer<cmsghdr> __cmsg_nxthdr(
   ffi.Pointer<msghdr> __mhdr,
   ffi.Pointer<cmsghdr> __cmsg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>(symbol: 'socket', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>(
+    symbol: 'socket', assetId: 'interactor-bindings-test')
 external int socket(
   int __domain,
   int __type,
   int __protocol,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>(symbol: 'socketpair', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>(
+    symbol: 'socketpair', assetId: 'interactor-bindings-test')
 external int socketpair(
   int __domain,
   int __type,
@@ -2864,35 +3666,45 @@ external int socketpair(
   ffi.Pointer<ffi.Int> __fds,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>(symbol: 'bind', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>(
+    symbol: 'bind', assetId: 'interactor-bindings-test')
 external int bind(
   int __fd,
   ffi.Pointer<sockaddr> __addr,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(symbol: 'getsockname', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(
+    symbol: 'getsockname', assetId: 'interactor-bindings-test')
 external int getsockname(
   int __fd,
   ffi.Pointer<sockaddr> __addr,
   ffi.Pointer<socklen_t> __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>(symbol: 'connect', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>(
+    symbol: 'connect', assetId: 'interactor-bindings-test')
 external int connect(
   int __fd,
   ffi.Pointer<sockaddr> __addr,
   int __len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(symbol: 'getpeername', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(
+    symbol: 'getpeername', assetId: 'interactor-bindings-test')
 external int getpeername(
   int __fd,
   ffi.Pointer<sockaddr> __addr,
   ffi.Pointer<socklen_t> __len,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(symbol: 'send', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(
+    symbol: 'send', assetId: 'interactor-bindings-test')
 external int send(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
@@ -2900,7 +3712,9 @@ external int send(
   int __flags,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(symbol: 'recv', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>(
+    symbol: 'recv', assetId: 'interactor-bindings-test')
 external int recv(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
@@ -2908,7 +3722,14 @@ external int recv(
   int __flags,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>(symbol: 'sendto', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ssize_t Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int,
+        ffi.Pointer<sockaddr>,
+        socklen_t)>(symbol: 'sendto', assetId: 'interactor-bindings-test')
 external int sendto(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
@@ -2918,7 +3739,10 @@ external int sendto(
   int __addr_len,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(symbol: 'recvfrom', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int,
+            ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(
+    symbol: 'recvfrom', assetId: 'interactor-bindings-test')
 external int recvfrom(
   int __fd,
   ffi.Pointer<ffi.Void> __buf,
@@ -2928,21 +3752,26 @@ external int recvfrom(
   ffi.Pointer<socklen_t> __addr_len,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>(symbol: 'sendmsg', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>(
+    symbol: 'sendmsg', assetId: 'interactor-bindings-test')
 external int sendmsg(
   int __fd,
   ffi.Pointer<msghdr> __message,
   int __flags,
 );
 
-@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>(symbol: 'recvmsg', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>(
+    symbol: 'recvmsg', assetId: 'interactor-bindings-test')
 external int recvmsg(
   int __fd,
   ffi.Pointer<msghdr> __message,
   int __flags,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, ffi.Pointer<socklen_t>)>(symbol: 'getsockopt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
+            ffi.Pointer<socklen_t>)>(
+    symbol: 'getsockopt', assetId: 'interactor-bindings-test')
 external int getsockopt(
   int __fd,
   int __level,
@@ -2951,7 +3780,9 @@ external int getsockopt(
   ffi.Pointer<socklen_t> __optlen,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>, socklen_t)>(symbol: 'setsockopt', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
+        socklen_t)>(symbol: 'setsockopt', assetId: 'interactor-bindings-test')
 external int setsockopt(
   int __fd,
   int __level,
@@ -2960,49 +3791,60 @@ external int setsockopt(
   int __optlen,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'listen', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'listen', assetId: 'interactor-bindings-test')
 external int listen(
   int __fd,
   int __n,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(symbol: 'accept', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>(
+    symbol: 'accept', assetId: 'interactor-bindings-test')
 external int accept(
   int __fd,
   ffi.Pointer<sockaddr> __addr,
   ffi.Pointer<socklen_t> __addr_len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'shutdown', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'shutdown', assetId: 'interactor-bindings-test')
 external int shutdown(
   int __fd,
   int __how,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'sockatmark', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'sockatmark', assetId: 'interactor-bindings-test')
 external int sockatmark(
   int __fd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'isfdtype', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'isfdtype', assetId: 'interactor-bindings-test')
 external int isfdtype(
   int __fd,
   int __fdtype,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>(symbol: 'stat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>(
+    symbol: 'stat', assetId: 'interactor-bindings-test')
 external int stat1(
   ffi.Pointer<ffi.Char> __file,
   ffi.Pointer<stat> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<stat>)>(symbol: 'fstat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<stat>)>(
+    symbol: 'fstat', assetId: 'interactor-bindings-test')
 external int fstat(
   int __fd,
   ffi.Pointer<stat> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>, ffi.Int)>(symbol: 'fstatat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<stat>,
+        ffi.Int)>(symbol: 'fstatat', assetId: 'interactor-bindings-test')
 external int fstatat(
   int __fd,
   ffi.Pointer<ffi.Char> __file,
@@ -3010,31 +3852,37 @@ external int fstatat(
   int __flag,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>(symbol: 'lstat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<stat>)>(
+    symbol: 'lstat', assetId: 'interactor-bindings-test')
 external int lstat(
   ffi.Pointer<ffi.Char> __file,
   ffi.Pointer<stat> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(symbol: 'chmod', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(
+    symbol: 'chmod', assetId: 'interactor-bindings-test')
 external int chmod(
   ffi.Pointer<ffi.Char> __file,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(symbol: 'lchmod', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(
+    symbol: 'lchmod', assetId: 'interactor-bindings-test')
 external int lchmod(
   ffi.Pointer<ffi.Char> __file,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, __mode_t)>(symbol: 'fchmod', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, __mode_t)>(
+    symbol: 'fchmod', assetId: 'interactor-bindings-test')
 external int fchmod(
   int __fd,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, ffi.Int)>(symbol: 'fchmodat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, ffi.Int)>(
+    symbol: 'fchmodat', assetId: 'interactor-bindings-test')
 external int fchmodat(
   int __fd,
   ffi.Pointer<ffi.Char> __file,
@@ -3042,32 +3890,38 @@ external int fchmodat(
   int __flag,
 );
 
-@ffi.Native<__mode_t Function(__mode_t)>(symbol: 'umask', assetId: 'interactor-bindings-test')
+@ffi.Native<__mode_t Function(__mode_t)>(
+    symbol: 'umask', assetId: 'interactor-bindings-test')
 external int umask(
   int __mask,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(symbol: 'mkdir', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(
+    symbol: 'mkdir', assetId: 'interactor-bindings-test')
 external int mkdir(
   ffi.Pointer<ffi.Char> __path,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>(symbol: 'mkdirat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>(
+    symbol: 'mkdirat', assetId: 'interactor-bindings-test')
 external int mkdirat(
   int __fd,
   ffi.Pointer<ffi.Char> __path,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>(symbol: 'mknod', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>(
+    symbol: 'mknod', assetId: 'interactor-bindings-test')
 external int mknod(
   ffi.Pointer<ffi.Char> __path,
   int __mode,
   int __dev,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>(symbol: 'mknodat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t, __dev_t)>(
+    symbol: 'mknodat', assetId: 'interactor-bindings-test')
 external int mknodat(
   int __fd,
   ffi.Pointer<ffi.Char> __path,
@@ -3075,20 +3929,24 @@ external int mknodat(
   int __dev,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(symbol: 'mkfifo', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, __mode_t)>(
+    symbol: 'mkfifo', assetId: 'interactor-bindings-test')
 external int mkfifo(
   ffi.Pointer<ffi.Char> __path,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>(symbol: 'mkfifoat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, __mode_t)>(
+    symbol: 'mkfifoat', assetId: 'interactor-bindings-test')
 external int mkfifoat(
   int __fd,
   ffi.Pointer<ffi.Char> __path,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<timespec>, ffi.Int)>(symbol: 'utimensat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<timespec>,
+        ffi.Int)>(symbol: 'utimensat', assetId: 'interactor-bindings-test')
 external int utimensat(
   int __fd,
   ffi.Pointer<ffi.Char> __path,
@@ -3096,226 +3954,274 @@ external int utimensat(
   int __flags,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<timespec>)>(symbol: 'futimens', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<timespec>)>(
+    symbol: 'futimens', assetId: 'interactor-bindings-test')
 external int futimens(
   int __fd,
   ffi.Pointer<timespec> __times,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Int> Function()>(symbol: '__errno_location', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Int> Function()>(
+    symbol: '__errno_location', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Int> __errno_location();
 
-@ffi.Native<__sighandler_t Function(ffi.Int, __sighandler_t)>(symbol: '__sysv_signal', assetId: 'interactor-bindings-test')
+@ffi.Native<__sighandler_t Function(ffi.Int, __sighandler_t)>(
+    symbol: '__sysv_signal', assetId: 'interactor-bindings-test')
 external __sighandler_t __sysv_signal(
   int __sig,
   __sighandler_t __handler,
 );
 
-@ffi.Native<__sighandler_t Function(ffi.Int, __sighandler_t)>(symbol: 'signal', assetId: 'interactor-bindings-test')
+@ffi.Native<__sighandler_t Function(ffi.Int, __sighandler_t)>(
+    symbol: 'signal', assetId: 'interactor-bindings-test')
 external __sighandler_t signal(
   int __sig,
   __sighandler_t __handler,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Int)>(symbol: 'kill', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Int)>(
+    symbol: 'kill', assetId: 'interactor-bindings-test')
 external int kill(
   int __pid,
   int __sig,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Int)>(symbol: 'killpg', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Int)>(
+    symbol: 'killpg', assetId: 'interactor-bindings-test')
 external int killpg(
   int __pgrp,
   int __sig,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'raise', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'raise', assetId: 'interactor-bindings-test')
 external int raise(
   int __sig,
 );
 
-@ffi.Native<__sighandler_t Function(ffi.Int, __sighandler_t)>(symbol: 'ssignal', assetId: 'interactor-bindings-test')
+@ffi.Native<__sighandler_t Function(ffi.Int, __sighandler_t)>(
+    symbol: 'ssignal', assetId: 'interactor-bindings-test')
 external __sighandler_t ssignal(
   int __sig,
   __sighandler_t __handler,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'gsignal', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'gsignal', assetId: 'interactor-bindings-test')
 external int gsignal(
   int __sig,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>)>(symbol: 'psignal', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'psignal', assetId: 'interactor-bindings-test')
 external void psignal(
   int __sig,
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>(symbol: 'psiginfo', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'psiginfo', assetId: 'interactor-bindings-test')
 external void psiginfo(
   ffi.Pointer<siginfo_t> __pinfo,
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'sigblock', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'sigblock', assetId: 'interactor-bindings-test')
 external int sigblock(
   int __mask,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'sigsetmask', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'sigsetmask', assetId: 'interactor-bindings-test')
 external int sigsetmask(
   int __mask,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'siggetmask', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'siggetmask', assetId: 'interactor-bindings-test')
 external int siggetmask();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(symbol: 'sigemptyset', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(
+    symbol: 'sigemptyset', assetId: 'interactor-bindings-test')
 external int sigemptyset(
   ffi.Pointer<sigset_t> __set,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(symbol: 'sigfillset', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(
+    symbol: 'sigfillset', assetId: 'interactor-bindings-test')
 external int sigfillset(
   ffi.Pointer<sigset_t> __set,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>(symbol: 'sigaddset', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>(
+    symbol: 'sigaddset', assetId: 'interactor-bindings-test')
 external int sigaddset(
   ffi.Pointer<sigset_t> __set,
   int __signo,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>(symbol: 'sigdelset', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>(
+    symbol: 'sigdelset', assetId: 'interactor-bindings-test')
 external int sigdelset(
   ffi.Pointer<sigset_t> __set,
   int __signo,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>(symbol: 'sigismember', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Int)>(
+    symbol: 'sigismember', assetId: 'interactor-bindings-test')
 external int sigismember(
   ffi.Pointer<sigset_t> __set,
   int __signo,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>(symbol: 'sigprocmask', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<sigset_t>, ffi.Pointer<sigset_t>)>(
+    symbol: 'sigprocmask', assetId: 'interactor-bindings-test')
 external int sigprocmask(
   int __how,
   ffi.Pointer<sigset_t> __set,
   ffi.Pointer<sigset_t> __oset,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(symbol: 'sigsuspend', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(
+    symbol: 'sigsuspend', assetId: 'interactor-bindings-test')
 external int sigsuspend(
   ffi.Pointer<sigset_t> __set,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>(symbol: 'sigaction', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<sigaction>, ffi.Pointer<sigaction>)>(
+    symbol: 'sigaction', assetId: 'interactor-bindings-test')
 external int sigaction1(
   int __sig,
   ffi.Pointer<sigaction> __act,
   ffi.Pointer<sigaction> __oact,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(symbol: 'sigpending', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>)>(
+    symbol: 'sigpending', assetId: 'interactor-bindings-test')
 external int sigpending(
   ffi.Pointer<sigset_t> __set,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>(symbol: 'sigwait', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<ffi.Int>)>(
+    symbol: 'sigwait', assetId: 'interactor-bindings-test')
 external int sigwait(
   ffi.Pointer<sigset_t> __set,
   ffi.Pointer<ffi.Int> __sig,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>(symbol: 'sigwaitinfo', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>)>(
+    symbol: 'sigwaitinfo', assetId: 'interactor-bindings-test')
 external int sigwaitinfo(
   ffi.Pointer<sigset_t> __set,
   ffi.Pointer<siginfo_t> __info,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>, ffi.Pointer<timespec>)>(symbol: 'sigtimedwait', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<sigset_t>, ffi.Pointer<siginfo_t>,
+            ffi.Pointer<timespec>)>(
+    symbol: 'sigtimedwait', assetId: 'interactor-bindings-test')
 external int sigtimedwait(
   ffi.Pointer<sigset_t> __set,
   ffi.Pointer<siginfo_t> __info,
   ffi.Pointer<timespec> __timeout,
 );
 
-@ffi.Native<ffi.Int Function(__pid_t, ffi.Int, sigval)>(symbol: 'sigqueue', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(__pid_t, ffi.Int, sigval)>(
+    symbol: 'sigqueue', assetId: 'interactor-bindings-test')
 external int sigqueue(
   int __pid,
   int __sig,
   sigval __val,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigcontext>)>(symbol: 'sigreturn', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigcontext>)>(
+    symbol: 'sigreturn', assetId: 'interactor-bindings-test')
 external int sigreturn(
   ffi.Pointer<sigcontext> __scp,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'siginterrupt', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'siginterrupt', assetId: 'interactor-bindings-test')
 external int siginterrupt(
   int __sig,
   int __interrupt,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>(symbol: 'sigaltstack', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<stack_t>, ffi.Pointer<stack_t>)>(
+    symbol: 'sigaltstack', assetId: 'interactor-bindings-test')
 external int sigaltstack(
   ffi.Pointer<stack_t> __ss,
   ffi.Pointer<stack_t> __oss,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>(symbol: 'sigstack', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<sigstack>, ffi.Pointer<sigstack>)>(
+    symbol: 'sigstack', assetId: 'interactor-bindings-test')
 external int sigstack1(
   ffi.Pointer<sigstack> __ss,
   ffi.Pointer<sigstack> __oss,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>(symbol: 'pthread_sigmask', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<__sigset_t>, ffi.Pointer<__sigset_t>)>(
+    symbol: 'pthread_sigmask', assetId: 'interactor-bindings-test')
 external int pthread_sigmask(
   int __how,
   ffi.Pointer<__sigset_t> __newmask,
   ffi.Pointer<__sigset_t> __oldmask,
 );
 
-@ffi.Native<ffi.Int Function(pthread_t, ffi.Int)>(symbol: 'pthread_kill', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(pthread_t, ffi.Int)>(
+    symbol: 'pthread_kill', assetId: 'interactor-bindings-test')
 external int pthread_kill(
   int __threadid,
   int __signo,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: '__libc_current_sigrtmin', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: '__libc_current_sigrtmin', assetId: 'interactor-bindings-test')
 external int __libc_current_sigrtmin();
 
-@ffi.Native<ffi.Int Function()>(symbol: '__libc_current_sigrtmax', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: '__libc_current_sigrtmax', assetId: 'interactor-bindings-test')
 external int __libc_current_sigrtmax();
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(symbol: 'fcntl', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Int)>(
+    symbol: 'fcntl', assetId: 'interactor-bindings-test')
 external int fcntl(
   int __fd,
   int __cmd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'open', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'open', assetId: 'interactor-bindings-test')
 external int open(
   ffi.Pointer<ffi.Char> __file,
   int __oflag,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(symbol: 'openat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int)>(
+    symbol: 'openat', assetId: 'interactor-bindings-test')
 external int openat(
   int __fd,
   ffi.Pointer<ffi.Char> __file,
   int __oflag,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, mode_t)>(symbol: 'creat', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, mode_t)>(
+    symbol: 'creat', assetId: 'interactor-bindings-test')
 external int creat(
   ffi.Pointer<ffi.Char> __file,
   int __mode,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, off_t, off_t, ffi.Int)>(symbol: 'posix_fadvise', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, off_t, off_t, ffi.Int)>(
+    symbol: 'posix_fadvise', assetId: 'interactor-bindings-test')
 external int posix_fadvise(
   int __fd,
   int __offset,
@@ -3323,37 +4229,45 @@ external int posix_fadvise(
   int __advise,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, off_t, off_t)>(symbol: 'posix_fallocate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, off_t, off_t)>(
+    symbol: 'posix_fallocate', assetId: 'interactor-bindings-test')
 external int posix_fallocate(
   int __fd,
   int __offset,
   int __len,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int32)>(symbol: 'atomic_thread_fence', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int32)>(
+    symbol: 'atomic_thread_fence', assetId: 'interactor-bindings-test')
 external void atomic_thread_fence(
   int arg0,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int32)>(symbol: 'atomic_signal_fence', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int32)>(
+    symbol: 'atomic_signal_fence', assetId: 'interactor-bindings-test')
 external void atomic_signal_fence(
   int arg0,
 );
 
-@ffi.Native<ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_get_probe_ring', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<io_uring_probe> Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_get_probe_ring', assetId: 'interactor-bindings-test')
 external ffi.Pointer<io_uring_probe> io_uring_get_probe_ring(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Pointer<io_uring_probe> Function()>(symbol: 'io_uring_get_probe', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<io_uring_probe> Function()>(
+    symbol: 'io_uring_get_probe', assetId: 'interactor-bindings-test')
 external ffi.Pointer<io_uring_probe> io_uring_get_probe();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<io_uring_probe>)>(symbol: 'io_uring_free_probe', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<io_uring_probe>)>(
+    symbol: 'io_uring_free_probe', assetId: 'interactor-bindings-test')
 external void io_uring_free_probe(
   ffi.Pointer<io_uring_probe> probe,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.Pointer<io_uring_params>, ffi.Pointer<ffi.Void>, ffi.Size)>(
+@ffi.Native<
+        ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>,
+            ffi.Pointer<io_uring_params>, ffi.Pointer<ffi.Void>, ffi.Size)>(
     symbol: 'io_uring_queue_init_mem', assetId: 'interactor-bindings-test')
 external int io_uring_queue_init_mem(
   int entries,
@@ -3363,45 +4277,65 @@ external int io_uring_queue_init_mem(
   int buf_size,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.Pointer<io_uring_params>)>(symbol: 'io_uring_queue_init_params', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>,
+            ffi.Pointer<io_uring_params>)>(
+    symbol: 'io_uring_queue_init_params', assetId: 'interactor-bindings-test')
 external int io_uring_queue_init_params(
   int entries,
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<io_uring_params> p,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.UnsignedInt)>(symbol: 'io_uring_queue_init', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.UnsignedInt, ffi.Pointer<io_uring>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_queue_init', assetId: 'interactor-bindings-test')
 external int io_uring_queue_init(
   int entries,
   ffi.Pointer<io_uring> ring,
   int flags,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<io_uring_params>, ffi.Pointer<io_uring>)>(symbol: 'io_uring_queue_mmap', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<io_uring_params>, ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_queue_mmap', assetId: 'interactor-bindings-test')
 external int io_uring_queue_mmap(
   int fd,
   ffi.Pointer<io_uring_params> p,
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_ring_dontfork', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_ring_dontfork', assetId: 'interactor-bindings-test')
 external int io_uring_ring_dontfork(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_queue_exit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_queue_exit', assetId: 'interactor-bindings-test')
 external void io_uring_queue_exit(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.UnsignedInt Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt)>(symbol: 'io_uring_peek_batch_cqe', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.UnsignedInt Function(ffi.Pointer<io_uring>,
+            ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_peek_batch_cqe', assetId: 'interactor-bindings-test')
 external int io_uring_peek_batch_cqe(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes,
   int count,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>(
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>,
+            ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
+            ffi.UnsignedInt,
+            ffi.Pointer<__kernel_timespec>,
+            ffi.Pointer<sigset_t>)>(
     symbol: 'io_uring_wait_cqes', assetId: 'interactor-bindings-test')
 external int io_uring_wait_cqes(
   ffi.Pointer<io_uring> ring,
@@ -3411,26 +4345,40 @@ external int io_uring_wait_cqes(
   ffi.Pointer<sigset_t> sigmask,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.Pointer<__kernel_timespec>)>(symbol: 'io_uring_wait_cqe_timeout', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>,
+            ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
+            ffi.Pointer<__kernel_timespec>)>(
+    symbol: 'io_uring_wait_cqe_timeout', assetId: 'interactor-bindings-test')
 external int io_uring_wait_cqe_timeout(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqe_ptr,
   ffi.Pointer<__kernel_timespec> ts,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_submit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_submit', assetId: 'interactor-bindings-test')
 external int io_uring_submit(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>(symbol: 'io_uring_submit_and_wait', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_submit_and_wait', assetId: 'interactor-bindings-test')
 external int io_uring_submit_and_wait(
   ffi.Pointer<io_uring> ring,
   int wait_nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.Pointer<__kernel_timespec>, ffi.Pointer<sigset_t>)>(
-    symbol: 'io_uring_submit_and_wait_timeout', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>,
+            ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
+            ffi.UnsignedInt,
+            ffi.Pointer<__kernel_timespec>,
+            ffi.Pointer<sigset_t>)>(
+    symbol: 'io_uring_submit_and_wait_timeout',
+    assetId: 'interactor-bindings-test')
 external int io_uring_submit_and_wait_timeout(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqe_ptr,
@@ -3439,14 +4387,21 @@ external int io_uring_submit_and_wait_timeout(
   ffi.Pointer<sigset_t> sigmask,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.UnsignedInt)>(symbol: 'io_uring_register_buffers', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_buffers', assetId: 'interactor-bindings-test')
 external int io_uring_register_buffers(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<iovec> iovecs,
   int nr_iovecs,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>(symbol: 'io_uring_register_buffers_tags', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<iovec>,
+            ffi.Pointer<__u64>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_buffers_tags',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_buffers_tags(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<iovec> iovecs,
@@ -3454,14 +4409,19 @@ external int io_uring_register_buffers_tags(
   int nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>(symbol: 'io_uring_register_buffers_sparse', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_buffers_sparse',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_buffers_sparse(
   ffi.Pointer<io_uring> ring,
   int nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>(
-    symbol: 'io_uring_register_buffers_update_tag', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt,
+            ffi.Pointer<iovec>, ffi.Pointer<__u64>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_buffers_update_tag',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_buffers_update_tag(
   ffi.Pointer<io_uring> ring,
   int off,
@@ -3470,19 +4430,26 @@ external int io_uring_register_buffers_update_tag(
   int nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_unregister_buffers', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_unregister_buffers', assetId: 'interactor-bindings-test')
 external int io_uring_unregister_buffers(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>(symbol: 'io_uring_register_files', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_files', assetId: 'interactor-bindings-test')
 external int io_uring_register_files(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<ffi.Int> files,
   int nr_files,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>(symbol: 'io_uring_register_files_tags', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Int>,
+            ffi.Pointer<__u64>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_files_tags', assetId: 'interactor-bindings-test')
 external int io_uring_register_files_tags(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<ffi.Int> files,
@@ -3490,14 +4457,19 @@ external int io_uring_register_files_tags(
   int nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>(symbol: 'io_uring_register_files_sparse', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_files_sparse',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_files_sparse(
   ffi.Pointer<io_uring> ring,
   int nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>(
-    symbol: 'io_uring_register_files_update_tag', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt,
+            ffi.Pointer<ffi.Int>, ffi.Pointer<__u64>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_files_update_tag',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_files_update_tag(
   ffi.Pointer<io_uring> ring,
   int off,
@@ -3506,12 +4478,17 @@ external int io_uring_register_files_update_tag(
   int nr_files,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_unregister_files', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_unregister_files', assetId: 'interactor-bindings-test')
 external int io_uring_unregister_files(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>(symbol: 'io_uring_register_files_update', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt,
+            ffi.Pointer<ffi.Int>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_files_update',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_files_update(
   ffi.Pointer<io_uring> ring,
   int off,
@@ -3519,128 +4496,173 @@ external int io_uring_register_files_update(
   int nr_files,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(symbol: 'io_uring_register_eventfd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(
+    symbol: 'io_uring_register_eventfd', assetId: 'interactor-bindings-test')
 external int io_uring_register_eventfd(
   ffi.Pointer<io_uring> ring,
   int fd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(symbol: 'io_uring_register_eventfd_async', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(
+    symbol: 'io_uring_register_eventfd_async',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_eventfd_async(
   ffi.Pointer<io_uring> ring,
   int fd,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_unregister_eventfd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_unregister_eventfd', assetId: 'interactor-bindings-test')
 external int io_uring_unregister_eventfd(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>, ffi.UnsignedInt)>(symbol: 'io_uring_register_probe', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_probe>,
+            ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_probe', assetId: 'interactor-bindings-test')
 external int io_uring_register_probe(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<io_uring_probe> p,
   int nr,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_register_personality', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_register_personality',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_personality(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(symbol: 'io_uring_unregister_personality', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(
+    symbol: 'io_uring_unregister_personality',
+    assetId: 'interactor-bindings-test')
 external int io_uring_unregister_personality(
   ffi.Pointer<io_uring> ring,
   int id,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_restriction>, ffi.UnsignedInt)>(symbol: 'io_uring_register_restrictions', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>,
+            ffi.Pointer<io_uring_restriction>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_restrictions',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_restrictions(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<io_uring_restriction> res,
   int nr_res,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_enable_rings', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_enable_rings', assetId: 'interactor-bindings-test')
 external int io_uring_enable_rings(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: '__io_uring_sqring_wait', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: '__io_uring_sqring_wait', assetId: 'interactor-bindings-test')
 external int __io_uring_sqring_wait(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Size, ffi.Pointer<cpu_set_t>)>(symbol: 'io_uring_register_iowq_aff', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>, ffi.Size, ffi.Pointer<cpu_set_t>)>(
+    symbol: 'io_uring_register_iowq_aff', assetId: 'interactor-bindings-test')
 external int io_uring_register_iowq_aff(
   ffi.Pointer<io_uring> ring,
   int cpusz,
   ffi.Pointer<cpu_set_t> mask,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_unregister_iowq_aff', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_unregister_iowq_aff', assetId: 'interactor-bindings-test')
 external int io_uring_unregister_iowq_aff(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>(symbol: 'io_uring_register_iowq_max_workers', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.UnsignedInt>)>(
+    symbol: 'io_uring_register_iowq_max_workers',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_iowq_max_workers(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<ffi.UnsignedInt> values,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_register_ring_fd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_register_ring_fd', assetId: 'interactor-bindings-test')
 external int io_uring_register_ring_fd(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_unregister_ring_fd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_unregister_ring_fd', assetId: 'interactor-bindings-test')
 external int io_uring_unregister_ring_fd(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_close_ring_fd', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_close_ring_fd', assetId: 'interactor-bindings-test')
 external int io_uring_close_ring_fd(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>, ffi.UnsignedInt)>(symbol: 'io_uring_register_buf_ring', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_reg>,
+            ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_buf_ring', assetId: 'interactor-bindings-test')
 external int io_uring_register_buf_ring(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<io_uring_buf_reg> reg,
   int flags,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(symbol: 'io_uring_unregister_buf_ring', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Int)>(
+    symbol: 'io_uring_unregister_buf_ring', assetId: 'interactor-bindings-test')
 external int io_uring_unregister_buf_ring(
   ffi.Pointer<io_uring> ring,
   int bgid,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_sync_cancel_reg>)>(symbol: 'io_uring_register_sync_cancel', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>, ffi.Pointer<io_uring_sync_cancel_reg>)>(
+    symbol: 'io_uring_register_sync_cancel',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_sync_cancel(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<io_uring_sync_cancel_reg> reg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.UnsignedInt)>(symbol: 'io_uring_register_file_alloc_range', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register_file_alloc_range',
+    assetId: 'interactor-bindings-test')
 external int io_uring_register_file_alloc_range(
   ffi.Pointer<io_uring> ring,
   int off,
   int len,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_get_events', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_get_events', assetId: 'interactor-bindings-test')
 external int io_uring_get_events(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(symbol: 'io_uring_submit_and_get_events', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>)>(
+    symbol: 'io_uring_submit_and_get_events',
+    assetId: 'interactor-bindings-test')
 external int io_uring_submit_and_get_events(
   ffi.Pointer<io_uring> ring,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>)>(symbol: 'io_uring_enter', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt,
+            ffi.UnsignedInt, ffi.Pointer<sigset_t>)>(
+    symbol: 'io_uring_enter', assetId: 'interactor-bindings-test')
 external int io_uring_enter(
   int fd,
   int to_submit,
@@ -3649,7 +4671,10 @@ external int io_uring_enter(
   ffi.Pointer<sigset_t> sig,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>, ffi.Size)>(symbol: 'io_uring_enter2', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.UnsignedInt,
+            ffi.UnsignedInt, ffi.Pointer<sigset_t>, ffi.Size)>(
+    symbol: 'io_uring_enter2', assetId: 'interactor-bindings-test')
 external int io_uring_enter2(
   int fd,
   int to_submit,
@@ -3659,13 +4684,17 @@ external int io_uring_enter2(
   int sz,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>(symbol: 'io_uring_setup', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>(
+    symbol: 'io_uring_setup', assetId: 'interactor-bindings-test')
 external int io_uring_setup(
   int entries,
   ffi.Pointer<io_uring_params> p,
 );
 
-@ffi.Native<ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<ffi.Void>, ffi.UnsignedInt)>(symbol: 'io_uring_register', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.UnsignedInt, ffi.UnsignedInt,
+            ffi.Pointer<ffi.Void>, ffi.UnsignedInt)>(
+    symbol: 'io_uring_register', assetId: 'interactor-bindings-test')
 external int io_uring_register(
   int fd,
   int opcode,
@@ -3673,7 +4702,9 @@ external int io_uring_register(
   int nr_args,
 );
 
-@ffi.Native<ffi.Pointer<io_uring_buf_ring> Function(ffi.Pointer<io_uring>, ffi.UnsignedInt, ffi.Int, ffi.UnsignedInt, ffi.Pointer<ffi.Int>)>(
+@ffi.Native<
+        ffi.Pointer<io_uring_buf_ring> Function(ffi.Pointer<io_uring>,
+            ffi.UnsignedInt, ffi.Int, ffi.UnsignedInt, ffi.Pointer<ffi.Int>)>(
     symbol: 'io_uring_setup_buf_ring', assetId: 'interactor-bindings-test')
 external ffi.Pointer<io_uring_buf_ring> io_uring_setup_buf_ring(
   ffi.Pointer<io_uring> ring,
@@ -3683,7 +4714,10 @@ external ffi.Pointer<io_uring_buf_ring> io_uring_setup_buf_ring(
   ffi.Pointer<ffi.Int> ret,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_ring>, ffi.UnsignedInt, ffi.Int)>(symbol: 'io_uring_free_buf_ring', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<io_uring_buf_ring>,
+            ffi.UnsignedInt, ffi.Int)>(
+    symbol: 'io_uring_free_buf_ring', assetId: 'interactor-bindings-test')
 external int io_uring_free_buf_ring(
   ffi.Pointer<io_uring> ring,
   ffi.Pointer<io_uring_buf_ring> br,
@@ -3691,7 +4725,13 @@ external int io_uring_free_buf_ring(
   int bgid,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<io_uring>, ffi.Pointer<ffi.Pointer<io_uring_cqe>>, ffi.UnsignedInt, ffi.UnsignedInt, ffi.Pointer<sigset_t>)>(
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<io_uring>,
+            ffi.Pointer<ffi.Pointer<io_uring_cqe>>,
+            ffi.UnsignedInt,
+            ffi.UnsignedInt,
+            ffi.Pointer<sigset_t>)>(
     symbol: '__io_uring_get_cqe', assetId: 'interactor-bindings-test')
 external int __io_uring_get_cqe(
   ffi.Pointer<io_uring> ring,
@@ -3701,42 +4741,52 @@ external int __io_uring_get_cqe(
   ffi.Pointer<sigset_t> sigmask,
 );
 
-@ffi.Native<ssize_t Function(ffi.UnsignedInt, ffi.UnsignedInt)>(symbol: 'io_uring_mlock_size', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.UnsignedInt, ffi.UnsignedInt)>(
+    symbol: 'io_uring_mlock_size', assetId: 'interactor-bindings-test')
 external int io_uring_mlock_size(
   int entries,
   int flags,
 );
 
-@ffi.Native<ssize_t Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>(symbol: 'io_uring_mlock_size_params', assetId: 'interactor-bindings-test')
+@ffi.Native<ssize_t Function(ffi.UnsignedInt, ffi.Pointer<io_uring_params>)>(
+    symbol: 'io_uring_mlock_size_params', assetId: 'interactor-bindings-test')
 external int io_uring_mlock_size_params(
   int entries,
   ffi.Pointer<io_uring_params> p,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'io_uring_major_version', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'io_uring_major_version', assetId: 'interactor-bindings-test')
 external int io_uring_major_version();
 
-@ffi.Native<ffi.Int Function()>(symbol: 'io_uring_minor_version', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'io_uring_minor_version', assetId: 'interactor-bindings-test')
 external int io_uring_minor_version();
 
-@ffi.Native<ffi.Bool Function(ffi.Int, ffi.Int)>(symbol: 'io_uring_check_version', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Bool Function(ffi.Int, ffi.Int)>(
+    symbol: 'io_uring_check_version', assetId: 'interactor-bindings-test')
 external bool io_uring_check_version(
   int major,
   int minor,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'remove', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'remove', assetId: 'interactor-bindings-test')
 external int remove(
   ffi.Pointer<ffi.Char> __filename,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'rename', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'rename', assetId: 'interactor-bindings-test')
 external int rename(
   ffi.Pointer<ffi.Char> __old,
   ffi.Pointer<ffi.Char> __new,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>)>(symbol: 'renameat', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'renameat', assetId: 'interactor-bindings-test')
 external int renameat(
   int __oldfd,
   ffi.Pointer<ffi.Char> __old,
@@ -3744,86 +4794,114 @@ external int renameat(
   ffi.Pointer<ffi.Char> __new,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fclose', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fclose', assetId: 'interactor-bindings-test')
 external int fclose(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function()>(symbol: 'tmpfile', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<FILE> Function()>(
+    symbol: 'tmpfile', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> tmpfile();
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'tmpnam', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'tmpnam', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> tmpnam(
   ffi.Pointer<ffi.Char> arg0,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'tmpnam_r', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'tmpnam_r', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> tmpnam_r(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'tempnam', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'tempnam', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> tempnam(
   ffi.Pointer<ffi.Char> __dir,
   ffi.Pointer<ffi.Char> __pfx,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fflush', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fflush', assetId: 'interactor-bindings-test')
 external int fflush(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fflush_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fflush_unlocked', assetId: 'interactor-bindings-test')
 external int fflush_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'fopen', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<FILE> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'fopen', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> fopen(
   ffi.Pointer<ffi.Char> __filename,
   ffi.Pointer<ffi.Char> __modes,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>(symbol: 'freopen', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<FILE> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>(
+    symbol: 'freopen', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> freopen(
   ffi.Pointer<ffi.Char> __filename,
   ffi.Pointer<ffi.Char> __modes,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Int, ffi.Pointer<ffi.Char>)>(symbol: 'fdopen', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<FILE> Function(ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'fdopen', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> fdopen(
   int __fd,
   ffi.Pointer<ffi.Char> __modes,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, cookie_io_functions_t)>(symbol: 'fopencookie', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>,
+            cookie_io_functions_t)>(
+    symbol: 'fopencookie', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> fopencookie(
   ffi.Pointer<ffi.Void> __magic_cookie,
   ffi.Pointer<ffi.Char> __modes,
   cookie_io_functions_t __io_funcs,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<ffi.Char>)>(symbol: 'fmemopen', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<FILE> Function(
+            ffi.Pointer<ffi.Void>, ffi.Size, ffi.Pointer<ffi.Char>)>(
+    symbol: 'fmemopen', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> fmemopen(
   ffi.Pointer<ffi.Void> __s,
   int __len,
   ffi.Pointer<ffi.Char> __modes,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>(symbol: 'open_memstream', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<FILE> Function(
+            ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>(
+    symbol: 'open_memstream', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> open_memstream(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __bufloc,
   ffi.Pointer<ffi.Size> __sizeloc,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>(symbol: 'setbuf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'setbuf', assetId: 'interactor-bindings-test')
 external void setbuf(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<ffi.Char> __buf,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Int, ffi.Size)>(symbol: 'setvbuf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+    ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Int,
+        ffi.Size)>(symbol: 'setvbuf', assetId: 'interactor-bindings-test')
 external int setvbuf(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<ffi.Char> __buf,
@@ -3831,63 +4909,83 @@ external int setvbuf(
   int __n,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Size)>(symbol: 'setbuffer', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Size)>(
+    symbol: 'setbuffer', assetId: 'interactor-bindings-test')
 external void setbuffer(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<ffi.Char> __buf,
   int __size,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(symbol: 'setlinebuf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(
+    symbol: 'setlinebuf', assetId: 'interactor-bindings-test')
 external void setlinebuf(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>(symbol: 'fprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'fprintf', assetId: 'interactor-bindings-test')
 external int fprintf(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'printf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'printf', assetId: 'interactor-bindings-test')
 external int printf(
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'sprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'sprintf', assetId: 'interactor-bindings-test')
 external int sprintf(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vfprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>,
+            ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vfprintf', assetId: 'interactor-bindings-test')
 external int vfprintf(
   ffi.Pointer<FILE> __s,
   ffi.Pointer<ffi.Char> __format,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vprintf', assetId: 'interactor-bindings-test')
 external int vprintf(
   ffi.Pointer<ffi.Char> __format,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vsprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+            ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vsprintf', assetId: 'interactor-bindings-test')
 external int vsprintf(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __format,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>)>(symbol: 'snprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>)>(
+    symbol: 'snprintf', assetId: 'interactor-bindings-test')
 external int snprintf(
   ffi.Pointer<ffi.Char> __s,
   int __maxlen,
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vsnprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>,
+            ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vsnprintf', assetId: 'interactor-bindings-test')
 external int vsnprintf(
   ffi.Pointer<ffi.Char> __s,
   int __maxlen,
@@ -3895,154 +4993,198 @@ external int vsnprintf(
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vasprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vasprintf', assetId: 'interactor-bindings-test')
 external int vasprintf(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
   ffi.Pointer<ffi.Char> __f,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(symbol: '__asprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(
+    symbol: '__asprintf', assetId: 'interactor-bindings-test')
 external int __asprintf(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
   ffi.Pointer<ffi.Char> __fmt,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(symbol: 'asprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'asprintf', assetId: 'interactor-bindings-test')
 external int asprintf(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
   ffi.Pointer<ffi.Char> __fmt,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vdprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(
+            ffi.Int, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vdprintf', assetId: 'interactor-bindings-test')
 external int vdprintf(
   int __fd,
   ffi.Pointer<ffi.Char> __fmt,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>)>(symbol: 'dprintf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>)>(
+    symbol: 'dprintf', assetId: 'interactor-bindings-test')
 external int dprintf(
   int __fd,
   ffi.Pointer<ffi.Char> __fmt,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>(symbol: 'fscanf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'fscanf', assetId: 'interactor-bindings-test')
 external int fscanf(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'scanf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'scanf', assetId: 'interactor-bindings-test')
 external int scanf(
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'sscanf', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'sscanf', assetId: 'interactor-bindings-test')
 external int sscanf(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __format,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vfscanf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>,
+            ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vfscanf', assetId: 'interactor-bindings-test')
 external int vfscanf(
   ffi.Pointer<FILE> __s,
   ffi.Pointer<ffi.Char> __format,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vscanf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vscanf', assetId: 'interactor-bindings-test')
 external int vscanf(
   ffi.Pointer<ffi.Char> __format,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>(symbol: 'vsscanf', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+            ffi.Pointer<__va_list_tag>)>(
+    symbol: 'vsscanf', assetId: 'interactor-bindings-test')
 external int vsscanf(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<ffi.Char> __format,
   ffi.Pointer<__va_list_tag> __arg,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fgetc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fgetc', assetId: 'interactor-bindings-test')
 external int fgetc(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'getc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'getc', assetId: 'interactor-bindings-test')
 external int getc(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'getchar', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getchar', assetId: 'interactor-bindings-test')
 external int getchar();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'getc_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'getc_unlocked', assetId: 'interactor-bindings-test')
 external int getc_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'getchar_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'getchar_unlocked', assetId: 'interactor-bindings-test')
 external int getchar_unlocked();
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fgetc_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fgetc_unlocked', assetId: 'interactor-bindings-test')
 external int fgetc_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(symbol: 'fputc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'fputc', assetId: 'interactor-bindings-test')
 external int fputc(
   int __c,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(symbol: 'putc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'putc', assetId: 'interactor-bindings-test')
 external int putc(
   int __c,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'putchar', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'putchar', assetId: 'interactor-bindings-test')
 external int putchar(
   int __c,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(symbol: 'fputc_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'fputc_unlocked', assetId: 'interactor-bindings-test')
 external int fputc_unlocked(
   int __c,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(symbol: 'putc_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'putc_unlocked', assetId: 'interactor-bindings-test')
 external int putc_unlocked(
   int __c,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int)>(symbol: 'putchar_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int)>(
+    symbol: 'putchar_unlocked', assetId: 'interactor-bindings-test')
 external int putchar_unlocked(
   int __c,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'getw', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'getw', assetId: 'interactor-bindings-test')
 external int getw(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(symbol: 'putw', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'putw', assetId: 'interactor-bindings-test')
 external int putw(
   int __w,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<FILE>)>(symbol: 'fgets', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Char> Function(
+            ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'fgets', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> fgets(
   ffi.Pointer<ffi.Char> __s,
   int __n,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<__ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>, ffi.Int, ffi.Pointer<FILE>)>(symbol: '__getdelim', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        __ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Size>, ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: '__getdelim', assetId: 'interactor-bindings-test')
 external int __getdelim(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __lineptr,
   ffi.Pointer<ffi.Size> __n,
@@ -4050,7 +5192,10 @@ external int __getdelim(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<__ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>, ffi.Int, ffi.Pointer<FILE>)>(symbol: 'getdelim', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        __ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Size>, ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'getdelim', assetId: 'interactor-bindings-test')
 external int getdelim(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __lineptr,
   ffi.Pointer<ffi.Size> __n,
@@ -4058,31 +5203,40 @@ external int getdelim(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<__ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>, ffi.Pointer<FILE>)>(symbol: 'getline', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        __ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            ffi.Pointer<ffi.Size>, ffi.Pointer<FILE>)>(
+    symbol: 'getline', assetId: 'interactor-bindings-test')
 external int getline(
   ffi.Pointer<ffi.Pointer<ffi.Char>> __lineptr,
   ffi.Pointer<ffi.Size> __n,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>(symbol: 'fputs', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>(
+    symbol: 'fputs', assetId: 'interactor-bindings-test')
 external int fputs(
   ffi.Pointer<ffi.Char> __s,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(symbol: 'puts', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'puts', assetId: 'interactor-bindings-test')
 external int puts(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(symbol: 'ungetc', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>(
+    symbol: 'ungetc', assetId: 'interactor-bindings-test')
 external int ungetc(
   int __c,
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(symbol: 'fread', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.UnsignedLong Function(
+            ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(
+    symbol: 'fread', assetId: 'interactor-bindings-test')
 external int fread(
   ffi.Pointer<ffi.Void> __ptr,
   int __size,
@@ -4090,7 +5244,10 @@ external int fread(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(symbol: 'fwrite', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.UnsignedLong Function(
+            ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(
+    symbol: 'fwrite', assetId: 'interactor-bindings-test')
 external int fwrite(
   ffi.Pointer<ffi.Void> __ptr,
   int __size,
@@ -4098,7 +5255,10 @@ external int fwrite(
   ffi.Pointer<FILE> __s,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(symbol: 'fread_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Size Function(
+            ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(
+    symbol: 'fread_unlocked', assetId: 'interactor-bindings-test')
 external int fread_unlocked(
   ffi.Pointer<ffi.Void> __ptr,
   int __size,
@@ -4106,7 +5266,10 @@ external int fread_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(symbol: 'fwrite_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Size Function(
+            ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size, ffi.Pointer<FILE>)>(
+    symbol: 'fwrite_unlocked', assetId: 'interactor-bindings-test')
 external int fwrite_unlocked(
   ffi.Pointer<ffi.Void> __ptr,
   int __size,
@@ -4114,311 +5277,452 @@ external int fwrite_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Long, ffi.Int)>(symbol: 'fseek', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Long, ffi.Int)>(
+    symbol: 'fseek', assetId: 'interactor-bindings-test')
 external int fseek(
   ffi.Pointer<FILE> __stream,
   int __off,
   int __whence,
 );
 
-@ffi.Native<ffi.Long Function(ffi.Pointer<FILE>)>(symbol: 'ftell', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Long Function(ffi.Pointer<FILE>)>(
+    symbol: 'ftell', assetId: 'interactor-bindings-test')
 external int ftell(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(symbol: 'rewind', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(
+    symbol: 'rewind', assetId: 'interactor-bindings-test')
 external void rewind(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, __off_t, ffi.Int)>(symbol: 'fseeko', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, __off_t, ffi.Int)>(
+    symbol: 'fseeko', assetId: 'interactor-bindings-test')
 external int fseeko(
   ffi.Pointer<FILE> __stream,
   int __off,
   int __whence,
 );
 
-@ffi.Native<__off_t Function(ffi.Pointer<FILE>)>(symbol: 'ftello', assetId: 'interactor-bindings-test')
+@ffi.Native<__off_t Function(ffi.Pointer<FILE>)>(
+    symbol: 'ftello', assetId: 'interactor-bindings-test')
 external int ftello(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>(symbol: 'fgetpos', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>(
+    symbol: 'fgetpos', assetId: 'interactor-bindings-test')
 external int fgetpos(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<fpos_t> __pos,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>(symbol: 'fsetpos', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>(
+    symbol: 'fsetpos', assetId: 'interactor-bindings-test')
 external int fsetpos(
   ffi.Pointer<FILE> __stream,
   ffi.Pointer<fpos_t> __pos,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(symbol: 'clearerr', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(
+    symbol: 'clearerr', assetId: 'interactor-bindings-test')
 external void clearerr(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'feof', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'feof', assetId: 'interactor-bindings-test')
 external int feof(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'ferror', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'ferror', assetId: 'interactor-bindings-test')
 external int ferror(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(symbol: 'clearerr_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(
+    symbol: 'clearerr_unlocked', assetId: 'interactor-bindings-test')
 external void clearerr_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'feof_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'feof_unlocked', assetId: 'interactor-bindings-test')
 external int feof_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'ferror_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'ferror_unlocked', assetId: 'interactor-bindings-test')
 external int ferror_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Char>)>(symbol: 'perror', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'perror', assetId: 'interactor-bindings-test')
 external void perror(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fileno', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fileno', assetId: 'interactor-bindings-test')
 external int fileno(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'fileno_unlocked', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'fileno_unlocked', assetId: 'interactor-bindings-test')
 external int fileno_unlocked(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'pclose', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'pclose', assetId: 'interactor-bindings-test')
 external int pclose(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(symbol: 'popen', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<FILE> Function(
+            ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>(
+    symbol: 'popen', assetId: 'interactor-bindings-test')
 external ffi.Pointer<FILE> popen(
   ffi.Pointer<ffi.Char> __command,
   ffi.Pointer<ffi.Char> __modes,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(symbol: 'ctermid', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>(
+    symbol: 'ctermid', assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Char> ctermid(
   ffi.Pointer<ffi.Char> __s,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(symbol: 'flockfile', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(
+    symbol: 'flockfile', assetId: 'interactor-bindings-test')
 external void flockfile(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: 'ftrylockfile', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: 'ftrylockfile', assetId: 'interactor-bindings-test')
 external int ftrylockfile(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(symbol: 'funlockfile', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<FILE>)>(
+    symbol: 'funlockfile', assetId: 'interactor-bindings-test')
 external void funlockfile(
   ffi.Pointer<FILE> __stream,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(symbol: '__uflow', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>)>(
+    symbol: '__uflow', assetId: 'interactor-bindings-test')
 external int __uflow(
   ffi.Pointer<FILE> arg0,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Int)>(symbol: '__overflow', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<FILE>, ffi.Int)>(
+    symbol: '__overflow', assetId: 'interactor-bindings-test')
 external int __overflow(
   ffi.Pointer<FILE> arg0,
   int arg1,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>, ffi.Pointer<interactor_native_configuration_t>, ffi.Uint8)>(symbol: 'interactor_native_initialize', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Int Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<interactor_native_configuration_t>, ffi.Uint8)>(
+    symbol: 'interactor_native_initialize', assetId: 'interactor-bindings-test')
 external int interactor_native_initialize(
   ffi.Pointer<interactor_native_t> interactor,
   ffi.Pointer<interactor_native_configuration_t> configuration,
   int id,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>, ffi.Uint8)>(symbol: 'interactor_native_initialize_default', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>, ffi.Uint8)>(
+    symbol: 'interactor_native_initialize_default',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_initialize_default(
   ffi.Pointer<interactor_native_t> interactor,
   int id,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Uint64, ffi.Uint64, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>)>(
-    symbol: 'interactor_native_register_callback', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(
+            ffi.Pointer<interactor_native_t>,
+            ffi.Uint64,
+            ffi.Uint64,
+            ffi.Pointer<
+                ffi.NativeFunction<
+                    ffi.Void Function(
+                        ffi.Pointer<linux_interactor.interactor_message_t>)>>)>(
+    symbol: 'interactor_native_register_callback',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_register_callback(
   ffi.Pointer<interactor_native_t> interactor,
   int owner,
   int method,
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>> callback,
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
+      callback,
 );
 
-@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_get_static_buffer', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_get_static_buffer',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_get_static_buffer(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Uint16)>(symbol: 'interactor_native_release_static_buffer', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32)>(
+    symbol: 'interactor_native_release_static_buffer',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_release_static_buffer(
   ffi.Pointer<interactor_native_t> interactor,
   int buffer_id,
 );
 
-@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_available_static_buffers', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_available_static_buffers',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_available_static_buffers(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_used_static_buffers', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_used_static_buffers',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_used_static_buffers(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Pointer<interactor_input_buffer_t> Function(ffi.Pointer<interactor_native_t>, ffi.Size)>(symbol: 'interactor_native_io_buffers_allocate_input', assetId: 'interactor-bindings-test')
-external ffi.Pointer<interactor_input_buffer_t> interactor_native_io_buffers_allocate_input(
+@ffi.Native<
+        ffi.Pointer<interactor_input_buffer_t> Function(
+            ffi.Pointer<interactor_native_t>, ffi.Size)>(
+    symbol: 'interactor_native_io_buffers_allocate_input',
+    assetId: 'interactor-bindings-test')
+external ffi.Pointer<interactor_input_buffer_t>
+    interactor_native_io_buffers_allocate_input(
   ffi.Pointer<interactor_native_t> interactor,
   int initial_capacity,
 );
 
-@ffi.Native<ffi.Pointer<interactor_output_buffer_t> Function(ffi.Pointer<interactor_native_t>, ffi.Size)>(symbol: 'interactor_native_io_buffers_allocate_output', assetId: 'interactor-bindings-test')
-external ffi.Pointer<interactor_output_buffer_t> interactor_native_io_buffers_allocate_output(
+@ffi.Native<
+        ffi.Pointer<interactor_output_buffer_t> Function(
+            ffi.Pointer<interactor_native_t>, ffi.Size)>(
+    symbol: 'interactor_native_io_buffers_allocate_output',
+    assetId: 'interactor-bindings-test')
+external ffi.Pointer<interactor_output_buffer_t>
+    interactor_native_io_buffers_allocate_output(
   ffi.Pointer<interactor_native_t> interactor,
   int initial_capacity,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Pointer<interactor_input_buffer_t>)>(symbol: 'interactor_native_io_buffers_free_input', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<interactor_input_buffer_t>)>(
+    symbol: 'interactor_native_io_buffers_free_input',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_io_buffers_free_input(
   ffi.Pointer<interactor_native_t> interactor,
   ffi.Pointer<interactor_input_buffer_t> buffer,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Pointer<interactor_output_buffer_t>)>(symbol: 'interactor_native_io_buffers_free_output', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<interactor_output_buffer_t>)>(
+    symbol: 'interactor_native_io_buffers_free_output',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_io_buffers_free_output(
   ffi.Pointer<interactor_native_t> interactor,
   ffi.Pointer<interactor_output_buffer_t> buffer,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(symbol: 'interactor_native_input_buffer_reserve', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_input_buffer_reserve',
+    assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> interactor_native_input_buffer_reserve(
   ffi.Pointer<interactor_input_buffer_t> buffer,
   int size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(symbol: 'interactor_native_input_buffer_allocate', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_input_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_input_buffer_allocate',
+    assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> interactor_native_input_buffer_allocate(
   ffi.Pointer<interactor_input_buffer_t> buffer,
   int size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(symbol: 'interactor_native_output_buffer_reserve', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_output_buffer_reserve',
+    assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> interactor_native_output_buffer_reserve(
   ffi.Pointer<interactor_output_buffer_t> buffer,
   int size,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(symbol: 'interactor_native_output_buffer_allocate', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_output_buffer_t>, ffi.Size)>(
+    symbol: 'interactor_native_output_buffer_allocate',
+    assetId: 'interactor-bindings-test')
 external ffi.Pointer<ffi.Void> interactor_native_output_buffer_allocate(
   ffi.Pointer<interactor_output_buffer_t> buffer,
   int size,
 );
 
-@ffi.Native<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_allocate_message', assetId: 'interactor-bindings-test')
-external ffi.Pointer<linux_interactor.interactor_message_t> interactor_native_allocate_message(
+@ffi.Native<
+        ffi.Pointer<linux_interactor.interactor_message_t> Function(
+            ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_allocate_message',
+    assetId: 'interactor-bindings-test')
+external ffi.Pointer<linux_interactor.interactor_message_t>
+    interactor_native_allocate_message(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>(symbol: 'interactor_native_free_message', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<linux_interactor.interactor_message_t>)>(
+    symbol: 'interactor_native_free_message',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_free_message(
   ffi.Pointer<interactor_native_t> interactor,
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.Pointer<interactor_payload_pool> Function(ffi.Pointer<interactor_native_t>, ffi.Size)>(symbol: 'interactor_native_payload_pool_create', assetId: 'interactor-bindings-test')
-external ffi.Pointer<interactor_payload_pool> interactor_native_payload_pool_create(
+@ffi.Native<
+        ffi.Pointer<interactor_payload_pool> Function(
+            ffi.Pointer<interactor_native_t>, ffi.Size)>(
+    symbol: 'interactor_native_payload_pool_create',
+    assetId: 'interactor-bindings-test')
+external ffi.Pointer<interactor_payload_pool>
+    interactor_native_payload_pool_create(
   ffi.Pointer<interactor_native_t> interactor,
   int size,
 );
 
-@ffi.Native<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>(symbol: 'interactor_native_payload_allocate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>(
+    symbol: 'interactor_native_payload_allocate',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_payload_allocate(
   ffi.Pointer<interactor_payload_pool> pool,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>(symbol: 'interactor_native_payload_free', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>(
+    symbol: 'interactor_native_payload_free',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_payload_free(
   ffi.Pointer<interactor_payload_pool> pool,
   int pointer,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>(symbol: 'interactor_native_payload_pool_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>(
+    symbol: 'interactor_native_payload_pool_destroy',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_payload_pool_destroy(
   ffi.Pointer<interactor_payload_pool> pool,
 );
 
-@ffi.Native<ffi.IntPtr Function(ffi.Pointer<interactor_native_t>, ffi.Size)>(symbol: 'interactor_native_data_allocate', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.IntPtr Function(ffi.Pointer<interactor_native_t>, ffi.Size)>(
+    symbol: 'interactor_native_data_allocate',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_data_allocate(
   ffi.Pointer<interactor_native_t> interactor,
   int size,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.IntPtr, ffi.Size)>(symbol: 'interactor_native_data_free', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(
+            ffi.Pointer<interactor_native_t>, ffi.IntPtr, ffi.Size)>(
+    symbol: 'interactor_native_data_free', assetId: 'interactor-bindings-test')
 external void interactor_native_data_free(
   ffi.Pointer<interactor_native_t> interactor,
   int pointer,
   int size,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_count_ready', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_count_ready',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_count_ready(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_count_ready_submit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_count_ready_submit',
+    assetId: 'interactor-bindings-test')
 external int interactor_native_count_ready_submit(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_process', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_process', assetId: 'interactor-bindings-test')
 external void interactor_native_process(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_process_infinity', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_process_infinity',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_process_infinity(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_process_timeout', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_process_timeout',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_process_timeout(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
 @ffi.Native<
-    ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>,
-        ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>>)>(symbol: 'interactor_native_foreach', assetId: 'interactor-bindings-test')
+        ffi.Void Function(
+            ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<
+                ffi.NativeFunction<
+                    ffi.Void Function(
+                        ffi.Pointer<linux_interactor.interactor_message_t>)>>,
+            ffi.Pointer<
+                ffi.NativeFunction<
+                    ffi.Void Function(
+                        ffi.Pointer<linux_interactor.interactor_message_t>)>>)>(
+    symbol: 'interactor_native_foreach', assetId: 'interactor-bindings-test')
 external void interactor_native_foreach(
   ffi.Pointer<interactor_native_t> interactor,
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>> call,
-  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>> callback,
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
+      call,
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<linux_interactor.interactor_message_t>)>>
+      callback,
 );
 
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_submit', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_submit', assetId: 'interactor-bindings-test')
 external int interactor_native_submit(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int, ffi.Pointer<linux_interactor.interactor_message_t>)>(
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int,
+            ffi.Pointer<linux_interactor.interactor_message_t>)>(
     symbol: 'interactor_native_call_dart', assetId: 'interactor-bindings-test')
 external void interactor_native_call_dart(
   ffi.Pointer<interactor_native_t> interactor,
@@ -4426,51 +5730,84 @@ external void interactor_native_call_dart(
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Pointer<linux_interactor.interactor_message_t>)>(symbol: 'interactor_native_callback_to_dart', assetId: 'interactor-bindings-test')
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>,
+            ffi.Pointer<linux_interactor.interactor_message_t>)>(
+    symbol: 'interactor_native_callback_to_dart',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_callback_to_dart(
   ffi.Pointer<interactor_native_t> interactor,
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(symbol: 'interactor_native_destroy', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'interactor_native_destroy', assetId: 'interactor-bindings-test')
 external void interactor_native_destroy(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Int)>(symbol: 'interactor_native_close_descriptor', assetId: 'interactor-bindings-test')
+@ffi.Native<ffi.Void Function(ffi.Int)>(
+    symbol: 'interactor_native_close_descriptor',
+    assetId: 'interactor-bindings-test')
 external void interactor_native_close_descriptor(
   int fd,
 );
 
-@ffi.Native<ffi.Pointer<interactor_native_t> Function()>(symbol: 'test_interactor_initialize', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Pointer<interactor_native_t> Function()>(
+    symbol: 'test_interactor_initialize',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external ffi.Pointer<interactor_native_t> test_interactor_initialize();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(symbol: 'test_interactor_destroy', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'test_interactor_destroy',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_interactor_destroy(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function()>(symbol: 'test_call_reset', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'test_call_reset',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_reset();
 
-@ffi.Native<ffi.Bool Function(ffi.Pointer<interactor_native_t>)>(symbol: 'test_call_native_check', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Bool Function(ffi.Pointer<interactor_native_t>)>(
+    symbol: 'test_call_native_check',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external bool test_call_native_check(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(symbol: 'test_call_native', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(
+    symbol: 'test_call_native',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_native(
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr)>(symbol: 'test_call_dart_null', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(
+            ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr)>(
+    symbol: 'test_call_dart_null',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_null(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
   int method,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Bool)>(symbol: 'test_call_dart_bool', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+            ffi.UintPtr, ffi.Bool)>(
+    symbol: 'test_call_dart_bool',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_bool(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
@@ -4478,7 +5815,12 @@ external void test_call_dart_bool(
   bool value,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>(symbol: 'test_call_dart_int', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(
+            ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>(
+    symbol: 'test_call_dart_int',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_int(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
@@ -4486,7 +5828,12 @@ external void test_call_dart_int(
   int value,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Double)>(symbol: 'test_call_dart_double', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+            ffi.UintPtr, ffi.Double)>(
+    symbol: 'test_call_dart_double',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_double(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
@@ -4494,7 +5841,12 @@ external void test_call_dart_double(
   double value,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Char>)>(symbol: 'test_call_dart_string', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+            ffi.UintPtr, ffi.Pointer<ffi.Char>)>(
+    symbol: 'test_call_dart_string',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_string(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
@@ -4502,7 +5854,12 @@ external void test_call_dart_string(
   ffi.Pointer<ffi.Char> value,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>(symbol: 'test_call_dart_object', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(
+            ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Int)>(
+    symbol: 'test_call_dart_object',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_object(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
@@ -4510,8 +5867,12 @@ external void test_call_dart_object(
   int field,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32, ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>(
-    symbol: 'test_call_dart_bytes', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32,
+            ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>(
+    symbol: 'test_call_dart_bytes',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_bytes(
   ffi.Pointer<interactor_native_t> interactor,
   int target,
@@ -4520,55 +5881,97 @@ external void test_call_dart_bytes(
   int count,
 );
 
-@ffi.Native<ffi.Pointer<linux_interactor.interactor_message_t> Function(ffi.Pointer<interactor_native_t>)>(symbol: 'test_call_dart_check', assetId: 'interactor-bindings-test', isLeaf: true)
-external ffi.Pointer<linux_interactor.interactor_message_t> test_call_dart_check(
+@ffi.Native<
+        ffi.Pointer<linux_interactor.interactor_message_t> Function(
+            ffi.Pointer<interactor_native_t>)>(
+    symbol: 'test_call_dart_check',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
+external ffi.Pointer<linux_interactor.interactor_message_t>
+    test_call_dart_check(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(symbol: 'test_call_dart_callback', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(
+    symbol: 'test_call_dart_callback',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_call_dart_callback(
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.IntPtr Function()>(symbol: 'test_call_native_address_lookup', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.IntPtr Function()>(
+    symbol: 'test_call_native_address_lookup',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external int test_call_native_address_lookup();
 
-@ffi.Native<ffi.Bool Function(ffi.Int, ffi.Int, ffi.Int)>(symbol: 'test_threading_initialize', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Bool Function(ffi.Int, ffi.Int, ffi.Int)>(
+    symbol: 'test_threading_initialize',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external bool test_threading_initialize(
   int thread_count,
   int isolates_count,
   int per_thread_messages_count,
 );
 
-@ffi.Native<ffi.Pointer<ffi.Int> Function()>(symbol: 'test_threading_interactor_descriptors', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Pointer<ffi.Int> Function()>(
+    symbol: 'test_threading_interactor_descriptors',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external ffi.Pointer<ffi.Int> test_threading_interactor_descriptors();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(symbol: 'test_threading_call_native', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(
+    symbol: 'test_threading_call_native',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_threading_call_native(
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'test_threading_call_native_check', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'test_threading_call_native_check',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external int test_threading_call_native_check();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Int32>, ffi.Int32)>(symbol: 'test_threading_prepare_call_dart_bytes', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Int32>, ffi.Int32)>(
+    symbol: 'test_threading_prepare_call_dart_bytes',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_threading_prepare_call_dart_bytes(
   ffi.Pointer<ffi.Int32> targets,
   int count,
 );
 
-@ffi.Native<ffi.Int Function()>(symbol: 'test_threading_call_dart_check', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Int Function()>(
+    symbol: 'test_threading_call_dart_check',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external int test_threading_call_dart_check();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(symbol: 'test_threading_call_dart_callback', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<
+        ffi.Void Function(ffi.Pointer<linux_interactor.interactor_message_t>)>(
+    symbol: 'test_threading_call_dart_callback',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_threading_call_dart_callback(
   ffi.Pointer<linux_interactor.interactor_message_t> message,
 );
 
-@ffi.Native<ffi.Void Function()>(symbol: 'test_threading_destroy', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.Void Function()>(
+    symbol: 'test_threading_destroy',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external void test_threading_destroy();
 
-@ffi.Native<ffi.IntPtr Function()>(symbol: 'test_threading_call_native_address_lookup', assetId: 'interactor-bindings-test', isLeaf: true)
+@ffi.Native<ffi.IntPtr Function()>(
+    symbol: 'test_threading_call_native_address_lookup',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
 external int test_threading_call_native_address_lookup();
 
 final class max_align_t extends ffi.Opaque {}
@@ -4905,8 +6308,10 @@ final class drand48_data extends ffi.Struct {
 typedef __uint32_t = ffi.UnsignedInt;
 typedef Dart__uint32_t = int;
 typedef __compar_fn_t = ffi.Pointer<ffi.NativeFunction<__compar_fn_tFunction>>;
-typedef __compar_fn_tFunction = ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>);
-typedef Dart__compar_fn_tFunction = int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>);
+typedef __compar_fn_tFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>);
+typedef Dart__compar_fn_tFunction = int Function(
+    ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>);
 
 /// @module Input buffer.
 final class slab_cache extends ffi.Struct {
@@ -5145,7 +6550,8 @@ final class UnnamedUnion1 extends ffi.Union {
 }
 
 final class UnnamedStruct2 extends ffi.Struct {
-  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(__sigval_t)>> _function;
+  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(__sigval_t)>>
+      _function;
 
   external ffi.Pointer<pthread_attr_t> _attribute;
 }
@@ -5172,7 +6578,9 @@ final class __jmp_buf_tag extends ffi.Struct {
 }
 
 final class _pthread_cleanup_buffer extends ffi.Struct {
-  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>> __routine;
+  external ffi
+      .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
+      __routine;
 
   external ffi.Pointer<ffi.Void> __arg;
 
@@ -5202,7 +6610,9 @@ final class __pthread_unwind_buf_t extends ffi.Struct {
 }
 
 final class __pthread_cleanup_frame extends ffi.Struct {
-  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>> __cancel_routine;
+  external ffi
+      .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
+      __cancel_routine;
 
   external ffi.Pointer<ffi.Void> __cancel_arg;
 
@@ -5932,7 +7342,8 @@ final class UnnamedStruct11 extends ffi.Struct {
   external int _arch;
 }
 
-typedef __sighandler_t = ffi.Pointer<ffi.NativeFunction<__sighandler_tFunction>>;
+typedef __sighandler_t
+    = ffi.Pointer<ffi.NativeFunction<__sighandler_tFunction>>;
 typedef __sighandler_tFunction = ffi.Void Function(ffi.Int);
 typedef Dart__sighandler_tFunction = void Function(int);
 typedef sigset_t = __sigset_t;
@@ -5951,7 +7362,11 @@ final class sigaction extends ffi.Struct {
 final class UnnamedUnion4 extends ffi.Union {
   external __sighandler_t sa_handler;
 
-  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Void>)>> sa_sigaction;
+  external ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int, ffi.Pointer<siginfo_t>, ffi.Pointer<ffi.Void>)>>
+      sa_sigaction;
 }
 
 final class _fpx_sw_bytes extends ffi.Struct {
@@ -6633,14 +8048,7 @@ abstract class io_uring_op {
   static const int IORING_OP_LAST = 49;
 }
 
-final class io_uring_cqe extends ffi.Struct {
-  @ffi.UnsignedLongLong()
-  external int user_data;
-  @ffi.Int()
-  external int res;
-  @ffi.UnsignedInt()
-  external int flags;
-}
+final class io_uring_cqe extends ffi.Struct {@ffi.UnsignedLongLong()external int user_data; @ffi.Int() external int res; @ffi.UnsignedInt()external int flags;}
 
 final class io_sqring_offsets extends ffi.Struct {
   @__u32()
@@ -7029,11 +8437,11 @@ final class statx extends ffi.Opaque {}
 final class epoll_event extends ffi.Opaque {}
 
 final class interactor_io_buffers extends ffi.Struct {
-  external ffi.Pointer<interactor_memory> memory;
-
   external interactor_pool input_buffers;
 
   external interactor_pool output_buffers;
+
+  external ffi.Pointer<interactor_memory> memory;
 }
 
 final class __mbstate_t extends ffi.Struct {
@@ -7158,10 +8566,17 @@ final class _IO_cookie_io_functions_t extends ffi.Struct {
   external ffi.Pointer<cookie_close_function_t> close;
 }
 
-typedef cookie_read_function_t = ffi.NativeFunction<__ssize_t Function(ffi.Pointer<ffi.Void> __cookie, ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
-typedef cookie_write_function_t = ffi.NativeFunction<__ssize_t Function(ffi.Pointer<ffi.Void> __cookie, ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
-typedef cookie_seek_function_t = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> __cookie, ffi.Pointer<__off64_t> __pos, ffi.Int __w)>;
-typedef cookie_close_function_t = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> __cookie)>;
+typedef cookie_read_function_t = ffi.NativeFunction<
+    __ssize_t Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
+typedef cookie_write_function_t = ffi.NativeFunction<
+    __ssize_t Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
+typedef cookie_seek_function_t = ffi.NativeFunction<
+    ffi.Int Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<__off64_t> __pos, ffi.Int __w)>;
+typedef cookie_close_function_t
+    = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> __cookie)>;
 typedef FILE = _IO_FILE;
 typedef cookie_io_functions_t = _IO_cookie_io_functions_t;
 
@@ -7244,15 +8659,11 @@ final class interactor_native extends ffi.Struct {
 
   external interactor_memory memory;
 
-  external ffi.Pointer<io_uring> ring;
-
   @ffi.Size()
   external int ring_size;
 
   @ffi.Int()
   external int ring_flags;
-
-  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
 
   @ffi.Uint64()
   external int cqe_wait_timeout_millis;
@@ -7262,6 +8673,10 @@ final class interactor_native extends ffi.Struct {
 
   @ffi.Uint32()
   external int cqe_peek_count;
+
+  external ffi.Pointer<io_uring> ring;
+
+  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
 
   external ffi.Pointer<ffi.Void> callbacks;
 }
@@ -7298,7 +8713,8 @@ final class test_thread extends ffi.Struct {
 
   external ffi.Pointer<interactor_native_t> interactor;
 
-  external ffi.Pointer<ffi.Pointer<linux_interactor.interactor_message_t>> messages;
+  external ffi.Pointer<ffi.Pointer<linux_interactor.interactor_message_t>>
+      messages;
 
   external pthread_cond_t initialize_condition;
 
@@ -8528,7 +9944,8 @@ const String __ILP32_OFF32_CFLAGS = '-m32';
 
 const String __ILP32_OFF32_LDFLAGS = '-m32';
 
-const String __ILP32_OFFBIG_CFLAGS = '-m32 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64';
+const String __ILP32_OFFBIG_CFLAGS =
+    '-m32 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64';
 
 const String __ILP32_OFFBIG_LDFLAGS = '-m32';
 

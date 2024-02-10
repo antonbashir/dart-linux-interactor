@@ -5050,7 +5050,7 @@ external int interactor_native_get_static_buffer(
   ffi.Pointer<interactor_native_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Uint16)>(
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native_t>, ffi.Int32)>(
     symbol: 'interactor_native_release_static_buffer',
     assetId: 'interactor-bindings')
 external void interactor_native_release_static_buffer(
@@ -6306,11 +6306,11 @@ final class interactor_payload_pool extends ffi.Struct {
 }
 
 final class interactor_io_buffers extends ffi.Struct {
-  external ffi.Pointer<interactor_memory> memory;
-
   external interactor_pool input_buffers;
 
   external interactor_pool output_buffers;
+
+  external ffi.Pointer<interactor_memory> memory;
 }
 
 typedef FILE = _IO_FILE;
@@ -6453,6 +6453,10 @@ final class UnnamedUnion2 extends ffi.Union {
 }
 
 final class interactor_static_buffers extends ffi.Struct {
+  external ffi.Pointer<ffi.Int32> ids;
+
+  external ffi.Pointer<iovec> buffers;
+
   @ffi.Size()
   external int available;
 
@@ -6461,10 +6465,6 @@ final class interactor_static_buffers extends ffi.Struct {
 
   @ffi.Size()
   external int capacity;
-
-  external ffi.Pointer<ffi.Int32> ids;
-
-  external ffi.Pointer<iovec> buffers;
 }
 
 final class interactor_dart_configuration extends ffi.Struct {
