@@ -5,6 +5,12 @@ import 'dart:typed_data';
 import 'bindings.dart';
 import 'constants.dart';
 
+const int _oneByteLimit = 0x7f;
+const int _twoByteLimit = 0x7ff;
+const int _surrogateTagMask = 0xFC00;
+const int _surrogateValueMask = 0x3FF;
+const int _leadSurrogateMin = 0xD800;
+
 @pragma(preferInlinePragma)
 int tupleWriteNull(ByteData data, int offset) {
   data.setUint8(offset++, 0xc0);
@@ -75,31 +81,30 @@ int tupleWriteDouble(ByteData data, double value, int offset) {
 
 @pragma(preferInlinePragma)
 int tupleWriteString(Uint8List buffer, ByteData data, String value, int offset) {
-  final encoded = utf8.encode(value);
-  final length = encoded.length;
+  final length = value.length;
   if (length <= 0x1F) {
     data.setUint8(offset++, 0xA0 | length);
-    buffer.setRange(offset, offset + length, encoded);
+    _encodeString(value, buffer, offset);
     return offset + length;
   }
   if (length <= 0xFF) {
     data.setUint8(offset++, 0xd9);
     data.setUint8(offset++, length);
-    buffer.setRange(offset, offset + length, encoded);
+    _encodeString(value, buffer, offset);
     return offset + length;
   }
   if (length <= 0xFFFF) {
     data.setUint8(offset++, 0xda);
     data.setUint16(offset, length);
     offset += 2;
-    buffer.setRange(offset, offset + length, encoded);
+    _encodeString(value, buffer, offset);
     return offset + length;
   }
   if (length <= 0xFFFFFFFF) {
     data.setUint8(offset++, 0xdb);
     data.setUint32(offset, length);
     offset += 4;
-    buffer.setRange(offset, offset + length, encoded);
+    _encodeString(value, buffer, offset);
     return offset + length;
   }
   throw ArgumentError('Max string length is 0xFFFFFFFF');
@@ -403,6 +408,32 @@ int tupleSizeOfMap(int length) {
   return 5;
 }
 
+@pragma(preferInlinePragma)
+int _encodeString(String str, Uint8List buffer, int offset) {
+  final startOffset = offset;
+  for (var stringIndex = 0; stringIndex < str.length; stringIndex++) {
+    final codeUnit = str.codeUnitAt(stringIndex);
+    if (codeUnit <= _oneByteLimit) {
+      buffer[offset++] = codeUnit;
+    } else if ((codeUnit & _surrogateTagMask) == _leadSurrogateMin) {
+      final nextCodeUnit = str.codeUnitAt(++stringIndex);
+      final rune = 0x10000 + ((codeUnit & _surrogateValueMask) << 10) | (nextCodeUnit & _surrogateValueMask);
+      buffer[offset++] = 0xF0 | (rune >> 18);
+      buffer[offset++] = 0x80 | ((rune >> 12) & 0x3f);
+      buffer[offset++] = 0x80 | ((rune >> 6) & 0x3f);
+      buffer[offset++] = 0x80 | (rune & 0x3f);
+    } else if (codeUnit <= _twoByteLimit) {
+      buffer[offset++] = 0xC0 | (codeUnit >> 6);
+      buffer[offset++] = 0x80 | (codeUnit & 0x3f);
+    } else {
+      buffer[offset++] = 0xE0 | (codeUnit >> 12);
+      buffer[offset++] = 0x80 | ((codeUnit >> 6) & 0x3f);
+      buffer[offset++] = 0x80 | (codeUnit & 0x3f);
+    }
+  }
+  return offset - startOffset;
+}
+
 extension InteractorTupleIntExtension on int {
   @pragma(preferInlinePragma)
   int get tupleSize => tupleSizeOfInt(this);
@@ -435,120 +466,4 @@ class InteractorTuples {
 
   @pragma(preferInlinePragma)
   int next(Pointer<Uint8> pointer, int offset) => interactor_dart_tuple_next(pointer.cast(), offset);
-
-  // @pragma(preferInlinePragma)
-  // Pointer<interactor_input_buffer_t> encodeForInput(dynamic object, {int initialCapacity = ioBuffersInitialCapacity}) {
-  //   final inputBuffer = interactor_dart_io_buffers_allocate_input(_interactor, initialCapacity);
-  //   interactor_dart_input_buffer_allocate(inputBuffer, _encodeForInput(object, inputBuffer).offset);
-  //   return inputBuffer;
-  // }
-
-  // @pragma(preferInlinePragma)
-  // ({int offset, int capacity}) _encodeForInput(dynamic object, Pointer<interactor_input_buffer_t> inputBuffer) {
-  //   late Pointer<Uint8> pointer;
-  //   late Uint8List buffer;
-  //   late ByteData data;
-  //   late ({int offset, int capacity}) innerResult;
-  //   var capacity = 0;
-  //   var offset = 0;
-  //   switch (object) {
-  //     case null:
-  //       final size = tupleSizeOfNull;
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteNull(data, offset);
-  //     case bool bool:
-  //       final size = tupleSizeOfBool;
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteBool(data, bool, offset);
-  //     case int int:
-  //       final size = tupleSizeOfInt(object);
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteInt(data, int, offset);
-  //     case double double:
-  //       final size = tupleSizeOfDouble;
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteDouble(data, double, offset);
-  //     case String string:
-  //       final size = tupleSizeOfString(string.length);
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteString(buffer, data, string, offset);
-  //     case Uint8List binary:
-  //       final size = tupleSizeOfBinary(binary.length);
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteBinary(buffer, data, binary, offset);
-  //     case ByteData byteData:
-  //       final size = tupleSizeOfBinary(byteData.lengthInBytes);
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteBinary(buffer, data, byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes), offset);
-  //     case Iterable iterable:
-  //       final size = tupleSizeOfList(iterable.length);
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteList(data, iterable.length, offset);
-  //       if (iterable.isNotEmpty) {
-  //         for (var element in iterable) {
-  //           innerResult = _encodeForInput(element, inputBuffer);
-  //         }
-  //         capacity = innerResult.capacity;
-  //         offset = innerResult.offset;
-  //       }
-  //     case Map map:
-  //       final size = tupleSizeOfMap(map.length);
-  //       if (offset + size > capacity) {
-  //         pointer = interactor_dart_input_buffer_reserve(inputBuffer, size).cast();
-  //         buffer = pointer.asTypedList(inputBuffer.ref.last_reserved_size);
-  //         data = buffer.buffer.asByteData(buffer.offsetInBytes);
-  //         capacity = inputBuffer.ref.last_reserved_size;
-  //       }
-  //       offset = tupleWriteMap(data, map.length, offset);
-  //       if (map.isNotEmpty) {
-  //         for (var element in map.entries) {
-  //           _encodeForInput(element.key, inputBuffer);
-  //           innerResult = _encodeForInput(element.value, inputBuffer);
-  //         }
-  //         capacity = innerResult.capacity;
-  //         offset = innerResult.offset;
-  //       }
-  //   }
-  //   throw ArgumentError("Unable to serialize: ${object}");
-  // }
 }

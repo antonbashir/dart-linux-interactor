@@ -32,7 +32,7 @@ class InteractorWorker {
   late final SendPort _destroyer;
   late final List<Duration> _delays;
 
-  var _active = true;
+  var _active = false;
   final _done = Completer();
 
   bool get active => _active;
@@ -47,8 +47,10 @@ class InteractorWorker {
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((_) async {
-      _active = false;
-      await _done.future;
+      if (_active) {
+        _active = false;
+        await _done.future;
+      }
       _payloads.destroy();
       interactor_dart_destroy(_interactor);
       ffi.calloc.free(_interactor);
@@ -76,6 +78,7 @@ class InteractorWorker {
   }
 
   void activate() {
+    _active = true;
     _delays = _calculateDelays();
     unawaited(_listen());
   }

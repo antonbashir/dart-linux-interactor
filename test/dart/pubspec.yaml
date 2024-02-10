@@ -14,6 +14,7 @@ dependencies:
   linux_interactor:
     path: ../../dart/
   collection: ^1.18.0
+  message_pack_dart: ^2.0.1
 
 ffigen:
   name: "TestBindings"
@@ -40,3 +41,8 @@ ffigen:
       - "../native/test.h"
       - "../native/test_call.h"
       - "../native/test_threading.h"
+      - "../native/bench.h"
+  functions:
+    leaf:
+      include:
+        - "test_.*"
