@@ -481,6 +481,72 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
   int get tupleSize => tupleSizeOfMap(length);
 
   @pragma(preferInlinePragma)
+  int computeTupleSize() {
+    var size = tupleSize;
+    for (var entry in entries) {
+      switch (entry.key) {
+        case null:
+          size += tupleSizeOfNull;
+          break;
+        case int asInt:
+          size += asInt.tupleSize;
+          break;
+        case double:
+          size += tupleSizeOfDouble;
+          break;
+        case bool:
+          size += tupleSizeOfBool;
+          break;
+        case String asString:
+          size += asString.tupleSize;
+          break;
+        case Uint8List asBinary:
+          size += asBinary.tupleSize;
+          break;
+        case List asList:
+          size += asList.computeTupleSize();
+          break;
+        case Map asMap:
+          size += asMap.computeTupleSize();
+          break;
+        case InteractorTuple asTuple:
+          size += asTuple.tupleSize;
+          break;
+      }
+      switch (entry.value) {
+        case null:
+          size += tupleSizeOfNull;
+          break;
+        case int asInt:
+          size += asInt.tupleSize;
+          break;
+        case double:
+          size += tupleSizeOfDouble;
+          break;
+        case bool:
+          size += tupleSizeOfBool;
+          break;
+        case String asString:
+          size += asString.tupleSize;
+          break;
+        case Uint8List asBinary:
+          size += asBinary.tupleSize;
+          break;
+        case List asList:
+          size += asList.computeTupleSize();
+          break;
+        case Map asMap:
+          size += asMap.computeTupleSize();
+          break;
+        case InteractorTuple asTuple:
+          size += asTuple.tupleSize;
+          break;
+      }
+    }
+    return size;
+  }
+
+  @pragma(preferInlinePragma)
   int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteMap(data, length, offset);
 
   @pragma(preferInlinePragma)
@@ -512,6 +578,9 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
         case Map asMap:
           offset = asMap.dumpToTuple(buffer, data, offset);
           break;
+        case InteractorTuple asTuple:
+          offset = asTuple.dump(buffer, data, offset);
+          break;
       }
       switch (entry.value) {
         case null:
@@ -538,6 +607,9 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
         case Map asMap:
           offset = asMap.dumpToTuple(buffer, data, offset);
           break;
+        case InteractorTuple asTuple:
+          offset = asTuple.dump(buffer, data, offset);
+          break;
       }
     }
     return offset;
@@ -550,6 +622,43 @@ extension InteractorTupleListExtension<T> on List<T> {
 
   @pragma(preferInlinePragma)
   int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteList(data, length, offset);
+
+  @pragma(preferInlinePragma)
+  int computeTupleSize() {
+    var size = tupleSize;
+    for (var entry in this) {
+      switch (entry) {
+        case null:
+          size += tupleSizeOfNull;
+          break;
+        case int asInt:
+          size += asInt.tupleSize;
+          break;
+        case double:
+          size += tupleSizeOfDouble;
+          break;
+        case bool:
+          size += tupleSizeOfBool;
+          break;
+        case String asString:
+          size += asString.tupleSize;
+          break;
+        case Uint8List asBinary:
+          size += asBinary.tupleSize;
+          break;
+        case List asList:
+          size += asList.computeTupleSize();
+          break;
+        case Map asMap:
+          size += asMap.computeTupleSize();
+          break;
+        case InteractorTuple asTuple:
+          size += asTuple.tupleSize;
+          break;
+      }
+    }
+    return size;
+  }
 
   @pragma(preferInlinePragma)
   int dumpToTuple(Uint8List buffer, ByteData data, int offset) {
@@ -580,6 +689,9 @@ extension InteractorTupleListExtension<T> on List<T> {
         case Map asMap:
           offset = asMap.dumpToTuple(buffer, data, offset);
           break;
+        case InteractorTuple asTuple:
+          offset = asTuple.dump(buffer, data, offset);
+          break;
       }
     }
     return offset;
@@ -605,4 +717,10 @@ class InteractorTuples {
 
   @pragma(preferInlinePragma)
   void freeOutputBuffer(Pointer<interactor_output_buffer_t> buffer) => interactor_dart_io_buffers_free_output(_interactor, buffer);
+}
+
+abstract interface class InteractorTuple {
+  int get tupleSize;
+
+  int dump(Uint8List buffer, ByteData data, int offset);
 }
