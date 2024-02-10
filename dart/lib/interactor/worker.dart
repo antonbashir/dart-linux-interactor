@@ -60,7 +60,6 @@ class InteractorWorker {
 
   Future<void> initialize() async {
     final configuration = await _fromInteractor.first as List;
-    print("initialized");
     _interactor = Pointer.fromAddress(configuration[0] as int).cast<interactor_dart_t>();
     _destroyer = configuration[1] as SendPort;
     _descriptor = configuration[2] as int;
@@ -68,7 +67,7 @@ class InteractorWorker {
     _ring = _interactor.ref.ring;
     _cqes = _interactor.ref.cqes;
     _payloads = InteractorPayloads(_interactor);
-    _buffers = InteractorStaticBuffers(_interactor.ref.static_buffers.buffers, _interactor);
+    _buffers = InteractorStaticBuffers(_interactor.ref.static_buffers.buffers, _interactor.ref.static_buffers.size, _interactor.ref.static_buffers.capacity, _interactor);
     _datas = InteractorDatas(_interactor);
     _messages = InteractorMessages(_interactor);
     _tuples = InteractorTuples(_interactor);

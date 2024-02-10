@@ -4139,7 +4139,7 @@ external int interactor_dart_get_static_buffer(
   ffi.Pointer<interactor_dart_t> interactor,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Uint16)>(
+@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_dart_t>, ffi.Int32)>(
     symbol: 'interactor_dart_release_static_buffer',
     assetId: 'interactor-bindings',
     isLeaf: true)
@@ -6453,18 +6453,18 @@ final class UnnamedUnion2 extends ffi.Union {
 }
 
 final class interactor_static_buffers extends ffi.Struct {
-  external ffi.Pointer<ffi.Int32> ids;
-
-  external ffi.Pointer<iovec> buffers;
-
   @ffi.Size()
-  external int count;
+  external int available;
 
   @ffi.Size()
   external int size;
 
   @ffi.Size()
   external int capacity;
+
+  external ffi.Pointer<ffi.Int32> ids;
+
+  external ffi.Pointer<iovec> buffers;
 }
 
 final class interactor_dart_configuration extends ffi.Struct {

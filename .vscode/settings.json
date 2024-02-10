@@ -34,7 +34,8 @@
     "small_config.h": "c",
     "interactor_memory.h": "c",
     "slab_arena.h": "c",
-    "msgpuck.h": "c"
+    "msgpuck.h": "c",
+    "interactor_static_buffers.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [

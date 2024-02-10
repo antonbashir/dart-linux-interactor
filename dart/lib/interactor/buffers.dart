@@ -7,60 +7,56 @@ import 'bindings.dart';
 import 'constants.dart';
 
 class InteractorStaticBuffers {
-  final Pointer<iovec> buffers;
+  final int size;
+  final int capacity;
   final Queue<Completer<void>> _finalizers = Queue();
-  final Pointer<interactor_dart_t> _worker;
+  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<iovec> _buffers;
 
-  late final int bufferSize;
-  late final int buffersCount;
-
-  InteractorStaticBuffers(this.buffers, this._worker) {
-    bufferSize = _worker.ref.static_buffers.size;
-    buffersCount = _worker.ref.static_buffers.capacity;
-  }
+  InteractorStaticBuffers(this._buffers, this.size, this.capacity, this._interactor);
 
   @pragma(preferInlinePragma)
   void release(int bufferId) {
-    interactor_dart_release_static_buffer(_worker, bufferId);
+    interactor_dart_release_static_buffer(_interactor, bufferId);
     if (_finalizers.isNotEmpty) _finalizers.removeLast().complete();
   }
 
   @pragma(preferInlinePragma)
   Uint8List read(int bufferId) {
-    final buffer = buffers.elementAt(bufferId);
+    final buffer = _buffers.elementAt(bufferId);
     final bufferBytes = buffer.ref.iov_base.cast<Uint8>();
     return bufferBytes.asTypedList(buffer.ref.iov_len);
   }
 
   @pragma(preferInlinePragma)
-  void setLength(int bufferId, int length) => buffers.elementAt(bufferId).ref.iov_len = length;
+  void setLength(int bufferId, int length) => _buffers.elementAt(bufferId).ref.iov_len = length;
 
   @pragma(preferInlinePragma)
   void write(int bufferId, Uint8List bytes) {
-    final buffer = buffers.elementAt(bufferId);
+    final buffer = _buffers.elementAt(bufferId);
     buffer.ref.iov_base.cast<Uint8>().asTypedList(bytes.length).setAll(0, bytes);
     buffer.ref.iov_len = bytes.length;
   }
 
   @pragma(preferInlinePragma)
   int? get() {
-    final buffer = interactor_dart_get_static_buffer(_worker);
+    final buffer = interactor_dart_get_static_buffer(_interactor);
     if (buffer == interactorBufferUsed) return null;
     return buffer;
   }
 
   Future<int> allocate() async {
-    var bufferId = interactor_dart_get_static_buffer(_worker);
+    var bufferId = interactor_dart_get_static_buffer(_interactor);
     while (bufferId == interactorBufferUsed) {
       if (_finalizers.isNotEmpty) {
         await _finalizers.last.future;
-        bufferId = interactor_dart_get_static_buffer(_worker);
+        bufferId = interactor_dart_get_static_buffer(_interactor);
         continue;
       }
       final completer = Completer();
       _finalizers.add(completer);
       await completer.future;
-      bufferId = interactor_dart_get_static_buffer(_worker);
+      bufferId = interactor_dart_get_static_buffer(_interactor);
     }
     return bufferId;
   }
@@ -72,10 +68,10 @@ class InteractorStaticBuffers {
   }
 
   @pragma(preferInlinePragma)
-  int available() => interactor_dart_available_static_buffers(_worker);
+  int available() => interactor_dart_available_static_buffers(_interactor);
 
   @pragma(preferInlinePragma)
-  int used() => interactor_dart_used_static_buffers(_worker);
+  int used() => interactor_dart_used_static_buffers(_interactor);
 
   @pragma(preferInlinePragma)
   void releaseArray(List<int> buffers) {

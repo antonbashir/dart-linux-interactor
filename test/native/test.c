@@ -27,4 +27,5 @@ interactor_native_t* test_interactor_initialize()
 void test_interactor_destroy(interactor_native_t* interactor)
 {
     interactor_native_destroy(interactor);
+    free(interactor);
 }

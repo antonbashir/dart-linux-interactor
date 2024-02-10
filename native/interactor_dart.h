@@ -54,7 +54,7 @@ extern "C"
     int interactor_dart_initialize(interactor_dart_t* interactor, interactor_dart_configuration_t* configuration, uint8_t id);
 
     int32_t interactor_dart_get_static_buffer(interactor_dart_t* interactor);
-    void interactor_dart_release_static_buffer(interactor_dart_t* interactor, uint16_t buffer_id);
+    void interactor_dart_release_static_buffer(interactor_dart_t* interactor, int32_t buffer_id);
     int32_t interactor_dart_available_static_buffers(interactor_dart_t* interactor);
     int32_t interactor_dart_used_static_buffers(interactor_dart_t* interactor);
 

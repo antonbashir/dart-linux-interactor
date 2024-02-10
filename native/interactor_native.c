@@ -79,8 +79,8 @@ int interactor_native_initialize(interactor_native_t* interactor, interactor_nat
 int interactor_native_initialize_default(interactor_native_t* interactor, uint8_t id)
 {
     interactor_native_configuration_t configuration = {
-        .static_buffer_size = 4096,
         .static_buffers_capacity = 4096,
+        .static_buffer_size = 4096,
         .ring_size = 16384,
         .cqe_peek_count = 1024,
         .cqe_wait_count = 1,
@@ -112,12 +112,12 @@ int32_t interactor_native_get_static_buffer(interactor_native_t* interactor)
 
 int32_t interactor_native_available_static_buffers(interactor_native_t* interactor)
 {
-    return interactor->static_buffers.count;
+    return interactor->static_buffers.available;
 }
 
 int32_t interactor_native_used_static_buffers(interactor_native_t* interactor)
 {
-    return interactor->static_buffers.capacity - interactor->static_buffers.count;
+    return interactor->static_buffers.capacity - interactor->static_buffers.available;
 }
 
 void interactor_native_release_static_buffer(interactor_native_t* interactor, uint16_t buffer_id)

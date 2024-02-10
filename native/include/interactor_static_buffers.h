@@ -18,7 +18,7 @@ extern "C"
 #endif
     struct interactor_static_buffers
     {
-        size_t count;
+        size_t available;
         size_t size;
         size_t capacity;
         int32_t* ids;
@@ -29,7 +29,7 @@ extern "C"
     {
         pool->size = size;
         pool->capacity = capacity;
-        pool->count = 0;
+        pool->available = 0;
 
         pool->ids = malloc(capacity * sizeof(int32_t));
         if (pool->ids == NULL)
@@ -47,13 +47,14 @@ extern "C"
         size_t page_size = getpagesize();
         for (size_t index = 0; index < capacity; index++)
         {
-            if (posix_memalign(&pool->buffers[index].iov_base, page_size, size))
+            struct iovec* buffer = &pool->buffers[index];
+            if (posix_memalign(&buffer->iov_base, page_size, size))
             {
                 return -1;
             }
-            memset(pool->buffers[index].iov_base, 0, size);
-            pool->buffers[index].iov_len = size;
-            pool->ids[pool->count++] = index;
+            memset(buffer->iov_base, 0, size);
+            buffer->iov_len = size;
+            pool->ids[pool->available++] = index;
         }
 
         return 0;
@@ -61,9 +62,10 @@ extern "C"
 
     static inline void interactor_static_buffers_destroy(struct interactor_static_buffers* pool)
     {
-        for (size_t index = 0; index < pool->count; index++)
+        for (size_t index = 0; index < pool->capacity; index++)
         {
-            free(pool->buffers[index].iov_base);
+            struct iovec* buffer = &pool->buffers[index];
+            free(buffer->iov_base);
         }
         free(pool->ids);
         free(pool->buffers);
@@ -74,14 +76,14 @@ extern "C"
         struct iovec* buffer = &pool->buffers[id];
         memset(buffer->iov_base, 0, pool->size);
         buffer->iov_len = pool->size;
-        pool->ids[pool->count++] = id;
+        pool->ids[pool->available++] = id;
     }
 
     static inline int32_t interactor_static_buffers_pop(struct interactor_static_buffers* pool)
     {
-        if (interactor_unlikely(pool->count == 0))
+        if (interactor_unlikely(pool->available == 0))
             return INTERACTOR_BUFFER_USED;
-        return pool->ids[--pool->count];
+        return pool->ids[--pool->available];
     }
 
 #if defined(__cplusplus)

@@ -1,5 +1,5 @@
 class InteractorConfiguration {
-  final int staticBuffersCount;
+  final int staticBuffersCapacity;
   final int staticBufferSize;
   final int ringSize;
   final int ringFlags;
@@ -14,7 +14,7 @@ class InteractorConfiguration {
   final int memoryQuotaSize;
 
   InteractorConfiguration({
-    required this.staticBuffersCount,
+    required this.staticBuffersCapacity,
     required this.staticBufferSize,
     required this.ringSize,
     required this.ringFlags,
@@ -30,8 +30,8 @@ class InteractorConfiguration {
   });
 
   InteractorConfiguration copyWith({
-    int? buffersCount,
-    int? bufferSize,
+    int? staticBuffersCapacity,
+    int? staticBufferSize,
     int? ringSize,
     int? ringFlags,
     Duration? timeoutCheckerPeriod,
@@ -46,8 +46,8 @@ class InteractorConfiguration {
     int? memoryQuotaSize,
   }) =>
       InteractorConfiguration(
-        staticBuffersCount: buffersCount ?? this.staticBuffersCount,
-        staticBufferSize: bufferSize ?? this.staticBufferSize,
+        staticBuffersCapacity: staticBuffersCapacity ?? this.staticBuffersCapacity,
+        staticBufferSize: staticBufferSize ?? this.staticBufferSize,
         ringSize: ringSize ?? this.ringSize,
         ringFlags: ringFlags ?? this.ringFlags,
         delayRandomizationFactor: delayRandomizationFactor ?? this.delayRandomizationFactor,
