@@ -82,13 +82,13 @@ int interactor_native_initialize_default(interactor_native_t* interactor, uint8_
         .static_buffers_capacity = 4096,
         .static_buffer_size = 4096,
         .ring_size = 16384,
+        .ring_flags = 0,
         .cqe_peek_count = 1024,
         .cqe_wait_count = 1,
         .cqe_wait_timeout_millis = 1,
         .preallocation_size = 64 * 1024,
         .slab_size = 64 * 1024,
         .quota_size = 16 * 1024 * 1024,
-        .ring_flags = 0,
     };
     return interactor_native_initialize(interactor, &configuration, id);
 }
