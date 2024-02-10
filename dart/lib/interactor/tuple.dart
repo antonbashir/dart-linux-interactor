@@ -467,4 +467,16 @@ class InteractorTuples {
 
   @pragma(preferInlinePragma)
   int next(Pointer<Uint8> pointer, int offset) => interactor_dart_tuple_next(pointer.cast(), offset);
+
+  @pragma(preferInlinePragma)
+  Pointer<interactor_input_buffer_t> allocateInputBuffer(int capacity) => interactor_dart_io_buffers_allocate_input(_interactor, capacity);
+
+  @pragma(preferInlinePragma)
+  Pointer<interactor_output_buffer_t> allocateOutputBuffer(int capacity) => interactor_dart_io_buffers_allocate_output(_interactor, capacity);
+
+  @pragma(preferInlinePragma)
+  void freeInputBuffer(Pointer<interactor_input_buffer_t> buffer) => interactor_dart_io_buffers_free_input(_interactor, buffer);
+
+  @pragma(preferInlinePragma)
+  void freeOutputBuffer(Pointer<interactor_output_buffer_t> buffer) => interactor_dart_io_buffers_free_output(_interactor, buffer);
 }

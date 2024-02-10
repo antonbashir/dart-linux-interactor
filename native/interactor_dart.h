@@ -59,9 +59,9 @@ extern "C"
     int32_t interactor_dart_used_static_buffers(interactor_dart_t* interactor);
 
     interactor_input_buffer_t* interactor_dart_io_buffers_allocate_input(interactor_dart_t* interactor, size_t initial_capacity);
-    interactor_output_buffer_t* interactor_dart_io_buffers_allocate_ouput(interactor_dart_t* interactor, size_t initial_capacity);
+    interactor_output_buffer_t* interactor_dart_io_buffers_allocate_output(interactor_dart_t* interactor, size_t initial_capacity);
     void interactor_dart_io_buffers_free_input(interactor_dart_t* interactor, interactor_input_buffer_t* buffer);
-    void interactor_dart_io_buffers_free_ouput(interactor_dart_t* interactor, interactor_output_buffer_t* buffer);
+    void interactor_dart_io_buffers_free_output(interactor_dart_t* interactor, interactor_output_buffer_t* buffer);
     void* interactor_dart_input_buffer_reserve(interactor_input_buffer_t* buffer, size_t size);
     void* interactor_dart_input_buffer_allocate(interactor_input_buffer_t* buffer, size_t size);
     void* interactor_dart_output_buffer_reserve(interactor_output_buffer_t* buffer, size_t size);

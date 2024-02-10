@@ -58,9 +58,9 @@ extern "C"
     int32_t interactor_native_used_static_buffers(interactor_native_t* interactor);
 
     interactor_input_buffer_t* interactor_native_io_buffers_allocate_input(interactor_native_t* interactor, size_t initial_capacity);
-    interactor_output_buffer_t* interactor_native_io_buffers_allocate_ouput(interactor_native_t* interactor, size_t initial_capacity);
+    interactor_output_buffer_t* interactor_native_io_buffers_allocate_output(interactor_native_t* interactor, size_t initial_capacity);
     void interactor_native_io_buffers_free_input(interactor_native_t* interactor, interactor_input_buffer_t* buffer);
-    void interactor_native_io_buffers_free_ouput(interactor_native_t* interactor, interactor_output_buffer_t* buffer);
+    void interactor_native_io_buffers_free_output(interactor_native_t* interactor, interactor_output_buffer_t* buffer);
     void* interactor_native_input_buffer_reserve(interactor_input_buffer_t* buffer, size_t size);
     void* interactor_native_input_buffer_allocate(interactor_input_buffer_t* buffer, size_t size);
     void* interactor_native_output_buffer_reserve(interactor_output_buffer_t* buffer, size_t size);

@@ -329,7 +329,7 @@ interactor_input_buffer_t* interactor_native_io_buffers_allocate_input(interacto
     return interactor_io_buffers_allocate_input(&interactor->io_buffers, initial_capacity);
 }
 
-interactor_output_buffer_t* interactor_native_io_buffers_allocate_ouput(interactor_native_t* interactor, size_t initial_capacity)
+interactor_output_buffer_t* interactor_native_io_buffers_allocate_output(interactor_native_t* interactor, size_t initial_capacity)
 {
     return interactor_io_buffers_allocate_output(&interactor->io_buffers, initial_capacity);
 }
@@ -339,7 +339,7 @@ void interactor_native_io_buffers_free_input(interactor_native_t* interactor, in
     interactor_io_buffers_free_input(&interactor->io_buffers, buffer);
 }
 
-void interactor_native_io_buffers_free_ouput(interactor_native_t* interactor, interactor_output_buffer_t* buffer)
+void interactor_native_io_buffers_free_output(interactor_native_t* interactor, interactor_output_buffer_t* buffer)
 {
     interactor_io_buffers_free_output(&interactor->io_buffers, buffer);
 }
