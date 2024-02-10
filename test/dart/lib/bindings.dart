@@ -8659,11 +8659,15 @@ final class interactor_native extends ffi.Struct {
 
   external interactor_memory memory;
 
+  external ffi.Pointer<io_uring> ring;
+
   @ffi.Size()
   external int ring_size;
 
   @ffi.Int()
   external int ring_flags;
+
+  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
 
   @ffi.Uint64()
   external int cqe_wait_timeout_millis;
@@ -8673,10 +8677,6 @@ final class interactor_native extends ffi.Struct {
 
   @ffi.Uint32()
   external int cqe_peek_count;
-
-  external ffi.Pointer<io_uring> ring;
-
-  external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
 
   external ffi.Pointer<ffi.Void> callbacks;
 }

@@ -36,13 +36,13 @@ extern "C"
         struct interactor_io_buffers io_buffers;
         struct interactor_data_pool data_pool;
         struct interactor_memory memory;
+        struct io_uring* ring;
         size_t ring_size;
         int ring_flags;
+        struct io_uring_cqe** cqes;
         uint64_t cqe_wait_timeout_millis;
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
-        struct io_uring* ring;
-        struct io_uring_cqe** cqes;
         void* callbacks;
     } interactor_native_t;
 

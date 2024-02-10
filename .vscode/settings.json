@@ -55,4 +55,5 @@
     "--function-arg-placeholders",
   ],
   "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+  "dart.sdkPath": "~/development/dart-sources/sdk/out/DebugX64/dart-sdk",
 }
