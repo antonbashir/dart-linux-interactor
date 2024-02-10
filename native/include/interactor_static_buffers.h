@@ -4,6 +4,7 @@
 #include <asm-generic/errno-base.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/uio.h>
@@ -30,14 +31,14 @@ extern "C"
         pool->capacity = capacity;
         pool->count = 0;
 
-        pool->ids = (int32_t*)malloc(size * sizeof(int32_t));
+        pool->ids = (int32_t*)malloc(capacity * sizeof(int32_t));
         if (pool->ids == NULL)
         {
             return -1;
         }
-        memset(pool->ids, 0, size * sizeof(int32_t));
+        memset(pool->ids, 0, capacity * sizeof(int32_t));
 
-        pool->buffers = (struct iovec*)malloc(size * sizeof(struct iovec));
+        pool->buffers = (struct iovec*)malloc(capacity * sizeof(struct iovec));
         if (pool->buffers == NULL)
         {
             return -1;
@@ -45,6 +46,7 @@ extern "C"
         
         for (size_t index = 0; index < capacity; index++)
         {
+            printf("%d\n", getpagesize());
             if (posix_memalign(&pool->buffers[index].iov_base, getpagesize(), size))
             {
                 return -1;

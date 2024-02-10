@@ -49,6 +49,7 @@ class Interactor {
         nativeConfiguration.ref.quota_size = configuration.memoryQuotaSize;
         return interactor_dart_initialize(interactorPointer, nativeConfiguration, _workerClosers.length);
       });
+      print("created");
       if (result < 0) {
         interactor_dart_destroy(interactorPointer);
         ffi.calloc.free(interactorPointer);

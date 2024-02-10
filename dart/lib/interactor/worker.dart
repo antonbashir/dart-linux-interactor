@@ -60,6 +60,7 @@ class InteractorWorker {
 
   Future<void> initialize() async {
     final configuration = await _fromInteractor.first as List;
+    print("initialized");
     _interactor = Pointer.fromAddress(configuration[0] as int).cast<interactor_dart_t>();
     _destroyer = configuration[1] as SendPort;
     _descriptor = configuration[2] as int;
