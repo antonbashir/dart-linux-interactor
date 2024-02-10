@@ -14,7 +14,6 @@ void testCallNative() {
   test("dart(null) <-> native(null)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-
     test_call_reset();
     await worker.initialize();
     final native = test_interactor_initialize();
@@ -31,7 +30,6 @@ void testCallNative() {
   test("dart(bool) <-> native(bool)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-
     test_call_reset();
     await worker.initialize();
     final native = test_interactor_initialize();
@@ -49,7 +47,6 @@ void testCallNative() {
   test("dart(int) <-> native(int)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-
     test_call_reset();
     await worker.initialize();
     final native = test_interactor_initialize();
@@ -67,7 +64,6 @@ void testCallNative() {
   test("dart(double) <-> native(double)", () async {
     final interactor = Interactor();
     final worker = InteractorWorker(interactor.worker(InteractorDefaults.worker()));
-
     test_call_reset();
     await worker.initialize();
     final native = test_interactor_initialize();

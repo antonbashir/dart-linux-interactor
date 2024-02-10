@@ -51,6 +51,7 @@ class Interactor {
       });
       if (result < 0) {
         interactor_dart_destroy(interactorPointer);
+        ffi.calloc.free(interactorPointer);
         throw InteractorInitializationException(InteractorErrors.workerError(result));
       }
       final workerInput = [interactorPointer.address, _workerDestroyer.sendPort, result];

@@ -29,24 +29,25 @@ extern "C"
         pool->size = size;
         pool->capacity = capacity;
         pool->count = 0;
+
         pool->ids = (int32_t*)malloc(size * sizeof(int32_t));
         if (pool->ids == NULL)
         {
-            return -ENOMEM;
-        }
-        memset(pool->ids, 0, size * sizeof(int32_t));
-        pool->buffers = (struct iovec*)malloc(size * sizeof(struct iovec));
-        if (pool->ids == NULL)
-        {
-            return -ENOMEM;
+            return -1;
         }
         memset(pool->ids, 0, size * sizeof(int32_t));
 
+        pool->buffers = (struct iovec*)malloc(size * sizeof(struct iovec));
+        if (pool->buffers == NULL)
+        {
+            return -1;
+        }
+        
         for (size_t index = 0; index < capacity; index++)
         {
             if (posix_memalign(&pool->buffers[index].iov_base, getpagesize(), size))
             {
-                return -ENOMEM;
+                return -1;
             }
             memset(pool->buffers[index].iov_base, 0, size);
             pool->buffers[index].iov_len = size;
@@ -76,7 +77,7 @@ extern "C"
 
     static inline int32_t interactor_static_buffers_pop(struct interactor_static_buffers* pool)
     {
-        if (interactor_likely(pool->count == 0))
+        if (interactor_unlikely(pool->count == 0))
             return INTERACTOR_BUFFER_USED;
         return pool->ids[--pool->count];
     }

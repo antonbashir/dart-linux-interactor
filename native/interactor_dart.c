@@ -184,7 +184,6 @@ void interactor_dart_destroy(interactor_dart_t* interactor)
     interactor_memory_destroy(&interactor->memory);
     free(interactor->cqes);
     free(interactor->ring);
-    free(interactor);
 }
 
 void interactor_dart_cqe_advance(struct io_uring* ring, int count)

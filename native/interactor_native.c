@@ -316,7 +316,6 @@ void interactor_native_destroy(interactor_native_t* interactor)
     mh_native_callbacks_delete(interactor->callbacks);
     free(interactor->cqes);
     free(interactor->ring);
-    free(interactor);
 }
 
 void interactor_native_close_descriptor(int fd)

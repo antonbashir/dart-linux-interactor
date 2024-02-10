@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:isolate';
 import 'dart:math';
-
+import 'package:ffi/ffi.dart' as ffi;
 import 'bindings.dart';
 import 'buffers.dart';
 import 'constants.dart';
@@ -51,6 +51,7 @@ class InteractorWorker {
       await _done.future;
       _payloads.destroy();
       interactor_dart_destroy(_interactor);
+      ffi.calloc.free(_interactor);
       _closer.close();
       _destroyer.send(null);
     });
