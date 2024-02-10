@@ -439,26 +439,151 @@ int tupleSizeOfMap(int length) {
 extension InteractorTupleIntExtension on int {
   @pragma(preferInlinePragma)
   int get tupleSize => tupleSizeOfInt(this);
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(ByteData data, int offset) => tupleWriteInt(data, this, offset);
+}
+
+extension InteractorTupleDoubleExtension on double {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfDouble;
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(ByteData data, int offset) => tupleWriteDouble(data, this, offset);
+}
+
+extension InteractorTupleBooleanExtension on bool {
+  @pragma(preferInlinePragma)
+  int get tupleSize => tupleSizeOfBool;
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(ByteData data, int offset) => tupleWriteBool(data, this, offset);
 }
 
 extension InteractorTupleStringExtension on String {
   @pragma(preferInlinePragma)
   int get tupleSize => tupleSizeOfString(length);
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteString(buffer, data, this, offset);
 }
 
 extension InteractorTupleBinaryExtension on Uint8List {
   @pragma(preferInlinePragma)
   int get tupleSize => tupleSizeOfBinary(length);
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteBinary(buffer, data, this, offset);
 }
 
 extension InteractorTupleMapExtension<K, V> on Map<K, V> {
   @pragma(preferInlinePragma)
   int get tupleSize => tupleSizeOfMap(length);
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteMap(data, length, offset);
+
+  @pragma(preferInlinePragma)
+  int dumpToTuple(Uint8List buffer, ByteData data, int offset) {
+    offset = tupleWriteMap(data, length, offset);
+    for (var entry in entries) {
+      switch (entry.key) {
+        case null:
+          offset = tupleWriteNull(data, offset);
+          break;
+        case int asInt:
+          offset = asInt.writeToTuple(data, offset);
+          break;
+        case double asDouble:
+          offset = asDouble.writeToTuple(data, offset);
+          break;
+        case bool asBool:
+          offset = asBool.writeToTuple(data, offset);
+          break;
+        case String asString:
+          offset = asString.writeToTuple(buffer, data, offset);
+          break;
+        case Uint8List asBinary:
+          offset = asBinary.writeToTuple(buffer, data, offset);
+          break;
+        case List asList:
+          offset = asList.dumpToTuple(buffer, data, offset);
+          break;
+        case Map asMap:
+          offset = asMap.dumpToTuple(buffer, data, offset);
+          break;
+      }
+      switch (entry.value) {
+        case null:
+          offset = tupleWriteNull(data, offset);
+          break;
+        case int asInt:
+          offset = asInt.writeToTuple(data, offset);
+          break;
+        case double asDouble:
+          offset = asDouble.writeToTuple(data, offset);
+          break;
+        case bool asBool:
+          offset = asBool.writeToTuple(data, offset);
+          break;
+        case String asString:
+          offset = asString.writeToTuple(buffer, data, offset);
+          break;
+        case Uint8List asBinary:
+          offset = asBinary.writeToTuple(buffer, data, offset);
+          break;
+        case List asList:
+          offset = asList.dumpToTuple(buffer, data, offset);
+          break;
+        case Map asMap:
+          offset = asMap.dumpToTuple(buffer, data, offset);
+          break;
+      }
+    }
+    return offset;
+  }
 }
 
 extension InteractorTupleListExtension<T> on List<T> {
   @pragma(preferInlinePragma)
   int get tupleSize => tupleSizeOfList(length);
+
+  @pragma(preferInlinePragma)
+  int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteList(data, length, offset);
+
+  @pragma(preferInlinePragma)
+  int dumpToTuple(Uint8List buffer, ByteData data, int offset) {
+    offset = tupleWriteList(data, length, offset);
+    for (var entry in this) {
+      switch (entry) {
+        case null:
+          offset = tupleWriteNull(data, offset);
+          break;
+        case int asInt:
+          offset = asInt.writeToTuple(data, offset);
+          break;
+        case double asDouble:
+          offset = asDouble.writeToTuple(data, offset);
+          break;
+        case bool asBool:
+          offset = asBool.writeToTuple(data, offset);
+          break;
+        case String asString:
+          offset = asString.writeToTuple(buffer, data, offset);
+          break;
+        case Uint8List asBinary:
+          offset = asBinary.writeToTuple(buffer, data, offset);
+          break;
+        case List asList:
+          offset = asList.dumpToTuple(buffer, data, offset);
+          break;
+        case Map asMap:
+          offset = asMap.dumpToTuple(buffer, data, offset);
+          break;
+      }
+    }
+    return offset;
+  }
 }
 
 class InteractorTuples {
