@@ -1,5 +1,5 @@
-#ifndef INTERACTOR_BUFFERS_POOL_H
-#define INTERACTOR_BUFFERS_POOL_H
+#ifndef INTERACTOR_STATIC_BUFFERS_H
+#define INTERACTOR_STATIC_BUFFERS_H
 
 #include <asm-generic/errno-base.h>
 #include <stddef.h>
@@ -18,11 +18,11 @@ extern "C"
 #endif
     struct interactor_static_buffers
     {
-        int32_t* ids;
-        struct iovec* buffers;
         size_t count;
         size_t size;
         size_t capacity;
+        int32_t* ids;
+        struct iovec* buffers;
     };
 
     static inline int interactor_static_buffers_create(struct interactor_static_buffers* pool, size_t capacity, size_t size)
@@ -43,10 +43,11 @@ extern "C"
         {
             return -1;
         }
-        
+
+        size_t page_size = getpagesize();
         for (size_t index = 0; index < capacity; index++)
         {
-            if (posix_memalign(&pool->buffers[index].iov_base, getpagesize(), size))
+            if (posix_memalign(&pool->buffers[index].iov_base, page_size, size))
             {
                 return -1;
             }

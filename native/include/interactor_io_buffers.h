@@ -1,5 +1,5 @@
-#ifndef interactor_io_buffers_H
-#define interactor_io_buffers_H
+#ifndef INTERACTOR_IO_BUFFERS_H
+#define INTERACTOR_IO_BUFFERS_H
 
 #include <stddef.h>
 #include "ibuf.h"
