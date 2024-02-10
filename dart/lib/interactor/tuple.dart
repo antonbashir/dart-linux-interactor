@@ -10,6 +10,7 @@ const int _twoByteLimit = 0x7ff;
 const int _surrogateTagMask = 0xFC00;
 const int _surrogateValueMask = 0x3FF;
 const int _leadSurrogateMin = 0xD800;
+final _decoder = const Utf8Decoder();
 
 @pragma(preferInlinePragma)
 int tupleWriteNull(ByteData data, int offset) {
@@ -258,7 +259,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
     length = bytes & 0x1F;
     offset += 1;
     final view = innerBuffer.asUint8List(offsetInBytes + offset, length);
-    return (value: utf8.decode(view), offset: offset + length);
+    return (value: _decoder.convert(view), offset: offset + length);
   }
   switch (bytes) {
     case 0xc0:
@@ -266,15 +267,15 @@ int tupleWriteMap(ByteData data, int length, int offset) {
     case 0xd9:
       length = data.getUint8(++offset);
       offset += 1;
-      return (value: utf8.decode(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
+      return (value: _decoder.convert(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
     case 0xda:
       length = data.getUint16(++offset);
       offset += 2;
-      return (value: utf8.decode(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
+      return (value: _decoder.convert(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
     case 0xdb:
       length = data.getUint32(++offset);
       offset += 4;
-      return (value: utf8.decode(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
+      return (value: _decoder.convert(innerBuffer.asUint8List(offsetInBytes + offset, length)), offset: offset + length);
   }
   throw FormatException("Byte $bytes is not string");
 }
@@ -365,6 +366,7 @@ int _encodeString(String str, Uint8List buffer, int offset) {
   }
   return offset - startOffset;
 }
+
 const tupleSizeOfNull = 1;
 const tupleSizeOfBool = 1;
 const tupleSizeOfDouble = 1 + 8;
