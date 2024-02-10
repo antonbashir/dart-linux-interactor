@@ -53,7 +53,7 @@ extern "C"
     void interactor_native_register_callback(interactor_native_t* interactor, uint64_t owner, uint64_t method, void (*callback)(interactor_message_t*));
 
     int32_t interactor_native_get_static_buffer(interactor_native_t* interactor);
-    void interactor_native_release_static_buffer(interactor_native_t* interactor, uint16_t buffer_id);
+    void interactor_native_release_static_buffer(interactor_native_t* interactor, int32_t buffer_id);
     int32_t interactor_native_available_static_buffers(interactor_native_t* interactor);
     int32_t interactor_native_used_static_buffers(interactor_native_t* interactor);
 

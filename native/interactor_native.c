@@ -120,7 +120,7 @@ int32_t interactor_native_used_static_buffers(interactor_native_t* interactor)
     return interactor->static_buffers.capacity - interactor->static_buffers.available;
 }
 
-void interactor_native_release_static_buffer(interactor_native_t* interactor, uint16_t buffer_id)
+void interactor_native_release_static_buffer(interactor_native_t* interactor, int32_t buffer_id)
 {
     interactor_static_buffers_push(&interactor->static_buffers, buffer_id);
 }
