@@ -189,6 +189,7 @@ int tupleWriteMap(ByteData data, int length, int offset) {
   throw FormatException("Byte $value is not bool");
 }
 
+@pragma(preferInlinePragma)
 ({int? value, int offset}) tupleReadInt(ByteData data, int offset) {
   final bytes = data.getUint8(offset);
   int? value;
