@@ -6453,10 +6453,6 @@ final class UnnamedUnion2 extends ffi.Union {
 }
 
 final class interactor_static_buffers extends ffi.Struct {
-  external ffi.Pointer<ffi.Int32> ids;
-
-  external ffi.Pointer<iovec> buffers;
-
   @ffi.Size()
   external int available;
 
@@ -6465,6 +6461,10 @@ final class interactor_static_buffers extends ffi.Struct {
 
   @ffi.Size()
   external int capacity;
+
+  external ffi.Pointer<ffi.Int32> ids;
+
+  external ffi.Pointer<iovec> buffers;
 }
 
 final class interactor_dart_configuration extends ffi.Struct {
