@@ -550,7 +550,7 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
   int writeToTuple(Uint8List buffer, ByteData data, int offset) => tupleWriteMap(data, length, offset);
 
   @pragma(preferInlinePragma)
-  int dumpToTuple(Uint8List buffer, ByteData data, int offset) {
+  int serializeToTuple(Uint8List buffer, ByteData data, int offset) {
     offset = tupleWriteMap(data, length, offset);
     for (var entry in entries) {
       switch (entry.key) {
@@ -573,13 +573,13 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
           offset = tupleWriteBinary(buffer, data, asBinary, offset);
           break;
         case List asList:
-          offset = asList.dumpToTuple(buffer, data, offset);
+          offset = asList.serializeToTuple(buffer, data, offset);
           break;
         case Map asMap:
-          offset = asMap.dumpToTuple(buffer, data, offset);
+          offset = asMap.serializeToTuple(buffer, data, offset);
           break;
         case InteractorTuple asTuple:
-          offset = asTuple.dump(buffer, data, offset);
+          offset = asTuple.serialize(buffer, data, offset);
           break;
       }
       switch (entry.value) {
@@ -602,13 +602,13 @@ extension InteractorTupleMapExtension<K, V> on Map<K, V> {
           offset = tupleWriteBinary(buffer, data, asBinary, offset);
           break;
         case List asList:
-          offset = asList.dumpToTuple(buffer, data, offset);
+          offset = asList.serializeToTuple(buffer, data, offset);
           break;
         case Map asMap:
-          offset = asMap.dumpToTuple(buffer, data, offset);
+          offset = asMap.serializeToTuple(buffer, data, offset);
           break;
         case InteractorTuple asTuple:
-          offset = asTuple.dump(buffer, data, offset);
+          offset = asTuple.serialize(buffer, data, offset);
           break;
       }
     }
@@ -661,7 +661,7 @@ extension InteractorTupleListExtension<T> on List<T> {
   }
 
   @pragma(preferInlinePragma)
-  int dumpToTuple(Uint8List buffer, ByteData data, int offset) {
+  int serializeToTuple(Uint8List buffer, ByteData data, int offset) {
     offset = tupleWriteList(data, length, offset);
     for (var entry in this) {
       switch (entry) {
@@ -684,13 +684,13 @@ extension InteractorTupleListExtension<T> on List<T> {
           offset = tupleWriteBinary(buffer, data, asBinary, offset);
           break;
         case List asList:
-          offset = asList.dumpToTuple(buffer, data, offset);
+          offset = asList.serializeToTuple(buffer, data, offset);
           break;
         case Map asMap:
-          offset = asMap.dumpToTuple(buffer, data, offset);
+          offset = asMap.serializeToTuple(buffer, data, offset);
           break;
         case InteractorTuple asTuple:
-          offset = asTuple.dump(buffer, data, offset);
+          offset = asTuple.serialize(buffer, data, offset);
           break;
       }
     }
@@ -728,5 +728,5 @@ class InteractorTuples {
 abstract interface class InteractorTuple {
   int get tupleSize;
 
-  int dump(Uint8List buffer, ByteData data, int offset);
+  int serialize(Uint8List buffer, ByteData data, int offset);
 }
