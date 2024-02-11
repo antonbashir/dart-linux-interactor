@@ -99,7 +99,6 @@ int test_threading_call_native_check()
     for (int id = 0; id < threads.count; id++)
     {
         messages += threads.threads[id].received_messages_count;
-        printf("%d\n", messages);
     }
     pthread_mutex_unlock((pthread_mutex_t*)threads.global_working_mutex);
     return messages;
