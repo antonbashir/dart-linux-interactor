@@ -86,7 +86,7 @@ int interactor_native_initialize(struct interactor_native* interactor, struct in
         return -ENOMEM;
     }
 
-    interactor->ring = calloc(sizeof(struct io_uring), 1);
+    interactor->ring = calloc(1, sizeof(struct io_uring));
     if (!interactor->ring)
     {
         return -ENOMEM;
