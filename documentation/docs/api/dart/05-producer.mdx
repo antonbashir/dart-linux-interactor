@@ -31,7 +31,7 @@ class TestNativeProducer implements InteractorProducer {
 ### InteractorProducerRegistrat
 ```dart title="Declaration"
 abstract interface class InteractorProducerRegistrat {
-  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer);
+  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message>)>> pointer);
 }
 ```
 
@@ -44,4 +44,4 @@ abstract interface class InteractorMethod {
 
 # References
 * See [InteractorCall](call)
-* See [interactor_message_t](../native/message)
+* See [interactor_message](../native/message)

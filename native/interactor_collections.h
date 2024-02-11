@@ -19,7 +19,7 @@ extern "C"
     struct mh_native_callbacks_node_t
     {
         mh_key_t key;
-        void (*callback)(interactor_message_t*);
+        void (*callback)(struct interactor_message*);
     };
 
 #define mh_node_t struct mh_native_callbacks_node_t

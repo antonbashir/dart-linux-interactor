@@ -4,7 +4,7 @@ import 'bindings.dart';
 import 'constants.dart';
 
 class InteractorDatas {
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
 
   InteractorDatas(this._interactor);
 

@@ -24,7 +24,7 @@ class InteractorWorker {
   late final InteractorMessages _messages;
   late final InteractorTuples _tuples;
 
-  late final Pointer<interactor_dart_t> _interactor;
+  late final Pointer<interactor_dart> _interactor;
   late final Pointer<io_uring> _ring;
   late final int _descriptor;
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
@@ -43,7 +43,7 @@ class InteractorWorker {
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
   InteractorTuples get tuples => _tuples;
-  Pointer<interactor_memory_t> get memory => interactor_dart_memory(_interactor);
+  Pointer<interactor_memory> get memory => interactor_dart_memory(_interactor);
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((_) async {
@@ -62,7 +62,7 @@ class InteractorWorker {
 
   Future<void> initialize() async {
     final configuration = await _fromInteractor.first as List;
-    _interactor = Pointer.fromAddress(configuration[0] as int).cast<interactor_dart_t>();
+    _interactor = Pointer.fromAddress(configuration[0] as int).cast<interactor_dart>();
     _destroyer = configuration[1] as SendPort;
     _descriptor = configuration[2] as int;
     _fromInteractor.close();
@@ -111,12 +111,12 @@ class InteractorWorker {
       final data = cqe.ref.user_data;
       final result = cqe.ref.res;
       if (result & interactorDartCall > 0) {
-        Pointer<interactor_message_t> message = Pointer.fromAddress(data);
+        Pointer<interactor_message> message = Pointer.fromAddress(data);
         _consumers.call(message);
         continue;
       }
       if (result & interactorDartCallback > 0) {
-        Pointer<interactor_message_t> message = Pointer.fromAddress(data);
+        Pointer<interactor_message> message = Pointer.fromAddress(data);
         _producers.callback(message);
         continue;
       }

@@ -5,12 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "interactor_constants.h"
 #include "interactor_message.h"
 #include "interactor_native.h"
 #include "test.h"
 
-test_threads_t threads;
+struct test_threads threads;
 
 int* test_threading_interactor_descriptors()
 {
@@ -24,9 +23,9 @@ int* test_threading_interactor_descriptors()
     return descriptors;
 }
 
-static inline test_thread_t* test_threading_thread_by_fd(int fd)
+static inline struct test_thread* test_threading_thread_by_fd(int fd)
 {
-    test_thread_t* thread = NULL;
+    struct test_thread* thread = NULL;
     for (int id = 0; id < threads.count; id++)
     {
         thread = &threads.threads[id];
@@ -40,7 +39,7 @@ static inline test_thread_t* test_threading_thread_by_fd(int fd)
 
 static void* test_threading_run(void* thread)
 {
-    test_thread_t* casted = (test_thread_t*)thread;
+    struct test_thread* casted = (struct test_thread*)thread;
     pthread_mutex_lock(&casted->initialize_mutex);
     casted->alive = false;
     do
@@ -63,15 +62,15 @@ static void* test_threading_run(void* thread)
 bool test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count)
 {
     threads.count = thread_count;
-    threads.threads = malloc(thread_count * sizeof(test_thread_t));
+    threads.threads = malloc(thread_count * sizeof(struct test_thread));
     pthread_mutex_init(&threads.global_working_mutex, NULL);
     for (int thread_id = 0; thread_id < thread_count; thread_id++)
     {
-        test_thread_t* thread = &threads.threads[thread_id];
-        memset(thread, 0, sizeof(test_thread_t));
+        struct test_thread* thread = &threads.threads[thread_id];
+        memset(thread, 0, sizeof(struct test_thread));
         thread->whole_messages_count = per_thread_messages_count;
         thread->received_messages_count = 0;
-        thread->messages = malloc(per_thread_messages_count * sizeof(interactor_message_t*));
+        thread->messages = malloc(per_thread_messages_count * sizeof(struct interactor_message*));
         pthread_mutex_init(&thread->initialize_mutex, NULL);
         pthread_cond_init(&thread->initialize_condition, NULL);
 
@@ -113,10 +112,10 @@ int test_threading_call_dart_check()
     return messages;
 }
 
-void test_threading_call_native(interactor_message_t* message)
+void test_threading_call_native(struct interactor_message* message)
 {
     pthread_mutex_lock(&threads.global_working_mutex);
-    test_thread_t* thread = test_threading_thread_by_fd(message->target);
+    struct test_thread* thread = test_threading_thread_by_fd(message->target);
     if (thread)
     {
         message->output = message->input;
@@ -132,12 +131,12 @@ void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t target_cou
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int id = 0; id < threads.count; id++)
     {
-        test_thread_t* thread = &threads.threads[id];
+        struct test_thread* thread = &threads.threads[id];
         for (int32_t target = 0; target < target_count; target++)
         {
             for (int message_id = 0; message_id < thread->whole_messages_count / target_count; message_id++)
             {
-                interactor_message_t* message = interactor_native_allocate_message(thread->interactor);
+                struct interactor_message* message = interactor_native_allocate_message(thread->interactor);
                 message->id = message_id;
                 message->input = (void*)(intptr_t)interactor_native_data_allocate(thread->interactor, 3);
                 ((char*)message->input)[0] = 0x1;
@@ -154,10 +153,10 @@ void test_threading_prepare_call_dart_bytes(int32_t* targets, int32_t target_cou
     pthread_mutex_unlock(&threads.global_working_mutex);
 }
 
-void test_threading_call_dart_callback(interactor_message_t* message)
+void test_threading_call_dart_callback(struct interactor_message* message)
 {
     pthread_mutex_lock(&threads.global_working_mutex);
-    test_thread_t* thread = test_threading_thread_by_fd(message->target);
+    struct test_thread* thread = test_threading_thread_by_fd(message->target);
     if (thread)
     {
         message->output = message->input;
@@ -173,7 +172,7 @@ void test_threading_destroy()
     pthread_mutex_lock(&threads.global_working_mutex);
     for (int thread_id = 0; thread_id < threads.count; thread_id++)
     {
-        test_thread_t* thread = &threads.threads[thread_id];
+        struct test_thread* thread = &threads.threads[thread_id];
         thread->alive = false;
         pthread_join(thread->id, NULL);
     }

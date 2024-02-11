@@ -10,7 +10,7 @@ class InteractorStaticBuffers {
   final int size;
   final int capacity;
   final Queue<Completer<void>> _finalizers = Queue();
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
   final Pointer<iovec> _buffers;
 
   InteractorStaticBuffers(this._buffers, this.size, this.capacity, this._interactor);

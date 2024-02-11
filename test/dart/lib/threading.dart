@@ -125,7 +125,7 @@ void testThreadingDart() {
 Future<void> _callNativeIsolate(List<dynamic> input) async {
   final messages = input[0];
   final threads = input[1];
-  final calls = <Future<Pointer<interactor_message_t>>>[];
+  final calls = <Future<Pointer<interactor_message>>>[];
   final worker = InteractorWorker(input[2]);
   await worker.initialize();
   final producer = worker.producer(TestNativeProducer());

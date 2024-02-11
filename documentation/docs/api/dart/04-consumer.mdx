@@ -28,7 +28,7 @@ worker.consumer(TestNativeConsumer());
 ```
 
 ```c title="Calling"
-interactor_message_t* message = interactor_native_allocate_message(interactor);
+interactor_message* message = interactor_native_allocate_message(interactor);
 message->id = // Your message id.
 message->input = // Your message input.
 message->input_size = // Your message input size.

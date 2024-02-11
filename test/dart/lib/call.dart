@@ -315,7 +315,7 @@ void testCallDart() {
   });
 }
 
-Future<void> _awaitDartCall(Pointer<interactor_native_t> native) async {
+Future<void> _awaitDartCall(Pointer<interactor_native> native) async {
   while (true) {
     final result = test_call_dart_check(native);
     if (result == nullptr) {
@@ -326,6 +326,6 @@ Future<void> _awaitDartCall(Pointer<interactor_native_t> native) async {
   }
 }
 
-Future<void> _awaitNativeCall(Pointer<interactor_native_t> native) async {
+Future<void> _awaitNativeCall(Pointer<interactor_native> native) async {
   while (!test_call_native_check(native)) await Future.delayed(Duration(milliseconds: 10));
 }

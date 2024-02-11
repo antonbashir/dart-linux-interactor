@@ -35,7 +35,15 @@
     "interactor_memory.h": "c",
     "slab_arena.h": "c",
     "msgpuck.h": "c",
-    "interactor_static_buffers.h": "c"
+    "interactor_static_buffers.h": "c",
+    "io_uring.h": "c",
+    "interactor_native.h": "c",
+    "system_error": "c",
+    "pthread.h": "c",
+    "assert.h": "c",
+    "string.h": "c",
+    "*.tcc": "c",
+    "stop_token": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [

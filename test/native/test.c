@@ -9,9 +9,9 @@
 
 static pthread_mutex_t mutex;
 
-interactor_native_t* test_interactor_initialize()
+struct interactor_native* test_interactor_initialize()
 {
-    interactor_native_t* test_interactor = malloc(sizeof(interactor_native_t));
+   struct  interactor_native* test_interactor = malloc(sizeof(struct interactor_native));
     if (!test_interactor)
     {
         return NULL;
@@ -24,7 +24,7 @@ interactor_native_t* test_interactor_initialize()
     return test_interactor;
 }
 
-void test_interactor_destroy(interactor_native_t* interactor)
+void test_interactor_destroy(struct interactor_native* interactor)
 {
     interactor_native_destroy(interactor);
     free(interactor);

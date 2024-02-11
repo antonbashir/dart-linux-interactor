@@ -9,7 +9,7 @@ import 'producer.dart';
 class InteractorConsumerRegistry {
   final _consumers = <InteractorConsumerExecutor>[];
 
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
 
   InteractorConsumerRegistry(this._interactor);
 
@@ -22,13 +22,13 @@ class InteractorConsumerRegistry {
   }
 
   @pragma(preferInlinePragma)
-  void call(Pointer<interactor_message_t> message) => _consumers[message.ref.owner].call(message);
+  void call(Pointer<interactor_message> message) => _consumers[message.ref.owner].call(message);
 }
 
 class InteractorProducerRegistry {
   final _producers = <InteractorProducerExecutor>[];
 
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
 
   InteractorProducerRegistry(this._interactor);
 
@@ -40,5 +40,5 @@ class InteractorProducerRegistry {
   }
 
   @pragma(preferInlinePragma)
-  void callback(Pointer<interactor_message_t> message) => _producers[message.ref.owner].callback(message);
+  void callback(Pointer<interactor_message> message) => _producers[message.ref.owner].callback(message);
 }

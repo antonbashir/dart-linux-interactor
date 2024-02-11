@@ -31,12 +31,11 @@ extern "C"
         pool->capacity = capacity;
         pool->available = 0;
 
-        pool->ids = malloc(capacity * sizeof(int32_t));
+        pool->ids = calloc(capacity, sizeof(int32_t));
         if (pool->ids == NULL)
         {
             return -1;
         }
-        memset(pool->ids, 0, capacity * sizeof(int32_t));
 
         pool->buffers = malloc(capacity * sizeof(struct iovec));
         if (pool->buffers == NULL)
@@ -44,7 +43,7 @@ extern "C"
             return -1;
         }
 
-        size_t page_size = getpagesize();
+        int page_size = getpagesize();
         for (size_t index = 0; index < capacity; index++)
         {
             struct iovec* buffer = &pool->buffers[index];

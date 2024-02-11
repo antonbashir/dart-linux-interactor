@@ -8,7 +8,7 @@ export 'interactor/message.dart' show InteractorMessageExtensions;
 export 'interactor/tuple.dart';
 export 'interactor/payloads.dart' show InteractorPayloads, InteractorPayloadPool;
 export 'interactor/worker.dart' show InteractorWorker;
-export 'interactor/bindings.dart' show interactor_message_t, interactor_memory_t;
+export 'interactor/bindings.dart' show interactor_message, interactor_memory, interactor_input_buffer, interactor_output_buffer;
 export 'interactor/lookup.dart' show InteractorLibrary;
 export 'interactor/interactor.dart' show Interactor;
 export 'interactor/system.dart';

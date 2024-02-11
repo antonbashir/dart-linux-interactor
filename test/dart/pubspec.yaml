@@ -29,11 +29,11 @@ ffigen:
     - "-I../../dependencies/small/small/include"
     - "-I../../dependencies/small/third_party"
   type-map:
-    typedefs:
-      "interactor_message_t":
+    structs:
+      "interactor_message":
         lib: "linux_interactor"
-        c-type: "interactor_message_t"
-        dart-type: "interactor_message_t"
+        c-type: "interactor_message"
+        dart-type: "interactor_message"
   library-imports:
     linux_interactor: package:linux_interactor/interactor/bindings.dart
   headers:

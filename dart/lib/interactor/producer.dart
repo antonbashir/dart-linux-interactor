@@ -10,25 +10,25 @@ class InteractorProducerExecutor implements InteractorProducerRegistrat {
   final Map<int, InteractorMethodExecutor> _methods = {};
 
   final int _id;
-  final Pointer<interactor_dart_t> _interactorPointer;
+  final Pointer<interactor_dart> _interactorPointer;
 
   InteractorProducerExecutor(this._id, this._interactorPointer);
 
-  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message_t>)>> pointer) {
+  InteractorMethod register(Pointer<NativeFunction<Void Function(Pointer<interactor_message>)>> pointer) {
     final executor = InteractorMethodExecutor(pointer.address, _id, _interactorPointer);
     _methods[pointer.address] = executor;
     return executor;
   }
 
   @pragma(preferInlinePragma)
-  void callback(Pointer<interactor_message_t> message) => _methods[message.ref.method]?.callback(message);
+  void callback(Pointer<interactor_message> message) => _methods[message.ref.method]?.callback(message);
 }
 
 class InteractorMethodExecutor implements InteractorMethod {
-  final Map<int, Completer<Pointer<interactor_message_t>>> _calls = {};
+  final Map<int, Completer<Pointer<interactor_message>>> _calls = {};
   final int _methodId;
   final int _executorId;
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
 
   var _nextId = 0;
   int? get nextId {
@@ -50,8 +50,8 @@ class InteractorMethodExecutor implements InteractorMethod {
 
   @override
   @pragma(preferInlinePragma)
-  Future<Pointer<interactor_message_t>> call(int target, Pointer<interactor_message_t> message) {
-    final completer = Completer<Pointer<interactor_message_t>>();
+  Future<Pointer<interactor_message>> call(int target, Pointer<interactor_message> message) {
+    final completer = Completer<Pointer<interactor_message>>();
     final id;
     if ((id = nextId) == null) throw InteractorRuntimeException(InteractorErrors.interactorLimitError);
     message.ref.id = id;
@@ -63,5 +63,5 @@ class InteractorMethodExecutor implements InteractorMethod {
   }
 
   @pragma(preferInlinePragma)
-  void callback(Pointer<interactor_message_t> message) => _calls[message.ref.id]?.complete(message);
+  void callback(Pointer<interactor_message> message) => _calls[message.ref.id]?.complete(message);
 }

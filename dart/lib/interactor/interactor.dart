@@ -30,10 +30,10 @@ class Interactor {
     final port = RawReceivePort((ports) async {
       SendPort toWorker = ports[0];
       _workerClosers.add(ports[1]);
-      final interactorPointer = ffi.calloc<interactor_dart_t>(sizeOf<interactor_dart_t>());
+      final interactorPointer = ffi.calloc<interactor_dart>(sizeOf<interactor_dart>());
       if (interactorPointer == nullptr) throw InteractorInitializationException(InteractorErrors.workerMemoryError);
       final result = ffi.using((arena) {
-        final nativeConfiguration = arena<interactor_dart_configuration_t>();
+        final nativeConfiguration = arena<interactor_dart_configuration>();
         nativeConfiguration.ref.ring_flags = configuration.ringFlags;
         nativeConfiguration.ref.ring_size = configuration.ringSize;
         nativeConfiguration.ref.static_buffer_size = configuration.staticBufferSize;

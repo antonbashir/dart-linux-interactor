@@ -699,7 +699,7 @@ extension InteractorTupleListExtension<T> on List<T> {
 }
 
 class InteractorTuples {
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
 
   InteractorTuples(this._interactor);
 
@@ -713,16 +713,16 @@ class InteractorTuples {
   void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.address, size);
 
   @pragma(preferInlinePragma)
-  Pointer<interactor_input_buffer_t> allocateInputBuffer(int capacity) => interactor_dart_io_buffers_allocate_input(_interactor, capacity);
+  Pointer<interactor_input_buffer> allocateInputBuffer(int capacity) => interactor_dart_io_buffers_allocate_input(_interactor, capacity);
 
   @pragma(preferInlinePragma)
-  Pointer<interactor_output_buffer_t> allocateOutputBuffer(int capacity) => interactor_dart_io_buffers_allocate_output(_interactor, capacity);
+  Pointer<interactor_output_buffer> allocateOutputBuffer(int capacity) => interactor_dart_io_buffers_allocate_output(_interactor, capacity);
 
   @pragma(preferInlinePragma)
-  void freeInputBuffer(Pointer<interactor_input_buffer_t> buffer) => interactor_dart_io_buffers_free_input(_interactor, buffer);
+  void freeInputBuffer(Pointer<interactor_input_buffer> buffer) => interactor_dart_io_buffers_free_input(_interactor, buffer);
 
   @pragma(preferInlinePragma)
-  void freeOutputBuffer(Pointer<interactor_output_buffer_t> buffer) => interactor_dart_io_buffers_free_output(_interactor, buffer);
+  void freeOutputBuffer(Pointer<interactor_output_buffer> buffer) => interactor_dart_io_buffers_free_output(_interactor, buffer);
 }
 
 abstract interface class InteractorTuple {

@@ -15,35 +15,34 @@
 extern "C"
 {
 #endif
-
-    typedef struct interactor_memory
+    struct interactor_memory
     {
         struct quota quota;
         struct slab_arena arena;
         struct slab_cache cache;
-    } interactor_memory_t;
+    };
 
-    typedef struct interactor_pool
+    struct interactor_pool
     {
         struct mempool pool;
-    } interactor_pool_t;
+    };
 
-    typedef struct interactor_allocator
+    struct interactor_small_allocator
     {
         struct small_alloc allocator;
-    } interactor_allocator_t;
+    };
 
-    typedef struct interactor_input_buffer
+    struct interactor_input_buffer
     {
         struct ibuf buffer;
         size_t last_reserved_size;
-    } interactor_input_buffer_t;
+    };
 
-    typedef struct interactor_output_buffer
+    struct interactor_output_buffer
     {
         struct obuf buffer;
         size_t last_reserved_size;
-    } interactor_output_buffer_t;
+    };
 
     static inline int interactor_memory_create(struct interactor_memory* memory, size_t quota_size, size_t preallocation_size, size_t slab_size)
     {
@@ -85,24 +84,24 @@ extern "C"
         mempool_free(&pool->pool, ptr);
     }
 
-    static inline int interactor_allocator_create(struct interactor_allocator* pool, struct interactor_memory* memory)
+    static inline int interactor_small_allocator_create(struct interactor_small_allocator* pool, struct interactor_memory* memory)
     {
         float actual_alloc_factor;
         small_alloc_create(&pool->allocator, &memory->cache, 3 * sizeof(int), sizeof(intptr_t), 1.05, &actual_alloc_factor);
         return pool->allocator.cache == NULL ? -1 : 0;
     }
 
-    static inline void* interactor_allocator_allocate(struct interactor_allocator* pool, size_t size)
+    static inline void* interactor_small_allocator_allocate(struct interactor_small_allocator* pool, size_t size)
     {
         return (void*)smalloc(&pool->allocator, size);
     }
 
-    static inline void interactor_allocator_free(struct interactor_allocator* pool, void* ptr, size_t size)
+    static inline void interactor_small_allocator_free(struct interactor_small_allocator* pool, void* ptr, size_t size)
     {
         smfree(&pool->allocator, ptr, size);
     }
 
-    static inline void interactor_allocator_destroy(struct interactor_allocator* pool)
+    static inline void interactor_small_allocator_destroy(struct interactor_small_allocator* pool)
     {
         small_alloc_destroy(&pool->allocator);
     }

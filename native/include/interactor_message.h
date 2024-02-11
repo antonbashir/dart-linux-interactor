@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 
-    typedef struct interactor_message
+    struct interactor_message
     {
         uint64_t id;
         uint64_t source;
@@ -21,7 +21,7 @@ extern "C"
         void* output;
         size_t output_size;
         uint16_t flags;
-    } interactor_message_t;
+    };
 
 #if defined(__cplusplus)
 }

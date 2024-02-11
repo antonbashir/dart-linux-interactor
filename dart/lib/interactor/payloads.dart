@@ -7,7 +7,7 @@ import 'exception.dart';
 class InteractorPayloads {
   final Map<int, Pointer<interactor_payload_pool>> _pools = {};
 
-  final Pointer<interactor_dart_t> _interactor;
+  final Pointer<interactor_dart> _interactor;
 
   InteractorPayloads(this._interactor);
 

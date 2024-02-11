@@ -11,7 +11,7 @@ import 'constants.dart';
 import 'data.dart';
 import 'payloads.dart';
 
-extension InteractorMessageExtensions on Pointer<interactor_message_t> {
+extension InteractorMessageExtensions on Pointer<interactor_message> {
   @pragma(preferInlinePragma)
   int get id => ref.id;
 
