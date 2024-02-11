@@ -307,7 +307,7 @@ void testCallDart() {
       },
     ));
     worker.activate();
-    test_call_dart_bytes(native, worker.descriptor, 0, (ffi.malloc<Uint8>(3)..asTypedList(3).setAll(0, [1, 2, 3])), 3);
+    test_call_dart_bytes(native, worker.descriptor, 0, (ffi.calloc<Uint8>(3)..asTypedList(3).setAll(0, [1, 2, 3])), 3);
     await _awaitDartCall(native);
     await completer.future;
     await interactor.shutdown();

@@ -84,7 +84,7 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
         return -ENOMEM;
     }
 
-    interactor->ring = malloc(sizeof(struct io_uring));
+    interactor->ring = calloc(sizeof(struct io_uring), 1);
     if (!interactor->ring)
     {
         return -ENOMEM;
