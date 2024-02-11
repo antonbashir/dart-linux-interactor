@@ -2,9 +2,7 @@
 #define INTERACTOR_IO_BUFFERS_H
 
 #include <stddef.h>
-#include "ibuf.h"
 #include "interactor_memory.h"
-#include "obuf.h"
 
 #if defined(__cplusplus)
 extern "C"

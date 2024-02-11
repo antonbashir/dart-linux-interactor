@@ -49,7 +49,16 @@
     "test.h": "c",
     "interactor_io_buffers.h": "c",
     "test_call.h": "c",
-    "thread-shared-types.h": "c"
+    "thread-shared-types.h": "c",
+    "any": "c",
+    "memory_resource": "c",
+    "memory": "c",
+    "fstream": "c",
+    "istream": "c",
+    "ostream": "c",
+    "sstream": "c",
+    "streambuf": "c",
+    "ibuf.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [

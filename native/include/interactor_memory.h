@@ -2,7 +2,6 @@
 #define INTERACTOR_MEMORY_H
 
 #include <stddef.h>
-#include "ibuf.h"
 #include "small/ibuf.h"
 #include "small/mempool.h"
 #include "small/obuf.h"
