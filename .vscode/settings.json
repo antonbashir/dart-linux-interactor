@@ -48,7 +48,8 @@
     "pthreadtypes.h": "c",
     "test.h": "c",
     "interactor_io_buffers.h": "c",
-    "test_call.h": "c"
+    "test_call.h": "c",
+    "thread-shared-types.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [

@@ -108,14 +108,18 @@ class InteractorWorker {
       Pointer<interactor_completion_event> cqe = _completions.elementAt(cqeIndex).value.cast();
       final data = cqe.ref.user_data;
       final result = cqe.ref.res;
-      if (result & interactorDartCall > 0) {
-        Pointer<interactor_message> message = Pointer.fromAddress(data);
-        _consumers.call(message);
-        continue;
-      }
-      if (result & interactorDartCallback > 0) {
-        Pointer<interactor_message> message = Pointer.fromAddress(data);
-        _producers.callback(message);
+      if (data > 0) {
+        if (result & interactorDartCall > 0) {
+          Pointer<interactor_message> message = Pointer.fromAddress(data);
+          _consumers.call(message);
+          continue;
+        }
+        if (result & interactorDartCallback > 0) {
+          Pointer<interactor_message> message = Pointer.fromAddress(data);
+          _producers.callback(message);
+          continue;
+        }
+        
         continue;
       }
     }

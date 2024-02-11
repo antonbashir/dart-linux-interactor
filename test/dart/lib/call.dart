@@ -19,7 +19,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate());
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate());
     await _awaitNativeCall(native);
     final result = await call;
     worker.messages.free(result);
@@ -35,7 +35,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputBool(true));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputBool(true));
     await _awaitNativeCall(native);
     final result = await call;
     expect(result.outputBool, true);
@@ -52,7 +52,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputInt(123));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputInt(123));
     await _awaitNativeCall(native);
     final result = await call;
     expect(result.outputInt, 123);
@@ -69,7 +69,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputDouble(worker.datas, 123.45));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputDouble(worker.datas, 123.45));
     await _awaitNativeCall(native);
     final result = await call;
     expect(result.outputDouble, 123.45);
@@ -86,7 +86,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputString(worker.datas, "test"));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputString(worker.datas, "test"));
     await _awaitNativeCall(native);
     final result = await call;
     expect(result.getOutputString(), "test");
@@ -107,7 +107,7 @@ void testCallNative() {
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
     final call = producer.testCallNative(
-        native.ref.descriptor,
+        test_interactor_descriptor(native),
         worker.messages.allocate()
           ..setInputObject<test_object>(
             worker.payloads,
@@ -136,7 +136,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputStaticBuffer(worker.buffers, [1, 2, 3]));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputStaticBuffer(worker.buffers, [1, 2, 3]));
     await _awaitNativeCall(native);
     final result = await call;
     expect(true, ListEquality().equals(result.getOutputStaticBuffer(worker.buffers), [1, 2, 3]));
@@ -154,7 +154,7 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate()..setInputBytes(worker.datas, [1, 2, 3]));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputBytes(worker.datas, [1, 2, 3]));
     await _awaitNativeCall(native);
     final result = await call;
     expect(true, ListEquality().equals(result.outputBytes, [1, 2, 3]));

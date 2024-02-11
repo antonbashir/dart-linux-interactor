@@ -1,9 +1,9 @@
 #ifndef TEST_THREADING_H
 #define TEST_THREADING_H
 
-#include <interactor_native.h>
 #include <stdbool.h>
 #include "interactor_message.h"
+#include "test.h"
 
 typedef unsigned long int pthread_t;
 typedef union pthread_cond_t test_cond_t;
@@ -23,7 +23,7 @@ extern "C"
         size_t whole_messages_count;
         size_t received_messages_count;
 
-        struct interactor_native* interactor;
+        test_interactor_native* interactor;
         struct interactor_message** messages;
 
         test_cond_t* initialize_condition;

@@ -5,344 +5,26 @@
 import 'dart:ffi' as ffi;
 import 'package:linux_interactor/interactor/bindings.dart' as linux_interactor;
 
-@ffi.Native<
-        ffi.Int Function(ffi.Pointer<interactor_native>,
-            ffi.Pointer<interactor_native_configuration>, ffi.Uint8)>(
-    symbol: 'interactor_native_initialize', assetId: 'interactor-bindings-test')
-external int interactor_native_initialize(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<interactor_native_configuration> configuration,
-  int id,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native>, ffi.Uint8)>(
-    symbol: 'interactor_native_initialize_default',
-    assetId: 'interactor-bindings-test')
-external int interactor_native_initialize_default(
-  ffi.Pointer<interactor_native> interactor,
-  int id,
-);
-
-@ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_native>,
-            ffi.Uint64,
-            ffi.Uint64,
-            ffi.Pointer<
-                ffi.NativeFunction<
-                    ffi.Void Function(
-                        ffi.Pointer<linux_interactor.interactor_message>)>>)>(
-    symbol: 'interactor_native_register_callback',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_register_callback(
-  ffi.Pointer<interactor_native> interactor,
-  int owner,
-  int method,
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message>)>>
-      callback,
-);
-
-@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_get_static_buffer',
-    assetId: 'interactor-bindings-test')
-external int interactor_native_get_static_buffer(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native>, ffi.Int32)>(
-    symbol: 'interactor_native_release_static_buffer',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_release_static_buffer(
-  ffi.Pointer<interactor_native> interactor,
-  int buffer_id,
-);
-
-@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_available_static_buffers',
-    assetId: 'interactor-bindings-test')
-external int interactor_native_available_static_buffers(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Int32 Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_used_static_buffers',
-    assetId: 'interactor-bindings-test')
-external int interactor_native_used_static_buffers(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<
-        ffi.Pointer<interactor_input_buffer> Function(
-            ffi.Pointer<interactor_native>, ffi.Size)>(
-    symbol: 'interactor_native_io_buffers_allocate_input',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<interactor_input_buffer>
-    interactor_native_io_buffers_allocate_input(
-  ffi.Pointer<interactor_native> interactor,
-  int initial_capacity,
-);
-
-@ffi.Native<
-        ffi.Pointer<interactor_output_buffer> Function(
-            ffi.Pointer<interactor_native>, ffi.Size)>(
-    symbol: 'interactor_native_io_buffers_allocate_output',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<interactor_output_buffer>
-    interactor_native_io_buffers_allocate_output(
-  ffi.Pointer<interactor_native> interactor,
-  int initial_capacity,
-);
-
-@ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>,
-            ffi.Pointer<interactor_input_buffer>)>(
-    symbol: 'interactor_native_io_buffers_free_input',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_io_buffers_free_input(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<interactor_input_buffer> buffer,
-);
-
-@ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>,
-            ffi.Pointer<interactor_output_buffer>)>(
-    symbol: 'interactor_native_io_buffers_free_output',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_io_buffers_free_output(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<interactor_output_buffer> buffer,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Uint8> Function(
-            ffi.Pointer<interactor_input_buffer>, ffi.Size)>(
-    symbol: 'interactor_native_input_buffer_reserve',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Uint8> interactor_native_input_buffer_reserve(
-  ffi.Pointer<interactor_input_buffer> buffer,
-  int size,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Uint8> Function(
-            ffi.Pointer<interactor_input_buffer>, ffi.Size)>(
-    symbol: 'interactor_native_input_buffer_allocate',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Uint8> interactor_native_input_buffer_allocate(
-  ffi.Pointer<interactor_input_buffer> buffer,
-  int size,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Uint8> Function(
-            ffi.Pointer<interactor_output_buffer>, ffi.Size)>(
-    symbol: 'interactor_native_output_buffer_reserve',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Uint8> interactor_native_output_buffer_reserve(
-  ffi.Pointer<interactor_output_buffer> buffer,
-  int size,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Uint8> Function(
-            ffi.Pointer<interactor_output_buffer>, ffi.Size)>(
-    symbol: 'interactor_native_output_buffer_allocate',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Uint8> interactor_native_output_buffer_allocate(
-  ffi.Pointer<interactor_output_buffer> buffer,
-  int size,
-);
-
-@ffi.Native<
-        ffi.Pointer<linux_interactor.interactor_message> Function(
-            ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_allocate_message',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<linux_interactor.interactor_message>
-    interactor_native_allocate_message(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>,
-            ffi.Pointer<linux_interactor.interactor_message>)>(
-    symbol: 'interactor_native_free_message',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_free_message(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<linux_interactor.interactor_message> message,
-);
-
-@ffi.Native<
-        ffi.Pointer<interactor_payload_pool> Function(
-            ffi.Pointer<interactor_native>, ffi.Size)>(
-    symbol: 'interactor_native_payload_pool_create',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<interactor_payload_pool>
-    interactor_native_payload_pool_create(
-  ffi.Pointer<interactor_native> interactor,
-  int size,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_payload_pool>)>(
-    symbol: 'interactor_native_payload_allocate',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Void> interactor_native_payload_allocate(
-  ffi.Pointer<interactor_payload_pool> pool,
-);
-
-@ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_payload_pool>, ffi.Pointer<ffi.Void>)>(
-    symbol: 'interactor_native_payload_free',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_payload_free(
-  ffi.Pointer<interactor_payload_pool> pool,
-  ffi.Pointer<ffi.Void> pointer,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>(
-    symbol: 'interactor_native_payload_pool_destroy',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_payload_pool_destroy(
-  ffi.Pointer<interactor_payload_pool> pool,
-);
-
-@ffi.Native<
-        ffi.Pointer<ffi.Void> Function(
-            ffi.Pointer<interactor_native>, ffi.Size)>(
-    symbol: 'interactor_native_data_allocate',
-    assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Void> interactor_native_data_allocate(
-  ffi.Pointer<interactor_native> interactor,
-  int size,
-);
-
-@ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_native>, ffi.Pointer<ffi.Void>, ffi.Size)>(
-    symbol: 'interactor_native_data_free', assetId: 'interactor-bindings-test')
-external void interactor_native_data_free(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<ffi.Void> pointer,
-  int size,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_count_ready',
-    assetId: 'interactor-bindings-test')
-external int interactor_native_count_ready(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_count_ready_submit',
-    assetId: 'interactor-bindings-test')
-external int interactor_native_count_ready_submit(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_process', assetId: 'interactor-bindings-test')
-external void interactor_native_process(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_process_infinity',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_process_infinity(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_process_timeout',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_process_timeout(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_native>,
-            ffi.Pointer<
-                ffi.NativeFunction<
-                    ffi.Void Function(
-                        ffi.Pointer<linux_interactor.interactor_message>)>>,
-            ffi.Pointer<
-                ffi.NativeFunction<
-                    ffi.Void Function(
-                        ffi.Pointer<linux_interactor.interactor_message>)>>)>(
-    symbol: 'interactor_native_foreach', assetId: 'interactor-bindings-test')
-external void interactor_native_foreach(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message>)>>
-      call,
-  ffi.Pointer<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<linux_interactor.interactor_message>)>>
-      callback,
-);
-
-@ffi.Native<ffi.Int Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_submit', assetId: 'interactor-bindings-test')
-external int interactor_native_submit(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>, ffi.Int,
-            ffi.Pointer<linux_interactor.interactor_message>)>(
-    symbol: 'interactor_native_call_dart', assetId: 'interactor-bindings-test')
-external void interactor_native_call_dart(
-  ffi.Pointer<interactor_native> interactor,
-  int target_ring_fd,
-  ffi.Pointer<linux_interactor.interactor_message> message,
-);
-
-@ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>,
-            ffi.Pointer<linux_interactor.interactor_message>)>(
-    symbol: 'interactor_native_callback_to_dart',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_callback_to_dart(
-  ffi.Pointer<interactor_native> interactor,
-  ffi.Pointer<linux_interactor.interactor_message> message,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native>)>(
-    symbol: 'interactor_native_destroy', assetId: 'interactor-bindings-test')
-external void interactor_native_destroy(
-  ffi.Pointer<interactor_native> interactor,
-);
-
-@ffi.Native<ffi.Void Function(ffi.Int)>(
-    symbol: 'interactor_native_close_descriptor',
-    assetId: 'interactor-bindings-test')
-external void interactor_native_close_descriptor(
-  int fd,
-);
-
-@ffi.Native<ffi.Pointer<interactor_native> Function()>(
+@ffi.Native<ffi.Pointer<test_interactor_native> Function()>(
     symbol: 'test_interactor_initialize',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
-external ffi.Pointer<interactor_native> test_interactor_initialize();
+external ffi.Pointer<test_interactor_native> test_interactor_initialize();
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<interactor_native>)>(
+@ffi.Native<ffi.Int Function(ffi.Pointer<test_interactor_native>)>(
+    symbol: 'test_interactor_descriptor',
+    assetId: 'interactor-bindings-test',
+    isLeaf: true)
+external int test_interactor_descriptor(
+  ffi.Pointer<test_interactor_native> interactor,
+);
+
+@ffi.Native<ffi.Void Function(ffi.Pointer<test_interactor_native>)>(
     symbol: 'test_interactor_destroy',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_interactor_destroy(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
 );
 
 @ffi.Native<ffi.Void Function()>(
@@ -351,12 +33,12 @@ external void test_interactor_destroy(
     isLeaf: true)
 external void test_call_reset();
 
-@ffi.Native<ffi.Bool Function(ffi.Pointer<interactor_native>)>(
+@ffi.Native<ffi.Bool Function(ffi.Pointer<test_interactor_native>)>(
     symbol: 'test_call_native_check',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external bool test_call_native_check(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
 );
 
 @ffi.Native<
@@ -370,89 +52,89 @@ external void test_call_native(
 
 @ffi.Native<
         ffi.Void Function(
-            ffi.Pointer<interactor_native>, ffi.Int32, ffi.UintPtr)>(
+            ffi.Pointer<test_interactor_native>, ffi.Int32, ffi.UintPtr)>(
     symbol: 'test_call_dart_null',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_null(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
 );
 
 @ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_native>, ffi.Int32, ffi.UintPtr, ffi.Bool)>(
+        ffi.Void Function(ffi.Pointer<test_interactor_native>, ffi.Int32,
+            ffi.UintPtr, ffi.Bool)>(
     symbol: 'test_call_dart_bool',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_bool(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
   bool value,
 );
 
 @ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_native>, ffi.Int32, ffi.UintPtr, ffi.Int)>(
+        ffi.Void Function(ffi.Pointer<test_interactor_native>, ffi.Int32,
+            ffi.UintPtr, ffi.Int)>(
     symbol: 'test_call_dart_int',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_int(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
   int value,
 );
 
 @ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>, ffi.Int32,
+        ffi.Void Function(ffi.Pointer<test_interactor_native>, ffi.Int32,
             ffi.UintPtr, ffi.Double)>(
     symbol: 'test_call_dart_double',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_double(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
   double value,
 );
 
 @ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>, ffi.Int32,
+        ffi.Void Function(ffi.Pointer<test_interactor_native>, ffi.Int32,
             ffi.UintPtr, ffi.Pointer<ffi.Char>)>(
     symbol: 'test_call_dart_string',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_string(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
   ffi.Pointer<ffi.Char> value,
 );
 
 @ffi.Native<
-        ffi.Void Function(
-            ffi.Pointer<interactor_native>, ffi.Int32, ffi.UintPtr, ffi.Int)>(
+        ffi.Void Function(ffi.Pointer<test_interactor_native>, ffi.Int32,
+            ffi.UintPtr, ffi.Int)>(
     symbol: 'test_call_dart_object',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_object(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
   int field,
 );
 
 @ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_native>, ffi.Int32,
+        ffi.Void Function(ffi.Pointer<test_interactor_native>, ffi.Int32,
             ffi.UintPtr, ffi.Pointer<ffi.Uint8>, ffi.Size)>(
     symbol: 'test_call_dart_bytes',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external void test_call_dart_bytes(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
   int target,
   int method,
   ffi.Pointer<ffi.Uint8> value,
@@ -461,12 +143,12 @@ external void test_call_dart_bytes(
 
 @ffi.Native<
         ffi.Pointer<linux_interactor.interactor_message> Function(
-            ffi.Pointer<interactor_native>)>(
+            ffi.Pointer<test_interactor_native>)>(
     symbol: 'test_call_dart_check',
     assetId: 'interactor-bindings-test',
     isLeaf: true)
 external ffi.Pointer<linux_interactor.interactor_message> test_call_dart_check(
-  ffi.Pointer<interactor_native> interactor,
+  ffi.Pointer<test_interactor_native> interactor,
 );
 
 @ffi.Native<
@@ -551,6 +233,10 @@ external void test_threading_destroy();
     isLeaf: true)
 external int test_threading_call_native_address_lookup();
 
+final class interactor_native extends ffi.Opaque {}
+
+typedef test_interactor_native = interactor_native;
+
 final class max_align_t extends ffi.Opaque {}
 
 final class __fsid_t extends ffi.Struct {
@@ -571,109 +257,6 @@ final class interactor_completion_event extends ffi.Struct {
   @ffi.Array.multi([2])
   external ffi.Array<ffi.UnsignedLongLong> big_cqe;
 }
-
-final class mh_native_callbacks_t extends ffi.Opaque {}
-
-final class io_uring extends ffi.Opaque {}
-
-final class io_uring_cqe extends ffi.Opaque {}
-
-final class interactor_messages_pool extends ffi.Opaque {}
-
-final class interactor_static_buffers extends ffi.Opaque {}
-
-final class interactor_io_buffers extends ffi.Opaque {}
-
-final class interactor_small_data extends ffi.Opaque {}
-
-final class interactor_memory extends ffi.Opaque {}
-
-final class interactor_native_configuration extends ffi.Struct {
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
-
-  @ffi.Size()
-  external int quota_size;
-
-  @ffi.Size()
-  external int preallocation_size;
-
-  @ffi.Size()
-  external int slab_size;
-
-  @ffi.Size()
-  external int static_buffers_capacity;
-
-  @ffi.Size()
-  external int static_buffer_size;
-
-  @ffi.Size()
-  external int ring_size;
-
-  @ffi.Int32()
-  external int ring_flags;
-
-  @ffi.Uint32()
-  external int cqe_wait_count;
-
-  @ffi.Uint32()
-  external int cqe_peek_count;
-}
-
-final class interactor_native extends ffi.Struct {
-  external ffi.Pointer<interactor_native_messages_pool> messages_pool;
-
-  external ffi.Pointer<interactor_native_static_buffers> static_buffers;
-
-  external ffi.Pointer<interactor_native_io_buffers> io_buffers;
-
-  external ffi.Pointer<interactor_native_small_data> small_data;
-
-  external ffi.Pointer<interactor_native_memory> memory;
-
-  external ffi.Pointer<interactor_native_io_uring> ring;
-
-  @ffi.Uint64()
-  external int cqe_wait_timeout_millis;
-
-  @ffi.Size()
-  external int ring_size;
-
-  external ffi.Pointer<ffi.Pointer<interactor_native_completion_event>>
-      completions;
-
-  external ffi.Pointer<interactor_native_callbacks_t> callbacks;
-
-  @ffi.Int32()
-  external int descriptor;
-
-  @ffi.Int32()
-  external int ring_flags;
-
-  @ffi.Uint32()
-  external int cqe_wait_count;
-
-  @ffi.Uint32()
-  external int cqe_peek_count;
-
-  @ffi.Uint8()
-  external int id;
-}
-
-typedef interactor_native_messages_pool = interactor_messages_pool;
-typedef interactor_native_static_buffers = interactor_static_buffers;
-typedef interactor_native_io_buffers = interactor_io_buffers;
-typedef interactor_native_small_data = interactor_small_data;
-typedef interactor_native_memory = interactor_memory;
-typedef interactor_native_io_uring = io_uring;
-typedef interactor_native_completion_event = io_uring_cqe;
-typedef interactor_native_callbacks_t = mh_native_callbacks_t;
-
-final class interactor_input_buffer extends ffi.Opaque {}
-
-final class interactor_output_buffer extends ffi.Opaque {}
-
-final class interactor_payload_pool extends ffi.Opaque {}
 
 final class test_object_child extends ffi.Struct {
   @ffi.Int()
@@ -704,7 +287,7 @@ final class test_thread extends ffi.Struct {
   @ffi.Size()
   external int received_messages_count;
 
-  external ffi.Pointer<interactor_native> interactor;
+  external ffi.Pointer<test_interactor_native> interactor;
 
   external ffi.Pointer<ffi.Pointer<linux_interactor.interactor_message>>
       messages;
