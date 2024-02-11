@@ -70,8 +70,11 @@ extern "C"
     void interactor_dart_io_buffers_free_output(struct interactor_dart* interactor, struct interactor_output_buffer* buffer);
     uint8_t* interactor_dart_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size);
     uint8_t* interactor_dart_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size);
+    uint8_t* interactor_dart_input_buffer_read_position(struct interactor_input_buffer* buffer);
+    uint8_t* interactor_dart_input_buffer_write_position(struct interactor_input_buffer* buffer);
     uint8_t* interactor_dart_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size);
     uint8_t* interactor_dart_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size);
+    struct iovec* interactor_dart_output_buffer_content(struct interactor_output_buffer* buffer);
 
     struct interactor_message* interactor_dart_allocate_message(struct interactor_dart* interactor);
     void interactor_dart_free_message(struct interactor_dart* interactor, struct interactor_message* message);
