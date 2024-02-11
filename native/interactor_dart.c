@@ -10,6 +10,8 @@
 #include "interactor_constants.h"
 #include "interactor_data_pool.h"
 #include "interactor_io_buffers.h"
+#include "interactor_messages_pool.h"
+#include "interactor_payload_pool.h"
 #include "interactor_static_buffers.h"
 #include "msgpuck.h"
 
@@ -29,23 +31,53 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
         return -ENOMEM;
     }
 
-    if (interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size))
+    interactor->memory = malloc(sizeof(struct interactor_memory));
+    if (!interactor->memory)
     {
         return -ENOMEM;
     }
-    if (interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory))
+
+    interactor->messages_pool = malloc(sizeof(struct interactor_messages_pool));
+    if (!interactor->messages_pool)
     {
         return -ENOMEM;
     }
-    if (interactor_data_pool_create(&interactor->data_pool, &interactor->memory))
+
+    interactor->small_data = malloc(sizeof(struct interactor_messages_pool));
+    if (!interactor->small_data)
     {
         return -ENOMEM;
     }
-    if (interactor_static_buffers_create(&interactor->static_buffers, configuration->static_buffers_capacity, configuration->static_buffer_size))
+
+    interactor->static_buffers = calloc(sizeof(struct interactor_static_buffers), 1);
+    if (!interactor->static_buffers)
     {
         return -ENOMEM;
     }
-    if (interactor_io_buffers_create(&interactor->io_buffers, &interactor->memory))
+
+    interactor->io_buffers = malloc(sizeof(struct interactor_io_buffers));
+    if (!interactor->io_buffers)
+    {
+        return -ENOMEM;
+    }
+
+    if (interactor_memory_create(interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_messages_pool_create(interactor->messages_pool, interactor->memory))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_small_data_create(interactor->small_data, interactor->memory))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_static_buffers_create(interactor->static_buffers, configuration->static_buffers_capacity, configuration->static_buffer_size))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_io_buffers_create(interactor->io_buffers, interactor->memory))
     {
         return -ENOMEM;
     }
@@ -67,43 +99,48 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
     return interactor->descriptor;
 }
 
-int32_t interactor_dart_get_static_buffer(struct interactor_dart* interactor)
+int32_t interactor_dart_static_buffers_get(struct interactor_dart* interactor)
 {
-    return interactor_static_buffers_pop(&interactor->static_buffers);
+    return interactor_static_buffers_pop(interactor->static_buffers);
 }
 
-int32_t interactor_dart_available_static_buffers(struct interactor_dart* interactor)
+int32_t interactor_dart_static_buffers_available(struct interactor_dart* interactor)
 {
-    return interactor->static_buffers.available;
+    return interactor->static_buffers->available;
 }
 
-int32_t interactor_dart_used_static_buffers(struct interactor_dart* interactor)
+int32_t interactor_dart_static_buffers_used(struct interactor_dart* interactor)
 {
-    return interactor->static_buffers.capacity - interactor->static_buffers.available;
+    return interactor->static_buffers->capacity - interactor->static_buffers->available;
 }
 
-void interactor_dart_release_static_buffer(struct interactor_dart* interactor, int32_t buffer_id)
+void interactor_dart_static_buffers_release(struct interactor_dart* interactor, int32_t buffer_id)
 {
-    interactor_static_buffers_push(&interactor->static_buffers, buffer_id);
+    interactor_static_buffers_push(interactor->static_buffers, buffer_id);
+}
+
+struct iovec* interactor_dart_static_buffers_inner(struct interactor_dart* interactor)
+{
+    return interactor->static_buffers->buffers;
 }
 
 struct interactor_message* interactor_dart_allocate_message(struct interactor_dart* interactor)
 {
-    struct interactor_message* message = interactor_messages_pool_allocate(&interactor->messages_pool);
+    struct interactor_message* message = interactor_messages_pool_allocate(interactor->messages_pool);
     memset(message, 0, sizeof(struct interactor_message));
     return message;
 }
 
 void interactor_dart_free_message(struct interactor_dart* interactor, struct interactor_message* message)
 {
-    interactor_messages_pool_free(&interactor->messages_pool, message);
+    interactor_messages_pool_free(interactor->messages_pool, message);
 }
 
 struct interactor_payload_pool* interactor_dart_payload_pool_create(struct interactor_dart* interactor, size_t size)
 {
     struct interactor_payload_pool* pool = malloc(sizeof(struct interactor_payload_pool));
     pool->size = size;
-    interactor_payload_pool_create(pool, &interactor->memory, size);
+    interactor_payload_pool_create(pool, interactor->memory, size);
     return pool;
 }
 
@@ -125,16 +162,21 @@ void interactor_dart_payload_pool_destroy(struct interactor_payload_pool* pool)
     free(pool);
 }
 
+size_t interactor_dart_payload_pool_size(struct interactor_payload_pool* pool)
+{
+    return pool->size;
+}
+
 void* interactor_dart_data_allocate(struct interactor_dart* interactor, size_t size)
 {
-    void* data = interactor_data_pool_allocate(&interactor->data_pool, size);
+    void* data = interactor_small_data_allocate(interactor->small_data, size);
     memset(data, 0, size);
     return data;
 }
 
 void interactor_dart_data_free(struct interactor_dart* interactor, void* pointer, size_t size)
 {
-    interactor_data_pool_free(&interactor->data_pool, pointer, size);
+    interactor_small_data_free(interactor->small_data, pointer, size);
 }
 
 int interactor_dart_peek(struct interactor_dart* interactor)
@@ -143,8 +185,8 @@ int interactor_dart_peek(struct interactor_dart* interactor)
         .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
         .tv_sec = 0,
     };
-    io_uring_submit_and_wait_timeout(interactor->ring, (struct io_uring_cqe **)&interactor->completions, interactor->cqe_wait_count, &timeout, 0);
-    return io_uring_peek_batch_cqe(interactor->ring, (struct io_uring_cqe **)&interactor->completions, interactor->cqe_peek_count);
+    io_uring_submit_and_wait_timeout(interactor->ring, (struct io_uring_cqe**)&interactor->completions, interactor->cqe_wait_count, &timeout, 0);
+    return io_uring_peek_batch_cqe(interactor->ring, (struct io_uring_cqe**)&interactor->completions, interactor->cqe_peek_count);
 }
 
 void interactor_dart_call_native(struct interactor_dart* interactor, int target_ring_fd, struct interactor_message* message)
@@ -171,11 +213,17 @@ void interactor_dart_callback_to_native(struct interactor_dart* interactor, stru
 void interactor_dart_destroy(struct interactor_dart* interactor)
 {
     io_uring_queue_exit(interactor->ring);
-    interactor_static_buffers_destroy(&interactor->static_buffers);
-    interactor_io_buffers_destroy(&interactor->io_buffers);
-    interactor_data_pool_destroy(&interactor->data_pool);
-    interactor_messages_pool_destroy(&interactor->messages_pool);
-    interactor_memory_destroy(&interactor->memory);
+    interactor_static_buffers_destroy(interactor->static_buffers);
+    interactor_io_buffers_destroy(interactor->io_buffers);
+    interactor_small_data_destroy(interactor->small_data);
+    interactor_messages_pool_destroy(interactor->messages_pool);
+    interactor_memory_destroy(interactor->memory);
+    free(interactor->static_buffers);
+    free(interactor->io_buffers);
+    free(interactor->io_buffers);
+    free(interactor->small_data);
+    free(interactor->messages_pool);
+    free(interactor->memory);
     free(interactor->ring);
     free(interactor->completions);
 }
@@ -196,11 +244,6 @@ const char* interactor_dart_error_to_string(int error)
     return strerror(-error);
 }
 
-struct interactor_memory* interactor_dart_memory(struct interactor_dart* interactor)
-{
-    return &interactor->memory;
-}
-
 uint64_t interactor_dart_tuple_next(const char* buffer, uint64_t offset)
 {
     const char* offset_buffer = buffer + offset;
@@ -210,22 +253,22 @@ uint64_t interactor_dart_tuple_next(const char* buffer, uint64_t offset)
 
 struct interactor_input_buffer* interactor_dart_io_buffers_allocate_input(struct interactor_dart* interactor, size_t initial_capacity)
 {
-    return interactor_io_buffers_allocate_input(&interactor->io_buffers, initial_capacity);
+    return interactor_io_buffers_allocate_input(interactor->io_buffers, initial_capacity);
 }
 
 struct interactor_output_buffer* interactor_dart_io_buffers_allocate_output(struct interactor_dart* interactor, size_t initial_capacity)
 {
-    return interactor_io_buffers_allocate_output(&interactor->io_buffers, initial_capacity);
+    return interactor_io_buffers_allocate_output(interactor->io_buffers, initial_capacity);
 }
 
 void interactor_dart_io_buffers_free_input(struct interactor_dart* interactor, struct interactor_input_buffer* buffer)
 {
-    interactor_io_buffers_free_input(&interactor->io_buffers, buffer);
+    interactor_io_buffers_free_input(interactor->io_buffers, buffer);
 }
 
 void interactor_dart_io_buffers_free_output(struct interactor_dart* interactor, struct interactor_output_buffer* buffer)
 {
-    interactor_io_buffers_free_output(&interactor->io_buffers, buffer);
+    interactor_io_buffers_free_output(interactor->io_buffers, buffer);
 }
 
 uint8_t* interactor_dart_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size)

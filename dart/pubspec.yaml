@@ -19,14 +19,16 @@ ffigen:
   output: "lib/interactor/bindings.dart"
   compiler-opts:
     - "-I../native/include"
-    - "-I../dependencies/small/include"
-    - "-I../dependencies/small/include/small"
-    - "-I../dependencies/small/small/include"
-    - "-I../dependencies/small/third_party"
   headers:
     entry-points:
       - "../native/interactor_dart.h"
   globals:
+    exclude:
+      - "(.*)"
+  macros:
+    exclude:
+      - "(.*)"
+  typedefs:
     exclude:
       - "_(.*)"
   functions:
@@ -36,14 +38,6 @@ ffigen:
     exclude:
       - "_(.*)"
       - "io_uring(.*)"
-  macros:
-    exclude:
-      - "_(.*)"
-      - "true"
-      - "false"
-  typedefs:
-    exclude:
-      - "_(.*)"
   structs:
     exclude:
       - "_(.*)"

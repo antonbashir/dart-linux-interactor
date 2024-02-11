@@ -24,10 +24,15 @@ ffigen:
   output: "lib/bindings.dart"
   compiler-opts:
     - "-I../../native/include"
-    - "-I../../dependencies/small/include"
-    - "-I../../dependencies/small/include/small"
-    - "-I../../dependencies/small/small/include"
-    - "-I../../dependencies/small/third_party"
+  globals:
+    exclude:
+      - "(.*)"
+  macros:
+    exclude:
+      - "(.*)"
+  typedefs:
+    exclude:
+      - "_(.*)"
   type-map:
     structs:
       "interactor_message":

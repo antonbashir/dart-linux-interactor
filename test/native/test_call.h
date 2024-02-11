@@ -2,6 +2,7 @@
 #define TEST_CALL_H
 
 #include <interactor_native.h>
+#include <stdbool.h>
 
 #if defined(__cplusplus)
 extern "C"

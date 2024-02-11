@@ -18,7 +18,7 @@ class InteractorPayloads {
   }
 
   @pragma(preferInlinePragma)
-  int size<T extends Struct>() => _pools[T.hashCode]?.ref.size ?? 0;
+  int size<T extends Struct>() => interactor_dart_payload_pool_size(_pools[T.hashCode]!.cast());
 
   @pragma(preferInlinePragma)
   Pointer<T> allocate<T extends Struct>() {
@@ -47,7 +47,7 @@ class InteractorPayloadPool<T extends Struct> {
   InteractorPayloadPool(this._pool);
 
   @pragma(preferInlinePragma)
-  int size() => _pool.ref.size;
+  int size() => interactor_dart_payload_pool_size(_pool);
 
   @pragma(preferInlinePragma)
   Pointer<T> allocate() => interactor_dart_payload_allocate(_pool).cast();

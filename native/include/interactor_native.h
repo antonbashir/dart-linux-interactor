@@ -1,15 +1,18 @@
 #ifndef INTERACTOR_NATIVE_H
 #define INTERACTOR_NATIVE_H
 
-#include <interactor_data_pool.h>
 #include <interactor_message.h>
-#include <interactor_messages_pool.h>
-#include <interactor_payload_pool.h>
-#include "interactor_io_buffers.h"
-#include "interactor_static_buffers.h"
+#include <stddef.h>
+#include <stdint.h>
 
 typedef struct mh_native_callbacks_t interactor_native_callbacks_t;
-typedef struct io_uring interactor_io_uring;
+typedef struct io_uring interactor_native_io_uring;
+typedef struct io_uring interactor_native_io_uring;
+typedef struct interactor_messages_pool interactor_native_messages_pool;
+typedef struct interactor_static_buffers interactor_native_static_buffers;
+typedef struct interactor_io_buffers interactor_native_io_buffers;
+typedef struct interactor_small_data interactor_native_small_data;
+typedef struct interactor_memory interactor_native_memory;
 
 #if defined(__cplusplus)
 extern "C"
@@ -31,12 +34,12 @@ extern "C"
 
     struct interactor_native
     {
-        struct interactor_messages_pool messages_pool;
-        struct interactor_static_buffers static_buffers;
-        struct interactor_io_buffers io_buffers;
-        struct interactor_data_pool data_pool;
-        struct interactor_memory memory;
-        interactor_io_uring* ring;
+        interactor_native_messages_pool* messages_pool;
+        interactor_native_static_buffers* static_buffers;
+        interactor_native_io_buffers* io_buffers;
+        interactor_native_small_data* small_data;
+        interactor_native_memory* memory;
+        interactor_native_io_uring* ring;
         uint64_t cqe_wait_timeout_millis;
         size_t ring_size;
         struct interactor_completion_event* completions;

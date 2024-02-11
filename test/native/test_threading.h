@@ -3,6 +3,7 @@
 
 #include <interactor_native.h>
 #include <pthread.h>
+#include <stdbool.h>
 #include "interactor_message.h"
 
 #if defined(__cplusplus)

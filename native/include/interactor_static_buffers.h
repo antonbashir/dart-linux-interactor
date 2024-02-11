@@ -1,13 +1,11 @@
 #ifndef INTERACTOR_STATIC_BUFFERS_H
 #define INTERACTOR_STATIC_BUFFERS_H
 
-#include <asm-generic/errno-base.h>
+#include <bits/types/struct_iovec.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/uio.h>
 #include <unistd.h>
 #include "interactor_constants.h"
 #include "interactor_native_common.h"
@@ -18,11 +16,11 @@ extern "C"
 #endif
     struct interactor_static_buffers
     {
+        int32_t* ids;
+        struct iovec* buffers;
         size_t available;
         size_t size;
         size_t capacity;
-        int32_t* ids;
-        struct iovec* buffers;
     };
 
     static inline int interactor_static_buffers_create(struct interactor_static_buffers* pool, size_t capacity, size_t size)
@@ -31,7 +29,7 @@ extern "C"
         pool->capacity = capacity;
         pool->available = 0;
 
-        pool->ids = calloc(capacity, sizeof(int32_t));
+        pool->ids = malloc(capacity * sizeof(int32_t));
         if (pool->ids == NULL)
         {
             return -1;

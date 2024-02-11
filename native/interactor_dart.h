@@ -1,16 +1,17 @@
 #ifndef INTERACTOR_DART_IMPLEMENTATION_H
 #define INTERACTOR_DART_IMPLEMENTATION_H
 
-#include <interactor_data_pool.h>
-#include <interactor_memory.h>
-#include <interactor_messages_pool.h>
-#include <interactor_payload_pool.h>
-#include <liburing.h>
+#include <bits/types/struct_iovec.h>
+#include <interactor_message.h>
+#include <stddef.h>
 #include <stdint.h>
-#include "interactor_io_buffers.h"
-#include "interactor_static_buffers.h"
 
-typedef struct io_uring interactor_io_uring;
+typedef struct io_uring interactor_dart_io_uring;
+typedef struct interactor_messages_pool interactor_dart_messages_pool;
+typedef struct interactor_static_buffers interactor_dart_static_buffers;
+typedef struct interactor_io_buffers interactor_dart_io_buffers;
+typedef struct interactor_small_data interactor_dart_small_data;
+typedef struct interactor_memory interactor_dart_memory;
 
 #if defined(__cplusplus)
 extern "C"
@@ -35,12 +36,12 @@ extern "C"
 
     struct interactor_dart
     {
-        struct interactor_messages_pool messages_pool;
-        struct interactor_static_buffers static_buffers;
-        struct interactor_io_buffers io_buffers;
-        struct interactor_data_pool data_pool;
-        struct interactor_memory memory;
-        interactor_io_uring* ring;
+        interactor_dart_messages_pool* messages_pool;
+        interactor_dart_static_buffers* static_buffers;
+        interactor_dart_io_buffers* io_buffers;
+        interactor_dart_small_data* small_data;
+        interactor_dart_memory* memory;
+        interactor_dart_io_uring* ring;
         size_t ring_size;
         uint64_t cqe_wait_timeout_millis;
         uint64_t max_delay_micros;
@@ -56,10 +57,11 @@ extern "C"
 
     int interactor_dart_initialize(struct interactor_dart* interactor, struct interactor_dart_configuration* configuration, uint8_t id);
 
-    int32_t interactor_dart_get_static_buffer(struct interactor_dart* interactor);
-    void interactor_dart_release_static_buffer(struct interactor_dart* interactor, int32_t buffer_id);
-    int32_t interactor_dart_available_static_buffers(struct interactor_dart* interactor);
-    int32_t interactor_dart_used_static_buffers(struct interactor_dart* interactor);
+    int32_t interactor_dart_static_buffers_get(struct interactor_dart* interactor);
+    void interactor_dart_static_buffers_release(struct interactor_dart* interactor, int32_t buffer_id);
+    int32_t interactor_dart_static_buffers_available(struct interactor_dart* interactor);
+    int32_t interactor_dart_static_buffers_used(struct interactor_dart* interactor);
+    struct iovec* interactor_dart_static_buffers_inner(struct interactor_dart* interactor);
 
     struct interactor_input_buffer* interactor_dart_io_buffers_allocate_input(struct interactor_dart* interactor, size_t initial_capacity);
     struct interactor_output_buffer* interactor_dart_io_buffers_allocate_output(struct interactor_dart* interactor, size_t initial_capacity);
@@ -77,6 +79,7 @@ extern "C"
     void* interactor_dart_payload_allocate(struct interactor_payload_pool* pool);
     void interactor_dart_payload_free(struct interactor_payload_pool* pool, void* pointer);
     void interactor_dart_payload_pool_destroy(struct interactor_payload_pool* pool);
+    size_t interactor_dart_payload_pool_size(struct interactor_payload_pool* pool);
 
     void* interactor_dart_data_allocate(struct interactor_dart* interactor, size_t size);
     void interactor_dart_data_free(struct interactor_dart* interactor, void* pointer, size_t size);
@@ -92,8 +95,6 @@ extern "C"
 
     void interactor_dart_close_descriptor(int fd);
     const char* interactor_dart_error_to_string(int error);
-
-    struct interactor_memory* interactor_dart_memory(struct interactor_dart* interactor);
 
     uint64_t interactor_dart_tuple_next(const char* buffer, uint64_t offset);
 #if defined(__cplusplus)

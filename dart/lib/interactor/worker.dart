@@ -42,7 +42,7 @@ class InteractorWorker {
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
   InteractorTuples get tuples => _tuples;
-  Pointer<interactor_memory> get memory => interactor_dart_memory(_interactor);
+  Pointer<interactor_memory> get memory => _interactor.ref.memory;
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((_) async {
@@ -67,7 +67,7 @@ class InteractorWorker {
     _fromInteractor.close();
     _completions = _interactor.ref.completions;
     _payloads = InteractorPayloads(_interactor);
-    _buffers = InteractorStaticBuffers(_interactor.ref.static_buffers.buffers, _interactor.ref.static_buffers.size, _interactor.ref.static_buffers.capacity, _interactor);
+    _buffers = InteractorStaticBuffers(interactor_dart_static_buffers_inner(_interactor), _interactor);
     _datas = InteractorDatas(_interactor);
     _messages = InteractorMessages(_interactor);
     _tuples = InteractorTuples(_interactor);
@@ -105,7 +105,7 @@ class InteractorWorker {
     final cqeCount = interactor_dart_peek(_interactor);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
-      Pointer<interactor_completion_event>cqe = _completions.elementAt(cqeIndex);
+      Pointer<interactor_completion_event> cqe = _completions.elementAt(cqeIndex);
       final data = cqe.ref.user_data;
       final result = cqe.ref.result;
       if (result & interactorDartCall > 0) {

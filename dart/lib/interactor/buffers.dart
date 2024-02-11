@@ -7,17 +7,15 @@ import 'bindings.dart';
 import 'constants.dart';
 
 class InteractorStaticBuffers {
-  final int size;
-  final int capacity;
   final Queue<Completer<void>> _finalizers = Queue();
   final Pointer<interactor_dart> _interactor;
   final Pointer<iovec> _buffers;
 
-  InteractorStaticBuffers(this._buffers, this.size, this.capacity, this._interactor);
+  InteractorStaticBuffers(this._buffers, this._interactor);
 
   @pragma(preferInlinePragma)
   void release(int bufferId) {
-    interactor_dart_release_static_buffer(_interactor, bufferId);
+    interactor_dart_static_buffers_release(_interactor, bufferId);
     if (_finalizers.isNotEmpty) _finalizers.removeLast().complete();
   }
 
@@ -40,23 +38,23 @@ class InteractorStaticBuffers {
 
   @pragma(preferInlinePragma)
   int? get() {
-    final buffer = interactor_dart_get_static_buffer(_interactor);
+    final buffer = interactor_dart_static_buffers_get(_interactor);
     if (buffer == interactorBufferUsed) return null;
     return buffer;
   }
 
   Future<int> allocate() async {
-    var bufferId = interactor_dart_get_static_buffer(_interactor);
+    var bufferId = interactor_dart_static_buffers_get(_interactor);
     while (bufferId == interactorBufferUsed) {
       if (_finalizers.isNotEmpty) {
         await _finalizers.last.future;
-        bufferId = interactor_dart_get_static_buffer(_interactor);
+        bufferId = interactor_dart_static_buffers_get(_interactor);
         continue;
       }
       final completer = Completer();
       _finalizers.add(completer);
       await completer.future;
-      bufferId = interactor_dart_get_static_buffer(_interactor);
+      bufferId = interactor_dart_static_buffers_get(_interactor);
     }
     return bufferId;
   }
@@ -68,10 +66,10 @@ class InteractorStaticBuffers {
   }
 
   @pragma(preferInlinePragma)
-  int available() => interactor_dart_available_static_buffers(_interactor);
+  int available() => interactor_dart_static_buffers_available(_interactor);
 
   @pragma(preferInlinePragma)
-  int used() => interactor_dart_used_static_buffers(_interactor);
+  int used() => interactor_dart_static_buffers_used(_interactor);
 
   @pragma(preferInlinePragma)
   void releaseArray(List<int> buffers) {

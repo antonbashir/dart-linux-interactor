@@ -7,10 +7,12 @@
 #include "interactor_collections.h"
 #include "interactor_common.h"
 #include "interactor_constants.h"
+#include "interactor_data_pool.h"
 #include "interactor_io_buffers.h"
 #include "interactor_memory.h"
 #include "interactor_message.h"
 #include "interactor_messages_pool.h"
+#include "interactor_payload_pool.h"
 #include "interactor_static_buffers.h"
 
 int interactor_native_initialize(struct interactor_native* interactor, struct interactor_native_configuration* configuration, uint8_t id)
@@ -26,15 +28,46 @@ int interactor_native_initialize(struct interactor_native* interactor, struct in
         return -ENOMEM;
     }
 
-    if (interactor_memory_create(&interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size))
+
+    interactor->memory = malloc(sizeof(struct interactor_memory));
+    if (!interactor->memory)
     {
         return -ENOMEM;
     }
-    if (interactor_messages_pool_create(&interactor->messages_pool, &interactor->memory))
+    
+    interactor->messages_pool = malloc(sizeof(struct interactor_messages_pool));
+    if (!interactor->messages_pool)
     {
         return -ENOMEM;
     }
-    if (interactor_data_pool_create(&interactor->data_pool, &interactor->memory))
+    
+    interactor->small_data = malloc(sizeof(struct interactor_messages_pool));
+    if (!interactor->small_data)
+    {
+        return -ENOMEM;
+    }
+    
+    interactor->static_buffers = malloc(sizeof(struct interactor_static_buffers));
+    if (!interactor->static_buffers)
+    {
+        return -ENOMEM;
+    }
+
+    interactor->io_buffers = malloc(sizeof(struct interactor_io_buffers));
+    if (!interactor->io_buffers)
+    {
+        return -ENOMEM;
+    }
+
+    if (interactor_memory_create(interactor->memory, configuration->quota_size, configuration->preallocation_size, configuration->slab_size))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_messages_pool_create(interactor->messages_pool, interactor->memory))
+    {
+        return -ENOMEM;
+    }
+    if (interactor_small_data_create(interactor->small_data, interactor->memory))
     {
         return -ENOMEM;
     }
@@ -44,11 +77,11 @@ int interactor_native_initialize(struct interactor_native* interactor, struct in
         return -ENOMEM;
     }
 
-    if (interactor_static_buffers_create(&interactor->static_buffers, configuration->static_buffers_capacity, configuration->static_buffer_size))
+    if (interactor_static_buffers_create(interactor->static_buffers, configuration->static_buffers_capacity, configuration->static_buffer_size))
     {
         return -ENOMEM;
     }
-    if (interactor_io_buffers_create(&interactor->io_buffers, &interactor->memory))
+    if (interactor_io_buffers_create(interactor->io_buffers, interactor->memory))
     {
         return -ENOMEM;
     }
@@ -101,41 +134,41 @@ void interactor_native_register_callback(struct interactor_native* interactor, u
 
 int32_t interactor_native_get_static_buffer(struct interactor_native* interactor)
 {
-    return interactor_static_buffers_pop(&interactor->static_buffers);
+    return interactor_static_buffers_pop(interactor->static_buffers);
 }
 
 int32_t interactor_native_available_static_buffers(struct interactor_native* interactor)
 {
-    return interactor->static_buffers.available;
+    return interactor->static_buffers->available;
 }
 
 int32_t interactor_native_used_static_buffers(struct interactor_native* interactor)
 {
-    return interactor->static_buffers.capacity - interactor->static_buffers.available;
+    return interactor->static_buffers->capacity - interactor->static_buffers->available;
 }
 
 void interactor_native_release_static_buffer(struct interactor_native* interactor, int32_t buffer_id)
 {
-    interactor_static_buffers_push(&interactor->static_buffers, buffer_id);
+    interactor_static_buffers_push(interactor->static_buffers, buffer_id);
 }
 
 struct interactor_message* interactor_native_allocate_message(struct interactor_native* interactor)
 {
-    struct interactor_message* message = interactor_messages_pool_allocate(&interactor->messages_pool);
+    struct interactor_message* message = interactor_messages_pool_allocate(interactor->messages_pool);
     memset(message, 0, sizeof(struct interactor_message));
     return message;
 }
 
 void interactor_native_free_message(struct interactor_native* interactor, struct interactor_message* message)
 {
-    interactor_messages_pool_free(&interactor->messages_pool, message);
+    interactor_messages_pool_free(interactor->messages_pool, message);
 }
 
 struct interactor_payload_pool* interactor_native_payload_pool_create(struct interactor_native* interactor, size_t size)
 {
     struct interactor_payload_pool* pool = malloc(sizeof(struct interactor_payload_pool));
     pool->size = size;
-    interactor_payload_pool_create(pool, &interactor->memory, size);
+    interactor_payload_pool_create(pool, interactor->memory, size);
     return pool;
 }
 
@@ -159,14 +192,14 @@ void interactor_native_payload_pool_destroy(struct interactor_payload_pool* pool
 
 void* interactor_native_data_allocate(struct interactor_native* interactor, size_t size)
 {
-    void* data = (void*)interactor_data_pool_allocate(&interactor->data_pool, size);
+    void* data = (void*)interactor_small_data_allocate(interactor->small_data, size);
     memset(data, 0, size);
     return data;
 }
 
 void interactor_native_data_free(struct interactor_native* interactor, void* pointer, size_t size)
 {
-    interactor_data_pool_free(&interactor->data_pool, pointer, size);
+    interactor_small_data_free(interactor->small_data, pointer, size);
 }
 
 int interactor_native_count_ready(struct interactor_native* interactor)
@@ -302,12 +335,18 @@ void interactor_native_callback_to_dart(struct interactor_native* interactor, st
 void interactor_native_destroy(struct interactor_native* interactor)
 {
     io_uring_queue_exit(interactor->ring);
-    interactor_static_buffers_destroy(&interactor->static_buffers);
-    interactor_io_buffers_destroy(&interactor->io_buffers);
-    interactor_data_pool_destroy(&interactor->data_pool);
-    interactor_messages_pool_destroy(&interactor->messages_pool);
-    interactor_memory_destroy(&interactor->memory);
+    interactor_static_buffers_destroy(interactor->static_buffers);
+    interactor_io_buffers_destroy(interactor->io_buffers);
+    interactor_small_data_destroy(interactor->small_data);
+    interactor_messages_pool_destroy(interactor->messages_pool);
+    interactor_memory_destroy(interactor->memory);
     mh_native_callbacks_delete(interactor->callbacks);
+    free(interactor->static_buffers);
+    free(interactor->io_buffers);
+    free(interactor->io_buffers);
+    free(interactor->small_data);
+    free(interactor->messages_pool);
+    free(interactor->memory);
     free(interactor->ring);
     free(interactor->completions);
 }
@@ -320,22 +359,22 @@ void interactor_native_close_descriptor(int fd)
 
 struct interactor_input_buffer* interactor_native_io_buffers_allocate_input(struct interactor_native* interactor, size_t initial_capacity)
 {
-    return interactor_io_buffers_allocate_input(&interactor->io_buffers, initial_capacity);
+    return interactor_io_buffers_allocate_input(interactor->io_buffers, initial_capacity);
 }
 
 struct interactor_output_buffer* interactor_native_io_buffers_allocate_output(struct interactor_native* interactor, size_t initial_capacity)
 {
-    return interactor_io_buffers_allocate_output(&interactor->io_buffers, initial_capacity);
+    return interactor_io_buffers_allocate_output(interactor->io_buffers, initial_capacity);
 }
 
 void interactor_native_io_buffers_free_input(struct interactor_native* interactor, struct interactor_input_buffer* buffer)
 {
-    interactor_io_buffers_free_input(&interactor->io_buffers, buffer);
+    interactor_io_buffers_free_input(interactor->io_buffers, buffer);
 }
 
 void interactor_native_io_buffers_free_output(struct interactor_native* interactor, struct interactor_output_buffer* buffer)
 {
-    interactor_io_buffers_free_output(&interactor->io_buffers, buffer);
+    interactor_io_buffers_free_output(interactor->io_buffers, buffer);
 }
 
 uint8_t* interactor_native_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size)
