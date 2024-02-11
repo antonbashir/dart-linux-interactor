@@ -8579,6 +8579,8 @@ final class interactor_static_buffers extends ffi.Struct {
   external ffi.Pointer<iovec> buffers;
 }
 
+final class mh_native_callbacks_t extends ffi.Opaque {}
+
 final class interactor_native_configuration extends ffi.Struct {
   @ffi.Uint64()
   external int cqe_wait_timeout_millis;
@@ -8622,17 +8624,17 @@ final class interactor_native extends ffi.Struct {
 
   external interactor_memory memory;
 
+  external io_uring ring;
+
   @ffi.Uint64()
   external int cqe_wait_timeout_millis;
 
   @ffi.Size()
   external int ring_size;
 
-  external ffi.Pointer<io_uring> ring;
-
   external ffi.Pointer<ffi.Pointer<io_uring_cqe>> cqes;
 
-  external ffi.Pointer<ffi.Void> callbacks;
+  external ffi.Pointer<interactor_native_callbacks_t> callbacks;
 
   @ffi.Int32()
   external int descriptor;
@@ -8649,6 +8651,8 @@ final class interactor_native extends ffi.Struct {
   @ffi.Uint8()
   external int id;
 }
+
+typedef interactor_native_callbacks_t = mh_native_callbacks_t;
 
 final class test_object_child extends ffi.Struct {
   @ffi.Int()

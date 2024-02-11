@@ -84,7 +84,7 @@ extern "C"
     void interactor_dart_call_native(struct interactor_dart* interactor, int target_ring_fd, struct interactor_message* message);
     void interactor_dart_callback_to_native(struct interactor_dart* interactor, struct interactor_message* message);
 
-    void interactor_dart_cqe_advance(struct io_uring* ring, int count);
+    void interactor_dart_cqe_advance(struct interactor_dart* interactor, int count);
 
     void interactor_dart_destroy(struct interactor_dart* interactor);
 

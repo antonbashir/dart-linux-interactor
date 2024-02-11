@@ -173,9 +173,9 @@ void interactor_dart_destroy(struct interactor_dart* interactor)
     free(interactor->cqes);
 }
 
-void interactor_dart_cqe_advance(struct io_uring* ring, int count)
+void interactor_dart_cqe_advance(struct interactor_dart* interactor, int count)
 {
-    io_uring_cq_advance(ring, count);
+    io_uring_cq_advance(&interactor->ring, count);
 }
 
 void interactor_dart_close_descriptor(int fd)

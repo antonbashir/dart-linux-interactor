@@ -25,7 +25,6 @@ class InteractorWorker {
   late final InteractorTuples _tuples;
 
   late final Pointer<interactor_dart> _interactor;
-  late final Pointer<io_uring> _ring;
   late final int _descriptor;
   late final Pointer<Pointer<io_uring_cqe>> _cqes;
   late final RawReceivePort _closer;
@@ -66,7 +65,6 @@ class InteractorWorker {
     _destroyer = configuration[1] as SendPort;
     _descriptor = configuration[2] as int;
     _fromInteractor.close();
-    _ring = _interactor.ref.ring;
     _cqes = _interactor.ref.cqes;
     _payloads = InteractorPayloads(_interactor);
     _buffers = InteractorStaticBuffers(_interactor.ref.static_buffers.buffers, _interactor.ref.static_buffers.size, _interactor.ref.static_buffers.capacity, _interactor);
@@ -121,7 +119,7 @@ class InteractorWorker {
         continue;
       }
     }
-    interactor_dart_cqe_advance(_ring, cqeCount);
+    interactor_dart_cqe_advance(_interactor, cqeCount);
     return true;
   }
 
