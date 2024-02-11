@@ -108,6 +108,8 @@ class InteractorWorker {
       Pointer<interactor_completion_event> cqe = _completions.elementAt(cqeIndex).value.cast();
       final data = cqe.ref.user_data;
       final result = cqe.ref.res;
+      print("data: ${data}");
+      print("result: ${result}");
       if (data > 0) {
         if (result & interactorDartCall > 0) {
           Pointer<interactor_message> message = Pointer.fromAddress(data);

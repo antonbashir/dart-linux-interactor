@@ -29,31 +29,31 @@ int interactor_native_initialize(struct interactor_native* interactor, struct in
     }
 
 
-    interactor->memory = calloc(sizeof(struct interactor_memory), 1);
+    interactor->memory = calloc(1, sizeof(struct interactor_memory));
     if (!interactor->memory)
     {
         return -ENOMEM;
     }
     
-    interactor->messages_pool = calloc(sizeof(struct interactor_messages_pool), 1);
+    interactor->messages_pool = calloc(1, sizeof(struct interactor_messages_pool));
     if (!interactor->messages_pool)
     {
         return -ENOMEM;
     }
     
-    interactor->small_data = calloc(sizeof(struct interactor_small_data), 1);
+    interactor->small_data = calloc(1, sizeof(struct interactor_small_data));
     if (!interactor->small_data)
     {
         return -ENOMEM;
     }
     
-    interactor->static_buffers = calloc(sizeof(struct interactor_static_buffers), 1);
+    interactor->static_buffers = calloc(1, sizeof(struct interactor_static_buffers));
     if (!interactor->static_buffers)
     {
         return -ENOMEM;
     }
 
-    interactor->io_buffers = calloc(sizeof(struct interactor_io_buffers), 1);
+    interactor->io_buffers = calloc(1, sizeof(struct interactor_io_buffers));
     if (!interactor->io_buffers)
     {
         return -ENOMEM;
