@@ -7,7 +7,7 @@
 
 typedef struct mh_native_callbacks_t interactor_native_callbacks_t;
 typedef struct io_uring interactor_native_io_uring;
-typedef struct io_uring interactor_native_io_uring;
+typedef struct io_uring_cqe interactor_native_completion_event;
 typedef struct interactor_messages_pool interactor_native_messages_pool;
 typedef struct interactor_static_buffers interactor_native_static_buffers;
 typedef struct interactor_io_buffers interactor_native_io_buffers;
@@ -42,7 +42,7 @@ extern "C"
         interactor_native_io_uring* ring;
         uint64_t cqe_wait_timeout_millis;
         size_t ring_size;
-        struct interactor_completion_event* completions;
+        interactor_native_completion_event** completions;
         interactor_native_callbacks_t* callbacks;
         int32_t descriptor;
         int32_t ring_flags;

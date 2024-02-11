@@ -26,7 +26,7 @@ class InteractorWorker {
 
   late final Pointer<interactor_dart> _interactor;
   late final int _descriptor;
-  late final Pointer<interactor_completion_event> _completions;
+  late final Pointer<Pointer<interactor_dart_completion_event>> _completions;
   late final RawReceivePort _closer;
   late final SendPort _destroyer;
   late final List<Duration> _delays;
@@ -105,9 +105,9 @@ class InteractorWorker {
     final cqeCount = interactor_dart_peek(_interactor);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
-      Pointer<interactor_completion_event> cqe = _completions.elementAt(cqeIndex);
+      Pointer<interactor_completion_event> cqe = _completions.elementAt(cqeIndex).value.cast();
       final data = cqe.ref.user_data;
-      final result = cqe.ref.result;
+      final result = cqe.ref.res;
       if (result & interactorDartCall > 0) {
         Pointer<interactor_message> message = Pointer.fromAddress(data);
         _consumers.call(message);

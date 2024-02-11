@@ -10,6 +10,7 @@
 #include "interactor_constants.h"
 #include "interactor_data_pool.h"
 #include "interactor_io_buffers.h"
+#include "interactor_message.h"
 #include "interactor_messages_pool.h"
 #include "interactor_payload_pool.h"
 #include "interactor_static_buffers.h"
@@ -22,10 +23,11 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
     interactor->delay_randomization_factor = configuration->delay_randomization_factor;
     interactor->base_delay_micros = configuration->base_delay_micros;
     interactor->max_delay_micros = configuration->max_delay_micros;
-    interactor->completions = malloc(sizeof(struct io_uring_cqe) * interactor->ring_size);
     interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;
     interactor->cqe_wait_count = configuration->cqe_wait_count;
     interactor->cqe_peek_count = configuration->cqe_peek_count;
+
+    interactor->completions = malloc(sizeof(struct io_uring_cqe*) * interactor->ring_size);
     if (!interactor->completions)
     {
         return -ENOMEM;
@@ -43,13 +45,13 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
         return -ENOMEM;
     }
 
-    interactor->small_data = malloc(sizeof(struct interactor_messages_pool));
+    interactor->small_data = malloc(sizeof(struct interactor_small_data));
     if (!interactor->small_data)
     {
         return -ENOMEM;
     }
 
-    interactor->static_buffers = calloc(sizeof(struct interactor_static_buffers), 1);
+    interactor->static_buffers = malloc(sizeof(struct interactor_static_buffers));
     if (!interactor->static_buffers)
     {
         return -ENOMEM;
@@ -185,8 +187,8 @@ int interactor_dart_peek(struct interactor_dart* interactor)
         .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
         .tv_sec = 0,
     };
-    io_uring_submit_and_wait_timeout(interactor->ring, (struct io_uring_cqe**)&interactor->completions, interactor->cqe_wait_count, &timeout, 0);
-    return io_uring_peek_batch_cqe(interactor->ring, (struct io_uring_cqe**)&interactor->completions, interactor->cqe_peek_count);
+    io_uring_submit_and_wait_timeout(interactor->ring, &interactor->completions[0], interactor->cqe_wait_count, &timeout, 0);
+    return io_uring_peek_batch_cqe(interactor->ring, &interactor->completions[0], interactor->cqe_peek_count);
 }
 
 void interactor_dart_call_native(struct interactor_dart* interactor, int target_ring_fd, struct interactor_message* message)
@@ -219,7 +221,6 @@ void interactor_dart_destroy(struct interactor_dart* interactor)
     interactor_messages_pool_destroy(interactor->messages_pool);
     interactor_memory_destroy(interactor->memory);
     free(interactor->static_buffers);
-    free(interactor->io_buffers);
     free(interactor->io_buffers);
     free(interactor->small_data);
     free(interactor->messages_pool);

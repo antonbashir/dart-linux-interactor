@@ -16,11 +16,11 @@ extern "C"
 #endif
     struct interactor_static_buffers
     {
-        int32_t* ids;
-        struct iovec* buffers;
         size_t available;
         size_t size;
         size_t capacity;
+        int32_t* ids;
+        struct iovec* buffers;
     };
 
     static inline int interactor_static_buffers_create(struct interactor_static_buffers* pool, size_t capacity, size_t size)

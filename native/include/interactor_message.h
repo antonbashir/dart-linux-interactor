@@ -1,6 +1,7 @@
 #ifndef INTERACTOR_MESSAGE_H
 #define INTERACTOR_MESSAGE_H
 
+#include <asm-generic/int-ll64.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -25,9 +26,10 @@ extern "C"
 
     struct interactor_completion_event
     {
-        uint64_t user_data;
-        int32_t result;
-        uint32_t flags;
+        __u64 user_data;
+        __s32 res;
+        __u32 flags;
+        __u64 big_cqe[2];
     };
 #if defined(__cplusplus)
 }

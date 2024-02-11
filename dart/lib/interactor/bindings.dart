@@ -348,17 +348,22 @@ final class interactor_message extends ffi.Struct {
 }
 
 final class interactor_completion_event extends ffi.Struct {
-  @ffi.Uint64()
+  @ffi.UnsignedLongLong()
   external int user_data;
 
-  @ffi.Int32()
-  external int result;
+  @ffi.Int()
+  external int res;
 
-  @ffi.Uint32()
+  @ffi.UnsignedInt()
   external int flags;
+
+  @ffi.Array.multi([2])
+  external ffi.Array<ffi.UnsignedLongLong> big_cqe;
 }
 
 final class io_uring extends ffi.Opaque {}
+
+final class io_uring_cqe extends ffi.Opaque {}
 
 final class interactor_messages_pool extends ffi.Opaque {}
 
@@ -436,7 +441,8 @@ final class interactor_dart extends ffi.Struct {
   @ffi.Double()
   external double delay_randomization_factor;
 
-  external ffi.Pointer<interactor_completion_event> completions;
+  external ffi.Pointer<ffi.Pointer<interactor_dart_completion_event>>
+      completions;
 
   @ffi.Int32()
   external int descriptor;
@@ -463,6 +469,7 @@ typedef interactor_dart_io_buffers = interactor_io_buffers;
 typedef interactor_dart_small_data = interactor_small_data;
 typedef interactor_dart_memory = interactor_memory;
 typedef interactor_dart_io_uring = io_uring;
+typedef interactor_dart_completion_event = io_uring_cqe;
 
 final class interactor_input_buffer extends ffi.Opaque {}
 

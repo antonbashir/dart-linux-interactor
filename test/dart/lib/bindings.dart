@@ -1599,19 +1599,24 @@ final class __fsid_t extends ffi.Struct {
 }
 
 final class interactor_completion_event extends ffi.Struct {
-  @ffi.Uint64()
+  @ffi.UnsignedLongLong()
   external int user_data;
 
-  @ffi.Int32()
-  external int result;
+  @ffi.Int()
+  external int res;
 
-  @ffi.Uint32()
+  @ffi.UnsignedInt()
   external int flags;
+
+  @ffi.Array.multi([2])
+  external ffi.Array<ffi.UnsignedLongLong> big_cqe;
 }
 
 final class mh_native_callbacks_t extends ffi.Opaque {}
 
 final class io_uring extends ffi.Opaque {}
+
+final class io_uring_cqe extends ffi.Opaque {}
 
 final class interactor_messages_pool extends ffi.Opaque {}
 
@@ -1674,7 +1679,8 @@ final class interactor_native extends ffi.Struct {
   @ffi.Size()
   external int ring_size;
 
-  external ffi.Pointer<interactor_completion_event> completions;
+  external ffi.Pointer<ffi.Pointer<interactor_native_completion_event>>
+      completions;
 
   external ffi.Pointer<interactor_native_callbacks_t> callbacks;
 
@@ -1700,6 +1706,7 @@ typedef interactor_native_io_buffers = interactor_io_buffers;
 typedef interactor_native_small_data = interactor_small_data;
 typedef interactor_native_memory = interactor_memory;
 typedef interactor_native_io_uring = io_uring;
+typedef interactor_native_completion_event = io_uring_cqe;
 typedef interactor_native_callbacks_t = mh_native_callbacks_t;
 
 final class interactor_input_buffer extends ffi.Opaque {}

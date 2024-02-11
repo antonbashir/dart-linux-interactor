@@ -19,7 +19,6 @@ struct interactor_native* test_interactor_initialize()
     {
         return NULL;
     }
-    printf("descriptor: %d\n", test_interactor->descriptor);
     return test_interactor;
 }
 

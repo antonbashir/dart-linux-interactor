@@ -7,6 +7,7 @@
 #include <stdint.h>
 
 typedef struct io_uring interactor_dart_io_uring;
+typedef struct io_uring_cqe interactor_dart_completion_event;
 typedef struct interactor_messages_pool interactor_dart_messages_pool;
 typedef struct interactor_static_buffers interactor_dart_static_buffers;
 typedef struct interactor_io_buffers interactor_dart_io_buffers;
@@ -46,7 +47,7 @@ extern "C"
         uint64_t cqe_wait_timeout_millis;
         uint64_t max_delay_micros;
         double delay_randomization_factor;
-        struct interactor_completion_event* completions;
+        interactor_dart_completion_event** completions;
         int32_t descriptor;
         uint32_t ring_flags;
         uint32_t cqe_wait_count;
