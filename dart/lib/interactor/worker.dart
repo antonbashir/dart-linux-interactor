@@ -52,7 +52,7 @@ class InteractorWorker {
       }
       _payloads.destroy();
       interactor_dart_destroy(_interactor);
-      ffi.malloc.free(_interactor);
+      ffi.calloc.free(_interactor);
       _closer.close();
       _destroyer.send(null);
     });
@@ -119,7 +119,7 @@ class InteractorWorker {
           _producers.callback(message);
           continue;
         }
-        
+
         continue;
       }
     }
