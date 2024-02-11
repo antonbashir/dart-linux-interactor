@@ -23,6 +23,12 @@ extern "C"
         uint16_t flags;
     };
 
+    struct interactor_completion_event
+    {
+        uint64_t user_data;
+        int32_t result;
+        uint32_t flags;
+    };
 #if defined(__cplusplus)
 }
 #endif

@@ -20,11 +20,11 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
     interactor->delay_randomization_factor = configuration->delay_randomization_factor;
     interactor->base_delay_micros = configuration->base_delay_micros;
     interactor->max_delay_micros = configuration->max_delay_micros;
-    interactor->cqes = malloc(sizeof(struct io_uring_cqe*) * interactor->ring_size);
+    interactor->completions = malloc(sizeof(struct io_uring_cqe) * interactor->ring_size);
     interactor->cqe_wait_timeout_millis = configuration->cqe_wait_timeout_millis;
     interactor->cqe_wait_count = configuration->cqe_wait_count;
     interactor->cqe_peek_count = configuration->cqe_peek_count;
-    if (!interactor->cqes)
+    if (!interactor->completions)
     {
         return -ENOMEM;
     }
@@ -50,13 +50,19 @@ int interactor_dart_initialize(struct interactor_dart* interactor, struct intera
         return -ENOMEM;
     }
 
-    int result = io_uring_queue_init(configuration->ring_size, &interactor->ring, configuration->ring_flags);
+    interactor->ring = malloc(sizeof(struct io_uring));
+    if (!interactor->ring)
+    {
+        return -ENOMEM;
+    }
+
+    int result = io_uring_queue_init(configuration->ring_size, interactor->ring, configuration->ring_flags);
     if (result)
     {
         return result;
     }
 
-    interactor->descriptor = interactor->ring.ring_fd;
+    interactor->descriptor = interactor->ring->ring_fd;
 
     return interactor->descriptor;
 }
@@ -137,13 +143,13 @@ int interactor_dart_peek(struct interactor_dart* interactor)
         .tv_nsec = interactor->cqe_wait_timeout_millis * 1e+6,
         .tv_sec = 0,
     };
-    io_uring_submit_and_wait_timeout(&interactor->ring, &interactor->cqes[0], interactor->cqe_wait_count, &timeout, 0);
-    return io_uring_peek_batch_cqe(&interactor->ring, &interactor->cqes[0], interactor->cqe_peek_count);
+    io_uring_submit_and_wait_timeout(interactor->ring, (struct io_uring_cqe **)&interactor->completions, interactor->cqe_wait_count, &timeout, 0);
+    return io_uring_peek_batch_cqe(interactor->ring, (struct io_uring_cqe **)&interactor->completions, interactor->cqe_peek_count);
 }
 
 void interactor_dart_call_native(struct interactor_dart* interactor, int target_ring_fd, struct interactor_message* message)
 {
-    struct io_uring_sqe* sqe = interactor_provide_sqe(&interactor->ring);
+    struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     message->source = interactor->descriptor;
     message->target = target_ring_fd;
     message->flags |= INTERACTOR_NATIVE_CALL;
@@ -153,7 +159,7 @@ void interactor_dart_call_native(struct interactor_dart* interactor, int target_
 
 void interactor_dart_callback_to_native(struct interactor_dart* interactor, struct interactor_message* message)
 {
-    struct io_uring_sqe* sqe = interactor_provide_sqe(&interactor->ring);
+    struct io_uring_sqe* sqe = interactor_provide_sqe(interactor->ring);
     uint64_t target = message->source;
     message->source = interactor->descriptor;
     message->target = target;
@@ -164,18 +170,19 @@ void interactor_dart_callback_to_native(struct interactor_dart* interactor, stru
 
 void interactor_dart_destroy(struct interactor_dart* interactor)
 {
-    io_uring_queue_exit(&interactor->ring);
+    io_uring_queue_exit(interactor->ring);
     interactor_static_buffers_destroy(&interactor->static_buffers);
     interactor_io_buffers_destroy(&interactor->io_buffers);
     interactor_data_pool_destroy(&interactor->data_pool);
     interactor_messages_pool_destroy(&interactor->messages_pool);
     interactor_memory_destroy(&interactor->memory);
-    free(interactor->cqes);
+    free(interactor->ring);
+    free(interactor->completions);
 }
 
 void interactor_dart_cqe_advance(struct interactor_dart* interactor, int count)
 {
-    io_uring_cq_advance(&interactor->ring, count);
+    io_uring_cq_advance(interactor->ring, count);
 }
 
 void interactor_dart_close_descriptor(int fd)

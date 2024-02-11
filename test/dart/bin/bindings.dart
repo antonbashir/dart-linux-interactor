@@ -22,10 +22,6 @@ void main() {
     "// external ffi.Pointer<quota> quota",
   );
   content = content.replaceAll(
-    "final class io_uring_cqe extends ffi.Opaque {}",
-    "final class io_uring_cqe extends ffi.Struct {@ffi.UnsignedLongLong()external int user_data; @ffi.Int() external int res; @ffi.UnsignedInt()external int flags;}",
-  );
-  content = content.replaceAll(
     "// ignore_for_file: type=lint",
     "// ignore_for_file: type=lint, unused_field",
   );

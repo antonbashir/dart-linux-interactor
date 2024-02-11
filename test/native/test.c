@@ -3,8 +3,6 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "interactor_constants.h"
-#include "interactor_message.h"
 #include "interactor_native.h"
 
 static pthread_mutex_t mutex;
@@ -21,6 +19,7 @@ struct interactor_native* test_interactor_initialize()
     {
         return NULL;
     }
+    printf("descriptor: %d\n", test_interactor->descriptor);
     return test_interactor;
 }
 

@@ -10,6 +10,8 @@
 #include "interactor_io_buffers.h"
 #include "interactor_static_buffers.h"
 
+typedef struct io_uring interactor_io_uring;
+
 #if defined(__cplusplus)
 extern "C"
 {
@@ -38,17 +40,17 @@ extern "C"
         struct interactor_io_buffers io_buffers;
         struct interactor_data_pool data_pool;
         struct interactor_memory memory;
-        struct io_uring ring;
+        interactor_io_uring* ring;
         size_t ring_size;
         uint64_t cqe_wait_timeout_millis;
         uint64_t max_delay_micros;
-        struct io_uring_cqe** cqes;
+        double delay_randomization_factor;
+        struct interactor_completion_event* completions;
         int32_t descriptor;
         uint32_t ring_flags;
         uint32_t cqe_wait_count;
         uint32_t cqe_peek_count;
         uint32_t base_delay_micros;
-        double delay_randomization_factor;
         uint8_t id;
     };
 

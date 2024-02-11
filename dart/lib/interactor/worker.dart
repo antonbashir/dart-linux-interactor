@@ -26,7 +26,7 @@ class InteractorWorker {
 
   late final Pointer<interactor_dart> _interactor;
   late final int _descriptor;
-  late final Pointer<Pointer<io_uring_cqe>> _cqes;
+  late final Pointer<interactor_completion_event> _completions;
   late final RawReceivePort _closer;
   late final SendPort _destroyer;
   late final List<Duration> _delays;
@@ -65,7 +65,7 @@ class InteractorWorker {
     _destroyer = configuration[1] as SendPort;
     _descriptor = configuration[2] as int;
     _fromInteractor.close();
-    _cqes = _interactor.ref.cqes;
+    _completions = _interactor.ref.completions;
     _payloads = InteractorPayloads(_interactor);
     _buffers = InteractorStaticBuffers(_interactor.ref.static_buffers.buffers, _interactor.ref.static_buffers.size, _interactor.ref.static_buffers.capacity, _interactor);
     _datas = InteractorDatas(_interactor);
@@ -105,9 +105,9 @@ class InteractorWorker {
     final cqeCount = interactor_dart_peek(_interactor);
     if (cqeCount == 0) return false;
     for (var cqeIndex = 0; cqeIndex < cqeCount; cqeIndex++) {
-      Pointer<io_uring_cqe> cqe = _cqes.elementAt(cqeIndex).value;
+      Pointer<interactor_completion_event>cqe = _completions.elementAt(cqeIndex);
       final data = cqe.ref.user_data;
-      final result = cqe.ref.res;
+      final result = cqe.ref.result;
       if (result & interactorDartCall > 0) {
         Pointer<interactor_message> message = Pointer.fromAddress(data);
         _consumers.call(message);

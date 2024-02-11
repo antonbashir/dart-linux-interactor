@@ -43,7 +43,11 @@
     "assert.h": "c",
     "string.h": "c",
     "*.tcc": "c",
-    "stop_token": "c"
+    "stop_token": "c",
+    "stdio.h": "c",
+    "pthreadtypes.h": "c",
+    "test.h": "c",
+    "interactor_io_buffers.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [

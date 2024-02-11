@@ -26,8 +26,6 @@ ffigen:
   headers:
     entry-points:
       - "../native/interactor_dart.h"
-      - "../native/include/interactor_native.h"
-      - "../native/test.h"
   globals:
     exclude:
       - "_(.*)"

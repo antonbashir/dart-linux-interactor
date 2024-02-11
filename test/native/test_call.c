@@ -16,7 +16,7 @@ bool test_call_native_check(struct interactor_native* interactor)
 {
     interactor_native_process_timeout(interactor);
     interactor_native_submit(interactor);
-    return current_message;
+    return current_message != NULL;
 }
 
 void test_call_native(struct interactor_message* message)

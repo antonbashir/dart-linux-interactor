@@ -5,11 +5,11 @@
 #include <interactor_message.h>
 #include <interactor_messages_pool.h>
 #include <interactor_payload_pool.h>
-#include <liburing.h>
 #include "interactor_io_buffers.h"
 #include "interactor_static_buffers.h"
 
 typedef struct mh_native_callbacks_t interactor_native_callbacks_t;
+typedef struct io_uring interactor_io_uring;
 
 #if defined(__cplusplus)
 extern "C"
@@ -36,10 +36,10 @@ extern "C"
         struct interactor_io_buffers io_buffers;
         struct interactor_data_pool data_pool;
         struct interactor_memory memory;
-        struct io_uring ring;
+        interactor_io_uring* ring;
         uint64_t cqe_wait_timeout_millis;
         size_t ring_size;
-        struct io_uring_cqe** cqes;
+        struct interactor_completion_event* completions;
         interactor_native_callbacks_t* callbacks;
         int32_t descriptor;
         int32_t ring_flags;

@@ -17,6 +17,7 @@ void testCallNative() {
     test_call_reset();
     await worker.initialize();
     final native = test_interactor_initialize();
+    print("d: ${native.ref.descriptor}");
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
     final call = producer.testCallNative(native.ref.descriptor, worker.messages.allocate());
