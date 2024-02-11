@@ -2,9 +2,12 @@
 #define TEST_THREADING_H
 
 #include <interactor_native.h>
-#include <pthread.h>
 #include <stdbool.h>
 #include "interactor_message.h"
+
+typedef unsigned long int pthread_t;
+typedef union pthread_cond_t test_cond_t;
+typedef union pthread_mutex_t test_mutex_t;
 
 #if defined(__cplusplus)
 extern "C"
@@ -23,15 +26,15 @@ extern "C"
         struct interactor_native* interactor;
         struct interactor_message** messages;
 
-        pthread_cond_t initialize_condition;
-        pthread_mutex_t initialize_mutex;
+        test_cond_t* initialize_condition;
+        test_mutex_t* initialize_mutex;
     };
 
     struct test_threads
     {
         struct test_thread* threads;
         size_t count;
-        pthread_mutex_t global_working_mutex;
+        test_mutex_t* global_working_mutex;
     };
 
     bool test_threading_initialize(int thread_count, int isolates_count, int per_thread_messages_count);

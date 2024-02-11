@@ -134,10 +134,13 @@ Future<void> _callNativeIsolate(List<dynamic> input) async {
   for (var threadId = 0; threadId < threads; threadId++) {
     final ring = descriptors.elementAt(threadId).value;
     for (var messageId = 0; messageId < messages; messageId++) {
-      calls.add(producer.testThreadingCallNative(ring, worker.messages.allocate()..setInputStaticBuffer(worker.buffers, [1, 2, 3])));
+      final message = worker.messages.allocate();
+      message.setInputStaticBuffer(worker.buffers, [1, 2, 3]);
+      calls.add(producer.testThreadingCallNative(ring, message));
     }
   }
   (await Future.wait(calls)).forEach((result) {
+    print("result.getOutputStaticBuffer(worker.buffers)");
     if (!ListEquality().equals(result.getOutputStaticBuffer(worker.buffers), [1, 2, 3])) {
       throw TestFailure("outputBuffer != ${[1, 2, 3]}. ${result.outputSize}: ${result.getOutputStaticBuffer(worker.buffers)}");
     }
