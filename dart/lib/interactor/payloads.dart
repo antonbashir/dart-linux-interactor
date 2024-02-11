@@ -24,14 +24,14 @@ class InteractorPayloads {
   Pointer<T> allocate<T extends Struct>() {
     final pool = _pools[T.hashCode];
     if (pool == null) throw InteractorRuntimeException(InteractorErrors.interactorMemoryError);
-    return Pointer.fromAddress(interactor_dart_payload_allocate(pool));
+    return interactor_dart_payload_allocate(pool).cast();
   }
 
   @pragma(preferInlinePragma)
   void free<T extends Struct>(Pointer<T> payload) {
     final pool = _pools[T.hashCode];
     if (pool == null) return;
-    interactor_dart_payload_free(pool, payload.address);
+    interactor_dart_payload_free(pool, payload.cast());
   }
 
   @pragma(preferInlinePragma)
@@ -50,8 +50,8 @@ class InteractorPayloadPool<T extends Struct> {
   int size() => _pool.ref.size;
 
   @pragma(preferInlinePragma)
-  Pointer<T> allocate() => Pointer.fromAddress(interactor_dart_payload_allocate(_pool));
+  Pointer<T> allocate() => interactor_dart_payload_allocate(_pool).cast();
 
   @pragma(preferInlinePragma)
-  void free(Pointer<T> payload) => interactor_dart_payload_free(_pool, payload.address);
+  void free(Pointer<T> payload) => interactor_dart_payload_free(_pool, payload.cast());
 }

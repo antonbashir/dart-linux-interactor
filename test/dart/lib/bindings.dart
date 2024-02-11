@@ -5543,41 +5543,41 @@ external void interactor_native_io_buffers_free_output(
 );
 
 @ffi.Native<
-        ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Uint8> Function(
             ffi.Pointer<interactor_input_buffer>, ffi.Size)>(
     symbol: 'interactor_native_input_buffer_reserve',
     assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Void> interactor_native_input_buffer_reserve(
+external ffi.Pointer<ffi.Uint8> interactor_native_input_buffer_reserve(
   ffi.Pointer<interactor_input_buffer> buffer,
   int size,
 );
 
 @ffi.Native<
-        ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Uint8> Function(
             ffi.Pointer<interactor_input_buffer>, ffi.Size)>(
     symbol: 'interactor_native_input_buffer_allocate',
     assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Void> interactor_native_input_buffer_allocate(
+external ffi.Pointer<ffi.Uint8> interactor_native_input_buffer_allocate(
   ffi.Pointer<interactor_input_buffer> buffer,
   int size,
 );
 
 @ffi.Native<
-        ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Uint8> Function(
             ffi.Pointer<interactor_output_buffer>, ffi.Size)>(
     symbol: 'interactor_native_output_buffer_reserve',
     assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Void> interactor_native_output_buffer_reserve(
+external ffi.Pointer<ffi.Uint8> interactor_native_output_buffer_reserve(
   ffi.Pointer<interactor_output_buffer> buffer,
   int size,
 );
 
 @ffi.Native<
-        ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<ffi.Uint8> Function(
             ffi.Pointer<interactor_output_buffer>, ffi.Size)>(
     symbol: 'interactor_native_output_buffer_allocate',
     assetId: 'interactor-bindings-test')
-external ffi.Pointer<ffi.Void> interactor_native_output_buffer_allocate(
+external ffi.Pointer<ffi.Uint8> interactor_native_output_buffer_allocate(
   ffi.Pointer<interactor_output_buffer> buffer,
   int size,
 );
@@ -5613,20 +5613,22 @@ external ffi.Pointer<interactor_payload_pool>
   int size,
 );
 
-@ffi.Native<ffi.IntPtr Function(ffi.Pointer<interactor_payload_pool>)>(
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(ffi.Pointer<interactor_payload_pool>)>(
     symbol: 'interactor_native_payload_allocate',
     assetId: 'interactor-bindings-test')
-external int interactor_native_payload_allocate(
+external ffi.Pointer<ffi.Void> interactor_native_payload_allocate(
   ffi.Pointer<interactor_payload_pool> pool,
 );
 
 @ffi.Native<
-        ffi.Void Function(ffi.Pointer<interactor_payload_pool>, ffi.IntPtr)>(
+        ffi.Void Function(
+            ffi.Pointer<interactor_payload_pool>, ffi.Pointer<ffi.Void>)>(
     symbol: 'interactor_native_payload_free',
     assetId: 'interactor-bindings-test')
 external void interactor_native_payload_free(
   ffi.Pointer<interactor_payload_pool> pool,
-  int pointer,
+  ffi.Pointer<ffi.Void> pointer,
 );
 
 @ffi.Native<ffi.Void Function(ffi.Pointer<interactor_payload_pool>)>(
@@ -5636,21 +5638,23 @@ external void interactor_native_payload_pool_destroy(
   ffi.Pointer<interactor_payload_pool> pool,
 );
 
-@ffi.Native<ffi.IntPtr Function(ffi.Pointer<interactor_native>, ffi.Size)>(
+@ffi.Native<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<interactor_native>, ffi.Size)>(
     symbol: 'interactor_native_data_allocate',
     assetId: 'interactor-bindings-test')
-external int interactor_native_data_allocate(
+external ffi.Pointer<ffi.Void> interactor_native_data_allocate(
   ffi.Pointer<interactor_native> interactor,
   int size,
 );
 
 @ffi.Native<
         ffi.Void Function(
-            ffi.Pointer<interactor_native>, ffi.IntPtr, ffi.Size)>(
+            ffi.Pointer<interactor_native>, ffi.Pointer<ffi.Void>, ffi.Size)>(
     symbol: 'interactor_native_data_free', assetId: 'interactor-bindings-test')
 external void interactor_native_data_free(
   ffi.Pointer<interactor_native> interactor,
-  int pointer,
+  ffi.Pointer<ffi.Void> pointer,
   int size,
 );
 

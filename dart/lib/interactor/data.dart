@@ -9,8 +9,8 @@ class InteractorDatas {
   InteractorDatas(this._interactor);
 
   @pragma(preferInlinePragma)
-  Pointer<Void> allocate(int size) => Pointer.fromAddress(interactor_dart_data_allocate(_interactor, size));
+  Pointer<Void> allocate(int size) => interactor_dart_data_allocate(_interactor, size);
 
   @pragma(preferInlinePragma)
-  void free(Pointer<Void> pointer, int size) => interactor_dart_data_free(_interactor, pointer.address, size);
+  void free(Pointer<Void> pointer, int size) => interactor_dart_data_free(_interactor, pointer, size);
 }

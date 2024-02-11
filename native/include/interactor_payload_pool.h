@@ -2,7 +2,6 @@
 #define INTERACTOR_PAYLOADS_POOL_INCLUDED
 
 #include <interactor_memory.h>
-#include <stdint.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -25,14 +24,14 @@ extern "C"
         interactor_pool_destroy(&pool->pool);
     }
 
-    static inline intptr_t interactor_payload_pool_allocate(struct interactor_payload_pool* pool)
+    static inline void* interactor_payload_pool_allocate(struct interactor_payload_pool* pool)
     {
-        return (intptr_t)interactor_pool_allocate(&pool->pool);
+        return interactor_pool_allocate(&pool->pool);
     }
 
-    static inline void interactor_payload_pool_free(struct interactor_payload_pool* pool, intptr_t payload)
+    static inline void interactor_payload_pool_free(struct interactor_payload_pool* pool, void* payload)
     {
-        interactor_pool_free(&pool->pool, (void*)payload);
+        interactor_pool_free(&pool->pool, payload);
     }
 
 #if defined(__cplusplus)

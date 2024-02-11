@@ -63,26 +63,26 @@ extern "C"
         interactor_pool_free(&buffers->output_buffers, buffer);
     }
 
-    static inline void* interactor_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size)
+    static inline uint8_t* interactor_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size)
     {
         void* data = ibuf_reserve(&buffer->buffer, size ? size : buffer->buffer.start_capacity);
         buffer->last_reserved_size = ibuf_unused(&buffer->buffer);
         return data;
     }
 
-    static inline void* interactor_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size)
+    static inline uint8_t* interactor_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size)
     {
         return ibuf_alloc(&buffer->buffer, size);
     }
 
-    static inline void* interactor_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size)
+    static inline uint8_t* interactor_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size)
     {
         void* reserved = obuf_reserve(&buffer->buffer, size ? size : buffer->buffer.start_capacity);
         buffer->last_reserved_size = buffer->buffer.capacity[buffer->buffer.pos] - buffer->buffer.iov[buffer->buffer.pos].iov_len;
         return reserved;
     }
 
-    static inline void* interactor_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size)
+    static inline uint8_t* interactor_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size)
     {
         return obuf_alloc(&buffer->buffer, size);
     }

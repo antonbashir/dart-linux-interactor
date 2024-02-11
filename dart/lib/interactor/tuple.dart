@@ -707,10 +707,10 @@ class InteractorTuples {
   int next(Pointer<Uint8> pointer, int offset) => interactor_dart_tuple_next(pointer.cast(), offset);
 
   @pragma(preferInlinePragma)
-  Pointer<Uint8> allocate(int capacity) => Pointer.fromAddress(interactor_dart_data_allocate(_interactor, capacity));
+  Pointer<Uint8> allocate(int capacity) => interactor_dart_data_allocate(_interactor, capacity).cast();
 
   @pragma(preferInlinePragma)
-  void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.address, size);
+  void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.cast(), size);
 
   @pragma(preferInlinePragma)
   Pointer<interactor_input_buffer> allocateInputBuffer(int capacity) => interactor_dart_io_buffers_allocate_input(_interactor, capacity);

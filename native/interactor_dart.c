@@ -101,14 +101,14 @@ struct interactor_payload_pool* interactor_dart_payload_pool_create(struct inter
     return pool;
 }
 
-intptr_t interactor_dart_payload_allocate(struct interactor_payload_pool* pool)
+void* interactor_dart_payload_allocate(struct interactor_payload_pool* pool)
 {
-    void* payload = (void*)interactor_payload_pool_allocate(pool);
+    void* payload = interactor_payload_pool_allocate(pool);
     memset(payload, 0, pool->size);
-    return (intptr_t)payload;
+    return payload;
 }
 
-void interactor_dart_payload_free(struct interactor_payload_pool* pool, intptr_t pointer)
+void interactor_dart_payload_free(struct interactor_payload_pool* pool, void* pointer)
 {
     interactor_payload_pool_free(pool, pointer);
 }
@@ -119,14 +119,14 @@ void interactor_dart_payload_pool_destroy(struct interactor_payload_pool* pool)
     free(pool);
 }
 
-intptr_t interactor_dart_data_allocate(struct interactor_dart* interactor, size_t size)
+void* interactor_dart_data_allocate(struct interactor_dart* interactor, size_t size)
 {
-    void* data = (void*)interactor_data_pool_allocate(&interactor->data_pool, size);
+    void* data = interactor_data_pool_allocate(&interactor->data_pool, size);
     memset(data, 0, size);
-    return (intptr_t)data;
+    return data;
 }
 
-void interactor_dart_data_free(struct interactor_dart* interactor, intptr_t pointer, size_t size)
+void interactor_dart_data_free(struct interactor_dart* interactor, void* pointer, size_t size)
 {
     interactor_data_pool_free(&interactor->data_pool, pointer, size);
 }
@@ -221,22 +221,22 @@ void interactor_dart_io_buffers_free_output(struct interactor_dart* interactor, 
     interactor_io_buffers_free_output(&interactor->io_buffers, buffer);
 }
 
-void* interactor_dart_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size)
+uint8_t* interactor_dart_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size)
 {
     return interactor_input_buffer_reserve(buffer, size);
 }
 
-void* interactor_dart_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size)
+uint8_t* interactor_dart_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size)
 {
     return interactor_input_buffer_allocate(buffer, size);
 }
 
-void* interactor_dart_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size)
+uint8_t* interactor_dart_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size)
 {
     return interactor_output_buffer_reserve(buffer, size);
 }
 
-void* interactor_dart_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size)
+uint8_t* interactor_dart_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size)
 {
     return interactor_output_buffer_allocate(buffer, size);
 }

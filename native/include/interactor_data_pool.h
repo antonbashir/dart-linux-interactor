@@ -24,14 +24,14 @@ extern "C"
         interactor_small_allocator_destroy(&pool->pool);
     }
 
-    static inline intptr_t interactor_data_pool_allocate(struct interactor_data_pool* pool, size_t data_size)
+    static inline void* interactor_data_pool_allocate(struct interactor_data_pool* pool, size_t data_size)
     {
-        return (intptr_t)interactor_small_allocator_allocate(&pool->pool, data_size);
+        return interactor_small_allocator_allocate(&pool->pool, data_size);
     }
 
-    static inline void interactor_data_pool_free(struct interactor_data_pool* pool, intptr_t data, size_t data_size)
+    static inline void interactor_data_pool_free(struct interactor_data_pool* pool, void* data, size_t data_size)
     {
-        interactor_small_allocator_free(&pool->pool, (void*)data, data_size);
+        interactor_small_allocator_free(&pool->pool, data, data_size);
     }
 
 #if defined(__cplusplus)

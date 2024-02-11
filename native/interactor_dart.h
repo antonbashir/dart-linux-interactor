@@ -63,21 +63,21 @@ extern "C"
     struct interactor_output_buffer* interactor_dart_io_buffers_allocate_output(struct interactor_dart* interactor, size_t initial_capacity);
     void interactor_dart_io_buffers_free_input(struct interactor_dart* interactor, struct interactor_input_buffer* buffer);
     void interactor_dart_io_buffers_free_output(struct interactor_dart* interactor, struct interactor_output_buffer* buffer);
-    void* interactor_dart_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size);
-    void* interactor_dart_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size);
-    void* interactor_dart_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size);
-    void* interactor_dart_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size);
+    uint8_t* interactor_dart_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size);
+    uint8_t* interactor_dart_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size);
+    uint8_t* interactor_dart_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size);
+    uint8_t* interactor_dart_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size);
 
     struct interactor_message* interactor_dart_allocate_message(struct interactor_dart* interactor);
     void interactor_dart_free_message(struct interactor_dart* interactor, struct interactor_message* message);
 
     struct interactor_payload_pool* interactor_dart_payload_pool_create(struct interactor_dart* interactor, size_t size);
-    intptr_t interactor_dart_payload_allocate(struct interactor_payload_pool* pool);
-    void interactor_dart_payload_free(struct interactor_payload_pool* pool, intptr_t pointer);
+    void* interactor_dart_payload_allocate(struct interactor_payload_pool* pool);
+    void interactor_dart_payload_free(struct interactor_payload_pool* pool, void* pointer);
     void interactor_dart_payload_pool_destroy(struct interactor_payload_pool* pool);
 
-    intptr_t interactor_dart_data_allocate(struct interactor_dart* interactor, size_t size);
-    void interactor_dart_data_free(struct interactor_dart* interactor, intptr_t pointer, size_t size);
+    void* interactor_dart_data_allocate(struct interactor_dart* interactor, size_t size);
+    void interactor_dart_data_free(struct interactor_dart* interactor, void* pointer, size_t size);
 
     int interactor_dart_peek(struct interactor_dart* interactor);
 
