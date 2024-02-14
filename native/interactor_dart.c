@@ -282,14 +282,19 @@ uint8_t* interactor_dart_input_buffer_allocate(struct interactor_input_buffer* b
     return interactor_input_buffer_allocate(buffer, size);
 }
 
+uint8_t* interactor_dart_input_buffer_allocate_reserve(struct interactor_input_buffer* buffer, size_t delta, size_t size)
+{
+    return interactor_input_buffer_allocate_reserve(buffer, delta, size);
+}
+
 uint8_t* interactor_dart_input_buffer_read_position(struct interactor_input_buffer* buffer)
 {
-  return (uint8_t*)buffer->buffer.rpos;
+    return (uint8_t*)buffer->buffer.rpos;
 }
 
 uint8_t* interactor_dart_input_buffer_write_position(struct interactor_input_buffer* buffer)
 {
-  return (uint8_t*)buffer->buffer.wpos;
+    return (uint8_t*)buffer->buffer.wpos;
 }
 
 uint8_t* interactor_dart_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size)
@@ -304,5 +309,10 @@ uint8_t* interactor_dart_output_buffer_allocate(struct interactor_output_buffer*
 
 struct iovec* interactor_dart_output_buffer_content(struct interactor_output_buffer* buffer)
 {
-  return buffer->buffer.iov;
+    return buffer->buffer.iov;
+}
+
+uint8_t* interactor_dart_output_buffer_allocate_reserve(struct interactor_output_buffer* buffer, size_t delta, size_t size)
+{
+    return interactor_output_buffer_allocate_reserve(buffer, delta, size);
 }

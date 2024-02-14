@@ -68,8 +68,10 @@ extern "C"
     void interactor_native_io_buffers_free_output(struct interactor_native* interactor, struct interactor_output_buffer* buffer);
     uint8_t* interactor_native_input_buffer_reserve(struct interactor_input_buffer* buffer, size_t size);
     uint8_t* interactor_native_input_buffer_allocate(struct interactor_input_buffer* buffer, size_t size);
+    uint8_t* interactor_native_input_buffer_allocate_reserve(struct interactor_input_buffer* buffer, size_t delta, size_t size);
     uint8_t* interactor_native_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size);
     uint8_t* interactor_native_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size);
+    uint8_t* interactor_native_output_buffer_allocate_reserve(struct interactor_output_buffer* buffer, size_t delta, size_t size);
 
     struct interactor_message* interactor_native_allocate_message(struct interactor_native* interactor);
     void interactor_native_free_message(struct interactor_native* interactor, struct interactor_message* message);

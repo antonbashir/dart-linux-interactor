@@ -19,7 +19,8 @@ class InteractorWorker {
   late final InteractorConsumerRegistry _consumers;
   late final InteractorProducerRegistry _producers;
   late final InteractorPayloads _payloads;
-  late final InteractorStaticBuffers _buffers;
+  late final InteractorStaticBuffers _staticBuffers;
+  late final InteractorInputOutputBuffers _ioBuffers;
   late final InteractorDatas _datas;
   late final InteractorMessages _messages;
   late final InteractorTuples _tuples;
@@ -38,7 +39,8 @@ class InteractorWorker {
   int get id => _interactor.ref.id;
   int get descriptor => _descriptor;
   InteractorPayloads get payloads => _payloads;
-  InteractorStaticBuffers get buffers => _buffers;
+  InteractorStaticBuffers get staticBuffers => _staticBuffers;
+  InteractorInputOutputBuffers get inputOutputBuffers => _ioBuffers;
   InteractorDatas get datas => _datas;
   InteractorMessages get messages => _messages;
   InteractorTuples get tuples => _tuples;
@@ -67,7 +69,8 @@ class InteractorWorker {
     _fromInteractor.close();
     _completions = _interactor.ref.completions;
     _payloads = InteractorPayloads(_interactor);
-    _buffers = InteractorStaticBuffers(interactor_dart_static_buffers_inner(_interactor), _interactor);
+    _staticBuffers = InteractorStaticBuffers(interactor_dart_static_buffers_inner(_interactor), _interactor);
+    _ioBuffers = InteractorInputOutputBuffers(_interactor);
     _datas = InteractorDatas(_interactor);
     _messages = InteractorMessages(_interactor);
     _tuples = InteractorTuples(_interactor);

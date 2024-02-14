@@ -136,10 +136,10 @@ void testCallNative() {
     final native = test_interactor_initialize();
     final producer = worker.producer(TestNativeProducer());
     worker.activate();
-    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputStaticBuffer(worker.buffers, [1, 2, 3]));
+    final call = producer.testCallNative(test_interactor_descriptor(native), worker.messages.allocate()..setInputStaticBuffer(worker.staticBuffers, [1, 2, 3]));
     await _awaitNativeCall(native);
     final result = await call;
-    expect(true, ListEquality().equals(result.getOutputStaticBuffer(worker.buffers), [1, 2, 3]));
+    expect(true, ListEquality().equals(result.getOutputStaticBuffer(worker.staticBuffers), [1, 2, 3]));
     worker.messages.free(result);
     await interactor.shutdown();
     test_interactor_destroy(native);

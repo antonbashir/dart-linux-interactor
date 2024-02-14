@@ -76,3 +76,52 @@ class InteractorStaticBuffers {
     for (var id in buffers) release(id);
   }
 }
+
+class InteractorInputOutputBuffers {
+  final Pointer<interactor_dart> _interactor;
+
+  InteractorInputOutputBuffers(this._interactor);
+
+  @pragma(preferInlinePragma)
+  Pointer<interactor_input_buffer> allocateInputBuffer(int capacity) => interactor_dart_io_buffers_allocate_input(_interactor, capacity);
+
+  @pragma(preferInlinePragma)
+  Pointer<interactor_output_buffer> allocateOutputBuffer(int capacity) => interactor_dart_io_buffers_allocate_output(_interactor, capacity);
+
+  @pragma(preferInlinePragma)
+  void freeInputBuffer(Pointer<interactor_input_buffer> buffer) => interactor_dart_io_buffers_free_input(_interactor, buffer);
+
+  @pragma(preferInlinePragma)
+  void freeOutputBuffer(Pointer<interactor_output_buffer> buffer) => interactor_dart_io_buffers_free_output(_interactor, buffer);
+}
+
+extension InteractorInputBufferExtensions on Pointer<interactor_input_buffer> {
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> allocate(buffer, int delta) => interactor_dart_input_buffer_allocate(buffer, delta);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> reserve(Pointer<interactor_input_buffer> buffer, int size) => interactor_dart_input_buffer_reserve(buffer, size);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> allocateReserve(Pointer<interactor_input_buffer> buffer, int delta, int size) => interactor_dart_input_buffer_allocate_reserve(buffer, delta, size);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> get readPosition => interactor_dart_input_buffer_read_position(this);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> get writePosition => interactor_dart_input_buffer_write_position(this);
+}
+
+extension InteractorOutputBufferExtensions on Pointer<interactor_output_buffer> {
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> allocate(Pointer<interactor_output_buffer> buffer, int delta) => interactor_dart_output_buffer_allocate(buffer, delta);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> reserve(Pointer<interactor_output_buffer> buffer, int size) => interactor_dart_output_buffer_reserve(buffer, size);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> allocateReserve(Pointer<interactor_output_buffer> buffer, int delta, int size) => interactor_dart_output_buffer_allocate_reserve(buffer, delta, size);
+
+  @pragma(preferInlinePragma)
+  Pointer<iovec> get content => interactor_dart_output_buffer_content(this);
+}

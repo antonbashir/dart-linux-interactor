@@ -58,7 +58,13 @@
     "ostream": "c",
     "sstream": "c",
     "streambuf": "c",
-    "ibuf.h": "c"
+    "ibuf.h": "c",
+    "array": "c",
+    "bitset": "c",
+    "string_view": "c",
+    "initializer_list": "c",
+    "span": "c",
+    "vector": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "grammarly.selectors": [

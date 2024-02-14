@@ -719,18 +719,6 @@ class InteractorTuples {
 
   @pragma(preferInlinePragma)
   void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.cast(), size);
-
-  @pragma(preferInlinePragma)
-  Pointer<interactor_input_buffer> allocateInputBuffer(int capacity) => interactor_dart_io_buffers_allocate_input(_interactor, capacity);
-
-  @pragma(preferInlinePragma)
-  Pointer<interactor_output_buffer> allocateOutputBuffer(int capacity) => interactor_dart_io_buffers_allocate_output(_interactor, capacity);
-
-  @pragma(preferInlinePragma)
-  void freeInputBuffer(Pointer<interactor_input_buffer> buffer) => interactor_dart_io_buffers_free_input(_interactor, buffer);
-
-  @pragma(preferInlinePragma)
-  void freeOutputBuffer(Pointer<interactor_output_buffer> buffer) => interactor_dart_io_buffers_free_output(_interactor, buffer);
 }
 
 abstract interface class InteractorTuple {

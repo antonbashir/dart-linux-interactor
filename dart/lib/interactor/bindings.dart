@@ -126,6 +126,18 @@ external ffi.Pointer<ffi.Uint8> interactor_dart_input_buffer_allocate(
 );
 
 @ffi.Native<
+        ffi.Pointer<ffi.Uint8> Function(
+            ffi.Pointer<interactor_input_buffer>, ffi.Size, ffi.Size)>(
+    symbol: 'interactor_dart_input_buffer_allocate_reserve',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<ffi.Uint8> interactor_dart_input_buffer_allocate_reserve(
+  ffi.Pointer<interactor_input_buffer> buffer,
+  int delta,
+  int size,
+);
+
+@ffi.Native<
         ffi.Pointer<ffi.Uint8> Function(ffi.Pointer<interactor_input_buffer>)>(
     symbol: 'interactor_dart_input_buffer_read_position',
     assetId: 'interactor-bindings',
@@ -162,6 +174,18 @@ external ffi.Pointer<ffi.Uint8> interactor_dart_output_buffer_reserve(
     isLeaf: true)
 external ffi.Pointer<ffi.Uint8> interactor_dart_output_buffer_allocate(
   ffi.Pointer<interactor_output_buffer> buffer,
+  int size,
+);
+
+@ffi.Native<
+        ffi.Pointer<ffi.Uint8> Function(
+            ffi.Pointer<interactor_output_buffer>, ffi.Size, ffi.Size)>(
+    symbol: 'interactor_dart_output_buffer_allocate_reserve',
+    assetId: 'interactor-bindings',
+    isLeaf: true)
+external ffi.Pointer<ffi.Uint8> interactor_dart_output_buffer_allocate_reserve(
+  ffi.Pointer<interactor_output_buffer> buffer,
+  int delta,
   int size,
 );
 

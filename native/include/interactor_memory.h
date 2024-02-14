@@ -34,13 +34,11 @@ extern "C"
     struct interactor_input_buffer
     {
         struct ibuf buffer;
-        size_t last_reserved_size;
     };
 
     struct interactor_output_buffer
     {
         struct obuf buffer;
-        size_t last_reserved_size;
     };
 
     static inline int interactor_memory_create(struct interactor_memory* memory, size_t quota_size, size_t preallocation_size, size_t slab_size)

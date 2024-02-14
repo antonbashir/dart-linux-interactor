@@ -28,25 +28,24 @@ int interactor_native_initialize(struct interactor_native* interactor, struct in
         return -ENOMEM;
     }
 
-
     interactor->memory = calloc(1, sizeof(struct interactor_memory));
     if (!interactor->memory)
     {
         return -ENOMEM;
     }
-    
+
     interactor->messages_pool = calloc(1, sizeof(struct interactor_messages_pool));
     if (!interactor->messages_pool)
     {
         return -ENOMEM;
     }
-    
+
     interactor->small_data = calloc(1, sizeof(struct interactor_small_data));
     if (!interactor->small_data)
     {
         return -ENOMEM;
     }
-    
+
     interactor->static_buffers = calloc(1, sizeof(struct interactor_static_buffers));
     if (!interactor->static_buffers)
     {
@@ -386,6 +385,11 @@ uint8_t* interactor_native_input_buffer_allocate(struct interactor_input_buffer*
     return interactor_input_buffer_allocate(buffer, size);
 }
 
+uint8_t* interactor_native_input_buffer_allocate_reserve(struct interactor_input_buffer* buffer, size_t delta, size_t size)
+{
+    return interactor_input_buffer_allocate_reserve(buffer, delta, size);
+}
+
 uint8_t* interactor_native_output_buffer_reserve(struct interactor_output_buffer* buffer, size_t size)
 {
     return interactor_output_buffer_reserve(buffer, size);
@@ -394,4 +398,9 @@ uint8_t* interactor_native_output_buffer_reserve(struct interactor_output_buffer
 uint8_t* interactor_native_output_buffer_allocate(struct interactor_output_buffer* buffer, size_t size)
 {
     return interactor_output_buffer_allocate(buffer, size);
+}
+
+uint8_t* interactor_native_output_buffer_allocate_reserve(struct interactor_output_buffer* buffer, size_t delta, size_t size)
+{
+    return interactor_output_buffer_allocate_reserve(buffer, delta, size);
 }
