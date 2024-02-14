@@ -9,14 +9,14 @@ const int _surrogateValueMask = 0x3FF;
 const int _leadSurrogateMin = 0xD800;
 
 @pragma(preferInlinePragma)
-int fastEncodeString(String str, Uint8List buffer, int offset) {
+int fastEncodeString(String string, Uint8List buffer, int offset) {
   final startOffset = offset;
-  for (var stringIndex = 0; stringIndex < str.length; stringIndex++) {
-    final codeUnit = str.codeUnitAt(stringIndex);
+  for (var stringIndex = 0; stringIndex < string.length; stringIndex++) {
+    final codeUnit = string.codeUnitAt(stringIndex);
     if (codeUnit <= _oneByteLimit) {
       buffer[offset++] = codeUnit;
     } else if ((codeUnit & _surrogateTagMask) == _leadSurrogateMin) {
-      final nextCodeUnit = str.codeUnitAt(++stringIndex);
+      final nextCodeUnit = string.codeUnitAt(++stringIndex);
       final rune = 0x10000 + ((codeUnit & _surrogateValueMask) << 10) | (nextCodeUnit & _surrogateValueMask);
       buffer[offset++] = 0xF0 | (rune >> 18);
       buffer[offset++] = 0x80 | ((rune >> 12) & 0x3f);
