@@ -710,11 +710,11 @@ class InteractorTuples {
   Pointer<Uint8> allocate(int capacity) => interactor_dart_data_allocate(_interactor, capacity).cast();
 
   @pragma(preferInlinePragma)
-  ({Pointer<Uint8> pointer, Uint8List buffer, ByteData data}) prepare(int size) {
+  (Pointer<Uint8>, Uint8List, ByteData) prepare(int size) {
     final pointer = interactor_dart_data_allocate(_interactor, size).cast<Uint8>();
     final buffer = pointer.asTypedList(size);
     final data = ByteData.view(buffer.buffer, buffer.offsetInBytes);
-    return (pointer: pointer, buffer: buffer, data: data);
+    return (pointer, buffer, data);
   }
 
   @pragma(preferInlinePragma)
