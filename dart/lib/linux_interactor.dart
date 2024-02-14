@@ -5,7 +5,7 @@ export 'interactor/declaration.dart' show InteractorCallback, InteractorConsumer
 export 'interactor/defaults.dart' show InteractorDefaults;
 export 'interactor/messages.dart' show InteractorMessages;
 export 'interactor/message.dart' show InteractorMessageExtensions;
-export 'interactor/tuple.dart';
+export 'interactor/tuples.dart';
 export 'interactor/payloads.dart' show InteractorPayloads, InteractorPayloadPool;
 export 'interactor/worker.dart' show InteractorWorker;
 export 'interactor/bindings.dart' show interactor_message, interactor_memory, interactor_input_buffer, interactor_output_buffer;

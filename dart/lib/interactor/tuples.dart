@@ -5,12 +5,17 @@ import 'dart:typed_data';
 import 'bindings.dart';
 import 'constants.dart';
 
+const tupleSizeOfNull = 1;
+const tupleSizeOfBool = 1;
+const tupleSizeOfDouble = 9;
+
 const int _oneByteLimit = 0x7f;
 const int _twoByteLimit = 0x7ff;
 const int _surrogateTagMask = 0xFC00;
 const int _surrogateValueMask = 0x3FF;
 const int _leadSurrogateMin = 0xD800;
-final _decoder = const Utf8Decoder();
+
+const _decoder = const Utf8Decoder();
 
 @pragma(preferInlinePragma)
 int tupleWriteNull(ByteData data, int offset) {
@@ -368,10 +373,6 @@ int _encodeString(String str, Uint8List buffer, int offset) {
   return offset - startOffset;
 }
 
-const tupleSizeOfNull = 1;
-const tupleSizeOfBool = 1;
-const tupleSizeOfDouble = 9;
-
 @pragma(preferInlinePragma)
 int tupleSizeOfInt(int number) {
   if (number >= -0x20) {
@@ -434,6 +435,57 @@ int tupleSizeOfMap(int length) {
     return 3;
   }
   return 5;
+}
+
+class InteractorTuples {
+  final Pointer<interactor_dart> _interactor;
+
+  static late final Pointer<Uint8> emptyList;
+  static late final Pointer<Uint8> emptyMap;
+
+  InteractorTuples(this._interactor) {
+    emptyList = _createEmptyList();
+    emptyMap = _createEmptyMap();
+  }
+
+  @pragma(preferInlinePragma)
+  int next(Pointer<Uint8> pointer, int offset) => interactor_dart_tuple_next(pointer.cast(), offset);
+
+  @pragma(preferInlinePragma)
+  Pointer<Uint8> allocate(int capacity) => interactor_dart_data_allocate(_interactor, capacity).cast();
+
+  @pragma(preferInlinePragma)
+  (Pointer<Uint8>, Uint8List, ByteData) prepare(int size) {
+    final pointer = interactor_dart_data_allocate(_interactor, size).cast<Uint8>();
+    final buffer = pointer.asTypedList(size);
+    final data = ByteData.view(buffer.buffer, buffer.offsetInBytes);
+    return (pointer, buffer, data);
+  }
+
+  @pragma(preferInlinePragma)
+  void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.cast(), size);
+
+  Pointer<Uint8> _createEmptyList() {
+    final size = tupleSizeOfList(0);
+    final list = allocate(size);
+    final buffer = list.asTypedList(size);
+    tupleWriteList(ByteData.view(buffer.buffer, buffer.offsetInBytes), 0, 0);
+    return list;
+  }
+
+  Pointer<Uint8> _createEmptyMap() {
+    final size = tupleSizeOfMap(0);
+    final list = allocate(size);
+    final buffer = list.asTypedList(size);
+    tupleWriteMap(ByteData.view(buffer.buffer, buffer.offsetInBytes), 0, 0);
+    return list;
+  }
+}
+
+abstract interface class InteractorTuple {
+  int get tupleSize;
+
+  int serialize(Uint8List buffer, ByteData data, int offset);
 }
 
 extension InteractorTupleIntExtension on int {
@@ -696,33 +748,4 @@ extension InteractorTupleListExtension<T> on List<T> {
     }
     return offset;
   }
-}
-
-class InteractorTuples {
-  final Pointer<interactor_dart> _interactor;
-
-  InteractorTuples(this._interactor);
-
-  @pragma(preferInlinePragma)
-  int next(Pointer<Uint8> pointer, int offset) => interactor_dart_tuple_next(pointer.cast(), offset);
-
-  @pragma(preferInlinePragma)
-  Pointer<Uint8> allocate(int capacity) => interactor_dart_data_allocate(_interactor, capacity).cast();
-
-  @pragma(preferInlinePragma)
-  (Pointer<Uint8>, Uint8List, ByteData) prepare(int size) {
-    final pointer = interactor_dart_data_allocate(_interactor, size).cast<Uint8>();
-    final buffer = pointer.asTypedList(size);
-    final data = ByteData.view(buffer.buffer, buffer.offsetInBytes);
-    return (pointer, buffer, data);
-  }
-
-  @pragma(preferInlinePragma)
-  void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.cast(), size);
-}
-
-abstract interface class InteractorTuple {
-  int get tupleSize;
-
-  int serialize(Uint8List buffer, ByteData data, int offset);
 }

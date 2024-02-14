@@ -11,7 +11,7 @@ import 'declaration.dart';
 import 'messages.dart';
 import 'payloads.dart';
 import 'registry.dart';
-import 'tuple.dart';
+import 'tuples.dart';
 
 class InteractorWorker {
   final _fromInteractor = ReceivePort();
