@@ -220,13 +220,13 @@ void interactor_dart_destroy(struct interactor_dart* interactor)
     interactor_small_data_destroy(interactor->small_data);
     interactor_messages_pool_destroy(interactor->messages_pool);
     interactor_memory_destroy(interactor->memory);
-    free((struct interactor_static_buffers*)interactor->static_buffers);
-    free((struct interactor_io_buffers*)interactor->io_buffers);
-    free((struct interactor_small_data*)interactor->small_data);
-    free((struct interactor_messages_pool*)interactor->messages_pool);
-    free((struct interactor_memory*)interactor->memory);
-    free((struct io_uring*)interactor->ring);
-    free((struct io_uring_cqe**)interactor->completions);
+    free(interactor->static_buffers);
+    free(interactor->io_buffers);
+    free(interactor->small_data);
+    free(interactor->messages_pool);
+    free(interactor->memory);
+    free(interactor->ring);
+    free(interactor->completions);
 }
 
 void interactor_dart_cqe_advance(struct interactor_dart* interactor, int count)
