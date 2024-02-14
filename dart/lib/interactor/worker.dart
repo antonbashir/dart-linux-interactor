@@ -48,10 +48,7 @@ class InteractorWorker {
 
   InteractorWorker(SendPort toInteractor) {
     _closer = RawReceivePort((_) async {
-      if (_active) {
-        _active = false;
-        await _done.future;
-      }
+      await deactivate();
       _payloads.destroy();
       interactor_dart_destroy(_interactor);
       ffi.calloc.free(_interactor);
@@ -82,6 +79,13 @@ class InteractorWorker {
     _active = true;
     _delays = _calculateDelays();
     unawaited(_listen());
+  }
+
+  Future<void> deactivate() async {
+    if (_active) {
+      _active = false;
+      await _done.future;
+    }
   }
 
   void consumer(InteractorConsumer declaration) => _consumers.register(declaration);

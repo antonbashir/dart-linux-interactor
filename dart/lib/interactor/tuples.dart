@@ -409,8 +409,8 @@ int tupleSizeOfMap(int length) {
 class InteractorTuples {
   final Pointer<interactor_dart> _interactor;
 
-  static late final (Pointer<Uint8>, int) emptyList;
-  static late final (Pointer<Uint8>, int) emptyMap;
+  late final (Pointer<Uint8>, int) emptyList;
+  late final (Pointer<Uint8>, int) emptyMap;
 
   InteractorTuples(this._interactor) {
     emptyList = _createEmptyList();
