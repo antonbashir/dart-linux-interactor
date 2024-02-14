@@ -15,8 +15,10 @@ class Interactor {
   final _workerPorts = <RawReceivePort>[];
   final _workerDestroyer = ReceivePort();
 
-  Interactor({String? libraryPath}) {
-    InteractorLibrary.load(libraryPath: libraryPath);
+  Interactor({String? libraryPath, bool load = true}) {
+    if (load) {
+      InteractorLibrary.load(libraryPath: libraryPath);
+    }
   }
 
   Future<void> shutdown() async {
