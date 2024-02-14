@@ -440,8 +440,8 @@ int tupleSizeOfMap(int length) {
 class InteractorTuples {
   final Pointer<interactor_dart> _interactor;
 
-  static late final Pointer<Uint8> emptyList;
-  static late final Pointer<Uint8> emptyMap;
+  static late final (Pointer<Uint8>, int) emptyList;
+  static late final (Pointer<Uint8>, int) emptyMap;
 
   InteractorTuples(this._interactor) {
     emptyList = _createEmptyList();
@@ -465,20 +465,20 @@ class InteractorTuples {
   @pragma(preferInlinePragma)
   void free(Pointer<Uint8> tuple, int size) => interactor_dart_data_free(_interactor, tuple.cast(), size);
 
-  Pointer<Uint8> _createEmptyList() {
+  (Pointer<Uint8>, int) _createEmptyList() {
     final size = tupleSizeOfList(0);
     final list = allocate(size);
     final buffer = list.asTypedList(size);
     tupleWriteList(ByteData.view(buffer.buffer, buffer.offsetInBytes), 0, 0);
-    return list;
+    return (list, size);
   }
 
-  Pointer<Uint8> _createEmptyMap() {
+  (Pointer<Uint8>, int) _createEmptyMap() {
     final size = tupleSizeOfMap(0);
-    final list = allocate(size);
-    final buffer = list.asTypedList(size);
+    final map = allocate(size);
+    final buffer = map.asTypedList(size);
     tupleWriteMap(ByteData.view(buffer.buffer, buffer.offsetInBytes), 0, 0);
-    return list;
+    return (map, size);
   }
 }
 
