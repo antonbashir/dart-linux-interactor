@@ -11,5 +11,6 @@ export 'interactor/worker.dart' show InteractorWorker;
 export 'interactor/bindings.dart' show interactor_message, interactor_memory, interactor_input_buffer, interactor_output_buffer;
 export 'interactor/lookup.dart' show InteractorLibrary;
 export 'interactor/interactor.dart' show Interactor;
+export 'interactor/exception.dart';
 export 'interactor/system.dart';
 export 'interactor/module.dart';

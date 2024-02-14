@@ -4,16 +4,11 @@ import 'dart:typed_data';
 
 import 'bindings.dart';
 import 'constants.dart';
+import 'extensions.dart';
 
 const tupleSizeOfNull = 1;
 const tupleSizeOfBool = 1;
 const tupleSizeOfDouble = 9;
-
-const int _oneByteLimit = 0x7f;
-const int _twoByteLimit = 0x7ff;
-const int _surrogateTagMask = 0xFC00;
-const int _surrogateValueMask = 0x3FF;
-const int _leadSurrogateMin = 0xD800;
 
 const _decoder = const Utf8Decoder();
 
@@ -90,27 +85,27 @@ int tupleWriteString(Uint8List buffer, ByteData data, String value, int offset) 
   final length = value.length;
   if (length <= 0x1F) {
     data.setUint8(offset++, 0xA0 | length);
-    _encodeString(value, buffer, offset);
+    fastEncodeString(value, buffer, offset);
     return offset + length;
   }
   if (length <= 0xFF) {
     data.setUint8(offset++, 0xd9);
     data.setUint8(offset++, length);
-    _encodeString(value, buffer, offset);
+    fastEncodeString(value, buffer, offset);
     return offset + length;
   }
   if (length <= 0xFFFF) {
     data.setUint8(offset++, 0xda);
     data.setUint16(offset, length);
     offset += 2;
-    _encodeString(value, buffer, offset);
+    fastEncodeString(value, buffer, offset);
     return offset + length;
   }
   if (length <= 0xFFFFFFFF) {
     data.setUint8(offset++, 0xdb);
     data.setUint32(offset, length);
     offset += 4;
-    _encodeString(value, buffer, offset);
+    fastEncodeString(value, buffer, offset);
     return offset + length;
   }
   throw ArgumentError('Max string length is 0xFFFFFFFF');
@@ -345,32 +340,6 @@ int tupleWriteMap(ByteData data, int length, int offset) {
       return (length: data.getUint32(++offset), offset: offset + 4);
   }
   throw FormatException("Byte $bytes is invalid map length");
-}
-
-@pragma(preferInlinePragma)
-int _encodeString(String str, Uint8List buffer, int offset) {
-  final startOffset = offset;
-  for (var stringIndex = 0; stringIndex < str.length; stringIndex++) {
-    final codeUnit = str.codeUnitAt(stringIndex);
-    if (codeUnit <= _oneByteLimit) {
-      buffer[offset++] = codeUnit;
-    } else if ((codeUnit & _surrogateTagMask) == _leadSurrogateMin) {
-      final nextCodeUnit = str.codeUnitAt(++stringIndex);
-      final rune = 0x10000 + ((codeUnit & _surrogateValueMask) << 10) | (nextCodeUnit & _surrogateValueMask);
-      buffer[offset++] = 0xF0 | (rune >> 18);
-      buffer[offset++] = 0x80 | ((rune >> 12) & 0x3f);
-      buffer[offset++] = 0x80 | ((rune >> 6) & 0x3f);
-      buffer[offset++] = 0x80 | (rune & 0x3f);
-    } else if (codeUnit <= _twoByteLimit) {
-      buffer[offset++] = 0xC0 | (codeUnit >> 6);
-      buffer[offset++] = 0x80 | (codeUnit & 0x3f);
-    } else {
-      buffer[offset++] = 0xE0 | (codeUnit >> 12);
-      buffer[offset++] = 0x80 | ((codeUnit >> 6) & 0x3f);
-      buffer[offset++] = 0x80 | (codeUnit & 0x3f);
-    }
-  }
-  return offset - startOffset;
 }
 
 @pragma(preferInlinePragma)
